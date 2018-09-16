@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
+  <meta name="description" content="R 语言分析 LI-6400XT 与 LI-6800 数据">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="R 语言分析 LI-6400XT 与 LI-6800 数据" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
+  
+  <meta name="twitter:description" content="R 语言分析 LI-6400XT 与 LI-6800 数据" />
+  
+
+<meta name="author" content="祝介东">
+
+
+<meta name="date" content="2018-09-16">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="section-8.html">
+<link rel="next" href="references.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="e5898de8a880.html"><a href="e5898de8a880.html"><i class="fa fa-check"></i>前言</a></li>
+<li class="chapter" data-level="" data-path="e78988e69d83e5a3b0e6988e.html"><a href="e78988e69d83e5a3b0e6988e.html"><i class="fa fa-check"></i>版权声明</a></li>
+<li class="chapter" data-level="" data-path="e585b3e4ba8ee4bd9ce88085.html"><a href="e585b3e4ba8ee4bd9ce88085.html"><i class="fa fa-check"></i>关于作者</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> R 软件与 Rstudio</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#r-"><i class="fa fa-check"></i><b>1.1</b> R 软件</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#rstudio"><i class="fa fa-check"></i><b>1.2</b> Rstudio</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="co2-.html"><a href="co2-.html"><i class="fa fa-check"></i><b>2</b> CO<sub>2</sub> 响应曲线的拟合</a><ul>
+<li class="chapter" data-level="2.1" data-path="co2-.html"><a href="co2-.html#fvcb-"><i class="fa fa-check"></i><b>2.1</b> FvCB 模型</a></li>
+<li class="chapter" data-level="2.2" data-path="co2-.html"><a href="co2-.html#plantecophys-"><i class="fa fa-check"></i><b>2.2</b> <code>plantecophys</code> 软件包</a></li>
+<li class="chapter" data-level="2.3" data-path="co2-.html"><a href="co2-.html#li-6400xt-co2-"><i class="fa fa-check"></i><b>2.3</b> LI-6400XT CO<sub>2</sub> 响应曲线的拟合</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="co2-.html"><a href="co2-.html#fitaci-"><i class="fa fa-check"></i><b>2.3.1</b> fitaci 函数介绍</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="co2-.html"><a href="co2-.html#-plantecophys--li-6400xt-co2-"><i class="fa fa-check"></i><b>2.4</b> 使用 <code>plantecophys</code> 拟合 LI-6400XT CO<sub>2</sub> 响应曲线数据</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="co2-.html"><a href="co2-.html#section-2.4.1"><i class="fa fa-check"></i><b>2.4.1</b> 数据的前处理</a></li>
+<li class="chapter" data-level="2.4.2" data-path="co2-.html"><a href="co2-.html#fitaci-p"><i class="fa fa-check"></i><b>2.4.2</b> 使用示例</a></li>
+<li class="chapter" data-level="2.4.3" data-path="co2-.html"><a href="co2-.html#-onepoint--vcmax--jmax"><i class="fa fa-check"></i><b>2.4.3</b> 使用 ‘onepoint’ 单独计算 V<sub>cmax</sub> 和 J<sub>max</sub></a></li>
+<li class="chapter" data-level="2.4.4" data-path="co2-.html"><a href="co2-.html#-co2-"><i class="fa fa-check"></i><b>2.4.4</b> 多条 CO<sub>2</sub> 响应曲线的拟合</a></li>
+<li class="chapter" data-level="2.4.5" data-path="co2-.html"><a href="co2-.html#findcitransition-"><i class="fa fa-check"></i><b>2.4.5</b> <code>findCiTransition</code> 函数</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="co2-.html"><a href="co2-.html#c4-"><i class="fa fa-check"></i><b>2.5</b> C4 植物光合</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="co2-.html"><a href="co2-.html#c4-"><i class="fa fa-check"></i><b>2.5.1</b> C4 植物光合速率的计算</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="section-3.html"><a href="section-3.html"><i class="fa fa-check"></i><b>3</b> 气孔导度模型的拟合</a><ul>
+<li class="chapter" data-level="3.1" data-path="section-3.html"><a href="section-3.html#ballberry"><i class="fa fa-check"></i><b>3.1</b> BallBerry 模型</a></li>
+<li class="chapter" data-level="3.2" data-path="section-3.html"><a href="section-3.html#bbleuning-"><i class="fa fa-check"></i><b>3.2</b> BBLeuning 模型</a></li>
+<li class="chapter" data-level="3.3" data-path="section-3.html"><a href="section-3.html#bboptifull-"><i class="fa fa-check"></i><b>3.3</b> BBOptiFull 模型</a></li>
+<li class="chapter" data-level="3.4" data-path="section-3.html"><a href="section-3.html#fitbb-p"><i class="fa fa-check"></i><b>3.4</b> <code>fitBB</code> 函数</a></li>
+<li class="chapter" data-level="3.5" data-path="section-3.html"><a href="section-3.html#fitbbs-"><i class="fa fa-check"></i><b>3.5</b> <code>fitBBs</code> 函数</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="section-4.html"><a href="section-4.html"><i class="fa fa-check"></i><b>4</b> 光合最优气孔导度耦合模型</a><ul>
+<li class="chapter" data-level="4.1" data-path="section-4.html"><a href="section-4.html#farao-"><i class="fa fa-check"></i><b>4.1</b> <code>FARAO</code> 函数</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="section-5.html"><a href="section-5.html"><i class="fa fa-check"></i><b>5</b> 光合气孔导度耦合模型</a><ul>
+<li class="chapter" data-level="5.1" data-path="section-5.html"><a href="section-5.html#photosyn-"><i class="fa fa-check"></i><b>5.1</b> <code>Photosyn</code> 函数</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="section-5.html"><a href="section-5.html#photosyn-"><i class="fa fa-check"></i><b>5.1.1</b> <code>Photosyn</code> 使用举例</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="section-5.html"><a href="section-5.html#photosyneb-"><i class="fa fa-check"></i><b>5.2</b> <code>PhotosynEB</code> 函数</a></li>
+<li class="chapter" data-level="5.3" data-path="section-5.html"><a href="section-5.html#photosyntuzet-"><i class="fa fa-check"></i><b>5.3</b> <code>PhotosynTuzet</code> 函数</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="section-5.html"><a href="section-5.html#photosyntuzet-"><i class="fa fa-check"></i><b>5.3.1</b> <code>PhotosynTuzet</code> 的参数</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="rhtovpd-.html"><a href="rhtovpd-.html"><i class="fa fa-check"></i><b>6</b> RHtoVPD 函数</a></li>
+<li class="chapter" data-level="7" data-path="section-7.html"><a href="section-7.html"><i class="fa fa-check"></i><b>7</b> 光响应曲线的拟合</a><ul>
+<li class="chapter" data-level="7.1" data-path="section-7.html"><a href="section-7.html#section-7.1"><i class="fa fa-check"></i><b>7.1</b> 直角双曲线模型</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="section-7.html"><a href="section-7.html#section-7.1.1"><i class="fa fa-check"></i><b>7.1.1</b> 直角双曲线模型的实现</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="section-7.html"><a href="section-7.html#section-7.2"><i class="fa fa-check"></i><b>7.2</b> 非直角双曲线模型</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="section-7.html"><a href="section-7.html#section-7.2.1"><i class="fa fa-check"></i><b>7.2.1</b> 非直角双曲线模型的实现</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="section-7.html"><a href="section-7.html#section-7.3"><i class="fa fa-check"></i><b>7.3</b> 指数模型</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="section-7.html"><a href="section-7.html#section-7.3.1"><i class="fa fa-check"></i><b>7.3.1</b> 指数模型的实现</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="section-7.html"><a href="section-7.html#section-7.4"><i class="fa fa-check"></i><b>7.4</b> 直角双曲线的修正模型</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="section-7.html"><a href="section-7.html#section-7.4.1"><i class="fa fa-check"></i><b>7.4.1</b> 直角双曲线修正模型的实现</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="section-8.html"><a href="section-8.html"><i class="fa fa-check"></i><b>8</b> 关于非线性拟合的初始值</a><ul>
+<li class="chapter" data-level="8.1" data-path="section-8.html"><a href="section-8.html#nlslm-"><i class="fa fa-check"></i><b>8.1</b> nlsLM 解决方案</a></li>
+<li class="chapter" data-level="8.2" data-path="section-8.html"><a href="section-8.html#section-8.2"><i class="fa fa-check"></i><b>8.2</b> 作图比对法</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="section-8.html"><a href="section-8.html#section-8.2.1"><i class="fa fa-check"></i><b>8.2.1</b> 实现过程</a></li>
+<li class="chapter" data-level="8.2.2" data-path="section-8.html"><a href="section-8.html#section-8.2.2"><i class="fa fa-check"></i><b>8.2.2</b> 直观展示</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="section-8.html"><a href="section-8.html#section-8.3"><i class="fa fa-check"></i><b>8.3</b> 自动多次尝试法</a></li>
+<li class="chapter" data-level="8.4" data-path="section-8.html"><a href="section-8.html#section-8.4"><i class="fa fa-check"></i><b>8.4</b> 小结</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="li-6800-.html"><a href="li-6800-.html"><i class="fa fa-check"></i><b>9</b> LI-6800 的数据分析</a><ul>
+<li class="chapter" data-level="9.1" data-path="li-6800-.html"><a href="li-6800-.html#section-9.1"><i class="fa fa-check"></i><b>9.1</b> 数据格式</a></li>
+<li class="chapter" data-level="9.2" data-path="li-6800-.html"><a href="li-6800-.html#li-6800--li-6400-"><i class="fa fa-check"></i><b>9.2</b> LI-6800 与 LI-6400 使用时的差别</a></li>
+<li class="chapter" data-level="9.3" data-path="li-6800-.html"><a href="li-6800-.html#section-9.3"><i class="fa fa-check"></i><b>9.3</b> 光响应曲线注意事项</a></li>
+<li class="chapter" data-level="9.4" data-path="li-6800-.html"><a href="li-6800-.html#li-6800-racir"><i class="fa fa-check"></i><b>9.4</b> LI-6800 RACiR的测量与拟合</a></li>
+<li class="chapter" data-level="9.5" data-path="li-6800-.html"><a href="li-6800-.html#racir"><i class="fa fa-check"></i><b>9.5</b> RACiR分析的实现</a></li>
+<li class="chapter" data-level="9.6" data-path="li-6800-.html"><a href="li-6800-.html#li-6800-"><i class="fa fa-check"></i><b>9.6</b> LI-6800 荧光数据分析</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="li-6800-.html"><a href="li-6800-.html#jip-test-"><i class="fa fa-check"></i><b>9.6.1</b> jip test 的实现</a></li>
+<li class="chapter" data-level="9.6.2" data-path="li-6800-.html"><a href="li-6800-.html#jiptest-"><i class="fa fa-check"></i><b>9.6.2</b> <code>jiptest</code> 软件包安装</a></li>
+<li class="chapter" data-level="9.6.3" data-path="li-6800-.html"><a href="li-6800-.html#read_files--read_dcfiles-"><i class="fa fa-check"></i><b>9.6.3</b> <code>read_files</code> 及 <code>read_dcfiles</code> 函数</a></li>
+<li class="chapter" data-level="9.6.4" data-path="li-6800-.html"><a href="li-6800-.html#jip_test--jip_dctest-"><i class="fa fa-check"></i><b>9.6.4</b> <code>jip_test</code> 及 <code>jip_dctest</code> 函数</a></li>
+<li class="chapter" data-level="9.6.5" data-path="li-6800-.html"><a href="li-6800-.html#jip_ggplot-"><i class="fa fa-check"></i><b>9.6.5</b> <code>jip_ggplot</code> 函数</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>参考文献</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R 语言分析 LI-6400 和 LI-6800 光合仪的数据</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="li-6800-" class="section level1">
+<h1><span class="header-section-number">第 9 章</span> LI-6800 的数据分析</h1>
+<div id="section-9.1" class="section level2">
+<h2><span class="header-section-number">9.1</span> 数据格式</h2>
+<p>LI-6800 的数据前处理同 LI-6400 相同，如表 <a href="li-6800-.html#tab:head6800">9.1</a> 所示的样式。</p>
+<table>
+<caption><span id="tab:head6800">表 9.1: </span>推荐 LI-6800 整理后数据样式</caption>
+<thead>
+<tr class="header">
+<th align="right">obs</th>
+<th align="right">time</th>
+<th align="right">elapsed</th>
+<th align="left">date</th>
+<th align="right">TIME</th>
+<th align="right">E</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">1471425750</td>
+<td align="right">0.0</td>
+<td align="left">20160817 17:22:30</td>
+<td align="right">1471425726</td>
+<td align="right">0.0007614</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">1471425855</td>
+<td align="right">104.5</td>
+<td align="left">20160817 17:24:14</td>
+<td align="right">1471425829</td>
+<td align="right">0.0009221</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">1471426153</td>
+<td align="right">403.1</td>
+<td align="left">20160817 17:29:13</td>
+<td align="right">1471426144</td>
+<td align="right">0.0009900</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">1471426244</td>
+<td align="right">494.0</td>
+<td align="left">20160817 17:30:44</td>
+<td align="right">1471426235</td>
+<td align="right">0.0010249</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">1471426335</td>
+<td align="right">585.1</td>
+<td align="left">20160817 17:32:15</td>
+<td align="right">1471426326</td>
+<td align="right">0.0010632</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="right">1471426426</td>
+<td align="right">676.0</td>
+<td align="left">20160817 17:33:46</td>
+<td align="right">1471426417</td>
+<td align="right">0.0011190</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="li-6800--li-6400-" class="section level2">
+<h2><span class="header-section-number">9.2</span> LI-6800 与 LI-6400 使用时的差别</h2>
+<p><code>plantecophys</code> 使用时建立在 LI-6400XT 基础之上的软件包，因此在 LI-6800 代码中，需要改动的是 fitaci、fitacis 及 fitBB 中的 varnames 选项，也就是将 LI-6400XT 的表头改为 LI-6800 的表头。 以 fitaci 函数为例：</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> <span class="kw">fitaci</span>(aci, <span class="dt">varnames =</span> 
+        <span class="kw">list</span>(<span class="dt">ALEAF =</span> <span class="st">&quot;A&quot;</span>, <span class="dt">Tleaf =</span> <span class="st">&quot;Tleaf&quot;</span>, <span class="dt">Ci =</span> <span class="st">&quot;Ci&quot;</span>, 
+          <span class="dt">PPFD  =</span> <span class="st">&quot;Qin&quot;</span>, <span class="dt">Rd =</span> <span class="st">&quot;Rd&quot;</span>))</code></pre></div>
+</div>
+<div id="section-9.3" class="section level2">
+<h2><span class="header-section-number">9.3</span> 光响应曲线注意事项</h2>
+<p>光响应曲线的拟合相对简单，仅需要光强和光合速率的值，其中需要修改的部分仅为光强的赋值部分，在文件名一致的前提下，修改如下代码即可：</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lrc_Q &lt;-<span class="st"> </span>lrc<span class="op">$</span>Qin
+lrc_A &lt;-<span class="st"> </span>lrc<span class="op">$</span>A </code></pre></div>
+</div>
+<div id="li-6800-racir" class="section level2">
+<h2><span class="header-section-number">9.4</span> LI-6800 RACiR的测量与拟合</h2>
+<p>在评估作物性状时，V<span class="math inline">\(_{cmax}\)</span> 及 J<span class="math inline">\(_{max}\)</span>时非常有用，传统的 A–Ci 曲线测量要求植物叶片要在一定浓度 CO<span class="math inline">\(_{2}\)</span> 下适应几分钟后完成测量，这样的测量有几个缺点：</p>
+<ul>
+<li>测量时间长，一条曲线至少需要 20 – 30 min，样本量多，重复多时，这种方法几乎没有可行性。</li>
+<li>整个测量过程中，时间长，酶的激活状态会有变化，叶绿体会移动，气孔的开度也会发生变化。</li>
+</ul>
+<p>而 LI-6800 独有的 auto control 功能在算法上允许用户自定义 CO<span class="math inline">\(_{2}\)</span> 的起始浓度和种植浓度、变化方式（线性或其他）、所花费的时间，再加上其 IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实，即快速 CO<span class="math inline">\(_{2}\)</span> 响应曲线 RACiR测量实验，该功能使得 5 min 内测量 A–Ci 曲线成为可能。该方法的实现可参考 <span class="citation">Stinziano et al. (<a href="#ref-Stinziano2017">2017</a>)</span> 的文章。具体测量步骤请参考我们的 LI-6800实验手册。</p>
+</div>
+<div id="racir" class="section level2">
+<h2><span class="header-section-number">9.5</span> RACiR分析的实现</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 分别读取未校准空叶室数据</span>
+<span class="co"># 未校准带叶片测量数据</span>
+<span class="co"># 标准aci曲线测量数据</span>
+uemp500 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/uncorr_emp500.csv&quot;</span>)
+uleaf500 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/uncorr_leaf500.csv&quot;</span>)
+acin &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/aci_ex.csv&quot;</span>)
+
+<span class="co"># 防止读入空白行</span>
+m &lt;-<span class="st"> </span><span class="kw">length</span>(<span class="kw">which</span>(uemp500<span class="op">$</span>obs <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span>))
+n &lt;-<span class="st"> </span><span class="kw">length</span>(<span class="kw">which</span>(uleaf500<span class="op">$</span>obs <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span>))
+uemp500 &lt;-<span class="st"> </span>uemp500[<span class="dv">1</span><span class="op">:</span>m,]
+uleaf500 &lt;-<span class="st"> </span>uleaf500[<span class="dv">1</span><span class="op">:</span>n,]
+
+<span class="co"># 观察空叶室未校准数据reference对A的图形</span>
+<span class="kw">plot</span>(uemp500<span class="op">$</span>CO2_r, uemp500<span class="op">$</span>A)
+<span class="co"># 选取线性部分用于校准</span>
+<span class="kw">locator</span>()
+<span class="co"># 执行locator命令后，在上图中的目标位置选点，</span>
+<span class="co"># 选好后按 esc 可以返回所选点的坐标（选点即为在</span>
+<span class="co"># 预期位置鼠标单击）</span>
+
+<span class="co"># 根据上面的点，利用二氧化碳的值过滤掉不需要的数据</span>
+<span class="co"># 只要在线性范围内选点，拟合结果相差很小</span>
+cemp &lt;-<span class="st"> </span>uemp500[<span class="kw">which</span>(uemp500<span class="op">$</span>CO2_r <span class="op">&gt;</span><span class="st"> </span>
+<span class="st">        </span><span class="fl">45.28</span> <span class="op">&amp;</span><span class="st"> </span>uemp500<span class="op">$</span>CO2_r <span class="op">&lt;</span><span class="st"> </span><span class="fl">459.12</span>),]
+<span class="kw">plot</span>(cemp<span class="op">$</span>CO2_r, cemp<span class="op">$</span>A)
+x &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span>Ci, <span class="dt">data =</span> cemp)
+<span class="kw">summary</span>(x)
+<span class="co"># 利用拟合的结果，提取校准用的斜率和截距</span>
+x<span class="op">$</span>coefficients
+
+k &lt;-<span class="st"> </span>x<span class="op">$</span>coefficients[<span class="dv">2</span>]
+z &lt;-<span class="st"> </span>x<span class="op">$</span>coefficients[<span class="dv">1</span>]
+
+<span class="co"># 校准带叶片测量的数据</span>
+uleafc &lt;-<span class="st"> </span>uleaf500
+uleafc<span class="op">$</span>A &lt;-<span class="st"> </span>uleafc<span class="op">$</span>A <span class="op">-</span><span class="st"> </span>(k <span class="op">*</span><span class="st"> </span>uleafc<span class="op">$</span>CO2_r <span class="op">+</span><span class="st"> </span>z)
+uleafc<span class="op">$</span>Ci &lt;-<span class="st"> </span>((uleafc<span class="op">$</span>gtc <span class="op">-</span><span class="st"> </span>uleafc<span class="op">$</span>E <span class="op">/</span><span class="st"> </span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span>uleafc<span class="op">$</span>CO2_s <span class="op">-</span><span class="st"> </span>
+<span class="st">                  </span>uleafc<span class="op">$</span>A) <span class="op">/</span><span class="st"> </span>(uleafc<span class="op">$</span>gtc <span class="op">+</span><span class="st"> </span>uleafc<span class="op">$</span>E <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)
+
+<span class="co"># 对校准前后的数据进行作图，查看校准效果</span>
+<span class="kw">plot</span>(uleaf500<span class="op">$</span>CO2_r, uleaf500<span class="op">$</span>A, <span class="dt">pch =</span> <span class="dv">2</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>, <span class="dv">40</span>))
+<span class="kw">points</span>(uleafc<span class="op">$</span>CO2_r, uleafc<span class="op">$</span>A)
+<span class="kw">locator</span>()
+cleaf &lt;-<span class="st"> </span>uleafc[<span class="kw">which</span>(uleafc<span class="op">$</span>CO2_r <span class="op">&gt;</span><span class="st"> </span><span class="fl">15.7</span> <span class="op">&amp;</span><span class="st"> </span>
+<span class="st">                        </span>uleafc<span class="op">$</span>CO2_r <span class="op">&lt;</span><span class="st"> </span><span class="fl">474.15</span>),]
+<span class="kw">plot</span>(cleaf<span class="op">$</span>CO2_r, cleaf<span class="op">$</span>A)
+
+<span class="co"># 利用plantecophys拟合标准曲线和racir曲线</span>
+<span class="kw">library</span>(<span class="st">&quot;plantecophys&quot;</span>)
+acifit &lt;-<span class="st"> </span><span class="kw">fitaci</span>(cleaf, <span class="dt">varnames =</span> 
+    <span class="kw">list</span>(<span class="dt">ALEAF =</span> <span class="st">&quot;A&quot;</span>, <span class="dt">Tleaf =</span> <span class="st">&quot;Tleaf&quot;</span>, <span class="dt">Ci =</span> <span class="st">&quot;Ci&quot;</span>, 
+    <span class="dt">PPFD  =</span> <span class="st">&quot;Qin&quot;</span>, <span class="dt">Rd =</span> <span class="st">&quot;Rd&quot;</span>), <span class="dt">Patm =</span> <span class="fl">84.09</span>)
+acifit_normal &lt;-<span class="st"> </span><span class="kw">fitaci</span>(acin, <span class="dt">varnames =</span> 
+     <span class="kw">list</span>(<span class="dt">ALEAF =</span> <span class="st">&quot;A&quot;</span>, <span class="dt">Tleaf =</span> <span class="st">&quot;Tleaf&quot;</span>, <span class="dt">Ci =</span> <span class="st">&quot;Ci&quot;</span>, 
+     <span class="dt">PPFD  =</span> <span class="st">&quot;Qin&quot;</span>, <span class="dt">Rd =</span> <span class="st">&quot;Rd&quot;</span>), <span class="dt">Patm =</span> <span class="fl">84.09</span>)
+<span class="co"># 查看拟合数据</span>
+<span class="kw">summary</span>(acifit)
+<span class="kw">summary</span>(acifit_normal)
+acifit<span class="op">$</span>pars
+acifit_normal<span class="op">$</span>pars
+
+<span class="co"># 对快速曲线作图拟合结果进行查看</span>
+<span class="kw">plot</span>(acifit, <span class="dt">linecols =</span> <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>))
+
+#### ggplot2 作图
+alldata &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">A =</span> 
+      <span class="kw">c</span>(acin<span class="op">$</span>A, ddata<span class="op">$</span>Ac, ddata<span class="op">$</span>Aj, cleaf<span class="op">$</span>A), 
+      <span class="dt">Ci =</span> <span class="kw">c</span>(acin<span class="op">$</span>Ci, ddata<span class="op">$</span>Ci, ddata<span class="op">$</span>Ci, cleaf<span class="op">$</span>Ci),
+      <span class="dt">Atype =</span> <span class="kw">c</span>(
+        <span class="kw">rep</span>(<span class="st">&quot;standard Aci curve&quot;</span>, <span class="kw">length</span>(acin<span class="op">$</span>A)),
+        <span class="kw">rep</span>(<span class="st">&quot;Ac&quot;</span>, <span class="kw">length</span>(ddata<span class="op">$</span>Ac)), 
+        <span class="kw">rep</span>(<span class="st">&quot;Aj&quot;</span>, <span class="kw">length</span>(ddata<span class="op">$</span>Aj)),
+        <span class="kw">rep</span>(<span class="st">&quot;A corrected&quot;</span>, <span class="kw">length</span>(cleaf<span class="op">$</span>A))
+                      )
+)
+
+alldata<span class="op">$</span>Atype &lt;-<span class="st"> </span><span class="kw">factor</span>(alldata<span class="op">$</span>Atype, 
+    <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;standard Aci curve&quot;</span>, 
+               <span class="st">&quot;Ac&quot;</span>, <span class="st">&quot;Aj&quot;</span>, <span class="st">&quot;A corrected&quot;</span>))
+
+<span class="kw">library</span>(ggplot2)
+p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(alldata)
+p1 &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(Ci,A, <span class="dt">colour =</span> Atype),  <span class="dt">alpha =</span> <span class="fl">0.5</span>)
+
+p2 &lt;-<span class="st"> </span>p1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="kw">aes</span>(Ci, A, <span class="dt">colour =</span> Atype),
+                       <span class="dt">method =</span> <span class="st">&#39;auto&#39;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;A &quot;</span>, <span class="st">&quot;(&quot;</span>, mu, 
+          mol<span class="op">%.%</span>m<span class="op">^-</span><span class="dv">2</span><span class="op">%.%</span>s<span class="op">^-</span><span class="dv">1</span>, <span class="st">&quot;)&quot;</span>)), 
+       <span class="dt">x=</span><span class="kw">expression</span>(<span class="kw">paste</span>(C[i], <span class="st">&quot; &quot;</span>,
+          <span class="st">&quot;(&quot;</span>, mu, mol<span class="op">%.%</span>mol<span class="op">^-</span><span class="dv">1</span>, <span class="st">&quot;)&quot;</span>)))
+
+p2 <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1800</span>),
+                        <span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1800</span>, <span class="dv">200</span>)) <span class="op">+</span><span class="st">  </span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">50</span>),
+                     <span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">50</span>, <span class="dv">10</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_colour_hue</span>(<span class="dt">name=</span><span class="st">&quot;  &quot;</span>, 
+                   <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&#39;ACi curve data; &#39;</span>, 
+                   <span class="kw">expression</span>(<span class="kw">paste</span>(A[c], <span class="st">&#39; data; &#39;</span>)), 
+                   <span class="kw">expression</span>(<span class="kw">paste</span>(A[j], <span class="st">&#39; data; &#39;</span>)), 
+                   <span class="st">&#39;RACiR data&#39;</span>) 
+  ) <span class="op">+</span><span class="st"> </span><span class="kw">theme_set</span>(<span class="kw">theme_bw</span>()) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x  =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>, 
+           <span class="dt">angle=</span><span class="dv">30</span>, <span class="dt">vjust=</span><span class="fl">0.5</span>), 
+        <span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>),
+        <span class="dt">axis.title.x =</span> <span class="kw">element_text</span>(
+          <span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&#39;bold&#39;</span>),
+        <span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(
+          <span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&#39;bold&#39;</span>),
+        <span class="dt">legend.text.align =</span> <span class="dv">0</span>,
+        <span class="dt">legend.position =</span> <span class="kw">c</span>(<span class="fl">0.8</span>, <span class="fl">0.6</span>))</code></pre></div>
+最终采用常规方法和 RACiR方法结果如图 <a href="li-6800-.html#fig:racir">9.1</a> 所示，其中 Aj 与 Ac 结果采用 RACiR计算<a href="#fn14" class="footnoteRef" id="fnref14"><sup>14</sup></a>。
+<div class="figure"><span id="fig:racir"></span>
+<img src="images/racir.png" alt="RACiR 方法与常规结果的比较" width="100%" />
+<p class="caption">
+图 9.1: RACiR 方法与常规结果的比较
+</p>
+</div>
+</div>
+<div id="li-6800-" class="section level2">
+<h2><span class="header-section-number">9.6</span> LI-6800 荧光数据分析</h2>
+<p>LI-6800 能够直接提供基本的叶绿素荧光参数，其他参数均可通过这些基本的参数进行计算，计算也较简单，在此不赘述，需要注意的是快相荧光部分的数据，因为分析 ojip 数据的模型有很多，很多都需要复杂的计算，在此我们先将其中较为简单的 jip test 数据分析进行介绍。</p>
+<div id="jip-test-" class="section level3">
+<h3><span class="header-section-number">9.6.1</span> jip test 的实现</h3>
+<p>LI-6800 增加了 ojip 曲线测量功能，本功能主要是针对测量数据的 jip test 的实现。</p>
+</div>
+<div id="jiptest-" class="section level3">
+<h3><span class="header-section-number">9.6.2</span> <code>jiptest</code> 软件包安装</h3>
+<p>目前 <code>jiptest</code> 暂时放在 github 我的软件仓库内，并没提交 CRAN，因此需要 <code>devtools</code> 的支持，然后才能从 github 安装 <code>jiptest</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)
+<span class="kw">library</span>(devtools)
+<span class="kw">install_github</span>(<span class="st">&quot;zhujiedong/jiptest&quot;</span>)</code></pre></div>
+</div>
+<div id="read_files--read_dcfiles-" class="section level3">
+<h3><span class="header-section-number">9.6.3</span> <code>read_files</code> 及 <code>read_dcfiles</code> 函数</h3>
+<p><code>read_files</code> 用于批量读取所有调制光测量数据，方便用于其他的数据分析。<strong>函数要求所有数据必须是 <code>xlsx</code> 格式，并且所有测量数据都保存在同一文件夹内。</strong>，如有其他文件或测量数据则会报错。 <code>read_dcfiles</code> 用于批量读取所有连续光测量数据，其他与 <code>read_dcfiles</code> 相同。</p>
+<p>函数仅有一个参数，即保存数据文件夹的路径，使用如下：</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(jiptest)
+jipdata &lt;-<span class="st"> </span><span class="kw">read_files</span>(<span class="st">&quot;./data/ojip&quot;</span>)</code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-25">表 9.2: </span>jiptest 批量导入数据后的样式</caption>
+<thead>
+<tr class="header">
+<th align="right">SECS</th>
+<th align="right">FLUOR</th>
+<th align="left">SOURCE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">2.41e-05</td>
+<td align="right">887</td>
+<td align="left">INDUCTION-484-20171225-13_15_58</td>
+</tr>
+<tr class="even">
+<td align="right">2.81e-05</td>
+<td align="right">998</td>
+<td align="left">INDUCTION-484-20171225-13_15_58</td>
+</tr>
+<tr class="odd">
+<td align="right">3.19e-05</td>
+<td align="right">1013</td>
+<td align="left">INDUCTION-484-20171225-13_15_58</td>
+</tr>
+<tr class="even">
+<td align="right">3.60e-05</td>
+<td align="right">1055</td>
+<td align="left">INDUCTION-484-20171225-13_15_58</td>
+</tr>
+<tr class="odd">
+<td align="right">4.01e-05</td>
+<td align="right">1044</td>
+<td align="left">INDUCTION-484-20171225-13_15_58</td>
+</tr>
+<tr class="even">
+<td align="right">4.41e-05</td>
+<td align="right">1205</td>
+<td align="left">INDUCTION-484-20171225-13_15_58</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dcjipdata &lt;-<span class="st"> </span><span class="kw">read_dcfiles</span>(<span class="st">&quot;./data/ojip&quot;</span>)</code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-26">表 9.3: </span>jiptest DC 数据批量导入数据后的样式</caption>
+<thead>
+<tr class="header">
+<th align="right">SECS</th>
+<th align="right">FLUOR</th>
+<th align="left">SOURCE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">2.41e-05</td>
+<td align="right">154000</td>
+<td align="left">INDUCTION-484-20171225-13_15_58</td>
+</tr>
+<tr class="even">
+<td align="right">2.81e-05</td>
+<td align="right">157566</td>
+<td align="left">INDUCTION-484-20171225-13_15_58</td>
+</tr>
+<tr class="odd">
+<td align="right">3.19e-05</td>
+<td align="right">161261</td>
+<td align="left">INDUCTION-484-20171225-13_15_58</td>
+</tr>
+<tr class="even">
+<td align="right">3.60e-05</td>
+<td align="right">165114</td>
+<td align="left">INDUCTION-484-20171225-13_15_58</td>
+</tr>
+<tr class="odd">
+<td align="right">4.01e-05</td>
+<td align="right">169069</td>
+<td align="left">INDUCTION-484-20171225-13_15_58</td>
+</tr>
+<tr class="even">
+<td align="right">4.41e-05</td>
+<td align="right">173231</td>
+<td align="left">INDUCTION-484-20171225-13_15_58</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="jip_test--jip_dctest-" class="section level3">
+<h3><span class="header-section-number">9.6.4</span> <code>jip_test</code> 及 <code>jip_dctest</code> 函数</h3>
+<p><code>jiptest</code> 是 jiptest 的核心函数，用于所有数据的 jip test 分析，函数仅包含两个参数，测量数据的保存文件夹路径，以及分析结果的导出路径，导出路径必须为<strong>已存在的文件夹或磁盘根目录</strong>。 <code>jip_dctest</code> 与 <code>jip_test</code> 相似，用于连续光测量数据的分析。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">jip_results &lt;-<span class="st"> </span><span class="kw">jip_test</span>(<span class="st">&quot;./data/ojip&quot;</span>, <span class="st">&quot;d:/&quot;</span>)</code></pre></div>
+<pre><code>## for the current version, we suggest you use the default settings of the duration (1000 ms or more)
+##   in the induction settings of LI-6800</code></pre>
+<table>
+<caption><span id="tab:jipres">表 9.4: </span>jiptest 输出的计算参数</caption>
+<thead>
+<tr class="header">
+<th align="left">parameters</th>
+<th align="right">data_file1</th>
+<th align="right">data_file2</th>
+<th align="right">data_file3</th>
+<th align="right">data_file4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Fo</td>
+<td align="right">887.0000000</td>
+<td align="right">849.0000000</td>
+<td align="right">981.0000000</td>
+<td align="right">914.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">Fm</td>
+<td align="right">4649.5200000</td>
+<td align="right">3714.2700000</td>
+<td align="right">4225.2400000</td>
+<td align="right">3754.2700000</td>
+</tr>
+<tr class="odd">
+<td align="left">F300</td>
+<td align="right">2181.4000000</td>
+<td align="right">1798.6000000</td>
+<td align="right">2067.8000000</td>
+<td align="right">2537.2000000</td>
+</tr>
+<tr class="even">
+<td align="left">FJ</td>
+<td align="right">2594.3000000</td>
+<td align="right">2104.6000000</td>
+<td align="right">2456.8000000</td>
+<td align="right">2569.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">FI</td>
+<td align="right">4443.1100000</td>
+<td align="right">3547.1100000</td>
+<td align="right">4009.2200000</td>
+<td align="right">3556.5300000</td>
+</tr>
+<tr class="even">
+<td align="left">Tfmax</td>
+<td align="right">256.0160000</td>
+<td align="right">316.0160000</td>
+<td align="right">272.0160000</td>
+<td align="right">200.0160000</td>
+</tr>
+<tr class="odd">
+<td align="left">Area</td>
+<td align="right">79.6780569</td>
+<td align="right">59.0630025</td>
+<td align="right">75.5884747</td>
+<td align="right">80.6896655</td>
+</tr>
+<tr class="even">
+<td align="left">Fv</td>
+<td align="right">3762.5200000</td>
+<td align="right">2865.2700000</td>
+<td align="right">3244.2400000</td>
+<td align="right">2840.2700000</td>
+</tr>
+<tr class="odd">
+<td align="left">Vj</td>
+<td align="right">0.4537650</td>
+<td align="right">0.4382135</td>
+<td align="right">0.4548985</td>
+<td align="right">0.5826911</td>
+</tr>
+<tr class="even">
+<td align="left">Mo</td>
+<td align="right">1.3760990</td>
+<td align="right">1.3256691</td>
+<td align="right">1.3399748</td>
+<td align="right">2.2859799</td>
+</tr>
+<tr class="odd">
+<td align="left">Sm</td>
+<td align="right">0.0211768</td>
+<td align="right">0.0206134</td>
+<td align="right">0.0232993</td>
+<td align="right">0.0284092</td>
+</tr>
+<tr class="even">
+<td align="left">Ss</td>
+<td align="right">0.3297474</td>
+<td align="right">0.3305602</td>
+<td align="right">0.3394829</td>
+<td align="right">0.2548977</td>
+</tr>
+<tr class="odd">
+<td align="left">N</td>
+<td align="right">0.0642212</td>
+<td align="right">0.0623590</td>
+<td align="right">0.0686317</td>
+<td align="right">0.1114531</td>
+</tr>
+<tr class="even">
+<td align="left">Vav</td>
+<td align="right">0.9999173</td>
+<td align="right">0.9999348</td>
+<td align="right">0.9999143</td>
+<td align="right">0.9998580</td>
+</tr>
+<tr class="odd">
+<td align="left">phi_po</td>
+<td align="right">0.8092276</td>
+<td align="right">0.7714221</td>
+<td align="right">0.7678238</td>
+<td align="right">0.7565439</td>
+</tr>
+<tr class="even">
+<td align="left">phi_ET2o</td>
+<td align="right">0.4420284</td>
+<td align="right">0.4333745</td>
+<td align="right">0.4185419</td>
+<td align="right">0.3157125</td>
+</tr>
+<tr class="odd">
+<td align="left">phi_RE1o</td>
+<td align="right">0.0443938</td>
+<td align="right">0.0450048</td>
+<td align="right">0.0511261</td>
+<td align="right">0.0526707</td>
+</tr>
+<tr class="even">
+<td align="left">psi_ET2o</td>
+<td align="right">0.5462350</td>
+<td align="right">0.5617865</td>
+<td align="right">0.5451015</td>
+<td align="right">0.4173089</td>
+</tr>
+<tr class="odd">
+<td align="left">psi_RE1o</td>
+<td align="right">0.0548595</td>
+<td align="right">0.0583401</td>
+<td align="right">0.0665857</td>
+<td align="right">0.0696201</td>
+</tr>
+<tr class="even">
+<td align="left">delta_RE1o</td>
+<td align="right">0.1004321</td>
+<td align="right">0.1038474</td>
+<td align="right">0.1221529</td>
+<td align="right">0.1668312</td>
+</tr>
+<tr class="odd">
+<td align="left">phi_Do</td>
+<td align="right">0.1907724</td>
+<td align="right">0.2285779</td>
+<td align="right">0.2321762</td>
+<td align="right">0.2434561</td>
+</tr>
+<tr class="even">
+<td align="left">phi_Pav</td>
+<td align="right">0.0000669</td>
+<td align="right">0.0000503</td>
+<td align="right">0.0000658</td>
+<td align="right">0.0001075</td>
+</tr>
+<tr class="odd">
+<td align="left">ABS_RC</td>
+<td align="right">3.7475545</td>
+<td align="right">3.9215460</td>
+<td align="right">3.8363703</td>
+<td align="right">5.1856106</td>
+</tr>
+<tr class="even">
+<td align="left">TR0_RC</td>
+<td align="right">3.0326246</td>
+<td align="right">3.0251673</td>
+<td align="right">2.9456566</td>
+<td align="right">3.9231420</td>
+</tr>
+<tr class="odd">
+<td align="left">ET2o_RC</td>
+<td align="right">1.6565256</td>
+<td align="right">1.6994981</td>
+<td align="right">1.6056817</td>
+<td align="right">1.6371621</td>
+</tr>
+<tr class="even">
+<td align="left">RE1o_RC</td>
+<td align="right">0.1663683</td>
+<td align="right">0.1764884</td>
+<td align="right">0.1961386</td>
+<td align="right">0.2731297</td>
+</tr>
+<tr class="odd">
+<td align="left">DI0_RC</td>
+<td align="right">0.7149299</td>
+<td align="right">0.8963787</td>
+<td align="right">0.8907137</td>
+<td align="right">1.2624686</td>
+</tr>
+<tr class="even">
+<td align="left">ABC_CS</td>
+<td align="right">887.0000000</td>
+<td align="right">849.0000000</td>
+<td align="right">981.0000000</td>
+<td align="right">914.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">TR0_CS</td>
+<td align="right">3.0326246</td>
+<td align="right">3.0251673</td>
+<td align="right">2.9456566</td>
+<td align="right">3.9231420</td>
+</tr>
+<tr class="even">
+<td align="left">ET0_CS</td>
+<td align="right">1.6565256</td>
+<td align="right">1.6994981</td>
+<td align="right">1.6056817</td>
+<td align="right">1.6371621</td>
+</tr>
+<tr class="odd">
+<td align="left">DI0_CS</td>
+<td align="right">883.9673754</td>
+<td align="right">845.9748327</td>
+<td align="right">978.0543434</td>
+<td align="right">910.0768580</td>
+</tr>
+<tr class="even">
+<td align="left">PIabs</td>
+<td align="right">1.3625603</td>
+<td align="right">1.1032809</td>
+<td align="right">1.0329666</td>
+<td align="right">0.4291734</td>
+</tr>
+<tr class="odd">
+<td align="left">PItotal</td>
+<td align="right">0.1521228</td>
+<td align="right">0.1278497</td>
+<td align="right">0.1437378</td>
+<td align="right">0.0859364</td>
+</tr>
+<tr class="even">
+<td align="left">DFabs</td>
+<td align="right">0.3093655</td>
+<td align="right">0.0982884</td>
+<td align="right">0.0324348</td>
+<td align="right">-0.8458942</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dcjip_results &lt;-<span class="st"> </span><span class="kw">jip_dctest</span>(<span class="st">&quot;./data/ojip&quot;</span>, <span class="st">&quot;d:/&quot;</span>)</code></pre></div>
+<pre><code>## for the current version, we suggest you use the default settings of the duration (1000 ms or more)
+##           in the induction settings of LI-6800</code></pre>
+<table>
+<caption><span id="tab:dcjipres">表 9.5: </span>jiptest DC 数据输出的计算参数</caption>
+<thead>
+<tr class="header">
+<th align="left">parameters</th>
+<th align="right">data_file1</th>
+<th align="right">data_file2</th>
+<th align="right">data_file3</th>
+<th align="right">data_file4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Fo</td>
+<td align="right">1.540000e+05</td>
+<td align="right">1.331910e+05</td>
+<td align="right">1.566640e+05</td>
+<td align="right">1.535890e+05</td>
+</tr>
+<tr class="even">
+<td align="left">Fm</td>
+<td align="right">7.138390e+05</td>
+<td align="right">5.606100e+05</td>
+<td align="right">6.476600e+05</td>
+<td align="right">5.848390e+05</td>
+</tr>
+<tr class="odd">
+<td align="left">F300</td>
+<td align="right">3.380910e+05</td>
+<td align="right">2.754768e+05</td>
+<td align="right">3.228592e+05</td>
+<td align="right">3.881104e+05</td>
+</tr>
+<tr class="even">
+<td align="left">FJ</td>
+<td align="right">4.007440e+05</td>
+<td align="right">3.202450e+05</td>
+<td align="right">3.768850e+05</td>
+<td align="right">4.066710e+05</td>
+</tr>
+<tr class="odd">
+<td align="left">FI</td>
+<td align="right">6.815050e+05</td>
+<td align="right">5.343140e+05</td>
+<td align="right">6.145900e+05</td>
+<td align="right">5.522530e+05</td>
+</tr>
+<tr class="even">
+<td align="left">Tfmax</td>
+<td align="right">2.760160e+02</td>
+<td align="right">3.000160e+02</td>
+<td align="right">2.880160e+02</td>
+<td align="right">2.120160e+02</td>
+</tr>
+<tr class="odd">
+<td align="left">Area</td>
+<td align="right">1.037380e+04</td>
+<td align="right">8.095231e+03</td>
+<td align="right">9.855470e+03</td>
+<td align="right">1.052059e+04</td>
+</tr>
+<tr class="even">
+<td align="left">Fv</td>
+<td align="right">5.598390e+05</td>
+<td align="right">4.274190e+05</td>
+<td align="right">4.909960e+05</td>
+<td align="right">4.312500e+05</td>
+</tr>
+<tr class="odd">
+<td align="left">Vj</td>
+<td align="right">4.407410e-01</td>
+<td align="right">4.376361e-01</td>
+<td align="right">4.485189e-01</td>
+<td align="right">5.868568e-01</td>
+</tr>
+<tr class="even">
+<td align="left">Mo</td>
+<td align="right">1.315314e+00</td>
+<td align="right">1.331581e+00</td>
+<td align="right">1.353943e+00</td>
+<td align="right">2.175271e+00</td>
+</tr>
+<tr class="odd">
+<td align="left">Sm</td>
+<td align="right">1.853000e-02</td>
+<td align="right">1.893980e-02</td>
+<td align="right">2.007240e-02</td>
+<td align="right">2.439560e-02</td>
+</tr>
+<tr class="even">
+<td align="left">Ss</td>
+<td align="right">3.350843e-01</td>
+<td align="right">3.286589e-01</td>
+<td align="right">3.312686e-01</td>
+<td align="right">2.697856e-01</td>
+</tr>
+<tr class="odd">
+<td align="left">N</td>
+<td align="right">5.529940e-02</td>
+<td align="right">5.762750e-02</td>
+<td align="right">6.059250e-02</td>
+<td align="right">9.042570e-02</td>
+</tr>
+<tr class="even">
+<td align="left">Vav</td>
+<td align="right">9.999329e-01</td>
+<td align="right">9.999369e-01</td>
+<td align="right">9.999303e-01</td>
+<td align="right">9.998849e-01</td>
+</tr>
+<tr class="odd">
+<td align="left">phi_po</td>
+<td align="right">7.842651e-01</td>
+<td align="right">7.624177e-01</td>
+<td align="right">7.581076e-01</td>
+<td align="right">7.373824e-01</td>
+</tr>
+<tr class="even">
+<td align="left">phi_ET2o</td>
+<td align="right">4.386073e-01</td>
+<td align="right">4.287562e-01</td>
+<td align="right">4.180820e-01</td>
+<td align="right">3.046445e-01</td>
+</tr>
+<tr class="odd">
+<td align="left">phi_RE1o</td>
+<td align="right">4.529590e-02</td>
+<td align="right">4.690600e-02</td>
+<td align="right">5.106070e-02</td>
+<td align="right">5.571790e-02</td>
+</tr>
+<tr class="even">
+<td align="left">psi_ET2o</td>
+<td align="right">5.592590e-01</td>
+<td align="right">5.623639e-01</td>
+<td align="right">5.514811e-01</td>
+<td align="right">4.131432e-01</td>
+</tr>
+<tr class="odd">
+<td align="left">psi_RE1o</td>
+<td align="right">5.775590e-02</td>
+<td align="right">6.152280e-02</td>
+<td align="right">6.735290e-02</td>
+<td align="right">7.556170e-02</td>
+</tr>
+<tr class="even">
+<td align="left">delta_RE1o</td>
+<td align="right">1.032722e-01</td>
+<td align="right">1.094003e-01</td>
+<td align="right">1.221309e-01</td>
+<td align="right">1.828948e-01</td>
+</tr>
+<tr class="odd">
+<td align="left">phi_Do</td>
+<td align="right">2.157349e-01</td>
+<td align="right">2.375823e-01</td>
+<td align="right">2.418924e-01</td>
+<td align="right">2.626176e-01</td>
+</tr>
+<tr class="even">
+<td align="left">phi_Pav</td>
+<td align="right">5.270000e-05</td>
+<td align="right">4.810000e-05</td>
+<td align="right">5.280000e-05</td>
+<td align="right">8.480000e-05</td>
+</tr>
+<tr class="odd">
+<td align="left">ABS_RC</td>
+<td align="right">3.805249e+00</td>
+<td align="right">3.990815e+00</td>
+<td align="right">3.981886e+00</td>
+<td align="right">5.026763e+00</td>
+</tr>
+<tr class="even">
+<td align="left">TR0_RC</td>
+<td align="right">2.984324e+00</td>
+<td align="right">3.042668e+00</td>
+<td align="right">3.018699e+00</td>
+<td align="right">3.706647e+00</td>
+</tr>
+<tr class="odd">
+<td align="left">ET2o_RC</td>
+<td align="right">1.669010e+00</td>
+<td align="right">1.711086e+00</td>
+<td align="right">1.664755e+00</td>
+<td align="right">1.531376e+00</td>
+</tr>
+<tr class="even">
+<td align="left">RE1o_RC</td>
+<td align="right">1.723623e-01</td>
+<td align="right">1.871934e-01</td>
+<td align="right">2.033181e-01</td>
+<td align="right">2.800807e-01</td>
+</tr>
+<tr class="odd">
+<td align="left">DI0_RC</td>
+<td align="right">8.209251e-01</td>
+<td align="right">9.481469e-01</td>
+<td align="right">9.631878e-01</td>
+<td align="right">1.320116e+00</td>
+</tr>
+<tr class="even">
+<td align="left">ABC_CS</td>
+<td align="right">1.540000e+05</td>
+<td align="right">1.331910e+05</td>
+<td align="right">1.566640e+05</td>
+<td align="right">1.535890e+05</td>
+</tr>
+<tr class="odd">
+<td align="left">TR0_CS</td>
+<td align="right">2.984324e+00</td>
+<td align="right">3.042668e+00</td>
+<td align="right">3.018699e+00</td>
+<td align="right">3.706647e+00</td>
+</tr>
+<tr class="even">
+<td align="left">ET0_CS</td>
+<td align="right">1.669010e+00</td>
+<td align="right">1.711086e+00</td>
+<td align="right">1.664755e+00</td>
+<td align="right">1.531376e+00</td>
+</tr>
+<tr class="odd">
+<td align="left">DI0_CS</td>
+<td align="right">1.539970e+05</td>
+<td align="right">1.331880e+05</td>
+<td align="right">1.566610e+05</td>
+<td align="right">1.535853e+05</td>
+</tr>
+<tr class="even">
+<td align="left">PIabs</td>
+<td align="right">1.212241e+00</td>
+<td align="right">1.033289e+00</td>
+<td align="right">9.677646e-01</td>
+<td align="right">3.932321e-01</td>
+</tr>
+<tr class="odd">
+<td align="left">PItotal</td>
+<td align="right">1.396084e-01</td>
+<td align="right">1.269280e-01</td>
+<td align="right">1.346374e-01</td>
+<td align="right">8.801820e-02</td>
+</tr>
+<tr class="even">
+<td align="left">DFabs</td>
+<td align="right">1.924705e-01</td>
+<td align="right">3.274650e-02</td>
+<td align="right">-3.276640e-02</td>
+<td align="right">-9.333551e-01</td>
+</tr>
+</tbody>
+</table>
+<p>计算参数见表 <a href="li-6800-.html#tab:jipres">9.4</a></p>
+</div>
+<div id="jip_ggplot-" class="section level3">
+<h3><span class="header-section-number">9.6.5</span> <code>jip_ggplot</code> 函数</h3>
+<p><code>jip_ggplot</code> 基于 <code>ggplot2</code>，用于快速预览所有测量结果的 ojip 曲线。函数仅有一个参数，即保存数据文件夹的路径，使用如下：</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">jip_ggplot</span>(<span class="st">&quot;./data/ojip&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:ggplot"></span>
+<img src="bookdown_files/figure-html/ggplot-1.png" alt="ojip 曲线的快速预览" width="672" />
+<p class="caption">
+图 9.2: ojip 曲线的快速预览
+</p>
+</div>
+<p>ojip 曲线的快速预览如图 <a href="li-6800-.html#fig:ggplot">9.2</a></p>
+
+
+</div>
+</div>
+</div>
+<h3>参考文献</h3>
+<div id="refs" class="references">
+<div id="ref-Stinziano2017">
+<p>Stinziano, J. R., P. B. Morgan, D. J. Lynch, A. J. Saathoff, D. K. Mcdermitt, and D. T. Hanson. 2017. “The Rapid a-Ci Response: Photosynthesis in the Phenomic Era.” <em>Plant Cell &amp; Environment</em> 40.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="14">
+<li id="fn14"><p>注意，注意数据表头的大小写，此处代码中，为处理数据的方便，我更改了大小写，分析自己的数据时需要注意<a href="li-6800-.html#fnref14">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="section-8.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/yihui/bookdown-crc/edit/master/12-li6800.Rmd",
+"text": "缂栬緫"
+},
+"download": ["bookdown.pdf", "bookdown.epub"],
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

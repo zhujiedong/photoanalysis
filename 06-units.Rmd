@@ -1,0 +1,49 @@
+# RHtoVPD 函数
+
+该函数为一系列的工具，用于温度、湿度不同单位之间的换算 @Jones1993Plants ：
+
+```{r, eval=FALSE}
+# RH 转为 VPD  
+RHtoVPD(RH, TdegC, Pa = 101) 
+ 
+# VPD 转为 RH   
+VPDtoRH(VPD, TdegC, Pa = 101) 
+ 
+#  饱和水气压计算 
+esat(TdegC, Pa = 101) 
+ 
+#  露点温度转换为VPD 
+DewtoVPD(Tdew, TdegC, Pa = 101) 
+ 
+#  基于叶温的 VPD 转换为基于空气温度的 VPD
+VPDleafToAir(VPD, Tleaf, Tair, Pa = 101) 
+ 
+#  基于空气温度的 VPD 转换为基于叶温的 VPD 
+VPDairToLeaf(VPD, Tair, Tleaf, Pa = 101) 
+ 
+#  基于叶温的相对湿度转换为基于空气温度的相对湿度  
+RHleafToAir(RH, Tleaf, Tair, Pa = 101) 
+ 
+#  基于空气温度的相对湿度转换为基于叶温的相对湿度  
+RHairToLeaf(RH, Tair, Tleaf, Pa = 101) 
+```
+
+注意事项及单位：
+
+部分参数的转换需要准确的大气压用于计算，因此，有大气压选项的参数必须填入实际值。
+
+RH：相对湿度 (\%) 。
+
+TdegC：温度 (\textcelsius) (叶片或温度)。
+
+Pa：大气压 (kPa)
+
+VPD：水气压亏缺 (kPa)。
+
+Tdew： 露点温度(\textcelsius) 。
+
+Tleaf：叶温(\textcelsius) 。
+
+Tair：空气温度(\textcelsius) 。
+
+\cleardoublepage

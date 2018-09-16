@@ -1,0 +1,100 @@
+## 直角双曲线的修正模型
+
+@YEZiPiao2010 直角双曲线修正模型的表达式如式 \@ref(eq:mrec) 所示：
+
+\begin{equation}
+P_{n} = \alpha \frac{1-\beta I}{1+\gamma I} I - R_{d}
+(\#eq:mrec)
+\end{equation}
+
+其中，$\text{\ensuremath{\beta}}$ 和 $\gamma$ 为系数，$\text{\ensuremath{\beta}}$光抑制项，$\gamma$光饱和项，单位为
+$m^{2}\cdot s\cdot\mu mol^{-1}$，其他参数与上文相同，因为该式 \@ref(eq:mrec)
+存在极值，因此，必然存在饱和光强和最大净光合速率，分别用式 \@ref(eq:isat) 和式 \@ref(eq:ic) 求得。
+
+\begin{equation}
+I_{sat} = \frac{\sqrt{\frac{(\beta+\gamma)}{\beta}-1}}{\gamma}
+(\#eq:isat)
+\end{equation}
+
+\begin{equation}
+P_{nmax} = \alpha\left(\frac{\sqrt{\beta+\gamma}-\sqrt{\beta}}{\gamma}\right)^{2}-R_{d}
+(\#eq:ic)
+\end{equation}
+
+该模型的优点为拟合结果中光饱和点和最大净光合速率均接近实测值，还可以拟合饱和光强之后光合速率随光强下降段的曲线。
+
+### 直角双曲线修正模型的实现
+
+```{r, mrecr, fig.cap="直角双曲线修正模型拟合"}
+library(minpack.lm)
+
+# 读取数据，同fitaci数据格式
+lrc <- read.csv("./data/lrc.csv")
+lrc <- subset(lrc, Obs > 0)
+
+# 光响应曲线没有太多参数，
+# 直接调出相应的光强和光合速率
+# 方便后面调用
+lrc_Q <- lrc$PARi
+lrc_A <- lrc$Photo 
+
+# 模型的拟合
+lrcnls <- nlsLM(lrc_A ~ alpha * ((1 - 
+              beta*lrc_Q)/(1 + gamma * lrc_Q)) * lrc_Q - Rd,
+                start=list(alpha = 0.07, beta = 0.00005,
+                           gamma=0.004, Rd = 0.2)
+                )
+fitlrc_mrec <- summary(lrcnls)
+
+# 饱和点计算
+Isat <-  sqrt((fitlrc_mrec$coef[2,1] + fitlrc_mrec$coef[3,1])/
+              fitlrc_mrec$coef[2,1]-1)/fitlrc_mrec$coef[3,1]
+# 补偿点计算
+Ic <- (fitlrc_mrec$coef[1,1] - fitlrc_mrec$coef[4,1])/
+  (fitlrc_mrec$coef[3,1]*fitlrc_mrec$coef[4,1]+
+   fitlrc_mrec$coef[1,1]*fitlrc_mrec$coef[2,1])
+
+## 拟合图形
+library(ggplot2)
+light <- data.frame(lrc_Q = lrc$PARi, lrc_A = lrc$Photo)
+
+p <- ggplot(light, aes(x = lrc_Q, y = lrc_A))
+
+p1 <- p + 
+  geom_point(shape = 16, size = 3, color = "green") + 
+  geom_smooth(method="nls", formula = 
+   y ~ alpha * ((1 - 
+              beta*x)/(1 + gamma * x)) * x - Rd, 
+    se = FALSE, method.args = list(
+    start = c(alpha = 0.07, beta = 0.00005,
+              gamma=0.004, Rd = 0.2), 
+    aes(x =lrc_Q, y = lrc_A, 
+    color='blue', size = 1.2))
+  ) +
+  labs(y=expression(paste("photosynthetic rate  ", 
+          "(", mu, mol%.%m^-2%.%s^-1, ")")), 
+       x=expression(paste("PAR ", 
+           "(", mu, mol%.%m^-2%.%s^-1, ")")))
+
+
+# 自定义坐标轴
+p1 + scale_x_continuous(breaks = seq(0, 2100, by = 200)) +  
+  scale_y_continuous(breaks= round(light$lrc_A)) +
+   theme(axis.text.x  = element_text(
+    size = 10, angle=30, vjust=0.5), 
+    axis.text.y = element_text(size = 10),
+    axis.title.x = element_text(size = 12, face = 'bold'),
+    axis.title.y = element_text(size = 12, face = 'bold')
+  )
+```
+
+```{r, mrectable, echo=FALSE}
+knitr::kable(
+fitlrc_mrec$coef, booktabs = TRUE,
+caption = '直角双曲线修正模型计算参数'
+)
+```
+
+尽管修正模型可以方便的计算饱和点和补偿点，但如同 @Lobo2013Fitting 所指出，双曲线模型对其结果的计算常有超出生态学意义范围的值^[例如本例的数据结果]，因此对模型的选择不能一概而论，需根据实际情况而选择。
+
+\cleardoublepage

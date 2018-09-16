@@ -1,0 +1,83 @@
+## 指数模型
+
+光合指数模型较多，我们此处使用的指数函数的模型 @Prado1997Photosynthetic，其表达式为：
+
+\begin{equation}
+P_{n} = P_{nmax}[1 - e^{-b(I-I_{C})}]
+(\#eq:exp)
+\end{equation}
+
+其中，$I_{c}$ 为光补偿点，$e$ 为自然对数的底，b为常数，其他参数意义同 \@ref(eq:exp)。同样，该方程仍然是没有极值的函数，但我们可以直接求得光补偿点。
+
+### 指数模型的实现
+
+```{r, nexpr, fig.cap="指数模型拟合"}
+library(minpack.lm)
+
+# 读取数据，同fitaci数据格式
+lrc <- read.csv("./data/lrc.csv")
+lrc <- subset(lrc, Obs > 0)
+
+# 光响应曲线没有太多参数，
+# 直接调出相应的光强和光合速率
+# 方便后面调用
+lrc_Q <- lrc$PARi
+lrc_A <- lrc$Photo 
+
+# 模型的拟合
+lrcnls <- nlsLM(lrc_A ~ Am*(1-exp((-b)*(lrc_Q-Ic))),
+                start=list(Am=(max(lrc_A)-min(lrc_A)),
+                           Ic=5, b=1)
+                )
+fitlrc_exp <- summary(lrcnls)
+
+# 光饱和点
+Isat <- function(Isat){fitlrc_exp$coef[1,1]*
+    (1-exp((-fitlrc_exp$coef[3,1])*(Isat-
+    fitlrc_exp$coef[2,1])))-0.9*fitlrc_exp$coef[1,1]}
+
+uniroot(Isat, c(0,2000))$root
+
+## 拟合图形
+library(ggplot2)
+light <- data.frame(lrc_Q = lrc$PARi, lrc_A = lrc$Photo)
+
+p <- ggplot(light, aes(x = lrc_Q, y = lrc_A))
+
+p1 <- p + 
+  geom_point(shape = 16, size = 3, color = "green") + 
+  geom_smooth(method="nls", formula = 
+    y ~ Am*(1-exp((-b)*(x -Ic))), 
+    se = FALSE, method.args = list(
+    start = c(Am=(max(lrc_A)-min(lrc_A)),
+    Ic=5, b=0.002), aes(x =lrc_Q, y = lrc_A, 
+    color='blue', size = 1.2))
+  ) +
+  labs(y=expression(paste("photosynthetic rate  ", 
+          "(", mu, mol%.%m^-2%.%s^-1, ")")), 
+       x=expression(paste("PAR ", 
+           "(", mu, mol%.%m^-2%.%s^-1, ")")))
+
+
+# 自定义坐标轴
+p1 + scale_x_continuous(breaks = seq(0, 2100, by = 200)) +  
+  scale_y_continuous(breaks= round(light$lrc_A)) +
+   theme(axis.text.x  = element_text(
+    size = 10, angle=30, vjust=0.5), 
+    axis.text.y = element_text(size = 10),
+    axis.title.x = element_text(size = 12, face = 'bold'),
+    axis.title.y = element_text(size = 12, face = 'bold')
+  )
+```
+
+```{r, nexptable, echo=FALSE}
+knitr::kable(
+fitlrc_exp$coef, booktabs = TRUE,
+caption = '指数模型计算参数'
+)
+```
+
+最终的数据拟结果如图 \@ref(fig:nexpr) 所示，拟合的参数及结果见表 \@ref(tab:nexptable)。
+
+
+\cleardoublepage

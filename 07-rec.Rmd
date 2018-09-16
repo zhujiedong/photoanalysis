@@ -1,0 +1,132 @@
+# 光响应曲线的拟合
+
+光响应曲线模型有很多，主要分为四大类，直角双曲线，非直角双曲线，指数以及直角双曲线修正模型，我们分别对这四类进行阐述。
+
+## 直角双曲线模型
+
+@BalyEC1935 提出了直角双曲线模型，它的表达式为：
+
+\begin{equation}
+P_{n}  = \frac{\alpha I\ P_{nmax}}{\alpha I + P_{nmax}}- R_{d}
+(\#eq:rec)
+\end{equation}
+
+* 其中，P$_{n}$ 为净光合速率；
+* \textsl{I} 为光强；
+* $\text{\ensuremath{\alpha}}$ 为光响应曲线在光强为0时的斜率，即光响应曲线的初始斜率，也称之为初始量子效率；
+* P$_{nmax}$ 为最大净光合速率；
+* R$_{d}$：为暗呼吸速率。
+
+对 \@ref(eq:rec) 求导可知其导数大于 0，也就是直角双曲线是一个没有极值的渐近线，因此，无法由 \@ref(eq:rec)  求得最大光合速率的饱和光强^[直角双曲线和非直角双曲线模型类似，如果测量时饱和光强之后光合速率不下降，则计算的P$_{nmax}$则远大于实测值。]。
+
+因此就需要使用弱光条件下
+($\leq$ 200 $\mu mol\cdot m^{-2}\cdot s^{-1}$) 的数据得到表观量子效率（apparent
+quantum efficiency，AQE），利用非线性最小二乘法估算 P$_{nmax}$ ，然后利用 @YEZiPiao2010 的式 \@ref(eq:aqe) 求解 $I_{sat}$，
+
+\begin{equation}
+P_{nmax}= AQE \times I_{sat} - R_{d}
+(\#eq:aqe)
+\end{equation}
+
+但此方法测得的光饱和点远小于实测值，我们采用 0.7P$_{nmax}$ @ZhangXS2009、0.9P$_{nmax}$
+@HuangHY2009、或其他设定的值来的来估算$I_{sat}$。
+
+### 直角双曲线模型的实现
+
+```{r, recr, fig.cap="直角双曲线模型拟合"}
+# 调用非线性拟合包minpack.lm，也可以直接使用nls
+library(minpack.lm)
+# 读取数据，同fitaci数据格式
+lrc <- read.csv("./data/lrc.csv")
+lrc <- subset(lrc, Obs > 0)
+
+# 光响应曲线没有太多参数，
+# 直接调出相应的光强和光合速率
+# 方便后面调用
+lrc_Q <- lrc$PARi
+lrc_A <- lrc$Photo 
+
+# 采用非线性拟合进行数据的拟合
+lrcnls <- nlsLM(lrc_A ~ (alpha * lrc_Q * Am) * 
+                (1/(alpha * lrc_Q + Am)) - Rd,  
+              start=list(Am=(max(lrc_A)-min(lrc_A)),
+              alpha=0.05,Rd=-min(lrc_A))
+)
+fitlrc_rec <- summary(lrcnls)
+
+# 补偿点时净光合速率为0，
+# 据此利用uniroot求解方程的根
+Ic <- function(Ic){(fitlrc_rec$coef[2,1] * Ic *
+    fitlrc_rec$coef[1,1]) * (1/(fitlrc_rec$coef[2,1] * 
+    Ic + fitlrc_rec$coef[1,1])) - fitlrc_rec$coef[3,1] 
+}
+
+uniroot(Ic, c(0,50))$root
+
+# 根据饱和点定义，0.75最大光合速率为饱和点，
+# 也可以是其他比例
+# 据此利用uniroot求解方程的根
+
+Isat <- function(Isat){(fitlrc_rec$coef[2,1] * 
+        Isat * fitlrc_rec$coef[1,1]) * 
+    (1/(fitlrc_rec$coef[2,1] * Isat + 
+          fitlrc_rec$coef[1,1])) - fitlrc_rec$coef[3,1] -
+    0.75 * fitlrc_rec$coef[1,1]
+}
+# 求值区间根据具体实验确定
+
+uniroot(Isat, c(0,2500))$root
+
+
+# 使用ggplot2进行作图并拟合曲线
+library(ggplot2)
+
+light <- data.frame(lrc_Q = lrc$PARi, lrc_A = lrc$Photo)
+
+p <- ggplot(light, aes(x = lrc_Q, y = lrc_A))
+
+p1 <- p + geom_point(shape = 16, size = 3, color = "green") + 
+  geom_smooth(method="nls", formula = y ~ (alpha * x * Am) * 
+  (1/(alpha * x + Am)) - Rd, se = FALSE,
+  method.args = 
+  list(start = c(Am=(max(lrc_A)-min(lrc_A)),
+  alpha=0.05,Rd=-min(lrc_A)), 
+  aes(x =lrc_Q, y = lrc_A, color='blue', size = 1.2))
+  ) +
+  labs(y=expression(paste("photosynthetic rate  ", 
+       "(", mu, mol%.%m^-2%.%s^-1, ")")), 
+       x=expression(paste("PAR ", 
+       "(", mu, mol%.%m^-2%.%s^-1, ")"))
+       )
+
+
+# 自定义坐标轴
+p1 + scale_x_continuous(breaks = seq(0, 2100, by = 200)) +  
+  scale_y_continuous(breaks= round(light$lrc_A)) +
+  theme(axis.text.x  = element_text(
+    size = 10, angle=30, vjust=0.5), 
+    axis.text.y = element_text(size = 10),
+    axis.title.x = element_text(size = 12, face = 'bold'),
+    axis.title.y = element_text(size = 12, face = 'bold')
+  )
+```
+
+代码目的见注释，其实现过程主要分三步：
+
+* 数据的导入，这与之前相同，具体格式方法参考前文 \ref{fitaci}。
+* 光响应曲线的拟合，使用到了非线性模型 nlsLM，也可以使用 nls，具体实现方法请查看参考文档。
+* 求饱和点和补偿点，补偿点的计算根据其定义，净光合速率为 0，求解模型在一定区间的根来计算，而饱和点则较为麻烦，若使用式 \@ref(eq:aqe)
+计算，那么饱和点远远低于我们实际需求的，因此，我们使用了 0.75P$_{nmax}$ 来计算，求得目标区间的根。当然也可以采用其他比例来作为饱和点光合速率。
+
+
+
+```{r, rectable, echo=FALSE}
+knitr::kable(
+fitlrc_rec$coef, booktabs = TRUE,
+caption = '直角双曲线计算参数'
+)
+```
+
+最终的数据拟结果如图 \@ref(fig:recr) 所示，拟合的参数及结果见表 \@ref(tab:rectable)。
+
+\cleardoublepage

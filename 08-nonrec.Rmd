@@ -1,0 +1,101 @@
+## 非直角双曲线模型
+
+@Thornley1976 提出了非直角双曲线模型，它的表达式为：
+
+\begin{equation}
+P_{n} = \frac{\alpha I + P_{nmax} \sqrt{(\alpha I + P_{nmax})^{2} - 4  \theta \alpha I P_{nmax}}}{2 \theta} - R_{d}
+(\#eq:nrec)
+\end{equation}
+
+其中，$\text{\ensuremath{\theta}}$ 为表示曲线弯曲程度的曲角参数，取值为$0\leq \theta \leq 1$。其他参数意义同式 \@ref(eq:rec)。同样如同直角双曲线模型，式仍然没有极值，无法求得 $I_{sat}$，可以仍然参考直角双曲线模型的方式进行计算。
+
+### 非直角双曲线模型的实现
+
+
+```{r nrecr, fig.cap="非直角双曲线模型拟合"}
+library(minpack.lm)
+
+# 读取数据，同fitaci数据格式
+lrc <- read.csv("./data/lrc.csv")
+lrc <- subset(lrc, Obs > 0)
+
+# 光响应曲线没有太多参数，
+# 直接调出相应的光强和光合速率
+# 方便后面调用
+lrc_Q <- lrc$PARi
+lrc_A <- lrc$Photo 
+
+# 非直角双曲线模型的拟合
+lrcnls <- nlsLM(lrc_A ~ 
+                (1/(2*theta))*
+                (alpha*lrc_Q+Am-sqrt((alpha*lrc_Q+Am)^2 - 
+                4*alpha*theta*Am*lrc_Q))- Rd,
+                start=list(Am=(max(lrc_A)-min(lrc_A)),
+                alpha=0.05,Rd=-min(lrc_A),theta=1)) 
+
+fitlrc_nrec <- summary(lrcnls)
+
+# 光补偿点
+Ic <- function(Ic){
+  (1/(2 * fitlrc_nrec$coef[4,1])) * 
+    (fitlrc_nrec$coef[2,1] * Ic + fitlrc_nrec$coef[1,1] - 
+    sqrt((fitlrc_nrec$coef[2,1] * Ic + fitlrc_nrec$coef[1,1]
+    )^2 -  4 * fitlrc_nrec$coef[2,1] * 
+    fitlrc_nrec$coef[4,1] * fitlrc_nrec$coef[1,1] * Ic)) -
+    fitlrc_nrec$coef[3,1]
+}
+
+uniroot(Ic, c(0,50))$root  
+
+# 光饱和点
+Isat <- function(Isat){
+  (1/(2 * fitlrc_nrec$coef[4,1])) * (fitlrc_nrec$coef[2,1] * 
+  Isat + fitlrc_nrec$coef[1,1] - sqrt(
+  (fitlrc_nrec$coef[2,1] * Isat +fitlrc_nrec$coef[1,1])^2 - 
+  4*fitlrc_nrec$coef[2,1] * fitlrc_nrec$coef[4,1] * 
+  fitlrc_nrec$coef[1,1] * Isat)) - 
+  fitlrc_nrec$coef[3,1] - (0.9*fitlrc_nrec$coef[1,1])}
+
+uniroot(Isat, c(0,2000))$root
+
+
+# 使用ggplot2进行作图并拟合曲线
+library(ggplot2)
+light <- data.frame(lrc_Q = lrc$PARi, lrc_A = lrc$Photo)
+
+p <- ggplot(light, aes(x = lrc_Q, y = lrc_A))
+
+p1 <- p + geom_point(shape = 16, size = 3, color = "green") + 
+  geom_smooth(method="nls", formula = y ~ 
+  (1/(2*theta))*(alpha*x+Am-sqrt((alpha*x+Am)^2 - 
+   4*alpha*theta*Am*x))- Rd, se = FALSE,
+   method.args = list(start = c(Am=(max(lrc_A)-min(lrc_A)), 
+   alpha=0.05, Rd=-min(lrc_A), theta=1), 
+    aes(x =lrc_Q, y = lrc_A, color='blue', size = 1.2))
+) +
+  labs(y=expression(paste("photosynthetic rate  ", 
+          "(", mu, mol%.%m^-2%.%s^-1, ")")), 
+       x=expression(paste("PAR ", 
+           "(", mu, mol%.%m^-2%.%s^-1, ")")))
+
+# 自定义坐标轴
+p1 + scale_x_continuous(breaks = seq(0, 2100, by = 200)) +  
+  scale_y_continuous(breaks= round(light$lrc_A)) +
+   theme(axis.text.x  = element_text(
+    size = 10, angle=30, vjust=0.5), 
+    axis.text.y = element_text(size = 10),
+    axis.title.x = element_text(size = 12, face = 'bold'),
+    axis.title.y = element_text(size = 12, face = 'bold')
+  )
+```
+
+```{r, nrectable, echo=FALSE}
+knitr::kable(
+fitlrc_nrec$coef, booktabs = TRUE,
+caption = '非直角双曲线计算参数'
+)
+```
+
+最终的数据拟结果如图 \@ref(fig:nrecr) 所示，拟合的参数及结果见表 \@ref(tab:nrectable)。单纯从作图来看，本例数据使用非直角双曲线与散点图重合程度更高。
+
+\cleardoublepage

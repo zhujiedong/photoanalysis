@@ -1,0 +1,102 @@
+# 气孔导度模型的拟合
+
+气孔导度模型的拟合是通过 `fitBB` 来实现的，可以拟合三个 **Ball-Berry 类型的气孔导度模型**，共有下面几个参数：
+
+* 气孔导度 (gs), 
+* 光合 (A), 
+* 外界 CO~2~ 浓度 (Ca) 
+* 水气压亏缺 (VPD).
+
+其三个模型的简介如下：
+
+##  BallBerry 模型 {#ballberry}
+
+@Ball1987A 发表的文章中的模型：
+
+\begin{equation}
+g_s = g0 + g1(\frac{A h_r}{C_a})
+(\#eq:ballberry)
+\end{equation}
+
+其中 A 为净光合速率，g~0~ 和 g~1~ 为拟合参数，h~r~ 为叶片表面的相对湿度，C~a~ 为叶片处CO~2~浓度。
+
+## BBLeuning 模型
+
+@leuning1995a 发表的文章中的模型：
+
+\begin{equation}
+g_s = g_0 + g_1(\frac{A}{(C_a - \Gamma)(1 + \frac{D}{D_0})})
+(\#eq:BBLeuning)
+\end{equation}
+
+其中 $\Gamma$ 为 CO~2~ 补偿点，g~0~、g~1~ 和 D~0~ 为拟合参数。
+
+## BBOptiFull 模型
+
+@Medlyn2011Reconciling 发表的文章中的模型：
+
+\begin{equation}
+g_s^* \approx g_0 + g_1(1 + \frac{g_1}{D}) \frac{A}{C_a}
+(\#eq:BBOptiFull)
+\end{equation}
+
+额外的参数 g~k~ 来自于 @Duursma2013Near
+\begin{equation}
+g_s = g_0 + 1.6(1 + \frac{g_1}{D}(1-g_k)) \frac{A}{C_a}
+(\#eq:Duursm)
+\end{equation}
+
+## `fitBB` 函数 {#fitbb-p}
+
+```{r eval=FALSE}
+fitBB(data, varnames = list(
+  ALEAF = "A", GS = "gsw", VPD = "VPDleaf",
+  Ca ="CO2_s", RH = "RHcham"), 
+  gsmodel = c("BBOpti", "BBLeuning", "BallBerry",
+              "BBOptiFull"), fitg0 = FALSE)
+```
+
+
+**参数的意义:**
+
+* data：待分析的数据文件。 
+* varnames：注意，函数默认数据为 6400 格式，因此 6800 的数据文件要安装上文的参数修改。 相对湿度只有在使用  BallBerry 时才需要输入。
+* gsmodel：上述三个模型之一。
+* fitg0：默认不计算g0，若需要，改为TRUE。
+
+**代码示例：**
+
+```{r, fitbb}
+library(plantecophys)
+
+aci <- read.csv("./data/aci.csv")
+aci <- subset(aci, Obs > 0)
+fitBB(aci, gsmodel = "BBOpti", fitg0 = TRUE)
+```
+
+## `fitBBs` 函数
+
+如果我们有多个物种的数据，那么使用  `fitBBs`  则可以快速拟合多条曲线的数据。我们先整合两次的数据，然后再查看运行结果：
+
+```{r, fitbbs}
+aci01 <- read.csv("./data/aci01.csv")
+aci01 <- subset(aci01, Obs > 0)
+multiBB <- data.frame(
+  A = c(aci$Photo, aci01$Photo),
+  GS = c(aci$Cond, aci01$Cond),
+  CO2S = c(aci$CO2S, aci01$CO2S),
+  VPD = c(aci$VpdL, aci01$VpdL),
+  RH = c(aci$RH_S, aci01$RH_S),
+  species = c(rep("species1", length(aci$Photo)),
+  rep("species2", length(aci01$Photo)))
+)
+
+mod2 <- fitBBs(multiBB, group = "species",  
+               varnames = list(
+               ALEAF = "A", GS = "GS", VPD = "VPD",
+               Ca ="CO2S", RH = "RH"), 
+               gsmodel = "BallBerry", fitg0 = TRUE)
+coef(mod2)
+```
+
+\cleardoublepage
