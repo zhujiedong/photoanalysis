@@ -14,6 +14,10 @@ LI-6800 与 LI-6400XT 光合仪数据，尤其是 RACiR\texttrademark 部分，�
 
 以便我们对相关内容做出修正。
 
+当然，如果您有 github 帐号，优先欢迎在 github 提交：
+
+[github地址](https://github.com/zhujiedong/R_analysis_LI-6400_LI_6800)
+
 如有其他仪器问题或者仪器购买需求，请使用下面方式与我们联系：
 
 * 北京力高泰科技有限公司 
