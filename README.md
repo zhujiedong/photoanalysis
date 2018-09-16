@@ -1,7 +1,3 @@
-# bookdown for Chapman & Hall books
+# 使用 R 分析 LI-6400 与 LI-6800 数据。
 
-This is a minimal example for those who plan to write books for Chapman & Hall. Basically you download this repository from Github, fill out the content in R Markdown files, and add more Rmd files as necessary.
-
-Since this example is minimal, it does not cover all technical details (e.g. the Markdown syntax), and you need to read the [**bookdown** book](https://bookdown.org/yihui/bookdown) before you write anything that is slightly complicated.
-
-For a full example, you may take a look at [the source](https://github.com/rstudio/bookdown/tree/master/inst/examples) of the **bookdown** book.
+个人打发时间作品，欢迎各位大神补充纠错，只要不用于商业用途，随便使用
