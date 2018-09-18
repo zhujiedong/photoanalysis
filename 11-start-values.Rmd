@@ -113,43 +113,43 @@ curve(expfct(x, Am = 12.307586,
 
 ### 直观展示
 
-上面的表述太啰嗦，直接用下面的图形说明一下，其中 alhpa 的取值在此处选择从 0.01 到 0.06，每次增加 0.01，其他值分别为 Am = 12, Rd= 0.7, theta=0.8 （此处为展示效果和方便，将这些值直接按照拟合结果设定了，实际差别不大）
+上面的表述太啰嗦，直接用下面的图形说明一下，其中 alhpa 的取值在此处选择从 0.01 到 0.07，每次增加 0.05，其他值分别为 Am = 12.31, Rd= 0.66, theta=0.71 （此处为展示效果和方便，将这些值直接按照拟合结果设定了，实际差别不大）
 
-```{r, malp, fig.cap="多个 alpha 取值的差异", echo=FALSE}
+```{r, malp, fig.cap="多个 alpha 取值的差异", message=FALSE}
 library(ggplot2)
+library(purrr)
 
+lrc <- read.csv("lrc.csv")
+
+# 光响应曲线比较简单，我们将需要的数据直接提取，方便后面操作
+lrc_Q <- lrc$Qin
+lrc_A <- lrc$A
 n <- length(lrc_A)
-gif_data <- data.frame(x = rep(lrc_Q, 7), 
-                       
-           y = c(lrc_A, expfct(lrc_Q, Am = 12.307586,
-           alpha=0.01, Rd= 0.656643, theta=0.707518),
-           expfct(lrc_Q, Am = 12.307586,
-                  alpha=0.02, Rd= 0.656643, theta=0.707518),
-           expfct(lrc_Q, Am = 12.307586,
-                  alpha=0.03, Rd= 0.656643, theta=0.707518),
-           expfct(lrc_Q, Am = 12.307586,
-                  alpha=0.04, Rd= 0.656643, theta=0.707518),
-           expfct(lrc_Q, Am = 12.307586,
-                  alpha=0.05, Rd= 0.656643, theta=0.707518),
-           expfct(lrc_Q, Am = 12.307586,
-                  alpha=0.06, Rd= 0.656643, theta=0.707518)
-           ), 
-           alpha = factor(
-             c(rep("measured", n),  rep("a=0.01", n),
-             rep("a=0.02", n), rep("a=0.03", n),
-             rep("a=0.04", n), rep("a=0.05", n),
-             rep("a=0.06", n)), 
-             level = c("measured", "a=0.01", "a=0.02",
-                       "a=0.03", "a=0.04", "a=0.05", "a=0.06")
-             )
-)
 
-ggplot(data = gif_data, aes(x, y, group = alpha, color=alpha)) + 
+
+alp <- paste0("a=", seq(0.01, 0.07, by = 0.005))
+alpn <- rep(alp, each = n)
+
+expfct <- function(x, Am, alpha, Rd, theta) {(1/(2 * theta)) * (alpha * x + Am - sqrt((alpha * x + Am)^2 - 4 * alpha * theta * Am * x)) - Rd
+}
+
+paras <- data.frame(alpha = rep(seq(0.01, 0.07, by = 0.005), each = n), 
+           x = rep(lrc_Q, n), Am = rep(12.31, n), Rd = rep(0.66, n), 
+           theta = rep(0.71, n))
+y = unlist(pmap(paras, expfct))
+
+show <- data.frame(x = rep(lrc_Q, 14),
+           y = c(lrc_A, y), 
+           a = factor(c(rep("measured", n), alpn),
+           level = c("measured", alp)
+             ))
+
+ggplot(data = show, aes(x, y, group = a, color=a)) + 
   geom_point() + 
-  geom_smooth(se = FALSE) + theme_bw()
+  geom_smooth(se = FALSE) 
 ```
 
-从上图 \@ref(fig:malp) 我们我们可以看到，实测值在 alpha =0.04 和 alpha = 0.05 两条曲线之间，也就是我们把初始值设为 0.04 或者 0.05 都比较合适。
+从上图 \@ref(fig:malp) 我们我们可以看到，实测值在 alpha =0.04 和 alpha = 0.05 两条曲线之间，在 0.045 时最接近测量点，也就是我们把初始值设为 0.04 和 0.05 之间最接近，本例中可认为是0.045，实际这三个值均可。
 
 ## 自动多次尝试法
 
