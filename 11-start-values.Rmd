@@ -119,7 +119,7 @@ curve(expfct(x, Am = 12.307586,
 library(ggplot2)
 library(purrr)
 
-lrc <- read.csv("lrc.csv")
+lrc <- read.csv("data/nlstest.csv")
 
 # 光响应曲线比较简单，我们将需要的数据直接提取，方便后面操作
 lrc_Q <- lrc$Qin

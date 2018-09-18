@@ -25,7 +25,7 @@
 <meta name="author" content="祝介东">
 
 
-<meta name="date" content="2018-09-16">
+<meta name="date" content="2018-09-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -338,15 +338,45 @@ test &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span clas
 </div>
 <div id="section-8.2.2" class="section level3">
 <h3><span class="header-section-number">8.2.2</span> 直观展示</h3>
-<p>上面的表述太啰嗦，直接用下面的图形说明一下，其中 alhpa 的取值在此处选择从 0.01 到 0.06，每次增加 0.01，其他值分别为 Am = 12, Rd= 0.7, theta=0.8 （此处为展示效果和方便，将这些值直接按照拟合结果设定了，实际差别不大）</p>
-<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p>上面的表述太啰嗦，直接用下面的图形说明一下，其中 alhpa 的取值在此处选择从 0.01 到 0.07，每次增加 0.05，其他值分别为 Am = 12.31, Rd= 0.66, theta=0.71 （此处为展示效果和方便，将这些值直接按照拟合结果设定了，实际差别不大）</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(purrr)
+
+lrc &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/nlstest.csv&quot;</span>)
+
+<span class="co"># 光响应曲线比较简单，我们将需要的数据直接提取，方便后面操作</span>
+lrc_Q &lt;-<span class="st"> </span>lrc<span class="op">$</span>Qin
+lrc_A &lt;-<span class="st"> </span>lrc<span class="op">$</span>A
+n &lt;-<span class="st"> </span><span class="kw">length</span>(lrc_A)
+
+
+alp &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;a=&quot;</span>, <span class="kw">seq</span>(<span class="fl">0.01</span>, <span class="fl">0.07</span>, <span class="dt">by =</span> <span class="fl">0.005</span>))
+alpn &lt;-<span class="st"> </span><span class="kw">rep</span>(alp, <span class="dt">each =</span> n)
+
+expfct &lt;-<span class="st"> </span><span class="cf">function</span>(x, Am, alpha, Rd, theta) {(<span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>theta)) <span class="op">*</span><span class="st"> </span>(alpha <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>Am <span class="op">-</span><span class="st"> </span><span class="kw">sqrt</span>((alpha <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>Am)<span class="op">^</span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">4</span> <span class="op">*</span><span class="st"> </span>alpha <span class="op">*</span><span class="st"> </span>theta <span class="op">*</span><span class="st"> </span>Am <span class="op">*</span><span class="st"> </span>x)) <span class="op">-</span><span class="st"> </span>Rd
+}
+
+paras &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">alpha =</span> <span class="kw">rep</span>(<span class="kw">seq</span>(<span class="fl">0.01</span>, <span class="fl">0.07</span>, <span class="dt">by =</span> <span class="fl">0.005</span>), <span class="dt">each =</span> n), 
+           <span class="dt">x =</span> <span class="kw">rep</span>(lrc_Q, n), <span class="dt">Am =</span> <span class="kw">rep</span>(<span class="fl">12.31</span>, n), <span class="dt">Rd =</span> <span class="kw">rep</span>(<span class="fl">0.66</span>, n), 
+           <span class="dt">theta =</span> <span class="kw">rep</span>(<span class="fl">0.71</span>, n))
+y =<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">pmap</span>(paras, expfct))
+
+show &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">rep</span>(lrc_Q, <span class="dv">14</span>),
+           <span class="dt">y =</span> <span class="kw">c</span>(lrc_A, y), 
+           <span class="dt">a =</span> <span class="kw">factor</span>(<span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;measured&quot;</span>, n), alpn),
+           <span class="dt">level =</span> <span class="kw">c</span>(<span class="st">&quot;measured&quot;</span>, alp)
+             ))
+
+<span class="kw">ggplot</span>(<span class="dt">data =</span> show, <span class="kw">aes</span>(x, y, <span class="dt">group =</span> a, <span class="dt">color=</span>a)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> <span class="ot">FALSE</span>) </code></pre></div>
 <div class="figure"><span id="fig:malp"></span>
 <img src="bookdown_files/figure-html/malp-1.png" alt="多个 alpha 取值的差异" width="672" />
 <p class="caption">
 图 8.4: 多个 alpha 取值的差异
 </p>
 </div>
-<p>从上图 <a href="section-8.html#fig:malp">8.4</a> 我们我们可以看到，实测值在 alpha =0.04 和 alpha = 0.05 两条曲线之间，也就是我们把初始值设为 0.04 或者 0.05 都比较合适。</p>
+<p>从上图 <a href="section-8.html#fig:malp">8.4</a> 我们我们可以看到，实测值在 alpha =0.04 和 alpha = 0.05 两条曲线之间，在 0.045 时最接近测量点，也就是我们把初始值设为 0.04 和 0.05 之间最接近，本例中可认为是0.045，实际这三个值均可。</p>
 </div>
 </div>
 <div id="section-8.3" class="section level2">
