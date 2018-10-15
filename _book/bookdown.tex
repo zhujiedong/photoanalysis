@@ -168,7 +168,9 @@
 
 \title{R 语言分析 LI-6400 和 LI-6800 光合仪的数据}
 \author{祝介东}
-\date{2018-09-16}
+\providecommand{\institute}[1]{}
+\institute{北京力高泰科技有限公司}
+\date{2018-09-25}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -281,7 +283,9 @@ R 软件和 Rstudio
 的安装十分方便，我们按照各自系统的安装方式安装即可，安装后界面及各区功能如下：
 
 \begin{figure}
-\includegraphics[width=4.55in]{images/rstudio} \caption{Rstudio 界面及功能}\label{fig:unnamed-chunk-1}
+\centering
+\includegraphics{images/rstudio.png}
+\caption{\label{fig:unnamed-chunk-1}Rstudio 界面及功能}
 \end{figure}
 
 本文的主要内容并非介绍这些软件的功能，因此，关于软件的操作部分请仔细阅读相关资料，网络上有大量的免费资源及教程，有需要的同学可自行搜索。
@@ -559,7 +563,7 @@ CO\textsubscript{2}
 \ref{tab:head6400} 样式，并另存为 csv 格式}\footnote{即仅保留测量值，删除其他所有头文件、空行、
   remark 等信息}：
 
-\begin{longtable}{rlrrrrrr}
+\begin{longtable}[t]{rlrrrrrr}
 \caption{\label{tab:head6400}推荐 LI-6400 整理后数据样式}\\
 \toprule
 Obs & HHMMSS & FTime & EBal. & Photo & Cond & Ci & Trmmol\\
@@ -569,7 +573,6 @@ Obs & HHMMSS & FTime & EBal. & Photo & Cond & Ci & Trmmol\\
 3 & 15:49:54 & 446.0 & 0 & 6.4525814 & 0.2909460 & 150.67623 & 2.361704\\
 4 & 15:51:26 & 538.5 & 0 & 1.7971569 & 0.3057164 & 85.82530 & 2.459459\\
 5 & 15:52:54 & 626.5 & 0 & -0.6575974 & 0.3150002 & 53.47985 & 2.515992\\
-\addlinespace
 6 & 15:54:50 & 742.5 & 0 & 15.4296572 & 0.3255415 & 292.56161 & 2.579840\\
 \bottomrule
 \end{longtable}
@@ -879,11 +882,11 @@ J\textsubscript{max}}{使用 onepoint 单独计算 Vcmax 和 Jmax}}\label{-onepo
 \end{Highlighting}
 \end{Shaded}
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:onepointdata}onepoint 使用的数据}
 \centering
-\begin{tabular}{rlrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr}
+\begin{tabular}[t]{rlrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr}
 \toprule
 Obs & HHMMSS & FTime & EBal. & Photo & Cond & Ci & Trmmol & VpdL & CTleaf & Area & BLC\_1 & StmRat & BLCond & Tair & Tleaf & TBlk & CO2R & CO2S & H2OR & H2OS & RH\_R & RH\_S & Flow & PARi & PARo & Press & CsMch & HsMch & CsMchSD & HsMchSD & CrMchSD & HrMchSD & StableF & BLCslope & BLCoffst & f\_parin & f\_parout & alphaK & Status & fda & Trans & Tair\_K & Twall\_K & R.W.m2. & Tl.Ta & SVTleaf & h2o\_i & h20diff & CTair & SVTair & CndTotal & vp\_kPa & VpdA & CndCO2 & Ci\_Pa & Ci.Ca & RHsfc & C2sfc & AHs.Cs\\
 \midrule
@@ -892,7 +895,6 @@ Obs & HHMMSS & FTime & EBal. & Photo & Cond & Ci & Trmmol & VpdL & CTleaf & Area
 3 & 14:13:25 & 373.0 & 0 & 10.207166 & 0.1342114 & 264.8348 & 1.925734 & 1.445717 & 25.89660 & 6 & 1.42 & 1 & 2.84 & 25.87186 & 25.89660 & 25.87317 & 412.5393 & 399.3762 & 17.03833 & 19.30316 & 50.29006 & 56.97489 & 500.3188 & 1198.737 & 7.489428 & 98.84142 & 2.018435 & -0.3787848 & 0.2174792 & 0.0025482 & 0.2455426 & 0.0025012 & 1.0000000 & -0.2195652 & 2.737392 & 1 & 0 & 0.16 & 111115 & 0.8338647 & 0.0019257 & 299.0466 & 299.0219 & 191.7980 & 1.210137 & 3.353668 & 33.92979 & 14.62663 & 25.88423 & 3.351212 & 0.1281551 & 1.907951 & 1.443261 & 0.0806199 & 26.17665 & 0.6631213 & 57.71117 & 394.5242 & 0.0149311\\
 4 & 14:13:41 & 389.5 & 0 & 9.547416 & 0.1281947 & 269.6337 & 1.854272 & 1.454248 & 25.94020 & 6 & 1.42 & 1 & 2.84 & 25.91845 & 25.94020 & 25.92104 & 413.8090 & 401.4666 & 17.12559 & 19.30638 & 50.40359 & 56.82203 & 500.3162 & 1199.245 & 7.449210 & 98.83208 & 2.018435 & -0.3787848 & 0.2174792 & 0.0025482 & 0.2455426 & 0.0025012 & 1.0000000 & -0.2195652 & 2.737392 & 1 & 0 & 0.16 & 111115 & 0.8338604 & 0.0018543 & 299.0902 & 299.0684 & 191.8792 & 1.247158 & 3.362337 & 34.02071 & 14.71433 & 25.92933 & 3.360173 & 0.1226580 & 1.908089 & 1.452084 & 0.0771402 & 26.64846 & 0.6716216 & 57.48324 & 396.9282 & 0.0138266\\
 5 & 14:16:16 & 540.0 & 0 & 10.288968 & 0.1376602 & 267.9198 & 2.009217 & 1.471788 & 26.01813 & 6 & 1.42 & 1 & 2.84 & 26.01478 & 26.01813 & 26.02164 & 413.9044 & 400.5999 & 16.92567 & 19.28878 & 49.53554 & 56.44850 & 500.3043 & 1200.785 & 7.497018 & 98.81870 & 2.018435 & -0.3787848 & 0.2174792 & 0.0025482 & 0.2455426 & 0.0025012 & 0.6666667 & -0.2195652 & 2.737392 & 1 & 0 & 0.16 & 111115 & 0.8338405 & 0.0020092 & 299.1681 & 299.1648 & 192.1257 & 1.174669 & 3.377880 & 34.18260 & 14.89382 & 26.01646 & 3.377546 & 0.1312960 & 1.906093 & 1.471453 & 0.0826090 & 26.47549 & 0.6687965 & 57.30143 & 395.7090 & 0.0148991\\
-\addlinespace
 6 & 14:16:32 & 555.5 & 0 & 10.178603 & 0.1381995 & 269.5898 & 2.016100 & 1.471138 & 26.01657 & 6 & 1.42 & 1 & 2.84 & 26.02212 & 26.01657 & 26.02939 & 413.6639 & 400.4885 & 16.92345 & 19.29468 & 49.49181 & 56.42595 & 500.2979 & 1200.879 & 7.569045 & 98.80596 & 2.018435 & -0.3787848 & 0.2174792 & 0.0025482 & 0.2455426 & 0.0025012 & 0.6666667 & -0.2195652 & 2.737392 & 1 & 0 & 0.16 & 111115 & 0.8338298 & 0.0020161 & 299.1666 & 299.1721 & 192.1406 & 1.172561 & 3.377567 & 34.18384 & 14.88916 & 26.01934 & 3.378122 & 0.1317865 & 1.906429 & 1.471693 & 0.0829197 & 26.63708 & 0.6731525 & 57.32389 & 395.6501 & 0.0147473\\
 \bottomrule
 \end{tabular}
@@ -917,11 +919,11 @@ Obs & HHMMSS & FTime & EBal. & Photo & Cond & Ci & Trmmol & VpdL & CTleaf & Area
 \end{Highlighting}
 \end{Shaded}
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:onepoint}onepoint 法计算的结果}
 \centering
-\begin{tabular}{rrr}
+\begin{tabular}[t]{rrr}
 \toprule
 aci\_fit.Photo & aci\_fit.Vcmax & aci\_fit.Jmax\\
 \midrule
@@ -930,7 +932,6 @@ aci\_fit.Photo & aci\_fit.Vcmax & aci\_fit.Jmax\\
 10.207166 & 45.44617 & 69.35838\\
 9.547416 & 41.86217 & 64.24400\\
 10.288968 & 45.09335 & 69.36954\\
-\addlinespace
 10.178603 & 44.37360 & 68.41628\\
 \bottomrule
 \end{tabular}
@@ -1892,11 +1893,11 @@ P_{nmax}= AQE \times I_{sat} - R_{d}
   来计算，求得目标区间的根。当然也可以采用其他比例来作为饱和点光合速率。
 \end{itemize}
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:rectable}直角双曲线计算参数}
 \centering
-\begin{tabular}{lrrrr}
+\begin{tabular}[t]{lrrrr}
 \toprule
   & Estimate & Std. Error & t value & Pr(>|t|)\\
 \midrule
@@ -2028,11 +2029,11 @@ P_{n} = \frac{\alpha I + P_{nmax} \sqrt{(\alpha I + P_{nmax})^{2} - 4  \theta \a
 \caption{\label{fig:nrecr}非直角双曲线模型拟合}
 \end{figure}
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:nrectable}非直角双曲线计算参数}
 \centering
-\begin{tabular}{lrrrr}
+\begin{tabular}[t]{lrrrr}
 \toprule
   & Estimate & Std. Error & t value & Pr(>|t|)\\
 \midrule
@@ -2140,11 +2141,11 @@ P_{n} = P_{nmax}[1 - e^{-b(I-I_{C})}]
 \caption{\label{fig:nexpr}指数模型拟合}
 \end{figure}
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:nexptable}指数模型计算参数}
 \centering
-\begin{tabular}{lrrrr}
+\begin{tabular}[t]{lrrrr}
 \toprule
   & Estimate & Std. Error & t value & Pr(>|t|)\\
 \midrule
@@ -2260,11 +2261,11 @@ P_{nmax} = \alpha\left(\frac{\sqrt{\beta+\gamma}-\sqrt{\beta}}{\gamma}\right)^{2
 \caption{\label{fig:mrecr}直角双曲线修正模型拟合}
 \end{figure}
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:mrectable}直角双曲线修正模型计算参数}
 \centering
-\begin{tabular}{lrrrr}
+\begin{tabular}[t]{lrrrr}
 \toprule
   & Estimate & Std. Error & t value & Pr(>|t|)\\
 \midrule
@@ -2497,13 +2498,45 @@ theta 值与 alpha
 \subsection{直观展示}
 
 上面的表述太啰嗦，直接用下面的图形说明一下，其中 alhpa
-的取值在此处选择从 0.01 到 0.06，每次增加 0.01，其他值分别为 Am = 12,
-Rd= 0.7, theta=0.8
+的取值在此处选择从 0.01 到 0.07，每次增加 0.05，其他值分别为 Am = 12.31,
+Rd= 0.66, theta=0.71
 （此处为展示效果和方便，将这些值直接按照拟合结果设定了，实际差别不大）
 
-\begin{verbatim}
-## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\KeywordTok{library}\NormalTok{(purrr)}
+
+\NormalTok{lrc <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data/nlstest.csv"}\NormalTok{)}
+
+\CommentTok{# 光响应曲线比较简单，我们将需要的数据直接提取，方便后面操作}
+\NormalTok{lrc_Q <-}\StringTok{ }\NormalTok{lrc}\OperatorTok{$}\NormalTok{Qin}
+\NormalTok{lrc_A <-}\StringTok{ }\NormalTok{lrc}\OperatorTok{$}\NormalTok{A}
+\NormalTok{n <-}\StringTok{ }\KeywordTok{length}\NormalTok{(lrc_A)}
+
+
+\NormalTok{alp <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\StringTok{"a="}\NormalTok{, }\KeywordTok{seq}\NormalTok{(}\FloatTok{0.01}\NormalTok{, }\FloatTok{0.07}\NormalTok{, }\DataTypeTok{by =} \FloatTok{0.005}\NormalTok{))}
+\NormalTok{alpn <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(alp, }\DataTypeTok{each =}\NormalTok{ n)}
+
+\NormalTok{expfct <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, Am, alpha, Rd, theta) \{(}\DecValTok{1}\OperatorTok{/}\NormalTok{(}\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{theta)) }\OperatorTok{*}\StringTok{ }\NormalTok{(alpha }\OperatorTok{*}\StringTok{ }\NormalTok{x }\OperatorTok{+}\StringTok{ }\NormalTok{Am }\OperatorTok{-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{((alpha }\OperatorTok{*}\StringTok{ }\NormalTok{x }\OperatorTok{+}\StringTok{ }\NormalTok{Am)}\OperatorTok{^}\DecValTok{2} \OperatorTok{-}\StringTok{ }\DecValTok{4} \OperatorTok{*}\StringTok{ }\NormalTok{alpha }\OperatorTok{*}\StringTok{ }\NormalTok{theta }\OperatorTok{*}\StringTok{ }\NormalTok{Am }\OperatorTok{*}\StringTok{ }\NormalTok{x)) }\OperatorTok{-}\StringTok{ }\NormalTok{Rd}
+\NormalTok{\}}
+
+\NormalTok{paras <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{alpha =} \KeywordTok{rep}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\FloatTok{0.01}\NormalTok{, }\FloatTok{0.07}\NormalTok{, }\DataTypeTok{by =} \FloatTok{0.005}\NormalTok{), }\DataTypeTok{each =}\NormalTok{ n), }
+           \DataTypeTok{x =} \KeywordTok{rep}\NormalTok{(lrc_Q, n), }\DataTypeTok{Am =} \KeywordTok{rep}\NormalTok{(}\FloatTok{12.31}\NormalTok{, n), }\DataTypeTok{Rd =} \KeywordTok{rep}\NormalTok{(}\FloatTok{0.66}\NormalTok{, n), }
+           \DataTypeTok{theta =} \KeywordTok{rep}\NormalTok{(}\FloatTok{0.71}\NormalTok{, n))}
+\NormalTok{y =}\StringTok{ }\KeywordTok{unlist}\NormalTok{(}\KeywordTok{pmap}\NormalTok{(paras, expfct))}
+
+\NormalTok{show <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{rep}\NormalTok{(lrc_Q, }\DecValTok{14}\NormalTok{),}
+           \DataTypeTok{y =} \KeywordTok{c}\NormalTok{(lrc_A, y), }
+           \DataTypeTok{a =} \KeywordTok{factor}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\StringTok{"measured"}\NormalTok{, n), alpn),}
+           \DataTypeTok{level =} \KeywordTok{c}\NormalTok{(}\StringTok{"measured"}\NormalTok{, alp)}
+\NormalTok{             ))}
+
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ show, }\KeywordTok{aes}\NormalTok{(x, y, }\DataTypeTok{group =}\NormalTok{ a, }\DataTypeTok{color=}\NormalTok{a)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{se =} \OtherTok{FALSE}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
 
 \begin{figure}
 \centering
@@ -2512,7 +2545,8 @@ Rd= 0.7, theta=0.8
 \end{figure}
 
 从上图 \ref{fig:malp} 我们我们可以看到，实测值在 alpha =0.04 和 alpha =
-0.05 两条曲线之间，也就是我们把初始值设为 0.04 或者 0.05 都比较合适。
+0.05 两条曲线之间，在 0.045 时最接近测量点，也就是我们把初始值设为 0.04
+和 0.05 之间最接近，本例中可认为是0.045，实际这三个值均可。
 
 \section{自动多次尝试法}
 
@@ -2524,15 +2558,7 @@ Rd= 0.7, theta=0.8
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(nls2)}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{verbatim}
-## Loading required package: proto
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{grid.test <-}\StringTok{ }\KeywordTok{expand.grid}\NormalTok{(}\KeywordTok{list}\NormalTok{(}
   \DataTypeTok{Am=}\KeywordTok{c}\NormalTok{(}\DecValTok{12}\NormalTok{),}
   \DataTypeTok{alpha =} \KeywordTok{seq}\NormalTok{(}\FloatTok{0.01}\NormalTok{, }\FloatTok{0.08}\NormalTok{, }\DataTypeTok{by =}\FloatTok{0.01}\NormalTok{),}
@@ -2612,7 +2638,7 @@ F 检验、 AIC、BIC 等统计方式才能判定。
 LI-6800 的数据前处理同 LI-6400 相同，如表 \ref{tab:head6800}
 所示的样式。
 
-\begin{longtable}{rrrlrr}
+\begin{longtable}[t]{rrrlrr}
 \caption{\label{tab:head6800}推荐 LI-6800 整理后数据样式}\\
 \toprule
 obs & time & elapsed & date & TIME & E\\
@@ -2622,7 +2648,6 @@ obs & time & elapsed & date & TIME & E\\
 3 & 1471426153 & 403.1 & 20160817 17:29:13 & 1471426144 & 0.0009900\\
 4 & 1471426244 & 494.0 & 20160817 17:30:44 & 1471426235 & 0.0010249\\
 5 & 1471426335 & 585.1 & 20160817 17:32:15 & 1471426326 & 0.0010632\\
-\addlinespace
 6 & 1471426426 & 676.0 & 20160817 17:33:46 & 1471426417 & 0.0011190\\
 \bottomrule
 \end{longtable}
@@ -2848,11 +2873,11 @@ CRAN，因此需要 \texttt{devtools} 的支持，然后才能从 github 安装
 \end{Highlighting}
 \end{Shaded}
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:unnamed-chunk-25}jiptest 批量导入数据后的样式}
 \centering
-\begin{tabular}{rrl}
+\begin{tabular}[t]{rrl}
 \toprule
 SECS & FLUOR & SOURCE\\
 \midrule
@@ -2861,7 +2886,6 @@ SECS & FLUOR & SOURCE\\
 3.19e-05 & 1013 & INDUCTION-484-20171225-13\_15\_58\\
 3.60e-05 & 1055 & INDUCTION-484-20171225-13\_15\_58\\
 4.01e-05 & 1044 & INDUCTION-484-20171225-13\_15\_58\\
-\addlinespace
 4.41e-05 & 1205 & INDUCTION-484-20171225-13\_15\_58\\
 \bottomrule
 \end{tabular}
@@ -2873,11 +2897,11 @@ SECS & FLUOR & SOURCE\\
 \end{Highlighting}
 \end{Shaded}
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:unnamed-chunk-26}jiptest DC 数据批量导入数据后的样式}
 \centering
-\begin{tabular}{rrl}
+\begin{tabular}[t]{rrl}
 \toprule
 SECS & FLUOR & SOURCE\\
 \midrule
@@ -2886,7 +2910,6 @@ SECS & FLUOR & SOURCE\\
 3.19e-05 & 161261 & INDUCTION-484-20171225-13\_15\_58\\
 3.60e-05 & 165114 & INDUCTION-484-20171225-13\_15\_58\\
 4.01e-05 & 169069 & INDUCTION-484-20171225-13\_15\_58\\
-\addlinespace
 4.41e-05 & 173231 & INDUCTION-484-20171225-13\_15\_58\\
 \bottomrule
 \end{tabular}
@@ -2911,7 +2934,7 @@ SECS & FLUOR & SOURCE\\
 ##   in the induction settings of LI-6800
 \end{verbatim}
 
-\begin{longtable}{lrrrr}
+\begin{longtable}[t]{lrrrr}
 \caption{\label{tab:jipres}jiptest 输出的计算参数}\\
 \toprule
 parameters & data\_file1 & data\_file2 & data\_file3 & data\_file4\\
@@ -2970,7 +2993,7 @@ DFabs & 0.3093655 & 0.0982884 & 0.0324348 & -0.8458942\\
 ##           in the induction settings of LI-6800
 \end{verbatim}
 
-\begin{longtable}{lrrrr}
+\begin{longtable}[t]{lrrrr}
 \caption{\label{tab:dcjipres}jiptest DC 数据输出的计算参数}\\
 \toprule
 parameters & data\_file1 & data\_file2 & data\_file3 & data\_file4\\
