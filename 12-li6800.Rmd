@@ -239,15 +239,21 @@ knitr::kable(dcjip_results,  longtable = TRUE, booktabs = TRUE,
 
 计算参数见表 \@ref(tab:jipres)
 
-### `jip_ggplot` 函数 
+### `jip_plot` 及 `jip_dcplot` 函数 
 
-`jip_ggplot` 基于 `ggplot2`，用于快速预览所有测量结果的 ojip 曲线。函数仅有一个参数，即保存数据文件夹的路径，使用如下：
+`jip_plot` 和 `jip_dcplot` 基于 `ggplot2`，用于快速预览所有测量结果的 ojip 曲线。函数仅有一个参数，即保存数据文件夹的路径，使用如下：
 
 
-```{r, ggplot, fig.cap="ojip 曲线的快速预览"}
-jip_ggplot("./data/ojip")
+```{r, acplot, fig.cap="调制式测量的 ojip 曲线的快速预览"}
+jip_plot("./data/ojip")
 ```
 
-ojip 曲线的快速预览如图 \@ref(fig:ggplot)
+```{r, dcplot, fig.cap="连续式测量的 ojip 曲线的快速预览"}
+jip_dcplot("./data/ojip")
+```
+
+ojip 调制式测量光 ojip 曲线的快速预览如图 \@ref(fig:acplot)
+
+ojip 连续式测量光 ojip 曲线的快速预览如图 \@ref(fig:dcplot)
 
 \cleardoublepage

@@ -1,0 +1,3094 @@
+\documentclass[]{krantz}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
+\usepackage[unicode=true]{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
+\hypersetup{
+            pdftitle={R 语言分析 LI-6400 和 LI-6800 光合仪的数据},
+            pdfauthor={祝介东      北京力高泰科技有限公司},
+            colorlinks=true,
+            linkcolor=Maroon,
+            citecolor=Blue,
+            urlcolor=Blue,
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{natbib}
+\bibliographystyle{apalike}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{longtable,booktabs}
+% Fix footnotes in tables (requires footnote package)
+\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{long table}}{}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{booktabs}
+\usepackage{ctex}
+\usepackage{longtable}
+\usepackage[bf,singlelinecheck=off]{caption}
+
+\usepackage{framed,color}
+\definecolor{shadecolor}{RGB}{248,248,248}
+
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\topfraction}{0.8}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\floatpagefraction}{0.75}
+
+\renewenvironment{quote}{\begin{VF}}{\end{VF}}
+\let\oldhref\href
+\renewcommand{\href}[2]{#2\footnote{\url{#1}}}
+
+\makeatletter
+\newenvironment{kframe}{%
+\medskip{}
+\setlength{\fboxsep}{.8em}
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\renewenvironment{Shaded}{\begin{kframe}}{\end{kframe}}
+
+\usepackage{makeidx}
+\makeindex
+
+\urlstyle{tt}
+
+\usepackage{amsthm}
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=8pt plus 2pt minus 4pt
+  \thm@postskip=\thm@preskip
+}
+\makeatother
+
+\frontmatter
+
+\title{R 语言分析 LI-6400 和 LI-6800 光合仪的数据}
+\author{祝介东 北京力高泰科技有限公司}
+\date{2018-10-30}
+
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{corollary}{Corollary}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
+\theoremstyle{definition}
+\newtheorem{example}{Example}[chapter]
+\theoremstyle{definition}
+\newtheorem{exercise}{Exercise}[chapter]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{solution}{Solution}
+\begin{document}
+\maketitle
+
+% you may need to leave a few empty pages before the dedication page
+
+%\cleardoublepage\newpage\thispagestyle{empty}\null
+%\cleardoublepage\newpage\thispagestyle{empty}\null
+%\cleardoublepage\newpage
+%\begin{titlepage}
+%    \centering
+%    \includegraphics[width=5in]{images/cover.png}
+%\end{titlepage}
+
+\thispagestyle{empty}
+
+\setlength{\abovedisplayskip}{-5pt}
+\setlength{\abovedisplayshortskip}{-5pt}
+
+{
+\hypersetup{linkcolor=black}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\listoftables
+\listoffigures
+\frontmatter
+
+\chapter*{前言}
+
+
+本文内容均来自个人对相关材料的理解，\textbf{并未经过权威认证，如有异议，请参考
+R
+软件及相关软件包的使用手册或相关模型的文献}。本文所使用代码均只做示例代码使用，在做实际分析时，请结合自己的实验数据及模型使用条件做相应的调整。本文内容仅针对
+LI-6800 与 LI-6400XT 光合仪数据，尤其是 RACiR\texttrademark 部分，仅针对
+LI-6800 进行分析，且目前市面上仅 LI-6800
+光合仪可完成此项数据的测量。如您有 LI-6400XT 或 LI-6800
+使用操作相关方面的问题请发送至：
+
+\url{zhujiedong@ecotek.com.cn}
+
+如有与本文数据分析相关的内容请发送至我个人邮箱（本文是业余爱好，内容虽与公司仪器相关，但并不是我领薪水的工作内容）：
+
+\url{zhujiedong@yeah.net}
+
+以便我们对相关内容做出修正。
+
+当然，如果您有 github 帐号，优先欢迎在 github 提交：
+
+\href{https://github.com/zhujiedong/photoanalysis}{github地址}
+
+如有其他仪器问题或者仪器购买需求，请使用下面方式与我们联系：
+
+\begin{itemize}
+\item
+  北京力高泰科技有限公司
+\item
+  网址：\url{http://www.ecotek.com.cn}
+\item
+  电话：010-51665551
+\item
+  电子邮件：\url{info@ecotek.com.cn}
+\item
+  地址：北京市西城区西直门南大街2号成铭大厦A座22F
+\end{itemize}
+
+\chapter*{版权声明}
+
+
+\textbf{本文旨在对广大 LI-6400XT 和 LI-6800
+光合仪的用户提供一个数据分析的参考，本人并未从中获取任何利益，内容错误疏漏之处，欢迎指正。本人保留一切权利，禁止一切将本文内容用于商业用途的行为，禁止其他仪器公司抄袭及使用。}
+
+\chapter*{关于作者}
+
+
+祝介东，\href{http://www.ecotek.com.cn/}{北京力高泰科技有限公司}
+工程师，本文内容为我在售后服务时所住的酒店所作（遍布国内大多数省份），本为我打发出差住酒店漫漫长夜的业余爱好，\textbf{此部分内容并非公司对我的职位所要求的内容，也并非我公司提供的服务内容，因此属于个人作品，仅供参考，我所在公司对此文内容不负任何责任}。文中代码得到了公司技术部同事：
+刘美玲、徐粒、焦阳、王昭、张启尧、张云飞等的测试，其中焦阳贡献了
+\texttt{jiptest} 包中基础荧光参数计算的代码，在此一并感谢。
+
+文中内容如对您有帮助，我很欣慰。但本人水平有限，错误与疏漏之处还请谅解，欢迎讨论，欢迎提出宝贵意见及建议。本人或单位其他售后人员仅有提供相关仪器操作或故障解决的义务，处理数据和分析数据并非我们的本职工作，如有相关需还请多参考本文内容或网上相关资料，不足之处还请谅解。
+
+\mainmatter
+
+\chapter{R 软件与 Rstudio}\label{intro}
+
+\section{R 软件}\label{r-}
+
+R语言的官方网站是 \href{http://www.r-project.org}{R}
+，与R语言有关的网站还有CRAN（镜像），其主站网址是：
+\href{http://www.cran.r-project.org}{CRAN}。
+
+\section{Rstudio}\label{rstudio}
+
+尽管R的功能十分强大，但是其作为一个命令行工具 \footnote{实际上在Windows系统下安装的时候提供一个十分简陋的GUI。}，在实际使用中尤为不便，因此，一款集成的开发环境十分有必要。\href{https://www.rstudio.com/products/RStudio/}{Rstudio}是一款专门针对R开发的一个集成环境，同时也支持其他多种语言，用户界面十分友好，支持代码高亮，拼写提示，作图展示等功能，因此我们推荐使用Rstudio对我们的数据进行分析。
+
+R 软件和 Rstudio
+的安装十分方便，我们按照各自系统的安装方式安装即可，安装后界面及各区功能如下：
+
+\begin{figure}
+\includegraphics[width=4.55in]{images/rstudio} \caption{Rstudio 界面及功能}\label{fig:unnamed-chunk-1}
+\end{figure}
+
+本文的主要内容并非介绍这些软件的功能，因此，关于软件的操作部分请仔细阅读相关资料，网络上有大量的免费资源及教程，有需要的同学可自行搜索。
+
+\begin{quote}
+注：R 与 Rstudio
+均非我公司产品，而且均免费或者有免费版本，因此请勿邮件或电话索要此两款软件。
+\end{quote}
+
+\cleardoublepage
+
+\chapter{\texorpdfstring{CO\textsubscript{2}
+响应曲线的拟合}{CO2 响应曲线的拟合}}\label{co2-}
+
+\section{FvCB 模型}\label{fvcb-}
+
+在 \texttt{plantecophys} 包中使用的模型为 \citet{Farquhar1980A} 建立的
+C3 植物模型 FvCB，其基于 C3 植物碳反应的三个阶段：
+
+\begin{itemize}
+\item
+  核酮糖-1,5-双磷酸羧化酶/加氧酶 (Rubisco)的催化下,
+  核酮糖-1,5-双磷酸(RuBP)与 CO\textsubscript{2}发生羧化作用,
+  生成3-磷酸甘油酸(PGA)。
+\item
+  在腺苷三磷酸(ATP)和还原型烟酰胺腺嘌呤 二核苷酸磷酸(NADPH)的作用下,
+  PGA被还原成磷 酸丙糖(TP)。每6个TP中有1个输出到细胞液中, 用
+  于蔗糖或者淀粉的合成。
+\item
+  剩下的5个TP 在ATP的作用下再生为 3 个RuBP。一部分再生的
+  RuBP在Rubisco的催化下被氧化成PGA和2-磷酸乙 醇酸,
+  2-磷酸乙醇酸在ATP的作用下形成PGA, 并且 释放CO\textsubscript{2}
+  (光呼吸)。
+\end{itemize}
+
+在光照下, C3 植物净光合速率 (A) 取决于 3 个同时存在的速率:
+RuBP羧化速率(Vc)、RuBP氧化速率 (或光呼吸速率,
+Vo)和线粒体在光照下的呼吸速率 (或明呼吸速率, Rd;
+此名为了与暗呼吸速率对应和区分)。RuBP氧化过程中每结合1 mol
+O\textsubscript{2} 就会释放 0.5 mol CO\textsubscript{2} 。因此,
+净光合速率 A 的计算为：
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/fvcb} \caption{光合速率的不同的限制阶段}\label{fig:fvcb}
+\end{figure}
+
+\begin{equation}
+A\ =V_{c}\ -0.5V_{o}\ -\ R_{d}
+\label{eq:aeta}
+\end{equation}
+
+线粒体Rd不同于暗呼吸速率(Rn )。Rn是叶片在 黑暗中的线粒体呼吸速率,
+随着光照的增加, 线粒体呼吸速率下降。因此 Rd \textless{} Rn
+在黑暗条件下测定的叶 片 CO\textsubscript{2} 交换速率即 Rn , 但是 Rd
+的测定比较困难, 因为光照条件下 Rd 与 Vc、Vo
+同时存在。\citet{Hikosaka2006Temperature} 总结了几种测定 Rd 的方法，式
+\eqref{eq:aeta} 又可表达为：
+
+\begin{equation}
+A\ =V_{c}\ (1\ -0.5\alpha)\ R_{d}
+\label{eq:achange}
+\end{equation}
+
+式 \eqref{eq:achange} 中 \(\alpha\) 为氧化速率和羧化速率的比值，由 Rubisco
+动力学常数确定：
+
+\begin{equation}
+\text{\ensuremath{\alpha}\ =\ \ensuremath{\frac{V_{O}}{V_{C}}}\ =\ \ensuremath{\frac{O}{C_{c}}}\ \ensuremath{\times}\ \ensuremath{\frac{V_{omax}\ K_{c}}{V_{cmax}\ K_{o}}}}=\ \frac{O}{C_{c}}\ \times\ \frac{1}{S_{\frac{c}{o}}}
+\label{eq:dynamic}
+\end{equation}
+
+式 \eqref{eq:dynamic} 中，Cc 和 O 分别为叶绿体部位 CO\textsubscript{2} 和
+O\textsubscript{2} 浓度。Cc 和 O 通常以气体摩尔分数
+(\(\mu mol\text{·}mol^{-1}\) ) 或分压 (Pa) 表示,
+但光合过程是在叶绿体的液相基质中发生的, 用分压表示更加恰当。Kc 与 Ko 为
+Rubisco 羧化(氧化)的米氏常数,
+代表了羧化(氧化)速率达到最大羧化(氧化)速率一半时的 CO\textsubscript{2}
+和 \(O_{2}\) 浓度。是 Rubisco 特异性因子, \(S_{\frac{c}{o}}\)表示
+Rubisco 对CO\textsubscript{2} 和 \(O_{2}\) 的偏好程度。
+
+当 A = Rd , 即 RuBP 羧化的 CO\textsubscript{2} 吸收速率刚好 等于 RuBP
+氧化的 CO\textsubscript{2} 释放速率 (Vc = 2Vo ) 时, \(\alpha\) =
+0.5。此时叶绿体的 CO\textsubscript{2} 浓度就是叶绿体 CO\textsubscript{2}
+光合补偿点, 标记为 \(\Gamma^{*}\)。即：
+
+\begin{equation}
+\Gamma^{*}\ =\ \frac{0.5O}{S_{\frac{c}{o}}}
+\label{eq:com}
+\end{equation}
+
+由公式 \eqref{eq:dynamic}和公式 \eqref{eq:com}可得：
+
+\begin{equation}
+\text{\ensuremath{\alpha}\ =\ \ensuremath{\frac{2\Gamma^{*}}{C_{c}}}}
+\label{eq:combine}
+\end{equation}
+
+代入公式 \eqref{eq:achange} 得到：
+
+\begin{equation}
+A\ =V_{c}\ (1\ -\frac{\Gamma^{*}}{C_{c}})\ R_{d}
+\label{eq:combine2}
+\end{equation}
+
+在 Cc 浓度很低的时候，RuBP 供应充足 (图 \ref{fig:fvcb} Rubisco 阶段)，Vc
+等于 Rubisco 所能支持的羧化速率 w\textsubscript{c}，：
+
+\begin{equation}
+w_{c}\ =\ \frac{V_{cmax\ }C_{c}}{C_{c\ }+\ K_{c\ }(1\ +\ \frac{O}{K_{o}})}
+\label{eq:wc}
+\end{equation}
+
+随着 Cc 浓度的增加，Rubisco 支持的羧化速率超过了 RuBP 供应速率, Vc 受
+RuBP 再生速率的限制（图 \ref{fig:fvcb} RuBP 阶段），此时 Vc 由 RuBP
+的再生速率限制，而 RuBP 又由电子传递速率（J）决定，故：
+
+\begin{equation}
+w_{j}\ =\ \frac{J\ C_{c}}{4C_{c\ }+\ 8\Gamma^{*}}
+\end{equation}
+
+当 Cc 浓度很高，光合磷酸化超过了淀粉和蔗糖的合成速率的时候，Vc 受到 TP
+利用速率（Vp）的限制（图 \ref{fig:fvcb} TPU 阶段），一般情况下，
+
+\begin{equation}
+w_{p\ }=\ \frac{3V_{p}C_{c}}{C_{c}-\Gamma^{*}}
+\end{equation}
+
+最终，C3 植物叶片的光合速率 A 由
+w\textsubscript{c}、w\textsubscript{j}、w\textsubscript{p}
+的最小者决定（图 \ref{fig:fvcb} 实现部分），当c \textgreater{}
+\(\Gamma^{*}\)时：
+
+\begin{equation}
+A=min\{w_{c},w_{j,}w_{p}\}(1-\frac{\Gamma^{*}}{C_{c}})-R_{d}
+\end{equation}
+
+\section{\texorpdfstring{\texttt{plantecophys}
+软件包}{plantecophys 软件包}}\label{plantecophys-}
+
+Remko A. Duursma 在2015年发表了一篇文章
+\citet{Duursma2015Plantecophys}，\texttt{plantecophys}
+是其开发的一个R包工具集，用于对叶片气体交换数据进行分析和建模。实现了如下功能：
+
+\begin{itemize}
+\tightlist
+\item
+  CO\textsubscript{2} 响应曲线 (A-Ci curves) 的拟合、作图及模拟。
+\item
+  不同气孔导度模型。
+\item
+  根据 Cowan-Farquhar 的假设估算最适的气孔导度。
+\item
+  耦合气体交换模型的实现。
+\item
+  基于 Ci 模拟 C4 光合。
+\item
+  RHtoVPD：常用单位的转换（相对湿度、水汽压亏缺、露点温度）。
+\end{itemize}
+
+各参数的基本用法请参考后文内容，或官方帮助文档:
+
+\href{https://cran.r-project.org/web/packages/plantecophys/plantecophys.pdf}{plantecophys}。
+
+\section{\texorpdfstring{LI-6400XT CO\textsubscript{2}
+响应曲线的拟合}{LI-6400XT CO2 响应曲线的拟合}}\label{li-6400xt-co2-}
+
+LI-6400XT CO\textsubscript{2} 响应曲线的拟合需要借助
+\texttt{plantecophys} 的 \texttt{fitaci} 实现，fitaci 函数为根据 FvCB
+模型对 A-Ci 曲线的测量数据进行拟合，并估算
+J\(_{max}\)、V\(_{cmax}\)、R\(_{d}\)及他们的标准差，并根据
+\citet{Medlyn2002Temperature} 的方法考虑了温度的影响。
+
+\subsection{fitaci 函数介绍}\label{fitaci-}
+
+\texttt{fitaci} 的用法如下\footnote{仅针对 C3 植物}：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{fitaci}\NormalTok{(data, }\DataTypeTok{varnames =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{ALEAF =} \StringTok{"Photo"}\NormalTok{, }
+  \DataTypeTok{Tleaf =} \StringTok{"Tleaf"}\NormalTok{, }\DataTypeTok{Ci =} \StringTok{"Ci"}\NormalTok{, }\DataTypeTok{PPFD =} \StringTok{"PARi"}\NormalTok{, }
+  \DataTypeTok{Rd =} \StringTok{"Rd"}\NormalTok{), }\DataTypeTok{Tcorrect =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{Patm =} \DecValTok{100}\NormalTok{, }
+  \DataTypeTok{citransition =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{quiet =} \OtherTok{FALSE}\NormalTok{, }
+  \DataTypeTok{startValgrid =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{fitmethod =} 
+  \KeywordTok{c}\NormalTok{(}\StringTok{"default"}\NormalTok{, }\StringTok{"bilinear"}\NormalTok{, }\StringTok{"onepoint"}\NormalTok{), }
+  \DataTypeTok{algorithm =} \StringTok{"default"}\NormalTok{, }\DataTypeTok{fitTPU =} \OtherTok{FALSE}\NormalTok{, }
+  \DataTypeTok{useRd =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{PPFD =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{Tleaf =} \OtherTok{NULL}\NormalTok{, }
+  \DataTypeTok{alpha =} \FloatTok{0.24}\NormalTok{, }\DataTypeTok{theta =} \FloatTok{0.85}\NormalTok{, }\DataTypeTok{gmeso =} \OtherTok{NULL}\NormalTok{, }
+  \DataTypeTok{EaV =} \FloatTok{82620.87}\NormalTok{, }\DataTypeTok{EdVC =} \DecValTok{0}\NormalTok{, }\DataTypeTok{delsC =} \FloatTok{645.1013}\NormalTok{,}
+  \DataTypeTok{EaJ =} \FloatTok{39676.89}\NormalTok{, }\DataTypeTok{EdVJ =} \FloatTok{2e+05}\NormalTok{, }
+  \DataTypeTok{delsJ =} \FloatTok{641.3615}\NormalTok{, }\DataTypeTok{GammaStar =} \OtherTok{NULL}\NormalTok{, }
+  \DataTypeTok{Km =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{id =} \OtherTok{NULL}\NormalTok{, ...)}
+
+\NormalTok{## S3 method for class 'acifit'}
+\KeywordTok{plot}\NormalTok{(x, }\DataTypeTok{what =} \KeywordTok{c}\NormalTok{(}\StringTok{"data"}\NormalTok{, }\StringTok{"model"}\NormalTok{, }\StringTok{"none"}\NormalTok{),}
+     \DataTypeTok{xlim =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{ylim =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{whichA =} \KeywordTok{c}\NormalTok{(}
+       \StringTok{"Ac"}\NormalTok{, }\StringTok{"Aj"}\NormalTok{, }\StringTok{"Amin"}\NormalTok{, }\StringTok{"Ap"}\NormalTok{), }\DataTypeTok{add =} \OtherTok{FALSE}\NormalTok{,}
+\DataTypeTok{pch =} \DecValTok{19}\NormalTok{, }\DataTypeTok{addzeroline =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{addlegend =} 
+  \OperatorTok{!}\NormalTok{add, }\DataTypeTok{legendbty =} \StringTok{"o"}\NormalTok{,}\DataTypeTok{transitionpoint =} \OtherTok{TRUE}\NormalTok{, }
+\DataTypeTok{linecols =} \KeywordTok{c}\NormalTok{(}\StringTok{"black"}\NormalTok{, }\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{), }\DataTypeTok{lwd =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}
+\DecValTok{2}\NormalTok{), ...)}
+\end{Highlighting}
+\end{Shaded}
+
+\emph{主要参数注释：}
+
+\begin{itemize}
+\tightlist
+\item
+  data：需要分析的数据，必须为 data.frame\footnote{具体参考 R
+    语言相关文档，为 R 语言最常用的数据格式}。 格式。
+\item
+  varnames：数据的表头，此处函数默认的表头为 LI-6400 的表头，分析
+  LI-6400 的数据时可以不用填写，直接使用默认的参数即可\footnote{在 R
+    中，使用参数的值为默认值时可以不用填写该参数，例如使用默认选项分析
+    LI-6400 数据时，可只填写 data 项，具体参考 R 的相关入门手册}。
+\item
+  Tcorrect：如果为 TRUE，那么 J\(_{max}\)、V\(_{cmax}\)
+  的结果为温度校正结果，若 Tcorrect = FALSE，则为测量温度下的结果。
+\item
+  Patm：为外界大气压。
+\item
+  citransition：参见详，若提供该选项，则 J\(_{max}\)、V\(_{cmax}\)
+  的区域则分别拟合\footnote{为Rubisco和RuBP限制的Ci转换点，物种间差异较大，可以通过预实验确定}。
+\item
+  fitmethod：参见详解。
+\item
+  fitTPU：是否拟合 TPU 限制，默认为 FALSE，参见详解。
+\item
+  x：对于plot.acifit，x 为fitaci返回的对象，简单理解为 将 fitaci
+  函数拟合结果赋值给一个变量，此处plot函数实际上为plot.acifit。
+\item
+  what：利用基础做图工具，默认为对数据和模型进行作图。
+\item
+  whichA：默认为对所有的光合速率进行作图（Aj=Jmax-limited (蓝色),
+  Ac=Vcmax- limited (红色), Hyperbolic minimum (黑色)), TPU-limited rate
+  (Ap, 如果模型有计算结果）。
+\end{itemize}
+
+其他参数请参考 FvCB 模型 \citet{Farquhar1980A} 或查看 plantecophys
+的帮助文档。
+
+\subsubsection{fitaci函数详解}\label{fitaci}
+
+\begin{itemize}
+\item
+  默认为非线性拟合，详见 \citet{Duursma2015Plantecophys}。
+\item
+  bilinear 方法使用两次线性拟合方法首先拟合 V\(_{cmax}\) 和
+  R\(_{d}\)，然后在拟合J\(_{max}\)，过渡点的选择为对所有数据拟合最适的点，类似
+  \citet{Gu2010Reliable}
+  的方法。该方法的优势时无论如何，都会返回拟合结果，尤其是非线性拟合失败时使用该方法，但若默认方法失败时，需首先检查是否数据存在问题。两种拟合方法的结果有轻微的差别\footnote{若默认拟合方法失败，数据也无问题，那么是非线性拟合初始值设定的原因}。
+\item
+  onepoint 参考 \citet{De2016A}。
+\item
+  citransition 使用时，数据将被区分为 V\(_{cmax}\) 限制（Ci \textless{}
+  citransition ）区域，以及 J\(_{max}\) 限制 (Ci \textgreater{}
+  citransition) 区域。
+\item
+  fitTPU：如果要计算TPU，要设置 fitTPU = TRUE，并且 fittingmethod =
+  ``bilinear''。但需要注意，当 TPU 被计算时，没有 J\(_{max}\)
+  限制的点的存在是可能的。TPU限制的发生是在A值不随 CO\(_{2}\)
+  的增加而增加时发生的，因此计算 TPU
+  是否有返回值，取决于测量数据是否有此情况出现。
+\end{itemize}
+
+\section{\texorpdfstring{使用 \texttt{plantecophys} 拟合 LI-6400XT
+CO\textsubscript{2}
+响应曲线数据}{使用 plantecophys 拟合 LI-6400XT CO2 响应曲线数据}}\label{-plantecophys--li-6400xt-co2-}
+
+\subsection{数据的前处理}
+
+虽然 R 软件支持直接导入 xlsx 的数据，但因为 LI-6400XT
+的数据记录文件内有其他空行或 remark
+等内容，增加了处理代码的量，\textbf{故而推荐将其数据先整理为如表
+\ref{tab:head6400} 样式，并另存为 csv 格式}\footnote{即仅保留测量值，删除其他所有头文件、空行、
+  remark 等信息}：
+
+\begin{longtable}[t]{rlrrrrrr}
+\caption{\label{tab:head6400}推荐 LI-6400 整理后数据样式}\\
+\toprule
+Obs & HHMMSS & FTime & EBal. & Photo & Cond & Ci & Trmmol\\
+\midrule
+1 & 15:46:59 & 271.5 & 0 & 14.2848912 & 0.2730691 & 286.39751 & 2.226126\\
+2 & 15:48:26 & 358.0 & 0 & 10.6562220 & 0.2826303 & 217.32002 & 2.292845\\
+3 & 15:49:54 & 446.0 & 0 & 6.4525814 & 0.2909460 & 150.67623 & 2.361704\\
+4 & 15:51:26 & 538.5 & 0 & 1.7971569 & 0.3057164 & 85.82530 & 2.459459\\
+5 & 15:52:54 & 626.5 & 0 & -0.6575974 & 0.3150002 & 53.47985 & 2.515992\\
+6 & 15:54:50 & 742.5 & 0 & 15.4296572 & 0.3255415 & 292.56161 & 2.579840\\
+\bottomrule
+\end{longtable}
+
+\subsection{使用示例}\label{fitaci-p}
+
+\texttt{plantecophys} 并非 base 的安装包，首次使用需要从 \texttt{CRAN}
+安装，可以使用图形界面安装，也可以直接用命令行安装\footnote{首次使用安装，更换电脑或者升级
+  R 软件后，如果没有拷贝 library，也需要运行安装命令}，推荐同时安装依赖。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"plantecophys"}\NormalTok{, }\DataTypeTok{dependencies =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 载入 plantecophys }
+\KeywordTok{library}\NormalTok{(}\StringTok{"plantecophys"}\NormalTok{)}
+
+\CommentTok{# 利用read.csv读取数据文件，}
+\CommentTok{# 我的路径为当前工作路径的data文件夹内}
+\NormalTok{aci <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"./data/aci.csv"}\NormalTok{)}
+
+\CommentTok{# 防止可能出现的NA值}
+\NormalTok{aci <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(aci, Obs }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{)}
+
+\CommentTok{# 不修改默认参数对数据进行拟合}
+\NormalTok{acifit <-}\StringTok{ }\KeywordTok{fitaci}\NormalTok{(aci)}
+\CommentTok{# 查看拟合结果的参数名称，方便导出数据使用}
+\KeywordTok{attributes}\NormalTok{(acifit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $names
+##  [1] "df"             "pars"           "nlsfit"         "Tcorrect"      
+##  [5] "Photosyn"       "Ci_transition"  "Ci_transition2" "Rd_measured"   
+##  [9] "GammaStar"      "Km"             "kminput"        "gstarinput"    
+## [13] "fitmethod"      "citransition"   "gmeso"          "fitTPU"        
+## [17] "alphag"         "RMSE"           "runorder"      
+## 
+## $class
+## [1] "acifit"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 查看拟合结果}
+\KeywordTok{summary}\NormalTok{(acifit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Result of fitaci.
+## 
+## Data and predictions:
+##            Ci      Ameas     Amodel         Ac        Aj   Ap       Rd VPD
+## 5    53.47985 -0.6575974 -0.5146882 -0.3552036  0.000000 1000 0.159449 1.5
+## 4    85.82530  1.7971569  1.9292621  2.0888575  5.068534 1000 0.159449 1.5
+## 3   150.67623  6.4525814  6.4176037  6.5777528 12.755502 1000 0.159449 1.5
+## 2   217.32002 10.6562220 10.5354626 10.6965875 17.519644 1000 0.159449 1.5
+## 1   286.39751 14.2848912 14.3365887 14.4993980 20.749310 1000 0.159449 1.5
+## 6   292.56161 15.4296572 14.9749157 15.1383702 20.852616 1000 0.159449 1.5
+## 7   292.96456 15.7134791 15.0564801 15.2200522 20.831098 1000 0.159449 1.5
+## 8   450.64285 22.2659015 23.0115187 23.1975997 25.186939 3000 0.159449 1.5
+## 9   622.03873 26.5135040 27.6485003 30.4281393 27.837462 3000 0.159449 1.5
+## 10  992.08737 30.3898585 30.6300461 42.3998173 30.797660 3000 0.159449 1.5
+## 11 1558.96968 33.6267056 32.6638021 54.9948264 32.828110 3000 0.159449 1.5
+## 12 1756.16396 33.3152783 33.0981490 58.5844507 33.261965 3000 0.159449 1.5
+##       Tleaf         Cc     PPFD Patm Ci_original
+## 5  31.12332   53.47934 1800.490  100    53.47985
+## 4  30.99093   85.82723 1800.558  100    85.82530
+## 3  30.82872  150.68265 1800.140  100   150.67623
+## 2  30.63983  217.33057 1800.524  100   217.32002
+## 1  30.46890  286.41186 1800.701  100   286.39751
+## 6  31.26338  292.57660 1799.923  100   292.56161
+## 7  31.41866  292.97963 1799.975  100   292.96456
+## 8  31.54122  450.66588 1799.826  100   450.64285
+## 9  31.63493  622.06640 1799.578  100   622.03873
+## 10 31.73910  992.11803 1800.055  100   992.08737
+## 11 31.86938 1559.00238 1800.022  100  1558.96968
+## 12 31.96654 1756.19709 1799.585  100  1756.16396
+## 
+## Root mean squared error:  1.889701 
+## 
+## Estimated parameters:
+##         Estimate Std. Error
+## Vcmax  49.261616  1.5152405
+## Jmax  126.620537  2.2816267
+## Rd      0.159449  0.4001302
+## Note: Vcmax, Jmax are at 25C, Rd is at measurement T.
+## 
+## Curve was fit using method:  default 
+## 
+## Parameter settings:
+## Patm = 100
+##  alpha = 0.24
+##  theta = 0.85
+##  EaV = 82620.87
+##  EdVC = 0
+##  delsC = 645.1013
+##  EaJ = 39676.89
+##  EdVJ = 2e+05
+##  delsJ = 641.3615
+## 
+## Estimated from Tleaf (shown at mean Tleaf):
+## GammaStar =  58.61138 
+## Km =  1223.279
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{acifit_linear <-}\StringTok{ }\KeywordTok{fitaci}\NormalTok{(aci,  }\DataTypeTok{fitmethod =} \StringTok{"bilinear"}\NormalTok{)}
+\KeywordTok{summary}\NormalTok{(acifit_linear)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Result of fitaci.
+## 
+## Data and predictions:
+##            Ci      Ameas     Amodel         Ac        Aj   Ap        Rd
+## 5    53.47985 -0.6575974 -0.7389447 -0.3560483  0.000000 1000 0.3828608
+## 4    85.82530  1.7971569  1.7108198  2.0938246  5.138366 1000 0.3828608
+## 3   150.67623  6.4525814  6.2098476  6.5933940 12.931333 1000 0.3828608
+## 2   217.32002 10.6562220 10.3375299 10.7220229 17.761317 1000 0.3828608
+## 1   286.39751 14.2848912 14.1477696 14.5338762 21.035722 1000 0.3828608
+## 6   292.56161 15.4296572 14.7876514 15.1743678 21.139657 1000 0.3828608
+## 7   292.96456 15.7134791 14.8694171 15.2562440 21.117718 1000 0.3828608
+## 8   450.64285 22.2659015 22.8464806 23.2527613 25.533374 3000 0.3828608
+## 9   622.03873 26.5135040 27.8030690 30.5004944 28.220254 3000 0.3828608
+## 10  992.08737 30.3898585 30.8295808 42.5006398 31.221072 3000 0.3828608
+## 11 1558.96968 33.6267056 32.8913778 55.1255986 33.279305 3000 0.3828608
+## 12 1756.16396 33.3152783 33.3316070 58.7237587 33.719013 3000 0.3828608
+##    VPD    Tleaf         Cc     PPFD Patm Ci_original
+## 5  1.5 31.12332   53.47911 1800.490  100    53.47985
+## 4  1.5 30.99093   85.82701 1800.558  100    85.82530
+## 3  1.5 30.82872  150.68244 1800.140  100   150.67623
+## 2  1.5 30.63983  217.33037 1800.524  100   217.32002
+## 1  1.5 30.46890  286.41167 1800.701  100   286.39751
+## 6  1.5 31.26338  292.57641 1799.923  100   292.56161
+## 7  1.5 31.41866  292.97944 1799.975  100   292.96456
+## 8  1.5 31.54122  450.66572 1799.826  100   450.64285
+## 9  1.5 31.63493  622.06656 1799.578  100   622.03873
+## 10 1.5 31.73910  992.11823 1800.055  100   992.08737
+## 11 1.5 31.86938 1559.00260 1800.022  100  1558.96968
+## 12 1.5 31.96654 1756.19733 1799.585  100  1756.16396
+## 
+## Root mean squared error:  2.013045 
+## 
+## Estimated parameters:
+##          Estimate Std. Error
+## Vcmax  49.3787547  3.4815555
+## Jmax  128.5546403         NA
+## Rd      0.3828608  0.4697008
+## Note: Vcmax, Jmax are at 25C, Rd is at measurement T.
+## 
+## Curve was fit using method:  bilinear 
+## 
+## Parameter settings:
+## Patm = 100
+##  alpha = 0.24
+##  theta = 0.85
+##  EaV = 82620.87
+##  EdVC = 0
+##  delsC = 645.1013
+##  EaJ = 39676.89
+##  EdVJ = 2e+05
+##  delsJ = 641.3615
+## 
+## Estimated from Tleaf (shown at mean Tleaf):
+## GammaStar =  58.61138 
+## Km =  1223.279
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 仅查看拟合参数, 比较两种拟合参数的差异}
+\KeywordTok{coef}\NormalTok{(acifit_linear)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Vcmax        Jmax          Rd 
+##  49.3787547 128.5546403   0.3828608
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{coef}\NormalTok{(acifit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      Vcmax       Jmax         Rd 
+##  49.261616 126.620537   0.159449
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 设置作图参数，图形的边距及分为1行两列输出图形}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mar =} \KeywordTok{c}\NormalTok{(}\FloatTok{4.5}\NormalTok{, }\FloatTok{4.5}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\CommentTok{# 对两种拟合参数的结果作图，查看模型拟合是否正常}
+\KeywordTok{plot}\NormalTok{(acifit, }\DataTypeTok{addlegend =} \OtherTok{FALSE}\NormalTok{)}
+\KeywordTok{legend}\NormalTok{(}\DataTypeTok{x =} \DecValTok{500}\NormalTok{, }\DataTypeTok{y =} \DecValTok{10}\NormalTok{, }
+       \DataTypeTok{legend =} \KeywordTok{c}\NormalTok{(}\KeywordTok{expression}\NormalTok{(}\KeywordTok{paste}\NormalTok{(A[c])), }
+                \KeywordTok{expression}\NormalTok{(}\KeywordTok{paste}\NormalTok{(A[j])),}
+                \StringTok{"Limiting rate"}\NormalTok{),}
+       \DataTypeTok{lty =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{),}
+       \DataTypeTok{col =}\KeywordTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"blue"}\NormalTok{, }\StringTok{"black"}\NormalTok{) }
+\NormalTok{         )}
+\KeywordTok{mtext}\NormalTok{(}\StringTok{" fitmethod = 'default' "}\NormalTok{)}
+
+\KeywordTok{plot}\NormalTok{(acifit_linear, }\DataTypeTok{addlegend =} \OtherTok{FALSE}\NormalTok{)}
+\KeywordTok{legend}\NormalTok{(}\DataTypeTok{x =} \DecValTok{500}\NormalTok{, }\DataTypeTok{y =} \DecValTok{10}\NormalTok{, }
+       \DataTypeTok{legend =} \KeywordTok{c}\NormalTok{(}\KeywordTok{expression}\NormalTok{(}\KeywordTok{paste}\NormalTok{(A[c])), }
+                  \KeywordTok{expression}\NormalTok{(}\KeywordTok{paste}\NormalTok{(A[j])),}
+                  \StringTok{"Limiting rate"}\NormalTok{),}
+       \DataTypeTok{lty =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{),}
+       \DataTypeTok{col =}\KeywordTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"blue"}\NormalTok{, }\StringTok{"black"}\NormalTok{) }
+\NormalTok{)}
+\KeywordTok{mtext}\NormalTok{(}\StringTok{"fitmethod = 'bilinear' "}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown_files/figure-latex/fitaci6400-1.pdf}
+\caption{\label{fig:fitaci6400}光合速率的不同的限制阶段}
+\end{figure}
+
+如果需要导出数据做他用，直接根据 \texttt{attributes}
+中看到的名称，选择对应的数据导出即可，如果使用 Rstudio
+的话，其自动补全的功能在选择数据上更方便。例如导出预测值和系数分别使用如下方式：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 将模型拟合结果中df（即计算数据）赋给predictaci，}
+\CommentTok{# 并用write.csv导出}
+\NormalTok{predictaci <-}\StringTok{ }\NormalTok{acifit}\OperatorTok{$}\NormalTok{df}
+\KeywordTok{write.csv}\NormalTok{(acifit}\OperatorTok{$}\NormalTok{df, }\DataTypeTok{file =} \StringTok{"acipredict.csv"}\NormalTok{)}
+\KeywordTok{write.csv}\NormalTok{(}\KeywordTok{coef}\NormalTok{(acifit), }\DataTypeTok{file =} \StringTok{"coefaci.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{quote}
+需要注意的是，因为非线性拟合需要一个初始值，因此，使用默认方式（非线性拟合）的时候，会存在可能的拟合失败现象，此时可以使用
+\texttt{fitmethod\ =\ "bilinear"}，二者结果略有差别。
+\end{quote}
+
+\subsubsection{\texorpdfstring{fitmethod = ``onepoint''
+介绍}{fitmethod = onepoint 介绍}}\label{fitmethod-onepoint-}
+
+\citet{De2016A} 发表了关于 one point 方法计算 \(V_{cmax}\) 和
+\(J_{max}\) 方法的文章，在 2017 年 11 月的更新中，plantecophys
+增加了响应的 R 软件实现方法， 该方法并非使用一个点计算 \(V_{cmax}\) 和
+\(J_{max}\)，而是对数据集中的每一个点的值进行估计，使用的方法为逆向了光合作用方程。输出为对每个原始数据加入了
+\(V_{cmax}\) 和
+\(J_{max}\)，当然一如既往的可以使用温度校准的方法。\textbf{并不建议该方法应用于整个
+ACi 曲线的数据，它的假设是在外部环境 CO\textsubscript{2}
+浓度和饱和光下，受到 Rubisco 所化速率的限制而不是 RUBP 的限制。}
+
+基于上面的描述，他们的模型如下：
+
+\begin{equation}
+\hat{V}_{cmax} = (A_{sat} + R_{day}) \frac{C_i + K_m}{C_i - \Gamma^*} 
+\label{eq:inverseA}
+\end{equation}
+
+其中：K\textsubscript{m} 为米氏常数，其计算为：
+
+\begin{equation}
+K_m = K_c (1 + \frac{O_i}{K_o}) 
+\label{eq:km}
+\end{equation}
+
+未知参数均由文献中的方法进行计算，具体可参考 \citet{De2016A}
+的原文,但上述方法的缺陷为还要使用 ACi 曲线来估算
+R\textsubscript{day}，因此作者使用了1.5\% V\textsubscript{cmax} 作为
+R\textsubscript{day}，因此公式 \eqref{eq:inverseA} 可变换为：
+
+\begin{equation}
+\hat{V}_{cmax} = A_{sat} (\frac{C_i + K_m}{C_i - \Gamma^*} - 0.015)
+\label{eq:onepoint}
+\end{equation}
+
+另一个重要的模型的假设为 J\textsubscript{max} 与 V\textsubscript{cmax}
+是成比例的， J\textsubscript{max} 的计算是通过 C\textsubscript{i}
+transition point 来实现的，文章中的比值均值为 1.9，范围在 1.68
+\textasciitilde{} 2.14 之间。
+
+\subsection{\texorpdfstring{使用 `onepoint' 单独计算
+V\textsubscript{cmax} 和
+J\textsubscript{max}}{使用 onepoint 单独计算 Vcmax 和 Jmax}}\label{-onepoint--vcmax--jmax}
+
+目前我手头没有相应数据，仅有使用 LI-6400 测试 auto log 2
+时的一个数据，我们用这个来示范该方法的使用：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{one_data <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"./data/onepoint.csv"}\NormalTok{)}
+\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{(}\KeywordTok{head}\NormalTok{(one_data), }\DataTypeTok{booktabs =} \OtherTok{TRUE}\NormalTok{,}
+             \DataTypeTok{caption =} \StringTok{'onepoint 使用的数据'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}
+
+\caption{\label{tab:onepointdata}onepoint 使用的数据}
+\centering
+\begin{tabular}[t]{rlrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr}
+\toprule
+Obs & HHMMSS & FTime & EBal. & Photo & Cond & Ci & Trmmol & VpdL & CTleaf & Area & BLC\_1 & StmRat & BLCond & Tair & Tleaf & TBlk & CO2R & CO2S & H2OR & H2OS & RH\_R & RH\_S & Flow & PARi & PARo & Press & CsMch & HsMch & CsMchSD & HsMchSD & CrMchSD & HrMchSD & StableF & BLCslope & BLCoffst & f\_parin & f\_parout & alphaK & Status & fda & Trans & Tair\_K & Twall\_K & R.W.m2. & Tl.Ta & SVTleaf & h2o\_i & h20diff & CTair & SVTair & CndTotal & vp\_kPa & VpdA & CndCO2 & Ci\_Pa & Ci.Ca & RHsfc & C2sfc & AHs.Cs\\
+\midrule
+1 & 14:12:43 & 347.0 & 0 & 10.519216 & 0.1369336 & 263.0905 & 1.963046 & 1.445782 & 25.89411 & 6 & 1.42 & 1 & 2.84 & 25.86572 & 25.89411 & 25.86697 & 412.5374 & 398.9832 & 16.98853 & 19.29724 & 50.16200 & 56.97891 & 500.3231 & 1198.761 & 7.497697 & 98.84273 & 2.011996 & -0.3824501 & 0.1618589 & 0.0039255 & 0.1864786 & 0.0030409 & 1.0000000 & -0.2195652 & 2.737392 & 1 & 0 & 0.16 & 111115 & 0.8338718 & 0.0019630 & 299.0441 & 299.0157 & 191.8018 & 1.191025 & 3.353173 & 33.92433 & 14.62709 & 25.87991 & 3.350355 & 0.1306349 & 1.907392 & 1.442964 & 0.0821903 & 26.00458 & 0.6594024 & 57.74196 & 393.9829 & 0.0154169\\
+2 & 14:13:04 & 369.0 & 0 & 10.361122 & 0.1357092 & 264.1135 & 1.946022 & 1.445559 & 25.89542 & 6 & 1.42 & 1 & 2.84 & 25.86854 & 25.89542 & 25.86977 & 412.5459 & 399.1890 & 17.01363 & 19.30231 & 50.22723 & 56.98380 & 500.3223 & 1198.748 & 7.486364 & 98.84175 & 2.018435 & -0.3787848 & 0.2174792 & 0.0025482 & 0.2455426 & 0.0025012 & 1.0000000 & -0.2195652 & 2.737392 & 1 & 0 & 0.16 & 111115 & 0.8338705 & 0.0019460 & 299.0454 & 299.0185 & 191.7997 & 1.199722 & 3.353433 & 33.92729 & 14.62498 & 25.88198 & 3.350765 & 0.1295200 & 1.907874 & 1.442891 & 0.0814842 & 26.10544 & 0.6616252 & 57.73418 & 394.2638 & 0.0151724\\
+3 & 14:13:25 & 373.0 & 0 & 10.207166 & 0.1342114 & 264.8348 & 1.925734 & 1.445717 & 25.89660 & 6 & 1.42 & 1 & 2.84 & 25.87186 & 25.89660 & 25.87317 & 412.5393 & 399.3762 & 17.03833 & 19.30316 & 50.29006 & 56.97489 & 500.3188 & 1198.737 & 7.489428 & 98.84142 & 2.018435 & -0.3787848 & 0.2174792 & 0.0025482 & 0.2455426 & 0.0025012 & 1.0000000 & -0.2195652 & 2.737392 & 1 & 0 & 0.16 & 111115 & 0.8338647 & 0.0019257 & 299.0466 & 299.0219 & 191.7980 & 1.210137 & 3.353668 & 33.92979 & 14.62663 & 25.88423 & 3.351212 & 0.1281551 & 1.907951 & 1.443261 & 0.0806199 & 26.17665 & 0.6631213 & 57.71117 & 394.5242 & 0.0149311\\
+4 & 14:13:41 & 389.5 & 0 & 9.547416 & 0.1281947 & 269.6337 & 1.854272 & 1.454248 & 25.94020 & 6 & 1.42 & 1 & 2.84 & 25.91845 & 25.94020 & 25.92104 & 413.8090 & 401.4666 & 17.12559 & 19.30638 & 50.40359 & 56.82203 & 500.3162 & 1199.245 & 7.449210 & 98.83208 & 2.018435 & -0.3787848 & 0.2174792 & 0.0025482 & 0.2455426 & 0.0025012 & 1.0000000 & -0.2195652 & 2.737392 & 1 & 0 & 0.16 & 111115 & 0.8338604 & 0.0018543 & 299.0902 & 299.0684 & 191.8792 & 1.247158 & 3.362337 & 34.02071 & 14.71433 & 25.92933 & 3.360173 & 0.1226580 & 1.908089 & 1.452084 & 0.0771402 & 26.64846 & 0.6716216 & 57.48324 & 396.9282 & 0.0138266\\
+5 & 14:16:16 & 540.0 & 0 & 10.288968 & 0.1376602 & 267.9198 & 2.009217 & 1.471788 & 26.01813 & 6 & 1.42 & 1 & 2.84 & 26.01478 & 26.01813 & 26.02164 & 413.9044 & 400.5999 & 16.92567 & 19.28878 & 49.53554 & 56.44850 & 500.3043 & 1200.785 & 7.497018 & 98.81870 & 2.018435 & -0.3787848 & 0.2174792 & 0.0025482 & 0.2455426 & 0.0025012 & 0.6666667 & -0.2195652 & 2.737392 & 1 & 0 & 0.16 & 111115 & 0.8338405 & 0.0020092 & 299.1681 & 299.1648 & 192.1257 & 1.174669 & 3.377880 & 34.18260 & 14.89382 & 26.01646 & 3.377546 & 0.1312960 & 1.906093 & 1.471453 & 0.0826090 & 26.47549 & 0.6687965 & 57.30143 & 395.7090 & 0.0148991\\
+6 & 14:16:32 & 555.5 & 0 & 10.178603 & 0.1381995 & 269.5898 & 2.016100 & 1.471138 & 26.01657 & 6 & 1.42 & 1 & 2.84 & 26.02212 & 26.01657 & 26.02939 & 413.6639 & 400.4885 & 16.92345 & 19.29468 & 49.49181 & 56.42595 & 500.2979 & 1200.879 & 7.569045 & 98.80596 & 2.018435 & -0.3787848 & 0.2174792 & 0.0025482 & 0.2455426 & 0.0025012 & 0.6666667 & -0.2195652 & 2.737392 & 1 & 0 & 0.16 & 111115 & 0.8338298 & 0.0020161 & 299.1666 & 299.1721 & 192.1406 & 1.172561 & 3.377567 & 34.18384 & 14.88916 & 26.01934 & 3.378122 & 0.1317865 & 1.906429 & 1.471693 & 0.0829197 & 26.63708 & 0.6731525 & 57.32389 & 395.6501 & 0.0147473\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+数据如上所示，为同一个叶片连续记录数据，故所有的光合速率十分接近。
+
+使用方法：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(plantecophys)}
+
+\NormalTok{one_data <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(one_data, Obs }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{)}
+\NormalTok{one_data}\OperatorTok{$}\NormalTok{Rd <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\OperatorTok{-}\FloatTok{0.5}\NormalTok{, }\KeywordTok{length}\NormalTok{(one_data}\OperatorTok{$}\NormalTok{Obs))}
+\NormalTok{aci_fit <-}\StringTok{ }\KeywordTok{fitaci}\NormalTok{(one_data, }\DataTypeTok{fitmethod =} \StringTok{"onepoint"}\NormalTok{)}
+
+\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{(}\KeywordTok{head}\NormalTok{(}\KeywordTok{data.frame}\NormalTok{(aci_fit}\OperatorTok{$}\NormalTok{Photo, }
+\NormalTok{             aci_fit}\OperatorTok{$}\NormalTok{Vcmax, aci_fit}\OperatorTok{$}\NormalTok{Jmax)),}
+             \DataTypeTok{booktabs =} \OtherTok{TRUE}\NormalTok{,}
+             \DataTypeTok{caption =} \StringTok{'onepoint 法计算的结果'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}
+
+\caption{\label{tab:onepoint}onepoint 法计算的结果}
+\centering
+\begin{tabular}[t]{rrr}
+\toprule
+aci\_fit.Photo & aci\_fit.Vcmax & aci\_fit.Jmax\\
+\midrule
+10.519216 & 47.06893 & 71.73759\\
+10.361122 & 46.22091 & 70.51059\\
+10.207166 & 45.44617 & 69.35838\\
+9.547416 & 41.86217 & 64.24400\\
+10.288968 & 45.09335 & 69.36954\\
+10.178603 & 44.37360 & 68.41628\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+需要注意，为保证结果的精确，如果不设定 Rd, 也即文献中的 Rday，
+模型是无法计算的，因此上面的示例中虚构了一个，实际操作用一般使用标准的
+ACi 测量计算。
+
+\subsection{\texorpdfstring{多条 CO\textsubscript{2}
+响应曲线的拟合}{多条 CO2 响应曲线的拟合}}\label{-co2-}
+
+fitacis 函数实际上是 fitaci 函数的扩展，方便一次拟合多条曲线\footnote{需要注意，此时fitmethod一般推荐使用bilinear。}。函数的参数如下：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{fitacis}\NormalTok{(data, group, }\DataTypeTok{fitmethod =} \KeywordTok{c}\NormalTok{(}\StringTok{"default"}\NormalTok{, }
+        \StringTok{"bilinear"}\NormalTok{),}\DataTypeTok{progressbar =} \OtherTok{TRUE}\NormalTok{, }
+        \DataTypeTok{quiet =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{id =} \OtherTok{NULL}\NormalTok{, ...)}
+
+\NormalTok{## S3 method for class 'acifits'}
+\KeywordTok{plot}\NormalTok{(x, }\DataTypeTok{how =} \KeywordTok{c}\NormalTok{(}\StringTok{"manyplots"}\NormalTok{, }\StringTok{"oneplot"}\NormalTok{), }
+     \DataTypeTok{highlight =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{ylim =} \OtherTok{NULL}\NormalTok{, }
+     \DataTypeTok{xlim =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{add =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{what =} \KeywordTok{c}\NormalTok{(}\StringTok{"model"}\NormalTok{,}
+     \StringTok{"data"}\NormalTok{, }\StringTok{"none"}\NormalTok{), ...)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{主要参数详解：}
+
+实际上 fitacis 与 fitaci 模型算法完全一致，只不过增加了一个 group
+参数，用于区分不同测量的数据，具体请参考举例内容。
+
+\subsubsection{fitacis 函数应用举例}\label{fitacis-}
+
+下文代码根据 plantecophys
+中的示例代码修改，进行演示，原代码请参考其帮助文档。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(plantecophys)}
+\CommentTok{# 只提取前10个不同测量的数据，节省时间进行举例}
+\NormalTok{manyacidat2 <-}\StringTok{ }\KeywordTok{droplevels}\NormalTok{(manyacidat[manyacidat}\OperatorTok{$}\NormalTok{Curve }\OperatorTok{%in%}\StringTok{ }
+\StringTok{                                       }\KeywordTok{levels}\NormalTok{(manyacidat}\OperatorTok{$}\NormalTok{Curve)[}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{],])}
+
+\CommentTok{# 对多条曲线进行拟合，使用bilinear方法，}
+\CommentTok{# 仅仅因为其比非线性拟合节省时间}
+\NormalTok{fits <-}\StringTok{ }\KeywordTok{fitacis}\NormalTok{(manyacidat2, }\DataTypeTok{group =} \StringTok{"Curve"}\NormalTok{, }\DataTypeTok{fitmethod=}\StringTok{"bilinear"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+  |                                                        
+  |                                                  |   0%
+  |                                                        
+  |=====                                             |  10%
+  |                                                        
+  |==========                                        |  20%
+  |                                                        
+  |===============                                   |  30%
+  |                                                        
+  |====================                              |  40%
+  |                                                        
+  |=========================                         |  50%
+  |                                                        
+  |==============================                    |  60%
+  |                                                        
+  |===================================               |  70%
+  |                                                        
+  |========================================          |  80%
+  |                                                        
+  |=============================================     |  90%
+  |                                                        
+  |==================================================| 100%
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 拟合结果为list，我们可以只提取第一个的拟合结果}
+\NormalTok{fits[[}\DecValTok{1}\NormalTok{]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Result of fitaci.
+## 
+## Data and predictions:
+##            Ci      Ameas     Amodel         Ac        Aj   Ap        Rd
+## 2    53.23129 -0.4401082  0.1014381  0.9601119  2.548123 1000 0.8586158
+## 3    79.47367  2.4824630  2.1937702  3.0526198  7.036734 1000 0.8586158
+## 4   116.74688  5.4531712  4.9419337  5.8011511 11.392394 1000 0.8586158
+## 5   188.00801  9.7099879  9.5705964 10.4310194 16.447715 1000 0.8586158
+## 6   278.44662 14.8225766 14.4261545 15.2897486 19.977583 1000 0.8586158
+## 7   343.03259 17.7982155 17.4602014 18.3289218 21.639847 1000 0.8586158
+## 1   344.72152 17.9244012 17.3165146 18.1849643 21.534276 1000 0.8586158
+## 14  344.74839 16.7933747 17.6853306 18.5545917 21.774261 1000 0.8586158
+## 8   588.08078 23.8925326 24.1309683 27.0327638 25.020148 3000 0.8586158
+## 9   833.25547 26.5674409 25.7783026 33.0856065 26.647921 3000 0.8586158
+## 10 1136.99222 25.9787890 26.8108335 38.1296944 27.676768 3000 0.8586158
+## 11 1436.86370 26.6110657 27.5409345 42.0628463 28.405453 3000 0.8586158
+## 12 1536.46772 27.4018784 27.7965881 43.3773689 28.660781 3000 0.8586158
+## 13 1731.76400 28.6752069 28.0952804 45.2475932 28.959041 3000 0.8586158
+##    VPD    Tleaf         Cc     PPFD Patm Ci_original
+## 2  1.5 24.55873   53.23139 1799.959  100    53.23129
+## 3  1.5 24.58292   79.47586 1799.590  100    79.47367
+## 4  1.5 24.71278  116.75183 1799.819  100   116.74688
+## 5  1.5 24.73687  188.01759 1800.371  100   188.00801
+## 6  1.5 24.67508  278.46106 1800.233  100   278.44662
+## 7  1.5 24.76596  343.05006 1799.575  100   343.03259
+## 1  1.5 24.51593  344.73886 1800.356  100   344.72152
+## 14 1.5 24.94098  344.76609 1799.964  100   344.74839
+## 8  1.5 24.83785  588.10494 1799.477  100   588.08078
+## 9  1.5 24.91185  833.28127 1799.969  100   833.25547
+## 10 1.5 24.87314 1137.01906 1799.525  100  1136.99222
+## 11 1.5 24.95914 1436.89126 1799.615  100  1436.86370
+## 12 1.5 25.04542 1536.49554 1799.784  100  1536.46772
+## 13 1.5 25.07566 1731.79212 1799.160  100  1731.76400
+## 
+## Root mean squared error:  2.196037 
+## 
+## Estimated parameters:
+##          Estimate Std. Error
+## Vcmax  65.0009909  1.3720635
+## Jmax  131.7980133         NA
+## Rd      0.8586158  0.2876248
+## Note: Vcmax, Jmax are at 25C, Rd is at measurement T.
+## 
+## Curve was fit using method:  bilinear 
+## 
+## Parameter settings:
+## Patm = 100
+##  alpha = 0.24
+##  theta = 0.85
+##  EaV = 82620.87
+##  EdVC = 0
+##  delsC = 645.1013
+##  EaJ = 39676.89
+##  EdVJ = 2e+05
+##  delsJ = 641.3615
+## 
+## Estimated from Tleaf (shown at mean Tleaf):
+## GammaStar =  42.31453 
+## Km =  698.2084
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 所有参数均可传递到 plot.acifit，例如：}
+\CommentTok{# 将所有的数据点作图，并将数据点标记为蓝色}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mar =} \KeywordTok{c}\NormalTok{(}\FloatTok{4.5}\NormalTok{, }\FloatTok{4.5}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(fits, }\DataTypeTok{how=}\StringTok{"oneplot"}\NormalTok{, }\DataTypeTok{what=}\StringTok{"data"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{, }\DataTypeTok{addlegend =} \OtherTok{FALSE}\NormalTok{)}
+\CommentTok{# 在上图的基础上增加模型拟合的线}
+\KeywordTok{plot}\NormalTok{(fits, }\DataTypeTok{how=}\StringTok{"oneplot"}\NormalTok{, }\DataTypeTok{what=}\StringTok{"data"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{, }\DataTypeTok{addlegend =} \OtherTok{FALSE}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(fits, }\DataTypeTok{how=}\StringTok{"oneplot"}\NormalTok{, }\DataTypeTok{add=}\OtherTok{TRUE}\NormalTok{, }\DataTypeTok{what=}\StringTok{"model"}\NormalTok{, }\DataTypeTok{lwd=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{), }\DataTypeTok{addlegend =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown_files/figure-latex/fitacisr-1.pdf}
+\caption{\label{fig:fitacisr}fitacis作图结果}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 使用sapply提取拟合结果的RMSE(均方根误差)}
+\NormalTok{rmses <-}\StringTok{ }\KeywordTok{sapply}\NormalTok{(fits, }\StringTok{"[["}\NormalTok{, }\StringTok{"RMSE"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(rmses, }\DataTypeTok{type=}\StringTok{'h'}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"RMSE"}\NormalTok{, }\DataTypeTok{xlab=}\StringTok{"Curve nr"}\NormalTok{)}
+\CommentTok{# 对最差的拟合结果进行作图}
+\KeywordTok{plot}\NormalTok{(fits[[}\KeywordTok{which.max}\NormalTok{(rmses)]])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown_files/figure-latex/fitacisr-2.pdf}
+\caption{\label{fig:fitacisr}fitacis作图结果}
+\end{figure}
+
+可以看出，\texttt{fitaci} 和 \texttt{fitacis}
+用法基本一致，各行代码均已经注释，更详细用法请参函数考帮助。
+
+\subsection{\texorpdfstring{\texttt{findCiTransition}
+函数}{findCiTransition 函数}}\label{findcitransition-}
+
+计算 CiTransition 的函数，第一点为 Ac \& Aj，第二点为 Aj \&
+Ap，并且仅在计算 TPU 的前提下才会有第二点出现。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{findCiTransition}\NormalTok{(object, ...)}
+\end{Highlighting}
+\end{Shaded}
+
+参数使用，object 为 fitaci 函数对象，或者整个的 \texttt{Photosyn} 函数。
+\ldots{} 为使用 \texttt{Photosyn} 时可传递的参数。
+
+\section{C4 植物光合}\label{c4-}
+
+之前的部分模型全部为关于 C3 植物的拟合，而
+\citet{Caemmerer2000Biochemical} 的方法，则是针对 C4 植物的 A-Ci
+曲线的实现。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{AciC4}\NormalTok{(Ci, }\DataTypeTok{PPFD =} \DecValTok{1500}\NormalTok{, }\DataTypeTok{Tleaf =} \DecValTok{25}\NormalTok{, }\DataTypeTok{VPMAX25 =} \DecValTok{120}\NormalTok{, }
+      \DataTypeTok{JMAX25 =} \DecValTok{400}\NormalTok{, }\DataTypeTok{Vcmax =} \DecValTok{60}\NormalTok{, }\DataTypeTok{Vpr =} \DecValTok{80}\NormalTok{, }
+      \DataTypeTok{alpha =} \DecValTok{0}\NormalTok{, }\DataTypeTok{gbs =} \FloatTok{0.003}\NormalTok{, }\DataTypeTok{O2 =} \DecValTok{210}\NormalTok{, }
+      \DataTypeTok{x =} \FloatTok{0.4}\NormalTok{, }\DataTypeTok{THETA =} \FloatTok{0.7}\NormalTok{, }\DataTypeTok{Q10 =} \FloatTok{2.3}\NormalTok{, }
+      \DataTypeTok{RD0 =} \DecValTok{1}\NormalTok{, }\DataTypeTok{RTEMP =} \DecValTok{25}\NormalTok{, }\DataTypeTok{TBELOW =} \DecValTok{0}\NormalTok{, }
+      \DataTypeTok{DAYRESP =} \DecValTok{1}\NormalTok{, }\DataTypeTok{Q10F =} \DecValTok{2}\NormalTok{, }\DataTypeTok{FRM =} \FloatTok{0.5}\NormalTok{, ...)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{参数详解}
+
+\begin{itemize}
+\tightlist
+\item
+  Ci：胞间二氧化碳浓度 (\(\mu mol\cdot m^{-2}\cdot s^{-1}\))。
+\item
+  PPFD：光合光量子通量密度 (\(\mu mol\cdot m^{-2}\cdot s^{-1}\))。
+\item
+  Tleaf：叶片温度 (\textcelsius)。
+\item
+  VPMAX25：PEP 羧化最大速率 (\(\mu mol\cdot m^{-2}\cdot s^{-1}\))。
+\item
+  JMAX25：最大电子传递速率 (\textcelsius))。
+\item
+  Vcmax：最大羧化速率(\(\mu mol\cdot m^{-2}\cdot s^{-1}\))。
+\item
+  Vpr：PEP 再生(\(\mu mol\cdot m^{-2}\cdot s^{-1}\))。
+\item
+  alpha：维管束鞘细胞中 PSII 活性的比例。
+\item
+  gbs：维管束鞘导度 (\(mol\cdot m^{-2}\cdot s^{-1}\))。
+\item
+  O2：叶肉细胞氧气浓度。
+\item
+  x：电子传递的分配因子。
+\item
+  THETA：曲角参数。
+\item
+  Q10：Michaelis-Menten 系数中依赖于温度的参数。
+\item
+  RD0：基温下的呼吸 (\(mol\cdot m^{-2}\cdot s^{-1}\))。
+\item
+  RTEMP：呼吸的基温(\textcelsius)
+\item
+  TBELOW：此温度以下呼吸为0。
+\item
+  DAYRESP：明呼吸和暗呼吸的比值。
+\item
+  Q10F：呼吸依赖于温度的参数。
+\item
+  FRM：明呼吸中为叶肉呼吸的比例。
+\end{itemize}
+
+以上参数均来自
+\citet{Caemmerer2000Biochemical}，括号中的参数值均为默认值，具体应用时请按照实际情况修改。
+
+\subsection{C4 植物光合速率的计算}\label{c4-}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 模拟 C4 植物的 Ci 值，计算光合速率并作图}
+\KeywordTok{library}\NormalTok{(plantecophys)}
+\NormalTok{aci <-}\StringTok{ }\KeywordTok{AciC4}\NormalTok{(}\DataTypeTok{Ci=}\KeywordTok{seq}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{600}\NormalTok{, }\DataTypeTok{length=}\DecValTok{101}\NormalTok{))}
+\KeywordTok{with}\NormalTok{(aci, }\KeywordTok{plot}\NormalTok{(Ci, ALEAF, }\DataTypeTok{type=}\StringTok{'l'}\NormalTok{, }\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\KeywordTok{max}\NormalTok{(ALEAF))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-8-1.pdf}
+\caption{\label{fig:unnamed-chunk-8}C4 植物 A-Ci 作图}
+\end{figure}
+
+\cleardoublepage
+
+\chapter{气孔导度模型的拟合}
+
+气孔导度模型的拟合是通过 \texttt{fitBB} 来实现的，可以拟合三个
+\textbf{Ball-Berry 类型的气孔导度模型}，共有下面几个参数：
+
+\begin{itemize}
+\tightlist
+\item
+  气孔导度 (gs),
+\item
+  光合 (A),
+\item
+  外界 CO\textsubscript{2} 浓度 (Ca)
+\item
+  水气压亏缺 (VPD).
+\end{itemize}
+
+其三个模型的简介如下：
+
+\section{BallBerry 模型}\label{ballberry}
+
+\citet{Ball1987A} 发表的文章中的模型：
+
+\begin{equation}
+g_s = g0 + g1(\frac{A h_r}{C_a})
+\label{eq:ballberry}
+\end{equation}
+
+其中 A 为净光合速率，g\textsubscript{0} 和 g\textsubscript{1}
+为拟合参数，h\textsubscript{r} 为叶片表面的相对湿度，C\textsubscript{a}
+为叶片处CO\textsubscript{2}浓度。
+
+\section{BBLeuning 模型}\label{bbleuning-}
+
+\citet{leuning1995a} 发表的文章中的模型：
+
+\begin{equation}
+g_s = g_0 + g_1(\frac{A}{(C_a - \Gamma)(1 + \frac{D}{D_0})})
+\label{eq:BBLeuning}
+\end{equation}
+
+其中 \(\Gamma\) 为 CO\textsubscript{2}
+补偿点，g\textsubscript{0}、g\textsubscript{1} 和 D\textsubscript{0}
+为拟合参数。
+
+\section{BBOptiFull 模型}\label{bboptifull-}
+
+\citet{Medlyn2011Reconciling} 发表的文章中的模型：
+
+\begin{equation}
+g_s^* \approx g_0 + g_1(1 + \frac{g_1}{D}) \frac{A}{C_a}
+\label{eq:BBOptiFull}
+\end{equation}
+
+额外的参数 g\textsubscript{k} 来自于 \citet{Duursma2013Near}
+
+\begin{equation}
+g_s = g_0 + 1.6(1 + \frac{g_1}{D}(1-g_k)) \frac{A}{C_a}
+\label{eq:Duursm}
+\end{equation}
+
+\section{\texorpdfstring{\texttt{fitBB}
+函数}{fitBB 函数}}\label{fitbb-p}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{fitBB}\NormalTok{(data, }\DataTypeTok{varnames =} \KeywordTok{list}\NormalTok{(}
+  \DataTypeTok{ALEAF =} \StringTok{"A"}\NormalTok{, }\DataTypeTok{GS =} \StringTok{"gsw"}\NormalTok{, }\DataTypeTok{VPD =} \StringTok{"VPDleaf"}\NormalTok{,}
+  \DataTypeTok{Ca =}\StringTok{"CO2_s"}\NormalTok{, }\DataTypeTok{RH =} \StringTok{"RHcham"}\NormalTok{), }
+  \DataTypeTok{gsmodel =} \KeywordTok{c}\NormalTok{(}\StringTok{"BBOpti"}\NormalTok{, }\StringTok{"BBLeuning"}\NormalTok{, }\StringTok{"BallBerry"}\NormalTok{,}
+              \StringTok{"BBOptiFull"}\NormalTok{), }\DataTypeTok{fitg0 =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{参数的意义:}
+
+\begin{itemize}
+\tightlist
+\item
+  data：待分析的数据文件。
+\item
+  varnames：注意，函数默认数据为 6400 格式，因此 6800
+  的数据文件要安装上文的参数修改。 相对湿度只有在使用 BallBerry
+  时才需要输入。
+\item
+  gsmodel：上述三个模型之一。
+\item
+  fitg0：默认不计算g0，若需要，改为TRUE。
+\end{itemize}
+
+\textbf{代码示例：}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(plantecophys)}
+
+\NormalTok{aci <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"./data/aci.csv"}\NormalTok{)}
+\NormalTok{aci <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(aci, Obs }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{)}
+\KeywordTok{fitBB}\NormalTok{(aci, }\DataTypeTok{gsmodel =} \StringTok{"BBOpti"}\NormalTok{, }\DataTypeTok{fitg0 =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Result of fitBB.
+## Model :  BBOpti 
+## Both g0 and g1 were estimated.
+## 
+## Coefficients:
+## g0  g1
+## 0.326 -0.992 
+## 
+## For more details of the fit, look at summary(myfit$fit)
+## To return coefficients, do coef(myfit).
+## (where myfit is the name of the object returned by fitBB)
+\end{verbatim}
+
+\section{\texorpdfstring{\texttt{fitBBs}
+函数}{fitBBs 函数}}\label{fitbbs-}
+
+如果我们有多个物种的数据，那么使用 \texttt{fitBBs}
+则可以快速拟合多条曲线的数据。我们先整合两次的数据，然后再查看运行结果：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{aci01 <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"./data/aci01.csv"}\NormalTok{)}
+\NormalTok{aci01 <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(aci01, Obs }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{)}
+\NormalTok{multiBB <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}
+  \DataTypeTok{A =} \KeywordTok{c}\NormalTok{(aci}\OperatorTok{$}\NormalTok{Photo, aci01}\OperatorTok{$}\NormalTok{Photo),}
+  \DataTypeTok{GS =} \KeywordTok{c}\NormalTok{(aci}\OperatorTok{$}\NormalTok{Cond, aci01}\OperatorTok{$}\NormalTok{Cond),}
+  \DataTypeTok{CO2S =} \KeywordTok{c}\NormalTok{(aci}\OperatorTok{$}\NormalTok{CO2S, aci01}\OperatorTok{$}\NormalTok{CO2S),}
+  \DataTypeTok{VPD =} \KeywordTok{c}\NormalTok{(aci}\OperatorTok{$}\NormalTok{VpdL, aci01}\OperatorTok{$}\NormalTok{VpdL),}
+  \DataTypeTok{RH =} \KeywordTok{c}\NormalTok{(aci}\OperatorTok{$}\NormalTok{RH_S, aci01}\OperatorTok{$}\NormalTok{RH_S),}
+  \DataTypeTok{species =} \KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\StringTok{"species1"}\NormalTok{, }\KeywordTok{length}\NormalTok{(aci}\OperatorTok{$}\NormalTok{Photo)),}
+  \KeywordTok{rep}\NormalTok{(}\StringTok{"species2"}\NormalTok{, }\KeywordTok{length}\NormalTok{(aci01}\OperatorTok{$}\NormalTok{Photo)))}
+\NormalTok{)}
+
+\NormalTok{mod2 <-}\StringTok{ }\KeywordTok{fitBBs}\NormalTok{(multiBB, }\DataTypeTok{group =} \StringTok{"species"}\NormalTok{,  }
+               \DataTypeTok{varnames =} \KeywordTok{list}\NormalTok{(}
+               \DataTypeTok{ALEAF =} \StringTok{"A"}\NormalTok{, }\DataTypeTok{GS =} \StringTok{"GS"}\NormalTok{, }\DataTypeTok{VPD =} \StringTok{"VPD"}\NormalTok{,}
+               \DataTypeTok{Ca =}\StringTok{"CO2S"}\NormalTok{, }\DataTypeTok{RH =} \StringTok{"RH"}\NormalTok{), }
+               \DataTypeTok{gsmodel =} \StringTok{"BallBerry"}\NormalTok{, }\DataTypeTok{fitg0 =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## RH provided in % converted to relative units.
+## RH provided in % converted to relative units.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{coef}\NormalTok{(mod2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      group         g0         g1
+## 1 species1 0.32638852 -0.1734554
+## 2 species2 0.05158725 -0.0218842
+\end{verbatim}
+
+\cleardoublepage
+
+\chapter{光合最优气孔导度耦合模型}
+
+\citet{Cowan1977Stomatal} 关于最优气孔导度的描述概括如下：
+最优气孔行为理论认为气孔的最优化行为就是在某一时间段内，
+最大化光合碳固定的同时最小化蒸腾作用，也就是说，对于一定的水分消耗，最大化光合碳固定。即使得：
+
+\begin{equation}
+A - \lambda E
+\label{eq:weff}
+\end{equation}
+
+有最大化，其中 \(\lambda\) 是临界水分利用效率，也即植物损耗单位水分的 C
+生产量，单位一般为
+\(mol \: CO_2 \cdot mol^{-1} H_2O\)，可通过光合速率和蒸腾速率计算。
+
+\section{\texorpdfstring{\texttt{FARAO} 函数}{FARAO 函数}}\label{farao-}
+
+\texttt{FARAO} 函数用于找到最大化 \(A - \lambda E\) 的** Ci **值。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{FARAO}\NormalTok{(}\DataTypeTok{lambda =} \FloatTok{0.002}\NormalTok{, }\DataTypeTok{Ca =} \DecValTok{400}\NormalTok{, }\DataTypeTok{VPD =} \DecValTok{1}\NormalTok{,}
+      \DataTypeTok{photo =} \KeywordTok{c}\NormalTok{(}\StringTok{"BOTH"}\NormalTok{, }\StringTok{"VCMAX"}\NormalTok{,}\StringTok{"JMAX"}\NormalTok{), }
+      \DataTypeTok{energybalance =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{C4 =} \OtherTok{FALSE}\NormalTok{, }
+      \DataTypeTok{Tair =} \DecValTok{25}\NormalTok{, }\DataTypeTok{Wind =} \DecValTok{2}\NormalTok{, }\DataTypeTok{Wleaf =} \FloatTok{0.02}\NormalTok{,}
+      \DataTypeTok{StomatalRatio =} \DecValTok{1}\NormalTok{, }\DataTypeTok{LeafAbs =} \FloatTok{0.86}\NormalTok{, ...)}
+
+\KeywordTok{FARAO2}\NormalTok{(}\DataTypeTok{lambda =} \FloatTok{0.002}\NormalTok{, }\DataTypeTok{Ca =} \DecValTok{400}\NormalTok{, }
+       \DataTypeTok{energybalance =} \OtherTok{FALSE}\NormalTok{, ...)}
+\end{Highlighting}
+\end{Shaded}
+
+其参数同 \texttt{fitaci} 和
+\texttt{Photosyn}，在此不多做介绍，可参考\citep[\citet{Buckley2014Is},
+\citet{Medlyn2011Reconciling}]{Cowan1977Stomatal}。
+
+\cleardoublepage
+
+\chapter{光合气孔导度耦合模型}
+
+\citet{Duursma2015Plantecophys} 对于气体交换耦合模型的简述如下
+\footnote{详细内容请参考原文}：
+
+\begin{itemize}
+\tightlist
+\item
+  对于 FvCB 模型有：
+\end{itemize}
+
+\begin{equation}
+A_n = min(A_c, A_j)-R_d
+\label{eq:minfvcb}
+\end{equation}
+
+\begin{itemize}
+\tightlist
+\item
+  在假定 gm 为恒定的前提下：
+\end{itemize}
+
+\begin{equation}
+C_c = C_i - \frac{A_n}{g_m}
+\label{eq:cgm}
+\end{equation}
+
+\begin{itemize}
+\tightlist
+\item
+  根据 Ficker 定理
+\end{itemize}
+
+\begin{equation}
+A_n = \frac{g_s}{1.6}(C_a - C_i)
+\label{eq:ficker}
+\end{equation}
+
+以及前文 \ref{ballberry} 提到的气孔导度模型
+
+\begin{equation}
+g_s = g_0 + g_1 \frac{A_n}{C_a} f(D)
+\label{eq:driver}
+\end{equation}
+
+整合公式 \eqref{eq:minfvcb}, \eqref{eq:cgm}, \eqref{eq:ficker} 和
+\eqref{eq:driver}，气体交换耦合模型有很多更大尺度上的应用，例如
+\citet{Duursma2012MAESPA} 和 wang1998a，可用于预测 An，gs
+和蒸腾速率对主要环境驱动因子的响应（除土壤水分），并包含了主要的叶片性状（g1，V\textsubscript{cmax},
+J\textsubscript{max}, R\textsubscript{d} 以及他们的温度依赖性）。
+
+\section{\texorpdfstring{\texttt{Photosyn}
+函数}{Photosyn 函数}}\label{photosyn-}
+
+Photosyn 为耦合的光合--气孔导度模型，基于 Farquhar 光合模型和 Ball-Berry
+气孔导度模型。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{Photosyn}\NormalTok{(}\DataTypeTok{VPD =} \FloatTok{1.5}\NormalTok{, }\DataTypeTok{Ca =} \DecValTok{400}\NormalTok{, }\DataTypeTok{PPFD =} \DecValTok{1500}\NormalTok{,}
+         \DataTypeTok{Tleaf =} \DecValTok{25}\NormalTok{, }\DataTypeTok{Patm =} \DecValTok{100}\NormalTok{,}\DataTypeTok{RH =} \OtherTok{NULL}\NormalTok{,}
+         \DataTypeTok{gsmodel =} \KeywordTok{c}\NormalTok{(}\StringTok{"BBOpti"}\NormalTok{, }\StringTok{"BBLeuning"}\NormalTok{, }
+                     \StringTok{"BallBerry"}\NormalTok{, }\StringTok{"BBdefine"}\NormalTok{),}
+         \DataTypeTok{g1 =} \DecValTok{4}\NormalTok{, }\DataTypeTok{g0 =} \DecValTok{0}\NormalTok{, }\DataTypeTok{gk =} \FloatTok{0.5}\NormalTok{, }\DataTypeTok{vpdmin =} \FloatTok{0.5}\NormalTok{,}
+         \DataTypeTok{D0 =} \DecValTok{5}\NormalTok{, }\DataTypeTok{GS =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{BBmult =} \OtherTok{NULL}\NormalTok{, }
+         \DataTypeTok{alpha =} \FloatTok{0.24}\NormalTok{, }\DataTypeTok{theta =} \FloatTok{0.85}\NormalTok{, }\DataTypeTok{Jmax =} \DecValTok{100}\NormalTok{,}
+         \DataTypeTok{Vcmax =} \DecValTok{50}\NormalTok{, }\DataTypeTok{gmeso =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{TPU =} \DecValTok{1000}\NormalTok{, }
+         \DataTypeTok{alphag =} \DecValTok{0}\NormalTok{, }\DataTypeTok{Rd0 =} \FloatTok{0.92}\NormalTok{, }\DataTypeTok{Q10 =} \FloatTok{1.92}\NormalTok{,}
+         \DataTypeTok{Rd =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{TrefR =} \DecValTok{25}\NormalTok{, }\DataTypeTok{Rdayfrac =} \DecValTok{1}\NormalTok{, }
+         \DataTypeTok{EaV =} \FloatTok{82620.87}\NormalTok{, }\DataTypeTok{EdVC =} \DecValTok{0}\NormalTok{, }\DataTypeTok{delsC =} \FloatTok{645.1013}\NormalTok{, }
+         \DataTypeTok{EaJ =} \FloatTok{39676.89}\NormalTok{, }\DataTypeTok{EdVJ =} \FloatTok{2e+05}\NormalTok{, }\DataTypeTok{delsJ =} \FloatTok{641.3615}\NormalTok{,}
+         \DataTypeTok{GammaStar =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{Km =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{Ci =} \OtherTok{NULL}\NormalTok{, }
+         \DataTypeTok{Tcorrect =} \OtherTok{TRUE}\NormalTok{,}\DataTypeTok{returnParsOnly =} \OtherTok{FALSE}\NormalTok{,}
+         \DataTypeTok{whichA =} \KeywordTok{c}\NormalTok{(}\StringTok{"Ah"}\NormalTok{, }\StringTok{"Amin"}\NormalTok{, }\StringTok{"Ac"}\NormalTok{, }\StringTok{"Aj"}\NormalTok{))}
+
+\KeywordTok{Aci}\NormalTok{(Ci, ...)}
+\end{Highlighting}
+\end{Shaded}
+
+因为是光合气孔导度模型的耦合，故而参数与之前的函数相同，参见
+\ref{fitaci-p} 和 \ref{fitbb-p} 部分的内容。
+
+\subsection{\texorpdfstring{\texttt{Photosyn}
+使用举例}{Photosyn 使用举例}}\label{photosyn-}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(plantecophys)}
+\CommentTok{# 仅使用下面几个参数运行模型}
+\CommentTok{#（其他参数使用默认值）}
+\CommentTok{# 利用已测量或计算的参数}
+\KeywordTok{Photosyn}\NormalTok{(}\DataTypeTok{VPD=}\DecValTok{2}\NormalTok{, }\DataTypeTok{g1=}\DecValTok{4}\NormalTok{, }\DataTypeTok{Ca=}\DecValTok{500}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         Ci    ALEAF        GS    ELEAF       Ac       Aj   Ap   Rd VPD
+## 1 369.3981 14.19466 0.1706377 3.412753 15.12654 17.03685 1000 0.92   2
+##   Tleaf  Ca       Cc PPFD Patm
+## 1    25 500 369.3981 1500  100
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 部分参数相同，而某一参数或某几个参数不同时，}
+\CommentTok{# 可以将不同的参数设置为一个序列（vectors）}
+\NormalTok{r <-}\StringTok{ }\KeywordTok{Photosyn}\NormalTok{(}\DataTypeTok{VPD=}\KeywordTok{seq}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DataTypeTok{length=}\DecValTok{25}\NormalTok{), }
+              \DataTypeTok{Vcmax=}\DecValTok{50}\NormalTok{, }\DataTypeTok{Jmax=}\DecValTok{100}\NormalTok{)}
+\KeywordTok{with}\NormalTok{(r, }\KeywordTok{plot}\NormalTok{(VPD, ALEAF, }\DataTypeTok{type=}\StringTok{'l'}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown_files/figure-latex/vpd-1.pdf}
+\caption{\label{fig:vpd}VPD VS. An}
+\end{figure}
+
+不同 VPD 下的光合速率见 \ref{fig:vpd}。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 设定叶肉导度的拟合}
+\NormalTok{run1 <-}\StringTok{ }\KeywordTok{Photosyn}\NormalTok{(}\DataTypeTok{PPFD=}\KeywordTok{seq}\NormalTok{(}\DecValTok{50}\NormalTok{,}\DecValTok{1000}\NormalTok{,}\DataTypeTok{length=}\DecValTok{25}\NormalTok{), }
+                 \DataTypeTok{gmeso=}\FloatTok{0.15}\NormalTok{, }\DataTypeTok{Vcmax=}\DecValTok{40}\NormalTok{, }\DataTypeTok{Jmax=}\DecValTok{85}\NormalTok{)}
+\KeywordTok{with}\NormalTok{(run1, }\KeywordTok{plot}\NormalTok{(PPFD, GS, }\DataTypeTok{type=}\StringTok{'l'}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown_files/figure-latex/ppfd-1.pdf}
+\caption{\label{fig:ppfd}PPFD VS. GS}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 运行ACi曲线数据（提供Ci值而不是计算）}
+\NormalTok{arun1 <-}\StringTok{ }\KeywordTok{Aci}\NormalTok{(}\DataTypeTok{Ci=}\KeywordTok{seq}\NormalTok{(}\DecValTok{50}\NormalTok{, }\DecValTok{1200}\NormalTok{, }\DataTypeTok{length=}\DecValTok{101}\NormalTok{), }
+             \DataTypeTok{Vcmax=}\DecValTok{40}\NormalTok{, }\DataTypeTok{Jmax=}\DecValTok{85}\NormalTok{)}
+\NormalTok{arun2 <-}\StringTok{ }\KeywordTok{Aci}\NormalTok{(}\DataTypeTok{Ci=}\KeywordTok{seq}\NormalTok{(}\DecValTok{50}\NormalTok{, }\DecValTok{1200}\NormalTok{, }\DataTypeTok{length=}\DecValTok{101}\NormalTok{), }
+             \DataTypeTok{Vcmax=}\DecValTok{30}\NormalTok{, }\DataTypeTok{Jmax=}\DecValTok{70}\NormalTok{)}
+\KeywordTok{with}\NormalTok{(arun1, }\KeywordTok{plot}\NormalTok{(Ci, ALEAF, }\DataTypeTok{type=}\StringTok{'l'}\NormalTok{))}
+\KeywordTok{with}\NormalTok{(arun2, }\KeywordTok{points}\NormalTok{(Ci, ALEAF, }\DataTypeTok{type=}\StringTok{'l'}\NormalTok{, }\DataTypeTok{lty=}\DecValTok{5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown_files/figure-latex/ppfd-2.pdf}
+\caption{\label{fig:ppfd}PPFD VS. GS}
+\end{figure}
+
+不同 ci 下的光合速率见 \ref{fig:ppfd}。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 找出CO2需求和供给的交叉点}
+\CommentTok{# 设定部分参数}
+\NormalTok{gs <-}\StringTok{ }\FloatTok{0.2} \CommentTok{# 对水的气孔导度}
+\NormalTok{Ca <-}\StringTok{ }\DecValTok{400} \CommentTok{# 外部CO2}
+\NormalTok{gctogw <-}\StringTok{ }\FloatTok{1.57} \CommentTok{# 转换系数}
+\NormalTok{gc <-}\StringTok{ }\NormalTok{gs }\OperatorTok{/}\StringTok{ }\NormalTok{gctogw }\CommentTok{# 对 CO2 的气孔导度}
+\CommentTok{# 需求曲线}
+\NormalTok{p <-}\StringTok{ }\KeywordTok{Aci}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{60}\NormalTok{,}\DecValTok{500}\NormalTok{,}\DataTypeTok{length=}\DecValTok{101}\NormalTok{), }\DataTypeTok{Ca=}\DecValTok{400}\NormalTok{)}
+\CommentTok{# 提供气孔导度及交叉点}
+\NormalTok{g <-}\StringTok{ }\KeywordTok{Photosyn}\NormalTok{(}\DataTypeTok{GS=}\NormalTok{gs, }\DataTypeTok{Ca=}\NormalTok{Ca)}
+\CommentTok{# 交叉点可视化}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{yaxs=}\StringTok{"i"}\NormalTok{)}
+\KeywordTok{with}\NormalTok{(p, }\KeywordTok{plot}\NormalTok{(Ci, ALEAF, }\DataTypeTok{type=}\StringTok{'l'}\NormalTok{, }
+             \DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\KeywordTok{max}\NormalTok{(ALEAF))))}
+\KeywordTok{with}\NormalTok{(g, }\KeywordTok{points}\NormalTok{(Ci, ALEAF, }\DataTypeTok{pch=}\DecValTok{19}\NormalTok{, }\DataTypeTok{col=}\StringTok{"red"}\NormalTok{))}
+\KeywordTok{abline}\NormalTok{(gc }\OperatorTok{*}\StringTok{ }\NormalTok{Ca, }\OperatorTok{-}\NormalTok{gc, }\DataTypeTok{lty=}\DecValTok{5}\NormalTok{)}
+\KeywordTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\KeywordTok{expression}\NormalTok{(}
+  \StringTok{"Demand:"}\OperatorTok{~}\ErrorTok{~}\NormalTok{A}\OperatorTok{==}\KeywordTok{f}\NormalTok{(C[i])),}
+   \KeywordTok{expression}\NormalTok{(}\StringTok{"Supply:"}\OperatorTok{~}\ErrorTok{~}\NormalTok{A}\OperatorTok{==}\NormalTok{g[c]}\OperatorTok{*}\NormalTok{(C[a]}\OperatorTok{-}\NormalTok{C[i])),}
+              \StringTok{"Operating point"}\NormalTok{),}
+   \DataTypeTok{lty=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{5}\NormalTok{,}\OperatorTok{-}\DecValTok{1}\NormalTok{),}\DataTypeTok{pch=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{1}\NormalTok{,}\OperatorTok{-}\DecValTok{1}\NormalTok{,}\DecValTok{19}\NormalTok{),}
+   \DataTypeTok{col=}\KeywordTok{c}\NormalTok{(}\StringTok{"black"}\NormalTok{,}\StringTok{"black"}\NormalTok{,}\StringTok{"red"}\NormalTok{),}
+   \DataTypeTok{bty=}\StringTok{'n'}\NormalTok{, }\DataTypeTok{cex=}\FloatTok{0.9}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown_files/figure-latex/supply-1.pdf}
+\caption{\label{fig:supply}supply VS. demand}
+\end{figure}
+
+需求与供给的作图 \ref{fig:supply}。
+
+\section{\texorpdfstring{\texttt{PhotosynEB}
+函数}{PhotosynEB 函数}}\label{photosyneb-}
+
+使用同 \texttt{Photosyn}，只不过使用能量平衡法来计算叶温。
+目前版本尚存在bug，不能直接提供 GS 来计算，否则会出现未知错误。
+
+\section{\texorpdfstring{\texttt{PhotosynTuzet}
+函数}{PhotosynTuzet 函数}}\label{photosyntuzet-}
+
+同样为光合气孔导度耦合模型，只不过基于 \citet{tuzet2003a}
+的气孔导度模型，现将其描述如下：
+
+\begin{equation}
+g_{co2} = g_0 + \frac{a A}{C_i - \Gamma} f_{\Psi v}
+\label{eq:tuzet}
+\end{equation}
+
+其中 g\textsubscript{co2} 为对 CO\textsubscript{2} 的气孔导度，
+g\textsubscript{0} 是残余导度（residual conductance）(在补偿点时限制
+g\textsubscript{CO2} 的值）， A 为光合速率，C\textsubscript{i}
+为胞间二氧化碳浓度，\(\Gamma\) 为 CO\textsubscript{2} 补偿点，a
+是经验系数。
+
+一个根据经验的逻辑方程用于描述气孔对水势的敏感性：
+
+\begin{equation}
+f_{\Psi v} = \frac{1 + exp(s_f \Psi_f)}{1 + exp(s_f(\Psi_f - \Psi_v))}
+\label{eq:ftuzet}
+\end{equation}
+
+\(\Psi_v\) 是指叶片水势，\(\Psi_f\) 是参比势能， 该方程假设在水势接近于
+0 时，气孔对叶片水势不敏感，并且气孔随着 \(\Psi_v\)
+的下降快速关闭。\(\Psi_f\) 和 \(s_f\) (曲线形状参数)
+依赖于不同物种的形态学适应以及生长过程中所处的环境。
+
+\subsection{\texorpdfstring{\texttt{PhotosynTuzet}
+的参数}{PhotosynTuzet 的参数}}\label{photosyntuzet-}
+
+除 \citet{tuzet2003a} 模型中使用的参数外，其他参数都继承了
+\texttt{Photosyn} 的参数
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{PhotosynTuzet}\NormalTok{(}\DataTypeTok{g1 =} \DecValTok{8}\NormalTok{, }\DataTypeTok{Ca =} \DecValTok{400}\NormalTok{, }\DataTypeTok{psis =} \DecValTok{0}\NormalTok{,}
+              \DataTypeTok{kl =} \DecValTok{2}\NormalTok{, }\DataTypeTok{sf =} \DecValTok{3}\NormalTok{, }\DataTypeTok{psif =} \OperatorTok{-}\DecValTok{2}\NormalTok{,}
+\NormalTok{...)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  g1：斜率参数，要远比 \texttt{fitBB} 中的大。
+\item
+  Ca：外界大气 CO\textsubscript{2} 浓度
+\item
+  psis，土壤水势（Mpa）。
+\item
+  kl：Leaf-speciﬁc hydraulic conductance（叶片导水参数
+  (\(mmol \cdot m^{-2} \cdot s^{-1} \cdot MPa^{-1}\))，叶片蒸腾量、叶片面积及叶片水势计算）。
+\item
+  sf：曲线形状参数。
+\item
+  在气孔导度为最大值 50\% 时的叶片水势。
+\end{itemize}
+
+\cleardoublepage
+
+\chapter{RHtoVPD 函数}\label{rhtovpd-}
+
+该函数为一系列的工具，用于温度、湿度不同单位之间的换算
+\citet{Jones1993Plants} ：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# RH 转为 VPD  }
+\KeywordTok{RHtoVPD}\NormalTok{(RH, TdegC, }\DataTypeTok{Pa =} \DecValTok{101}\NormalTok{) }
+ 
+\CommentTok{# VPD 转为 RH   }
+\KeywordTok{VPDtoRH}\NormalTok{(VPD, TdegC, }\DataTypeTok{Pa =} \DecValTok{101}\NormalTok{) }
+ 
+\CommentTok{#  饱和水气压计算 }
+\KeywordTok{esat}\NormalTok{(TdegC, }\DataTypeTok{Pa =} \DecValTok{101}\NormalTok{) }
+ 
+\CommentTok{#  露点温度转换为VPD }
+\KeywordTok{DewtoVPD}\NormalTok{(Tdew, TdegC, }\DataTypeTok{Pa =} \DecValTok{101}\NormalTok{) }
+ 
+\CommentTok{#  基于叶温的 VPD 转换为基于空气温度的 VPD}
+\KeywordTok{VPDleafToAir}\NormalTok{(VPD, Tleaf, Tair, }\DataTypeTok{Pa =} \DecValTok{101}\NormalTok{) }
+ 
+\CommentTok{#  基于空气温度的 VPD 转换为基于叶温的 VPD }
+\KeywordTok{VPDairToLeaf}\NormalTok{(VPD, Tair, Tleaf, }\DataTypeTok{Pa =} \DecValTok{101}\NormalTok{) }
+ 
+\CommentTok{#  基于叶温的相对湿度转换为基于空气温度的相对湿度  }
+\KeywordTok{RHleafToAir}\NormalTok{(RH, Tleaf, Tair, }\DataTypeTok{Pa =} \DecValTok{101}\NormalTok{) }
+ 
+\CommentTok{#  基于空气温度的相对湿度转换为基于叶温的相对湿度  }
+\KeywordTok{RHairToLeaf}\NormalTok{(RH, Tair, Tleaf, }\DataTypeTok{Pa =} \DecValTok{101}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+注意事项及单位：
+
+部分参数的转换需要准确的大气压用于计算，因此，有大气压选项的参数必须填入实际值。
+
+RH：相对湿度 (\%) 。
+
+TdegC：温度 (\textcelsius) (叶片或温度)。
+
+Pa：大气压 (kPa)
+
+VPD：水气压亏缺 (kPa)。
+
+Tdew： 露点温度(\textcelsius) 。
+
+Tleaf：叶温(\textcelsius) 。
+
+Tair：空气温度(\textcelsius) 。
+
+\cleardoublepage
+
+\chapter{光响应曲线的拟合}
+
+光响应曲线模型有很多，主要分为四大类，直角双曲线，非直角双曲线，指数以及直角双曲线修正模型，我们分别对这四类进行阐述。
+
+\section{直角双曲线模型}
+
+\citet{BalyEC1935} 提出了直角双曲线模型，它的表达式为：
+
+\begin{equation}
+P_{n}  = \frac{\alpha I\ P_{nmax}}{\alpha I + P_{nmax}}- R_{d}
+\label{eq:rec}
+\end{equation}
+
+\begin{itemize}
+\tightlist
+\item
+  其中，P\(_{n}\) 为净光合速率；
+\item
+  \textsl{I} 为光强；
+\item
+  \(\text{\ensuremath{\alpha}}\)
+  为光响应曲线在光强为0时的斜率，即光响应曲线的初始斜率，也称之为初始量子效率；
+\item
+  P\(_{nmax}\) 为最大净光合速率；
+\item
+  R\(_{d}\)：为暗呼吸速率。
+\end{itemize}
+
+对 \eqref{eq:rec} 求导可知其导数大于
+0，也就是直角双曲线是一个没有极值的渐近线，因此，无法由 \eqref{eq:rec}
+求得最大光合速率的饱和光强\footnote{直角双曲线和非直角双曲线模型类似，如果测量时饱和光强之后光合速率不下降，则计算的P\(_{nmax}\)则远大于实测值。}。
+
+因此就需要使用弱光条件下 (\(\leq\) 200
+\(\mu mol\cdot m^{-2}\cdot s^{-1}\)) 的数据得到表观量子效率（apparent
+quantum efficiency，AQE），利用非线性最小二乘法估算 P\(_{nmax}\)
+，然后利用 \citet{YEZiPiao2010} 的式 \eqref{eq:aqe} 求解 \(I_{sat}\)，
+
+\begin{equation}
+P_{nmax}= AQE \times I_{sat} - R_{d}
+\label{eq:aqe}
+\end{equation}
+
+但此方法测得的光饱和点远小于实测值，我们采用 0.7P\(_{nmax}\)
+\citet{ZhangXS2009}、0.9P\(_{nmax}\)
+\citet{HuangHY2009}、或其他设定的值来的来估算\(I_{sat}\)。
+
+\subsection{直角双曲线模型的实现}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 调用非线性拟合包minpack.lm，也可以直接使用nls}
+\KeywordTok{library}\NormalTok{(minpack.lm)}
+\CommentTok{# 读取数据，同fitaci数据格式}
+\NormalTok{lrc <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"./data/lrc.csv"}\NormalTok{)}
+\NormalTok{lrc <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(lrc, Obs }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{)}
+
+\CommentTok{# 光响应曲线没有太多参数，}
+\CommentTok{# 直接调出相应的光强和光合速率}
+\CommentTok{# 方便后面调用}
+\NormalTok{lrc_Q <-}\StringTok{ }\NormalTok{lrc}\OperatorTok{$}\NormalTok{PARi}
+\NormalTok{lrc_A <-}\StringTok{ }\NormalTok{lrc}\OperatorTok{$}\NormalTok{Photo }
+
+\CommentTok{# 采用非线性拟合进行数据的拟合}
+\NormalTok{lrcnls <-}\StringTok{ }\KeywordTok{nlsLM}\NormalTok{(lrc_A }\OperatorTok{~}\StringTok{ }\NormalTok{(alpha }\OperatorTok{*}\StringTok{ }\NormalTok{lrc_Q }\OperatorTok{*}\StringTok{ }\NormalTok{Am) }\OperatorTok{*}\StringTok{ }
+\StringTok{                }\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{(alpha }\OperatorTok{*}\StringTok{ }\NormalTok{lrc_Q }\OperatorTok{+}\StringTok{ }\NormalTok{Am)) }\OperatorTok{-}\StringTok{ }\NormalTok{Rd,  }
+              \DataTypeTok{start=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{Am=}\NormalTok{(}\KeywordTok{max}\NormalTok{(lrc_A)}\OperatorTok{-}\KeywordTok{min}\NormalTok{(lrc_A)),}
+              \DataTypeTok{alpha=}\FloatTok{0.05}\NormalTok{,}\DataTypeTok{Rd=}\OperatorTok{-}\KeywordTok{min}\NormalTok{(lrc_A))}
+\NormalTok{)}
+\NormalTok{fitlrc_rec <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(lrcnls)}
+
+\CommentTok{# 补偿点时净光合速率为0，}
+\CommentTok{# 据此利用uniroot求解方程的根}
+\NormalTok{Ic <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(Ic)\{(fitlrc_rec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OperatorTok{*}\StringTok{ }\NormalTok{Ic }\OperatorTok{*}
+\StringTok{    }\NormalTok{fitlrc_rec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]) }\OperatorTok{*}\StringTok{ }\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{(fitlrc_rec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OperatorTok{*}\StringTok{ }
+\StringTok{    }\NormalTok{Ic }\OperatorTok{+}\StringTok{ }\NormalTok{fitlrc_rec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{])) }\OperatorTok{-}\StringTok{ }\NormalTok{fitlrc_rec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{] }
+\NormalTok{\}}
+
+\KeywordTok{uniroot}\NormalTok{(Ic, }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{50}\NormalTok{))}\OperatorTok{$}\NormalTok{root}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3.650053
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 根据饱和点定义，0.75最大光合速率为饱和点，}
+\CommentTok{# 也可以是其他比例}
+\CommentTok{# 据此利用uniroot求解方程的根}
+
+\NormalTok{Isat <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(Isat)\{(fitlrc_rec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OperatorTok{*}\StringTok{ }
+\StringTok{        }\NormalTok{Isat }\OperatorTok{*}\StringTok{ }\NormalTok{fitlrc_rec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]) }\OperatorTok{*}\StringTok{ }
+\StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{(fitlrc_rec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OperatorTok{*}\StringTok{ }\NormalTok{Isat }\OperatorTok{+}\StringTok{ }
+\StringTok{          }\NormalTok{fitlrc_rec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{])) }\OperatorTok{-}\StringTok{ }\NormalTok{fitlrc_rec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OperatorTok{-}
+\StringTok{    }\FloatTok{0.75} \OperatorTok{*}\StringTok{ }\NormalTok{fitlrc_rec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]}
+\NormalTok{\}}
+\CommentTok{# 求值区间根据具体实验确定}
+
+\KeywordTok{uniroot}\NormalTok{(Isat, }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{2500}\NormalTok{))}\OperatorTok{$}\NormalTok{root}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 700.0946
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 使用ggplot2进行作图并拟合曲线}
+\KeywordTok{library}\NormalTok{(ggplot2)}
+
+\NormalTok{light <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{lrc_Q =}\NormalTok{ lrc}\OperatorTok{$}\NormalTok{PARi, }\DataTypeTok{lrc_A =}\NormalTok{ lrc}\OperatorTok{$}\NormalTok{Photo)}
+
+\NormalTok{p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(light, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ lrc_Q, }\DataTypeTok{y =}\NormalTok{ lrc_A))}
+
+\NormalTok{p1 <-}\StringTok{ }\NormalTok{p }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{shape =} \DecValTok{16}\NormalTok{, }\DataTypeTok{size =} \DecValTok{3}\NormalTok{, }\DataTypeTok{color =} \StringTok{"green"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method=}\StringTok{"nls"}\NormalTok{, }\DataTypeTok{formula =}\NormalTok{ y }\OperatorTok{~}\StringTok{ }\NormalTok{(alpha }\OperatorTok{*}\StringTok{ }\NormalTok{x }\OperatorTok{*}\StringTok{ }\NormalTok{Am) }\OperatorTok{*}\StringTok{ }
+\StringTok{  }\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{(alpha }\OperatorTok{*}\StringTok{ }\NormalTok{x }\OperatorTok{+}\StringTok{ }\NormalTok{Am)) }\OperatorTok{-}\StringTok{ }\NormalTok{Rd, }\DataTypeTok{se =} \OtherTok{FALSE}\NormalTok{,}
+  \DataTypeTok{method.args =} 
+  \KeywordTok{list}\NormalTok{(}\DataTypeTok{start =} \KeywordTok{c}\NormalTok{(}\DataTypeTok{Am=}\NormalTok{(}\KeywordTok{max}\NormalTok{(lrc_A)}\OperatorTok{-}\KeywordTok{min}\NormalTok{(lrc_A)),}
+  \DataTypeTok{alpha=}\FloatTok{0.05}\NormalTok{,}\DataTypeTok{Rd=}\OperatorTok{-}\KeywordTok{min}\NormalTok{(lrc_A)), }
+  \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{lrc_Q, }\DataTypeTok{y =}\NormalTok{ lrc_A, }\DataTypeTok{color=}\StringTok{'blue'}\NormalTok{, }\DataTypeTok{size =} \FloatTok{1.2}\NormalTok{))}
+\NormalTok{  ) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{y=}\KeywordTok{expression}\NormalTok{(}\KeywordTok{paste}\NormalTok{(}\StringTok{"photosynthetic rate  "}\NormalTok{, }
+       \StringTok{"("}\NormalTok{, mu, mol}\OperatorTok{%.%}\NormalTok{m}\OperatorTok{^-}\DecValTok{2}\OperatorTok{%.%}\NormalTok{s}\OperatorTok{^-}\DecValTok{1}\NormalTok{, }\StringTok{")"}\NormalTok{)), }
+       \DataTypeTok{x=}\KeywordTok{expression}\NormalTok{(}\KeywordTok{paste}\NormalTok{(}\StringTok{"PAR "}\NormalTok{, }
+       \StringTok{"("}\NormalTok{, mu, mol}\OperatorTok{%.%}\NormalTok{m}\OperatorTok{^-}\DecValTok{2}\OperatorTok{%.%}\NormalTok{s}\OperatorTok{^-}\DecValTok{1}\NormalTok{, }\StringTok{")"}\NormalTok{))}
+\NormalTok{       )}
+
+
+\CommentTok{# 自定义坐标轴}
+\NormalTok{p1 }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{2100}\NormalTok{, }\DataTypeTok{by =} \DecValTok{200}\NormalTok{)) }\OperatorTok{+}\StringTok{  }
+\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{breaks=} \KeywordTok{round}\NormalTok{(light}\OperatorTok{$}\NormalTok{lrc_A)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x  =} \KeywordTok{element_text}\NormalTok{(}
+    \DataTypeTok{size =} \DecValTok{10}\NormalTok{, }\DataTypeTok{angle=}\DecValTok{30}\NormalTok{, }\DataTypeTok{vjust=}\FloatTok{0.5}\NormalTok{), }
+    \DataTypeTok{axis.text.y =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{10}\NormalTok{),}
+    \DataTypeTok{axis.title.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{12}\NormalTok{, }\DataTypeTok{face =} \StringTok{'bold'}\NormalTok{),}
+    \DataTypeTok{axis.title.y =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{12}\NormalTok{, }\DataTypeTok{face =} \StringTok{'bold'}\NormalTok{)}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown_files/figure-latex/recr-1.pdf}
+\caption{\label{fig:recr}直角双曲线模型拟合}
+\end{figure}
+
+代码目的见注释，其实现过程主要分三步：
+
+\begin{itemize}
+\tightlist
+\item
+  数据的导入，这与之前相同，具体格式方法参考前文 \ref{fitaci}。
+\item
+  光响应曲线的拟合，使用到了非线性模型 nlsLM，也可以使用
+  nls，具体实现方法请查看参考文档。
+\item
+  求饱和点和补偿点，补偿点的计算根据其定义，净光合速率为
+  0，求解模型在一定区间的根来计算，而饱和点则较为麻烦，若使用式
+  \eqref{eq:aqe} 计算，那么饱和点远远低于我们实际需求的，因此，我们使用了
+  0.75P\(_{nmax}\)
+  来计算，求得目标区间的根。当然也可以采用其他比例来作为饱和点光合速率。
+\end{itemize}
+
+\begin{table}
+
+\caption{\label{tab:rectable}直角双曲线计算参数}
+\centering
+\begin{tabular}[t]{lrrrr}
+\toprule
+  & Estimate & Std. Error & t value & Pr(>|t|)\\
+\midrule
+Am & 16.6721752 & 0.1522849 & 109.480151 & 0.0000000\\
+alpha & 0.0783312 & 0.0026774 & 29.256870 & 0.0000000\\
+Rd & 0.2810926 & 0.0789338 & 3.561117 & 0.0051716\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+最终的数据拟结果如图 \ref{fig:recr} 所示，拟合的参数及结果见表
+\ref{tab:rectable}。
+
+\cleardoublepage
+
+\section{非直角双曲线模型}
+
+\citet{Thornley1976} 提出了非直角双曲线模型，它的表达式为：
+
+\begin{equation}
+P_{n} = \frac{\alpha I + P_{nmax} \sqrt{(\alpha I + P_{nmax})^{2} - 4  \theta \alpha I P_{nmax}}}{2 \theta} - R_{d}
+\label{eq:nrec}
+\end{equation}
+
+其中，\(\text{\ensuremath{\theta}}\)
+为表示曲线弯曲程度的曲角参数，取值为\(0\leq \theta \leq 1\)。其他参数意义同式
+\eqref{eq:rec}。同样如同直角双曲线模型，式仍然没有极值，无法求得
+\(I_{sat}\)，可以仍然参考直角双曲线模型的方式进行计算。
+
+\subsection{非直角双曲线模型的实现}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(minpack.lm)}
+
+\CommentTok{# 读取数据，同fitaci数据格式}
+\NormalTok{lrc <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"./data/lrc.csv"}\NormalTok{)}
+\NormalTok{lrc <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(lrc, Obs }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{)}
+
+\CommentTok{# 光响应曲线没有太多参数，}
+\CommentTok{# 直接调出相应的光强和光合速率}
+\CommentTok{# 方便后面调用}
+\NormalTok{lrc_Q <-}\StringTok{ }\NormalTok{lrc}\OperatorTok{$}\NormalTok{PARi}
+\NormalTok{lrc_A <-}\StringTok{ }\NormalTok{lrc}\OperatorTok{$}\NormalTok{Photo }
+
+\CommentTok{# 非直角双曲线模型的拟合}
+\NormalTok{lrcnls <-}\StringTok{ }\KeywordTok{nlsLM}\NormalTok{(lrc_A }\OperatorTok{~}\StringTok{ }
+\StringTok{                }\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{(}\DecValTok{2}\OperatorTok{*}\NormalTok{theta))}\OperatorTok{*}
+\StringTok{                }\NormalTok{(alpha}\OperatorTok{*}\NormalTok{lrc_Q}\OperatorTok{+}\NormalTok{Am}\OperatorTok{-}\KeywordTok{sqrt}\NormalTok{((alpha}\OperatorTok{*}\NormalTok{lrc_Q}\OperatorTok{+}\NormalTok{Am)}\OperatorTok{^}\DecValTok{2} \OperatorTok{-}\StringTok{ }
+\StringTok{                }\DecValTok{4}\OperatorTok{*}\NormalTok{alpha}\OperatorTok{*}\NormalTok{theta}\OperatorTok{*}\NormalTok{Am}\OperatorTok{*}\NormalTok{lrc_Q))}\OperatorTok{-}\StringTok{ }\NormalTok{Rd,}
+                \DataTypeTok{start=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{Am=}\NormalTok{(}\KeywordTok{max}\NormalTok{(lrc_A)}\OperatorTok{-}\KeywordTok{min}\NormalTok{(lrc_A)),}
+                \DataTypeTok{alpha=}\FloatTok{0.05}\NormalTok{,}\DataTypeTok{Rd=}\OperatorTok{-}\KeywordTok{min}\NormalTok{(lrc_A),}\DataTypeTok{theta=}\DecValTok{1}\NormalTok{)) }
+
+\NormalTok{fitlrc_nrec <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(lrcnls)}
+
+\CommentTok{# 光补偿点}
+\NormalTok{Ic <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(Ic)\{}
+\NormalTok{  (}\DecValTok{1}\OperatorTok{/}\NormalTok{(}\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{fitlrc_nrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{])) }\OperatorTok{*}\StringTok{ }
+\StringTok{    }\NormalTok{(fitlrc_nrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OperatorTok{*}\StringTok{ }\NormalTok{Ic }\OperatorTok{+}\StringTok{ }\NormalTok{fitlrc_nrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OperatorTok{-}\StringTok{ }
+\StringTok{    }\KeywordTok{sqrt}\NormalTok{((fitlrc_nrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OperatorTok{*}\StringTok{ }\NormalTok{Ic }\OperatorTok{+}\StringTok{ }\NormalTok{fitlrc_nrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]}
+\NormalTok{    )}\OperatorTok{^}\DecValTok{2} \OperatorTok{-}\StringTok{  }\DecValTok{4} \OperatorTok{*}\StringTok{ }\NormalTok{fitlrc_nrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OperatorTok{*}\StringTok{ }
+\StringTok{    }\NormalTok{fitlrc_nrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OperatorTok{*}\StringTok{ }\NormalTok{fitlrc_nrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OperatorTok{*}\StringTok{ }\NormalTok{Ic)) }\OperatorTok{-}
+\StringTok{    }\NormalTok{fitlrc_nrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{]}
+\NormalTok{\}}
+
+\KeywordTok{uniroot}\NormalTok{(Ic, }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{50}\NormalTok{))}\OperatorTok{$}\NormalTok{root  }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.234292
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 光饱和点}
+\NormalTok{Isat <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(Isat)\{}
+\NormalTok{  (}\DecValTok{1}\OperatorTok{/}\NormalTok{(}\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{fitlrc_nrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{])) }\OperatorTok{*}\StringTok{ }\NormalTok{(fitlrc_nrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OperatorTok{*}\StringTok{ }
+\StringTok{  }\NormalTok{Isat }\OperatorTok{+}\StringTok{ }\NormalTok{fitlrc_nrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OperatorTok{-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}
+\NormalTok{  (fitlrc_nrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OperatorTok{*}\StringTok{ }\NormalTok{Isat }\OperatorTok{+}\NormalTok{fitlrc_nrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{])}\OperatorTok{^}\DecValTok{2} \OperatorTok{-}\StringTok{ }
+\StringTok{  }\DecValTok{4}\OperatorTok{*}\NormalTok{fitlrc_nrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OperatorTok{*}\StringTok{ }\NormalTok{fitlrc_nrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OperatorTok{*}\StringTok{ }
+\StringTok{  }\NormalTok{fitlrc_nrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OperatorTok{*}\StringTok{ }\NormalTok{Isat)) }\OperatorTok{-}\StringTok{ }
+\StringTok{  }\NormalTok{fitlrc_nrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OperatorTok{-}\StringTok{ }\NormalTok{(}\FloatTok{0.9}\OperatorTok{*}\NormalTok{fitlrc_nrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{])\}}
+
+\KeywordTok{uniroot}\NormalTok{(Isat, }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{2000}\NormalTok{))}\OperatorTok{$}\NormalTok{root}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1596.286
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 使用ggplot2进行作图并拟合曲线}
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\NormalTok{light <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{lrc_Q =}\NormalTok{ lrc}\OperatorTok{$}\NormalTok{PARi, }\DataTypeTok{lrc_A =}\NormalTok{ lrc}\OperatorTok{$}\NormalTok{Photo)}
+
+\NormalTok{p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(light, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ lrc_Q, }\DataTypeTok{y =}\NormalTok{ lrc_A))}
+
+\NormalTok{p1 <-}\StringTok{ }\NormalTok{p }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{shape =} \DecValTok{16}\NormalTok{, }\DataTypeTok{size =} \DecValTok{3}\NormalTok{, }\DataTypeTok{color =} \StringTok{"green"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method=}\StringTok{"nls"}\NormalTok{, }\DataTypeTok{formula =}\NormalTok{ y }\OperatorTok{~}\StringTok{ }
+\StringTok{  }\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{(}\DecValTok{2}\OperatorTok{*}\NormalTok{theta))}\OperatorTok{*}\NormalTok{(alpha}\OperatorTok{*}\NormalTok{x}\OperatorTok{+}\NormalTok{Am}\OperatorTok{-}\KeywordTok{sqrt}\NormalTok{((alpha}\OperatorTok{*}\NormalTok{x}\OperatorTok{+}\NormalTok{Am)}\OperatorTok{^}\DecValTok{2} \OperatorTok{-}\StringTok{ }
+\StringTok{   }\DecValTok{4}\OperatorTok{*}\NormalTok{alpha}\OperatorTok{*}\NormalTok{theta}\OperatorTok{*}\NormalTok{Am}\OperatorTok{*}\NormalTok{x))}\OperatorTok{-}\StringTok{ }\NormalTok{Rd, }\DataTypeTok{se =} \OtherTok{FALSE}\NormalTok{,}
+   \DataTypeTok{method.args =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{start =} \KeywordTok{c}\NormalTok{(}\DataTypeTok{Am=}\NormalTok{(}\KeywordTok{max}\NormalTok{(lrc_A)}\OperatorTok{-}\KeywordTok{min}\NormalTok{(lrc_A)), }
+   \DataTypeTok{alpha=}\FloatTok{0.05}\NormalTok{, }\DataTypeTok{Rd=}\OperatorTok{-}\KeywordTok{min}\NormalTok{(lrc_A), }\DataTypeTok{theta=}\DecValTok{1}\NormalTok{), }
+    \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{lrc_Q, }\DataTypeTok{y =}\NormalTok{ lrc_A, }\DataTypeTok{color=}\StringTok{'blue'}\NormalTok{, }\DataTypeTok{size =} \FloatTok{1.2}\NormalTok{))}
+\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{y=}\KeywordTok{expression}\NormalTok{(}\KeywordTok{paste}\NormalTok{(}\StringTok{"photosynthetic rate  "}\NormalTok{, }
+          \StringTok{"("}\NormalTok{, mu, mol}\OperatorTok{%.%}\NormalTok{m}\OperatorTok{^-}\DecValTok{2}\OperatorTok{%.%}\NormalTok{s}\OperatorTok{^-}\DecValTok{1}\NormalTok{, }\StringTok{")"}\NormalTok{)), }
+       \DataTypeTok{x=}\KeywordTok{expression}\NormalTok{(}\KeywordTok{paste}\NormalTok{(}\StringTok{"PAR "}\NormalTok{, }
+           \StringTok{"("}\NormalTok{, mu, mol}\OperatorTok{%.%}\NormalTok{m}\OperatorTok{^-}\DecValTok{2}\OperatorTok{%.%}\NormalTok{s}\OperatorTok{^-}\DecValTok{1}\NormalTok{, }\StringTok{")"}\NormalTok{)))}
+
+\CommentTok{# 自定义坐标轴}
+\NormalTok{p1 }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{2100}\NormalTok{, }\DataTypeTok{by =} \DecValTok{200}\NormalTok{)) }\OperatorTok{+}\StringTok{  }
+\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{breaks=} \KeywordTok{round}\NormalTok{(light}\OperatorTok{$}\NormalTok{lrc_A)) }\OperatorTok{+}
+\StringTok{   }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x  =} \KeywordTok{element_text}\NormalTok{(}
+    \DataTypeTok{size =} \DecValTok{10}\NormalTok{, }\DataTypeTok{angle=}\DecValTok{30}\NormalTok{, }\DataTypeTok{vjust=}\FloatTok{0.5}\NormalTok{), }
+    \DataTypeTok{axis.text.y =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{10}\NormalTok{),}
+    \DataTypeTok{axis.title.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{12}\NormalTok{, }\DataTypeTok{face =} \StringTok{'bold'}\NormalTok{),}
+    \DataTypeTok{axis.title.y =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{12}\NormalTok{, }\DataTypeTok{face =} \StringTok{'bold'}\NormalTok{)}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown_files/figure-latex/nrecr-1.pdf}
+\caption{\label{fig:nrecr}非直角双曲线模型拟合}
+\end{figure}
+
+\begin{table}
+
+\caption{\label{tab:nrectable}非直角双曲线计算参数}
+\centering
+\begin{tabular}[t]{lrrrr}
+\toprule
+  & Estimate & Std. Error & t value & Pr(>|t|)\\
+\midrule
+Am & 15.8017296 & 0.1513064 & 104.435285 & 0.0000000\\
+alpha & 0.0658067 & 0.0020216 & 32.551422 & 0.0000000\\
+Rd & 0.1461717 & 0.0420800 & 3.473659 & 0.0070082\\
+theta & 0.3700908 & 0.0493403 & 7.500783 & 0.0000369\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+最终的数据拟结果如图 \ref{fig:nrecr} 所示，拟合的参数及结果见表
+\ref{tab:nrectable}。单纯从作图来看，本例数据使用非直角双曲线与散点图重合程度更高。
+
+\cleardoublepage
+
+\section{指数模型}
+
+光合指数模型较多，我们此处使用的指数函数的模型
+\citet{Prado1997Photosynthetic}，其表达式为：
+
+\begin{equation}
+P_{n} = P_{nmax}[1 - e^{-b(I-I_{C})}]
+\label{eq:exp}
+\end{equation}
+
+其中，\(I_{c}\) 为光补偿点，\(e\)
+为自然对数的底，b为常数，其他参数意义同
+\eqref{eq:exp}。同样，该方程仍然是没有极值的函数，但我们可以直接求得光补偿点。
+
+\subsection{指数模型的实现}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(minpack.lm)}
+
+\CommentTok{# 读取数据，同fitaci数据格式}
+\NormalTok{lrc <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"./data/lrc.csv"}\NormalTok{)}
+\NormalTok{lrc <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(lrc, Obs }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{)}
+
+\CommentTok{# 光响应曲线没有太多参数，}
+\CommentTok{# 直接调出相应的光强和光合速率}
+\CommentTok{# 方便后面调用}
+\NormalTok{lrc_Q <-}\StringTok{ }\NormalTok{lrc}\OperatorTok{$}\NormalTok{PARi}
+\NormalTok{lrc_A <-}\StringTok{ }\NormalTok{lrc}\OperatorTok{$}\NormalTok{Photo }
+
+\CommentTok{# 模型的拟合}
+\NormalTok{lrcnls <-}\StringTok{ }\KeywordTok{nlsLM}\NormalTok{(lrc_A }\OperatorTok{~}\StringTok{ }\NormalTok{Am}\OperatorTok{*}\NormalTok{(}\DecValTok{1}\OperatorTok{-}\KeywordTok{exp}\NormalTok{((}\OperatorTok{-}\NormalTok{b)}\OperatorTok{*}\NormalTok{(lrc_Q}\OperatorTok{-}\NormalTok{Ic))),}
+                \DataTypeTok{start=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{Am=}\NormalTok{(}\KeywordTok{max}\NormalTok{(lrc_A)}\OperatorTok{-}\KeywordTok{min}\NormalTok{(lrc_A)),}
+                           \DataTypeTok{Ic=}\DecValTok{5}\NormalTok{, }\DataTypeTok{b=}\DecValTok{1}\NormalTok{)}
+\NormalTok{                )}
+\NormalTok{fitlrc_exp <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(lrcnls)}
+
+\CommentTok{# 光饱和点}
+\NormalTok{Isat <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(Isat)\{fitlrc_exp}\OperatorTok{$}\NormalTok{coef[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{*}
+\StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{-}\KeywordTok{exp}\NormalTok{((}\OperatorTok{-}\NormalTok{fitlrc_exp}\OperatorTok{$}\NormalTok{coef[}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{])}\OperatorTok{*}\NormalTok{(Isat}\OperatorTok{-}
+\StringTok{    }\NormalTok{fitlrc_exp}\OperatorTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{])))}\OperatorTok{-}\FloatTok{0.9}\OperatorTok{*}\NormalTok{fitlrc_exp}\OperatorTok{$}\NormalTok{coef[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]\}}
+
+\KeywordTok{uniroot}\NormalTok{(Isat, }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{2000}\NormalTok{))}\OperatorTok{$}\NormalTok{root}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 558.6038
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{## 拟合图形}
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\NormalTok{light <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{lrc_Q =}\NormalTok{ lrc}\OperatorTok{$}\NormalTok{PARi, }\DataTypeTok{lrc_A =}\NormalTok{ lrc}\OperatorTok{$}\NormalTok{Photo)}
+
+\NormalTok{p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(light, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ lrc_Q, }\DataTypeTok{y =}\NormalTok{ lrc_A))}
+
+\NormalTok{p1 <-}\StringTok{ }\NormalTok{p }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{shape =} \DecValTok{16}\NormalTok{, }\DataTypeTok{size =} \DecValTok{3}\NormalTok{, }\DataTypeTok{color =} \StringTok{"green"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method=}\StringTok{"nls"}\NormalTok{, }\DataTypeTok{formula =} 
+\NormalTok{    y }\OperatorTok{~}\StringTok{ }\NormalTok{Am}\OperatorTok{*}\NormalTok{(}\DecValTok{1}\OperatorTok{-}\KeywordTok{exp}\NormalTok{((}\OperatorTok{-}\NormalTok{b)}\OperatorTok{*}\NormalTok{(x }\OperatorTok{-}\NormalTok{Ic))), }
+    \DataTypeTok{se =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{method.args =} \KeywordTok{list}\NormalTok{(}
+    \DataTypeTok{start =} \KeywordTok{c}\NormalTok{(}\DataTypeTok{Am=}\NormalTok{(}\KeywordTok{max}\NormalTok{(lrc_A)}\OperatorTok{-}\KeywordTok{min}\NormalTok{(lrc_A)),}
+    \DataTypeTok{Ic=}\DecValTok{5}\NormalTok{, }\DataTypeTok{b=}\FloatTok{0.002}\NormalTok{), }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{lrc_Q, }\DataTypeTok{y =}\NormalTok{ lrc_A, }
+    \DataTypeTok{color=}\StringTok{'blue'}\NormalTok{, }\DataTypeTok{size =} \FloatTok{1.2}\NormalTok{))}
+\NormalTok{  ) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{y=}\KeywordTok{expression}\NormalTok{(}\KeywordTok{paste}\NormalTok{(}\StringTok{"photosynthetic rate  "}\NormalTok{, }
+          \StringTok{"("}\NormalTok{, mu, mol}\OperatorTok{%.%}\NormalTok{m}\OperatorTok{^-}\DecValTok{2}\OperatorTok{%.%}\NormalTok{s}\OperatorTok{^-}\DecValTok{1}\NormalTok{, }\StringTok{")"}\NormalTok{)), }
+       \DataTypeTok{x=}\KeywordTok{expression}\NormalTok{(}\KeywordTok{paste}\NormalTok{(}\StringTok{"PAR "}\NormalTok{, }
+           \StringTok{"("}\NormalTok{, mu, mol}\OperatorTok{%.%}\NormalTok{m}\OperatorTok{^-}\DecValTok{2}\OperatorTok{%.%}\NormalTok{s}\OperatorTok{^-}\DecValTok{1}\NormalTok{, }\StringTok{")"}\NormalTok{)))}
+
+
+\CommentTok{# 自定义坐标轴}
+\NormalTok{p1 }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{2100}\NormalTok{, }\DataTypeTok{by =} \DecValTok{200}\NormalTok{)) }\OperatorTok{+}\StringTok{  }
+\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{breaks=} \KeywordTok{round}\NormalTok{(light}\OperatorTok{$}\NormalTok{lrc_A)) }\OperatorTok{+}
+\StringTok{   }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x  =} \KeywordTok{element_text}\NormalTok{(}
+    \DataTypeTok{size =} \DecValTok{10}\NormalTok{, }\DataTypeTok{angle=}\DecValTok{30}\NormalTok{, }\DataTypeTok{vjust=}\FloatTok{0.5}\NormalTok{), }
+    \DataTypeTok{axis.text.y =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{10}\NormalTok{),}
+    \DataTypeTok{axis.title.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{12}\NormalTok{, }\DataTypeTok{face =} \StringTok{'bold'}\NormalTok{),}
+    \DataTypeTok{axis.title.y =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{12}\NormalTok{, }\DataTypeTok{face =} \StringTok{'bold'}\NormalTok{)}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown_files/figure-latex/nexpr-1.pdf}
+\caption{\label{fig:nexpr}指数模型拟合}
+\end{figure}
+
+\begin{table}
+
+\caption{\label{tab:nexptable}指数模型计算参数}
+\centering
+\begin{tabular}[t]{lrrrr}
+\toprule
+  & Estimate & Std. Error & t value & Pr(>|t|)\\
+\midrule
+Am & 13.6547568 & 0.1723363 & 79.233185 & 0.0000000\\
+Ic & -0.5133438 & 2.3370250 & -0.219657 & 0.8305573\\
+b & 0.0041183 & 0.0002012 & 20.467032 & 0.0000000\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+最终的数据拟结果如图 \ref{fig:nexpr} 所示，拟合的参数及结果见表
+\ref{tab:nexptable}。
+
+\cleardoublepage
+
+\section{直角双曲线的修正模型}
+
+\citet{YEZiPiao2010} 直角双曲线修正模型的表达式如式 \eqref{eq:mrec} 所示：
+
+\begin{equation}
+P_{n} = \alpha \frac{1-\beta I}{1+\gamma I} I - R_{d}
+\label{eq:mrec}
+\end{equation}
+
+其中，\(\text{\ensuremath{\beta}}\) 和 \(\gamma\)
+为系数，\(\text{\ensuremath{\beta}}\)光抑制项，\(\gamma\)光饱和项，单位为
+\(m^{2}\cdot s\cdot\mu mol^{-1}\)，其他参数与上文相同，因为该式
+\eqref{eq:mrec} 存在极值，因此，必然存在饱和光强和最大净光合速率，分别用式
+\eqref{eq:isat} 和式 \eqref{eq:ic} 求得。
+
+\begin{equation}
+I_{sat} = \frac{\sqrt{\frac{(\beta+\gamma)}{\beta}-1}}{\gamma}
+\label{eq:isat}
+\end{equation}
+
+\begin{equation}
+P_{nmax} = \alpha\left(\frac{\sqrt{\beta+\gamma}-\sqrt{\beta}}{\gamma}\right)^{2}-R_{d}
+\label{eq:ic}
+\end{equation}
+
+该模型的优点为拟合结果中光饱和点和最大净光合速率均接近实测值，还可以拟合饱和光强之后光合速率随光强下降段的曲线。
+
+\subsection{直角双曲线修正模型的实现}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(minpack.lm)}
+
+\CommentTok{# 读取数据，同fitaci数据格式}
+\NormalTok{lrc <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"./data/lrc.csv"}\NormalTok{)}
+\NormalTok{lrc <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(lrc, Obs }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{)}
+
+\CommentTok{# 光响应曲线没有太多参数，}
+\CommentTok{# 直接调出相应的光强和光合速率}
+\CommentTok{# 方便后面调用}
+\NormalTok{lrc_Q <-}\StringTok{ }\NormalTok{lrc}\OperatorTok{$}\NormalTok{PARi}
+\NormalTok{lrc_A <-}\StringTok{ }\NormalTok{lrc}\OperatorTok{$}\NormalTok{Photo }
+
+\CommentTok{# 模型的拟合}
+\NormalTok{lrcnls <-}\StringTok{ }\KeywordTok{nlsLM}\NormalTok{(lrc_A }\OperatorTok{~}\StringTok{ }\NormalTok{alpha }\OperatorTok{*}\StringTok{ }\NormalTok{((}\DecValTok{1} \OperatorTok{-}\StringTok{ }
+\StringTok{              }\NormalTok{beta}\OperatorTok{*}\NormalTok{lrc_Q)}\OperatorTok{/}\NormalTok{(}\DecValTok{1} \OperatorTok{+}\StringTok{ }\NormalTok{gamma }\OperatorTok{*}\StringTok{ }\NormalTok{lrc_Q)) }\OperatorTok{*}\StringTok{ }\NormalTok{lrc_Q }\OperatorTok{-}\StringTok{ }\NormalTok{Rd,}
+                \DataTypeTok{start=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{0.07}\NormalTok{, }\DataTypeTok{beta =} \FloatTok{0.00005}\NormalTok{,}
+                           \DataTypeTok{gamma=}\FloatTok{0.004}\NormalTok{, }\DataTypeTok{Rd =} \FloatTok{0.2}\NormalTok{)}
+\NormalTok{                )}
+\NormalTok{fitlrc_mrec <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(lrcnls)}
+
+\CommentTok{# 饱和点计算}
+\NormalTok{Isat <-}\StringTok{  }\KeywordTok{sqrt}\NormalTok{((fitlrc_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OperatorTok{+}\StringTok{ }\NormalTok{fitlrc_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{])}\OperatorTok{/}
+\StringTok{              }\NormalTok{fitlrc_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{-}\DecValTok{1}\NormalTok{)}\OperatorTok{/}\NormalTok{fitlrc_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{]}
+\CommentTok{# 补偿点计算}
+\NormalTok{Ic <-}\StringTok{ }\NormalTok{(fitlrc_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OperatorTok{-}\StringTok{ }\NormalTok{fitlrc_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{])}\OperatorTok{/}
+\StringTok{  }\NormalTok{(fitlrc_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{*}\NormalTok{fitlrc_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{+}
+\StringTok{   }\NormalTok{fitlrc_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{*}\NormalTok{fitlrc_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{])}
+
+\NormalTok{## 拟合图形}
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\NormalTok{light <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{lrc_Q =}\NormalTok{ lrc}\OperatorTok{$}\NormalTok{PARi, }\DataTypeTok{lrc_A =}\NormalTok{ lrc}\OperatorTok{$}\NormalTok{Photo)}
+
+\NormalTok{p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(light, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ lrc_Q, }\DataTypeTok{y =}\NormalTok{ lrc_A))}
+
+\NormalTok{p1 <-}\StringTok{ }\NormalTok{p }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{shape =} \DecValTok{16}\NormalTok{, }\DataTypeTok{size =} \DecValTok{3}\NormalTok{, }\DataTypeTok{color =} \StringTok{"green"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method=}\StringTok{"nls"}\NormalTok{, }\DataTypeTok{formula =} 
+\NormalTok{   y }\OperatorTok{~}\StringTok{ }\NormalTok{alpha }\OperatorTok{*}\StringTok{ }\NormalTok{((}\DecValTok{1} \OperatorTok{-}\StringTok{ }
+\StringTok{              }\NormalTok{beta}\OperatorTok{*}\NormalTok{x)}\OperatorTok{/}\NormalTok{(}\DecValTok{1} \OperatorTok{+}\StringTok{ }\NormalTok{gamma }\OperatorTok{*}\StringTok{ }\NormalTok{x)) }\OperatorTok{*}\StringTok{ }\NormalTok{x }\OperatorTok{-}\StringTok{ }\NormalTok{Rd, }
+    \DataTypeTok{se =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{method.args =} \KeywordTok{list}\NormalTok{(}
+    \DataTypeTok{start =} \KeywordTok{c}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{0.07}\NormalTok{, }\DataTypeTok{beta =} \FloatTok{0.00005}\NormalTok{,}
+              \DataTypeTok{gamma=}\FloatTok{0.004}\NormalTok{, }\DataTypeTok{Rd =} \FloatTok{0.2}\NormalTok{), }
+    \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{lrc_Q, }\DataTypeTok{y =}\NormalTok{ lrc_A, }
+    \DataTypeTok{color=}\StringTok{'blue'}\NormalTok{, }\DataTypeTok{size =} \FloatTok{1.2}\NormalTok{))}
+\NormalTok{  ) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{y=}\KeywordTok{expression}\NormalTok{(}\KeywordTok{paste}\NormalTok{(}\StringTok{"photosynthetic rate  "}\NormalTok{, }
+          \StringTok{"("}\NormalTok{, mu, mol}\OperatorTok{%.%}\NormalTok{m}\OperatorTok{^-}\DecValTok{2}\OperatorTok{%.%}\NormalTok{s}\OperatorTok{^-}\DecValTok{1}\NormalTok{, }\StringTok{")"}\NormalTok{)), }
+       \DataTypeTok{x=}\KeywordTok{expression}\NormalTok{(}\KeywordTok{paste}\NormalTok{(}\StringTok{"PAR "}\NormalTok{, }
+           \StringTok{"("}\NormalTok{, mu, mol}\OperatorTok{%.%}\NormalTok{m}\OperatorTok{^-}\DecValTok{2}\OperatorTok{%.%}\NormalTok{s}\OperatorTok{^-}\DecValTok{1}\NormalTok{, }\StringTok{")"}\NormalTok{)))}
+
+
+\CommentTok{# 自定义坐标轴}
+\NormalTok{p1 }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{2100}\NormalTok{, }\DataTypeTok{by =} \DecValTok{200}\NormalTok{)) }\OperatorTok{+}\StringTok{  }
+\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{breaks=} \KeywordTok{round}\NormalTok{(light}\OperatorTok{$}\NormalTok{lrc_A)) }\OperatorTok{+}
+\StringTok{   }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x  =} \KeywordTok{element_text}\NormalTok{(}
+    \DataTypeTok{size =} \DecValTok{10}\NormalTok{, }\DataTypeTok{angle=}\DecValTok{30}\NormalTok{, }\DataTypeTok{vjust=}\FloatTok{0.5}\NormalTok{), }
+    \DataTypeTok{axis.text.y =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{10}\NormalTok{),}
+    \DataTypeTok{axis.title.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{12}\NormalTok{, }\DataTypeTok{face =} \StringTok{'bold'}\NormalTok{),}
+    \DataTypeTok{axis.title.y =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{12}\NormalTok{, }\DataTypeTok{face =} \StringTok{'bold'}\NormalTok{)}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown_files/figure-latex/mrecr-1.pdf}
+\caption{\label{fig:mrecr}直角双曲线修正模型拟合}
+\end{figure}
+
+\begin{table}
+
+\caption{\label{tab:mrectable}直角双曲线修正模型计算参数}
+\centering
+\begin{tabular}[t]{lrrrr}
+\toprule
+  & Estimate & Std. Error & t value & Pr(>|t|)\\
+\midrule
+alpha & 0.0730858 & 0.0021209 & 34.460183 & 0.0000000\\
+beta & 0.0000501 & 0.0000133 & 3.776115 & 0.0043751\\
+gamma & 0.0040622 & 0.0001955 & 20.773916 & 0.0000000\\
+Rd & 0.2156186 & 0.0543505 & 3.967190 & 0.0032685\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+尽管修正模型可以方便的计算饱和点和补偿点，但如同 \citet{Lobo2013Fitting}
+所指出，双曲线模型对其结果的计算常有超出生态学意义范围的值\footnote{例如本例的数据结果}，因此对模型的选择不能一概而论，需根据实际情况而选择。
+
+\cleardoublepage
+
+\chapter{关于非线性拟合的初始值}
+
+在解释初始值之前我们首先需要了解一个数学上的概念------迭代，
+
+\begin{quote}
+``迭代法''也称``辗转法''是一种不断用变量的旧值递推新值的过程。
+\end{quote}
+
+用通俗但不是特别严谨的说法可解释为：每次执行这种算法是，程序都会从原值（也就是我抄的上面迭代法定义的旧值）推出一个新值。
+
+之所以先介绍这个迭代，原因很简单，非线性拟合就是通过迭代的方法，需要对每一个变量\textbf{最初的估计值进行不断的迭代，得到一个向一个点收缩或汇聚的值，这个估计值必须在实际值的一定范围内，程序通过不断调整这个值来改善拟合结果}。这就解释了上面的问题，初始值是让程序开始运行的前提，不然没法迭代，必须设定。我下面的内容将以
+LI-6800 的光响应曲线的测试数据，使用非直角双曲线模型进行拟合来讲解具体的
+R
+中的一些实现方法，我们首先导入数据，然后再利用这些数据逐个举例不同的确定初始值的方式。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nls <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data/nlstest.csv"}\NormalTok{)}
+
+
+\CommentTok{# 光响应曲线比较简单，我们将需要的数据直接提取，方便后面操作}
+\NormalTok{lrc_Q <-}\StringTok{ }\NormalTok{nls}\OperatorTok{$}\NormalTok{Qin}
+\NormalTok{lrc_A <-}\StringTok{ }\NormalTok{nls}\OperatorTok{$}\NormalTok{A}
+\end{Highlighting}
+\end{Shaded}
+
+\section{nlsLM 解决方案}\label{nlslm-}
+
+nlsLM 来自于 \citet{Elzhov2016minpack} 的 \texttt{minpack.lm}，利用 C
+语言的 MINPACK 库，修改了 Levenberg-Marquardt
+算法，在实际操作中，很多时候并不准确的输入初始值，他也能得出比较好的拟合结果。但结果未必完美，出现下面让人烦恼的报错：
+
+\begin{quote}
+singular gradient matrix at initial parameter estimates
+\end{quote}
+
+的概率会大大降低，而且尽管结果不如意，我们也可以利用他的结果缩小初始值的范围，继续尝试其他初始值。
+
+例如下面的例子中，非直角双曲线的 Rd
+的初始值我们可以利用暗呼吸的实测值大致估计，同理最大光合速率也是如此，剩下的分别为非直角双曲线曲率，我们暂定为
+1，alpha 也暂定为 0.1，使用 \texttt{nlsLM} 进行拟合，结果如下：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(minpack.lm)}
+
+\NormalTok{lrcnls_lm <-}\StringTok{ }\KeywordTok{nlsLM}\NormalTok{(lrc_A }\OperatorTok{~}\StringTok{ }\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{(}\DecValTok{2}\OperatorTok{*}\NormalTok{theta))}\OperatorTok{*}
+\StringTok{        }\NormalTok{(alpha}\OperatorTok{*}\NormalTok{lrc_Q}\OperatorTok{+}\NormalTok{Am}\OperatorTok{-}\KeywordTok{sqrt}\NormalTok{((alpha}\OperatorTok{*}\NormalTok{lrc_Q}\OperatorTok{+}\NormalTok{Am)}\OperatorTok{^}\DecValTok{2} \OperatorTok{-}\StringTok{ }
+\StringTok{        }\DecValTok{4}\OperatorTok{*}\NormalTok{alpha}\OperatorTok{*}\NormalTok{theta}\OperatorTok{*}\NormalTok{Am}\OperatorTok{*}\NormalTok{lrc_Q))}\OperatorTok{-}\StringTok{ }
+\StringTok{        }\NormalTok{Rd, }\DataTypeTok{start=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{Am=}\NormalTok{(}\KeywordTok{max}\NormalTok{(lrc_A)}\OperatorTok{-}\KeywordTok{min}\NormalTok{(lrc_A)),}
+        \DataTypeTok{alpha=}\FloatTok{0.1}\NormalTok{,}\DataTypeTok{Rd=}\OperatorTok{-}\KeywordTok{min}\NormalTok{(lrc_A),}\DataTypeTok{theta=}\FloatTok{0.8}\NormalTok{)) }
+\end{Highlighting}
+\end{Shaded}
+
+结果没有报错，看上去没有问题，那我们观察一下具体的拟合结果：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(lrcnls_lm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Formula: lrc_A ~ (1/(2 * theta)) * (alpha * lrc_Q + Am - sqrt((alpha * 
+##     lrc_Q + Am)^2 - 4 * alpha * theta * Am * lrc_Q)) - Rd
+## 
+## Parameters:
+##        Estimate Std. Error t value Pr(>|t|)    
+## Am    12.307570   0.406739  30.259 2.30e-10 ***
+## alpha  0.045706   0.003423  13.352 3.09e-07 ***
+## Rd     0.656638   0.132646   4.950 0.000791 ***
+## theta  0.707522   0.079738   8.873 9.59e-06 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.1852 on 9 degrees of freedom
+## 
+## Number of iterations to convergence: 8 
+## Achieved convergence tolerance: 1.49e-08
+\end{verbatim}
+
+结果看上去还可以\footnote{有些时候结果并不理想，该方法并不是万无一失}。
+
+\section{作图比对法}
+
+模型很多参数可以用已有数据去估计，我们可以只来分析难以判断的参数，流程如下：
+
+\begin{itemize}
+\tightlist
+\item
+  Rd、Am等我们可以利用测量值来确定一个范围。
+\item
+  剩余的参数，我们也可以根据经验或文献来有一个大致的判断。
+\item
+  然后我们根据数学的方式来判断哪个参数对曲线形状影响最大（例如在分母上的参数，或者是乘以该参数，该参数可以显著改变计算结果，例如整体乘以或除以
+  0.1 还是 0.01，像 Rd
+  之类的参数本身就很小，多数公式中都是减去该值，对结果影响很小，我们通常直接使用实测值
+  ）。
+\item
+  将该参数取一系列值带入模型来求解净光合速率。
+\item
+  将计算的A值与光强进行作图，看我们计算的曲线与测量数据点的重合程度，必要时在修改其他参数，使曲线和散点重合度最好，重合程度最高的参数值即为我们需要的初始值。
+\end{itemize}
+
+\subsection{实现过程}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 我们选择的模型，将其写为一个函数，用于计算净光合速率}
+\NormalTok{expfct <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, Am, alpha, Rd, theta) \{}
+\NormalTok{  (}\DecValTok{1}\OperatorTok{/}\NormalTok{(}\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{theta)) }\OperatorTok{*}\StringTok{ }\NormalTok{(alpha }\OperatorTok{*}\StringTok{ }\NormalTok{x }\OperatorTok{+}\StringTok{ }\NormalTok{Am }\OperatorTok{-}\StringTok{ }
+\StringTok{  }\KeywordTok{sqrt}\NormalTok{((alpha }\OperatorTok{*}\StringTok{ }\NormalTok{x }\OperatorTok{+}\StringTok{ }\NormalTok{Am)}\OperatorTok{^}\DecValTok{2} \OperatorTok{-}\StringTok{ }\DecValTok{4} \OperatorTok{*}\StringTok{ }\NormalTok{alpha }\OperatorTok{*}\StringTok{ }\NormalTok{theta }\OperatorTok{*}\StringTok{ }\NormalTok{Am }\OperatorTok{*}\StringTok{ }\NormalTok{x)) }\OperatorTok{-}\StringTok{ }\NormalTok{Rd}
+\NormalTok{\}}
+
+\CommentTok{# 我们的数据}
+\NormalTok{test <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ lrc_Q, }\DataTypeTok{y =}\NormalTok{ lrc_A)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 先做实测数据的散点图}
+\KeywordTok{plot}\NormalTok{(y }\OperatorTok{~}\StringTok{ }\NormalTok{x, }\DataTypeTok{data =}\NormalTok{ test)}
+
+\CommentTok{# 利用上面的函数，假定 alpha 的值为0.8，看计算值与测量值重合程度}
+\KeywordTok{curve}\NormalTok{(}\KeywordTok{expfct}\NormalTok{(x, }\DataTypeTok{Am =}\NormalTok{ (}\KeywordTok{max}\NormalTok{(lrc_A)}\OperatorTok{-}\KeywordTok{min}\NormalTok{(lrc_A)),}
+     \DataTypeTok{alpha=}\FloatTok{0.8}\NormalTok{, }\DataTypeTok{Rd=}\OperatorTok{-}\KeywordTok{min}\NormalTok{(lrc_A), }\DataTypeTok{theta=}\FloatTok{0.8}\NormalTok{), }\DataTypeTok{add =} \OtherTok{TRUE}
+\NormalTok{             )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown_files/figure-latex/pomp-1.pdf}
+\caption{\label{fig:pomp}初步判断 alpha 的初始值}
+\end{figure}
+
+观察上图 \ref{fig:pomp} 的结果可以看到，曲线在 0-600
+的范围内，拟合值明显偏大，观察模型的方程式，以及其他起始值的设定方式，我们初步判断
+alpha
+的值偏大，于是乎我们将其改小观察，观察曲线和测量点的重合仍然不是很好，我们尝试修改
+theta 值与 alpha
+值（也即曲线高于测量点，则需要减小纵坐标的值，低于测量点，则需要增加该值，该过程省略，我大概设置了五分钟完成），最终得出的结果如下：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(y }\OperatorTok{~}\StringTok{ }\NormalTok{x, }\DataTypeTok{data =}\NormalTok{ test)}
+\KeywordTok{curve}\NormalTok{(}\KeywordTok{expfct}\NormalTok{(x, }\DataTypeTok{Am =}\NormalTok{ (}\KeywordTok{max}\NormalTok{(lrc_A)}\OperatorTok{-}\KeywordTok{min}\NormalTok{(lrc_A)),}
+     \DataTypeTok{alpha=}\FloatTok{0.06}\NormalTok{, }\DataTypeTok{Rd=}\OperatorTok{-}\KeywordTok{min}\NormalTok{(lrc_A), }\DataTypeTok{theta=}\FloatTok{0.82}\NormalTok{), }\DataTypeTok{add =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown_files/figure-latex/alpp-1.pdf}
+\caption{\label{fig:alpp}初修正后断 alpha 的初始值}
+\end{figure}
+
+图 \ref{fig:alpp}
+尽管看上去效果仍然不满意，但我们可试着进行拟合，看能否得到显著差异的结果：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lrcnls_manual <-}\StringTok{ }\KeywordTok{nls}\NormalTok{(lrc_A }\OperatorTok{~}\StringTok{ }
+\StringTok{        }\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{(}\DecValTok{2}\OperatorTok{*}\NormalTok{theta))}\OperatorTok{*}
+\StringTok{        }\NormalTok{(alpha}\OperatorTok{*}\NormalTok{lrc_Q}\OperatorTok{+}\NormalTok{Am}\OperatorTok{-}\KeywordTok{sqrt}\NormalTok{((alpha}\OperatorTok{*}\NormalTok{lrc_Q}\OperatorTok{+}\NormalTok{Am)}\OperatorTok{^}\DecValTok{2} \OperatorTok{-}\StringTok{ }
+\StringTok{                               }\DecValTok{4}\OperatorTok{*}\NormalTok{alpha}\OperatorTok{*}\NormalTok{theta}\OperatorTok{*}\NormalTok{Am}\OperatorTok{*}\NormalTok{lrc_Q))}\OperatorTok{-}\StringTok{ }
+\StringTok{        }\NormalTok{Rd, }\DataTypeTok{start=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{Am=}\NormalTok{(}\KeywordTok{max}\NormalTok{(lrc_A)}\OperatorTok{-}\KeywordTok{min}\NormalTok{(lrc_A)),}
+                       \DataTypeTok{alpha=}\FloatTok{0.03}\NormalTok{,}\DataTypeTok{Rd=}\OperatorTok{-}\KeywordTok{min}\NormalTok{(lrc_A),}\DataTypeTok{theta=}\FloatTok{0.6}\NormalTok{))}
+\KeywordTok{summary}\NormalTok{(lrcnls_manual)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Formula: lrc_A ~ (1/(2 * theta)) * (alpha * lrc_Q + Am - sqrt((alpha * 
+##     lrc_Q + Am)^2 - 4 * alpha * theta * Am * lrc_Q)) - Rd
+## 
+## Parameters:
+##        Estimate Std. Error t value Pr(>|t|)    
+## Am    12.307585   0.406741  30.259 2.30e-10 ***
+## alpha  0.045706   0.003423  13.352 3.09e-07 ***
+## Rd     0.656642   0.132646   4.950 0.000791 ***
+## theta  0.707518   0.079739   8.873 9.59e-06 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.1852 on 9 degrees of freedom
+## 
+## Number of iterations to convergence: 7 
+## Achieved convergence tolerance: 4.601e-06
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 对拟合之后的结果作图，观察使用我们的估计值，}
+\CommentTok{# 迭代的最终值与元数据的重合程度}
+\KeywordTok{plot}\NormalTok{(y }\OperatorTok{~}\StringTok{ }\NormalTok{x, }\DataTypeTok{data =}\NormalTok{ test, }\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{2}\NormalTok{, }\DecValTok{14}\NormalTok{))}
+\KeywordTok{curve}\NormalTok{(}\KeywordTok{expfct}\NormalTok{(x, }\DataTypeTok{Am =} \FloatTok{12.307586}\NormalTok{,}
+     \DataTypeTok{alpha=}\FloatTok{0.045706}\NormalTok{, }\DataTypeTok{Rd=} \FloatTok{0.656643}\NormalTok{, }\DataTypeTok{theta=}\FloatTok{0.707518}\NormalTok{), }\DataTypeTok{add =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown_files/figure-latex/alpf-1.pdf}
+\caption{\label{fig:alpf}检验作图法的初始值判断}
+\end{figure}
+
+从 \ref{fig:alpf} 的呈现以及 F 检验的 p
+值来讲，图形已经比较完美了。\textbf{也就是说尽管我们作图的时候看到重合度并不高，但是非线性拟合本来就是一个迭代的过程，只要我们的数据与真实值相差不大，还是能够得到完美结果的}。
+
+\subsection{直观展示}
+
+上面的表述太啰嗦，直接用下面的图形说明一下，其中 alhpa
+的取值在此处选择从 0.01 到 0.07，每次增加 0.05，其他值分别为 Am = 12.31,
+Rd= 0.66, theta=0.71
+（此处为展示效果和方便，将这些值直接按照拟合结果设定了，实际差别不大）
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\KeywordTok{library}\NormalTok{(purrr)}
+
+\NormalTok{lrc <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data/nlstest.csv"}\NormalTok{)}
+
+\CommentTok{# 光响应曲线比较简单，我们将需要的数据直接提取，方便后面操作}
+\NormalTok{lrc_Q <-}\StringTok{ }\NormalTok{lrc}\OperatorTok{$}\NormalTok{Qin}
+\NormalTok{lrc_A <-}\StringTok{ }\NormalTok{lrc}\OperatorTok{$}\NormalTok{A}
+\NormalTok{n <-}\StringTok{ }\KeywordTok{length}\NormalTok{(lrc_A)}
+
+
+\NormalTok{alp <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\StringTok{"a="}\NormalTok{, }\KeywordTok{seq}\NormalTok{(}\FloatTok{0.01}\NormalTok{, }\FloatTok{0.07}\NormalTok{, }\DataTypeTok{by =} \FloatTok{0.005}\NormalTok{))}
+\NormalTok{alpn <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(alp, }\DataTypeTok{each =}\NormalTok{ n)}
+
+\NormalTok{expfct <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, Am, alpha, Rd, theta) \{(}\DecValTok{1}\OperatorTok{/}\NormalTok{(}\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{theta)) }\OperatorTok{*}\StringTok{ }\NormalTok{(alpha }\OperatorTok{*}\StringTok{ }\NormalTok{x }\OperatorTok{+}\StringTok{ }\NormalTok{Am }\OperatorTok{-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{((alpha }\OperatorTok{*}\StringTok{ }\NormalTok{x }\OperatorTok{+}\StringTok{ }\NormalTok{Am)}\OperatorTok{^}\DecValTok{2} \OperatorTok{-}\StringTok{ }\DecValTok{4} \OperatorTok{*}\StringTok{ }\NormalTok{alpha }\OperatorTok{*}\StringTok{ }\NormalTok{theta }\OperatorTok{*}\StringTok{ }\NormalTok{Am }\OperatorTok{*}\StringTok{ }\NormalTok{x)) }\OperatorTok{-}\StringTok{ }\NormalTok{Rd}
+\NormalTok{\}}
+
+\NormalTok{paras <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{alpha =} \KeywordTok{rep}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\FloatTok{0.01}\NormalTok{, }\FloatTok{0.07}\NormalTok{, }\DataTypeTok{by =} \FloatTok{0.005}\NormalTok{), }\DataTypeTok{each =}\NormalTok{ n), }
+           \DataTypeTok{x =} \KeywordTok{rep}\NormalTok{(lrc_Q, n), }\DataTypeTok{Am =} \KeywordTok{rep}\NormalTok{(}\FloatTok{12.31}\NormalTok{, n), }\DataTypeTok{Rd =} \KeywordTok{rep}\NormalTok{(}\FloatTok{0.66}\NormalTok{, n), }
+           \DataTypeTok{theta =} \KeywordTok{rep}\NormalTok{(}\FloatTok{0.71}\NormalTok{, n))}
+\NormalTok{y =}\StringTok{ }\KeywordTok{unlist}\NormalTok{(}\KeywordTok{pmap}\NormalTok{(paras, expfct))}
+
+\NormalTok{show <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{rep}\NormalTok{(lrc_Q, }\DecValTok{14}\NormalTok{),}
+           \DataTypeTok{y =} \KeywordTok{c}\NormalTok{(lrc_A, y), }
+           \DataTypeTok{a =} \KeywordTok{factor}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\StringTok{"measured"}\NormalTok{, n), alpn),}
+           \DataTypeTok{level =} \KeywordTok{c}\NormalTok{(}\StringTok{"measured"}\NormalTok{, alp)}
+\NormalTok{             ))}
+
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ show, }\KeywordTok{aes}\NormalTok{(x, y, }\DataTypeTok{group =}\NormalTok{ a, }\DataTypeTok{color=}\NormalTok{a)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{se =} \OtherTok{FALSE}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown_files/figure-latex/malp-1.pdf}
+\caption{\label{fig:malp}多个 alpha 取值的差异}
+\end{figure}
+
+从上图 \ref{fig:malp} 我们我们可以看到，实测值在 alpha =0.04 和 alpha =
+0.05 两条曲线之间，在 0.045 时最接近测量点，也就是我们把初始值设为 0.04
+和 0.05 之间最接近，本例中可认为是0.045，实际这三个值均可。
+
+\section{自动多次尝试法}
+
+该方法实际为使用 \texttt{nls2} 来实现，具体方法参考 \citet{nls2}
+的文章，可简单概括为使用一系列的起始值梯度（例如下面的代码中， alpha
+的取值在 0.01 到 0.08 之间
+），然后软件循序使用不同的起始值，即排列组合所有的起始值序列，最终找到合适的值，具体实现如下：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(nls2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: proto
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{grid.test <-}\StringTok{ }\KeywordTok{expand.grid}\NormalTok{(}\KeywordTok{list}\NormalTok{(}
+  \DataTypeTok{Am=}\KeywordTok{c}\NormalTok{(}\DecValTok{12}\NormalTok{),}
+  \DataTypeTok{alpha =} \KeywordTok{seq}\NormalTok{(}\FloatTok{0.01}\NormalTok{, }\FloatTok{0.08}\NormalTok{, }\DataTypeTok{by =}\FloatTok{0.01}\NormalTok{),}
+  \DataTypeTok{Rd =} \KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{3}\NormalTok{),}
+  \DataTypeTok{theta=}\KeywordTok{seq}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DataTypeTok{by =} \FloatTok{0.1}\NormalTok{)}
+\NormalTok{  ))}
+
+\NormalTok{lrcnls2 <-}\StringTok{ }\KeywordTok{nls2}\NormalTok{(lrc_A }\OperatorTok{~}\StringTok{ }
+\StringTok{        }\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{(}\DecValTok{2}\OperatorTok{*}\NormalTok{theta))}\OperatorTok{*}
+\StringTok{        }\NormalTok{(alpha}\OperatorTok{*}\NormalTok{lrc_Q}\OperatorTok{+}\NormalTok{Am}\OperatorTok{-}\KeywordTok{sqrt}\NormalTok{((alpha}\OperatorTok{*}\NormalTok{lrc_Q}\OperatorTok{+}\NormalTok{Am)}\OperatorTok{^}\DecValTok{2} \OperatorTok{-}\StringTok{ }
+\StringTok{                               }\DecValTok{4}\OperatorTok{*}\NormalTok{alpha}\OperatorTok{*}\NormalTok{theta}\OperatorTok{*}\NormalTok{Am}\OperatorTok{*}\NormalTok{lrc_Q))}\OperatorTok{-}\StringTok{ }
+\StringTok{        }\NormalTok{Rd, }\DataTypeTok{start =}\NormalTok{ grid.test, }\DataTypeTok{algorithm =} \StringTok{"brute-force"}\NormalTok{)}
+\KeywordTok{summary}\NormalTok{(lrcnls2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Formula: lrc_A ~ (1/(2 * theta)) * (alpha * lrc_Q + Am - sqrt((alpha * 
+##     lrc_Q + Am)^2 - 4 * alpha * theta * Am * lrc_Q)) - Rd
+## 
+## Parameters:
+##        Estimate Std. Error t value Pr(>|t|)    
+## Am    12.000000   0.623023  19.261 1.27e-08 ***
+## alpha  0.050000   0.006414   7.795 2.72e-05 ***
+## Rd     1.000000   0.260153   3.844  0.00394 ** 
+## theta  0.800000   0.102143   7.832 2.62e-05 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.3663 on 9 degrees of freedom
+## 
+## Number of iterations to convergence: 320 
+## Achieved convergence tolerance: NA
+\end{verbatim}
+
+通过结果可以看到，虽然和之前采用手动方法判定的结果比较接近，但是还是略有差异，可以看一下他们各自的结果同测量值的重合程度：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(lrc_Q, lrc_A)}
+\KeywordTok{lines}\NormalTok{(lrc_Q,  }\KeywordTok{predict}\NormalTok{(lrcnls2), }\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}
+\KeywordTok{lines}\NormalTok{(lrc_Q,  }\KeywordTok{predict}\NormalTok{(lrcnls_manual), }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown_files/figure-latex/mcomp-1.pdf}
+\caption{\label{fig:mcomp}两种方法结果的对比展示}
+\end{figure}
+
+图 \ref{fig:mcomp} 可以看到，使用 \texttt{nls2}
+的拟合结果似乎和测量值更匹配，当然这只是第一印象，后续的判断还要进一步通过
+F 检验、 AIC、BIC 等统计方式才能判定。
+
+\section{小结}
+
+采用如上三种方式都可以有效的解决起始值的问题，\texttt{nlsLM}
+操作上更易实现，对初始值的大小不敏感，但设置不能太离谱，否则仍然会报错。作图比对法操作上更麻烦一些，但是这种方式一定能得出合理的初始值设置。采用
+\texttt{nls2} 类似于将手动作图方式自动化，类似于 SPSS
+中非线性拟合中需要给出一个初始值的范围，且该范围不能过大。如有一定的经验，操作起来将非常迅速。
+
+需要注意的是，这三种方法结合起来使用会更好，例如，即使使用
+\texttt{nlsLM}
+的结果不合理，也可以参考他们参数的范围（部分结果也可能是差异显著），然后将这些结果用于手动作图判定参数或者
+\texttt{nls2}
+中判定参数范围，或者使用作图法确定大致的范围，将该范围输入到
+\texttt{nls2} 中，这样会节省时间，也更加方便。
+
+\cleardoublepage
+
+\chapter{LI-6800 的数据分析}\label{li-6800-}
+
+\section{数据格式}
+
+LI-6800 的数据前处理同 LI-6400 相同，如表 \ref{tab:head6800}
+所示的样式。
+
+\begin{longtable}[t]{rrrlrr}
+\caption{\label{tab:head6800}推荐 LI-6800 整理后数据样式}\\
+\toprule
+obs & time & elapsed & date & TIME & E\\
+\midrule
+1 & 1471425750 & 0.0 & 20160817 17:22:30 & 1471425726 & 0.0007614\\
+2 & 1471425855 & 104.5 & 20160817 17:24:14 & 1471425829 & 0.0009221\\
+3 & 1471426153 & 403.1 & 20160817 17:29:13 & 1471426144 & 0.0009900\\
+4 & 1471426244 & 494.0 & 20160817 17:30:44 & 1471426235 & 0.0010249\\
+5 & 1471426335 & 585.1 & 20160817 17:32:15 & 1471426326 & 0.0010632\\
+6 & 1471426426 & 676.0 & 20160817 17:33:46 & 1471426417 & 0.0011190\\
+\bottomrule
+\end{longtable}
+
+\section{LI-6800 与 LI-6400 使用时的差别}\label{li-6800--li-6400-}
+
+\texttt{plantecophys} 使用时建立在 LI-6400XT 基础之上的软件包，因此在
+LI-6800 代码中，需要改动的是 fitaci、fitacis 及 fitBB 中的 varnames
+选项，也就是将 LI-6400XT 的表头改为 LI-6800 的表头。 以 fitaci
+函数为例：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \KeywordTok{fitaci}\NormalTok{(aci, }\DataTypeTok{varnames =} 
+        \KeywordTok{list}\NormalTok{(}\DataTypeTok{ALEAF =} \StringTok{"A"}\NormalTok{, }\DataTypeTok{Tleaf =} \StringTok{"Tleaf"}\NormalTok{, }\DataTypeTok{Ci =} \StringTok{"Ci"}\NormalTok{, }
+          \DataTypeTok{PPFD  =} \StringTok{"Qin"}\NormalTok{, }\DataTypeTok{Rd =} \StringTok{"Rd"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\section{光响应曲线注意事项}
+
+光响应曲线的拟合相对简单，仅需要光强和光合速率的值，其中需要修改的部分仅为光强的赋值部分，在文件名一致的前提下，修改如下代码即可：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lrc_Q <-}\StringTok{ }\NormalTok{lrc}\OperatorTok{$}\NormalTok{Qin}
+\NormalTok{lrc_A <-}\StringTok{ }\NormalTok{lrc}\OperatorTok{$}\NormalTok{A }
+\end{Highlighting}
+\end{Shaded}
+
+\section{\texorpdfstring{LI-6800
+RACiR\texttrademark 的测量与拟合}{LI-6800 RACiR的测量与拟合}}\label{li-6800-racir}
+
+在评估作物性状时，V\(_{cmax}\) 及 J\(_{max}\)时非常有用，传统的 A--Ci
+曲线测量要求植物叶片要在一定浓度 CO\(_{2}\)
+下适应几分钟后完成测量，这样的测量有几个缺点：
+
+\begin{itemize}
+\tightlist
+\item
+  测量时间长，一条曲线至少需要 20 -- 30
+  min，样本量多，重复多时，这种方法几乎没有可行性。
+\item
+  整个测量过程中，时间长，酶的激活状态会有变化，叶绿体会移动，气孔的开度也会发生变化。
+\end{itemize}
+
+而 LI-6800 独有的 auto control 功能在算法上允许用户自定义 CO\(_{2}\)
+的起始浓度和种植浓度、变化方式（线性或其他）、所花费的时间，再加上其
+IRGAs 极快的响应频率，使得短时间内的 A--Ci 的测量成为现实，即快速
+CO\(_{2}\) 响应曲线 RACiR\texttrademark
+测量实验，该功能使得 5 min 内测量 A--Ci 曲线成为可能。该方法的实现可参考
+\citet{Stinziano2017} 的文章。具体测量步骤请参考我们的 LI-6800实验手册。
+
+\section{\texorpdfstring{RACiR\texttrademark 分析的实现}{RACiR分析的实现}}\label{racir}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 分别读取未校准空叶室数据}
+\CommentTok{# 未校准带叶片测量数据}
+\CommentTok{# 标准aci曲线测量数据}
+\NormalTok{uemp500 <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"./data/uncorr_emp500.csv"}\NormalTok{)}
+\NormalTok{uleaf500 <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"./data/uncorr_leaf500.csv"}\NormalTok{)}
+\NormalTok{acin <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"./data/aci_ex.csv"}\NormalTok{)}
+
+\CommentTok{# 防止读入空白行}
+\NormalTok{m <-}\StringTok{ }\KeywordTok{length}\NormalTok{(}\KeywordTok{which}\NormalTok{(uemp500}\OperatorTok{$}\NormalTok{obs }\OperatorTok{>=}\StringTok{ }\DecValTok{1}\NormalTok{))}
+\NormalTok{n <-}\StringTok{ }\KeywordTok{length}\NormalTok{(}\KeywordTok{which}\NormalTok{(uleaf500}\OperatorTok{$}\NormalTok{obs }\OperatorTok{>=}\StringTok{ }\DecValTok{1}\NormalTok{))}
+\NormalTok{uemp500 <-}\StringTok{ }\NormalTok{uemp500[}\DecValTok{1}\OperatorTok{:}\NormalTok{m,]}
+\NormalTok{uleaf500 <-}\StringTok{ }\NormalTok{uleaf500[}\DecValTok{1}\OperatorTok{:}\NormalTok{n,]}
+
+\CommentTok{# 观察空叶室未校准数据reference对A的图形}
+\KeywordTok{plot}\NormalTok{(uemp500}\OperatorTok{$}\NormalTok{CO2_r, uemp500}\OperatorTok{$}\NormalTok{A)}
+\CommentTok{# 选取线性部分用于校准}
+\KeywordTok{locator}\NormalTok{()}
+\CommentTok{# 执行locator命令后，在上图中的目标位置选点，}
+\CommentTok{# 选好后按 esc 可以返回所选点的坐标（选点即为在}
+\CommentTok{# 预期位置鼠标单击）}
+
+\CommentTok{# 根据上面的点，利用二氧化碳的值过滤掉不需要的数据}
+\CommentTok{# 只要在线性范围内选点，拟合结果相差很小}
+\NormalTok{cemp <-}\StringTok{ }\NormalTok{uemp500[}\KeywordTok{which}\NormalTok{(uemp500}\OperatorTok{$}\NormalTok{CO2_r }\OperatorTok{>}\StringTok{ }
+\StringTok{        }\FloatTok{45.28} \OperatorTok{&}\StringTok{ }\NormalTok{uemp500}\OperatorTok{$}\NormalTok{CO2_r }\OperatorTok{<}\StringTok{ }\FloatTok{459.12}\NormalTok{),]}
+\KeywordTok{plot}\NormalTok{(cemp}\OperatorTok{$}\NormalTok{CO2_r, cemp}\OperatorTok{$}\NormalTok{A)}
+\NormalTok{x <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(A }\OperatorTok{~}\StringTok{ }\NormalTok{Ci, }\DataTypeTok{data =}\NormalTok{ cemp)}
+\KeywordTok{summary}\NormalTok{(x)}
+\CommentTok{# 利用拟合的结果，提取校准用的斜率和截距}
+\NormalTok{x}\OperatorTok{$}\NormalTok{coefficients}
+
+\NormalTok{k <-}\StringTok{ }\NormalTok{x}\OperatorTok{$}\NormalTok{coefficients[}\DecValTok{2}\NormalTok{]}
+\NormalTok{z <-}\StringTok{ }\NormalTok{x}\OperatorTok{$}\NormalTok{coefficients[}\DecValTok{1}\NormalTok{]}
+
+\CommentTok{# 校准带叶片测量的数据}
+\NormalTok{uleafc <-}\StringTok{ }\NormalTok{uleaf500}
+\NormalTok{uleafc}\OperatorTok{$}\NormalTok{A <-}\StringTok{ }\NormalTok{uleafc}\OperatorTok{$}\NormalTok{A }\OperatorTok{-}\StringTok{ }\NormalTok{(k }\OperatorTok{*}\StringTok{ }\NormalTok{uleafc}\OperatorTok{$}\NormalTok{CO2_r }\OperatorTok{+}\StringTok{ }\NormalTok{z)}
+\NormalTok{uleafc}\OperatorTok{$}\NormalTok{Ci <-}\StringTok{ }\NormalTok{((uleafc}\OperatorTok{$}\NormalTok{gtc }\OperatorTok{-}\StringTok{ }\NormalTok{uleafc}\OperatorTok{$}\NormalTok{E }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{uleafc}\OperatorTok{$}\NormalTok{CO2_s }\OperatorTok{-}\StringTok{ }
+\StringTok{                  }\NormalTok{uleafc}\OperatorTok{$}\NormalTok{A) }\OperatorTok{/}\StringTok{ }\NormalTok{(uleafc}\OperatorTok{$}\NormalTok{gtc }\OperatorTok{+}\StringTok{ }\NormalTok{uleafc}\OperatorTok{$}\NormalTok{E }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
+
+\CommentTok{# 对校准前后的数据进行作图，查看校准效果}
+\KeywordTok{plot}\NormalTok{(uleaf500}\OperatorTok{$}\NormalTok{CO2_r, uleaf500}\OperatorTok{$}\NormalTok{A, }\DataTypeTok{pch =} \DecValTok{2}\NormalTok{, }\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{20}\NormalTok{, }\DecValTok{40}\NormalTok{))}
+\KeywordTok{points}\NormalTok{(uleafc}\OperatorTok{$}\NormalTok{CO2_r, uleafc}\OperatorTok{$}\NormalTok{A)}
+\KeywordTok{locator}\NormalTok{()}
+\NormalTok{cleaf <-}\StringTok{ }\NormalTok{uleafc[}\KeywordTok{which}\NormalTok{(uleafc}\OperatorTok{$}\NormalTok{CO2_r }\OperatorTok{>}\StringTok{ }\FloatTok{15.7} \OperatorTok{&}\StringTok{ }
+\StringTok{                        }\NormalTok{uleafc}\OperatorTok{$}\NormalTok{CO2_r }\OperatorTok{<}\StringTok{ }\FloatTok{474.15}\NormalTok{),]}
+\KeywordTok{plot}\NormalTok{(cleaf}\OperatorTok{$}\NormalTok{CO2_r, cleaf}\OperatorTok{$}\NormalTok{A)}
+
+\CommentTok{# 利用plantecophys拟合标准曲线和racir曲线}
+\KeywordTok{library}\NormalTok{(}\StringTok{"plantecophys"}\NormalTok{)}
+\NormalTok{acifit <-}\StringTok{ }\KeywordTok{fitaci}\NormalTok{(cleaf, }\DataTypeTok{varnames =} 
+    \KeywordTok{list}\NormalTok{(}\DataTypeTok{ALEAF =} \StringTok{"A"}\NormalTok{, }\DataTypeTok{Tleaf =} \StringTok{"Tleaf"}\NormalTok{, }\DataTypeTok{Ci =} \StringTok{"Ci"}\NormalTok{, }
+    \DataTypeTok{PPFD  =} \StringTok{"Qin"}\NormalTok{, }\DataTypeTok{Rd =} \StringTok{"Rd"}\NormalTok{), }\DataTypeTok{Patm =} \FloatTok{84.09}\NormalTok{)}
+\NormalTok{acifit_normal <-}\StringTok{ }\KeywordTok{fitaci}\NormalTok{(acin, }\DataTypeTok{varnames =} 
+     \KeywordTok{list}\NormalTok{(}\DataTypeTok{ALEAF =} \StringTok{"A"}\NormalTok{, }\DataTypeTok{Tleaf =} \StringTok{"Tleaf"}\NormalTok{, }\DataTypeTok{Ci =} \StringTok{"Ci"}\NormalTok{, }
+     \DataTypeTok{PPFD  =} \StringTok{"Qin"}\NormalTok{, }\DataTypeTok{Rd =} \StringTok{"Rd"}\NormalTok{), }\DataTypeTok{Patm =} \FloatTok{84.09}\NormalTok{)}
+\CommentTok{# 查看拟合数据}
+\KeywordTok{summary}\NormalTok{(acifit)}
+\KeywordTok{summary}\NormalTok{(acifit_normal)}
+\NormalTok{acifit}\OperatorTok{$}\NormalTok{pars}
+\NormalTok{acifit_normal}\OperatorTok{$}\NormalTok{pars}
+
+\CommentTok{# 对快速曲线作图拟合结果进行查看}
+\KeywordTok{plot}\NormalTok{(acifit, }\DataTypeTok{linecols =} \KeywordTok{c}\NormalTok{(}\StringTok{"green"}\NormalTok{, }\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{))}
+
+\NormalTok{#### ggplot2 作图}
+\NormalTok{alldata <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{A =} 
+      \KeywordTok{c}\NormalTok{(acin}\OperatorTok{$}\NormalTok{A, ddata}\OperatorTok{$}\NormalTok{Ac, ddata}\OperatorTok{$}\NormalTok{Aj, cleaf}\OperatorTok{$}\NormalTok{A), }
+      \DataTypeTok{Ci =} \KeywordTok{c}\NormalTok{(acin}\OperatorTok{$}\NormalTok{Ci, ddata}\OperatorTok{$}\NormalTok{Ci, ddata}\OperatorTok{$}\NormalTok{Ci, cleaf}\OperatorTok{$}\NormalTok{Ci),}
+      \DataTypeTok{Atype =} \KeywordTok{c}\NormalTok{(}
+        \KeywordTok{rep}\NormalTok{(}\StringTok{"standard Aci curve"}\NormalTok{, }\KeywordTok{length}\NormalTok{(acin}\OperatorTok{$}\NormalTok{A)),}
+        \KeywordTok{rep}\NormalTok{(}\StringTok{"Ac"}\NormalTok{, }\KeywordTok{length}\NormalTok{(ddata}\OperatorTok{$}\NormalTok{Ac)), }
+        \KeywordTok{rep}\NormalTok{(}\StringTok{"Aj"}\NormalTok{, }\KeywordTok{length}\NormalTok{(ddata}\OperatorTok{$}\NormalTok{Aj)),}
+        \KeywordTok{rep}\NormalTok{(}\StringTok{"A corrected"}\NormalTok{, }\KeywordTok{length}\NormalTok{(cleaf}\OperatorTok{$}\NormalTok{A))}
+\NormalTok{                      )}
+\NormalTok{)}
+
+\NormalTok{alldata}\OperatorTok{$}\NormalTok{Atype <-}\StringTok{ }\KeywordTok{factor}\NormalTok{(alldata}\OperatorTok{$}\NormalTok{Atype, }
+    \DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\StringTok{"standard Aci curve"}\NormalTok{, }
+               \StringTok{"Ac"}\NormalTok{, }\StringTok{"Aj"}\NormalTok{, }\StringTok{"A corrected"}\NormalTok{))}
+
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\NormalTok{p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(alldata)}
+\NormalTok{p1 <-}\StringTok{ }\NormalTok{p }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(Ci,A, }\DataTypeTok{colour =}\NormalTok{ Atype),  }\DataTypeTok{alpha =} \FloatTok{0.5}\NormalTok{)}
+
+\NormalTok{p2 <-}\StringTok{ }\NormalTok{p1 }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{(}\KeywordTok{aes}\NormalTok{(Ci, A, }\DataTypeTok{colour =}\NormalTok{ Atype),}
+                       \DataTypeTok{method =} \StringTok{'auto'}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{y=}\KeywordTok{expression}\NormalTok{(}\KeywordTok{paste}\NormalTok{(}\StringTok{"A "}\NormalTok{, }\StringTok{"("}\NormalTok{, mu, }
+\NormalTok{          mol}\OperatorTok{%.%}\NormalTok{m}\OperatorTok{^-}\DecValTok{2}\OperatorTok{%.%}\NormalTok{s}\OperatorTok{^-}\DecValTok{1}\NormalTok{, }\StringTok{")"}\NormalTok{)), }
+       \DataTypeTok{x=}\KeywordTok{expression}\NormalTok{(}\KeywordTok{paste}\NormalTok{(C[i], }\StringTok{" "}\NormalTok{,}
+          \StringTok{"("}\NormalTok{, mu, mol}\OperatorTok{%.%}\NormalTok{mol}\OperatorTok{^-}\DecValTok{1}\NormalTok{, }\StringTok{")"}\NormalTok{)))}
+
+\NormalTok{p2 }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{limits=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1800}\NormalTok{),}
+                        \DataTypeTok{breaks=}\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1800}\NormalTok{, }\DecValTok{200}\NormalTok{)) }\OperatorTok{+}\StringTok{  }
+\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{limits=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{3}\NormalTok{, }\DecValTok{50}\NormalTok{),}
+                     \DataTypeTok{breaks=}\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{10}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{scale_colour_hue}\NormalTok{(}\DataTypeTok{name=}\StringTok{"  "}\NormalTok{, }
+                   \DataTypeTok{labels=}\KeywordTok{c}\NormalTok{(}\StringTok{'ACi curve data; '}\NormalTok{, }
+                   \KeywordTok{expression}\NormalTok{(}\KeywordTok{paste}\NormalTok{(A[c], }\StringTok{' data; '}\NormalTok{)), }
+                   \KeywordTok{expression}\NormalTok{(}\KeywordTok{paste}\NormalTok{(A[j], }\StringTok{' data; '}\NormalTok{)), }
+                   \StringTok{'RACiR data'}\NormalTok{) }
+\NormalTok{  ) }\OperatorTok{+}\StringTok{ }\KeywordTok{theme_set}\NormalTok{(}\KeywordTok{theme_bw}\NormalTok{()) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x  =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{10}\NormalTok{, }
+           \DataTypeTok{angle=}\DecValTok{30}\NormalTok{, }\DataTypeTok{vjust=}\FloatTok{0.5}\NormalTok{), }
+        \DataTypeTok{axis.text.y =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{10}\NormalTok{),}
+        \DataTypeTok{axis.title.x =} \KeywordTok{element_text}\NormalTok{(}
+          \DataTypeTok{size =} \DecValTok{12}\NormalTok{, }\DataTypeTok{face =} \StringTok{'bold'}\NormalTok{),}
+        \DataTypeTok{axis.title.y =} \KeywordTok{element_text}\NormalTok{(}
+          \DataTypeTok{size =} \DecValTok{12}\NormalTok{, }\DataTypeTok{face =} \StringTok{'bold'}\NormalTok{),}
+        \DataTypeTok{legend.text.align =} \DecValTok{0}\NormalTok{,}
+        \DataTypeTok{legend.position =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.8}\NormalTok{, }\FloatTok{0.6}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+最终采用常规方法和 RACiR\texttrademark 方法结果如图 \ref{fig:racir}
+所示，其中 Aj 与 Ac 结果采用 RACiR\texttrademark 计算\footnote{注意，注意数据表头的大小写，此处代码中，为处理数据的方便，我更改了大小写，分析自己的数据时需要注意}。
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/racir} \caption{RACiR 方法与常规结果的比较}\label{fig:racir}
+\end{figure}
+
+\section{LI-6800 荧光数据分析}\label{li-6800-}
+
+LI-6800
+能够直接提供基本的叶绿素荧光参数，其他参数均可通过这些基本的参数进行计算，计算也较简单，在此不赘述，需要注意的是快相荧光部分的数据，因为分析
+ojip 数据的模型有很多，很多都需要复杂的计算，在此我们先将其中较为简单的
+jip test 数据分析进行介绍。
+
+\subsection{jip test 的实现}\label{jip-test-}
+
+LI-6800 增加了 ojip 曲线测量功能，本功能主要是针对测量数据的 jip test
+的实现。
+
+\subsection{\texorpdfstring{\texttt{jiptest}
+软件包安装}{jiptest 软件包安装}}\label{jiptest-}
+
+目前 \texttt{jiptest} 暂时放在 github 我的软件仓库内，并没提交
+CRAN，因此需要 \texttt{devtools} 的支持，然后才能从 github 安装
+\texttt{jiptest}。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
+\KeywordTok{library}\NormalTok{(devtools)}
+\KeywordTok{install_github}\NormalTok{(}\StringTok{"zhujiedong/jiptest"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{\texorpdfstring{\texttt{read\_files} 及
+\texttt{read\_dcfiles}
+函数}{read\_files 及 read\_dcfiles 函数}}\label{read_files--read_dcfiles-}
+
+\texttt{read\_files}
+用于批量读取所有调制光测量数据，方便用于其他的数据分析。\textbf{函数要求所有数据必须是
+\texttt{xlsx}
+格式，并且所有测量数据都保存在同一文件夹内。}，如有其他文件或测量数据则会报错。
+\texttt{read\_dcfiles} 用于批量读取所有连续光测量数据，其他与
+\texttt{read\_dcfiles} 相同。
+
+函数仅有一个参数，即保存数据文件夹的路径，使用如下：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(jiptest)}
+\NormalTok{jipdata <-}\StringTok{ }\KeywordTok{read_files}\NormalTok{(}\StringTok{"./data/ojip"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}
+
+\caption{\label{tab:unnamed-chunk-25}jiptest 批量导入数据后的样式}
+\centering
+\begin{tabular}[t]{rrl}
+\toprule
+SECS & FLUOR & SOURCE\\
+\midrule
+2.41e-05 & 887 & INDUCTION-484-20171225-13\_15\_58\\
+2.81e-05 & 998 & INDUCTION-484-20171225-13\_15\_58\\
+3.19e-05 & 1013 & INDUCTION-484-20171225-13\_15\_58\\
+3.60e-05 & 1055 & INDUCTION-484-20171225-13\_15\_58\\
+4.01e-05 & 1044 & INDUCTION-484-20171225-13\_15\_58\\
+4.41e-05 & 1205 & INDUCTION-484-20171225-13\_15\_58\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dcjipdata <-}\StringTok{ }\KeywordTok{read_dcfiles}\NormalTok{(}\StringTok{"./data/ojip"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}
+
+\caption{\label{tab:unnamed-chunk-26}jiptest DC 数据批量导入数据后的样式}
+\centering
+\begin{tabular}[t]{rrl}
+\toprule
+SECS & FLUOR & SOURCE\\
+\midrule
+2.41e-05 & 154000 & INDUCTION-484-20171225-13\_15\_58\\
+2.81e-05 & 157566 & INDUCTION-484-20171225-13\_15\_58\\
+3.19e-05 & 161261 & INDUCTION-484-20171225-13\_15\_58\\
+3.60e-05 & 165114 & INDUCTION-484-20171225-13\_15\_58\\
+4.01e-05 & 169069 & INDUCTION-484-20171225-13\_15\_58\\
+4.41e-05 & 173231 & INDUCTION-484-20171225-13\_15\_58\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{\texorpdfstring{\texttt{jip\_test} 及 \texttt{jip\_dctest}
+函数}{jip\_test 及 jip\_dctest 函数}}\label{jip_test--jip_dctest-}
+
+\texttt{jiptest} 是 jiptest 的核心函数，用于所有数据的 jip test
+分析，函数仅包含两个参数，测量数据的保存文件夹路径，以及分析结果的导出路径，导出路径必须为\textbf{已存在的文件夹或磁盘根目录}。
+\texttt{jip\_dctest} 与 \texttt{jip\_test}
+相似，用于连续光测量数据的分析。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{jip_results <-}\StringTok{ }\KeywordTok{jip_test}\NormalTok{(}\StringTok{"./data/ojip"}\NormalTok{, }\StringTok{"d:/"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## for the current version, we suggest you use the default settings of the duration (1000 ms or more)
+##   in the induction settings of LI-6800
+\end{verbatim}
+
+\begin{longtable}[t]{lrrrr}
+\caption{\label{tab:jipres}jiptest 输出的计算参数}\\
+\toprule
+parameters & data\_file1 & data\_file2 & data\_file3 & data\_file4\\
+\midrule
+Fo & 887.0000000 & 849.0000000 & 981.0000000 & 914.0000000\\
+Fm & 4649.5200000 & 3714.2700000 & 4225.2400000 & 3754.2700000\\
+F300 & 2181.4000000 & 1798.6000000 & 2067.8000000 & 2537.2000000\\
+FJ & 2594.3000000 & 2104.6000000 & 2456.8000000 & 2569.0000000\\
+FI & 4443.1100000 & 3547.1100000 & 4009.2200000 & 3556.5300000\\
+\addlinespace
+Tfmax & 256.0160000 & 316.0160000 & 272.0160000 & 200.0160000\\
+Area & 79.6780569 & 59.0630025 & 75.5884747 & 80.6896655\\
+Fv & 3762.5200000 & 2865.2700000 & 3244.2400000 & 2840.2700000\\
+Vj & 0.4537650 & 0.4382135 & 0.4548985 & 0.5826911\\
+Mo & 1.3760990 & 1.3256691 & 1.3399748 & 2.2859799\\
+\addlinespace
+Sm & 0.0211768 & 0.0206134 & 0.0232993 & 0.0284092\\
+Ss & 0.3297474 & 0.3305602 & 0.3394829 & 0.2548977\\
+N & 0.0642212 & 0.0623590 & 0.0686317 & 0.1114531\\
+Vav & 0.9999173 & 0.9999348 & 0.9999143 & 0.9998580\\
+phi\_po & 0.8092276 & 0.7714221 & 0.7678238 & 0.7565439\\
+\addlinespace
+phi\_ET2o & 0.4420284 & 0.4333745 & 0.4185419 & 0.3157125\\
+phi\_RE1o & 0.0443938 & 0.0450048 & 0.0511261 & 0.0526707\\
+psi\_ET2o & 0.5462350 & 0.5617865 & 0.5451015 & 0.4173089\\
+psi\_RE1o & 0.0548595 & 0.0583401 & 0.0665857 & 0.0696201\\
+delta\_RE1o & 0.1004321 & 0.1038474 & 0.1221529 & 0.1668312\\
+\addlinespace
+phi\_Do & 0.1907724 & 0.2285779 & 0.2321762 & 0.2434561\\
+phi\_Pav & 0.0000669 & 0.0000503 & 0.0000658 & 0.0001075\\
+ABS\_RC & 3.7475545 & 3.9215460 & 3.8363703 & 5.1856106\\
+TR0\_RC & 3.0326246 & 3.0251673 & 2.9456566 & 3.9231420\\
+ET2o\_RC & 1.6565256 & 1.6994981 & 1.6056817 & 1.6371621\\
+\addlinespace
+RE1o\_RC & 0.1663683 & 0.1764884 & 0.1961386 & 0.2731297\\
+DI0\_RC & 0.7149299 & 0.8963787 & 0.8907137 & 1.2624686\\
+ABC\_CS & 887.0000000 & 849.0000000 & 981.0000000 & 914.0000000\\
+TR0\_CS & 3.0326246 & 3.0251673 & 2.9456566 & 3.9231420\\
+ET0\_CS & 1.6565256 & 1.6994981 & 1.6056817 & 1.6371621\\
+\addlinespace
+DI0\_CS & 883.9673754 & 845.9748327 & 978.0543434 & 910.0768580\\
+PIabs & 1.3625603 & 1.1032809 & 1.0329666 & 0.4291734\\
+PItotal & 0.1521228 & 0.1278497 & 0.1437378 & 0.0859364\\
+DFabs & 0.3093655 & 0.0982884 & 0.0324348 & -0.8458942\\
+\bottomrule
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dcjip_results <-}\StringTok{ }\KeywordTok{jip_dctest}\NormalTok{(}\StringTok{"./data/ojip"}\NormalTok{, }\StringTok{"d:/"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## for the current version, we suggest you use the default settings of the duration (1000 ms or more)
+##           in the induction settings of LI-6800
+\end{verbatim}
+
+\begin{longtable}[t]{lrrrr}
+\caption{\label{tab:dcjipres}jiptest DC 数据输出的计算参数}\\
+\toprule
+parameters & data\_file1 & data\_file2 & data\_file3 & data\_file4\\
+\midrule
+Fo & 1.540000e+05 & 1.331910e+05 & 1.566640e+05 & 1.535890e+05\\
+Fm & 7.138390e+05 & 5.606100e+05 & 6.476600e+05 & 5.848390e+05\\
+F300 & 3.380910e+05 & 2.754768e+05 & 3.228592e+05 & 3.881104e+05\\
+FJ & 4.007440e+05 & 3.202450e+05 & 3.768850e+05 & 4.066710e+05\\
+FI & 6.815050e+05 & 5.343140e+05 & 6.145900e+05 & 5.522530e+05\\
+\addlinespace
+Tfmax & 2.760160e+02 & 3.000160e+02 & 2.880160e+02 & 2.120160e+02\\
+Area & 1.037380e+04 & 8.095231e+03 & 9.855470e+03 & 1.052059e+04\\
+Fv & 5.598390e+05 & 4.274190e+05 & 4.909960e+05 & 4.312500e+05\\
+Vj & 4.407410e-01 & 4.376361e-01 & 4.485189e-01 & 5.868568e-01\\
+Mo & 1.315314e+00 & 1.331581e+00 & 1.353943e+00 & 2.175271e+00\\
+\addlinespace
+Sm & 1.853000e-02 & 1.893980e-02 & 2.007240e-02 & 2.439560e-02\\
+Ss & 3.350843e-01 & 3.286589e-01 & 3.312686e-01 & 2.697856e-01\\
+N & 5.529940e-02 & 5.762750e-02 & 6.059250e-02 & 9.042570e-02\\
+Vav & 9.999329e-01 & 9.999369e-01 & 9.999303e-01 & 9.998849e-01\\
+phi\_po & 7.842651e-01 & 7.624177e-01 & 7.581076e-01 & 7.373824e-01\\
+\addlinespace
+phi\_ET2o & 4.386073e-01 & 4.287562e-01 & 4.180820e-01 & 3.046445e-01\\
+phi\_RE1o & 4.529590e-02 & 4.690600e-02 & 5.106070e-02 & 5.571790e-02\\
+psi\_ET2o & 5.592590e-01 & 5.623639e-01 & 5.514811e-01 & 4.131432e-01\\
+psi\_RE1o & 5.775590e-02 & 6.152280e-02 & 6.735290e-02 & 7.556170e-02\\
+delta\_RE1o & 1.032722e-01 & 1.094003e-01 & 1.221309e-01 & 1.828948e-01\\
+\addlinespace
+phi\_Do & 2.157349e-01 & 2.375823e-01 & 2.418924e-01 & 2.626176e-01\\
+phi\_Pav & 5.270000e-05 & 4.810000e-05 & 5.280000e-05 & 8.480000e-05\\
+ABS\_RC & 3.805249e+00 & 3.990815e+00 & 3.981886e+00 & 5.026763e+00\\
+TR0\_RC & 2.984324e+00 & 3.042668e+00 & 3.018699e+00 & 3.706647e+00\\
+ET2o\_RC & 1.669010e+00 & 1.711086e+00 & 1.664755e+00 & 1.531376e+00\\
+\addlinespace
+RE1o\_RC & 1.723623e-01 & 1.871934e-01 & 2.033181e-01 & 2.800807e-01\\
+DI0\_RC & 8.209251e-01 & 9.481469e-01 & 9.631878e-01 & 1.320116e+00\\
+ABC\_CS & 1.540000e+05 & 1.331910e+05 & 1.566640e+05 & 1.535890e+05\\
+TR0\_CS & 2.984324e+00 & 3.042668e+00 & 3.018699e+00 & 3.706647e+00\\
+ET0\_CS & 1.669010e+00 & 1.711086e+00 & 1.664755e+00 & 1.531376e+00\\
+\addlinespace
+DI0\_CS & 1.539970e+05 & 1.331880e+05 & 1.566610e+05 & 1.535853e+05\\
+PIabs & 1.212241e+00 & 1.033289e+00 & 9.677646e-01 & 3.932321e-01\\
+PItotal & 1.396084e-01 & 1.269280e-01 & 1.346374e-01 & 8.801820e-02\\
+DFabs & 1.924705e-01 & 3.274650e-02 & -3.276640e-02 & -9.333551e-01\\
+\bottomrule
+\end{longtable}
+
+计算参数见表 \ref{tab:jipres}
+
+\subsection{\texorpdfstring{\texttt{jip\_plot} 及 \texttt{jip\_dcplot}
+函数}{jip\_plot 及 jip\_dcplot 函数}}\label{jip_plot--jip_dcplot-}
+
+\texttt{jip\_plot} 和 \texttt{jip\_dcplot} 基于
+\texttt{ggplot2}，用于快速预览所有测量结果的 ojip
+曲线。函数仅有一个参数，即保存数据文件夹的路径，使用如下：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{jip_plot}\NormalTok{(}\StringTok{"./data/ojip"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown_files/figure-latex/acplot-1.pdf}
+\caption{\label{fig:acplot}调制式测量的 ojip 曲线的快速预览}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{jip_dcplot}\NormalTok{(}\StringTok{"./data/ojip"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown_files/figure-latex/dcplot-1.pdf}
+\caption{\label{fig:dcplot}连续式测量的 ojip 曲线的快速预览}
+\end{figure}
+
+ojip 调制式测量光 ojip 曲线的快速预览如图 \ref{fig:acplot}
+
+ojip 连续式测量光 ojip 曲线的快速预览如图 \ref{fig:dcplot}
+
+\cleardoublepage
+
+\bibliography{photoR.bib}
+
+\backmatter
+\printindex
+
+\end{document}

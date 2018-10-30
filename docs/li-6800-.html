@@ -25,7 +25,7 @@
 <meta name="author" content="祝介东      北京力高泰科技有限公司">
 
 
-<meta name="date" content="2018-10-19">
+<meta name="date" content="2018-10-31">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -181,7 +181,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.6.2" data-path="li-6800-.html"><a href="li-6800-.html#jiptest-"><i class="fa fa-check"></i><b>9.6.2</b> <code>jiptest</code> 软件包安装</a></li>
 <li class="chapter" data-level="9.6.3" data-path="li-6800-.html"><a href="li-6800-.html#read_files--read_dcfiles-"><i class="fa fa-check"></i><b>9.6.3</b> <code>read_files</code> 及 <code>read_dcfiles</code> 函数</a></li>
 <li class="chapter" data-level="9.6.4" data-path="li-6800-.html"><a href="li-6800-.html#jip_test--jip_dctest-"><i class="fa fa-check"></i><b>9.6.4</b> <code>jip_test</code> 及 <code>jip_dctest</code> 函数</a></li>
-<li class="chapter" data-level="9.6.5" data-path="li-6800-.html"><a href="li-6800-.html#jip_ggplot-"><i class="fa fa-check"></i><b>9.6.5</b> <code>jip_ggplot</code> 函数</a></li>
+<li class="chapter" data-level="9.6.5" data-path="li-6800-.html"><a href="li-6800-.html#jip_plot--jip_dcplot-"><i class="fa fa-check"></i><b>9.6.5</b> <code>jip_plot</code> 及 <code>jip_dcplot</code> 函数</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>参考文献</a></li>
@@ -1038,17 +1038,25 @@ jipdata &lt;-<span class="st"> </span><span class="kw">read_files</span>(<span c
 </table>
 <p>计算参数见表 <a href="li-6800-.html#tab:jipres">9.4</a></p>
 </div>
-<div id="jip_ggplot-" class="section level3">
-<h3><span class="header-section-number">9.6.5</span> <code>jip_ggplot</code> 函数</h3>
-<p><code>jip_ggplot</code> 基于 <code>ggplot2</code>，用于快速预览所有测量结果的 ojip 曲线。函数仅有一个参数，即保存数据文件夹的路径，使用如下：</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">jip_ggplot</span>(<span class="st">&quot;./data/ojip&quot;</span>)</code></pre></div>
-<div class="figure"><span id="fig:ggplot"></span>
-<img src="bookdown_files/figure-html/ggplot-1.png" alt="ojip 曲线的快速预览" width="672" />
+<div id="jip_plot--jip_dcplot-" class="section level3">
+<h3><span class="header-section-number">9.6.5</span> <code>jip_plot</code> 及 <code>jip_dcplot</code> 函数</h3>
+<p><code>jip_plot</code> 和 <code>jip_dcplot</code> 基于 <code>ggplot2</code>，用于快速预览所有测量结果的 ojip 曲线。函数仅有一个参数，即保存数据文件夹的路径，使用如下：</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">jip_plot</span>(<span class="st">&quot;./data/ojip&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:acplot"></span>
+<img src="bookdown_files/figure-html/acplot-1.png" alt="调制式测量的 ojip 曲线的快速预览" width="672" />
 <p class="caption">
-图 9.2: ojip 曲线的快速预览
+图 9.2: 调制式测量的 ojip 曲线的快速预览
 </p>
 </div>
-<p>ojip 曲线的快速预览如图 <a href="li-6800-.html#fig:ggplot">9.2</a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">jip_dcplot</span>(<span class="st">&quot;./data/ojip&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:dcplot"></span>
+<img src="bookdown_files/figure-html/dcplot-1.png" alt="连续式测量的 ojip 曲线的快速预览" width="672" />
+<p class="caption">
+图 9.3: 连续式测量的 ojip 曲线的快速预览
+</p>
+</div>
+<p>ojip 调制式测量光 ojip 曲线的快速预览如图 <a href="li-6800-.html#fig:acplot">9.2</a></p>
+<p>ojip 连续式测量光 ojip 曲线的快速预览如图 <a href="li-6800-.html#fig:dcplot">9.3</a></p>
 
 
 </div>
