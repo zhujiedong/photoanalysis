@@ -26,7 +26,7 @@
 \PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
 \hypersetup{
             pdftitle={R 语言分析 LI-6400 和 LI-6800 光合仪的数据},
-            pdfauthor={祝介东      北京力高泰科技有限公司},
+            pdfauthor={祝介东    北京力高泰科技有限公司},
             colorlinks=true,
             linkcolor=Maroon,
             citecolor=Blue,
@@ -168,7 +168,7 @@
 
 \title{R 语言分析 LI-6400 和 LI-6800 光合仪的数据}
 \author{祝介东 北京力高泰科技有限公司}
-\date{2018-10-30}
+\date{2018-10-31}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -269,13 +269,13 @@ LI-6800 进行分析，且目前市面上仅 LI-6800
 
 \chapter{R 软件与 Rstudio}\label{intro}
 
-\section{R 软件}\label{r-}
+\section{R 软件}\label{rsoft}
 
 R语言的官方网站是 \href{http://www.r-project.org}{R}
 ，与R语言有关的网站还有CRAN（镜像），其主站网址是：
 \href{http://www.cran.r-project.org}{CRAN}。
 
-\section{Rstudio}\label{rstudio}
+\section{Rstudio}\label{rstudiosoft}
 
 尽管R的功能十分强大，但是其作为一个命令行工具 \footnote{实际上在Windows系统下安装的时候提供一个十分简陋的GUI。}，在实际使用中尤为不便，因此，一款集成的开发环境十分有必要。\href{https://www.rstudio.com/products/RStudio/}{Rstudio}是一款专门针对R开发的一个集成环境，同时也支持其他多种语言，用户界面十分友好，支持代码高亮，拼写提示，作图展示等功能，因此我们推荐使用Rstudio对我们的数据进行分析。
 
@@ -296,9 +296,9 @@ R 软件和 Rstudio
 \cleardoublepage
 
 \chapter{\texorpdfstring{CO\textsubscript{2}
-响应曲线的拟合}{CO2 响应曲线的拟合}}\label{co2-}
+响应曲线的拟合}{CO2 响应曲线的拟合}}\label{response_fit}
 
-\section{FvCB 模型}\label{fvcb-}
+\section{FvCB 模型}\label{fvcb_mod}
 
 在 \texttt{plantecophys} 包中使用的模型为 \citet{Farquhar1980A} 建立的
 C3 植物模型 FvCB，其基于 C3 植物碳反应的三个阶段：
@@ -421,7 +421,7 @@ A=min\{w_{c},w_{j,}w_{p}\}(1-\frac{\Gamma^{*}}{C_{c}})-R_{d}
 \end{equation}
 
 \section{\texorpdfstring{\texttt{plantecophys}
-软件包}{plantecophys 软件包}}\label{plantecophys-}
+软件包}{plantecophys 软件包}}\label{plantecophys}
 
 Remko A. Duursma 在2015年发表了一篇文章
 \citet{Duursma2015Plantecophys}，\texttt{plantecophys}
@@ -448,7 +448,7 @@ Remko A. Duursma 在2015年发表了一篇文章
 \href{https://cran.r-project.org/web/packages/plantecophys/plantecophys.pdf}{plantecophys}。
 
 \section{\texorpdfstring{LI-6400XT CO\textsubscript{2}
-响应曲线的拟合}{LI-6400XT CO2 响应曲线的拟合}}\label{li-6400xt-co2-}
+响应曲线的拟合}{LI-6400XT CO2 响应曲线的拟合}}\label{fit6400}
 
 LI-6400XT CO\textsubscript{2} 响应曲线的拟合需要借助
 \texttt{plantecophys} 的 \texttt{fitaci} 实现，fitaci 函数为根据 FvCB
@@ -456,7 +456,7 @@ LI-6400XT CO\textsubscript{2} 响应曲线的拟合需要借助
 J\(_{max}\)、V\(_{cmax}\)、R\(_{d}\)及他们的标准差，并根据
 \citet{Medlyn2002Temperature} 的方法考虑了温度的影响。
 
-\subsection{fitaci 函数介绍}\label{fitaci-}
+\subsection{fitaci 函数介绍}\label{fitaci_intro}
 
 \texttt{fitaci} 的用法如下\footnote{仅针对 C3 植物}：
 
@@ -525,7 +525,7 @@ J\(_{max}\)、V\(_{cmax}\)、R\(_{d}\)及他们的标准差，并根据
 其他参数请参考 FvCB 模型 \citet{Farquhar1980A} 或查看 plantecophys
 的帮助文档。
 
-\subsubsection{fitaci函数详解}\label{fitaci}
+\subsubsection{fitaci函数详解}\label{fitaci_detail}
 
 \begin{itemize}
 \item
@@ -551,9 +551,9 @@ J\(_{max}\)、V\(_{cmax}\)、R\(_{d}\)及他们的标准差，并根据
 
 \section{\texorpdfstring{使用 \texttt{plantecophys} 拟合 LI-6400XT
 CO\textsubscript{2}
-响应曲线数据}{使用 plantecophys 拟合 LI-6400XT CO2 响应曲线数据}}\label{-plantecophys--li-6400xt-co2-}
+响应曲线数据}{使用 plantecophys 拟合 LI-6400XT CO2 响应曲线数据}}\label{plantecophy_use}
 
-\subsection{数据的前处理}
+\subsection{数据的前处理}\label{data6400}
 
 虽然 R 软件支持直接导入 xlsx 的数据，但因为 LI-6400XT
 的数据记录文件内有其他空行或 remark
@@ -825,7 +825,7 @@ Obs & HHMMSS & FTime & EBal. & Photo & Cond & Ci & Trmmol\\
 \end{quote}
 
 \subsubsection{\texorpdfstring{fitmethod = ``onepoint''
-介绍}{fitmethod = onepoint 介绍}}\label{fitmethod-onepoint-}
+介绍}{fitmethod = onepoint 介绍}}\label{onepoint}
 
 \citet{De2016A} 发表了关于 one point 方法计算 \(V_{cmax}\) 和
 \(J_{max}\) 方法的文章，在 2017 年 11 月的更新中，plantecophys
@@ -867,7 +867,7 @@ transition point 来实现的，文章中的比值均值为 1.9，范围在 1.68
 
 \subsection{\texorpdfstring{使用 `onepoint' 单独计算
 V\textsubscript{cmax} 和
-J\textsubscript{max}}{使用 onepoint 单独计算 Vcmax 和 Jmax}}\label{-onepoint--vcmax--jmax}
+J\textsubscript{max}}{使用 onepoint 单独计算 Vcmax 和 Jmax}}\label{onpoint_fit}
 
 目前我手头没有相应数据，仅有使用 LI-6400 测试 auto log 2
 时的一个数据，我们用这个来示范该方法的使用：
@@ -940,7 +940,7 @@ aci\_fit.Photo & aci\_fit.Vcmax & aci\_fit.Jmax\\
 ACi 测量计算。
 
 \subsection{\texorpdfstring{多条 CO\textsubscript{2}
-响应曲线的拟合}{多条 CO2 响应曲线的拟合}}\label{-co2-}
+响应曲线的拟合}{多条 CO2 响应曲线的拟合}}\label{multi_curve}
 
 fitacis 函数实际上是 fitaci 函数的扩展，方便一次拟合多条曲线\footnote{需要注意，此时fitmethod一般推荐使用bilinear。}。函数的参数如下：
 
@@ -963,7 +963,7 @@ fitacis 函数实际上是 fitaci 函数的扩展，方便一次拟合多条曲�
 实际上 fitacis 与 fitaci 模型算法完全一致，只不过增加了一个 group
 参数，用于区分不同测量的数据，具体请参考举例内容。
 
-\subsubsection{fitacis 函数应用举例}\label{fitacis-}
+\subsubsection{fitacis 函数应用举例}\label{fitacis_exa}
 
 下文代码根据 plantecophys
 中的示例代码修改，进行演示，原代码请参考其帮助文档。
@@ -1115,7 +1115,7 @@ fitacis 函数实际上是 fitaci 函数的扩展，方便一次拟合多条曲�
 用法基本一致，各行代码均已经注释，更详细用法请参函数考帮助。
 
 \subsection{\texorpdfstring{\texttt{findCiTransition}
-函数}{findCiTransition 函数}}\label{findcitransition-}
+函数}{findCiTransition 函数}}\label{transition}
 
 计算 CiTransition 的函数，第一点为 Ac \& Aj，第二点为 Aj \&
 Ap，并且仅在计算 TPU 的前提下才会有第二点出现。
@@ -1129,7 +1129,7 @@ Ap，并且仅在计算 TPU 的前提下才会有第二点出现。
 参数使用，object 为 fitaci 函数对象，或者整个的 \texttt{Photosyn} 函数。
 \ldots{} 为使用 \texttt{Photosyn} 时可传递的参数。
 
-\section{C4 植物光合}\label{c4-}
+\section{C4 植物光合}\label{c4}
 
 之前的部分模型全部为关于 C3 植物的拟合，而
 \citet{Caemmerer2000Biochemical} 的方法，则是针对 C4 植物的 A-Ci
@@ -1193,7 +1193,7 @@ Ap，并且仅在计算 TPU 的前提下才会有第二点出现。
 以上参数均来自
 \citet{Caemmerer2000Biochemical}，括号中的参数值均为默认值，具体应用时请按照实际情况修改。
 
-\subsection{C4 植物光合速率的计算}\label{c4-}
+\subsection{C4 植物光合速率的计算}\label{c4_sim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1212,7 +1212,7 @@ Ap，并且仅在计算 TPU 的前提下才会有第二点出现。
 
 \cleardoublepage
 
-\chapter{气孔导度模型的拟合}
+\chapter{气孔导度模型的拟合}\label{stomotal_sim}
 
 气孔导度模型的拟合是通过 \texttt{fitBB} 来实现的，可以拟合三个
 \textbf{Ball-Berry 类型的气孔导度模型}，共有下面几个参数：
@@ -1244,7 +1244,7 @@ g_s = g0 + g1(\frac{A h_r}{C_a})
 为拟合参数，h\textsubscript{r} 为叶片表面的相对湿度，C\textsubscript{a}
 为叶片处CO\textsubscript{2}浓度。
 
-\section{BBLeuning 模型}\label{bbleuning-}
+\section{BBLeuning 模型}\label{bbleuning}
 
 \citet{leuning1995a} 发表的文章中的模型：
 
@@ -1257,7 +1257,7 @@ g_s = g_0 + g_1(\frac{A}{(C_a - \Gamma)(1 + \frac{D}{D_0})})
 补偿点，g\textsubscript{0}、g\textsubscript{1} 和 D\textsubscript{0}
 为拟合参数。
 
-\section{BBOptiFull 模型}\label{bboptifull-}
+\section{BBOptiFull 模型}\label{bboptifull}
 
 \citet{Medlyn2011Reconciling} 发表的文章中的模型：
 
@@ -1329,7 +1329,7 @@ g_s = g_0 + 1.6(1 + \frac{g_1}{D}(1-g_k)) \frac{A}{C_a}
 \end{verbatim}
 
 \section{\texorpdfstring{\texttt{fitBBs}
-函数}{fitBBs 函数}}\label{fitbbs-}
+函数}{fitBBs 函数}}\label{fitbbs}
 
 如果我们有多个物种的数据，那么使用 \texttt{fitBBs}
 则可以快速拟合多条曲线的数据。我们先整合两次的数据，然后再查看运行结果：
@@ -1375,7 +1375,7 @@ g_s = g_0 + 1.6(1 + \frac{g_1}{D}(1-g_k)) \frac{A}{C_a}
 
 \cleardoublepage
 
-\chapter{光合最优气孔导度耦合模型}
+\chapter{光合最优气孔导度耦合模型}\label{stomotal_couple}
 
 \citet{Cowan1977Stomatal} 关于最优气孔导度的描述概括如下：
 最优气孔行为理论认为气孔的最优化行为就是在某一时间段内，
@@ -1390,7 +1390,7 @@ A - \lambda E
 生产量，单位一般为
 \(mol \: CO_2 \cdot mol^{-1} H_2O\)，可通过光合速率和蒸腾速率计算。
 
-\section{\texorpdfstring{\texttt{FARAO} 函数}{FARAO 函数}}\label{farao-}
+\section{\texorpdfstring{\texttt{FARAO} 函数}{FARAO 函数}}\label{farao}
 
 \texttt{FARAO} 函数用于找到最大化 \(A - \lambda E\) 的** Ci **值。
 
@@ -1413,7 +1413,7 @@ A - \lambda E
 
 \cleardoublepage
 
-\chapter{光合气孔导度耦合模型}
+\chapter{光合气孔导度耦合模型}\label{photo_stomo}
 
 \citet{Duursma2015Plantecophys} 对于气体交换耦合模型的简述如下
 \footnote{详细内容请参考原文}：
@@ -1465,7 +1465,7 @@ g_s = g_0 + g_1 \frac{A_n}{C_a} f(D)
 J\textsubscript{max}, R\textsubscript{d} 以及他们的温度依赖性）。
 
 \section{\texorpdfstring{\texttt{Photosyn}
-函数}{Photosyn 函数}}\label{photosyn-}
+函数}{Photosyn 函数}}\label{photosyn}
 
 Photosyn 为耦合的光合--气孔导度模型，基于 Farquhar 光合模型和 Ball-Berry
 气孔导度模型。
@@ -1496,7 +1496,7 @@ Photosyn 为耦合的光合--气孔导度模型，基于 Farquhar 光合模型�
 \ref{fitaci-p} 和 \ref{fitbb-p} 部分的内容。
 
 \subsection{\texorpdfstring{\texttt{Photosyn}
-使用举例}{Photosyn 使用举例}}\label{photosyn-}
+使用举例}{Photosyn 使用举例}}\label{photo_exam}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1605,13 +1605,13 @@ Photosyn 为耦合的光合--气孔导度模型，基于 Farquhar 光合模型�
 需求与供给的作图 \ref{fig:supply}。
 
 \section{\texorpdfstring{\texttt{PhotosynEB}
-函数}{PhotosynEB 函数}}\label{photosyneb-}
+函数}{PhotosynEB 函数}}\label{photsyneb}
 
 使用同 \texttt{Photosyn}，只不过使用能量平衡法来计算叶温。
 目前版本尚存在bug，不能直接提供 GS 来计算，否则会出现未知错误。
 
 \section{\texorpdfstring{\texttt{PhotosynTuzet}
-函数}{PhotosynTuzet 函数}}\label{photosyntuzet-}
+函数}{PhotosynTuzet 函数}}\label{photosyntuzet}
 
 同样为光合气孔导度耦合模型，只不过基于 \citet{tuzet2003a}
 的气孔导度模型，现将其描述如下：
@@ -1640,7 +1640,7 @@ f_{\Psi v} = \frac{1 + exp(s_f \Psi_f)}{1 + exp(s_f(\Psi_f - \Psi_v))}
 依赖于不同物种的形态学适应以及生长过程中所处的环境。
 
 \subsection{\texorpdfstring{\texttt{PhotosynTuzet}
-的参数}{PhotosynTuzet 的参数}}\label{photosyntuzet-}
+的参数}{PhotosynTuzet 的参数}}\label{photosyntuzet_para}
 
 除 \citet{tuzet2003a} 模型中使用的参数外，其他参数都继承了
 \texttt{Photosyn} 的参数
@@ -1672,7 +1672,7 @@ f_{\Psi v} = \frac{1 + exp(s_f \Psi_f)}{1 + exp(s_f(\Psi_f - \Psi_v))}
 
 \cleardoublepage
 
-\chapter{RHtoVPD 函数}\label{rhtovpd-}
+\chapter{RHtoVPD 函数}\label{rhtovpd}
 
 该函数为一系列的工具，用于温度、湿度不同单位之间的换算
 \citet{Jones1993Plants} ：
@@ -1725,11 +1725,11 @@ Tair：空气温度(\textcelsius) 。
 
 \cleardoublepage
 
-\chapter{光响应曲线的拟合}
+\chapter{光响应曲线的拟合}\label{lrc_fit}
 
 光响应曲线模型有很多，主要分为四大类，直角双曲线，非直角双曲线，指数以及直角双曲线修正模型，我们分别对这四类进行阐述。
 
-\section{直角双曲线模型}
+\section{直角双曲线模型}\label{rec_mod}
 
 \citet{BalyEC1935} 提出了直角双曲线模型，它的表达式为：
 
@@ -1771,7 +1771,7 @@ P_{nmax}= AQE \times I_{sat} - R_{d}
 \citet{ZhangXS2009}、0.9P\(_{nmax}\)
 \citet{HuangHY2009}、或其他设定的值来的来估算\(I_{sat}\)。
 
-\subsection{直角双曲线模型的实现}
+\subsection{直角双曲线模型的实现}\label{rec_fit}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1911,7 +1911,7 @@ Rd & 0.2810926 & 0.0789338 & 3.561117 & 0.0051716\\
 
 \cleardoublepage
 
-\section{非直角双曲线模型}
+\section{非直角双曲线模型}\label{nonrec_mod}
 
 \citet{Thornley1976} 提出了非直角双曲线模型，它的表达式为：
 
@@ -1925,7 +1925,7 @@ P_{n} = \frac{\alpha I + P_{nmax} \sqrt{(\alpha I + P_{nmax})^{2} - 4  \theta \a
 \eqref{eq:rec}。同样如同直角双曲线模型，式仍然没有极值，无法求得
 \(I_{sat}\)，可以仍然参考直角双曲线模型的方式进行计算。
 
-\subsection{非直角双曲线模型的实现}
+\subsection{非直角双曲线模型的实现}\label{nonrec_mode_exam}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2048,7 +2048,7 @@ theta & 0.3700908 & 0.0493403 & 7.500783 & 0.0000369\\
 
 \cleardoublepage
 
-\section{指数模型}
+\section{指数模型}\label{lrc_exp}
 
 光合指数模型较多，我们此处使用的指数函数的模型
 \citet{Prado1997Photosynthetic}，其表达式为：
@@ -2062,7 +2062,7 @@ P_{n} = P_{nmax}[1 - e^{-b(I-I_{C})}]
 为自然对数的底，b为常数，其他参数意义同
 \eqref{eq:exp}。同样，该方程仍然是没有极值的函数，但我们可以直接求得光补偿点。
 
-\subsection{指数模型的实现}
+\subsection{指数模型的实现}\label{lrc_exp_exam}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2159,7 +2159,7 @@ b & 0.0041183 & 0.0002012 & 20.467032 & 0.0000000\\
 
 \cleardoublepage
 
-\section{直角双曲线的修正模型}
+\section{直角双曲线的修正模型}\label{rev_rec}
 
 \citet{YEZiPiao2010} 直角双曲线修正模型的表达式如式 \eqref{eq:mrec} 所示：
 
@@ -2186,7 +2186,7 @@ P_{nmax} = \alpha\left(\frac{\sqrt{\beta+\gamma}-\sqrt{\beta}}{\gamma}\right)^{2
 
 该模型的优点为拟合结果中光饱和点和最大净光合速率均接近实测值，还可以拟合饱和光强之后光合速率随光强下降段的曲线。
 
-\subsection{直角双曲线修正模型的实现}
+\subsection{直角双曲线修正模型的实现}\label{rev_rec_exam}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2280,7 +2280,7 @@ Rd & 0.2156186 & 0.0543505 & 3.967190 & 0.0032685\\
 
 \cleardoublepage
 
-\chapter{关于非线性拟合的初始值}
+\chapter{关于非线性拟合的初始值}\label{start_con}
 
 在解释初始值之前我们首先需要了解一个数学上的概念------迭代，
 
@@ -2306,7 +2306,7 @@ R
 \end{Highlighting}
 \end{Shaded}
 
-\section{nlsLM 解决方案}\label{nlslm-}
+\section{nlsLM 解决方案}\label{nlslm}
 
 nlsLM 来自于 \citet{Elzhov2016minpack} 的 \texttt{minpack.lm}，利用 C
 语言的 MINPACK 库，修改了 Levenberg-Marquardt
@@ -2364,7 +2364,7 @@ singular gradient matrix at initial parameter estimates
 
 结果看上去还可以\footnote{有些时候结果并不理想，该方法并不是万无一失}。
 
-\section{作图比对法}
+\section{作图比对法}\label{plot_comp}
 
 模型很多参数可以用已有数据去估计，我们可以只来分析难以判断的参数，流程如下：
 
@@ -2385,7 +2385,7 @@ singular gradient matrix at initial parameter estimates
   将计算的A值与光强进行作图，看我们计算的曲线与测量数据点的重合程度，必要时在修改其他参数，使曲线和散点重合度最好，重合程度最高的参数值即为我们需要的初始值。
 \end{itemize}
 
-\subsection{实现过程}
+\subsection{实现过程}\label{plot_exam}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2493,7 +2493,7 @@ theta 值与 alpha
 从 \ref{fig:alpf} 的呈现以及 F 检验的 p
 值来讲，图形已经比较完美了。\textbf{也就是说尽管我们作图的时候看到重合度并不高，但是非线性拟合本来就是一个迭代的过程，只要我们的数据与真实值相差不大，还是能够得到完美结果的}。
 
-\subsection{直观展示}
+\subsection{直观展示}\label{show_demo}
 
 上面的表述太啰嗦，直接用下面的图形说明一下，其中 alhpa
 的取值在此处选择从 0.01 到 0.07，每次增加 0.05，其他值分别为 Am = 12.31,
@@ -2546,7 +2546,7 @@ Rd= 0.66, theta=0.71
 0.05 两条曲线之间，在 0.045 时最接近测量点，也就是我们把初始值设为 0.04
 和 0.05 之间最接近，本例中可认为是0.045，实际这三个值均可。
 
-\section{自动多次尝试法}
+\section{自动多次尝试法}\label{mult_try}
 
 该方法实际为使用 \texttt{nls2} 来实现，具体方法参考 \citet{nls2}
 的文章，可简单概括为使用一系列的起始值梯度（例如下面的代码中， alpha
@@ -2621,7 +2621,7 @@ Rd= 0.66, theta=0.71
 的拟合结果似乎和测量值更匹配，当然这只是第一印象，后续的判断还要进一步通过
 F 检验、 AIC、BIC 等统计方式才能判定。
 
-\section{小结}
+\section{小结}\label{sum_start}
 
 采用如上三种方式都可以有效的解决起始值的问题，\texttt{nlsLM}
 操作上更易实现，对初始值的大小不敏感，但设置不能太离谱，否则仍然会报错。作图比对法操作上更麻烦一些，但是这种方式一定能得出合理的初始值设置。采用
@@ -2637,9 +2637,9 @@ F 检验、 AIC、BIC 等统计方式才能判定。
 
 \cleardoublepage
 
-\chapter{LI-6800 的数据分析}\label{li-6800-}
+\chapter{LI-6800 的数据分析}\label{anay_6800}
 
-\section{数据格式}
+\section{数据格式}\label{data6800}
 
 LI-6800 的数据前处理同 LI-6400 相同，如表 \ref{tab:head6800}
 所示的样式。
@@ -2658,7 +2658,7 @@ obs & time & elapsed & date & TIME & E\\
 \bottomrule
 \end{longtable}
 
-\section{LI-6800 与 LI-6400 使用时的差别}\label{li-6800--li-6400-}
+\section{LI-6800 与 LI-6400 使用时的差别}\label{dif}
 
 \texttt{plantecophys} 使用时建立在 LI-6400XT 基础之上的软件包，因此在
 LI-6800 代码中，需要改动的是 fitaci、fitacis 及 fitBB 中的 varnames
@@ -2673,7 +2673,7 @@ LI-6800 代码中，需要改动的是 fitaci、fitacis 及 fitBB 中的 varname
 \end{Highlighting}
 \end{Shaded}
 
-\section{光响应曲线注意事项}
+\section{光响应曲线注意事项}\label{notice}
 
 光响应曲线的拟合相对简单，仅需要光强和光合速率的值，其中需要修改的部分仅为光强的赋值部分，在文件名一致的前提下，修改如下代码即可：
 
@@ -2685,7 +2685,7 @@ LI-6800 代码中，需要改动的是 fitaci、fitacis 及 fitBB 中的 varname
 \end{Shaded}
 
 \section{\texorpdfstring{LI-6800
-RACiR\texttrademark 的测量与拟合}{LI-6800 RACiR的测量与拟合}}\label{li-6800-racir}
+RACiR\texttrademark 的测量与拟合}{LI-6800 RACiR的测量与拟合}}\label{racir68}
 
 在评估作物性状时，V\(_{cmax}\) 及 J\(_{max}\)时非常有用，传统的 A--Ci
 曲线测量要求植物叶片要在一定浓度 CO\(_{2}\)
@@ -2707,7 +2707,7 @@ CO\(_{2}\) 响应曲线 RACiR\texttrademark
 测量实验，该功能使得 5 min 内测量 A--Ci 曲线成为可能。该方法的实现可参考
 \citet{Stinziano2017} 的文章。具体测量步骤请参考我们的 LI-6800实验手册。
 
-\section{\texorpdfstring{RACiR\texttrademark 分析的实现}{RACiR分析的实现}}\label{racir}
+\section{\texorpdfstring{RACiR\texttrademark 分析的实现}{RACiR分析的实现}}\label{racir68_exam}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2832,20 +2832,20 @@ CO\(_{2}\) 响应曲线 RACiR\texttrademark
 \includegraphics[width=1\linewidth]{images/racir} \caption{RACiR 方法与常规结果的比较}\label{fig:racir}
 \end{figure}
 
-\section{LI-6800 荧光数据分析}\label{li-6800-}
+\section{LI-6800 荧光数据分析}\label{fluro68}
 
 LI-6800
 能够直接提供基本的叶绿素荧光参数，其他参数均可通过这些基本的参数进行计算，计算也较简单，在此不赘述，需要注意的是快相荧光部分的数据，因为分析
 ojip 数据的模型有很多，很多都需要复杂的计算，在此我们先将其中较为简单的
 jip test 数据分析进行介绍。
 
-\subsection{jip test 的实现}\label{jip-test-}
+\subsection{jip test 的实现}\label{jiptest}
 
 LI-6800 增加了 ojip 曲线测量功能，本功能主要是针对测量数据的 jip test
 的实现。
 
 \subsection{\texorpdfstring{\texttt{jiptest}
-软件包安装}{jiptest 软件包安装}}\label{jiptest-}
+软件包安装}{jiptest 软件包安装}}\label{jiptest_pack}
 
 目前 \texttt{jiptest} 暂时放在 github 我的软件仓库内，并没提交
 CRAN，因此需要 \texttt{devtools} 的支持，然后才能从 github 安装
@@ -2861,7 +2861,7 @@ CRAN，因此需要 \texttt{devtools} 的支持，然后才能从 github 安装
 
 \subsection{\texorpdfstring{\texttt{read\_files} 及
 \texttt{read\_dcfiles}
-函数}{read\_files 及 read\_dcfiles 函数}}\label{read_files--read_dcfiles-}
+函数}{read\_files 及 read\_dcfiles 函数}}\label{readfluor}
 
 \texttt{read\_files}
 用于批量读取所有调制光测量数据，方便用于其他的数据分析。\textbf{函数要求所有数据必须是
@@ -2922,7 +2922,7 @@ SECS & FLUOR & SOURCE\\
 \end{table}
 
 \subsection{\texorpdfstring{\texttt{jip\_test} 及 \texttt{jip\_dctest}
-函数}{jip\_test 及 jip\_dctest 函数}}\label{jip_test--jip_dctest-}
+函数}{jip\_test 及 jip\_dctest 函数}}\label{testfluor}
 
 \texttt{jiptest} 是 jiptest 的核心函数，用于所有数据的 jip test
 分析，函数仅包含两个参数，测量数据的保存文件夹路径，以及分析结果的导出路径，导出路径必须为\textbf{已存在的文件夹或磁盘根目录}。
@@ -3050,7 +3050,7 @@ DFabs & 1.924705e-01 & 3.274650e-02 & -3.276640e-02 & -9.333551e-01\\
 计算参数见表 \ref{tab:jipres}
 
 \subsection{\texorpdfstring{\texttt{jip\_plot} 及 \texttt{jip\_dcplot}
-函数}{jip\_plot 及 jip\_dcplot 函数}}\label{jip_plot--jip_dcplot-}
+函数}{jip\_plot 及 jip\_dcplot 函数}}\label{plotfluor}
 
 \texttt{jip\_plot} 和 \texttt{jip\_dcplot} 基于
 \texttt{ggplot2}，用于快速预览所有测量结果的 ojip

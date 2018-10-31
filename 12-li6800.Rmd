@@ -1,6 +1,6 @@
-# LI-6800 的数据分析
+# LI-6800 的数据分析 {#anay_6800}
 
-## 数据格式
+## 数据格式 {#data6800}
 
 LI-6800 的数据前处理同 LI-6400 相同，如表 \@ref(tab:head6800) 所示的样式。
 
@@ -9,7 +9,7 @@ style1 <- read.csv("./data/aci6800.csv")
 knitr::kable(head(style1[, 1:6]),  longtable = TRUE, booktabs = TRUE, caption = '推荐 LI-6800 整理后数据样式')
 ```
 
-## LI-6800 与 LI-6400 使用时的差别
+## LI-6800 与 LI-6400 使用时的差别 {#dif}
 
 `plantecophys` 使用时建立在 LI-6400XT 基础之上的软件包，因此在 LI-6800 代码中，需要改动的是 fitaci、fitacis 及 fitBB 中的 varnames 选项，也就是将 LI-6400XT 的表头改为 LI-6800 的表头。
 以 fitaci 函数为例：
@@ -20,7 +20,7 @@ knitr::kable(head(style1[, 1:6]),  longtable = TRUE, booktabs = TRUE, caption = 
           PPFD  = "Qin", Rd = "Rd"))
 ```
 
-## 光响应曲线注意事项
+## 光响应曲线注意事项 {#notice}
 
 光响应曲线的拟合相对简单，仅需要光强和光合速率的值，其中需要修改的部分仅为光强的赋值部分，在文件名一致的前提下，修改如下代码即可：
 
@@ -29,7 +29,7 @@ lrc_Q <- lrc$Qin
 lrc_A <- lrc$A 
 ```
 
-## LI-6800 RACiR\texttrademark 的测量与拟合
+## LI-6800 RACiR\texttrademark 的测量与拟合 {#racir68}
 
 在评估作物性状时，V$_{cmax}$ 及 J$_{max}$时非常有用，传统的 A–Ci 曲线测量要求植物叶片要在一定浓度 CO$_{2}$
 下适应几分钟后完成测量，这样的测量有几个缺点：
@@ -42,7 +42,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 测量实验，该功能使得 5 min 内测量 A–Ci 曲线成为可能。该方法的实现可参考  @Stinziano2017
 的文章。具体测量步骤请参考我们的 LI-6800实验手册。
 
-## RACiR\texttrademark 分析的实现 
+## RACiR\texttrademark 分析的实现 {#racir68_exam}
 
 ```{r, eval=FALSE}
 # 分别读取未校准空叶室数据
@@ -163,15 +163,15 @@ p2 + scale_x_continuous(limits=c(0, 1800),
 knitr::include_graphics("images/racir.png")
 ```
 
-## LI-6800 荧光数据分析
+## LI-6800 荧光数据分析 {#fluro68}
 
 LI-6800 能够直接提供基本的叶绿素荧光参数，其他参数均可通过这些基本的参数进行计算，计算也较简单，在此不赘述，需要注意的是快相荧光部分的数据，因为分析 ojip 数据的模型有很多，很多都需要复杂的计算，在此我们先将其中较为简单的 jip test 数据分析进行介绍。
 
-### jip test 的实现
+### jip test 的实现 {#jiptest}
 
 LI-6800 增加了 ojip 曲线测量功能，本功能主要是针对测量数据的 jip test 的实现。
 
-### `jiptest` 软件包安装
+### `jiptest` 软件包安装 {#jiptest_pack}
 
 目前 `jiptest` 暂时放在 github 我的软件仓库内，并没提交 CRAN，因此需要 `devtools` 的支持，然后才能从 github 安装 `jiptest`。
 
@@ -182,7 +182,7 @@ library(devtools)
 install_github("zhujiedong/jiptest")
 ```
 
-### `read_files` 及 `read_dcfiles` 函数
+### `read_files` 及 `read_dcfiles` 函数 {#readfluor}
 
 `read_files` 用于批量读取所有调制光测量数据，方便用于其他的数据分析。**函数要求所有数据必须是 `xlsx` 格式，并且所有测量数据都保存在同一文件夹内。**，如有其他文件或测量数据则会报错。
 `read_dcfiles` 用于批量读取所有连续光测量数据，其他与 `read_dcfiles` 相同。
@@ -208,7 +208,7 @@ knitr::kable(head(dcjipdata),  booktabs = TRUE,
 caption = 'jiptest DC 数据批量导入数据后的样式')
 ```
 
-### `jip_test` 及 `jip_dctest` 函数
+### `jip_test` 及 `jip_dctest` 函数 {#testfluor}
 
  `jiptest` 是 jiptest 的核心函数，用于所有数据的 jip test 分析，函数仅包含两个参数，测量数据的保存文件夹路径，以及分析结果的导出路径，导出路径必须为**已存在的文件夹或磁盘根目录**。
  `jip_dctest` 与 `jip_test` 相似，用于连续光测量数据的分析。
@@ -239,7 +239,7 @@ knitr::kable(dcjip_results,  longtable = TRUE, booktabs = TRUE,
 
 计算参数见表 \@ref(tab:jipres)
 
-### `jip_plot` 及 `jip_dcplot` 函数 
+### `jip_plot` 及 `jip_dcplot` 函数 {#plotfluor}
 
 `jip_plot` 和 `jip_dcplot` 基于 `ggplot2`，用于快速预览所有测量结果的 ojip 曲线。函数仅有一个参数，即保存数据文件夹的路径，使用如下：
 

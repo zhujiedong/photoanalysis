@@ -12,7 +12,7 @@
   <meta property="og:title" content="R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:image" content="images/cover.jpg" />
+  <meta property="og:image" content="images/cover.png" />
   <meta property="og:description" content="R 语言分析 LI-6400XT 与 LI-6800 数据" />
   <meta name="github-repo" content="zhujiedong/R_analysis_LI-6400_LI_6800" />
 
@@ -20,9 +20,9 @@
   <meta name="twitter:title" content="R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   
   <meta name="twitter:description" content="R 语言分析 LI-6400XT 与 LI-6800 数据" />
-  <meta name="twitter:image" content="images/cover.jpg" />
+  <meta name="twitter:image" content="images/cover.png" />
 
-<meta name="author" content="祝介东      北京力高泰科技有限公司">
+<meta name="author" content="祝介东    北京力高泰科技有限公司">
 
 
 <meta name="date" content="2018-10-31">
@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="e585b3e4ba8ee4bd9ce88085.html">
-<link rel="next" href="co2-.html">
+<link rel="next" href="response-fit.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -100,93 +100,93 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Book Example</a></li>
+<li><a href="./">R 光合数据分析</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="e5898de8a880.html"><a href="e5898de8a880.html"><i class="fa fa-check"></i>前言</a></li>
 <li class="chapter" data-level="" data-path="e78988e69d83e5a3b0e6988e.html"><a href="e78988e69d83e5a3b0e6988e.html"><i class="fa fa-check"></i>版权声明</a></li>
 <li class="chapter" data-level="" data-path="e585b3e4ba8ee4bd9ce88085.html"><a href="e585b3e4ba8ee4bd9ce88085.html"><i class="fa fa-check"></i>关于作者</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> R 软件与 Rstudio</a><ul>
-<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#r-"><i class="fa fa-check"></i><b>1.1</b> R 软件</a></li>
-<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#rstudio"><i class="fa fa-check"></i><b>1.2</b> Rstudio</a></li>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#rsoft"><i class="fa fa-check"></i><b>1.1</b> R 软件</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#rstudiosoft"><i class="fa fa-check"></i><b>1.2</b> Rstudio</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="co2-.html"><a href="co2-.html"><i class="fa fa-check"></i><b>2</b> CO<sub>2</sub> 响应曲线的拟合</a><ul>
-<li class="chapter" data-level="2.1" data-path="co2-.html"><a href="co2-.html#fvcb-"><i class="fa fa-check"></i><b>2.1</b> FvCB 模型</a></li>
-<li class="chapter" data-level="2.2" data-path="co2-.html"><a href="co2-.html#plantecophys-"><i class="fa fa-check"></i><b>2.2</b> <code>plantecophys</code> 软件包</a></li>
-<li class="chapter" data-level="2.3" data-path="co2-.html"><a href="co2-.html#li-6400xt-co2-"><i class="fa fa-check"></i><b>2.3</b> LI-6400XT CO<sub>2</sub> 响应曲线的拟合</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="co2-.html"><a href="co2-.html#fitaci-"><i class="fa fa-check"></i><b>2.3.1</b> fitaci 函数介绍</a></li>
+<li class="chapter" data-level="2" data-path="response-fit.html"><a href="response-fit.html"><i class="fa fa-check"></i><b>2</b> CO<sub>2</sub> 响应曲线的拟合</a><ul>
+<li class="chapter" data-level="2.1" data-path="response-fit.html"><a href="response-fit.html#fvcb_mod"><i class="fa fa-check"></i><b>2.1</b> FvCB 模型</a></li>
+<li class="chapter" data-level="2.2" data-path="response-fit.html"><a href="response-fit.html#plantecophys"><i class="fa fa-check"></i><b>2.2</b> <code>plantecophys</code> 软件包</a></li>
+<li class="chapter" data-level="2.3" data-path="response-fit.html"><a href="response-fit.html#fit6400"><i class="fa fa-check"></i><b>2.3</b> LI-6400XT CO<sub>2</sub> 响应曲线的拟合</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="response-fit.html"><a href="response-fit.html#fitaci_intro"><i class="fa fa-check"></i><b>2.3.1</b> fitaci 函数介绍</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="co2-.html"><a href="co2-.html#-plantecophys--li-6400xt-co2-"><i class="fa fa-check"></i><b>2.4</b> 使用 <code>plantecophys</code> 拟合 LI-6400XT CO<sub>2</sub> 响应曲线数据</a><ul>
-<li class="chapter" data-level="2.4.1" data-path="co2-.html"><a href="co2-.html#section-2.4.1"><i class="fa fa-check"></i><b>2.4.1</b> 数据的前处理</a></li>
-<li class="chapter" data-level="2.4.2" data-path="co2-.html"><a href="co2-.html#fitaci-p"><i class="fa fa-check"></i><b>2.4.2</b> 使用示例</a></li>
-<li class="chapter" data-level="2.4.3" data-path="co2-.html"><a href="co2-.html#-onepoint--vcmax--jmax"><i class="fa fa-check"></i><b>2.4.3</b> 使用 ‘onepoint’ 单独计算 V<sub>cmax</sub> 和 J<sub>max</sub></a></li>
-<li class="chapter" data-level="2.4.4" data-path="co2-.html"><a href="co2-.html#-co2-"><i class="fa fa-check"></i><b>2.4.4</b> 多条 CO<sub>2</sub> 响应曲线的拟合</a></li>
-<li class="chapter" data-level="2.4.5" data-path="co2-.html"><a href="co2-.html#findcitransition-"><i class="fa fa-check"></i><b>2.4.5</b> <code>findCiTransition</code> 函数</a></li>
+<li class="chapter" data-level="2.4" data-path="response-fit.html"><a href="response-fit.html#plantecophy_use"><i class="fa fa-check"></i><b>2.4</b> 使用 <code>plantecophys</code> 拟合 LI-6400XT CO<sub>2</sub> 响应曲线数据</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="response-fit.html"><a href="response-fit.html#data6400"><i class="fa fa-check"></i><b>2.4.1</b> 数据的前处理</a></li>
+<li class="chapter" data-level="2.4.2" data-path="response-fit.html"><a href="response-fit.html#fitaci-p"><i class="fa fa-check"></i><b>2.4.2</b> 使用示例</a></li>
+<li class="chapter" data-level="2.4.3" data-path="response-fit.html"><a href="response-fit.html#onpoint_fit"><i class="fa fa-check"></i><b>2.4.3</b> 使用 ‘onepoint’ 单独计算 V<sub>cmax</sub> 和 J<sub>max</sub></a></li>
+<li class="chapter" data-level="2.4.4" data-path="response-fit.html"><a href="response-fit.html#multi_curve"><i class="fa fa-check"></i><b>2.4.4</b> 多条 CO<sub>2</sub> 响应曲线的拟合</a></li>
+<li class="chapter" data-level="2.4.5" data-path="response-fit.html"><a href="response-fit.html#transition"><i class="fa fa-check"></i><b>2.4.5</b> <code>findCiTransition</code> 函数</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="co2-.html"><a href="co2-.html#c4-"><i class="fa fa-check"></i><b>2.5</b> C4 植物光合</a><ul>
-<li class="chapter" data-level="2.5.1" data-path="co2-.html"><a href="co2-.html#c4-"><i class="fa fa-check"></i><b>2.5.1</b> C4 植物光合速率的计算</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="section-3.html"><a href="section-3.html"><i class="fa fa-check"></i><b>3</b> 气孔导度模型的拟合</a><ul>
-<li class="chapter" data-level="3.1" data-path="section-3.html"><a href="section-3.html#ballberry"><i class="fa fa-check"></i><b>3.1</b> BallBerry 模型</a></li>
-<li class="chapter" data-level="3.2" data-path="section-3.html"><a href="section-3.html#bbleuning-"><i class="fa fa-check"></i><b>3.2</b> BBLeuning 模型</a></li>
-<li class="chapter" data-level="3.3" data-path="section-3.html"><a href="section-3.html#bboptifull-"><i class="fa fa-check"></i><b>3.3</b> BBOptiFull 模型</a></li>
-<li class="chapter" data-level="3.4" data-path="section-3.html"><a href="section-3.html#fitbb-p"><i class="fa fa-check"></i><b>3.4</b> <code>fitBB</code> 函数</a></li>
-<li class="chapter" data-level="3.5" data-path="section-3.html"><a href="section-3.html#fitbbs-"><i class="fa fa-check"></i><b>3.5</b> <code>fitBBs</code> 函数</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="section-4.html"><a href="section-4.html"><i class="fa fa-check"></i><b>4</b> 光合最优气孔导度耦合模型</a><ul>
-<li class="chapter" data-level="4.1" data-path="section-4.html"><a href="section-4.html#farao-"><i class="fa fa-check"></i><b>4.1</b> <code>FARAO</code> 函数</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="section-5.html"><a href="section-5.html"><i class="fa fa-check"></i><b>5</b> 光合气孔导度耦合模型</a><ul>
-<li class="chapter" data-level="5.1" data-path="section-5.html"><a href="section-5.html#photosyn-"><i class="fa fa-check"></i><b>5.1</b> <code>Photosyn</code> 函数</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="section-5.html"><a href="section-5.html#photosyn-"><i class="fa fa-check"></i><b>5.1.1</b> <code>Photosyn</code> 使用举例</a></li>
-</ul></li>
-<li class="chapter" data-level="5.2" data-path="section-5.html"><a href="section-5.html#photosyneb-"><i class="fa fa-check"></i><b>5.2</b> <code>PhotosynEB</code> 函数</a></li>
-<li class="chapter" data-level="5.3" data-path="section-5.html"><a href="section-5.html#photosyntuzet-"><i class="fa fa-check"></i><b>5.3</b> <code>PhotosynTuzet</code> 函数</a><ul>
-<li class="chapter" data-level="5.3.1" data-path="section-5.html"><a href="section-5.html#photosyntuzet-"><i class="fa fa-check"></i><b>5.3.1</b> <code>PhotosynTuzet</code> 的参数</a></li>
+<li class="chapter" data-level="2.5" data-path="response-fit.html"><a href="response-fit.html#c4"><i class="fa fa-check"></i><b>2.5</b> C4 植物光合</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="response-fit.html"><a href="response-fit.html#c4_sim"><i class="fa fa-check"></i><b>2.5.1</b> C4 植物光合速率的计算</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="rhtovpd-.html"><a href="rhtovpd-.html"><i class="fa fa-check"></i><b>6</b> RHtoVPD 函数</a></li>
-<li class="chapter" data-level="7" data-path="section-7.html"><a href="section-7.html"><i class="fa fa-check"></i><b>7</b> 光响应曲线的拟合</a><ul>
-<li class="chapter" data-level="7.1" data-path="section-7.html"><a href="section-7.html#section-7.1"><i class="fa fa-check"></i><b>7.1</b> 直角双曲线模型</a><ul>
-<li class="chapter" data-level="7.1.1" data-path="section-7.html"><a href="section-7.html#section-7.1.1"><i class="fa fa-check"></i><b>7.1.1</b> 直角双曲线模型的实现</a></li>
+<li class="chapter" data-level="3" data-path="stomotal-sim.html"><a href="stomotal-sim.html"><i class="fa fa-check"></i><b>3</b> 气孔导度模型的拟合</a><ul>
+<li class="chapter" data-level="3.1" data-path="stomotal-sim.html"><a href="stomotal-sim.html#ballberry"><i class="fa fa-check"></i><b>3.1</b> BallBerry 模型</a></li>
+<li class="chapter" data-level="3.2" data-path="stomotal-sim.html"><a href="stomotal-sim.html#bbleuning"><i class="fa fa-check"></i><b>3.2</b> BBLeuning 模型</a></li>
+<li class="chapter" data-level="3.3" data-path="stomotal-sim.html"><a href="stomotal-sim.html#bboptifull"><i class="fa fa-check"></i><b>3.3</b> BBOptiFull 模型</a></li>
+<li class="chapter" data-level="3.4" data-path="stomotal-sim.html"><a href="stomotal-sim.html#fitbb-p"><i class="fa fa-check"></i><b>3.4</b> <code>fitBB</code> 函数</a></li>
+<li class="chapter" data-level="3.5" data-path="stomotal-sim.html"><a href="stomotal-sim.html#fitbbs"><i class="fa fa-check"></i><b>3.5</b> <code>fitBBs</code> 函数</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="section-7.html"><a href="section-7.html#section-7.2"><i class="fa fa-check"></i><b>7.2</b> 非直角双曲线模型</a><ul>
-<li class="chapter" data-level="7.2.1" data-path="section-7.html"><a href="section-7.html#section-7.2.1"><i class="fa fa-check"></i><b>7.2.1</b> 非直角双曲线模型的实现</a></li>
+<li class="chapter" data-level="4" data-path="stomotal-couple.html"><a href="stomotal-couple.html"><i class="fa fa-check"></i><b>4</b> 光合最优气孔导度耦合模型</a><ul>
+<li class="chapter" data-level="4.1" data-path="stomotal-couple.html"><a href="stomotal-couple.html#farao"><i class="fa fa-check"></i><b>4.1</b> <code>FARAO</code> 函数</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="section-7.html"><a href="section-7.html#section-7.3"><i class="fa fa-check"></i><b>7.3</b> 指数模型</a><ul>
-<li class="chapter" data-level="7.3.1" data-path="section-7.html"><a href="section-7.html#section-7.3.1"><i class="fa fa-check"></i><b>7.3.1</b> 指数模型的实现</a></li>
+<li class="chapter" data-level="5" data-path="photo-stomo.html"><a href="photo-stomo.html"><i class="fa fa-check"></i><b>5</b> 光合气孔导度耦合模型</a><ul>
+<li class="chapter" data-level="5.1" data-path="photo-stomo.html"><a href="photo-stomo.html#photosyn"><i class="fa fa-check"></i><b>5.1</b> <code>Photosyn</code> 函数</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="photo-stomo.html"><a href="photo-stomo.html#photo_exam"><i class="fa fa-check"></i><b>5.1.1</b> <code>Photosyn</code> 使用举例</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="section-7.html"><a href="section-7.html#section-7.4"><i class="fa fa-check"></i><b>7.4</b> 直角双曲线的修正模型</a><ul>
-<li class="chapter" data-level="7.4.1" data-path="section-7.html"><a href="section-7.html#section-7.4.1"><i class="fa fa-check"></i><b>7.4.1</b> 直角双曲线修正模型的实现</a></li>
+<li class="chapter" data-level="5.2" data-path="photo-stomo.html"><a href="photo-stomo.html#photsyneb"><i class="fa fa-check"></i><b>5.2</b> <code>PhotosynEB</code> 函数</a></li>
+<li class="chapter" data-level="5.3" data-path="photo-stomo.html"><a href="photo-stomo.html#photosyntuzet"><i class="fa fa-check"></i><b>5.3</b> <code>PhotosynTuzet</code> 函数</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="photo-stomo.html"><a href="photo-stomo.html#photosyntuzet_para"><i class="fa fa-check"></i><b>5.3.1</b> <code>PhotosynTuzet</code> 的参数</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="section-8.html"><a href="section-8.html"><i class="fa fa-check"></i><b>8</b> 关于非线性拟合的初始值</a><ul>
-<li class="chapter" data-level="8.1" data-path="section-8.html"><a href="section-8.html#nlslm-"><i class="fa fa-check"></i><b>8.1</b> nlsLM 解决方案</a></li>
-<li class="chapter" data-level="8.2" data-path="section-8.html"><a href="section-8.html#section-8.2"><i class="fa fa-check"></i><b>8.2</b> 作图比对法</a><ul>
-<li class="chapter" data-level="8.2.1" data-path="section-8.html"><a href="section-8.html#section-8.2.1"><i class="fa fa-check"></i><b>8.2.1</b> 实现过程</a></li>
-<li class="chapter" data-level="8.2.2" data-path="section-8.html"><a href="section-8.html#section-8.2.2"><i class="fa fa-check"></i><b>8.2.2</b> 直观展示</a></li>
+<li class="chapter" data-level="6" data-path="rhtovpd.html"><a href="rhtovpd.html"><i class="fa fa-check"></i><b>6</b> RHtoVPD 函数</a></li>
+<li class="chapter" data-level="7" data-path="lrc-fit.html"><a href="lrc-fit.html"><i class="fa fa-check"></i><b>7</b> 光响应曲线的拟合</a><ul>
+<li class="chapter" data-level="7.1" data-path="lrc-fit.html"><a href="lrc-fit.html#rec_mod"><i class="fa fa-check"></i><b>7.1</b> 直角双曲线模型</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="lrc-fit.html"><a href="lrc-fit.html#rec_fit"><i class="fa fa-check"></i><b>7.1.1</b> 直角双曲线模型的实现</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="section-8.html"><a href="section-8.html#section-8.3"><i class="fa fa-check"></i><b>8.3</b> 自动多次尝试法</a></li>
-<li class="chapter" data-level="8.4" data-path="section-8.html"><a href="section-8.html#section-8.4"><i class="fa fa-check"></i><b>8.4</b> 小结</a></li>
+<li class="chapter" data-level="7.2" data-path="lrc-fit.html"><a href="lrc-fit.html#nonrec_mod"><i class="fa fa-check"></i><b>7.2</b> 非直角双曲线模型</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="lrc-fit.html"><a href="lrc-fit.html#nonrec_mode_exam"><i class="fa fa-check"></i><b>7.2.1</b> 非直角双曲线模型的实现</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="li-6800-.html"><a href="li-6800-.html"><i class="fa fa-check"></i><b>9</b> LI-6800 的数据分析</a><ul>
-<li class="chapter" data-level="9.1" data-path="li-6800-.html"><a href="li-6800-.html#section-9.1"><i class="fa fa-check"></i><b>9.1</b> 数据格式</a></li>
-<li class="chapter" data-level="9.2" data-path="li-6800-.html"><a href="li-6800-.html#li-6800--li-6400-"><i class="fa fa-check"></i><b>9.2</b> LI-6800 与 LI-6400 使用时的差别</a></li>
-<li class="chapter" data-level="9.3" data-path="li-6800-.html"><a href="li-6800-.html#section-9.3"><i class="fa fa-check"></i><b>9.3</b> 光响应曲线注意事项</a></li>
-<li class="chapter" data-level="9.4" data-path="li-6800-.html"><a href="li-6800-.html#li-6800-racir"><i class="fa fa-check"></i><b>9.4</b> LI-6800 RACiR的测量与拟合</a></li>
-<li class="chapter" data-level="9.5" data-path="li-6800-.html"><a href="li-6800-.html#racir"><i class="fa fa-check"></i><b>9.5</b> RACiR分析的实现</a></li>
-<li class="chapter" data-level="9.6" data-path="li-6800-.html"><a href="li-6800-.html#li-6800-"><i class="fa fa-check"></i><b>9.6</b> LI-6800 荧光数据分析</a><ul>
-<li class="chapter" data-level="9.6.1" data-path="li-6800-.html"><a href="li-6800-.html#jip-test-"><i class="fa fa-check"></i><b>9.6.1</b> jip test 的实现</a></li>
-<li class="chapter" data-level="9.6.2" data-path="li-6800-.html"><a href="li-6800-.html#jiptest-"><i class="fa fa-check"></i><b>9.6.2</b> <code>jiptest</code> 软件包安装</a></li>
-<li class="chapter" data-level="9.6.3" data-path="li-6800-.html"><a href="li-6800-.html#read_files--read_dcfiles-"><i class="fa fa-check"></i><b>9.6.3</b> <code>read_files</code> 及 <code>read_dcfiles</code> 函数</a></li>
-<li class="chapter" data-level="9.6.4" data-path="li-6800-.html"><a href="li-6800-.html#jip_test--jip_dctest-"><i class="fa fa-check"></i><b>9.6.4</b> <code>jip_test</code> 及 <code>jip_dctest</code> 函数</a></li>
-<li class="chapter" data-level="9.6.5" data-path="li-6800-.html"><a href="li-6800-.html#jip_plot--jip_dcplot-"><i class="fa fa-check"></i><b>9.6.5</b> <code>jip_plot</code> 及 <code>jip_dcplot</code> 函数</a></li>
+<li class="chapter" data-level="7.3" data-path="lrc-fit.html"><a href="lrc-fit.html#lrc_exp"><i class="fa fa-check"></i><b>7.3</b> 指数模型</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="lrc-fit.html"><a href="lrc-fit.html#lrc_exp_exam"><i class="fa fa-check"></i><b>7.3.1</b> 指数模型的实现</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="lrc-fit.html"><a href="lrc-fit.html#rev_rec"><i class="fa fa-check"></i><b>7.4</b> 直角双曲线的修正模型</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="lrc-fit.html"><a href="lrc-fit.html#rev_rec_exam"><i class="fa fa-check"></i><b>7.4.1</b> 直角双曲线修正模型的实现</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="start-con.html"><a href="start-con.html"><i class="fa fa-check"></i><b>8</b> 关于非线性拟合的初始值</a><ul>
+<li class="chapter" data-level="8.1" data-path="start-con.html"><a href="start-con.html#nlslm"><i class="fa fa-check"></i><b>8.1</b> nlsLM 解决方案</a></li>
+<li class="chapter" data-level="8.2" data-path="start-con.html"><a href="start-con.html#plot_comp"><i class="fa fa-check"></i><b>8.2</b> 作图比对法</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="start-con.html"><a href="start-con.html#plot_exam"><i class="fa fa-check"></i><b>8.2.1</b> 实现过程</a></li>
+<li class="chapter" data-level="8.2.2" data-path="start-con.html"><a href="start-con.html#show_demo"><i class="fa fa-check"></i><b>8.2.2</b> 直观展示</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="start-con.html"><a href="start-con.html#mult_try"><i class="fa fa-check"></i><b>8.3</b> 自动多次尝试法</a></li>
+<li class="chapter" data-level="8.4" data-path="start-con.html"><a href="start-con.html#sum_start"><i class="fa fa-check"></i><b>8.4</b> 小结</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="anay-6800.html"><a href="anay-6800.html"><i class="fa fa-check"></i><b>9</b> LI-6800 的数据分析</a><ul>
+<li class="chapter" data-level="9.1" data-path="anay-6800.html"><a href="anay-6800.html#data6800"><i class="fa fa-check"></i><b>9.1</b> 数据格式</a></li>
+<li class="chapter" data-level="9.2" data-path="anay-6800.html"><a href="anay-6800.html#dif"><i class="fa fa-check"></i><b>9.2</b> LI-6800 与 LI-6400 使用时的差别</a></li>
+<li class="chapter" data-level="9.3" data-path="anay-6800.html"><a href="anay-6800.html#notice"><i class="fa fa-check"></i><b>9.3</b> 光响应曲线注意事项</a></li>
+<li class="chapter" data-level="9.4" data-path="anay-6800.html"><a href="anay-6800.html#racir68"><i class="fa fa-check"></i><b>9.4</b> LI-6800 RACiR的测量与拟合</a></li>
+<li class="chapter" data-level="9.5" data-path="anay-6800.html"><a href="anay-6800.html#racir68_exam"><i class="fa fa-check"></i><b>9.5</b> RACiR分析的实现</a></li>
+<li class="chapter" data-level="9.6" data-path="anay-6800.html"><a href="anay-6800.html#fluro68"><i class="fa fa-check"></i><b>9.6</b> LI-6800 荧光数据分析</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="anay-6800.html"><a href="anay-6800.html#jiptest"><i class="fa fa-check"></i><b>9.6.1</b> jip test 的实现</a></li>
+<li class="chapter" data-level="9.6.2" data-path="anay-6800.html"><a href="anay-6800.html#jiptest_pack"><i class="fa fa-check"></i><b>9.6.2</b> <code>jiptest</code> 软件包安装</a></li>
+<li class="chapter" data-level="9.6.3" data-path="anay-6800.html"><a href="anay-6800.html#readfluor"><i class="fa fa-check"></i><b>9.6.3</b> <code>read_files</code> 及 <code>read_dcfiles</code> 函数</a></li>
+<li class="chapter" data-level="9.6.4" data-path="anay-6800.html"><a href="anay-6800.html#testfluor"><i class="fa fa-check"></i><b>9.6.4</b> <code>jip_test</code> 及 <code>jip_dctest</code> 函数</a></li>
+<li class="chapter" data-level="9.6.5" data-path="anay-6800.html"><a href="anay-6800.html#plotfluor"><i class="fa fa-check"></i><b>9.6.5</b> <code>jip_plot</code> 及 <code>jip_dcplot</code> 函数</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>参考文献</a></li>
 <li class="divider"></li>
-<li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
+<li><a href="https://bookdown.org" target="blank">由 bookdown 驱动</a></li>
 
 </ul>
 
@@ -207,11 +207,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="intro" class="section level1">
 <h1><span class="header-section-number">第 1 章</span> R 软件与 Rstudio</h1>
-<div id="r-" class="section level2">
+<div id="rsoft" class="section level2">
 <h2><span class="header-section-number">1.1</span> R 软件</h2>
 <p>R语言的官方网站是 <a href="http://www.r-project.org">R</a> ，与R语言有关的网站还有CRAN（镜像），其主站网址是： <a href="http://www.cran.r-project.org">CRAN</a>。</p>
 </div>
-<div id="rstudio" class="section level2">
+<div id="rstudiosoft" class="section level2">
 <h2><span class="header-section-number">1.2</span> Rstudio</h2>
 <p>尽管R的功能十分强大，但是其作为一个命令行工具<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>，在实际使用中尤为不便，因此，一款集成的开发环境十分有必要。<a href="https://www.rstudio.com/products/RStudio/">Rstudio</a>是一款专门针对R开发的一个集成环境，同时也支持其他多种语言，用户界面十分友好，支持代码高亮，拼写提示，作图展示等功能，因此我们推荐使用Rstudio对我们的数据进行分析。</p>
 <p>R 软件和 Rstudio 的安装十分方便，我们按照各自系统的安装方式安装即可，安装后界面及各区功能如下：</p>
@@ -241,7 +241,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="e585b3e4ba8ee4bd9ce88085.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="co2-.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="response-fit.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

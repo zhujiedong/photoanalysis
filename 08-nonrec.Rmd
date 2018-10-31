@@ -1,4 +1,4 @@
-## 非直角双曲线模型
+## 非直角双曲线模型{#nonrec_mod}
 
 @Thornley1976 提出了非直角双曲线模型，它的表达式为：
 
@@ -9,7 +9,7 @@ P_{n} = \frac{\alpha I + P_{nmax} \sqrt{(\alpha I + P_{nmax})^{2} - 4  \theta \a
 
 其中，$\text{\ensuremath{\theta}}$ 为表示曲线弯曲程度的曲角参数，取值为$0\leq \theta \leq 1$。其他参数意义同式 \@ref(eq:rec)。同样如同直角双曲线模型，式仍然没有极值，无法求得 $I_{sat}$，可以仍然参考直角双曲线模型的方式进行计算。
 
-### 非直角双曲线模型的实现
+### 非直角双曲线模型的实现{#nonrec_mode_exam}
 
 
 ```{r nrecr, fig.cap="非直角双曲线模型拟合"}

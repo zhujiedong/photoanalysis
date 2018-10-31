@@ -1,4 +1,4 @@
-# 气孔导度模型的拟合
+# 气孔导度模型的拟合 {#stomotal_sim}
 
 气孔导度模型的拟合是通过 `fitBB` 来实现的，可以拟合三个 **Ball-Berry 类型的气孔导度模型**，共有下面几个参数：
 
@@ -20,7 +20,7 @@ g_s = g0 + g1(\frac{A h_r}{C_a})
 
 其中 A 为净光合速率，g~0~ 和 g~1~ 为拟合参数，h~r~ 为叶片表面的相对湿度，C~a~ 为叶片处CO~2~浓度。
 
-## BBLeuning 模型
+## BBLeuning 模型 {#bbleuning}
 
 @leuning1995a 发表的文章中的模型：
 
@@ -31,7 +31,7 @@ g_s = g_0 + g_1(\frac{A}{(C_a - \Gamma)(1 + \frac{D}{D_0})})
 
 其中 $\Gamma$ 为 CO~2~ 补偿点，g~0~、g~1~ 和 D~0~ 为拟合参数。
 
-## BBOptiFull 模型
+## BBOptiFull 模型 {#bboptifull}
 
 @Medlyn2011Reconciling 发表的文章中的模型：
 
@@ -74,7 +74,7 @@ aci <- subset(aci, Obs > 0)
 fitBB(aci, gsmodel = "BBOpti", fitg0 = TRUE)
 ```
 
-## `fitBBs` 函数
+## `fitBBs` 函数 {#fitbbs}
 
 如果我们有多个物种的数据，那么使用  `fitBBs`  则可以快速拟合多条曲线的数据。我们先整合两次的数据，然后再查看运行结果：
 

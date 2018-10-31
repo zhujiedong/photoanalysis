@@ -1,6 +1,6 @@
-# CO~2~ 响应曲线的拟合
+# CO~2~ 响应曲线的拟合 {#response_fit}
 
-## FvCB 模型
+## FvCB 模型 {#fvcb_mod}
 
 在 `plantecophys` 包中使用的模型为 @Farquhar1980A 建立的 C3 植物模型 FvCB，其基于 C3 植物碳反应的三个阶段：
 
@@ -100,7 +100,7 @@ w_{p\ }=\ \frac{3V_{p}C_{c}}{C_{c}-\Gamma^{*}}
 A=min\{w_{c},w_{j,}w_{p}\}(1-\frac{\Gamma^{*}}{C_{c}})-R_{d}
 \end{equation}
 
-## `plantecophys` 软件包
+## `plantecophys` 软件包 {#plantecophys}
 
 Remko A. Duursma 在2015年发表了一篇文章 @Duursma2015Plantecophys，`plantecophys` 是其开发的一个R包工具集，用于对叶片气体交换数据进行分析和建模。实现了如下功能：
 
@@ -115,12 +115,12 @@ Remko A. Duursma 在2015年发表了一篇文章 @Duursma2015Plantecophys，`pla
 
 [plantecophys](https://cran.r-project.org/web/packages/plantecophys/plantecophys.pdf)。
 
-## LI-6400XT CO~2~ 响应曲线的拟合
+## LI-6400XT CO~2~ 响应曲线的拟合 {#fit6400}
 
 LI-6400XT CO~2~ 响应曲线的拟合需要借助 `plantecophys` 的 `fitaci` 实现，fitaci 函数为根据 FvCB 模型对 A-Ci 曲线的测量数据进行拟合，并估算 J$_{max}$、V$_{cmax}$、R$_{d}$及他们的标准差，并根据
 @Medlyn2002Temperature 的方法考虑了温度的影响。
 
-### fitaci 函数介绍
+### fitaci 函数介绍 {#fitaci_intro}
 
 `fitaci` 的用法如下^[仅针对 C3 植物]：
 
@@ -170,7 +170,7 @@ Hyperbolic minimum (黑色)), TPU-limited rate (Ap, 如果模型有计算结果�
 
 其他参数请参考 FvCB 模型 @Farquhar1980A 或查看 plantecophys 的帮助文档。
 
-#### fitaci函数详解
+#### fitaci函数详解 {#fitaci_detail}
 
 * 默认为非线性拟合，详见 @Duursma2015Plantecophys。
 * bilinear 方法使用两次线性拟合方法首先拟合 V$_{cmax}$ 和 R$_{d}$，然后在拟合J$_{max}$，过渡点的选择为对所有数据拟合最适的点，类似 @Gu2010Reliable 的方法。该方法的优势时无论如何，都会返回拟合结果，尤其是非线性拟合失败时使用该方法，但若默认方法失败时，需首先检查是否数据存在问题。两种拟合方法的结果有轻微的差别^[若默认拟合方法失败，数据也无问题，那么是非线性拟合初始值设定的原因]。
@@ -182,9 +182,9 @@ citransition ）区域，以及 J$_{max}$ 限制 (Ci > citransition) 区域。
 = "bilinear"。但需要注意，当 TPU 被计算时，没有 J$_{max}$ 限制的点的存在是可能的。TPU限制的发生是在A值不随
 CO$_{2}$ 的增加而增加时发生的，因此计算 TPU 是否有返回值，取决于测量数据是否有此情况出现。
 
-## 使用 `plantecophys` 拟合 LI-6400XT CO~2~ 响应曲线数据
+## 使用 `plantecophys` 拟合 LI-6400XT CO~2~ 响应曲线数据 {#plantecophy_use}
 
-### 数据的前处理
+### 数据的前处理 {#data6400}
 
 虽然 R 软件支持直接导入 xlsx 的数据，但因为 LI-6400XT 的数据记录文件内有其他空行或 remark 等内容，增加了处理代码的量，**故而推荐将其数据先整理为如表 \@ref(tab:head6400) 样式，并另存为 csv 格式**^[即仅保留测量值，删除其他所有头文件、空行、 remark 等信息]：
 
@@ -265,7 +265,7 @@ write.csv(coef(acifit), file = "coefaci.csv")
 
 >需要注意的是，因为非线性拟合需要一个初始值，因此，使用默认方式（非线性拟合）的时候，会存在可能的拟合失败现象，此时可以使用 `fitmethod = "bilinear"`，二者结果略有差别。
 
-#### fitmethod = "onepoint" 介绍
+#### fitmethod = "onepoint" 介绍 {#onepoint}
 
 @De2016A 发表了关于 one point 方法计算 $V_{cmax}$ 和 $J_{max}$ 方法的文章，在 2017 年 11 月的更新中，plantecophys 增加了响应的 R 软件实现方法， 该方法并非使用一个点计算 $V_{cmax}$ 和 $J_{max}$，而是对数据集中的每一个点的值进行估计，使用的方法为逆向了光合作用方程。输出为对每个原始数据加入了 $V_{cmax}$ 和 $J_{max}$，当然一如既往的可以使用温度校准的方法。**并不建议该方法应用于整个 ACi 曲线的数据，它的假设是在外部环境 CO~2~ 浓度和饱和光下，受到 Rubisco 所化速率的限制而不是 RUBP 的限制。**
 
@@ -292,7 +292,7 @@ K_m = K_c (1 + \frac{O_i}{K_o})
 
 另一个重要的模型的假设为 J~max~ 与 V~cmax~ 是成比例的， J~max~ 的计算是通过 C~i~ transition point 来实现的，文章中的比值均值为 1.9，范围在 1.68 ~ 2.14 之间。 
 
-### 使用 'onepoint' 单独计算 V~cmax~ 和 J~max~
+### 使用 'onepoint' 单独计算 V~cmax~ 和 J~max~ {#onpoint_fit}
 
 目前我手头没有相应数据，仅有使用 LI-6400 测试 auto log 2 时的一个数据，我们用这个来示范该方法的使用：
 
@@ -321,7 +321,7 @@ knitr::kable(head(data.frame(aci_fit$Photo,
 
 需要注意，为保证结果的精确，如果不设定 Rd, 也即文献中的 Rday， 模型是无法计算的，因此上面的示例中虚构了一个，实际操作用一般使用标准的 ACi 测量计算。
 
-### 多条 CO~2~ 响应曲线的拟合 
+### 多条 CO~2~ 响应曲线的拟合 {#multi_curve}
 
 fitacis 函数实际上是 fitaci 函数的扩展，方便一次拟合多条曲线^[需要注意，此时fitmethod一般推荐使用bilinear。]。函数的参数如下：
 
@@ -341,7 +341,7 @@ plot(x, how = c("manyplots", "oneplot"),
 
 实际上 fitacis 与 fitaci 模型算法完全一致，只不过增加了一个 group 参数，用于区分不同测量的数据，具体请参考举例内容。
 
-#### fitacis 函数应用举例
+#### fitacis 函数应用举例 {#fitacis_exa}
 
 下文代码根据 plantecophys 中的示例代码修改，进行演示，原代码请参考其帮助文档。
 
@@ -375,7 +375,7 @@ plot(fits[[which.max(rmses)]])
 
 可以看出，`fitaci` 和 `fitacis` 用法基本一致，各行代码均已经注释，更详细用法请参函数考帮助。
 
-### `findCiTransition` 函数
+### `findCiTransition` 函数 {#transition}
 
 计算 CiTransition 的函数，第一点为 Ac & Aj，第二点为 Aj & Ap，并且仅在计算 TPU 的前提下才会有第二点出现。
 
@@ -387,7 +387,7 @@ findCiTransition(object, ...)
 ... 为使用 `Photosyn` 时可传递的参数。
 
 
-## C4 植物光合
+## C4 植物光合 {#c4}
 
 之前的部分模型全部为关于 C3 植物的拟合，而 @Caemmerer2000Biochemical 的方法，则是针对
 C4 植物的 A-Ci 曲线的实现。
@@ -425,7 +425,7 @@ AciC4(Ci, PPFD = 1500, Tleaf = 25, VPMAX25 = 120,
 
 以上参数均来自 @Caemmerer2000Biochemical，括号中的参数值均为默认值，具体应用时请按照实际情况修改。
 
-### C4 植物光合速率的计算
+### C4 植物光合速率的计算 {#c4_sim}
 
 ```{r, fig.cap="C4 植物 A-Ci 作图"}
 # 模拟 C4 植物的 Ci 值，计算光合速率并作图

@@ -44,13 +44,13 @@ LI-6800 与 LI-6400XT 光合仪数据，尤其是 RACiR\texttrademark 部分，�
 
 # R 软件与 Rstudio {#intro}
 
-## R 软件
+## R 软件 {#rsoft}
 
 
 
 R语言的官方网站是 [R](http://www.r-project.org) ，与R语言有关的网站还有CRAN（镜像），其主站网址是： [CRAN](http://www.cran.r-project.org)。
 
-## Rstudio
+## Rstudio {#rstudiosoft}
 
 尽管R的功能十分强大，但是其作为一个命令行工具 ^[实际上在Windows系统下安装的时候提供一个十分简陋的GUI。]，在实际使用中尤为不便，因此，一款集成的开发环境十分有必要。[Rstudio](https://www.rstudio.com/products/RStudio/)是一款专门针对R开发的一个集成环境，同时也支持其他多种语言，用户界面十分友好，支持代码高亮，拼写提示，作图展示等功能，因此我们推荐使用Rstudio对我们的数据进行分析。
 

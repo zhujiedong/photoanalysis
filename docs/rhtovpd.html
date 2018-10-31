@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="e78988e69d83e5a3b0e6988e.html">
+<link rel="prev" href="photo-stomo.html">
+<link rel="next" href="lrc-fit.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -205,36 +205,57 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">R 语言分析 LI-6400 和 LI-6800 光合仪的数据</h1>
-<h4 class="author"><em>祝介东<br /> <br /> 北京力高泰科技有限公司</em></h4>
-<h4 class="date"><em>2018-10-31</em></h4>
+<div id="rhtovpd" class="section level1">
+<h1><span class="header-section-number">第 6 章</span> RHtoVPD 函数</h1>
+<p>该函数为一系列的工具，用于温度、湿度不同单位之间的换算 <span class="citation">Jones (<a href="#ref-Jones1993Plants">1993</a>)</span> ：</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># RH 转为 VPD  </span>
+<span class="kw">RHtoVPD</span>(RH, TdegC, <span class="dt">Pa =</span> <span class="dv">101</span>) 
+ 
+<span class="co"># VPD 转为 RH   </span>
+<span class="kw">VPDtoRH</span>(VPD, TdegC, <span class="dt">Pa =</span> <span class="dv">101</span>) 
+ 
+<span class="co">#  饱和水气压计算 </span>
+<span class="kw">esat</span>(TdegC, <span class="dt">Pa =</span> <span class="dv">101</span>) 
+ 
+<span class="co">#  露点温度转换为VPD </span>
+<span class="kw">DewtoVPD</span>(Tdew, TdegC, <span class="dt">Pa =</span> <span class="dv">101</span>) 
+ 
+<span class="co">#  基于叶温的 VPD 转换为基于空气温度的 VPD</span>
+<span class="kw">VPDleafToAir</span>(VPD, Tleaf, Tair, <span class="dt">Pa =</span> <span class="dv">101</span>) 
+ 
+<span class="co">#  基于空气温度的 VPD 转换为基于叶温的 VPD </span>
+<span class="kw">VPDairToLeaf</span>(VPD, Tair, Tleaf, <span class="dt">Pa =</span> <span class="dv">101</span>) 
+ 
+<span class="co">#  基于叶温的相对湿度转换为基于空气温度的相对湿度  </span>
+<span class="kw">RHleafToAir</span>(RH, Tleaf, Tair, <span class="dt">Pa =</span> <span class="dv">101</span>) 
+ 
+<span class="co">#  基于空气温度的相对湿度转换为基于叶温的相对湿度  </span>
+<span class="kw">RHairToLeaf</span>(RH, Tair, Tleaf, <span class="dt">Pa =</span> <span class="dv">101</span>) </code></pre></div>
+<p>注意事项及单位：</p>
+<p>部分参数的转换需要准确的大气压用于计算，因此，有大气压选项的参数必须填入实际值。</p>
+<p>RH：相对湿度 (%) 。</p>
+<p>TdegC：温度 () (叶片或温度)。</p>
+<p>Pa：大气压 (kPa)</p>
+<p>VPD：水气压亏缺 (kPa)。</p>
+<p>Tdew： 露点温度() 。</p>
+<p>Tleaf：叶温() 。</p>
+<p>Tair：空气温度() 。</p>
+
+
 </div>
-<div id="e5898de8a880" class="section level1 unnumbered">
-<h1>前言</h1>
-<p>本文内容均来自个人对相关材料的理解，<strong>并未经过权威认证，如有异议，请参考 R 软件及相关软件包的使用手册或相关模型的文献</strong>。本文所使用代码均只做示例代码使用，在做实际分析时，请结合自己的实验数据及模型使用条件做相应的调整。本文内容仅针对 LI-6800 与 LI-6400XT 光合仪数据，尤其是 RACiR部分，仅针对 LI-6800 进行分析，且目前市面上仅 LI-6800 光合仪可完成此项数据的测量。如您有 LI-6400XT 或 LI-6800 使用操作相关方面的问题请发送至：</p>
-<p><a href="zhujiedong@ecotek.com.cn" class="uri">zhujiedong@ecotek.com.cn</a></p>
-<p>如有与本文数据分析相关的内容请发送至我个人邮箱（本文是业余爱好，内容虽与公司仪器相关，但并不是我领薪水的工作内容）：</p>
-<p><a href="zhujiedong@yeah.net" class="uri">zhujiedong@yeah.net</a></p>
-<p>以便我们对相关内容做出修正。</p>
-<p>当然，如果您有 github 帐号，优先欢迎在 github 提交：</p>
-<p><a href="https://github.com/zhujiedong/photoanalysis">github地址</a></p>
-<p>如有其他仪器问题或者仪器购买需求，请使用下面方式与我们联系：</p>
-<ul>
-<li><p>北京力高泰科技有限公司</p></li>
-<li><p>网址：<a href="http://www.ecotek.com.cn" class="uri">http://www.ecotek.com.cn</a></p></li>
-<li><p>电话：010-51665551</p></li>
-<li><p>电子邮件：<a href="info@ecotek.com.cn" class="uri">info@ecotek.com.cn</a></p></li>
-<li><p>地址：北京市西城区西直门南大街2号成铭大厦A座22F</p></li>
-</ul>
+<h3>参考文献</h3>
+<div id="refs" class="references">
+<div id="ref-Jones1993Plants">
+<p>Jones, H. G. 1993. <em>Plants and Microclimate. a Quantitative Approach to Environmental Plant Physiology.</em> Cambridge University Press.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="e78988e69d83e5a3b0e6988e.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="photo-stomo.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="lrc-fit.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -264,7 +285,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/yihui/bookdown-crc/edit/master/01-front.Rmd",
+"link": "https://github.com/yihui/bookdown-crc/edit/master/06-units.Rmd",
 "text": "缂栬緫"
 },
 "download": ["bookdown.pdf", "bookdown.epub"],

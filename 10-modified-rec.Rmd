@@ -1,4 +1,4 @@
-## 直角双曲线的修正模型
+## 直角双曲线的修正模型 {#rev_rec}
 
 @YEZiPiao2010 直角双曲线修正模型的表达式如式 \@ref(eq:mrec) 所示：
 
@@ -23,7 +23,7 @@ P_{nmax} = \alpha\left(\frac{\sqrt{\beta+\gamma}-\sqrt{\beta}}{\gamma}\right)^{2
 
 该模型的优点为拟合结果中光饱和点和最大净光合速率均接近实测值，还可以拟合饱和光强之后光合速率随光强下降段的曲线。
 
-### 直角双曲线修正模型的实现
+### 直角双曲线修正模型的实现 {#rev_rec_exam}
 
 ```{r, mrecr, fig.cap="直角双曲线修正模型拟合"}
 library(minpack.lm)

@@ -1,4 +1,4 @@
-# 光合气孔导度耦合模型
+# 光合气孔导度耦合模型 {#photo_stomo}
 
 @Duursma2015Plantecophys 对于气体交换耦合模型的简述如下 ^[详细内容请参考原文]：
 
@@ -32,7 +32,7 @@ g_s = g_0 + g_1 \frac{A_n}{C_a} f(D)
 
 整合公式 \@ref(eq:minfvcb), \@ref(eq:cgm), \@ref(eq:ficker) 和  \@ref(eq:driver)，气体交换耦合模型有很多更大尺度上的应用，例如 @Duursma2012MAESPA 和 wang1998a，可用于预测 An，gs 和蒸腾速率对主要环境驱动因子的响应（除土壤水分），并包含了主要的叶片性状（g1，V~cmax~, J~max~, R~d~ 以及他们的温度依赖性）。
 
-## `Photosyn` 函数
+## `Photosyn` 函数 {#photosyn}
 
 Photosyn 为耦合的光合–气孔导度模型，基于 Farquhar 光合模型和 Ball-Berry 气孔导度模型。
 
@@ -58,7 +58,7 @@ Aci(Ci, ...)
 
 因为是光合气孔导度模型的耦合，故而参数与之前的函数相同，参见 \@ref(fitaci-p) 和 \@ref(fitbb-p) 部分的内容。
 
-### `Photosyn` 使用举例
+### `Photosyn` 使用举例 {#photo_exam}
 
 ```{r, vpd, fig.cap="VPD VS. An"}
 library(plantecophys)
@@ -121,12 +121,12 @@ legend("topleft", c(expression(
 
 需求与供给的作图 \@ref(fig:supply)。
 
-## `PhotosynEB` 函数
+## `PhotosynEB` 函数 {#photsyneb}
 
 使用同 `Photosyn`，只不过使用能量平衡法来计算叶温。
 目前版本尚存在bug，不能直接提供 GS 来计算，否则会出现未知错误。
 
-## `PhotosynTuzet` 函数
+## `PhotosynTuzet` 函数 {#photosyntuzet}
 
 同样为光合气孔导度耦合模型，只不过基于 @tuzet2003a 的气孔导度模型，现将其描述如下：
 
@@ -146,7 +146,7 @@ f_{\Psi v} = \frac{1 + exp(s_f \Psi_f)}{1 + exp(s_f(\Psi_f - \Psi_v))}
 
 $\Psi_v$ 是指叶片水势，$\Psi_f$ 是参比势能， 该方程假设在水势接近于 0 时，气孔对叶片水势不敏感，并且气孔随着 $\Psi_v$ 的下降快速关闭。$\Psi_f$ 和 $s_f$ (曲线形状参数) 依赖于不同物种的形态学适应以及生长过程中所处的环境。
 
-### `PhotosynTuzet` 的参数
+### `PhotosynTuzet` 的参数 {#photosyntuzet_para}
 
 除 @tuzet2003a 模型中使用的参数外，其他参数都继承了 `Photosyn` 的参数
 
