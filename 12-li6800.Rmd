@@ -257,7 +257,7 @@ ojip 调制式测量光 ojip 曲线的快速预览如图 \@ref(fig:acplot)
 ojip 连续式测量光 ojip 曲线的快速预览如图 \@ref(fig:dcplot)
 
 
-# 环境与配置
+# 环境与配置 {#sessioninfo}
 
 本文的内容所完成的 sessioninfo 如下：
 
