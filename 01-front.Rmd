@@ -64,5 +64,4 @@ knitr::include_graphics("images/rstudio.png")
 
 >注：R 与 Rstudio 均非我公司产品，而且均免费或者有免费版本，因此请勿邮件或电话索要此两款软件。
 
-
 \cleardoublepage
