@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="e78988e69d83e5a3b0e6988e.html">
+<link rel="prev" href="copyright.html">
+<link rel="next" href="intro.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -103,9 +103,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="./">R 光合数据分析</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="e5898de8a880.html"><a href="e5898de8a880.html"><i class="fa fa-check"></i>前言</a></li>
-<li class="chapter" data-level="" data-path="e78988e69d83e5a3b0e6988e.html"><a href="e78988e69d83e5a3b0e6988e.html"><i class="fa fa-check"></i>版权声明</a></li>
-<li class="chapter" data-level="" data-path="e585b3e4ba8ee4bd9ce88085.html"><a href="e585b3e4ba8ee4bd9ce88085.html"><i class="fa fa-check"></i>关于作者</a></li>
+<li class="chapter" data-level="" data-path="frontmatter.html"><a href="frontmatter.html"><i class="fa fa-check"></i>前言</a></li>
+<li class="chapter" data-level="" data-path="copyright.html"><a href="copyright.html"><i class="fa fa-check"></i>版权声明</a></li>
+<li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i>关于作者</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> R 软件与 Rstudio</a><ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#rsoft"><i class="fa fa-check"></i><b>1.1</b> R 软件</a></li>
 <li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#rstudiosoft"><i class="fa fa-check"></i><b>1.2</b> Rstudio</a></li>
@@ -206,36 +206,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">R 语言分析 LI-6400 和 LI-6800 光合仪的数据</h1>
-<h4 class="author"><em>祝介东<br /> <br /> 北京力高泰科技有限公司</em></h4>
-<h4 class="date"><em>2018-11-13</em></h4>
-</div>
-<div id="e5898de8a880" class="section level1 unnumbered">
-<h1>前言</h1>
-<p>本文内容均来自个人对相关材料的理解，<strong>并未经过权威认证，如有异议，请参考 R 软件及相关软件包的使用手册或相关模型的文献</strong>。本文所使用代码均只做示例代码使用，在做实际分析时，请结合自己的实验数据及模型使用条件做相应的调整。本文内容仅针对 LI-6800 与 LI-6400XT 光合仪数据，尤其是 RACiR部分，仅针对 LI-6800 进行分析，且目前市面上仅 LI-6800 光合仪可完成此项数据的测量。如您有 LI-6400XT 或 LI-6800 使用操作相关方面的问题请发送至：</p>
-<p><a href="zhujiedong@ecotek.com.cn" class="uri">zhujiedong@ecotek.com.cn</a></p>
-<p>如有与本文数据分析相关的内容请发送至我个人邮箱（本文是业余爱好，内容虽与公司仪器相关，但并不是我领薪水的工作内容）：</p>
-<p><a href="zhujiedong@yeah.net" class="uri">zhujiedong@yeah.net</a></p>
-<p>以便我们对相关内容做出修正。</p>
-<p>当然，如果您有 github 帐号，优先欢迎在 github 提交：</p>
-<p><a href="https://github.com/zhujiedong/photoanalysis">github地址</a></p>
-<p>如有其他仪器问题或者仪器购买需求，请使用下面方式与我们联系：</p>
-<ul>
-<li><p>北京力高泰科技有限公司</p></li>
-<li><p>网址：<a href="http://www.ecotek.com.cn" class="uri">http://www.ecotek.com.cn</a></p></li>
-<li><p>电话：010-51665551</p></li>
-<li><p>电子邮件：<a href="info@ecotek.com.cn" class="uri">info@ecotek.com.cn</a></p></li>
-<li><p>地址：北京市西城区西直门南大街2号成铭大厦A座22F</p></li>
-</ul>
+<div id="author" class="section level1 unnumbered">
+<h1>关于作者</h1>
+<p>祝介东，<a href="http://www.ecotek.com.cn/">北京力高泰科技有限公司</a> 工程师，本文内容为我在售后服务时所住的酒店所作（遍布国内大多数省份），本为我打发出差住酒店漫漫长夜的业余爱好，<strong>此部分内容并非公司对我的职位所要求的内容，也并非我公司提供的服务内容，因此属于个人作品，仅供参考，我所在公司对此文内容不负任何责任</strong>。文中代码得到了公司技术部同事： 刘美玲、徐粒、焦阳、王昭、张启尧、张云飞等的测试，其中焦阳贡献了 <code>jiptest</code> 包中基础荧光参数计算的代码，在此一并感谢。</p>
+<p>文中内容如对您有帮助，我很欣慰。但本人水平有限，错误与疏漏之处还请谅解，欢迎讨论，欢迎提出宝贵意见及建议。本人或单位其他售后人员仅有提供相关仪器操作或故障解决的义务，处理数据和分析数据并非我们的本职工作，如有相关需还请多参考本文内容或网上相关资料，不足之处还请谅解。</p>
+
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="e78988e69d83e5a3b0e6988e.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="copyright.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
