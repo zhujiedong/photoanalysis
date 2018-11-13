@@ -40,7 +40,24 @@ lrc_A <- lrc$A
 而 LI-6800 独有的 auto control 功能在算法上允许用户自定义 CO$_{2}$ 的起始浓度和种植浓度、变化方式（线性或其他）、所花费的时间，再加上其
 IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实，即快速 CO$_{2}$ 响应曲线 RACiR\texttrademark
 测量实验，该功能使得 5 min 内测量 A–Ci 曲线成为可能。该方法的实现可参考  @Stinziano2017
-的文章。具体测量步骤请参考我们的 LI-6800实验手册。
+的文章。
+
+@stinziano2018 针对 RACiR\texttrademark 技术的疑问做了解答并提出了准确测量的建议，概括如下：
+
+* 首先，采用 100 ppm/min 的变化速率是与标准方法重合度最高的测量。
+* 其次，明确研究问题，目前已有研究表明Vcmax 与 Jmax 的计算结果与标准测量方法结果无显著差异。
+* 任何条件的改变，都需要做空叶室校准，例如：流速，气体浓度变化方向、温度，斜率等。
+* 空叶室校准与叶片测量采用严格的同一次校准，因为 IRGA  的漂移，需要再次匹配时，或者环境条件改变时，需要重新做空叶室校准。是否需要匹配，可通过不加叶片的最初状态查看，此时 A 值应接近为0，reference 和 sample 气体浓度读数接近相等。
+* IRGA 分析器使用 5 此多项式进行校准，推荐使用 1 次到 5  次多项式进行拟合，然后根据 BIC 指数来确定最合适的空叶室校准系数（即非参数拟合的模型选择的问题）。
+确定最合适的浓度变化范围。通常需要去掉最初和最后 30 s的数据。
+* 最小化校准和测量值之间的水分摩尔分数差异。甚至有可能需要控制 reference 或 sample 的水的摩尔分数而不是 Vpdleaf。
+通过预实验来确定最合适的 $CO_2$ 变化范围和随时间的斜率。
+
+
+同时 @stinziano2018 还给出了专门的 RACiR 数据分析软件包 [racir package](https://github.com/jstinzi/racir)，以下内容是我之前写的内容，部分代码的实现和上述软件包相似，仅供参考。
+
+后续会更新 `racir` 相关的分析方法。
+
 
 ## RACiR\texttrademark 分析的实现 {#racir68_exam}
 
@@ -69,41 +86,43 @@ locator()
 # 根据上面的点，利用二氧化碳的值过滤掉不需要的数据
 # 只要在线性范围内选点，拟合结果相差很小
 cemp <- uemp500[which(uemp500$CO2_r > 
-        45.28 & uemp500$CO2_r < 459.12),]
+                        45.28 & uemp500$CO2_r < 459.12),]
 plot(cemp$CO2_r, cemp$A)
-x <- lm(A ~ Ci, data = cemp)
-summary(x)
-# 利用拟合的结果，提取校准用的斜率和截距
-x$coefficients
 
-k <- x$coefficients[2]
-z <- x$coefficients[1]
+cemp1st <- lm(A ~ CO2_r, data = cemp)
+cemp2nd <- lm(A ~ poly(CO2_r, 2), data = cemp)
+cemp3rd <- lm(A ~ poly(CO2_r, 3), data = cemp)
+cemp4th <- lm(A ~ poly(CO2_r, 4), data = cemp)
+cemp5th <- lm(A ~ poly(CO2_r, 5), data = cemp)
+
+bics <- BIC(cal1st, cal2nd, cal3rd, cal4th, cal5th)
+best <- noquote(rownames(bics)[bics$BIC == min(bics$BIC)])
+
+best
 
 # 校准带叶片测量的数据
 uleafc <- uleaf500
-uleafc$A <- uleafc$A - (k * uleafc$CO2_r + z)
+uleafc$A <- uleafc$A - predict(cal4th, uleafc)
 uleafc$Ci <- ((uleafc$gtc - uleafc$E / 2) * uleafc$CO2_s - 
-                  uleafc$A) / (uleafc$gtc + uleafc$E / 2)
+                uleafc$A) / (uleafc$gtc + uleafc$E / 2)
 
 # 对校准前后的数据进行作图，查看校准效果
 plot(uleaf500$CO2_r, uleaf500$A, pch = 2, ylim = c(-20, 40))
 points(uleafc$CO2_r, uleafc$A)
 locator()
-cleaf <- uleafc[which(uleafc$CO2_r > 15.7 & 
-                        uleafc$CO2_r < 474.15),]
+cleaf <- uleafc[which(uleafc$CO2_r > 16.6 & 
+                        uleafc$CO2_r < 478),]
 plot(cleaf$CO2_r, cleaf$A)
 
 # 利用plantecophys拟合标准曲线和racir曲线
 library("plantecophys")
 acifit <- fitaci(cleaf, varnames = 
-    list(ALEAF = "A", Tleaf = "Tleaf", Ci = "Ci", 
-    PPFD  = "Qin", Rd = "Rd"), Patm = 84.09)
+                   list(ALEAF = "A", Tleaf = "Tleaf", Ci = "Ci", 
+                        PPFD  = "Qin", Rd = "Rd"), Patm = 84.09)
 acifit_normal <- fitaci(acin, varnames = 
-     list(ALEAF = "A", Tleaf = "Tleaf", Ci = "Ci", 
-     PPFD  = "Qin", Rd = "Rd"), Patm = 84.09)
+                          list(ALEAF = "A", Tleaf = "Tleaf", Ci = "Ci", 
+                               PPFD  = "Qin", Rd = "Rd"), Patm = 84.09)
 # 查看拟合数据
-summary(acifit)
-summary(acifit_normal)
 acifit$pars
 acifit_normal$pars
 
@@ -111,20 +130,21 @@ acifit_normal$pars
 plot(acifit, linecols = c("green", "blue", "red"))
 
 #### ggplot2 作图
-alldata <- data.frame(A = 
-      c(acin$A, ddata$Ac, ddata$Aj, cleaf$A), 
-      Ci = c(acin$Ci, ddata$Ci, ddata$Ci, cleaf$Ci),
-      Atype = c(
-        rep("standard Aci curve", length(acin$A)),
-        rep("Ac", length(ddata$Ac)), 
-        rep("Aj", length(ddata$Aj)),
-        rep("A corrected", length(cleaf$A))
+ddata <- acifit$df
+
+alldata <- data.frame(A = c(acin$A, ddata$Ac, ddata$Aj, cleaf$A), 
+                      Ci = c(acin$Ci, ddata$Ci, ddata$Ci, cleaf$Ci),
+                      Atype = c(
+                        rep("standard Aci curve", length(acin$A)),
+                        rep("Ac", length(ddata$Ac)), 
+                        rep("Aj", length(ddata$Aj)),
+                        rep("A corrected", length(cleaf$A))
                       )
 )
 
 alldata$Atype <- factor(alldata$Atype, 
-    levels = c("standard Aci curve", 
-               "Ac", "Aj", "A corrected"))
+                        levels = c("standard Aci curve", 
+                                   "Ac", "Aj", "A corrected"))
 
 library(ggplot2)
 p <- ggplot(alldata)
@@ -133,9 +153,9 @@ p1 <- p + geom_point(aes(Ci,A, colour = Atype),  alpha = 0.5)
 p2 <- p1 + geom_smooth(aes(Ci, A, colour = Atype),
                        method = 'auto') + 
   labs(y=expression(paste("A ", "(", mu, 
-          mol%.%m^-2%.%s^-1, ")")), 
+                          mol%.%m^-2%.%s^-1, ")")), 
        x=expression(paste(C[i], " ",
-          "(", mu, mol%.%mol^-1, ")")))
+                          "(", mu, mol%.%mol^-1, ")")))
 
 p2 + scale_x_continuous(limits=c(0, 1800),
                         breaks=seq(0, 1800, 200)) +  
@@ -143,12 +163,12 @@ p2 + scale_x_continuous(limits=c(0, 1800),
                      breaks=seq(0, 50, 10)) + 
   scale_colour_hue(name="  ", 
                    labels=c('ACi curve data; ', 
-                   expression(paste(A[c], ' data; ')), 
-                   expression(paste(A[j], ' data; ')), 
-                   'RACiR data') 
+                            expression(paste(A[c], ' data; ')), 
+                            expression(paste(A[j], ' data; ')), 
+                            'RACiR data') 
   ) + theme_set(theme_bw()) +
   theme(axis.text.x  = element_text(size = 10, 
-           angle=30, vjust=0.5), 
+                                    angle=30, vjust=0.5), 
         axis.text.y = element_text(size = 10),
         axis.title.x = element_text(
           size = 12, face = 'bold'),

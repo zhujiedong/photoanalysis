@@ -25,7 +25,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司">
 
 
-<meta name="date" content="2018-11-07">
+<meta name="date" content="2018-11-13">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -295,7 +295,18 @@ lrc_A &lt;-<span class="st"> </span>lrc<span class="op">$</span>A </code></pre><
 <li>测量时间长，一条曲线至少需要 20 – 30 min，样本量多，重复多时，这种方法几乎没有可行性。</li>
 <li>整个测量过程中，时间长，酶的激活状态会有变化，叶绿体会移动，气孔的开度也会发生变化。</li>
 </ul>
-<p>而 LI-6800 独有的 auto control 功能在算法上允许用户自定义 CO<span class="math inline">\(_{2}\)</span> 的起始浓度和种植浓度、变化方式（线性或其他）、所花费的时间，再加上其 IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实，即快速 CO<span class="math inline">\(_{2}\)</span> 响应曲线 RACiR测量实验，该功能使得 5 min 内测量 A–Ci 曲线成为可能。该方法的实现可参考 <span class="citation">Stinziano et al. (<a href="#ref-Stinziano2017">2017</a>)</span> 的文章。具体测量步骤请参考我们的 LI-6800实验手册。</p>
+<p>而 LI-6800 独有的 auto control 功能在算法上允许用户自定义 CO<span class="math inline">\(_{2}\)</span> 的起始浓度和种植浓度、变化方式（线性或其他）、所花费的时间，再加上其 IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实，即快速 CO<span class="math inline">\(_{2}\)</span> 响应曲线 RACiR测量实验，该功能使得 5 min 内测量 A–Ci 曲线成为可能。该方法的实现可参考 <span class="citation">J. R. Stinziano et al. (<a href="#ref-Stinziano2017">2017</a>)</span> 的文章。</p>
+<p><span class="citation">Joseph R Stinziano et al. (<a href="#ref-stinziano2018">2018</a>)</span> 针对 RACiR技术的疑问做了解答并提出了准确测量的建议，概括如下：</p>
+<ul>
+<li>首先，采用 100 ppm/min 的变化速率是与标准方法重合度最高的测量。</li>
+<li>其次，明确研究问题，目前已有研究表明Vcmax 与 Jmax 的计算结果与标准测量方法结果无显著差异。</li>
+<li>任何条件的改变，都需要做空叶室校准，例如：流速，气体浓度变化方向、温度，斜率等。</li>
+<li>空叶室校准与叶片测量采用严格的同一次校准，因为 IRGA 的漂移，需要再次匹配时，或者环境条件改变时，需要重新做空叶室校准。是否需要匹配，可通过不加叶片的最初状态查看，此时 A 值应接近为0，reference 和 sample 气体浓度读数接近相等。</li>
+<li>IRGA 分析器使用 5 此多项式进行校准，推荐使用 1 次到 5 次多项式进行拟合，然后根据 BIC 指数来确定最合适的空叶室校准系数（即非参数拟合的模型选择的问题）。 确定最合适的浓度变化范围。通常需要去掉最初和最后 30 s的数据。</li>
+<li>最小化校准和测量值之间的水分摩尔分数差异。甚至有可能需要控制 reference 或 sample 的水的摩尔分数而不是 Vpdleaf。 通过预实验来确定最合适的 <span class="math inline">\(CO_2\)</span> 变化范围和随时间的斜率。</li>
+</ul>
+<p>同时 <span class="citation">Joseph R Stinziano et al. (<a href="#ref-stinziano2018">2018</a>)</span> 还给出了专门的 RACiR 数据分析软件包 <a href="https://github.com/jstinzi/racir">racir package</a>，以下内容是我之前写的内容，部分代码的实现和上述软件包相似，仅供参考。</p>
+<p>后续会更新 <code>racir</code> 相关的分析方法。</p>
 </div>
 <div id="racir68_exam" class="section level2">
 <h2><span class="header-section-number">9.5</span> RACiR分析的实现</h2>
@@ -323,41 +334,43 @@ uleaf500 &lt;-<span class="st"> </span>uleaf500[<span class="dv">1</span><span c
 <span class="co"># 根据上面的点，利用二氧化碳的值过滤掉不需要的数据</span>
 <span class="co"># 只要在线性范围内选点，拟合结果相差很小</span>
 cemp &lt;-<span class="st"> </span>uemp500[<span class="kw">which</span>(uemp500<span class="op">$</span>CO2_r <span class="op">&gt;</span><span class="st"> </span>
-<span class="st">        </span><span class="fl">45.28</span> <span class="op">&amp;</span><span class="st"> </span>uemp500<span class="op">$</span>CO2_r <span class="op">&lt;</span><span class="st"> </span><span class="fl">459.12</span>),]
+<span class="st">                        </span><span class="fl">45.28</span> <span class="op">&amp;</span><span class="st"> </span>uemp500<span class="op">$</span>CO2_r <span class="op">&lt;</span><span class="st"> </span><span class="fl">459.12</span>),]
 <span class="kw">plot</span>(cemp<span class="op">$</span>CO2_r, cemp<span class="op">$</span>A)
-x &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span>Ci, <span class="dt">data =</span> cemp)
-<span class="kw">summary</span>(x)
-<span class="co"># 利用拟合的结果，提取校准用的斜率和截距</span>
-x<span class="op">$</span>coefficients
 
-k &lt;-<span class="st"> </span>x<span class="op">$</span>coefficients[<span class="dv">2</span>]
-z &lt;-<span class="st"> </span>x<span class="op">$</span>coefficients[<span class="dv">1</span>]
+cemp1st &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span>CO2_r, <span class="dt">data =</span> cemp)
+cemp2nd &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(CO2_r, <span class="dv">2</span>), <span class="dt">data =</span> cemp)
+cemp3rd &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(CO2_r, <span class="dv">3</span>), <span class="dt">data =</span> cemp)
+cemp4th &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(CO2_r, <span class="dv">4</span>), <span class="dt">data =</span> cemp)
+cemp5th &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(CO2_r, <span class="dv">5</span>), <span class="dt">data =</span> cemp)
+
+bics &lt;-<span class="st"> </span><span class="kw">BIC</span>(cal1st, cal2nd, cal3rd, cal4th, cal5th)
+best &lt;-<span class="st"> </span><span class="kw">noquote</span>(<span class="kw">rownames</span>(bics)[bics<span class="op">$</span>BIC <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(bics<span class="op">$</span>BIC)])
+
+best
 
 <span class="co"># 校准带叶片测量的数据</span>
 uleafc &lt;-<span class="st"> </span>uleaf500
-uleafc<span class="op">$</span>A &lt;-<span class="st"> </span>uleafc<span class="op">$</span>A <span class="op">-</span><span class="st"> </span>(k <span class="op">*</span><span class="st"> </span>uleafc<span class="op">$</span>CO2_r <span class="op">+</span><span class="st"> </span>z)
+uleafc<span class="op">$</span>A &lt;-<span class="st"> </span>uleafc<span class="op">$</span>A <span class="op">-</span><span class="st"> </span><span class="kw">predict</span>(cal4th, uleafc)
 uleafc<span class="op">$</span>Ci &lt;-<span class="st"> </span>((uleafc<span class="op">$</span>gtc <span class="op">-</span><span class="st"> </span>uleafc<span class="op">$</span>E <span class="op">/</span><span class="st"> </span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span>uleafc<span class="op">$</span>CO2_s <span class="op">-</span><span class="st"> </span>
-<span class="st">                  </span>uleafc<span class="op">$</span>A) <span class="op">/</span><span class="st"> </span>(uleafc<span class="op">$</span>gtc <span class="op">+</span><span class="st"> </span>uleafc<span class="op">$</span>E <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)
+<span class="st">                </span>uleafc<span class="op">$</span>A) <span class="op">/</span><span class="st"> </span>(uleafc<span class="op">$</span>gtc <span class="op">+</span><span class="st"> </span>uleafc<span class="op">$</span>E <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)
 
 <span class="co"># 对校准前后的数据进行作图，查看校准效果</span>
 <span class="kw">plot</span>(uleaf500<span class="op">$</span>CO2_r, uleaf500<span class="op">$</span>A, <span class="dt">pch =</span> <span class="dv">2</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>, <span class="dv">40</span>))
 <span class="kw">points</span>(uleafc<span class="op">$</span>CO2_r, uleafc<span class="op">$</span>A)
 <span class="kw">locator</span>()
-cleaf &lt;-<span class="st"> </span>uleafc[<span class="kw">which</span>(uleafc<span class="op">$</span>CO2_r <span class="op">&gt;</span><span class="st"> </span><span class="fl">15.7</span> <span class="op">&amp;</span><span class="st"> </span>
-<span class="st">                        </span>uleafc<span class="op">$</span>CO2_r <span class="op">&lt;</span><span class="st"> </span><span class="fl">474.15</span>),]
+cleaf &lt;-<span class="st"> </span>uleafc[<span class="kw">which</span>(uleafc<span class="op">$</span>CO2_r <span class="op">&gt;</span><span class="st"> </span><span class="fl">16.6</span> <span class="op">&amp;</span><span class="st"> </span>
+<span class="st">                        </span>uleafc<span class="op">$</span>CO2_r <span class="op">&lt;</span><span class="st"> </span><span class="dv">478</span>),]
 <span class="kw">plot</span>(cleaf<span class="op">$</span>CO2_r, cleaf<span class="op">$</span>A)
 
 <span class="co"># 利用plantecophys拟合标准曲线和racir曲线</span>
 <span class="kw">library</span>(<span class="st">&quot;plantecophys&quot;</span>)
 acifit &lt;-<span class="st"> </span><span class="kw">fitaci</span>(cleaf, <span class="dt">varnames =</span> 
-    <span class="kw">list</span>(<span class="dt">ALEAF =</span> <span class="st">&quot;A&quot;</span>, <span class="dt">Tleaf =</span> <span class="st">&quot;Tleaf&quot;</span>, <span class="dt">Ci =</span> <span class="st">&quot;Ci&quot;</span>, 
-    <span class="dt">PPFD  =</span> <span class="st">&quot;Qin&quot;</span>, <span class="dt">Rd =</span> <span class="st">&quot;Rd&quot;</span>), <span class="dt">Patm =</span> <span class="fl">84.09</span>)
+                   <span class="kw">list</span>(<span class="dt">ALEAF =</span> <span class="st">&quot;A&quot;</span>, <span class="dt">Tleaf =</span> <span class="st">&quot;Tleaf&quot;</span>, <span class="dt">Ci =</span> <span class="st">&quot;Ci&quot;</span>, 
+                        <span class="dt">PPFD  =</span> <span class="st">&quot;Qin&quot;</span>, <span class="dt">Rd =</span> <span class="st">&quot;Rd&quot;</span>), <span class="dt">Patm =</span> <span class="fl">84.09</span>)
 acifit_normal &lt;-<span class="st"> </span><span class="kw">fitaci</span>(acin, <span class="dt">varnames =</span> 
-     <span class="kw">list</span>(<span class="dt">ALEAF =</span> <span class="st">&quot;A&quot;</span>, <span class="dt">Tleaf =</span> <span class="st">&quot;Tleaf&quot;</span>, <span class="dt">Ci =</span> <span class="st">&quot;Ci&quot;</span>, 
-     <span class="dt">PPFD  =</span> <span class="st">&quot;Qin&quot;</span>, <span class="dt">Rd =</span> <span class="st">&quot;Rd&quot;</span>), <span class="dt">Patm =</span> <span class="fl">84.09</span>)
+                          <span class="kw">list</span>(<span class="dt">ALEAF =</span> <span class="st">&quot;A&quot;</span>, <span class="dt">Tleaf =</span> <span class="st">&quot;Tleaf&quot;</span>, <span class="dt">Ci =</span> <span class="st">&quot;Ci&quot;</span>, 
+                               <span class="dt">PPFD  =</span> <span class="st">&quot;Qin&quot;</span>, <span class="dt">Rd =</span> <span class="st">&quot;Rd&quot;</span>), <span class="dt">Patm =</span> <span class="fl">84.09</span>)
 <span class="co"># 查看拟合数据</span>
-<span class="kw">summary</span>(acifit)
-<span class="kw">summary</span>(acifit_normal)
 acifit<span class="op">$</span>pars
 acifit_normal<span class="op">$</span>pars
 
@@ -365,20 +378,21 @@ acifit_normal<span class="op">$</span>pars
 <span class="kw">plot</span>(acifit, <span class="dt">linecols =</span> <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>))
 
 #### ggplot2 作图
-alldata &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">A =</span> 
-      <span class="kw">c</span>(acin<span class="op">$</span>A, ddata<span class="op">$</span>Ac, ddata<span class="op">$</span>Aj, cleaf<span class="op">$</span>A), 
-      <span class="dt">Ci =</span> <span class="kw">c</span>(acin<span class="op">$</span>Ci, ddata<span class="op">$</span>Ci, ddata<span class="op">$</span>Ci, cleaf<span class="op">$</span>Ci),
-      <span class="dt">Atype =</span> <span class="kw">c</span>(
-        <span class="kw">rep</span>(<span class="st">&quot;standard Aci curve&quot;</span>, <span class="kw">length</span>(acin<span class="op">$</span>A)),
-        <span class="kw">rep</span>(<span class="st">&quot;Ac&quot;</span>, <span class="kw">length</span>(ddata<span class="op">$</span>Ac)), 
-        <span class="kw">rep</span>(<span class="st">&quot;Aj&quot;</span>, <span class="kw">length</span>(ddata<span class="op">$</span>Aj)),
-        <span class="kw">rep</span>(<span class="st">&quot;A corrected&quot;</span>, <span class="kw">length</span>(cleaf<span class="op">$</span>A))
+ddata &lt;-<span class="st"> </span>acifit<span class="op">$</span>df
+
+alldata &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">A =</span> <span class="kw">c</span>(acin<span class="op">$</span>A, ddata<span class="op">$</span>Ac, ddata<span class="op">$</span>Aj, cleaf<span class="op">$</span>A), 
+                      <span class="dt">Ci =</span> <span class="kw">c</span>(acin<span class="op">$</span>Ci, ddata<span class="op">$</span>Ci, ddata<span class="op">$</span>Ci, cleaf<span class="op">$</span>Ci),
+                      <span class="dt">Atype =</span> <span class="kw">c</span>(
+                        <span class="kw">rep</span>(<span class="st">&quot;standard Aci curve&quot;</span>, <span class="kw">length</span>(acin<span class="op">$</span>A)),
+                        <span class="kw">rep</span>(<span class="st">&quot;Ac&quot;</span>, <span class="kw">length</span>(ddata<span class="op">$</span>Ac)), 
+                        <span class="kw">rep</span>(<span class="st">&quot;Aj&quot;</span>, <span class="kw">length</span>(ddata<span class="op">$</span>Aj)),
+                        <span class="kw">rep</span>(<span class="st">&quot;A corrected&quot;</span>, <span class="kw">length</span>(cleaf<span class="op">$</span>A))
                       )
 )
 
 alldata<span class="op">$</span>Atype &lt;-<span class="st"> </span><span class="kw">factor</span>(alldata<span class="op">$</span>Atype, 
-    <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;standard Aci curve&quot;</span>, 
-               <span class="st">&quot;Ac&quot;</span>, <span class="st">&quot;Aj&quot;</span>, <span class="st">&quot;A corrected&quot;</span>))
+                        <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;standard Aci curve&quot;</span>, 
+                                   <span class="st">&quot;Ac&quot;</span>, <span class="st">&quot;Aj&quot;</span>, <span class="st">&quot;A corrected&quot;</span>))
 
 <span class="kw">library</span>(ggplot2)
 p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(alldata)
@@ -387,9 +401,9 @@ p1 &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </
 p2 &lt;-<span class="st"> </span>p1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="kw">aes</span>(Ci, A, <span class="dt">colour =</span> Atype),
                        <span class="dt">method =</span> <span class="st">&#39;auto&#39;</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;A &quot;</span>, <span class="st">&quot;(&quot;</span>, mu, 
-          mol<span class="op">%.%</span>m<span class="op">^-</span><span class="dv">2</span><span class="op">%.%</span>s<span class="op">^-</span><span class="dv">1</span>, <span class="st">&quot;)&quot;</span>)), 
+                          mol<span class="op">%.%</span>m<span class="op">^-</span><span class="dv">2</span><span class="op">%.%</span>s<span class="op">^-</span><span class="dv">1</span>, <span class="st">&quot;)&quot;</span>)), 
        <span class="dt">x=</span><span class="kw">expression</span>(<span class="kw">paste</span>(C[i], <span class="st">&quot; &quot;</span>,
-          <span class="st">&quot;(&quot;</span>, mu, mol<span class="op">%.%</span>mol<span class="op">^-</span><span class="dv">1</span>, <span class="st">&quot;)&quot;</span>)))
+                          <span class="st">&quot;(&quot;</span>, mu, mol<span class="op">%.%</span>mol<span class="op">^-</span><span class="dv">1</span>, <span class="st">&quot;)&quot;</span>)))
 
 p2 <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1800</span>),
                         <span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1800</span>, <span class="dv">200</span>)) <span class="op">+</span><span class="st">  </span>
@@ -397,12 +411,12 @@ p2 <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_co
                      <span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">50</span>, <span class="dv">10</span>)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">scale_colour_hue</span>(<span class="dt">name=</span><span class="st">&quot;  &quot;</span>, 
                    <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&#39;ACi curve data; &#39;</span>, 
-                   <span class="kw">expression</span>(<span class="kw">paste</span>(A[c], <span class="st">&#39; data; &#39;</span>)), 
-                   <span class="kw">expression</span>(<span class="kw">paste</span>(A[j], <span class="st">&#39; data; &#39;</span>)), 
-                   <span class="st">&#39;RACiR data&#39;</span>) 
+                            <span class="kw">expression</span>(<span class="kw">paste</span>(A[c], <span class="st">&#39; data; &#39;</span>)), 
+                            <span class="kw">expression</span>(<span class="kw">paste</span>(A[j], <span class="st">&#39; data; &#39;</span>)), 
+                            <span class="st">&#39;RACiR data&#39;</span>) 
   ) <span class="op">+</span><span class="st"> </span><span class="kw">theme_set</span>(<span class="kw">theme_bw</span>()) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x  =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>, 
-           <span class="dt">angle=</span><span class="dv">30</span>, <span class="dt">vjust=</span><span class="fl">0.5</span>), 
+                                    <span class="dt">angle=</span><span class="dv">30</span>, <span class="dt">vjust=</span><span class="fl">0.5</span>), 
         <span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>),
         <span class="dt">axis.title.x =</span> <span class="kw">element_text</span>(
           <span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&#39;bold&#39;</span>),
@@ -1065,6 +1079,9 @@ jipdata &lt;-<span class="st"> </span><span class="kw">read_files</span>(<span c
 <div id="refs" class="references">
 <div id="ref-Stinziano2017">
 <p>Stinziano, J. R., P. B. Morgan, D. J. Lynch, A. J. Saathoff, D. K. Mcdermitt, and D. T. Hanson. 2017. “The Rapid a-Ci Response: Photosynthesis in the Phenomic Era.” <em>Plant Cell &amp; Environment</em> 40.</p>
+</div>
+<div id="ref-stinziano2018">
+<p>Stinziano, Joseph R, Dayle K Mcdermitt, Douglas J Lynch, Aaron J Saathoff, Patrick B Morgan, and David T Hanson. 2018. “The Rapid a/Ci Response: A Guide to Best Practices.” <em>New Phytologist</em>.</p>
 </div>
 </div>
 <div class="footnotes">
