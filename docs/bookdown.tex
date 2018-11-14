@@ -168,7 +168,7 @@
 
 \title{R 语言分析 LI-6400 和 LI-6800 光合仪的数据}
 \author{祝介东 北京力高泰科技有限公司}
-\date{2018-11-13}
+\date{2018-11-14}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -2556,7 +2556,15 @@ Rd= 0.66, theta=0.71
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(nls2)}
+\end{Highlighting}
+\end{Shaded}
 
+\begin{verbatim}
+## Loading required package: proto
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{grid.test <-}\StringTok{ }\KeywordTok{expand.grid}\NormalTok{(}\KeywordTok{list}\NormalTok{(}
   \DataTypeTok{Am=}\KeywordTok{c}\NormalTok{(}\DecValTok{12}\NormalTok{),}
   \DataTypeTok{alpha =} \KeywordTok{seq}\NormalTok{(}\FloatTok{0.01}\NormalTok{, }\FloatTok{0.08}\NormalTok{, }\DataTypeTok{by =}\FloatTok{0.01}\NormalTok{),}
@@ -2726,13 +2734,109 @@ RACiR\texttrademark 技术的疑问做了解答并提出了准确测量的建议
   \(CO_2\) 变化范围和随时间的斜率。
 \end{itemize}
 
-同时 \citet{stinziano2018} 还给出了专门的 RACiR 数据分析软件包
+\section{\texorpdfstring{racir 软件包实现
+RACiR\texttrademark 数据分析}{racir 软件包实现 RACiR数据分析}}\label{racir_pkg}
+
+\citet{stinziano2018} 还给出了专门的 RACiR 数据分析软件包
 \href{https://github.com/jstinzi/racir}{racir
-package}，以下内容是我之前写的内容，部分代码的实现和上述软件包相似，仅供参考。
+package}，我们下面先介绍一下这个软件包。
 
-后续会更新 \texttt{racir} 相关的分析方法。
+软件的安装及调用通过如下代码实现：
 
-\section{\texorpdfstring{RACiR\texttrademark 分析的实现}{RACiR分析的实现}}\label{racir68_exam}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{devtools}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"jstinzi/racir"}\NormalTok{)}
+\KeywordTok{library}\NormalTok{(racir)}
+\end{Highlighting}
+\end{Shaded}
+
+软件包的函数很多，但可以分为下面几类：
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{read\_6800}： 直接读取 LI-6800 的\textbf{原始数据}。
+\item
+  \texttt{racircalcheck} \&
+  \texttt{racircalcheckcsv}，检查空叶室校准的数据并作图，两者的差别是一个读取原始数据格式，一个读取
+  csv 数据格式。
+\item
+  \texttt{racircal} \& \texttt{racircalcsv}:
+  空叶室校准带叶片测量的数据。分为原始数据格式和 csv 数据格式两种
+\item
+  \texttt{racircalbatch} \& \texttt{racircalbatchcsv}：批量校准数据，同
+  \texttt{racircalcsv} 作用相同，不过属于批量校准，分为原始数据格式和
+  csv 数据格式两种。
+\item
+  \texttt{compile\_racir}：将 csv
+  数据格式批量处理到一个数据表格中，通常结合 \texttt{plantecophys} 的
+  \texttt{fitacis} 使用进行批量拟合。
+\end{itemize}
+
+\subsection{实现过程}\label{racir_pkg_real}
+
+手上暂时没有原始数据格式的 racir 数据，因而现在使用以前的 csv
+数据进行操作（空叶室测量数据和带叶片测量数据转为 csv 格式）。
+
+首先检查空叶室校准：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(racir)}
+
+\KeywordTok{racircalcheckcsv}\NormalTok{(}\StringTok{"./data/empty_test.csv"}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{460}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown_files/figure-latex/racir_check-1.pdf}
+\includegraphics{bookdown_files/figure-latex/racir_check-2.pdf}
+\includegraphics{bookdown_files/figure-latex/racir_check-3.pdf}
+
+\begin{verbatim}
+## [1] cal3rd
+\end{verbatim}
+
+上述参数分别是空叶室校准数据的路径，以及我要删除的数据，即只保留参比室
+\(CO_2\)
+浓度在两者之间的数据（范围可作图确定，可参考本部分手动实现的代码）。
+所示。当然此步骤可以跳过，因为下面的代码包含了该步骤，直接输出一个校准后的
+csv 文件，文件名为 ''原文件名`` + ``\_corrected" + ``.csv''。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{racircalcsv}\NormalTok{(}\StringTok{"./data/empty_test.csv"}\NormalTok{, }\DecValTok{16}\NormalTok{, }\DecValTok{460}\NormalTok{, }\StringTok{"./data/leaf_test.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown_files/figure-latex/racir_cor_pkg-1.pdf}
+\caption{(\#fig:racir\_cor\_pkg)校准之后的数据}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(plantecophys)}
+\NormalTok{df_racir <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"./data/leaf_test.csv_corrected.csv"}\NormalTok{)}
+\NormalTok{fitracir <-}\StringTok{ }\KeywordTok{fitaci}\NormalTok{(df_racir,}\DataTypeTok{varnames =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{ALEAF =} \StringTok{"A"}\NormalTok{, }
+              \DataTypeTok{Tleaf =} \StringTok{"Tleaf"}\NormalTok{, }\DataTypeTok{Ci =} \StringTok{"Ci"}\NormalTok{,   }\DataTypeTok{PPFD  =} \StringTok{"Qin"}\NormalTok{, }
+              \DataTypeTok{Rd =} \StringTok{"Rd"}\NormalTok{), }\DataTypeTok{Patm =} \FloatTok{84.09}\NormalTok{)}
+\NormalTok{fitracir}\OperatorTok{$}\NormalTok{pars}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        Estimate Std. Error
+## Vcmax 143.59891 0.26389323
+## Jmax  229.00314 0.71289238
+## Rd     18.33568 0.04327703
+\end{verbatim}
+
+\section{\texorpdfstring{RACiR\texttrademark 分析的手动实现}{RACiR分析的手动实现}}\label{racir68_exam}
+
+以下内容是我之前写的内容，部分代码的实现和上述软件包相似，仅供参考，尤其是当您使用
+\texttt{racir} 软件包报错时，可以参考下文代码手动实现 RACiR
+数据的分析。。
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2763,15 +2867,16 @@ package}，以下内容是我之前写的内容，部分代码的实现和上述
 \StringTok{                        }\FloatTok{45.28} \OperatorTok{&}\StringTok{ }\NormalTok{uemp500}\OperatorTok{$}\NormalTok{CO2_r }\OperatorTok{<}\StringTok{ }\FloatTok{459.12}\NormalTok{),]}
 \KeywordTok{plot}\NormalTok{(cemp}\OperatorTok{$}\NormalTok{CO2_r, cemp}\OperatorTok{$}\NormalTok{A)}
 
+\CommentTok{# 采用 1~5 次多项式分别拟合}
 \NormalTok{cemp1st <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(A }\OperatorTok{~}\StringTok{ }\NormalTok{CO2_r, }\DataTypeTok{data =}\NormalTok{ cemp)}
 \NormalTok{cemp2nd <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(A }\OperatorTok{~}\StringTok{ }\KeywordTok{poly}\NormalTok{(CO2_r, }\DecValTok{2}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ cemp)}
 \NormalTok{cemp3rd <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(A }\OperatorTok{~}\StringTok{ }\KeywordTok{poly}\NormalTok{(CO2_r, }\DecValTok{3}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ cemp)}
 \NormalTok{cemp4th <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(A }\OperatorTok{~}\StringTok{ }\KeywordTok{poly}\NormalTok{(CO2_r, }\DecValTok{4}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ cemp)}
 \NormalTok{cemp5th <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(A }\OperatorTok{~}\StringTok{ }\KeywordTok{poly}\NormalTok{(CO2_r, }\DecValTok{5}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ cemp)}
 
+\CommentTok{# 利用 BIC 找出最合理的校准方程}
 \NormalTok{bics <-}\StringTok{ }\KeywordTok{BIC}\NormalTok{(cal1st, cal2nd, cal3rd, cal4th, cal5th)}
 \NormalTok{best <-}\StringTok{ }\KeywordTok{noquote}\NormalTok{(}\KeywordTok{rownames}\NormalTok{(bics)[bics}\OperatorTok{$}\NormalTok{BIC }\OperatorTok{==}\StringTok{ }\KeywordTok{min}\NormalTok{(bics}\OperatorTok{$}\NormalTok{BIC)])}
-
 \NormalTok{best}
 
 \CommentTok{# 校准带叶片测量的数据}
@@ -3140,23 +3245,23 @@ ojip 连续式测量光 ojip 曲线的快速预览如图 \ref{fig:dcplot}
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] jiptest_0.1.3      nls2_0.2           proto_1.0.0       
-## [4] purrr_0.2.5        ggplot2_3.0.0      minpack.lm_1.2-1  
-## [7] plantecophys_1.3-2
+## [1] jiptest_0.1.3      racir_1.0.0        nls2_0.2          
+## [4] proto_1.0.0        purrr_0.2.5        ggplot2_3.0.0     
+## [7] minpack.lm_1.2-1   plantecophys_1.3-2
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.12.18     cellranger_1.1.0 compiler_3.5.1   pillar_1.3.0    
-##  [5] highr_0.7        plyr_1.8.4       bindr_0.1.1      MESS_0.5.2      
-##  [9] tools_3.5.1      digest_0.6.17    lattice_0.20-35  evaluate_0.11   
-## [13] tibble_1.4.2     gtable_0.2.0     pkgconfig_2.0.2  png_0.1-7       
-## [17] rlang_0.2.2      Matrix_1.2-14    rstudioapi_0.7   yaml_2.2.0      
-## [21] geeM_0.10.1      xfun_0.4         bindrcpp_0.2.2   withr_2.1.2     
-## [25] stringr_1.3.1    dplyr_0.7.7      knitr_1.20       tidyselect_0.2.4
-## [29] rprojroot_1.3-2  grid_3.5.1       glue_1.3.0       R6_2.2.2        
-## [33] rematch_1.0.1    geepack_1.2-1    readxl_1.1.0     rmarkdown_1.10  
-## [37] bookdown_0.7     magrittr_1.5     backports_1.1.2  scales_1.0.0    
-## [41] htmltools_0.3.6  assertthat_0.2.0 colorspace_1.3-2 labeling_0.3    
-## [45] stringi_1.2.4    lazyeval_0.2.1   munsell_0.5.0    crayon_1.3.4
+##  [1] tidyselect_0.2.4 xfun_0.4         lattice_0.20-35  colorspace_1.3-2
+##  [5] htmltools_0.3.6  yaml_2.2.0       rlang_0.2.2      pillar_1.3.0    
+##  [9] glue_1.3.0       withr_2.1.2      readxl_1.1.0     bindrcpp_0.2.2  
+## [13] bindr_0.1.1      plyr_1.8.4       stringr_1.3.1    munsell_0.5.0   
+## [17] gtable_0.2.0     cellranger_1.1.0 evaluate_0.11    labeling_0.3    
+## [21] geepack_1.2-1    knitr_1.20       highr_0.7        Rcpp_0.12.18    
+## [25] scales_1.0.0     backports_1.1.2  png_0.1-7        digest_0.6.17   
+## [29] stringi_1.2.4    bookdown_0.7     dplyr_0.7.7      grid_3.5.1      
+## [33] rprojroot_1.3-2  tools_3.5.1      magrittr_1.5     lazyeval_0.2.1  
+## [37] tibble_1.4.2     MESS_0.5.2       crayon_1.3.4     geeM_0.10.1     
+## [41] pkgconfig_2.0.2  Matrix_1.2-14    assertthat_0.2.0 rmarkdown_1.10  
+## [45] rematch_1.0.1    rstudioapi_0.7   R6_2.2.2         compiler_3.5.1
 \end{verbatim}
 
 \cleardoublepage
