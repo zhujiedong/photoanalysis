@@ -427,9 +427,10 @@ A=min\{w_{c},w_{j,}w_{p}\}(1-\frac{\Gamma^{*}}{C_{c}})-R_{d}
 \section{\texorpdfstring{CO\textsubscript{2}
 响应曲线测量的注意事项}{CO2 响应曲线测量的注意事项}}\label{co2-}
 
-\subsection{分段性}
+尽管上文对其分段性做了数学上的解释，相比来讲，不是那么通俗易懂，根据
+\citet{matthew2018} 文章中的内容，我们后面两小节的内容对其进行概述：
 
-尽管上文对其分段性做了数学上的解释，相比来讲，不是那么通俗易懂，他的分段性是由下面的因素决定的：
+\subsection{分段性}
 
 与光响应曲线不同， A/Ci
 曲线是分段的，这也增加了其复杂性，在其最初阶段，\(CO_2\)
@@ -2645,15 +2646,7 @@ Rd= 0.66, theta=0.71
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(nls2)}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{verbatim}
-## Loading required package: proto
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{grid.test <-}\StringTok{ }\KeywordTok{expand.grid}\NormalTok{(}\KeywordTok{list}\NormalTok{(}
   \DataTypeTok{Am=}\KeywordTok{c}\NormalTok{(}\DecValTok{12}\NormalTok{),}
   \DataTypeTok{alpha =} \KeywordTok{seq}\NormalTok{(}\FloatTok{0.01}\NormalTok{, }\FloatTok{0.08}\NormalTok{, }\DataTypeTok{by =}\FloatTok{0.01}\NormalTok{),}

@@ -284,9 +284,9 @@ A=min\{w_{c},w_{j,}w_{p}\}(1-\frac{\Gamma^{*}}{C_{c}})-R_{d}
 </div>
 <div id="co2-" class="section level2">
 <h2><span class="header-section-number">2.2</span> CO<sub>2</sub> 响应曲线测量的注意事项</h2>
+<p>尽管上文对其分段性做了数学上的解释，相比来讲，不是那么通俗易懂，根据 <span class="citation">Haworth, Marino, and Centritto (<a href="#ref-matthew2018">2018</a>)</span> 文章中的内容，我们后面两小节的内容对其进行概述：</p>
 <div id="section-2.2.1" class="section level3">
 <h3><span class="header-section-number">2.2.1</span> 分段性</h3>
-<p>尽管上文对其分段性做了数学上的解释，相比来讲，不是那么通俗易懂，他的分段性是由下面的因素决定的：</p>
 <p>与光响应曲线不同， A/Ci 曲线是分段的，这也增加了其复杂性，在其最初阶段，<span class="math inline">\(CO_2\)</span> 浓度较低，在此阶段， Rubisco 更多的与 <span class="math inline">\(O_2\)</span> 结合，因此，即使是较小浓度的 <span class="math inline">\(CO_2\)</span> 的增加，也会显著提高羧化速率，我们将此阶段称之为 <span class="math inline">\(CO_2\)</span> (<span class="citation">Wullschleger (<a href="#ref-Wullschleger1993Biochemical">1993</a>)</span>) 限制或 Rubisco 限制 (<span class="citation">Long and Bernacchi (<a href="#ref-Long2003Gas">2003</a>)</span>)。净光合速率 A 与 Ci 在此阶段斜率比较陡峭，实践中往往利用计算该斜率来计算 <span class="math inline">\(V_{cmax}\)</span>。</p>
 <p>在较高的 <span class="math inline">\(CO_2\)</span> 浓度下，曲线斜率开始便的平缓，作为底物的 <span class="math inline">\(CO_2\)</span> 已经不在是限制因素，随着羧化速率达到最大，RUBP 的量成为了其限制因素，而 RUBP 的再生速率受最大电子传递速率 <span class="math inline">\(J_{max}\)</span> 的限制。此时曲线的弯曲点由 <span class="math inline">\(V_{cmax}\)</span> 限制转变为 <span class="math inline">\(J_{max}\)</span>，许多研究中将饱和光下和 <span class="math inline">\(CO_2\)</span> 浓度下测量的光合速率称之为做大光合速率(<span class="citation">Heath et al. (<a href="#ref-heath2005rising">2005</a>)</span>)。而另一些研究中将最大光合速率定义为外界 <span class="math inline">\(CO_2\)</span> 时，在饱和光强下达到的最大光合速率(<span class="citation">Marshall and Biscoe (<a href="#ref-marshall1980a">1980</a>)</span>)。这些术语上的差别需要注意。</p>
 <p>在之后，有可能继续观测到磷酸盐限制 RUBP 再生的情况，导致光合速率的下降。因为此时大量的磷酸丙糖与正磷酸盐结合，导致 ATP 合成受限制(<span class="citation">D. S. Ellsworth et al. (<a href="#ref-ellsworth2015phosphorus">2015</a>)</span>)。这就是 TPU 限制阶段。</p>
@@ -1366,6 +1366,9 @@ aci &lt;-<span class="st"> </span><span class="kw">AciC4</span>(<span class="dt"
 </div>
 <div id="ref-Hikosaka2006Temperature">
 <p>Hikosaka, K, K Ishikawa, A Borjigidai, O Muller, and Y Onoda. 2006. “Temperature Acclimation of Photosynthesis: Mechanisms Involved in the Changes in Temperature Dependence of Photosynthetic Rate.” <em>Journal of Experimental Botany</em> 57 (2): 291.</p>
+</div>
+<div id="ref-matthew2018">
+<p>Haworth, Matthew, Giovanni Marino, and Mauro Centritto. 2018. “An Introductory Guide to Gas Exchange Analysis of Photosynthesis and Its Application to Plant Phenotyping and Precision Irrigation to Enhance Water Use Efficiency.” <em>Journal of Water and Climate Change</em>.</p>
 </div>
 <div id="ref-Wullschleger1993Biochemical">
 <p>Wullschleger, Stan D. 1993. “Biochemical Limitations to Carbon Assimilation in C3 Plants—A Retrospective Analysis of the a-Ci Curves from 109 Species.” <em>Journal of Experimental Botany</em> 44 (262): 907–20.</p>
