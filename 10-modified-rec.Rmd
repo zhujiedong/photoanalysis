@@ -7,7 +7,7 @@ P_{n} = \alpha \frac{1-\beta I}{1+\gamma I} I - R_{d}
 (\#eq:mrec)
 \end{equation}
 
-其中，$\text{\ensuremath{\beta}}$ 和 $\gamma$ 为系数，$\text{\ensuremath{\beta}}$光抑制项，$\gamma$光饱和项，单位为
+其中，$\beta$ 和 $\gamma$ 为系数，$\beta$光抑制项，$\gamma$光饱和项，单位为
 $m^{2}\cdot s\cdot\mu mol^{-1}$，其他参数与上文相同，因为该式 \@ref(eq:mrec)
 存在极值，因此，必然存在饱和光强和最大净光合速率，分别用式 \@ref(eq:isat) 和式 \@ref(eq:ic) 求得。
 

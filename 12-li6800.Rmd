@@ -99,6 +99,7 @@ fitracir <- fitaci(df_racir,varnames = list(ALEAF = "A",
               Rd = "Rd"), Patm = 84.09)
 fitracir$pars
 ```
+**注意：RACiR 的本意是表型研究中求 Vcmax 和 Jmax，因而，请忽略 Rd 等参数的计算结果**
 
 ## RACiR\texttrademark 分析的手动实现 {#racir68_exam}
 
