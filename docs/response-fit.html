@@ -25,7 +25,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司">
 
 
-<meta name="date" content="2018-11-15">
+<meta name="date" content="2018-11-16">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -112,9 +112,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2" data-path="response-fit.html"><a href="response-fit.html"><i class="fa fa-check"></i><b>2</b> CO<sub>2</sub> 响应曲线的拟合</a><ul>
 <li class="chapter" data-level="2.1" data-path="response-fit.html"><a href="response-fit.html#fvcb_mod"><i class="fa fa-check"></i><b>2.1</b> FvCB 模型</a></li>
-<li class="chapter" data-level="2.2" data-path="response-fit.html"><a href="response-fit.html#co2-"><i class="fa fa-check"></i><b>2.2</b> CO<sub>2</sub> 响应曲线测量的注意事项</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="response-fit.html"><a href="response-fit.html#section-2.2.1"><i class="fa fa-check"></i><b>2.2.1</b> 分段性</a></li>
-<li class="chapter" data-level="2.2.2" data-path="response-fit.html"><a href="response-fit.html#section-2.2.2"><i class="fa fa-check"></i><b>2.2.2</b> 测量注意事项</a></li>
+<li class="chapter" data-level="2.2" data-path="response-fit.html"><a href="response-fit.html#co2_note"><i class="fa fa-check"></i><b>2.2</b> CO<sub>2</sub> 响应曲线测量的注意事项</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="response-fit.html"><a href="response-fit.html#model_3"><i class="fa fa-check"></i><b>2.2.1</b> 分段性</a></li>
+<li class="chapter" data-level="2.2.2" data-path="response-fit.html"><a href="response-fit.html#-note_detail"><i class="fa fa-check"></i><b>2.2.2</b> 测量注意事项 {note_detail}</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="response-fit.html"><a href="response-fit.html#plantecophys"><i class="fa fa-check"></i><b>2.3</b> <code>plantecophys</code> 软件包</a></li>
 <li class="chapter" data-level="2.4" data-path="response-fit.html"><a href="response-fit.html#fit6400"><i class="fa fa-check"></i><b>2.4</b> LI-6400XT CO<sub>2</sub> 响应曲线的拟合</a><ul>
@@ -282,17 +282,17 @@ w_{p\ }=\ \frac{3V_{p}C_{c}}{C_{c}-\Gamma^{*}}
 A=min\{w_{c},w_{j,}w_{p}\}(1-\frac{\Gamma^{*}}{C_{c}})-R_{d}
 \end{equation}\]</span>
 </div>
-<div id="co2-" class="section level2">
+<div id="co2_note" class="section level2">
 <h2><span class="header-section-number">2.2</span> CO<sub>2</sub> 响应曲线测量的注意事项</h2>
 <p>尽管上文对其分段性做了数学上的解释，相比来讲，不是那么通俗易懂，根据 <span class="citation">Haworth, Marino, and Centritto (<a href="#ref-matthew2018">2018</a>)</span> 文章中的内容，我们后面两小节的内容对其进行概述：</p>
-<div id="section-2.2.1" class="section level3">
+<div id="model_3" class="section level3">
 <h3><span class="header-section-number">2.2.1</span> 分段性</h3>
 <p>与光响应曲线不同， A/Ci 曲线是分段的，这也增加了其复杂性，在其最初阶段，<span class="math inline">\(CO_2\)</span> 浓度较低，在此阶段， Rubisco 更多的与 <span class="math inline">\(O_2\)</span> 结合，因此，即使是较小浓度的 <span class="math inline">\(CO_2\)</span> 的增加，也会显著提高羧化速率，我们将此阶段称之为 <span class="math inline">\(CO_2\)</span> (<span class="citation">Wullschleger (<a href="#ref-Wullschleger1993Biochemical">1993</a>)</span>) 限制或 Rubisco 限制 (<span class="citation">Long and Bernacchi (<a href="#ref-Long2003Gas">2003</a>)</span>)。净光合速率 A 与 Ci 在此阶段斜率比较陡峭，实践中往往利用计算该斜率来计算 <span class="math inline">\(V_{cmax}\)</span>。</p>
 <p>在较高的 <span class="math inline">\(CO_2\)</span> 浓度下，曲线斜率开始便的平缓，作为底物的 <span class="math inline">\(CO_2\)</span> 已经不在是限制因素，随着羧化速率达到最大，RUBP 的量成为了其限制因素，而 RUBP 的再生速率受最大电子传递速率 <span class="math inline">\(J_{max}\)</span> 的限制。此时曲线的弯曲点由 <span class="math inline">\(V_{cmax}\)</span> 限制转变为 <span class="math inline">\(J_{max}\)</span>，许多研究中将饱和光下和 <span class="math inline">\(CO_2\)</span> 浓度下测量的光合速率称之为做大光合速率(<span class="citation">Heath et al. (<a href="#ref-heath2005rising">2005</a>)</span>)。而另一些研究中将最大光合速率定义为外界 <span class="math inline">\(CO_2\)</span> 时，在饱和光强下达到的最大光合速率(<span class="citation">Marshall and Biscoe (<a href="#ref-marshall1980a">1980</a>)</span>)。这些术语上的差别需要注意。</p>
 <p>在之后，有可能继续观测到磷酸盐限制 RUBP 再生的情况，导致光合速率的下降。因为此时大量的磷酸丙糖与正磷酸盐结合，导致 ATP 合成受限制(<span class="citation">D. S. Ellsworth et al. (<a href="#ref-ellsworth2015phosphorus">2015</a>)</span>)。这就是 TPU 限制阶段。</p>
 </div>
-<div id="section-2.2.2" class="section level3">
-<h3><span class="header-section-number">2.2.2</span> 测量注意事项</h3>
+<div id="-note_detail" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> 测量注意事项 {note_detail}</h3>
 <p>尽管您的操作是严格按照说明书操作的，但说明书是指仪器的正确操作方式，无法对所有测量都采用相同设置，要获得好的测量结果，有更多的因素需要注意：</p>
 <p>使用 LI-6400 或 LI-6800 测量 A/Ci 曲线的过程也就是控制叶室或参比室气体浓度变化的过程，<strong>只要诱导的时间足够</strong>，气孔会在相应设置的环境条件下开到足够大，这样 Ci 会随 Ca 而变化，一般来讲二者的比例为 0.7，但也可能在 0.5~0.7 间变化。</p>
 <p>一般来讲，测量参数是在温度为 25 <span class="math inline">\(^{\circ}\)</span>C 时获得，但实际测量过程中，因为外界温度过高或过低等无法控制叶室温度到 25 <span class="math inline">\(^{\circ}\)</span>C，这其实并非严重的问题，因为这可以通过数学上的方法将计算参数标准化为 25 <span class="math inline">\(^{\circ}\)</span>C 时的结果。所以，在测量时只需控制叶室温度稳定即可（通常为 20 <span class="math inline">\(^{\circ}\)</span>C ~ 30 <span class="math inline">\(^{\circ}\)</span>C 之间）。 此外就是控制恒定的 VPD 及一个饱和光强。另外就是需要注意，开始测量之前，必须在外界环境的 <span class="math inline">\(CO_2\)</span> 浓度下诱导足够长的时间，使光合速率达到稳定，一般需要20 ~ 30 min。对于没有稳定的光保护机制的植物，一般不建议在 50 ppm 或更低的浓度下进行设置，此时饱和光强和建议的温度下，植物没有足够的底物进行光合作用，这样会因为光化学反应的降低发生氧化性损伤。<span class="citation">M. Centritto, Loreto, and Chartzoulakis (<a href="#ref-centritto2003">2003</a>)</span> 研究表明，长时间的在 50 ppm 下诱导气孔打开到最大时，可以观测到最大的气孔导度（非标准方式测量）。</p>
@@ -1368,7 +1368,7 @@ aci &lt;-<span class="st"> </span><span class="kw">AciC4</span>(<span class="dt"
 <p>Hikosaka, K, K Ishikawa, A Borjigidai, O Muller, and Y Onoda. 2006. “Temperature Acclimation of Photosynthesis: Mechanisms Involved in the Changes in Temperature Dependence of Photosynthetic Rate.” <em>Journal of Experimental Botany</em> 57 (2): 291.</p>
 </div>
 <div id="ref-matthew2018">
-<p>Haworth, Matthew, Giovanni Marino, and Mauro Centritto. 2018. “An Introductory Guide to Gas Exchange Analysis of Photosynthesis and Its Application to Plant Phenotyping and Precision Irrigation to Enhance Water Use Efficiency.” <em>Journal of Water and Climate Change</em>.</p>
+<p>Haworth, Matthew, Giovanni Marino, and Mauro Centritto. 2018. “An Introductory Guide to Gas Exchange Analysis of Photosynthesis and Its Application to Plant Phenotyping and Precision Irrigation to Enhance Water Use Efficiency.” <em>Journal of Water and Climate Change</em>. doi:<a href="https://doi.org/https://doi.org/10.2166/wcc.2018.152">https://doi.org/10.2166/wcc.2018.152</a>.</p>
 </div>
 <div id="ref-Wullschleger1993Biochemical">
 <p>Wullschleger, Stan D. 1993. “Biochemical Limitations to Carbon Assimilation in C3 Plants—A Retrospective Analysis of the a-Ci Curves from 109 Species.” <em>Journal of Experimental Botany</em> 44 (262): 907–20.</p>
