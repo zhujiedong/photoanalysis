@@ -88,6 +88,7 @@ RuBP 阶段），此时 Vc 由 RuBP 的再生速率限制，而 RuBP 又由电�
 
 \begin{equation}
 w_{j}\ =\ \frac{J\ C_{c}}{4C_{c\ }+\ 8\Gamma^{*}}
+(\#eq:wj)
 \end{equation}
 
 当 Cc 浓度很高，光合磷酸化超过了淀粉和蔗糖的合成速率的时候，Vc 受到 TP 利用速率（Vp）的限制（图 \@ref(fig:fvcb)
@@ -95,6 +96,7 @@ TPU 阶段），一般情况下，
 
 \begin{equation}
 w_{p\ }=\ \frac{3V_{p}C_{c}}{C_{c}-\Gamma^{*}}
+(\#eq:wp)
 \end{equation}
 
 最终，C3 植物叶片的光合速率 A 由 w~c~、w~j~、w~p~
@@ -102,6 +104,7 @@ w_{p\ }=\ \frac{3V_{p}C_{c}}{C_{c}-\Gamma^{*}}
 
 \begin{equation}
 A=min\{w_{c},w_{j,}w_{p}\}(1-\frac{\Gamma^{*}}{C_{c}})-R_{d}
+(\#eq:fvcb_fin)
 \end{equation}
 
 
@@ -117,7 +120,7 @@ A=min\{w_{c},w_{j,}w_{p}\}(1-\frac{\Gamma^{*}}{C_{c}})-R_{d}
 
 在之后，有可能继续观测到磷酸盐限制 RUBP 再生的情况，导致光合速率的下降。因为此时大量的磷酸丙糖与正磷酸盐结合，导致 ATP 合成受限制(@ellsworth2015phosphorus)。这就是 TPU 限制阶段。
 
-### 测量注意事项 {note_detail}
+### 测量注意事项 {#note_detail}
 
 尽管您的操作是严格按照说明书操作的，但说明书是指仪器的正确操作方式，无法对所有测量都采用相同设置，要获得好的测量结果，有更多的因素需要注意：
 
@@ -131,6 +134,7 @@ A=min\{w_{c},w_{j,}w_{p}\}(1-\frac{\Gamma^{*}}{C_{c}})-R_{d}
 
 \begin{equation}
 C_c = C_i - \frac{A}{gm}
+(\#eq:note_cc)
 \end{equation}
 
 对于 gm 的计算，比较易操作的有几种：采用光合荧光联合测量的方式计算求得。当然也可以采用曲线拟合的方式，或者 @yin2009using 使用的方式，在低氧气体下，采用不同的光照水平求得。
