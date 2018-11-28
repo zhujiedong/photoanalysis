@@ -1,0 +1,62 @@
+"OPEN 6.3.3"
+"Thr Nov 30 2017 10:01:30"
+<open><version>"6.3.3"</version></open>
+<open><configfile>"/User/Configs/UserPrefs/2x3 LED.xml"</configfile></open>
+<open><light><source>"6400-02 or -02B LED Source"</source><par_in>1<sensor>"SI-4712"<cal>-0.93<actinity>1.00</actinity><transm>1.00</transm></cal></sensor><transm>1</transm></par_in><par_out>1<sensor>"Q104169"<cal>6.81</cal></sensor></par_out></light></open>
+<open><comps><file>"/User/Configs/Comps/StdComps_6.3"<header>""</header><extras></extras></file><energybal>no<f_parIn>1</f_parIn><f_parOut>0</f_parOut><alphaK>0.16</alphaK></energybal><bc_total>2.840<stomatal_ratio>1</stomatal_ratio><bc_oneside>1.420<type>2</type><table>"/Sys/Lib/StdBLCTable"</table><area>6</area><slope>-0.219565</slope><offset>2.73739</offset><fan>5</fan></bc_oneside></bc_total></comps></open>
+<open><prompts><onlog>off</onlog><items>"Default (none)"</items></prompts></open>
+<open><constants><oxygen>21 %</oxygen><bb_vapor>1.5</bb_vapor><bb_oxy>0.9</bb_oxy></constants></open>
+<open><stability><items>"Std Stability"<items[1]><id>-2</id><size>15</size><pcv><onoff>0</onoff><value>1</value></pcv><std><onoff>0</onoff><value>1</value></std><slp><onoff>1</onoff><value>1</value></slp></items[1]><items[2]><id>-5</id><size>15</size><pcv><onoff>0</onoff><value>1</value></pcv><std><onoff>0</onoff><value>1</value></std><slp><onoff>1</onoff><value>1</value></slp></items[2]><items[3]><id>-7</id><size>15</size><pcv><onoff>0</onoff><value>1</value></pcv><std><onoff>0</onoff><value>1</value></std><slp><onoff>1</onoff><value>1</value></slp></items[3]></items></stability></open>
+<open><log><format>"StdLogFmt_6.3"<items>{ -35 -21 -36 -76 30 23 36 21 25 221 -33 111 -34 11 -9 -10 -8 -1 -2 -4 -5 -14 -15 -7 -12 -13 -11 -65 -66 -117 -119 -116 -118 -72 -18 -19 -77 -78 -79 -23  }<hdr>{  }</hdr></items></format><options><beep>on</beep><match>"never"<time>30</time><co2>100</co2><delta>10</delta></match><hdr>normal</hdr><rem>normal</rem><stab>no</stab><stats>no<mean>no</mean><file>no</file><period>15</period></stats><excel>yes</excel><controls>yes</controls><comm>no</comm></options><datafile>"/User/light reponse"</datafile><button><action>"Normal Log"<code>" LogOneObsManual "</code></action></button><autoprog>"/User/Configs/AutoProgs/LightCurve2"<active>no</active></autoprog></log></open>
+<open><a2d><avgtime>4.0 secs</avgtime><userchans><ch20>"Off"</ch20><ch21>"Off"</ch21><ch22>"Off"</ch22><ch23>"Off"</ch23></userchans></a2d></open>
+<open><matching><type>0</type><disp>'a'</disp><settings>><CO2Limit>10.0</CO2Limit><H2OLimit>1.0</H2OLimit><MaxAutoTime>60</MaxAutoTime><AverageTime>10</AverageTime></settings></matching></open>
+<li6400><factory><unit>"PSC-4827"</unit><serviced>"27 Feb 2017"</serviced><fuseaware>0</fuseaware><co2mixer>yes</co2mixer><co2><coeffs>{ 0 0.209065 3.3003e-05 1.36817e-08 -1.47938e-12 1.28716e-16  }</coeffs><dvdt>-2.4</dvdt><xs>{ 0.000492 0.000474  }</xs></co2><h2o><coeffs>{ 0 0.00575229 2.28932e-06 -1.40918e-11  }</coeffs><dvdt>-1.9</dvdt><xs>{ -0.00224 6.84e-05  }</xs></h2o><flow>{ 0 0.3602  }</flow><press>{ 87.256 0.00549  }</press></factory></li6400>
+<li6400><user><flow_zero>-122.1</flow_zero><irga_zero><co2>73.1 73.1<at>29.8231</at></co2><h2o>-5.0 -5.0<at>29.7683</at></h2o></irga_zero><irga_span><co2>{ 0.989587 0.990947  }</co2><h2o>{ 0.994 0.999094  }</h2o></irga_span><irga_match><co2>{ -1.32277 1.34896  }</co2><h2o>{ -0.0430326 -0.28017  }</h2o></irga_match><co2_mixer><pump_mv>4500</pump_mv><ppm>{ 2416.72 1133.73 437.951 262.348 116.479 65.9403 44.3124 44.337  }</ppm><mv>{ 5000 3000 1500 1000 500 300 200 100  }</mv></co2_mixer><parin_offset>0</parin_offset><led_cal><unit>"SI-4712"</unit><mv>{ 10 25 50 100 1000 2000 3000 4000 5000  }</mv><qntm>{ 7.16767 20.0541 43.1768 96.5275 1075.69 2117.96 3098.59 4038.45 4688.92  }</qntm></led_cal><lcf_cal><unit>"unknown"</unit><red><mv>{ 50 100 500 1000 1500 5000  }</mv><qntm>{ 50 100 500 1000 2000 5000  }</qntm></red><blue><mv>{ 100 200 500 1000 2000 5000  }</mv><qntm>{ 10 20 50 100 200 500  }</qntm></blue></lcf_cal></user></li6400>
+"10:01:48 "
+$STARTOFDATA$
+"Obs"	"HHMMSS"	"FTime"	"EBal?"	"Photo"	"Cond"	"Ci"	"Trmmol"	"VpdL"	"CTleaf"	"Area"	"BLC_1"	"StmRat"	"BLCond"	"Tair"	"Tleaf"	"TBlk"	"CO2R"	"CO2S"	"H2OR"	"H2OS"	"RH_R"	"RH_S"	"Flow"	"PARi"	"PARo"	"Press"	"CsMch"	"HsMch"	"CsMchSD"	"HsMchSD"	"CrMchSD"	"HrMchSD"	"StableF"	"BLCslope"	"BLCoffst"	"f_parin"	"f_parout"	"alphaK"	"Status"
+"10:01:48 Launched AutoProg /User/Configs/AutoProgs/LightCurve2"
+"10:08:30 Stability: (CO2S 15s SLP<1)(H2OS 15s SLP<1)(Flow 15s SLP<1)"
+"10:08:30 Lamp: ParIn ->  1000 uml"
+"10:08:30 CO2 Mixer: CO2R -> 400 uml"
+"10:08:30 Coolers: Tblock -> 20.00 C"
+"10:08:30 Flow: Fixed -> 500 umol/s"
+"10:08:30 Lamp: ParIn ->  1000 uml"
+"10:10:50 Flow: Fixed -> 500 umol/s"
+1	"10:10:31"	597.0	0	6.63	0.0711	236	0.441	0.564	21.16	6	1.42	1	2.84	20.43	21.16	20.08	399.88	391.72	21.007	21.525	79.27	81.22	500.2	1000	0	90.91	1.64	-0.298	0.0385	0.00265	0.0194	0.00362	1.0	-0.22	2.74	1.00	0.00	0.16	111115
+"10:10:51 Lamp: ParIn ->  800 uml"
+"10:13:11 Flow: Fixed -> 500 umol/s"
+2	"10:12:52"	737.5	0	6.45	0.07	239	0.423	0.548	21.09	6	1.42	1	2.84	20.42	21.09	20.08	399.90	391.97	21.084	21.580	79.57	81.44	500.2	801	0	90.91	1.61	-0.3	0.052	0.00185	0.0221	0.000974	1.0	-0.22	2.74	1.00	0.00	0.16	111115
+"10:13:11 Lamp: ParIn ->  600 uml"
+"10:15:31 Flow: Fixed -> 500 umol/s"
+3	"10:15:12"	878.0	0	6.45	0.0684	235	0.399	0.53	20.99	6	1.42	1	2.84	20.41	20.99	20.08	399.89	391.97	21.130	21.598	79.81	81.58	500.2	599	0	90.91	1.57	-0.301	0.0268	0.000937	0.0344	0.000549	1.0	-0.22	2.74	1.00	0.00	0.16	111115
+"10:15:31 Lamp: ParIn ->  400 uml"
+"10:17:51 Flow: Fixed -> 500 umol/s"
+4	"10:17:32"	1017.5	0	5.96	0.0655	241	0.371	0.514	20.88	6	1.42	1	2.84	20.39	20.88	20.08	399.82	392.50	21.160	21.595	80.02	81.67	500.2	401	0	90.91	1.58	-0.301	0.0238	0.001	0.0154	0.00129	1.0	-0.22	2.74	1.00	0.00	0.16	111115
+"10:17:51 Lamp: ParIn ->  300 uml"
+"10:20:11 Flow: Fixed -> 500 umol/s"
+5	"10:19:52"	1157.5	0	5.77	0.063	241	0.349	0.503	20.81	6	1.42	1	2.84	20.37	20.81	20.08	400.08	392.98	21.190	21.600	80.22	81.77	500.1	299	0	90.92	1.53	-0.302	0.0378	0.000717	0.0471	0.00063	1.0	-0.22	2.74	1.00	0.00	0.16	111115
+"10:20:11 Lamp: ParIn ->  200 uml"
+"10:22:31 Flow: Fixed -> 500 umol/s"
+6	"10:22:12"	1298.0	0	5.05	0.0605	255	0.33	0.495	20.76	6	1.42	1	2.84	20.37	20.76	20.08	399.80	393.59	21.221	21.609	80.36	81.83	500.1	200	0	90.92	1.53	-0.304	0.0158	0.00138	0.0194	0.000629	1.0	-0.22	2.74	1.00	0.00	0.16	111115
+"10:22:31 Lamp: ParIn ->  150 uml"
+"10:25:01 Flow: Fixed -> 500 umol/s"
+7	"10:24:42"	1447.5	0	4.56	0.059	266	0.32	0.491	20.75	6	1.42	1	2.84	20.37	20.75	20.08	400.02	394.40	21.268	21.643	80.52	81.94	500.1	150	0	90.91	1.47	-0.301	0.039	0.000871	0.019	0.00216	1.0	-0.22	2.74	1.00	0.00	0.16	111115
+"10:25:01 Lamp: ParIn ->  100 uml"
+"10:27:21 Flow: Fixed -> 500 umol/s"
+8	"10:27:02"	1588.0	0	3.79	0.057	284	0.305	0.485	20.74	6	1.42	1	2.84	20.37	20.74	20.08	399.93	395.23	21.320	21.679	80.72	82.08	500.2	100	0	90.92	1.46	-0.301	0.0252	0.00117	0.0177	0.00147	1.0	-0.22	2.74	1.00	0.00	0.16	111115
+"10:27:21 Lamp: ParIn ->  60 uml"
+"10:29:41 Flow: Fixed -> 500 umol/s"
+9	"10:29:22"	1727.5	0	2.49	0.0552	321	0.293	0.479	20.72	6	1.42	1	2.84	20.37	20.72	20.08	400.12	397.00	21.371	21.714	80.91	82.21	500.1	60	0	90.92	1.52	-0.302	0.0279	0.000907	0.0343	0.000887	1.0	-0.22	2.74	1.00	0.00	0.16	111115
+"10:29:41 Lamp: ParIn ->  30 uml"
+"10:32:01 Flow: Fixed -> 500 umol/s"
+10	"10:31:42"	1867.5	0	1.37	0.0522	352	0.275	0.477	20.72	6	1.42	1	2.84	20.37	20.72	20.08	399.81	398.04	21.415	21.738	81.09	82.31	500.2	31	0	90.92	1.45	-0.301	0.0658	0.0016	0.0856	0.00158	1.0	-0.22	2.74	1.00	0.00	0.16	111115
+"10:32:01 Lamp: ParIn ->  0 uml"
+"10:34:21 Flow: Fixed -> 500 umol/s"
+11	"10:34:02"	2008.0	0	-0.419	0.05	410	0.261	0.471	20.70	6	1.42	1	2.84	20.38	20.70	20.08	399.87	400.25	21.466	21.772	81.22	82.38	500.2	-0	0	90.92	1.46	-0.301	0.0206	0.00135	0.0107	0.000962	1.0	-0.22	2.74	1.00	0.00	0.16	111115
+"10:34:21 Lamp: ParIn ->  0 uml"
+"10:34:21 CO2 Mixer: CO2R -> 400 uml"
+"10:34:21 Coolers: Tblock -> 20.00 C"
+"10:34:22 Flow: Fixed -> 500 umol/s"
+"10:34:42 Lamp: ParIn ->  600 uml"
+"10:35:53 Lamp: ParIn ->  800 uml"

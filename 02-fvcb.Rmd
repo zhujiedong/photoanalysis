@@ -104,7 +104,7 @@ w_{p\ }=\ \frac{3V_{p}C_{c}}{C_{c}-\Gamma^{*}}
 
 \begin{equation}
 A=min\{w_{c},w_{j,}w_{p}\}(1-\frac{\Gamma^{*}}{C_{c}})-R_{d}
-(\#eq:fvcb_fin)
+(\#eq:fvcbfin)
 \end{equation}
 
 
@@ -134,7 +134,7 @@ A=min\{w_{c},w_{j,}w_{p}\}(1-\frac{\Gamma^{*}}{C_{c}})-R_{d}
 
 \begin{equation}
 C_c = C_i - \frac{A}{gm}
-(\#eq:note_cc)
+(\#eq:notecc)
 \end{equation}
 
 对于 gm 的计算，比较易操作的有几种：采用光合荧光联合测量的方式计算求得。当然也可以采用曲线拟合的方式，或者 @yin2009using 使用的方式，在低氧气体下，采用不同的光照水平求得。

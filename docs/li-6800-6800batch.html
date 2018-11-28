@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
+  <meta name="description" content="R 语言分析 LI-6400XT 与 LI-6800 数据">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="images/cover.png" />
+  <meta property="og:description" content="R 语言分析 LI-6400XT 与 LI-6800 数据" />
+  <meta name="github-repo" content="zhujiedong/R_analysis_LI-6400_LI_6800" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
+  
+  <meta name="twitter:description" content="R 语言分析 LI-6400XT 与 LI-6800 数据" />
+  <meta name="twitter:image" content="images/cover.png" />
+
+<meta name="author" content="祝介东    北京力高泰科技有限公司">
+
+
+<meta name="date" content="2018-11-28">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="section-2.html">
+<link rel="next" href="6400batch.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R 光合数据分析</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="frontmatter.html"><a href="frontmatter.html"><i class="fa fa-check"></i>前言</a></li>
+<li class="chapter" data-level="" data-path="copyright.html"><a href="copyright.html"><i class="fa fa-check"></i>版权声明</a></li>
+<li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i>关于作者</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> R 软件与 Rstudio</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#rsoft"><i class="fa fa-check"></i><b>1.1</b> R 软件</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#rstudiosoft"><i class="fa fa-check"></i><b>1.2</b> Rstudio</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="section-2.html"><a href="section-2.html"><i class="fa fa-check"></i><b>2</b> 安装</a></li>
+<li class="chapter" data-level="3" data-path="li-6800-6800batch.html"><a href="li-6800-6800batch.html"><i class="fa fa-check"></i><b>3</b> LI-6800 数据整合{#6800batch}</a></li>
+<li class="chapter" data-level="4" data-path="6400batch.html"><a href="6400batch.html"><i class="fa fa-check"></i><b>4</b> 6400 数据整合{#6400batch}</a></li>
+<li class="chapter" data-level="5" data-path="response-fit.html"><a href="response-fit.html"><i class="fa fa-check"></i><b>5</b> CO<sub>2</sub> 响应曲线的拟合</a><ul>
+<li class="chapter" data-level="5.1" data-path="response-fit.html"><a href="response-fit.html#fvcb_mod"><i class="fa fa-check"></i><b>5.1</b> FvCB 模型</a></li>
+<li class="chapter" data-level="5.2" data-path="response-fit.html"><a href="response-fit.html#co2_note"><i class="fa fa-check"></i><b>5.2</b> CO<sub>2</sub> 响应曲线测量的注意事项</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="response-fit.html"><a href="response-fit.html#model_3"><i class="fa fa-check"></i><b>5.2.1</b> 分段性</a></li>
+<li class="chapter" data-level="5.2.2" data-path="response-fit.html"><a href="response-fit.html#note_detail"><i class="fa fa-check"></i><b>5.2.2</b> 测量注意事项</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="response-fit.html"><a href="response-fit.html#plantecophys"><i class="fa fa-check"></i><b>5.3</b> <code>plantecophys</code> 软件包</a></li>
+<li class="chapter" data-level="5.4" data-path="response-fit.html"><a href="response-fit.html#fit6400"><i class="fa fa-check"></i><b>5.4</b> LI-6400XT CO<sub>2</sub> 响应曲线的拟合</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="response-fit.html"><a href="response-fit.html#fitaci_intro"><i class="fa fa-check"></i><b>5.4.1</b> fitaci 函数介绍</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="response-fit.html"><a href="response-fit.html#plantecophy_use"><i class="fa fa-check"></i><b>5.5</b> 使用 <code>plantecophys</code> 拟合 LI-6400XT CO<sub>2</sub> 响应曲线数据</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="response-fit.html"><a href="response-fit.html#data6400"><i class="fa fa-check"></i><b>5.5.1</b> 数据的前处理</a></li>
+<li class="chapter" data-level="5.5.2" data-path="response-fit.html"><a href="response-fit.html#fitaci-p"><i class="fa fa-check"></i><b>5.5.2</b> 使用示例</a></li>
+<li class="chapter" data-level="5.5.3" data-path="response-fit.html"><a href="response-fit.html#onpoint_fit"><i class="fa fa-check"></i><b>5.5.3</b> 使用 ‘onepoint’ 单独计算 V<sub>cmax</sub> 和 J<sub>max</sub></a></li>
+<li class="chapter" data-level="5.5.4" data-path="response-fit.html"><a href="response-fit.html#multi_curve"><i class="fa fa-check"></i><b>5.5.4</b> 多条 CO<sub>2</sub> 响应曲线的拟合</a></li>
+<li class="chapter" data-level="5.5.5" data-path="response-fit.html"><a href="response-fit.html#transition"><i class="fa fa-check"></i><b>5.5.5</b> <code>findCiTransition</code> 函数</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="response-fit.html"><a href="response-fit.html#c4"><i class="fa fa-check"></i><b>5.6</b> C4 植物光合</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="response-fit.html"><a href="response-fit.html#c4_sim"><i class="fa fa-check"></i><b>5.6.1</b> C4 植物光合速率的计算</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="stomotal-sim.html"><a href="stomotal-sim.html"><i class="fa fa-check"></i><b>6</b> 气孔导度模型的拟合</a><ul>
+<li class="chapter" data-level="6.1" data-path="stomotal-sim.html"><a href="stomotal-sim.html#ballberry"><i class="fa fa-check"></i><b>6.1</b> BallBerry 模型</a></li>
+<li class="chapter" data-level="6.2" data-path="stomotal-sim.html"><a href="stomotal-sim.html#bbleuning"><i class="fa fa-check"></i><b>6.2</b> BBLeuning 模型</a></li>
+<li class="chapter" data-level="6.3" data-path="stomotal-sim.html"><a href="stomotal-sim.html#bboptifull"><i class="fa fa-check"></i><b>6.3</b> BBOptiFull 模型</a></li>
+<li class="chapter" data-level="6.4" data-path="stomotal-sim.html"><a href="stomotal-sim.html#fitbb-p"><i class="fa fa-check"></i><b>6.4</b> <code>fitBB</code> 函数</a></li>
+<li class="chapter" data-level="6.5" data-path="stomotal-sim.html"><a href="stomotal-sim.html#fitbbs"><i class="fa fa-check"></i><b>6.5</b> <code>fitBBs</code> 函数</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="stomotal-couple.html"><a href="stomotal-couple.html"><i class="fa fa-check"></i><b>7</b> 光合最优气孔导度耦合模型</a><ul>
+<li class="chapter" data-level="7.1" data-path="stomotal-couple.html"><a href="stomotal-couple.html#farao"><i class="fa fa-check"></i><b>7.1</b> <code>FARAO</code> 函数</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="photo-stomo.html"><a href="photo-stomo.html"><i class="fa fa-check"></i><b>8</b> 光合气孔导度耦合模型</a><ul>
+<li class="chapter" data-level="8.1" data-path="photo-stomo.html"><a href="photo-stomo.html#photosyn"><i class="fa fa-check"></i><b>8.1</b> <code>Photosyn</code> 函数</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="photo-stomo.html"><a href="photo-stomo.html#photo_exam"><i class="fa fa-check"></i><b>8.1.1</b> <code>Photosyn</code> 使用举例</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="photo-stomo.html"><a href="photo-stomo.html#photsyneb"><i class="fa fa-check"></i><b>8.2</b> <code>PhotosynEB</code> 函数</a></li>
+<li class="chapter" data-level="8.3" data-path="photo-stomo.html"><a href="photo-stomo.html#photosyntuzet"><i class="fa fa-check"></i><b>8.3</b> <code>PhotosynTuzet</code> 函数</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="photo-stomo.html"><a href="photo-stomo.html#photosyntuzet_para"><i class="fa fa-check"></i><b>8.3.1</b> <code>PhotosynTuzet</code> 的参数</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="rhtovpd.html"><a href="rhtovpd.html"><i class="fa fa-check"></i><b>9</b> RHtoVPD 函数</a></li>
+<li class="chapter" data-level="10" data-path="lrc-fit.html"><a href="lrc-fit.html"><i class="fa fa-check"></i><b>10</b> 光响应曲线的拟合</a><ul>
+<li class="chapter" data-level="10.1" data-path="lrc-fit.html"><a href="lrc-fit.html#rec_mod"><i class="fa fa-check"></i><b>10.1</b> 直角双曲线模型</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="lrc-fit.html"><a href="lrc-fit.html#rec_fit"><i class="fa fa-check"></i><b>10.1.1</b> 直角双曲线模型的实现</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="lrc-fit.html"><a href="lrc-fit.html#nonrec_mod"><i class="fa fa-check"></i><b>10.2</b> 非直角双曲线模型</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="lrc-fit.html"><a href="lrc-fit.html#nonrec_mode_exam"><i class="fa fa-check"></i><b>10.2.1</b> 非直角双曲线模型的实现</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="lrc-fit.html"><a href="lrc-fit.html#lrc_exp"><i class="fa fa-check"></i><b>10.3</b> 指数模型</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="lrc-fit.html"><a href="lrc-fit.html#lrc_exp_exam"><i class="fa fa-check"></i><b>10.3.1</b> 指数模型的实现</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="lrc-fit.html"><a href="lrc-fit.html#rev_rec"><i class="fa fa-check"></i><b>10.4</b> 直角双曲线的修正模型</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="lrc-fit.html"><a href="lrc-fit.html#rev_rec_exam"><i class="fa fa-check"></i><b>10.4.1</b> 直角双曲线修正模型的实现</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="start-con.html"><a href="start-con.html"><i class="fa fa-check"></i><b>11</b> 关于非线性拟合的初始值</a><ul>
+<li class="chapter" data-level="11.1" data-path="start-con.html"><a href="start-con.html#nlslm"><i class="fa fa-check"></i><b>11.1</b> nlsLM 解决方案</a></li>
+<li class="chapter" data-level="11.2" data-path="start-con.html"><a href="start-con.html#plot_comp"><i class="fa fa-check"></i><b>11.2</b> 作图比对法</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="start-con.html"><a href="start-con.html#plot_exam"><i class="fa fa-check"></i><b>11.2.1</b> 实现过程</a></li>
+<li class="chapter" data-level="11.2.2" data-path="start-con.html"><a href="start-con.html#show_demo"><i class="fa fa-check"></i><b>11.2.2</b> 直观展示</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="start-con.html"><a href="start-con.html#mult_try"><i class="fa fa-check"></i><b>11.3</b> 自动多次尝试法</a></li>
+<li class="chapter" data-level="11.4" data-path="start-con.html"><a href="start-con.html#sum_start"><i class="fa fa-check"></i><b>11.4</b> 小结</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="anay-6800.html"><a href="anay-6800.html"><i class="fa fa-check"></i><b>12</b> LI-6800 的数据分析</a><ul>
+<li class="chapter" data-level="12.1" data-path="anay-6800.html"><a href="anay-6800.html#data6800"><i class="fa fa-check"></i><b>12.1</b> 数据格式</a></li>
+<li class="chapter" data-level="12.2" data-path="anay-6800.html"><a href="anay-6800.html#dif"><i class="fa fa-check"></i><b>12.2</b> LI-6800 与 LI-6400 使用时的差别</a></li>
+<li class="chapter" data-level="12.3" data-path="anay-6800.html"><a href="anay-6800.html#notice"><i class="fa fa-check"></i><b>12.3</b> 光响应曲线注意事项</a></li>
+<li class="chapter" data-level="12.4" data-path="anay-6800.html"><a href="anay-6800.html#racir68"><i class="fa fa-check"></i><b>12.4</b> LI-6800 RACiR的测量与拟合</a></li>
+<li class="chapter" data-level="12.5" data-path="anay-6800.html"><a href="anay-6800.html#racir_pkg"><i class="fa fa-check"></i><b>12.5</b> racir 软件包实现 RACiR数据分析</a><ul>
+<li class="chapter" data-level="12.5.1" data-path="anay-6800.html"><a href="anay-6800.html#racir_pkg_real"><i class="fa fa-check"></i><b>12.5.1</b> 实现过程</a></li>
+</ul></li>
+<li class="chapter" data-level="12.6" data-path="anay-6800.html"><a href="anay-6800.html#racir68_exam"><i class="fa fa-check"></i><b>12.6</b> RACiR分析的手动实现</a></li>
+<li class="chapter" data-level="12.7" data-path="anay-6800.html"><a href="anay-6800.html#fluro68"><i class="fa fa-check"></i><b>12.7</b> LI-6800 荧光数据分析</a><ul>
+<li class="chapter" data-level="12.7.1" data-path="anay-6800.html"><a href="anay-6800.html#jiptest"><i class="fa fa-check"></i><b>12.7.1</b> jip test 的实现</a></li>
+<li class="chapter" data-level="12.7.2" data-path="anay-6800.html"><a href="anay-6800.html#jiptest_pack"><i class="fa fa-check"></i><b>12.7.2</b> <code>jiptest</code> 软件包安装</a></li>
+<li class="chapter" data-level="12.7.3" data-path="anay-6800.html"><a href="anay-6800.html#readfluor"><i class="fa fa-check"></i><b>12.7.3</b> <code>read_files</code> 及 <code>read_dcfiles</code> 函数</a></li>
+<li class="chapter" data-level="12.7.4" data-path="anay-6800.html"><a href="anay-6800.html#testfluor"><i class="fa fa-check"></i><b>12.7.4</b> <code>jip_test</code> 及 <code>jip_dctest</code> 函数</a></li>
+<li class="chapter" data-level="12.7.5" data-path="anay-6800.html"><a href="anay-6800.html#plotfluor"><i class="fa fa-check"></i><b>12.7.5</b> <code>jip_plot</code> 及 <code>jip_dcplot</code> 函数</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="sessioninfo.html"><a href="sessioninfo.html"><i class="fa fa-check"></i><b>13</b> 环境与配置</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>参考文献</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">由 bookdown 驱动</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R 语言分析 LI-6400 和 LI-6800 光合仪的数据</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="li-6800-6800batch" class="section level1">
+<h1><span class="header-section-number">第 3 章</span> LI-6800 数据整合{#6800batch}</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readphoto)
+df &lt;-<span class="st"> </span><span class="kw">read_bat_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="dt">skiplines =</span> <span class="dv">53</span>)
+df[<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>,]</code></pre></div>
+<pre><code>##    obs       time elapsed              date plot plant       TIME
+## 1    1 1513614617     0.0 20171218 10:30:16    1     1 1513614617
+## 2    2 1513614731   114.0 20171218 10:32:10    1     1 1513614731
+## 3    3 1513614886   269.0 20171218 10:34:45    1     1 1513614886
+## 4    4 1513615008   391.0 20171218 10:36:47    1     1 1513615008
+## 5    5 1513615127   510.0 20171218 10:38:46    1     1 1513615127
+## 6    6 1513615287   670.5 20171218 10:41:27    1     1 1513615287
+## 7    7 1513615410   793.0 20171218 10:43:29    1     1 1513615410
+## 8    8 1513615566   949.0 20171218 10:46:05    1     1 1513615566
+## 9    9 1513615701  1084.0 20171218 10:48:20    1     1 1513615701
+## 10  10 1513615831  1214.0 20171218 10:50:30    1     1 1513615831
+## 11  11 1513615940  1323.0 20171218 10:52:19    1     1 1513615940
+## 12  12 1513616064  1447.4 20171218 10:54:24    1     1 1513616064
+## 13   1 1513612721     0.0 20171218 09:58:40    1     1 1513612721
+## 14   2 1513612832   111.0 20171218 10:00:31    1     1 1513612832
+## 15   3 1513612941   220.0 20171218 10:02:20    1     1 1513612941
+##              E          A        Ca         Ci        Pci        Pca
+## 1  0.004572625 24.7381184  377.2420  231.21258  23.480602  38.310497
+## 2  0.004716209 18.1379358  283.3320  177.59661  18.036160  28.774317
+## 3  0.004972853 10.8055345  189.9250  127.59810  12.957453  19.286683
+## 4  0.005263165  3.0239340   96.9793   78.88291   8.010456   9.848120
+## 5  0.005361913 -0.9144044   50.5697   53.73937   5.456793   5.134939
+## 6  0.005390857 26.9519572  375.1860  239.36541  24.307391  38.099875
+## 7  0.005224151 27.5088717  374.7070  239.90519  24.363619  38.053441
+## 8  0.005215787 40.9101889  562.4100  363.19442  36.881421  57.111225
+## 9  0.005394692 50.1393342  753.5289  506.34634  51.415265  76.514605
+## 10 0.005490842 55.3865984  948.0019  665.60434  67.587570  96.263115
+## 11 0.005386037 58.0662751 1144.9799  835.18779  84.811968 116.270859
+## 12 0.005215889 59.3556428 1442.5899 1106.40723 112.353761 146.492539
+## 13 0.006743924 32.4442919  370.0650  260.39836  26.435607  37.568945
+## 14 0.006595533 31.7559713  370.6780  263.88851  26.786661  37.626590
+## 15 0.006449253 30.8954954  371.4540  266.54153  27.056326  37.705868
+##          gsw      gbw       gtw       gtc     Rabs  TleafEB TleafCnd
+## 1  0.3043718 2.281382 0.2834781 0.1789313 289.4840 27.59813  26.0080
+## 2  0.3095819 2.283519 0.2880127 0.1818205 289.5243 27.79574  26.2524
+## 3  0.3172168 2.284847 0.2946244 0.1860358 289.5158 28.10854  26.6891
+## 4  0.3293625 2.279137 0.3050218 0.1926754 289.4792 28.33561  27.0532
+## 5  0.3432104 2.282424 0.3169024 0.2002594 289.5026 28.21844  26.8767
+## 6  0.3623104 2.283108 0.3331341 0.2106341 289.4936 27.84052  26.4112
+## 7  0.3721794 2.285401 0.3414922 0.2159785 289.5126 27.20357  25.5778
+## 8  0.3749797 2.283367 0.3438244 0.2174733 289.4781 27.02008  25.3616
+## 9  0.3733265 2.284633 0.3424488 0.2165915 289.5201 27.40937  25.8553
+## 10 0.3644496 2.287160 0.3349905 0.2118170 289.4908 27.73144  26.3405
+## 11 0.3512177 2.288006 0.3237819 0.2046498 289.4967 27.92964  26.5675
+## 12 0.3359745 2.286158 0.3107583 0.1963316 289.4919 28.12754  26.7022
+## 13 0.5630383 2.282713 0.4957738 0.3152299 321.4359 25.43036  23.8649
+## 14 0.5664270 2.285210 0.4984674 0.3169660 289.4807 25.04033  23.5525
+## 15 0.5607485 2.283992 0.4940280 0.3140981 241.6739 24.75876  23.4143
+##     SVPleaf   RHcham   VPcham  SVPcham  VPDleaf  LatHFlux SenHFlux
+## 1  3.375856 49.87219 1.779321 3.567761 1.596536 -201.6528 115.3313
+## 2  3.424984 49.86424 1.804808 3.619444 1.620176 -207.9848 115.5133
+## 3  3.514323 49.81722 1.845551 3.704644 1.668772 -219.3028 110.7271
+## 4  3.590358 49.94574 1.885373 3.774843 1.704985 -232.1056 105.2037
+## 5  3.553322 50.08245 1.881235 3.756275 1.672087 -236.4603 116.6761
+## 6  3.457239 50.51179 1.856941 3.676252 1.600298 -237.7368 128.6627
+## 7  3.290874 50.31189 1.776038 3.530056 1.514836 -230.3850 146.2756
+## 8  3.248875 50.01534 1.746299 3.491527 1.502576 -230.0162 149.8138
+## 9  3.345475 49.83022 1.786281 3.584734 1.559194 -237.9059 144.2557
+## 10 3.442846 49.77067 1.821593 3.659973 1.621253 -242.1461 128.2623
+## 11 3.489244 49.91136 1.844372 3.695296 1.644872 -237.5242 120.5509
+## 12 3.517034 49.85649 1.857714 3.726123 1.659320 -230.0207 121.3656
+## 13 2.970755 50.22231 1.621029 3.227706 1.349726 -297.4071 170.6674
+## 14 2.915406 50.23651 1.602184 3.189282 1.313221 -290.8630 184.5663
+## 15 2.891209 49.94550 1.595354 3.194190 1.295855 -284.4121 204.6620
+##    NetTherm    EBSum      blfa_1     blfa_2   blfa_3 Leak LeakPct CorrFact
+## 1  10.85304 214.0156 -0.04203399 0.04718684 3.511485  310      44        1
+## 2  10.88663 207.9394 -0.04209230 0.04725229 3.515328  308      44        1
+## 3  10.47308 191.4132 -0.04212855 0.04729299 3.517717  304      43        1
+## 4  10.00979 172.5871 -0.04197279 0.04711814 3.507448  299      43        1
+## 5  11.07093 180.7892 -0.04206242 0.04721875 3.513359  298      43        1
+## 6  12.15389 192.5734 -0.04208106 0.04723968 3.514588  293      42        1
+## 7  13.69880 219.1019 -0.04214368 0.04730997 3.518714  293      42        1
+## 8  14.01433 223.2900 -0.04208815 0.04724764 3.515055  295      42        1
+## 9  13.55073 209.4206 -0.04212270 0.04728642 3.517332  296      42        1
+## 10 12.08573 187.6927 -0.04219173 0.04736392 3.521879  295      42        1
+## 11 11.37715 183.9005 -0.04221486 0.04738988 3.523402  294      42        1
+## 12 11.47916 192.3159 -0.04216435 0.04733317 3.520075  293      42        1
+## 13 15.74451 210.4407 -0.04207029 0.04722758 3.513878  335      48        1
+## 14 16.96414 200.1481 -0.04213846 0.04730411 3.518370  337      48        1
+## 15 18.81059 180.7344 -0.04210520 0.04726678 3.516179  335      48        1
+##    CorrFactPct   Fan               DarkAdaptedID     Fo      Fm      Fv
+## 1            0 53613 RECT-1241-20171205-12_54_10 710.75 3267.12 2556.37
+## 2            0 53641 RECT-1241-20171205-12_54_10 710.75 3267.12 2556.37
+## 3            0 53614 RECT-1241-20171205-12_54_10 710.75 3267.12 2556.37
+## 4            0 53367 RECT-1241-20171205-12_54_10 710.75 3267.12 2556.37
+## 5            0 53491 RECT-1241-20171205-12_54_10 710.75 3267.12 2556.37
+## 6            0 53579 RECT-1241-20171205-12_54_10 710.75 3267.12 2556.37
+## 7            0 53780 RECT-1241-20171205-12_54_10 710.75 3267.12 2556.37
+## 8            0 53745 RECT-1241-20171205-12_54_10 710.75 3267.12 2556.37
+## 9            0 53707 RECT-1241-20171205-12_54_10 710.75 3267.12 2556.37
+## 10           0 53728 RECT-1241-20171205-12_54_10 710.75 3267.12 2556.37
+## 11           0 53727 RECT-1241-20171205-12_54_10 710.75 3267.12 2556.37
+## 12           0 53640 RECT-1241-20171205-12_54_10 710.75 3267.12 2556.37
+## 13           0 53962                           -   0.00    0.00    0.00
+## 14           0 54082                           -   0.00    0.00    0.00
+## 15           0 54036                           -   0.00    0.00    0.00
+##        Fv.Fm     Adark              LightAdaptedID        Fs      Fm.
+## 1  0.7824537 -3.251998 RECT-1242-20171205-13_04_35  840.8504 1159.130
+## 2  0.7824537 -3.251998 RECT-1244-20171205-13_06_29  798.1235 1070.600
+## 3  0.7824537 -3.251998 RECT-1246-20171205-13_09_04  778.1266 1008.670
+## 4  0.7824537 -3.251998 RECT-1248-20171205-13_11_06  770.8055  957.616
+## 5  0.7824537 -3.251998 RECT-1250-20171205-13_13_05  771.6944  928.064
+## 6  0.7824537 -3.251998 RECT-1252-20171205-13_15_46  841.3228 1155.740
+## 7  0.7824537 -3.251998 RECT-1254-20171205-13_17_48  829.7272 1147.660
+## 8  0.7824537 -3.251998 RECT-1256-20171205-13_20_24  962.8020 1410.620
+## 9  0.7824537 -3.251998 RECT-1258-20171205-13_22_39 1035.3277 1578.690
+## 10 0.7824537 -3.251998 RECT-1260-20171205-13_24_49 1045.2373 1622.840
+## 11 0.7824537 -3.251998 RECT-1262-20171205-13_26_38 1024.9304 1594.490
+## 12 0.7824537 -3.251998 RECT-1264-20171205-13_28_43  990.6899 1526.450
+## 13 0.0000000  0.000000 RECT-1217-20171205-12_32_59  881.6115 1196.430
+## 14 0.0000000  0.000000 RECT-1219-20171205-12_34_50  890.0579 1249.210
+## 15 0.0000000  0.000000 RECT-1221-20171205-12_36_39  916.0870 1381.180
+##       PhiPS2 PS2.1  Qabs_fs        Afs      ETR   Fv..Fm.      PhiCO2
+## 1  0.2745849   0.5 1513.087 24.7381184 207.7355 0.4742609 0.018498680
+## 2  0.2545083   0.5 1513.305 18.1379358 192.5743 0.4466654 0.014134582
+## 3  0.2285618   0.5 1513.263 10.8055345 172.9370 0.4235974 0.009289552
+## 4  0.1950787   0.5 1513.062  3.0239340 147.5831 0.3903611 0.004147835
+## 5  0.1684901   0.5 1513.188 -0.9144044 127.4786 0.3815082 0.001544814
+## 6  0.2720483   0.5 1513.138 26.9519572 205.8233 0.4843131 0.019961142
+## 7  0.2770270   0.5 1513.246 27.5088717 209.6050 0.4855619 0.020327740
+## 8  0.3174618   0.5 1513.061 40.9101889 240.1696 0.5455899 0.029187306
+## 9  0.3441856   0.5 1513.280 50.1393342 260.4246 0.5692631 0.035281857
+## 10 0.3559209   0.5 1513.129 55.3865984 269.2771 0.5817209 0.038753214
+## 11 0.3572049   0.5 1513.162 58.0662751 270.2544 0.5693921 0.040523273
+## 12 0.3509844   0.5 1513.137 59.3556428 265.5437 0.5591077 0.041376064
+## 13 0.2631316   0.5 1681.150 32.4442919 221.1818 0.4954991 0.019298873
+## 14 0.2875034   0.5 1513.078 31.7559713 217.5075 0.5016050 0.020987664
+## 15 0.3367360   0.5 1261.222 30.8954954 212.3495 0.5453163 0.024496467
+##          NPQ                 DarkPulseID   Fo.     Fv.        qP        qN
+## 1   1.818597 DARK-1243-20171205-13_04_37 609.4 549.730 0.5789744 0.7931573
+## 2   2.051672 DARK-1245-20171205-13_06_31 592.4 478.200 0.5697962 0.8212149
+## 3   2.239038 DARK-1247-20171205-13_09_06 581.4 427.270 0.5395731 0.8409104
+## 4   2.411722 DARK-1249-20171205-13_11_08 583.8 373.816 0.4997392 0.8606890
+## 5   2.520361 DARK-1251-20171205-13_13_07 574.0 354.064 0.4416422 0.8685302
+## 6   1.826864 DARK-1253-20171205-13_15_48 596.0 559.740 0.5617200 0.7904475
+## 7   1.846766 DARK-1255-20171205-13_17_50 590.4 557.260 0.5705286 0.7918124
+## 8   1.316088 DARK-1257-20171205-13_20_26 641.0 769.620 0.5818690 0.7069365
+## 9   1.069513 DARK-1259-20171205-13_22_41 680.0 898.690 0.6046159 0.6526292
+## 10  1.013211 DARK-1261-20171205-13_24_51 678.8 944.040 0.6118413 0.6352692
+## 11  1.049006 DARK-1263-20171205-13_26_40 686.6 907.890 0.6273443 0.6481756
+## 12  1.140339 DARK-1265-20171205-13_28_45 673.0 853.450 0.6277581 0.6710060
+## 13 -1.000000 DARK-1218-20171205-12_33_01 603.6 592.830 0.5310435 1.9821571
+## 14 -1.000000 DARK-1220-20171205-12_34_52 622.6 626.610 0.5731669 2.0064407
+## 15 -1.000000 DARK-1222-20171205-12_36_41 628.0 753.180 0.6175058 2.1993312
+##        qP_Fo     qN_Fo     Qin     Qabs     alpha   convert S   K
+## 1  0.7098435 0.8246029 1799.88 1513.087 0.8406600 0.1913201 6 0.5
+## 2  0.7571948 0.8592340 1800.14 1513.305 0.8406596 0.1913192 6 0.5
+## 3  0.7738433 0.8834597 1800.09 1513.263 0.8406595 0.1913189 6 0.5
+## 4  0.7567283 0.9034310 1799.85 1513.062 0.8406601 0.1913201 6 0.5
+## 5  0.7195561 0.9149912 1800.00 1513.188 0.8406598 0.1913197 6 0.5
+## 6  0.7065713 0.8259290 1799.94 1513.138 0.8406600 0.1913200 6 0.5
+## 7  0.7276848 0.8290897 1800.07 1513.246 0.8406595 0.1913189 6 0.5
+## 8  0.6398588 0.7262251 1799.85 1513.061 0.8406597 0.1913194 6 0.5
+## 9  0.6260367 0.6604795 1800.11 1513.280 0.8406598 0.1913196 6 0.5
+## 10 0.6332738 0.6432089 1799.93 1513.129 0.8406597 0.1913194 6 0.5
+## 11 0.6444878 0.6542989 1799.97 1513.162 0.8406595 0.1913190 6 0.5
+## 12 0.6568102 0.6809147 1799.94 1513.137 0.8406595 0.1913190 6 0.5
+## 13 0.2631316 0.0000000 1999.94 1681.150 0.8406000 0.1912000 6 0.5
+## 14 0.2875034 0.0000000 1799.87 1513.078 0.8406595 0.1913191 6 0.5
+## 15 0.3367360 0.0000000 1500.01 1261.222 0.8408094 0.1916188 6 0.5
+##        Geometry     TIME.1     CO2_s     CO2_r   H2O_s   H2O_r    Flow
+## 1  0: Broadleaf 1513614617  377.2420  399.9210 17.5209 13.6708 700.113
+## 2  0: Broadleaf 1513614731  283.3320  300.0270 17.7714 13.8001 699.881
+## 3  0: Broadleaf 1513614886  189.9250  199.9960 18.1740 13.9892 700.030
+## 4  0: Broadleaf 1513615008   96.9793  100.0090 18.5662 14.1383 699.941
+## 5  0: Broadleaf 1513615127   50.5697   50.0183 18.5267 14.0156 699.950
+## 6  0: Broadleaf 1513615287  375.1860  400.0200 18.2861 13.7501 700.037
+## 7  0: Broadleaf 1513615410  374.7070  399.9620 17.4884 13.0892 700.053
+## 8  0: Broadleaf 1513615566  562.4100  599.9920 17.1969 12.8029 699.967
+## 9  0: Broadleaf 1513615701  753.5290  799.9840 17.5916 13.0495 700.089
+## 10 0: Broadleaf 1513615831  948.0020  999.9300 17.9391 13.3178 700.107
+## 11 0: Broadleaf 1513615940 1144.9800 1200.0400 18.1625 13.6295 699.962
+## 12 0: Broadleaf 1513616064 1442.5900 1499.9200 18.2939 13.9046 699.948
+## 13 0: Broadleaf 1513612721  370.0650  400.0130 15.9676 10.2795 700.013
+## 14 0: Broadleaf 1513612832  370.6780  399.9920 15.7839 10.2200 700.023
+## 15 0: Broadleaf 1513612941  371.4540  399.9900 15.7164 10.2752 699.981
+##         Pa   螖Pcham    Tair   Tleaf Tleaf2 Fan_speed Qamb_in Qamb_out
+## 1  101.532 0.0221745 26.9457 26.0080  999.9   9983.75       0 299.5580
+## 2  101.533 0.0238972 27.1907 26.2524  999.9   9997.50       0 297.3100
+## 3  101.525 0.0239472 27.5880 26.6891  999.9  10006.90       0 304.6140
+## 4  101.524 0.0246883 27.9094 27.0532  999.9   9970.00       0 258.3330
+## 5  101.518 0.0238141 27.8249 26.8767  999.9   9991.88       0 326.0810
+## 6  101.525 0.0243074 27.4565 26.4112  999.9   9995.62       0 164.3060
+## 7  101.530 0.0251991 26.7650 25.5778  999.9  10010.00       0  35.5527
+## 8  101.523 0.0243226 26.5786 25.3616  999.9   9997.50       0 346.5740
+## 9  101.518 0.0236938 27.0265 25.8553  999.9  10006.20       0 357.5920
+## 10 101.519 0.0241628 27.3807 26.3405  999.9  10022.50       0 362.6650
+## 11 101.524 0.0243814 27.5448 26.5675  999.9  10027.50       0 374.1720
+## 12 101.523 0.0252887 27.6869 26.7022  999.9  10015.60       0 372.9430
+## 13 101.499 0.0208647 25.2517 23.8649  999.9   9995.62       0  83.8536
+## 14 101.486 0.0214908 25.0506 23.5525  999.9  10013.10       0 187.7590
+## 15 101.488 0.0208579 25.0764 23.4143  999.9  10005.00       0 268.8550
+##          Q    f_red    f_blue f_farred        F Q_modavg    F_dc      Pc
+## 1  1799.88 0.977989 0.0220110        0  840.133  1.00007 15502.0 14643.1
+## 2  1800.14 0.977999 0.0220008        0  797.547  1.00007 14740.7 14645.3
+## 3  1800.09 0.978006 0.0219940        0  778.236  1.00007 14414.1 14644.9
+## 4  1799.85 0.977989 0.0220115        0  771.281  1.00007 14181.8 14642.9
+## 5  1800.00 0.977992 0.0220081        0  771.318  1.00007 14261.6 14644.1
+## 6  1799.94 0.977989 0.0220115        0  840.177  1.00007 15398.7 14643.6
+## 7  1800.07 0.978006 0.0219940        0  829.838  1.00007 15188.0 14644.7
+## 8  1799.85 0.977996 0.0220042        0  964.187  1.00007 17617.9 14642.9
+## 9  1800.11 0.977996 0.0220042        0 1036.390  1.00007 19086.0 14645.1
+## 10 1799.93 0.977999 0.0220008        0 1045.120  1.00007 19375.2 14643.6
+## 11 1799.97 0.978003 0.0219974        0 1024.770  1.00007 19029.4 14643.9
+## 12 1799.94 0.978006 0.0219940        0  987.542  1.00007 18329.6 14643.7
+## 13 1999.94 0.979992 0.0200084        0  882.191  1.00007 17760.7 16280.2
+## 14 1799.87 0.978004 0.0219964        0  890.102  1.00007 16250.6 14643.2
+## 15 1500.01 0.973004 0.0269964        0  916.940  1.00007 14141.5 12186.1
+##      Tled TDigital TPreamp TPwrSpy TDrive   Q_red Q_blue Q_farred  TSPF
+## 1  40.375   41.750  40.875  41.437 42.375 1759.28  39.60        0 624.7
+## 2  40.812   42.187  41.250  41.875 42.750 1759.56  39.58        0 113.6
+## 3  41.375   42.875  41.875  42.562 43.375 1759.52  39.57        0 154.6
+## 4  41.937   43.500  42.437  43.187 43.937 1759.26  39.60        0 121.3
+## 5  42.250   43.687  42.750  43.375 44.187 1759.41  39.59        0 118.3
+## 6  42.312   43.562  42.875  43.312 44.250 1759.34  39.60        0 159.7
+## 7  41.875   42.750  42.437  42.500 43.750 1759.50  39.57        0 122.2
+## 8  41.312   42.000  41.875  41.687 43.125 1759.27  39.58        0 155.2
+## 9  41.250   42.250  41.750  41.812 43.062 1759.52  39.59        0 134.5
+## 10 41.375   42.750  41.937  42.125 43.312 1759.35  39.58        0 129.8
+## 11 41.625   43.187  42.187  42.500 43.562 1759.40  39.57        0 108.3
+## 12 41.937   43.562  42.500  42.875 43.937 1759.37  39.57        0 123.7
+## 13 38.875   39.187  39.250  38.812 40.625 1958.95  40.00        0 729.1
+## 14 38.437   38.937  38.937  38.625 40.312 1759.30  39.57        0 110.7
+## 15 38.000   38.875  38.687  38.687 40.062 1458.54  40.47        0 108.4
+##        F_avg       dF.dt   dF_dc.dt F_dc_avg period MatchValveR
+## 1   840.8504  -1.4533333 -195.07692 15550.29     15         100
+## 2   798.1235  -4.1021539 -111.98291 14746.63     15         100
+## 3   778.1266   0.7671795 -112.14701 14422.39     15         100
+## 4   770.8055   0.5991453 -650.15726 14300.30     15         100
+## 5   771.6944   1.9799658 -326.52991 14316.74     15         100
+## 6   841.3228  -4.0073163  -69.16581 15408.10     15         100
+## 7   829.7272   1.5483761  -10.59145 15185.45     15         100
+## 8   962.8020   7.8442393  189.88376 17598.86     15         100
+## 9  1035.3277   8.8369231  467.24444 19045.08     15         100
+## 10 1045.2373  -2.3545299  -25.95556 19364.90     15         100
+## 11 1024.9304  -2.9035898 -304.93675 18979.25     15         100
+## 12  990.6899 -18.3397949 -498.87863 18377.20     15         100
+## 13  881.6115  -1.0895384   73.05641 17765.80     15         100
+## 14  890.0579   1.1570940 -381.02564 16211.74     15         100
+## 15  916.0870   3.9045128 -906.38633 13953.10     15         100
+##    MatchValveS MatchCO2 MatchH2O DIAG  Flow_s  Flow_r   Txchg   Tirga
+## 1          100   -3.597    0.008    2 381.395 712.766 25.0011 22.7444
+## 2          100   -3.546    0.006    2 384.110 711.558 25.0019 22.9230
+## 3          100   -3.094    0.010    2 388.338 710.135 25.0023 23.2402
+## 4          100   -2.596    0.012    2 393.039 708.376 25.0018 23.5374
+## 5          100   -2.544    0.011    2 394.350 705.551 25.0003 23.8214
+## 6          100   -3.575    0.009    2 400.017 705.078 24.9966 23.9913
+## 7          100   -3.602    0.002    2 400.127 703.619 24.9969 23.8944
+## 8          100   -3.787   -0.005    2 397.743 702.850 25.0008 23.8106
+## 9          100   -4.228   -0.013    2 396.519 702.877 25.0018 23.8467
+## 10         100   -4.522   -0.001    2 398.302 704.546 25.0013 23.8167
+## 11         100   -4.688    0.005    2 399.228 707.119 25.0014 23.8006
+## 12         100   -5.577    0.013    2 400.642 709.326 25.0016 23.8959
+## 13         100   -3.880   -0.048    2 355.548 708.891 24.9999 20.9200
+## 14         100   -3.788   -0.051    2 353.997 709.172 25.0003 20.7393
+## 15         100   -3.783   -0.048    2 356.109 707.927 25.0020 20.7422
+##    Tchopper      Ts      Tr    CO2_. Desiccant_. Humidifier_. Txchg_sp
+## 1   30.0006 22.4512 22.3482 25.41630     38.7892            0       25
+## 2   30.0006 22.6221 22.5155 20.19470     39.7737            0       25
+## 3   30.0009 22.9194 22.8148 14.69620     41.2827            0       25
+## 4   30.0011 23.1960 23.0895  8.97621     42.6671            0       25
+## 5   30.0007 23.4750 23.3622  6.08506     44.6806            0       25
+## 6   30.0002 23.6895 23.5794 25.34120     47.0662            0       25
+## 7   29.9998 23.6858 23.5836 25.30680     50.2942            0       25
+## 8   30.0001 23.6565 23.5711 35.09120     52.5490            0       25
+## 9   30.0000 23.6853 23.5934 44.30570     50.5955            0       25
+## 10  30.0001 23.6705 23.5773 53.07610     48.0355            0       25
+## 11  30.0000 23.6431 23.5501 61.49630     45.6737            0       25
+## 12  30.0005 23.6954 23.6064 73.46440     43.7812            0       25
+## 13  29.9994 20.8979 20.8191 25.43570     48.1688            0       25
+## 14  29.9995 20.7025 20.6249 25.42700     47.8532            0       25
+## 15  30.0006 20.6419 20.5667 25.42230     48.9497            0       25
+##    CO2_r_sp H2O_r_sp    SS_s    SS_r  X  NA
+## 1       400  13.6523 103.501 100.780 NA aci
+## 2       300  13.7082 103.473 100.757 NA aci
+## 3       200  13.9520 103.424 100.721 NA aci
+## 4       100  14.0570 103.379 100.679 NA aci
+## 5        50  13.9467 103.327 100.633 NA aci
+## 6       400  13.5988 103.297 100.603 NA aci
+## 7       400  13.0226 103.307 100.614 NA aci
+## 8       600  12.7456 103.320 100.626 NA aci
+## 9       800  13.0809 103.317 100.620 NA aci
+## 10     1000  13.4048 103.318 100.623 NA aci
+## 11     1200  13.6662 103.324 100.630 NA aci
+## 12     1500  13.9635 103.316 100.624 NA aci
+## 13      400  10.2085 103.840 101.042 NA lrc
+## 14      400  10.2336 103.857 101.058 NA lrc
+## 15      400  10.1878 103.857 101.069 NA lrc</code></pre>
+<p>其中就两个参数，第一个为 LI-6800 <strong>原始数据</strong>所在的文件夹，即文件夹内<strong>包含且仅包含 LI-6800 的原始数据</strong>，不要放其他文件，不要放 excel 数据。第二个参数即为你原始数据中表头所在的参数行，我使用的这些示例数据的表头在 53 行。 特别需要注意的是，目前路径写法仅支持 “/” 分隔，不能使用 “\“ 作为分隔。例如在数据放在 D 盘的 6800 文件夹下，那么写法应为”d:/6800“, 不能为 <strong>“d:\6800”</strong>, 尽管后者对 R 是合法的，主要是因为我要区分你不同数据来源的文件是哪个，也即下文提到的 <code>df$file</code> 列</p>
+<p>数据输出如上所示，如果想另存为 csv 格式：</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write.csv</span>(df, <span class="st">&quot;./combined.csv&quot;</span>)</code></pre></div>
+<p>其中，数据的来源在表格中最后一列，叫做 Source，是数据来源的文件名（即你起的名字）,例如本例中你看到的 aci 是我之前数据里面 aci 响应曲线的数据。</p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="section-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="6400batch.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/yihui/bookdown-crc/edit/master/01-batch-data.Rmd",
+"text": "缂栬緫"
+},
+"download": ["bookdown.pdf", "bookdown.epub"],
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
