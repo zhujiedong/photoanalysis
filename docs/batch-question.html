@@ -520,7 +520,7 @@ df[<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>,
 ## 13      400  10.2085 103.840 101.042 NA lrc
 ## 14      400  10.2336 103.857 101.058 NA lrc
 ## 15      400  10.1878 103.857 101.069 NA lrc</code></pre>
-<p>其中就两个参数，第一个为 LI-6800 <strong>原始数据</strong>所在的文件夹，即文件夹内<strong>包含且仅包含 LI-6800 的原始数据</strong>，不要放其他文件，不要放 excel 数据。第二个参数即为你原始数据中表头所在的参数行，我使用的这些示例数据的表头在 53 行。 特别需要注意的是，目前路径写法仅支持 “/” 分隔，不能使用 “\“ 作为分隔。例如在数据放在 D 盘的 6800 文件夹下，那么写法应为”d:/6800“, 不能为 <strong>“d:\6800”</strong>, 尽管后者对 R 是合法的，主要是因为我要区分你不同数据来源的文件是哪个，也即下文提到的 <code>df$file</code> 列</p>
+<p>其中就两个参数，第一个为 LI-6800 <strong>原始数据</strong>所在的文件夹，即文件夹内<strong>包含且仅包含 LI-6800 的原始数据</strong>，不要放其他文件，不要放 excel 数据。第二个参数即为你原始数据中表头所在的参数行的<strong>前一行</strong>，我使用的这些示例数据的表头在 54 行。 特别需要注意的是，目前路径写法仅支持 “/” 分隔，不能使用 “\“ 作为分隔。例如在数据放在 D 盘的 6800 文件夹下，那么写法应为”d:/6800“, 不能为 <strong>“d:\6800”</strong>, 尽管后者对 R 是合法的，主要是因为我要区分你不同数据来源的文件是哪个，也即下文提到的 <code>df$file</code> 列</p>
 <p>数据输出如上所示，如果想另存为 csv 格式：</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write.csv</span>(df, <span class="st">&quot;./combined.csv&quot;</span>)</code></pre></div>
 <p>其中，数据的来源在表格中最后一列，叫做 file，是数据来源的文件名（即你起的名字）,例如本例中你看到的 aci 是我之前数据里面 aci 响应曲线的数据。</p>
