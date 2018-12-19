@@ -17,7 +17,7 @@ devtools::install_github("zhujiedong/readphoto")
 ```{r}
 library(readphoto)
 df64  <- read_bat_6400("./data/6400", header_line = 17, data_start = 27)
-df64[1:15,]
+knitr::kable(df64[1:15, (ncol(df64)-5):ncol(df64)])
 ```
 
 数据输出如上所示，如果想另存为 csv 格式：
@@ -37,7 +37,7 @@ header_line 表示你数据表头所在行，data_start 表示你数据起始行
 ```{r}
 library(readphoto)
 df <- read_bat_6800("./data/6800", skiplines = 53)
-df[1:15,]
+knitr::kable(df[1:15, (ncol(df)-5):ncol(df)])
 ```
 
 其中就两个参数，第一个为 LI-6800 **原始数据**所在的文件夹，即文件夹内**包含且仅包含 LI-6800 的原始数据**，不要放其他文件，不要放 excel 数据。第二个参数即为你原始数据中表头所在的参数行的**前一行**，我使用的这些示例数据的表头在 54 行。
