@@ -321,47 +321,41 @@ excel 格式的数据时的问题。
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(readphoto)}
 \NormalTok{df64  <-}\StringTok{ }\KeywordTok{read_bat_6400}\NormalTok{(}\StringTok{"./data/6400"}\NormalTok{, }\DataTypeTok{header_line =} \DecValTok{17}\NormalTok{, }\DataTypeTok{data_start =} \DecValTok{27}\NormalTok{)}
-\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{(df64[}\DecValTok{1}\OperatorTok{:}\DecValTok{15}\NormalTok{, (}\KeywordTok{ncol}\NormalTok{(df64)}\OperatorTok{-}\DecValTok{5}\NormalTok{)}\OperatorTok{:}\KeywordTok{ncol}\NormalTok{(df64)])}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tabular}{l|r|r|r|r|r|l}
-\hline
-  & BLCoffst & f\_parin & f\_parout & alphaK & Status & files\\
-\hline
-1 & 2.74 & 1 & 0 & 0.16 & 111115 & aci\\
-\hline
-4 & 2.74 & 1 & 0 & 0.16 & 111115 & aci\\
-\hline
-7 & 2.74 & 1 & 0 & 0.16 & 111115 & aci\\
-\hline
-10 & 2.74 & 1 & 0 & 0.16 & 111115 & aci\\
-\hline
-13 & 2.74 & 1 & 0 & 0.16 & 111115 & aci\\
-\hline
-16 & 2.74 & 1 & 0 & 0.16 & 111115 & aci\\
-\hline
-19 & 2.74 & 1 & 0 & 0.16 & 111115 & aci\\
-\hline
-22 & 2.74 & 1 & 0 & 0.16 & 111115 & aci\\
-\hline
-25 & 2.74 & 1 & 0 & 0.16 & 111115 & aci\\
-\hline
-28 & 2.74 & 1 & 0 & 0.16 & 111115 & aci\\
-\hline
-31 & 2.74 & 1 & 0 & 0.16 & 111115 & aci\\
-\hline
-34 & 2.74 & 1 & 0 & 0.16 & 111115 & aci\\
-\hline
-41 & 2.74 & 1 & 0 & 0.16 & 111115 & aq\\
-\hline
-44 & 2.74 & 1 & 0 & 0.16 & 111115 & aq\\
-\hline
-47 & 2.74 & 1 & 0 & 0.16 & 111115 & aq\\
-\hline
-\end{tabular}
+数据输出如下所示：
 
-数据输出如上所示，如果想另存为 csv 格式：
+\begin{table}
+
+\caption{\label{tab:unnamed-chunk-4}LI-6400 批量整合数据}
+\centering
+\begin{tabular}[t]{lrrrrrl}
+\toprule
+  & BLCoffst & f\_parin & f\_parout & alphaK & Status & files\\
+\midrule
+1 & 2.74 & 1 & 0 & 0.16 & 111115 & aci\\
+4 & 2.74 & 1 & 0 & 0.16 & 111115 & aci\\
+7 & 2.74 & 1 & 0 & 0.16 & 111115 & aci\\
+10 & 2.74 & 1 & 0 & 0.16 & 111115 & aci\\
+13 & 2.74 & 1 & 0 & 0.16 & 111115 & aci\\
+\addlinespace
+16 & 2.74 & 1 & 0 & 0.16 & 111115 & aci\\
+19 & 2.74 & 1 & 0 & 0.16 & 111115 & aci\\
+22 & 2.74 & 1 & 0 & 0.16 & 111115 & aci\\
+25 & 2.74 & 1 & 0 & 0.16 & 111115 & aci\\
+28 & 2.74 & 1 & 0 & 0.16 & 111115 & aci\\
+\addlinespace
+31 & 2.74 & 1 & 0 & 0.16 & 111115 & aci\\
+34 & 2.74 & 1 & 0 & 0.16 & 111115 & aci\\
+41 & 2.74 & 1 & 0 & 0.16 & 111115 & aq\\
+44 & 2.74 & 1 & 0 & 0.16 & 111115 & aq\\
+47 & 2.74 & 1 & 0 & 0.16 & 111115 & aq\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+如果想另存为 csv 格式：
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -372,8 +366,16 @@ excel 格式的数据时的问题。
 header\_line 表示你数据表头所在行，data\_start 表示你数据起始行，Obs = 1
 时所在行，不含表头。这个也要确认好了，不同的测量不能放在一起（当然一般不会出现这种情况，同一台仪器，处理数据当然是希望
 aci 和 aci 在一起，lrc 和 lrc
-在一起，调查测量和调查测量在一起），不同的测量可能起始行不同，这样就会报错，其他注意事项同
-\texttt{read\_bat\_6800}。
+在一起，调查测量和调查测量在一起），不同的测量可能起始行不同，这样就会报错，特别需要注意的是，目前路径写法仅支持
+``/'' 分隔，不能使用 ``\textbackslash{}`` 作为分隔。例如在数据放在 D
+盘的 6400 文件夹下，那么写法应为''d:/6400``, 不能为
+\textbf{``d:\textbackslash{}6400''}, 尽管后者对 R
+是合法的，主要是因为我要区分你不同数据来源的文件是哪个，也即下文提到的
+\texttt{df\$file} 列。
+
+其中，数据的来源在表格中最后一列，叫做
+file，是数据来源的文件名（即你起的名字）,例如本例中你看到的 aci
+是我之前数据里面 aci 响应曲线的数据。
 
 这些数据可以用于后文相关的分析中，尤其是像 \texttt{fitacis}
 这样的函数，因为本质上他们都是符合 \texttt{tidyverse} 样式的数据。
@@ -386,68 +388,45 @@ aci 和 aci 在一起，lrc 和 lrc
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(readphoto)}
 \NormalTok{df <-}\StringTok{ }\KeywordTok{read_bat_6800}\NormalTok{(}\StringTok{"./data/6800"}\NormalTok{, }\DataTypeTok{skiplines =} \DecValTok{53}\NormalTok{)}
-\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{(df[}\DecValTok{1}\OperatorTok{:}\DecValTok{15}\NormalTok{, (}\KeywordTok{ncol}\NormalTok{(df)}\OperatorTok{-}\DecValTok{5}\NormalTok{)}\OperatorTok{:}\KeywordTok{ncol}\NormalTok{(df)])}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{tabular}{r|r|r|r|l|l}
-\hline
-CO2\_r\_sp & H2O\_r\_sp & SS\_s & SS\_r & X & files\\
-\hline
-400 & 13.6523 & 103.501 & 100.780 & NA & aci\\
-\hline
-300 & 13.7082 & 103.473 & 100.757 & NA & aci\\
-\hline
-200 & 13.9520 & 103.424 & 100.721 & NA & aci\\
-\hline
-100 & 14.0570 & 103.379 & 100.679 & NA & aci\\
-\hline
-50 & 13.9467 & 103.327 & 100.633 & NA & aci\\
-\hline
-400 & 13.5988 & 103.297 & 100.603 & NA & aci\\
-\hline
-400 & 13.0226 & 103.307 & 100.614 & NA & aci\\
-\hline
-600 & 12.7456 & 103.320 & 100.626 & NA & aci\\
-\hline
-800 & 13.0809 & 103.317 & 100.620 & NA & aci\\
-\hline
-1000 & 13.4048 & 103.318 & 100.623 & NA & aci\\
-\hline
-1200 & 13.6662 & 103.324 & 100.630 & NA & aci\\
-\hline
-1500 & 13.9635 & 103.316 & 100.624 & NA & aci\\
-\hline
-400 & 10.2085 & 103.840 & 101.042 & NA & lrc\\
-\hline
-400 & 10.2336 & 103.857 & 101.058 & NA & lrc\\
-\hline
-400 & 10.1878 & 103.857 & 101.069 & NA & lrc\\
-\hline
-\end{tabular}
 
 其中就两个参数，第一个为 LI-6800
 \textbf{原始数据}所在的文件夹，即文件夹内\textbf{包含且仅包含 LI-6800
 的原始数据}，不要放其他文件，不要放 excel
 数据。第二个参数即为你原始数据中表头所在的参数行的\textbf{前一行}，我使用的这些示例数据的表头在
-54 行。 特别需要注意的是，目前路径写法仅支持 ``/'' 分隔，不能使用
-``\textbackslash{}`` 作为分隔。例如在数据放在 D 盘的 6800
-文件夹下，那么写法应为''d:/6800``, 不能为
-\textbf{``d:\textbackslash{}6800''}, 尽管后者对 R
-是合法的，主要是因为我要区分你不同数据来源的文件是哪个，也即下文提到的
-\texttt{df\$file} 列
+54 行。
 
-数据输出如上所示，如果想另存为 csv 格式：
+\begin{table}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{write.csv}\NormalTok{(df, }\StringTok{"./combined.csv"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\caption{\label{tab:unnamed-chunk-7}LI-6800 批量整合数据}
+\centering
+\begin{tabular}[t]{rrrrll}
+\toprule
+CO2\_r\_sp & H2O\_r\_sp & SS\_s & SS\_r & X & files\\
+\midrule
+400 & 13.6523 & 103.501 & 100.780 & NA & aci\\
+300 & 13.7082 & 103.473 & 100.757 & NA & aci\\
+200 & 13.9520 & 103.424 & 100.721 & NA & aci\\
+100 & 14.0570 & 103.379 & 100.679 & NA & aci\\
+50 & 13.9467 & 103.327 & 100.633 & NA & aci\\
+\addlinespace
+400 & 13.5988 & 103.297 & 100.603 & NA & aci\\
+400 & 13.0226 & 103.307 & 100.614 & NA & aci\\
+600 & 12.7456 & 103.320 & 100.626 & NA & aci\\
+800 & 13.0809 & 103.317 & 100.620 & NA & aci\\
+1000 & 13.4048 & 103.318 & 100.623 & NA & aci\\
+\addlinespace
+1200 & 13.6662 & 103.324 & 100.630 & NA & aci\\
+1500 & 13.9635 & 103.316 & 100.624 & NA & aci\\
+400 & 10.2085 & 103.840 & 101.042 & NA & lrc\\
+400 & 10.2336 & 103.857 & 101.058 & NA & lrc\\
+400 & 10.1878 & 103.857 & 101.069 & NA & lrc\\
+\bottomrule
+\end{tabular}
+\end{table}
 
-其中，数据的来源在表格中最后一列，叫做
-file，是数据来源的文件名（即你起的名字）,例如本例中你看到的 aci
-是我之前数据里面 aci 响应曲线的数据。
+其他注意事项见 LI-6400 数据整合部分
 
 \cleardoublepage
 
@@ -1456,8 +1435,8 @@ Ap，并且仅在计算 TPU 的前提下才会有第二点出现。
 
 \begin{figure}
 \centering
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-13-1.pdf}
-\caption{\label{fig:unnamed-chunk-13}C4 植物 A-Ci 作图}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-14-1.pdf}
+\caption{\label{fig:unnamed-chunk-14}C4 植物 A-Ci 作图}
 \end{figure}
 
 \cleardoublepage
@@ -3282,7 +3261,7 @@ CRAN，因此需要 \texttt{devtools} 的支持，然后才能从 github 安装
 
 \begin{table}
 
-\caption{\label{tab:unnamed-chunk-30}jiptest 批量导入数据后的样式}
+\caption{\label{tab:unnamed-chunk-31}jiptest 批量导入数据后的样式}
 \centering
 \begin{tabular}[t]{rrl}
 \toprule
@@ -3306,7 +3285,7 @@ SECS & FLUOR & SOURCE\\
 
 \begin{table}
 
-\caption{\label{tab:unnamed-chunk-31}jiptest DC 数据批量导入数据后的样式}
+\caption{\label{tab:unnamed-chunk-32}jiptest DC 数据批量导入数据后的样式}
 \centering
 \begin{tabular}[t]{rrl}
 \toprule

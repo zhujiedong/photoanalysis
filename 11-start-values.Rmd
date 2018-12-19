@@ -179,7 +179,7 @@ summary(lrcnls2)
 
 通过结果可以看到，虽然和之前采用手动方法判定的结果比较接近，但是还是略有差异，可以看一下他们各自的结果同测量值的重合程度：
 
-```{r, mcomp, fig.cap="两种方法结果的对比展示"}
+```{r, mcomp, message = FALSE, fig.cap="两种方法结果的对比展示"}
 plot(lrc_Q, lrc_A)
 lines(lrc_Q,  predict(lrcnls2), col="red")
 lines(lrc_Q,  predict(lrcnls_manual), col="blue")

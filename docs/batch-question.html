@@ -230,9 +230,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">2.2</span> 6400 数据整合</h2>
 <p>基本参数如下：</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readphoto)
-df64  &lt;-<span class="st"> </span><span class="kw">read_bat_6400</span>(<span class="st">&quot;./data/6400&quot;</span>, <span class="dt">header_line =</span> <span class="dv">17</span>, <span class="dt">data_start =</span> <span class="dv">27</span>)
-knitr<span class="op">::</span><span class="kw">kable</span>(df64[<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>, (<span class="kw">ncol</span>(df64)<span class="op">-</span><span class="dv">5</span>)<span class="op">:</span><span class="kw">ncol</span>(df64)])</code></pre></div>
+df64  &lt;-<span class="st"> </span><span class="kw">read_bat_6400</span>(<span class="st">&quot;./data/6400&quot;</span>, <span class="dt">header_line =</span> <span class="dv">17</span>, <span class="dt">data_start =</span> <span class="dv">27</span>)</code></pre></div>
+<p>数据输出如下所示：</p>
 <table>
+<caption><span id="tab:unnamed-chunk-4">表 2.1: </span>LI-6400 批量整合数据</caption>
 <thead>
 <tr class="header">
 <th></th>
@@ -382,18 +383,20 @@ knitr<span class="op">::</span><span class="kw">kable</span>(df64[<span class="d
 </tr>
 </tbody>
 </table>
-<p>数据输出如上所示，如果想另存为 csv 格式：</p>
+<p>如果想另存为 csv 格式：</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write.csv</span>(df64, <span class="st">&quot;./combined.csv&quot;</span>)</code></pre></div>
-<p>header_line 表示你数据表头所在行，data_start 表示你数据起始行，Obs = 1 时所在行，不含表头。这个也要确认好了，不同的测量不能放在一起（当然一般不会出现这种情况，同一台仪器，处理数据当然是希望 aci 和 aci 在一起，lrc 和 lrc 在一起，调查测量和调查测量在一起），不同的测量可能起始行不同，这样就会报错，其他注意事项同 <code>read_bat_6800</code>。</p>
+<p>header_line 表示你数据表头所在行，data_start 表示你数据起始行，Obs = 1 时所在行，不含表头。这个也要确认好了，不同的测量不能放在一起（当然一般不会出现这种情况，同一台仪器，处理数据当然是希望 aci 和 aci 在一起，lrc 和 lrc 在一起，调查测量和调查测量在一起），不同的测量可能起始行不同，这样就会报错，特别需要注意的是，目前路径写法仅支持 “/” 分隔，不能使用 “\“ 作为分隔。例如在数据放在 D 盘的 6400 文件夹下，那么写法应为”d:/6400“, 不能为 <strong>“d:\6400”</strong>, 尽管后者对 R 是合法的，主要是因为我要区分你不同数据来源的文件是哪个，也即下文提到的 <code>df$file</code> 列。</p>
+<p>其中，数据的来源在表格中最后一列，叫做 file，是数据来源的文件名（即你起的名字）,例如本例中你看到的 aci 是我之前数据里面 aci 响应曲线的数据。</p>
 <p>这些数据可以用于后文相关的分析中，尤其是像 <code>fitacis</code> 这样的函数，因为本质上他们都是符合 <code>tidyverse</code> 样式的数据。</p>
 </div>
 <div id="batch68" class="section level2">
 <h2><span class="header-section-number">2.3</span> LI-6800 数据整合</h2>
 <p>相比 6400， 6800 参数要少，导入需要两行命令即可：</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readphoto)
-df &lt;-<span class="st"> </span><span class="kw">read_bat_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="dt">skiplines =</span> <span class="dv">53</span>)
-knitr<span class="op">::</span><span class="kw">kable</span>(df[<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>, (<span class="kw">ncol</span>(df)<span class="op">-</span><span class="dv">5</span>)<span class="op">:</span><span class="kw">ncol</span>(df)])</code></pre></div>
+df &lt;-<span class="st"> </span><span class="kw">read_bat_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="dt">skiplines =</span> <span class="dv">53</span>)</code></pre></div>
+<p>其中就两个参数，第一个为 LI-6800 <strong>原始数据</strong>所在的文件夹，即文件夹内<strong>包含且仅包含 LI-6800 的原始数据</strong>，不要放其他文件，不要放 excel 数据。第二个参数即为你原始数据中表头所在的参数行的<strong>前一行</strong>，我使用的这些示例数据的表头在 54 行。</p>
 <table>
+<caption><span id="tab:unnamed-chunk-7">表 2.2: </span>LI-6800 批量整合数据</caption>
 <thead>
 <tr class="header">
 <th align="right">CO2_r_sp</th>
@@ -527,10 +530,7 @@ knitr<span class="op">::</span><span class="kw">kable</span>(df[<span class="dv"
 </tr>
 </tbody>
 </table>
-<p>其中就两个参数，第一个为 LI-6800 <strong>原始数据</strong>所在的文件夹，即文件夹内<strong>包含且仅包含 LI-6800 的原始数据</strong>，不要放其他文件，不要放 excel 数据。第二个参数即为你原始数据中表头所在的参数行的<strong>前一行</strong>，我使用的这些示例数据的表头在 54 行。 特别需要注意的是，目前路径写法仅支持 “/” 分隔，不能使用 “\“ 作为分隔。例如在数据放在 D 盘的 6800 文件夹下，那么写法应为”d:/6800“, 不能为 <strong>“d:\6800”</strong>, 尽管后者对 R 是合法的，主要是因为我要区分你不同数据来源的文件是哪个，也即下文提到的 <code>df$file</code> 列</p>
-<p>数据输出如上所示，如果想另存为 csv 格式：</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write.csv</span>(df, <span class="st">&quot;./combined.csv&quot;</span>)</code></pre></div>
-<p>其中，数据的来源在表格中最后一列，叫做 file，是数据来源的文件名（即你起的名字）,例如本例中你看到的 aci 是我之前数据里面 aci 响应曲线的数据。</p>
+<p>其他注意事项见 LI-6400 数据整合部分</p>
 
 
 </div>
