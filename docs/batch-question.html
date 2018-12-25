@@ -25,7 +25,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司">
 
 
-<meta name="date" content="2018-12-19">
+<meta name="date" content="2018-12-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -231,162 +231,194 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>基本参数如下：</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readphoto)
 df64  &lt;-<span class="st"> </span><span class="kw">read_bat_6400</span>(<span class="st">&quot;./data/6400&quot;</span>, <span class="dt">header_line =</span> <span class="dv">17</span>, <span class="dt">data_start =</span> <span class="dv">27</span>)</code></pre></div>
-<p>数据输出如下所示：</p>
+<p>数据输出如下所示(仅显示前8列数据)：</p>
 <table>
 <caption><span id="tab:unnamed-chunk-4">表 2.1: </span>LI-6400 批量整合数据</caption>
 <thead>
 <tr class="header">
 <th></th>
-<th align="right">BLCoffst</th>
-<th align="right">f_parin</th>
-<th align="right">f_parout</th>
-<th align="right">alphaK</th>
-<th align="right">Status</th>
 <th align="left">files</th>
+<th align="left">Obs</th>
+<th align="left">HHMMSS</th>
+<th align="right">FTime</th>
+<th align="right">EBal.</th>
+<th align="right">Photo</th>
+<th align="right">Cond</th>
+<th align="right">Ci</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>1</td>
-<td align="right">2.74</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0.16</td>
-<td align="right">111115</td>
 <td align="left">aci</td>
+<td align="left">1</td>
+<td align="left">10:55:14</td>
+<td align="right">483.0</td>
+<td align="right">0</td>
+<td align="right">6.990</td>
+<td align="right">0.0831</td>
+<td align="right">251.0</td>
 </tr>
 <tr class="even">
 <td>4</td>
-<td align="right">2.74</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0.16</td>
-<td align="right">111115</td>
 <td align="left">aci</td>
+<td align="left">2</td>
+<td align="left">10:57:35</td>
+<td align="right">623.5</td>
+<td align="right">0</td>
+<td align="right">5.160</td>
+<td align="right">0.0853</td>
+<td align="right">192.0</td>
 </tr>
 <tr class="odd">
 <td>7</td>
-<td align="right">2.74</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0.16</td>
-<td align="right">111115</td>
 <td align="left">aci</td>
+<td align="left">3</td>
+<td align="left">10:59:55</td>
+<td align="right">763.5</td>
+<td align="right">0</td>
+<td align="right">3.140</td>
+<td align="right">0.0881</td>
+<td align="right">136.0</td>
 </tr>
 <tr class="even">
 <td>10</td>
-<td align="right">2.74</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0.16</td>
-<td align="right">111115</td>
 <td align="left">aci</td>
+<td align="left">4</td>
+<td align="left">11:02:26</td>
+<td align="right">914.5</td>
+<td align="right">0</td>
+<td align="right">0.910</td>
+<td align="right">0.0927</td>
+<td align="right">81.9</td>
 </tr>
 <tr class="odd">
 <td>13</td>
-<td align="right">2.74</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0.16</td>
-<td align="right">111115</td>
 <td align="left">aci</td>
+<td align="left">5</td>
+<td align="left">11:04:46</td>
+<td align="right">1055.0</td>
+<td align="right">0</td>
+<td align="right">-0.167</td>
+<td align="right">0.0966</td>
+<td align="right">52.7</td>
 </tr>
 <tr class="even">
 <td>16</td>
-<td align="right">2.74</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0.16</td>
-<td align="right">111115</td>
 <td align="left">aci</td>
+<td align="left">6</td>
+<td align="left">11:07:23</td>
+<td align="right">1211.5</td>
+<td align="right">0</td>
+<td align="right">5.240</td>
+<td align="right">0.1010</td>
+<td align="right">305.0</td>
 </tr>
 <tr class="odd">
 <td>19</td>
-<td align="right">2.74</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0.16</td>
-<td align="right">111115</td>
 <td align="left">aci</td>
+<td align="left">7</td>
+<td align="left">11:09:43</td>
+<td align="right">1352.0</td>
+<td align="right">0</td>
+<td align="right">6.610</td>
+<td align="right">0.1040</td>
+<td align="right">284.0</td>
 </tr>
 <tr class="even">
 <td>22</td>
-<td align="right">2.74</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0.16</td>
-<td align="right">111115</td>
 <td align="left">aci</td>
+<td align="left">8</td>
+<td align="left">11:12:04</td>
+<td align="right">1492.5</td>
+<td align="right">0</td>
+<td align="right">9.280</td>
+<td align="right">0.1050</td>
+<td align="right">438.0</td>
 </tr>
 <tr class="odd">
 <td>25</td>
-<td align="right">2.74</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0.16</td>
-<td align="right">111115</td>
 <td align="left">aci</td>
+<td align="left">9</td>
+<td align="left">11:14:24</td>
+<td align="right">1633.0</td>
+<td align="right">0</td>
+<td align="right">10.200</td>
+<td align="right">0.1020</td>
+<td align="right">616.0</td>
 </tr>
 <tr class="even">
 <td>28</td>
-<td align="right">2.74</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0.16</td>
-<td align="right">111115</td>
 <td align="left">aci</td>
+<td align="left">10</td>
+<td align="left">11:16:44</td>
+<td align="right">1772.5</td>
+<td align="right">0</td>
+<td align="right">10.500</td>
+<td align="right">0.0943</td>
+<td align="right">795.0</td>
 </tr>
 <tr class="odd">
 <td>31</td>
-<td align="right">2.74</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0.16</td>
-<td align="right">111115</td>
 <td align="left">aci</td>
+<td align="left">11</td>
+<td align="left">11:19:49</td>
+<td align="right">1958.0</td>
+<td align="right">0</td>
+<td align="right">10.700</td>
+<td align="right">0.0853</td>
+<td align="right">970.0</td>
 </tr>
 <tr class="even">
 <td>34</td>
-<td align="right">2.74</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0.16</td>
-<td align="right">111115</td>
 <td align="left">aci</td>
+<td align="left">12</td>
+<td align="left">11:22:09</td>
+<td align="right">2097.5</td>
+<td align="right">0</td>
+<td align="right">11.100</td>
+<td align="right">0.0812</td>
+<td align="right">1150.0</td>
 </tr>
 <tr class="odd">
 <td>41</td>
-<td align="right">2.74</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0.16</td>
-<td align="right">111115</td>
 <td align="left">aq</td>
+<td align="left">2</td>
+<td align="left">10:12:52</td>
+<td align="right">737.5</td>
+<td align="right">0</td>
+<td align="right">6.450</td>
+<td align="right">0.0700</td>
+<td align="right">239.0</td>
 </tr>
 <tr class="even">
 <td>44</td>
-<td align="right">2.74</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0.16</td>
-<td align="right">111115</td>
 <td align="left">aq</td>
+<td align="left">3</td>
+<td align="left">10:15:12</td>
+<td align="right">878.0</td>
+<td align="right">0</td>
+<td align="right">6.450</td>
+<td align="right">0.0684</td>
+<td align="right">235.0</td>
 </tr>
 <tr class="odd">
 <td>47</td>
-<td align="right">2.74</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0.16</td>
-<td align="right">111115</td>
 <td align="left">aq</td>
+<td align="left">4</td>
+<td align="left">10:17:32</td>
+<td align="right">1017.5</td>
+<td align="right">0</td>
+<td align="right">5.960</td>
+<td align="right">0.0655</td>
+<td align="right">241.0</td>
 </tr>
 </tbody>
 </table>
 <p>如果想另存为 csv 格式：</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write.csv</span>(df64, <span class="st">&quot;./combined.csv&quot;</span>)</code></pre></div>
-<p>header_line 表示你数据表头所在行，data_start 表示你数据起始行，Obs = 1 时所在行，不含表头。这个也要确认好了，不同的测量不能放在一起（当然一般不会出现这种情况，同一台仪器，处理数据当然是希望 aci 和 aci 在一起，lrc 和 lrc 在一起，调查测量和调查测量在一起），不同的测量可能起始行不同，这样就会报错，特别需要注意的是，目前路径写法仅支持 “/” 分隔，不能使用 “\“ 作为分隔。例如在数据放在 D 盘的 6400 文件夹下，那么写法应为”d:/6400“, 不能为 <strong>“d:\6400”</strong>, 尽管后者对 R 是合法的，主要是因为我要区分你不同数据来源的文件是哪个，也即下文提到的 <code>df$file</code> 列。</p>
-<p>其中，数据的来源在表格中最后一列，叫做 file，是数据来源的文件名（即你起的名字）,例如本例中你看到的 aci 是我之前数据里面 aci 响应曲线的数据。</p>
+<p>header_line 表示你数据表头所在行，data_start 表示你数据起始行，Obs = 1 时所在行，不含表头。这个也要确认好了，不同的测量不能放在一起（当然一般不会出现这种情况，同一台仪器，处理数据当然是希望 aci 和 aci 在一起，lrc 和 lrc 在一起，调查测量和调查测量在一起），不同的测量可能起始行不同，这样就会报错，特别需要注意的是，目前路径写法仅支持 “/” 分隔，不能使用 “\“ 作为分隔。例如在数据放在 D 盘的 6400 文件夹下，那么写法应为”d:/6400“, 不能为 <strong>“d:\6400”</strong>, 尽管后者对 R 是合法的，主要是因为我要区分你不同数据来源的文件是哪个，也即下文提到的 <code>df$files</code> 列。</p>
+<p>其中，数据的来源在表格中第一列，叫做 files，是数据来源的文件名（即你起的名字）,例如本例中你看到的 aci 是我之前数据里面 aci 响应曲线的数据。</p>
 <p>这些数据可以用于后文相关的分析中，尤其是像 <code>fitacis</code> 这样的函数，因为本质上他们都是符合 <code>tidyverse</code> 样式的数据。</p>
 </div>
 <div id="batch68" class="section level2">
@@ -395,138 +427,171 @@ df64  &lt;-<span class="st"> </span><span class="kw">read_bat_6400</span>(<span 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readphoto)
 df &lt;-<span class="st"> </span><span class="kw">read_bat_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="dt">skiplines =</span> <span class="dv">53</span>)</code></pre></div>
 <p>其中就两个参数，第一个为 LI-6800 <strong>原始数据</strong>所在的文件夹，即文件夹内<strong>包含且仅包含 LI-6800 的原始数据</strong>，不要放其他文件，不要放 excel 数据。第二个参数即为你原始数据中表头所在的参数行的<strong>前一行</strong>，我使用的这些示例数据的表头在 54 行。</p>
+<p>数据输出如下所示(仅显示前8列数据)：</p>
 <table>
 <caption><span id="tab:unnamed-chunk-7">表 2.2: </span>LI-6800 批量整合数据</caption>
 <thead>
 <tr class="header">
-<th align="right">CO2_r_sp</th>
-<th align="right">H2O_r_sp</th>
-<th align="right">SS_s</th>
-<th align="right">SS_r</th>
-<th align="left">X</th>
 <th align="left">files</th>
+<th align="right">obs</th>
+<th align="right">time</th>
+<th align="right">elapsed</th>
+<th align="left">date</th>
+<th align="right">plot</th>
+<th align="right">plant</th>
+<th align="right">TIME</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">400</td>
-<td align="right">13.6523</td>
-<td align="right">103.501</td>
-<td align="right">100.780</td>
-<td align="left">NA</td>
 <td align="left">aci</td>
+<td align="right">1</td>
+<td align="right">1513614617</td>
+<td align="right">0.0</td>
+<td align="left">20171218 10:30:16</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513614617</td>
 </tr>
 <tr class="even">
-<td align="right">300</td>
-<td align="right">13.7082</td>
-<td align="right">103.473</td>
-<td align="right">100.757</td>
-<td align="left">NA</td>
 <td align="left">aci</td>
+<td align="right">2</td>
+<td align="right">1513614731</td>
+<td align="right">114.0</td>
+<td align="left">20171218 10:32:10</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513614731</td>
 </tr>
 <tr class="odd">
-<td align="right">200</td>
-<td align="right">13.9520</td>
-<td align="right">103.424</td>
-<td align="right">100.721</td>
-<td align="left">NA</td>
 <td align="left">aci</td>
+<td align="right">3</td>
+<td align="right">1513614886</td>
+<td align="right">269.0</td>
+<td align="left">20171218 10:34:45</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513614886</td>
 </tr>
 <tr class="even">
-<td align="right">100</td>
-<td align="right">14.0570</td>
-<td align="right">103.379</td>
-<td align="right">100.679</td>
-<td align="left">NA</td>
 <td align="left">aci</td>
+<td align="right">4</td>
+<td align="right">1513615008</td>
+<td align="right">391.0</td>
+<td align="left">20171218 10:36:47</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513615008</td>
 </tr>
 <tr class="odd">
-<td align="right">50</td>
-<td align="right">13.9467</td>
-<td align="right">103.327</td>
-<td align="right">100.633</td>
-<td align="left">NA</td>
 <td align="left">aci</td>
+<td align="right">5</td>
+<td align="right">1513615127</td>
+<td align="right">510.0</td>
+<td align="left">20171218 10:38:46</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513615127</td>
 </tr>
 <tr class="even">
-<td align="right">400</td>
-<td align="right">13.5988</td>
-<td align="right">103.297</td>
-<td align="right">100.603</td>
-<td align="left">NA</td>
 <td align="left">aci</td>
+<td align="right">6</td>
+<td align="right">1513615287</td>
+<td align="right">670.5</td>
+<td align="left">20171218 10:41:27</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513615287</td>
 </tr>
 <tr class="odd">
-<td align="right">400</td>
-<td align="right">13.0226</td>
-<td align="right">103.307</td>
-<td align="right">100.614</td>
-<td align="left">NA</td>
 <td align="left">aci</td>
+<td align="right">7</td>
+<td align="right">1513615410</td>
+<td align="right">793.0</td>
+<td align="left">20171218 10:43:29</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513615410</td>
 </tr>
 <tr class="even">
-<td align="right">600</td>
-<td align="right">12.7456</td>
-<td align="right">103.320</td>
-<td align="right">100.626</td>
-<td align="left">NA</td>
 <td align="left">aci</td>
+<td align="right">8</td>
+<td align="right">1513615566</td>
+<td align="right">949.0</td>
+<td align="left">20171218 10:46:05</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513615566</td>
 </tr>
 <tr class="odd">
-<td align="right">800</td>
-<td align="right">13.0809</td>
-<td align="right">103.317</td>
-<td align="right">100.620</td>
-<td align="left">NA</td>
 <td align="left">aci</td>
+<td align="right">9</td>
+<td align="right">1513615701</td>
+<td align="right">1084.0</td>
+<td align="left">20171218 10:48:20</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513615701</td>
 </tr>
 <tr class="even">
-<td align="right">1000</td>
-<td align="right">13.4048</td>
-<td align="right">103.318</td>
-<td align="right">100.623</td>
-<td align="left">NA</td>
 <td align="left">aci</td>
+<td align="right">10</td>
+<td align="right">1513615831</td>
+<td align="right">1214.0</td>
+<td align="left">20171218 10:50:30</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513615831</td>
 </tr>
 <tr class="odd">
-<td align="right">1200</td>
-<td align="right">13.6662</td>
-<td align="right">103.324</td>
-<td align="right">100.630</td>
-<td align="left">NA</td>
 <td align="left">aci</td>
+<td align="right">11</td>
+<td align="right">1513615940</td>
+<td align="right">1323.0</td>
+<td align="left">20171218 10:52:19</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513615940</td>
 </tr>
 <tr class="even">
-<td align="right">1500</td>
-<td align="right">13.9635</td>
-<td align="right">103.316</td>
-<td align="right">100.624</td>
-<td align="left">NA</td>
 <td align="left">aci</td>
+<td align="right">12</td>
+<td align="right">1513616064</td>
+<td align="right">1447.4</td>
+<td align="left">20171218 10:54:24</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513616064</td>
 </tr>
 <tr class="odd">
-<td align="right">400</td>
-<td align="right">10.2085</td>
-<td align="right">103.840</td>
-<td align="right">101.042</td>
-<td align="left">NA</td>
 <td align="left">lrc</td>
+<td align="right">1</td>
+<td align="right">1513612721</td>
+<td align="right">0.0</td>
+<td align="left">20171218 09:58:40</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513612721</td>
 </tr>
 <tr class="even">
-<td align="right">400</td>
-<td align="right">10.2336</td>
-<td align="right">103.857</td>
-<td align="right">101.058</td>
-<td align="left">NA</td>
 <td align="left">lrc</td>
+<td align="right">2</td>
+<td align="right">1513612832</td>
+<td align="right">111.0</td>
+<td align="left">20171218 10:00:31</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513612832</td>
 </tr>
 <tr class="odd">
-<td align="right">400</td>
-<td align="right">10.1878</td>
-<td align="right">103.857</td>
-<td align="right">101.069</td>
-<td align="left">NA</td>
 <td align="left">lrc</td>
+<td align="right">3</td>
+<td align="right">1513612941</td>
+<td align="right">220.0</td>
+<td align="left">20171218 10:02:20</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513612941</td>
 </tr>
 </tbody>
 </table>
