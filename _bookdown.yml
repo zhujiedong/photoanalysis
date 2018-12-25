@@ -1,5 +1,5 @@
 book_filename: bookdown
-edit: https://github.com/zhujiedong/photoanalysis/edit/master/%s
+edit: https://github.com/zhujiedong/photoanalysis/blob/master/02-fvcb.Rmd
 clean: [photoR.bib, bookdown.bbl]
 delete_merged_file: true
 language:
