@@ -168,22 +168,8 @@
 
 \title{R 语言分析 LI-6400 和 LI-6800 光合仪的数据}
 \author{祝介东 北京力高泰科技有限公司}
-\date{2018-12-25}
+\date{2018-12-29}
 
-\usepackage{amsthm}
-\newtheorem{theorem}{Theorem}[chapter]
-\newtheorem{lemma}{Lemma}[chapter]
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}[chapter]
-\newtheorem{corollary}{Corollary}[chapter]
-\newtheorem{proposition}{Proposition}[chapter]
-\theoremstyle{definition}
-\newtheorem{example}{Example}[chapter]
-\theoremstyle{definition}
-\newtheorem{exercise}{Exercise}[chapter]
-\theoremstyle{remark}
-\newtheorem*{remark}{Remark}
-\newtheorem*{solution}{Solution}
 \begin{document}
 \maketitle
 
@@ -326,11 +312,11 @@ excel 格式的数据时的问题。
 
 数据输出如下所示(仅显示前8列数据)：
 
-\begin{table}
+\begin{table}[t]
 
 \caption{\label{tab:unnamed-chunk-4}LI-6400 批量整合数据}
 \centering
-\begin{tabular}[t]{llllrrrrr}
+\begin{tabular}{llllrrrrr}
 \toprule
   & files & Obs & HHMMSS & FTime & EBal. & Photo & Cond & Ci\\
 \midrule
@@ -399,11 +385,11 @@ files，是数据来源的文件名（即你起的名字）,例如本例中你�
 
 数据输出如下所示(仅显示前8列数据)：
 
-\begin{table}
+\begin{table}[t]
 
 \caption{\label{tab:unnamed-chunk-7}LI-6800 批量整合数据}
 \centering
-\begin{tabular}[t]{lrrrlrrr}
+\begin{tabular}{lrrrlrrr}
 \toprule
 files & obs & time & elapsed & date & plot & plant & TIME\\
 \midrule
@@ -792,7 +778,7 @@ CO\textsubscript{2}
 \ref{tab:head6400} 样式，并另存为 csv 格式}\footnote{即仅保留测量值，删除其他所有头文件、空行、
   remark 等信息}：
 
-\begin{longtable}[t]{rlrrrrrr}
+\begin{longtable}{rlrrrrrr}
 \caption{\label{tab:head6400}推荐 LI-6400 整理后数据样式}\\
 \toprule
 Obs & HHMMSS & FTime & EBal. & Photo & Cond & Ci & Trmmol\\
@@ -802,6 +788,7 @@ Obs & HHMMSS & FTime & EBal. & Photo & Cond & Ci & Trmmol\\
 3 & 15:49:54 & 446.0 & 0 & 6.4525814 & 0.2909460 & 150.67623 & 2.361704\\
 4 & 15:51:26 & 538.5 & 0 & 1.7971569 & 0.3057164 & 85.82530 & 2.459459\\
 5 & 15:52:54 & 626.5 & 0 & -0.6575974 & 0.3150002 & 53.47985 & 2.515992\\
+\addlinespace
 6 & 15:54:50 & 742.5 & 0 & 15.4296572 & 0.3255415 & 292.56161 & 2.579840\\
 \bottomrule
 \end{longtable}
@@ -1111,11 +1098,11 @@ J\textsubscript{max}}{使用 onepoint 单独计算 Vcmax 和 Jmax}}\label{onpoin
 \end{Highlighting}
 \end{Shaded}
 
-\begin{table}
+\begin{table}[t]
 
 \caption{\label{tab:onepointdata}onepoint 使用的数据}
 \centering
-\begin{tabular}[t]{rlrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr}
+\begin{tabular}{rlrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr}
 \toprule
 Obs & HHMMSS & FTime & EBal. & Photo & Cond & Ci & Trmmol & VpdL & CTleaf & Area & BLC\_1 & StmRat & BLCond & Tair & Tleaf & TBlk & CO2R & CO2S & H2OR & H2OS & RH\_R & RH\_S & Flow & PARi & PARo & Press & CsMch & HsMch & CsMchSD & HsMchSD & CrMchSD & HrMchSD & StableF & BLCslope & BLCoffst & f\_parin & f\_parout & alphaK & Status & fda & Trans & Tair\_K & Twall\_K & R.W.m2. & Tl.Ta & SVTleaf & h2o\_i & h20diff & CTair & SVTair & CndTotal & vp\_kPa & VpdA & CndCO2 & Ci\_Pa & Ci.Ca & RHsfc & C2sfc & AHs.Cs\\
 \midrule
@@ -1124,6 +1111,7 @@ Obs & HHMMSS & FTime & EBal. & Photo & Cond & Ci & Trmmol & VpdL & CTleaf & Area
 3 & 14:13:25 & 373.0 & 0 & 10.207166 & 0.1342114 & 264.8348 & 1.925734 & 1.445717 & 25.89660 & 6 & 1.42 & 1 & 2.84 & 25.87186 & 25.89660 & 25.87317 & 412.5393 & 399.3762 & 17.03833 & 19.30316 & 50.29006 & 56.97489 & 500.3188 & 1198.737 & 7.489428 & 98.84142 & 2.018435 & -0.3787848 & 0.2174792 & 0.0025482 & 0.2455426 & 0.0025012 & 1.0000000 & -0.2195652 & 2.737392 & 1 & 0 & 0.16 & 111115 & 0.8338647 & 0.0019257 & 299.0466 & 299.0219 & 191.7980 & 1.210137 & 3.353668 & 33.92979 & 14.62663 & 25.88423 & 3.351212 & 0.1281551 & 1.907951 & 1.443261 & 0.0806199 & 26.17665 & 0.6631213 & 57.71117 & 394.5242 & 0.0149311\\
 4 & 14:13:41 & 389.5 & 0 & 9.547416 & 0.1281947 & 269.6337 & 1.854272 & 1.454248 & 25.94020 & 6 & 1.42 & 1 & 2.84 & 25.91845 & 25.94020 & 25.92104 & 413.8090 & 401.4666 & 17.12559 & 19.30638 & 50.40359 & 56.82203 & 500.3162 & 1199.245 & 7.449210 & 98.83208 & 2.018435 & -0.3787848 & 0.2174792 & 0.0025482 & 0.2455426 & 0.0025012 & 1.0000000 & -0.2195652 & 2.737392 & 1 & 0 & 0.16 & 111115 & 0.8338604 & 0.0018543 & 299.0902 & 299.0684 & 191.8792 & 1.247158 & 3.362337 & 34.02071 & 14.71433 & 25.92933 & 3.360173 & 0.1226580 & 1.908089 & 1.452084 & 0.0771402 & 26.64846 & 0.6716216 & 57.48324 & 396.9282 & 0.0138266\\
 5 & 14:16:16 & 540.0 & 0 & 10.288968 & 0.1376602 & 267.9198 & 2.009217 & 1.471788 & 26.01813 & 6 & 1.42 & 1 & 2.84 & 26.01478 & 26.01813 & 26.02164 & 413.9044 & 400.5999 & 16.92567 & 19.28878 & 49.53554 & 56.44850 & 500.3043 & 1200.785 & 7.497018 & 98.81870 & 2.018435 & -0.3787848 & 0.2174792 & 0.0025482 & 0.2455426 & 0.0025012 & 0.6666667 & -0.2195652 & 2.737392 & 1 & 0 & 0.16 & 111115 & 0.8338405 & 0.0020092 & 299.1681 & 299.1648 & 192.1257 & 1.174669 & 3.377880 & 34.18260 & 14.89382 & 26.01646 & 3.377546 & 0.1312960 & 1.906093 & 1.471453 & 0.0826090 & 26.47549 & 0.6687965 & 57.30143 & 395.7090 & 0.0148991\\
+\addlinespace
 6 & 14:16:32 & 555.5 & 0 & 10.178603 & 0.1381995 & 269.5898 & 2.016100 & 1.471138 & 26.01657 & 6 & 1.42 & 1 & 2.84 & 26.02212 & 26.01657 & 26.02939 & 413.6639 & 400.4885 & 16.92345 & 19.29468 & 49.49181 & 56.42595 & 500.2979 & 1200.879 & 7.569045 & 98.80596 & 2.018435 & -0.3787848 & 0.2174792 & 0.0025482 & 0.2455426 & 0.0025012 & 0.6666667 & -0.2195652 & 2.737392 & 1 & 0 & 0.16 & 111115 & 0.8338298 & 0.0020161 & 299.1666 & 299.1721 & 192.1406 & 1.172561 & 3.377567 & 34.18384 & 14.88916 & 26.01934 & 3.378122 & 0.1317865 & 1.906429 & 1.471693 & 0.0829197 & 26.63708 & 0.6731525 & 57.32389 & 395.6501 & 0.0147473\\
 \bottomrule
 \end{tabular}
@@ -1148,11 +1136,11 @@ Obs & HHMMSS & FTime & EBal. & Photo & Cond & Ci & Trmmol & VpdL & CTleaf & Area
 \end{Highlighting}
 \end{Shaded}
 
-\begin{table}
+\begin{table}[t]
 
 \caption{\label{tab:onepoint}onepoint 法计算的结果}
 \centering
-\begin{tabular}[t]{rrr}
+\begin{tabular}{rrr}
 \toprule
 aci\_fit.Photo & aci\_fit.Vcmax & aci\_fit.Jmax\\
 \midrule
@@ -1161,6 +1149,7 @@ aci\_fit.Photo & aci\_fit.Vcmax & aci\_fit.Jmax\\
 10.207166 & 45.44617 & 69.35838\\
 9.547416 & 41.86217 & 64.24400\\
 10.288968 & 45.09335 & 69.36954\\
+\addlinespace
 10.178603 & 44.37360 & 68.41628\\
 \bottomrule
 \end{tabular}
@@ -2122,11 +2111,11 @@ P_{nmax}= AQE \times I_{sat} - R_{d}
   来计算，求得目标区间的根。当然也可以采用其他比例来作为饱和点光合速率。
 \end{itemize}
 
-\begin{table}
+\begin{table}[t]
 
 \caption{\label{tab:rectable}直角双曲线计算参数}
 \centering
-\begin{tabular}[t]{lrrrr}
+\begin{tabular}{lrrrr}
 \toprule
   & Estimate & Std. Error & t value & Pr(>|t|)\\
 \midrule
@@ -2258,11 +2247,11 @@ P_{n} = \frac{\alpha I + P_{nmax} \sqrt{(\alpha I + P_{nmax})^{2} - 4  \theta \a
 \caption{\label{fig:nrecr}非直角双曲线模型拟合}
 \end{figure}
 
-\begin{table}
+\begin{table}[t]
 
 \caption{\label{tab:nrectable}非直角双曲线计算参数}
 \centering
-\begin{tabular}[t]{lrrrr}
+\begin{tabular}{lrrrr}
 \toprule
   & Estimate & Std. Error & t value & Pr(>|t|)\\
 \midrule
@@ -2370,11 +2359,11 @@ P_{n} = P_{nmax}[1 - e^{-b(I-I_{C})}]
 \caption{\label{fig:nexpr}指数模型拟合}
 \end{figure}
 
-\begin{table}
+\begin{table}[t]
 
 \caption{\label{tab:nexptable}指数模型计算参数}
 \centering
-\begin{tabular}[t]{lrrrr}
+\begin{tabular}{lrrrr}
 \toprule
   & Estimate & Std. Error & t value & Pr(>|t|)\\
 \midrule
@@ -2490,11 +2479,11 @@ P_{nmax} = \alpha\left(\frac{\sqrt{\beta+\gamma}-\sqrt{\beta}}{\gamma}\right)^{2
 \caption{\label{fig:mrecr}直角双曲线修正模型拟合}
 \end{figure}
 
-\begin{table}
+\begin{table}[t]
 
 \caption{\label{tab:mrectable}直角双曲线修正模型计算参数}
 \centering
-\begin{tabular}[t]{lrrrr}
+\begin{tabular}{lrrrr}
 \toprule
   & Estimate & Std. Error & t value & Pr(>|t|)\\
 \midrule
@@ -2875,7 +2864,7 @@ F 检验、 AIC、BIC 等统计方式才能判定。
 LI-6800 的数据前处理同 LI-6400 相同，如表 \ref{tab:head6800}
 所示的样式。
 
-\begin{longtable}[t]{rrrlrr}
+\begin{longtable}{rrrlrr}
 \caption{\label{tab:head6800}推荐 LI-6800 整理后数据样式}\\
 \toprule
 obs & time & elapsed & date & TIME & E\\
@@ -2885,6 +2874,7 @@ obs & time & elapsed & date & TIME & E\\
 3 & 1471426153 & 403.1 & 20160817 17:29:13 & 1471426144 & 0.0009900\\
 4 & 1471426244 & 494.0 & 20160817 17:30:44 & 1471426235 & 0.0010249\\
 5 & 1471426335 & 585.1 & 20160817 17:32:15 & 1471426326 & 0.0010632\\
+\addlinespace
 6 & 1471426426 & 676.0 & 20160817 17:33:46 & 1471426417 & 0.0011190\\
 \bottomrule
 \end{longtable}
@@ -2968,6 +2958,10 @@ RACiR\texttrademark 技术的疑问做了解答并提出了准确测量的建议
 \section{\texorpdfstring{racir 软件包实现
 RACiR\texttrademark 数据分析}{racir 软件包实现 RACiR数据分析}}\label{racir_pkg}
 
+\textbf{因作者将代码升级，只支持原始数据的处理，我现在没有
+原始数据格式的RACiR 数据，因此下面的 racir
+包代码暂时不能使用，如有需要，请将您测试数据选择一个叶片的测量和空叶室校准发给我，我再更改（目前北方没有合适的植物供我测试），也可以参考我后面手动实现的代码}
+
 \citet{stinziano2018} 还给出了专门的 RACiR 数据分析软件包
 \href{https://github.com/jstinzi/racir}{racir
 package}，我们下面先介绍一下这个软件包。
@@ -3014,33 +3008,10 @@ package}，我们下面先介绍一下这个软件包。
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(racir)}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{verbatim}
-## 
-## Attaching package: 'racir'
-\end{verbatim}
-
-\begin{verbatim}
-## The following object is masked from 'package:readphoto':
-## 
-##     read_6800
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \KeywordTok{racircalcheckcsv}\NormalTok{(}\StringTok{"./data/empty_test.csv"}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{460}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\includegraphics{bookdown_files/figure-latex/racir_check-1.pdf}
-\includegraphics{bookdown_files/figure-latex/racir_check-2.pdf}
-\includegraphics{bookdown_files/figure-latex/racir_check-3.pdf}
-
-\begin{verbatim}
-## [1] cal3rd
-\end{verbatim}
 
 上述参数分别是空叶室校准数据的路径，以及我要删除的数据，即只保留参比室
 \(CO_2\)
@@ -3054,12 +3025,6 @@ csv 文件，文件名为 ''原文件名`` + ``\_corrected" + ``.csv''。
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}
-\centering
-\includegraphics{bookdown_files/figure-latex/racir_cor_pkg-1.pdf}
-\caption{(\#fig:racir\_cor\_pkg)校准之后的数据}
-\end{figure}
-
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(plantecophys)}
@@ -3070,13 +3035,6 @@ csv 文件，文件名为 ''原文件名`` + ``\_corrected" + ``.csv''。
 \NormalTok{fitracir}\OperatorTok{$}\NormalTok{pars}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-##        Estimate Std. Error
-## Vcmax 143.59891 0.26389323
-## Jmax  229.00314 0.71289238
-## Rd     18.33568 0.04327703
-\end{verbatim}
 
 \textbf{注意：RACiR 的本意是表型研究中求 Vcmax 和 Jmax，因而，请忽略 Rd
 等参数的计算结果}
@@ -3261,11 +3219,18 @@ CRAN，因此需要 \texttt{devtools} 的支持，然后才能从 github 安装
 \end{Highlighting}
 \end{Shaded}
 
-\begin{table}
+\begin{verbatim}
+## readxl works best with a newer version of the tibble package.
+## You currently have tibble v1.4.2.
+## Falling back to column name repair from tibble <= v1.4.2.
+## Message displays once per session.
+\end{verbatim}
+
+\begin{table}[t]
 
 \caption{\label{tab:unnamed-chunk-31}jiptest 批量导入数据后的样式}
 \centering
-\begin{tabular}[t]{rrl}
+\begin{tabular}{rrl}
 \toprule
 SECS & FLUOR & SOURCE\\
 \midrule
@@ -3274,6 +3239,7 @@ SECS & FLUOR & SOURCE\\
 3.19e-05 & 1013 & INDUCTION-484-20171225-13\_15\_58\\
 3.60e-05 & 1055 & INDUCTION-484-20171225-13\_15\_58\\
 4.01e-05 & 1044 & INDUCTION-484-20171225-13\_15\_58\\
+\addlinespace
 4.41e-05 & 1205 & INDUCTION-484-20171225-13\_15\_58\\
 \bottomrule
 \end{tabular}
@@ -3285,11 +3251,11 @@ SECS & FLUOR & SOURCE\\
 \end{Highlighting}
 \end{Shaded}
 
-\begin{table}
+\begin{table}[t]
 
 \caption{\label{tab:unnamed-chunk-32}jiptest DC 数据批量导入数据后的样式}
 \centering
-\begin{tabular}[t]{rrl}
+\begin{tabular}{rrl}
 \toprule
 SECS & FLUOR & SOURCE\\
 \midrule
@@ -3298,6 +3264,7 @@ SECS & FLUOR & SOURCE\\
 3.19e-05 & 161261 & INDUCTION-484-20171225-13\_15\_58\\
 3.60e-05 & 165114 & INDUCTION-484-20171225-13\_15\_58\\
 4.01e-05 & 169069 & INDUCTION-484-20171225-13\_15\_58\\
+\addlinespace
 4.41e-05 & 173231 & INDUCTION-484-20171225-13\_15\_58\\
 \bottomrule
 \end{tabular}
@@ -3322,7 +3289,7 @@ SECS & FLUOR & SOURCE\\
 ##   in the induction settings of LI-6800
 \end{verbatim}
 
-\begin{longtable}[t]{lrrrr}
+\begin{longtable}{lrrrr}
 \caption{\label{tab:jipres}jiptest 输出的计算参数}\\
 \toprule
 parameters & data\_file1 & data\_file2 & data\_file3 & data\_file4\\
@@ -3381,7 +3348,7 @@ DFabs & 0.3093655 & 0.0982884 & 0.0324348 & -0.8458942\\
 ##           in the induction settings of LI-6800
 \end{verbatim}
 
-\begin{longtable}[t]{lrrrr}
+\begin{longtable}{lrrrr}
 \caption{\label{tab:dcjipres}jiptest DC 数据输出的计算参数}\\
 \toprule
 parameters & data\_file1 & data\_file2 & data\_file3 & data\_file4\\
@@ -3466,6 +3433,194 @@ ojip 调制式测量光 ojip 曲线的快速预览如图 \ref{fig:acplot}
 
 ojip 连续式测量光 ojip 曲线的快速预览如图 \ref{fig:dcplot}
 
+\cleardoublepage
+
+\chapter{PCA 分析}\label{pca-anylysis}
+
+PCA
+作为一个基础的方法，应用领域覆盖很广，涵盖的统计学相关的内容有均值、标准差、协方差，
+线性代数中的特征向量及特征值。当然在与光合仪相关的应用方面多数是测量的光合速率、气孔导度等配合植物的其他性状来进行研究。下面的内容将使用不那么数学的语言来观察其实现方式。
+
+\section{特征向量与特征值}
+
+特征向量和特征值的数学描述为：
+
+\begin{equation}
+A \vec{x} = \lambda \vec{x}
+\label{eq:eign}
+\end{equation}
+
+其中 A 为 n \(\times\) n 的矩阵，\(\vec{x}\) 为 非零 n \(\times\) 1
+列向量，\(\lambda\) 是标量，那么 \(\vec{x}\) 为 A
+的特征向量，\(\lambda\) 为 A 的特征值。
+
+如果仅从数学描述上看，是十分不适合我这样没基础的人来理解的，但我们可以这么理解：
+
+A 为我们观测值（也即我们生态学上测量的数据）组成的 \(n \times n\)
+矩阵，每行的数据代表了一个观测值，例如光合速率是其中的一行，我们有n 个，
+那么 \(\vec{x}\) 和 \(\lambda\) 意味着什么呢？再看一眼上面的
+\eqref{eq:eign}，这是一个等式，而 \(\vec{x}\) 是 n \(\times\) 1
+维度，原来的数据是 n \(\times\) n
+维度，这就是主轴分析是降维分析的意义了，一个一维的特征向量和特征值与我们多维的观测值之间有一个相等的关系。当然，也有很多人在描述时喜欢用坐标轴旋转或这投影来形容的，如果你觉得这样好理解也没问题，不过我脑袋不擅长想象这种多维的空间。这样描述并不十分准确，只是我觉得便于理解，更正确描述应为我们下面所述的例子
+(\citet{Smith2002}) ，但降维的原理即来自此处：
+
+\begin{equation}
+finaldata = rowfeaturevector \times rowdataajust
+\label{eq:despca}
+\end{equation}
+
+finaldata 很好理解，我们用于 PCA 的最终数据，rowfeature vector
+则是我们根据协相关矩阵求得的特征向量的转置，最大的特征向量再最上面，
+rowdataadjust 则为\textbf{原始数据减去标准值}。
+
+\section{PCA R 语言实现}\label{pca_R}
+
+因为我手头没有相关的数据（我这里最多的就是培训时演示用的数据，当然客户给发的数据也有，但大家都明白，基本到我这里都是怀疑有问题的数据，即使没问题，我要使用也要经过人家的同意），想来想去，我们在
+R 里见到最多的与生态学相关的数据也就是 iris，一个关于不同 iris
+品种的叶片性状相关的数据，非常生态，我们来看一下：
+
+\begin{tabular}{r|r|r|r|l}
+\hline
+Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
+\hline
+5.1 & 3.5 & 1.4 & 0.2 & setosa\\
+\hline
+4.9 & 3.0 & 1.4 & 0.2 & setosa\\
+\hline
+4.7 & 3.2 & 1.3 & 0.2 & setosa\\
+\hline
+4.6 & 3.1 & 1.5 & 0.2 & setosa\\
+\hline
+5.0 & 3.6 & 1.4 & 0.2 & setosa\\
+\hline
+5.4 & 3.9 & 1.7 & 0.4 & setosa\\
+\hline
+\end{tabular}
+
+数据并不复杂，但是想要得出一些规律性的东西确不那么容易，因为数据量太大了。R
+语言里面很多函数可以直接实现 PCA，例如
+\texttt{prcomp}。我们先按照最原始的方法实现一下，加深对原理的理解：
+
+\subsection{手动实现过程}\label{man_pca}
+
+\subsubsection{均值的计算}\label{av_val}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris_mean <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(iris[, }\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{], }\DecValTok{2}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(x) x }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(x))}
+\end{Highlighting}
+\end{Shaded}
+
+我只使用了前四列的性状数据，仅仅是方便结果的展示。
+
+\subsubsection{计算协方差矩阵}\label{cov_val}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris_cov <-}\StringTok{ }\KeywordTok{cov}\NormalTok{(iris_mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{计算特征值和特征向量}\label{eig_val}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris_eigen <-}\StringTok{ }\KeywordTok{eigen}\NormalTok{(iris_cov)}
+\end{Highlighting}
+\end{Shaded}
+
+这里就可以看到之前提到的，特征值和特征向量是根据协方差矩阵计算的。我们选取特征值最大的两个，他们的特征值之和已经占所有的特征值之和相当大的比例：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(iris_eigen}\OperatorTok{$}\NormalTok{values[}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{])}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(iris_eigen}\OperatorTok{$}\NormalTok{values)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9776852
+\end{verbatim}
+
+也就是说特征值对应的前两项是我们最终降维所需要的，即最终的两个主轴为
+\(150 \times 2\) 维矩阵，即我们原来的 \(150 \times 4\)
+的矩阵乘以我们选取的前两个特征值对应的 \(4 \times 2\) 组成的矩阵。
+
+实际应用中我们不需要这么做了，因为太浪费时间了，我们直接用函数来得到结果即可。
+
+\subsection{\texorpdfstring{\texttt{prcomp}
+的实现}{prcomp 的实现}}\label{prcom}
+
+我们用 \texttt{prcomp} 来简化实现过程，注意，根据
+\citet{kemp2003modern}，我们把 iris 数据对数化一下，并提取所有物种名字：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(}\StringTok{"iris"}\NormalTok{)}
+\NormalTok{iris_pca <-}\StringTok{ }\KeywordTok{log}\NormalTok{(iris[, }\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{])}
+\NormalTok{iris_species <-}\StringTok{ }\NormalTok{iris}\OperatorTok{$}\NormalTok{Species}
+\end{Highlighting}
+\end{Shaded}
+
+需要注意，我们处理时使用特征中心化。即每一维的数据都减去该维的均值。这里的``维''指的就是一个特征（或属性），变换之后每一维的均值都变成了0
+(参考 \eqref{eq:despca} )。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{value_pca <-}\StringTok{ }\KeywordTok{prcomp}\NormalTok{(iris_pca, }\DataTypeTok{center =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{scale. =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{## 查看结果}
+\KeywordTok{summary}\NormalTok{(value_pca)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Importance of components:
+##                           PC1    PC2     PC3     PC4
+## Standard deviation     1.7125 0.9524 0.36470 0.16568
+## Proportion of Variance 0.7331 0.2268 0.03325 0.00686
+## Cumulative Proportion  0.7331 0.9599 0.99314 1.00000
+\end{verbatim}
+
+可以看到结果同我们最开始的计算相似，不同的是我们进行了对数化，而且根据
+\citet{kemp2003modern}， 这个结果更合适。
+
+\subsection{作图}\label{plot_pca}
+
+这个我们不做过多说明了，推荐两个非常好的软件包，分别是 `ggbiplot',
+`factoextra'：
+
+\textbf{ggbiplot 作图}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggbiplot)}
+
+\NormalTok{p <-}\StringTok{ }\KeywordTok{ggbiplot}\NormalTok{(value_pca, }\DataTypeTok{obs.scale =} \DecValTok{1}\NormalTok{, }\DataTypeTok{var.scale =} \DecValTok{1}\NormalTok{, }
+       \DataTypeTok{groups =}\NormalTok{ iris_species, }\DataTypeTok{ellipse =} \OtherTok{TRUE}\NormalTok{, }
+       \DataTypeTok{circle =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_color_discrete}\NormalTok{(}\DataTypeTok{name =} \StringTok{''}\NormalTok{)}
+
+\NormalTok{p1 <-}\StringTok{ }\NormalTok{p }\OperatorTok{+}\StringTok{ }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{legend.direction =} \StringTok{'horizontal'}\NormalTok{, }
+       \DataTypeTok{legend.position =} \StringTok{'top'}\NormalTok{)}
+\NormalTok{p1}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-40-1.pdf}
+
+\textbf{factoextra 作图}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(factoextra)}
+
+\KeywordTok{fviz_pca_ind}\NormalTok{(value_pca, }\DataTypeTok{col.ind =} \StringTok{"cos2"}\NormalTok{, }
+   \DataTypeTok{gradient.cols =} \KeywordTok{c}\NormalTok{(}\StringTok{"#00AFBB"}\NormalTok{, }\StringTok{"#E7B800"}\NormalTok{, }\StringTok{"#FC4E07"}\NormalTok{), }
+   \DataTypeTok{repel =} \OtherTok{TRUE}  
+\NormalTok{             )}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-41-1.pdf}
+
 \chapter{环境与配置}\label{sessioninfo}
 
 本文的内容所完成的 sessioninfo 如下：
@@ -3477,7 +3632,7 @@ ojip 连续式测量光 ojip 曲线的快速预览如图 \ref{fig:dcplot}
 \end{Shaded}
 
 \begin{verbatim}
-## R version 3.5.1 (2018-07-02)
+## R version 3.5.2 (2018-12-20)
 ## Platform: x86_64-w64-mingw32/x64 (64-bit)
 ## Running under: Windows 10 x64 (build 17134)
 ## 
@@ -3491,26 +3646,28 @@ ojip 连续式测量光 ojip 曲线的快速预览如图 \ref{fig:dcplot}
 ## [5] LC_TIME=Chinese (Simplified)_China.936    
 ## 
 ## attached base packages:
-## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## [1] grid      stats     graphics  grDevices utils     datasets  methods  
+## [8] base     
 ## 
 ## other attached packages:
-## [1] jiptest_0.1.3      racir_1.0.0        nls2_0.2          
-## [4] proto_1.0.0        purrr_0.2.5        ggplot2_3.0.0     
-## [7] minpack.lm_1.2-1   plantecophys_1.3-2 readphoto_0.0.1   
+##  [1] factoextra_1.0.5   ggbiplot_0.55      scales_1.0.0      
+##  [4] plyr_1.8.4         jiptest_0.1.3      nls2_0.2          
+##  [7] proto_1.0.0        purrr_0.2.5        ggplot2_3.1.0     
+## [10] minpack.lm_1.2-1   plantecophys_1.3-2 readphoto_0.0.1   
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] tidyselect_0.2.4 xfun_0.4         lattice_0.20-35  colorspace_1.3-2
-##  [5] htmltools_0.3.6  yaml_2.2.0       rlang_0.2.2      pillar_1.3.0    
-##  [9] glue_1.3.0       withr_2.1.2      readxl_1.1.0     bindrcpp_0.2.2  
-## [13] plyr_1.8.4       bindr_0.1.1      stringr_1.3.1    munsell_0.5.0   
-## [17] gtable_0.2.0     cellranger_1.1.0 evaluate_0.11    geepack_1.2-1   
-## [21] labeling_0.3     knitr_1.20       highr_0.7        Rcpp_0.12.18    
-## [25] scales_1.0.0     backports_1.1.2  png_0.1-7        digest_0.6.17   
-## [29] stringi_1.2.4    bookdown_0.7     dplyr_0.7.7      grid_3.5.1      
-## [33] rprojroot_1.3-2  tools_3.5.1      magrittr_1.5     lazyeval_0.2.1  
-## [37] tibble_1.4.2     MESS_0.5.2       crayon_1.3.4     geeM_0.10.1     
-## [41] pkgconfig_2.0.2  Matrix_1.2-14    assertthat_0.2.0 rmarkdown_1.10  
-## [45] rematch_1.0.1    rstudioapi_0.7   R6_2.2.2         compiler_3.5.1
+##  [1] tidyselect_0.2.5 xfun_0.4         lattice_0.20-38  colorspace_1.3-2
+##  [5] htmltools_0.3.6  yaml_2.2.0       rlang_0.3.0.1    ggpubr_0.2      
+##  [9] pillar_1.3.1     glue_1.3.0       withr_2.1.2      readxl_1.2.0    
+## [13] bindrcpp_0.2.2   bindr_0.1.1      stringr_1.3.1    munsell_0.5.0   
+## [17] gtable_0.2.0     cellranger_1.1.0 evaluate_0.12    labeling_0.3    
+## [21] geepack_1.2-1    knitr_1.21       highr_0.7        Rcpp_1.0.0      
+## [25] png_0.1-7        digest_0.6.18    stringi_1.2.4    ggrepel_0.8.0   
+## [29] bookdown_0.9     dplyr_0.7.8      tools_3.5.2      magrittr_1.5    
+## [33] lazyeval_0.2.1   tibble_1.4.2     MESS_0.5.4       crayon_1.3.4    
+## [37] geeM_0.10.1      pkgconfig_2.0.2  Matrix_1.2-15    assertthat_0.2.0
+## [41] rmarkdown_1.11   rematch_1.0.1    rstudioapi_0.8   R6_2.3.0        
+## [45] compiler_3.5.2
 \end{verbatim}
 
 \cleardoublepage

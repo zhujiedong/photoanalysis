@@ -1,0 +1,127 @@
+# PCA 分析 {#pca-anylysis}
+
+PCA 作为一个基础的方法，应用领域覆盖很广，涵盖的统计学相关的内容有均值、标准差、协方差， 线性代数中的特征向量及特征值。当然在与光合仪相关的应用方面多数是测量的光合速率、气孔导度等配合植物的其他性状来进行研究。下面的内容将使用不那么数学的语言来观察其实现方式。
+
+
+
+## 特征向量与特征值
+
+特征向量和特征值的数学描述为：
+
+\begin{equation}
+A \vec{x} = \lambda \vec{x}
+(\#eq:eign)
+\end{equation}
+
+其中 A 为 n $\times$ n 的矩阵，$\vec{x}$ 为 非零  n $\times$ 1 列向量，$\lambda$ 是标量，那么 $\vec{x}$ 为 A 的特征向量，$\lambda$ 为 A 的特征值。
+
+如果仅从数学描述上看，是十分不适合我这样没基础的人来理解的，但我们可以这么理解：
+
+A 为我们观测值（也即我们生态学上测量的数据）组成的 $n \times n$ 矩阵，每行的数据代表了一个观测值，例如光合速率是其中的一行，我们有n 个， 那么 $\vec{x}$ 和 $\lambda$ 意味着什么呢？再看一眼上面的 \@ref(eq:eign)，这是一个等式，而 $\vec{x}$ 是 n $\times$ 1 维度，原来的数据是 n $\times$ n 维度，这就是主轴分析是降维分析的意义了，一个一维的特征向量和特征值与我们多维的观测值之间有一个相等的关系。当然，也有很多人在描述时喜欢用坐标轴旋转或这投影来形容的，如果你觉得这样好理解也没问题，不过我脑袋不擅长想象这种多维的空间。这样描述并不十分准确，只是我觉得便于理解，更正确描述应为我们下面所述的例子 (@Smith2002) ，但降维的原理即来自此处：
+
+\begin{equation}
+finaldata = rowfeaturevector \times rowdataajust
+(\#eq:despca)
+\end{equation}
+
+finaldata 很好理解，我们用于 PCA 的最终数据，rowfeature vector 则是我们根据协相关矩阵求得的特征向量的转置，最大的特征向量再最上面， rowdataadjust 则为**原始数据减去标准值**。
+
+## PCA R 语言实现 {#pca_R}
+
+因为我手头没有相关的数据（我这里最多的就是培训时演示用的数据，当然客户给发的数据也有，但大家都明白，基本到我这里都是怀疑有问题的数据，即使没问题，我要使用也要经过人家的同意），想来想去，我们在 R 里见到最多的与生态学相关的数据也就是 iris，一个关于不同 iris 品种的叶片性状相关的数据，非常生态，我们来看一下：
+
+```{r echo =FALSE}
+data("iris")
+knitr::kable(head(iris))
+```
+
+数据并不复杂，但是想要得出一些规律性的东西确不那么容易，因为数据量太大了。R 语言里面很多函数可以直接实现 PCA，例如 `prcomp`。我们先按照最原始的方法实现一下，加深对原理的理解：
+
+### 手动实现过程 {#man_pca}
+
+#### 均值的计算 {#av_val}
+
+```{r}
+iris_mean <- apply(iris[, 1:4], 2, function(x) x - mean(x))
+```
+
+我只使用了前四列的性状数据，仅仅是方便结果的展示。
+
+#### 计算协方差矩阵 {#cov_val}
+
+```{r}
+iris_cov <- cov(iris_mean)
+```
+
+#### 计算特征值和特征向量 {#eig_val}
+
+```{r}
+iris_eigen <- eigen(iris_cov)
+```
+
+这里就可以看到之前提到的，特征值和特征向量是根据协方差矩阵计算的。我们选取特征值最大的两个，他们的特征值之和已经占所有的特征值之和相当大的比例：
+
+```{r}
+sum(iris_eigen$values[1:2])/sum(iris_eigen$values)
+```
+
+也就是说特征值对应的前两项是我们最终降维所需要的，即最终的两个主轴为 $150 \times 2$ 维矩阵，即我们原来的 $150 \times 4$ 的矩阵乘以我们选取的前两个特征值对应的 $4 \times 2$ 组成的矩阵。
+
+实际应用中我们不需要这么做了，因为太浪费时间了，我们直接用函数来得到结果即可。
+
+### `prcomp` 的实现 {#prcom}
+
+我们用 `prcomp` 来简化实现过程，注意，根据 @kemp2003modern，我们把 iris 数据对数化一下，并提取所有物种名字：
+
+```{r}
+data("iris")
+iris_pca <- log(iris[, 1:4])
+iris_species <- iris$Species
+```
+需要注意，我们处理时使用特征中心化。即每一维的数据都减去该维的均值。这里的“维”指的就是一个特征（或属性），变换之后每一维的均值都变成了0 (参考 \@ref(eq:despca) )。
+
+```{r}
+value_pca <- prcomp(iris_pca, center = TRUE, scale. = TRUE)
+## 查看结果
+summary(value_pca)
+```
+
+可以看到结果同我们最开始的计算相似，不同的是我们进行了对数化，而且根据 @kemp2003modern， 这个结果更合适。
+
+### 作图 {#plot_pca}
+
+这个我们不做过多说明了，推荐两个非常好的软件包，分别是 'ggbiplot', 'factoextra'：
+
+**ggbiplot 作图**
+
+```{r, message=FALSE}
+library(ggbiplot)
+
+p <- ggbiplot(value_pca, obs.scale = 1, var.scale = 1, 
+       groups = iris_species, ellipse = TRUE, 
+       circle = TRUE) + scale_color_discrete(name = '')
+
+p1 <- p + theme(legend.direction = 'horizontal', 
+       legend.position = 'top')
+p1
+```
+
+**factoextra 作图**
+```{r, message=FALSE}
+library(factoextra)
+
+fviz_pca_ind(value_pca, col.ind = "cos2", 
+   gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), 
+   repel = TRUE  
+             )
+```
+
+# 环境与配置 {#sessioninfo}
+
+本文的内容所完成的 sessioninfo 如下：
+
+```{r, sessionifo}
+sessionInfo()
+```
+
+\cleardoublepage

@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>第 6 章 光合气孔导度耦合模型 | R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
+  <title>第 11 章 PCA 分析 | R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
   <meta name="description" content="R 语言分析 LI-6400XT 与 LI-6800 数据">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="第 6 章 光合气孔导度耦合模型 | R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
+  <meta property="og:title" content="第 11 章 PCA 分析 | R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="images/cover.png" />
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="zhujiedong/R_analysis_LI-6400_LI_6800" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="第 6 章 光合气孔导度耦合模型 | R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
+  <meta name="twitter:title" content="第 11 章 PCA 分析 | R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   
   <meta name="twitter:description" content="R 语言分析 LI-6400XT 与 LI-6800 数据" />
   <meta name="twitter:image" content="images/cover.png" />
@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="stomotal-couple.html">
-<link rel="next" href="rhtovpd.html">
+<link rel="prev" href="anay-6800.html">
+<link rel="next" href="sessioninfo.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -227,198 +227,163 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="photo_stomo" class="section level1">
-<h1><span class="header-section-number">第 6 章</span> 光合气孔导度耦合模型</h1>
-<p><span class="citation">Remko A. Duursma (<a href="#ref-Duursma2015Plantecophys">2015</a>)</span> 对于气体交换耦合模型的简述如下<a href="#fn11" class="footnoteRef" id="fnref11"><sup>11</sup></a>：</p>
-<ul>
-<li>对于 FvCB 模型有：</li>
-</ul>
-<span class="math display" id="eq:minfvcb">\[\begin{equation}
-A_n = min(A_c, A_j)-R_d
-\tag{6.1}
+<div id="pca-anylysis" class="section level1">
+<h1><span class="header-section-number">第 11 章</span> PCA 分析</h1>
+<p>PCA 作为一个基础的方法，应用领域覆盖很广，涵盖的统计学相关的内容有均值、标准差、协方差， 线性代数中的特征向量及特征值。当然在与光合仪相关的应用方面多数是测量的光合速率、气孔导度等配合植物的其他性状来进行研究。下面的内容将使用不那么数学的语言来观察其实现方式。</p>
+<div id="section-11.1" class="section level2">
+<h2><span class="header-section-number">11.1</span> 特征向量与特征值</h2>
+<p>特征向量和特征值的数学描述为：</p>
+<span class="math display" id="eq:eign">\[\begin{equation}
+A \vec{x} = \lambda \vec{x}
+\tag{11.1}
 \end{equation}\]</span>
-<ul>
-<li>在假定 gm 为恒定的前提下：</li>
-</ul>
-<span class="math display" id="eq:cgm">\[\begin{equation}
-C_c = C_i - \frac{A_n}{g_m}
-\tag{6.2}
+<p>其中 A 为 n <span class="math inline">\(\times\)</span> n 的矩阵，<span class="math inline">\(\vec{x}\)</span> 为 非零 n <span class="math inline">\(\times\)</span> 1 列向量，<span class="math inline">\(\lambda\)</span> 是标量，那么 <span class="math inline">\(\vec{x}\)</span> 为 A 的特征向量，<span class="math inline">\(\lambda\)</span> 为 A 的特征值。</p>
+<p>如果仅从数学描述上看，是十分不适合我这样没基础的人来理解的，但我们可以这么理解：</p>
+<p>A 为我们观测值（也即我们生态学上测量的数据）组成的 <span class="math inline">\(n \times n\)</span> 矩阵，每行的数据代表了一个观测值，例如光合速率是其中的一行，我们有n 个， 那么 <span class="math inline">\(\vec{x}\)</span> 和 <span class="math inline">\(\lambda\)</span> 意味着什么呢？再看一眼上面的 <a href="pca-anylysis.html#eq:eign">(11.1)</a>，这是一个等式，而 <span class="math inline">\(\vec{x}\)</span> 是 n <span class="math inline">\(\times\)</span> 1 维度，原来的数据是 n <span class="math inline">\(\times\)</span> n 维度，这就是主轴分析是降维分析的意义了，一个一维的特征向量和特征值与我们多维的观测值之间有一个相等的关系。当然，也有很多人在描述时喜欢用坐标轴旋转或这投影来形容的，如果你觉得这样好理解也没问题，不过我脑袋不擅长想象这种多维的空间。这样描述并不十分准确，只是我觉得便于理解，更正确描述应为我们下面所述的例子 (<span class="citation">L. I. Smith (<a href="#ref-Smith2002">2002</a>)</span>) ，但降维的原理即来自此处：</p>
+<span class="math display" id="eq:despca">\[\begin{equation}
+finaldata = rowfeaturevector \times rowdataajust
+\tag{11.2}
 \end{equation}\]</span>
-<ul>
-<li>根据 Ficker 定理</li>
-</ul>
-<span class="math display" id="eq:ficker">\[\begin{equation}
-A_n = \frac{g_s}{1.6}(C_a - C_i)
-\tag{6.3}
-\end{equation}\]</span>
-<p>以及前文 <a href="stomotal-sim.html#ballberry">4.1</a> 提到的气孔导度模型</p>
-<span class="math display" id="eq:driver">\[\begin{equation}
-g_s = g_0 + g_1 \frac{A_n}{C_a} f(D)
-\tag{6.4}
-\end{equation}\]</span>
-<p>整合公式 <a href="photo-stomo.html#eq:minfvcb">(6.1)</a>, <a href="photo-stomo.html#eq:cgm">(6.2)</a>, <a href="photo-stomo.html#eq:ficker">(6.3)</a> 和 <a href="photo-stomo.html#eq:driver">(6.4)</a>，气体交换耦合模型有很多更大尺度上的应用，例如 <span class="citation">R. A. Duursma and Medlyn (<a href="#ref-Duursma2012MAESPA">2012</a>)</span> 和 wang1998a，可用于预测 An，gs 和蒸腾速率对主要环境驱动因子的响应（除土壤水分），并包含了主要的叶片性状（g1，V<sub>cmax</sub>, J<sub>max</sub>, R<sub>d</sub> 以及他们的温度依赖性）。</p>
-<div id="photosyn" class="section level2">
-<h2><span class="header-section-number">6.1</span> <code>Photosyn</code> 函数</h2>
-<p>Photosyn 为耦合的光合–气孔导度模型，基于 Farquhar 光合模型和 Ball-Berry 气孔导度模型。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Photosyn</span>(<span class="dt">VPD =</span> <span class="fl">1.5</span>, <span class="dt">Ca =</span> <span class="dv">400</span>, <span class="dt">PPFD =</span> <span class="dv">1500</span>,
-         <span class="dt">Tleaf =</span> <span class="dv">25</span>, <span class="dt">Patm =</span> <span class="dv">100</span>,<span class="dt">RH =</span> <span class="ot">NULL</span>,
-         <span class="dt">gsmodel =</span> <span class="kw">c</span>(<span class="st">&quot;BBOpti&quot;</span>, <span class="st">&quot;BBLeuning&quot;</span>, 
-                     <span class="st">&quot;BallBerry&quot;</span>, <span class="st">&quot;BBdefine&quot;</span>),
-         <span class="dt">g1 =</span> <span class="dv">4</span>, <span class="dt">g0 =</span> <span class="dv">0</span>, <span class="dt">gk =</span> <span class="fl">0.5</span>, <span class="dt">vpdmin =</span> <span class="fl">0.5</span>,
-         <span class="dt">D0 =</span> <span class="dv">5</span>, <span class="dt">GS =</span> <span class="ot">NULL</span>, <span class="dt">BBmult =</span> <span class="ot">NULL</span>, 
-         <span class="dt">alpha =</span> <span class="fl">0.24</span>, <span class="dt">theta =</span> <span class="fl">0.85</span>, <span class="dt">Jmax =</span> <span class="dv">100</span>,
-         <span class="dt">Vcmax =</span> <span class="dv">50</span>, <span class="dt">gmeso =</span> <span class="ot">NULL</span>, <span class="dt">TPU =</span> <span class="dv">1000</span>, 
-         <span class="dt">alphag =</span> <span class="dv">0</span>, <span class="dt">Rd0 =</span> <span class="fl">0.92</span>, <span class="dt">Q10 =</span> <span class="fl">1.92</span>,
-         <span class="dt">Rd =</span> <span class="ot">NULL</span>, <span class="dt">TrefR =</span> <span class="dv">25</span>, <span class="dt">Rdayfrac =</span> <span class="dv">1</span>, 
-         <span class="dt">EaV =</span> <span class="fl">82620.87</span>, <span class="dt">EdVC =</span> <span class="dv">0</span>, <span class="dt">delsC =</span> <span class="fl">645.1013</span>, 
-         <span class="dt">EaJ =</span> <span class="fl">39676.89</span>, <span class="dt">EdVJ =</span> <span class="fl">2e+05</span>, <span class="dt">delsJ =</span> <span class="fl">641.3615</span>,
-         <span class="dt">GammaStar =</span> <span class="ot">NULL</span>, <span class="dt">Km =</span> <span class="ot">NULL</span>, <span class="dt">Ci =</span> <span class="ot">NULL</span>, 
-         <span class="dt">Tcorrect =</span> <span class="ot">TRUE</span>,<span class="dt">returnParsOnly =</span> <span class="ot">FALSE</span>,
-         <span class="dt">whichA =</span> <span class="kw">c</span>(<span class="st">&quot;Ah&quot;</span>, <span class="st">&quot;Amin&quot;</span>, <span class="st">&quot;Ac&quot;</span>, <span class="st">&quot;Aj&quot;</span>))
+<p>finaldata 很好理解，我们用于 PCA 的最终数据，rowfeature vector 则是我们根据协相关矩阵求得的特征向量的转置，最大的特征向量再最上面， rowdataadjust 则为<strong>原始数据减去标准值</strong>。</p>
+</div>
+<div id="pca_R" class="section level2">
+<h2><span class="header-section-number">11.2</span> PCA R 语言实现</h2>
+<p>因为我手头没有相关的数据（我这里最多的就是培训时演示用的数据，当然客户给发的数据也有，但大家都明白，基本到我这里都是怀疑有问题的数据，即使没问题，我要使用也要经过人家的同意），想来想去，我们在 R 里见到最多的与生态学相关的数据也就是 iris，一个关于不同 iris 品种的叶片性状相关的数据，非常生态，我们来看一下：</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Sepal.Length</th>
+<th align="right">Sepal.Width</th>
+<th align="right">Petal.Length</th>
+<th align="right">Petal.Width</th>
+<th align="left">Species</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">5.1</td>
+<td align="right">3.5</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">4.9</td>
+<td align="right">3.0</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">4.7</td>
+<td align="right">3.2</td>
+<td align="right">1.3</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">4.6</td>
+<td align="right">3.1</td>
+<td align="right">1.5</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">5.0</td>
+<td align="right">3.6</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">5.4</td>
+<td align="right">3.9</td>
+<td align="right">1.7</td>
+<td align="right">0.4</td>
+<td align="left">setosa</td>
+</tr>
+</tbody>
+</table>
+<p>数据并不复杂，但是想要得出一些规律性的东西确不那么容易，因为数据量太大了。R 语言里面很多函数可以直接实现 PCA，例如 <code>prcomp</code>。我们先按照最原始的方法实现一下，加深对原理的理解：</p>
+<div id="man_pca" class="section level3">
+<h3><span class="header-section-number">11.2.1</span> 手动实现过程</h3>
+<div id="av_val" class="section level4">
+<h4><span class="header-section-number">11.2.1.1</span> 均值的计算</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_mean &lt;-<span class="st"> </span><span class="kw">apply</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dv">2</span>, <span class="cf">function</span>(x) x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x))</code></pre></div>
+<p>我只使用了前四列的性状数据，仅仅是方便结果的展示。</p>
+</div>
+<div id="cov_val" class="section level4">
+<h4><span class="header-section-number">11.2.1.2</span> 计算协方差矩阵</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_cov &lt;-<span class="st"> </span><span class="kw">cov</span>(iris_mean)</code></pre></div>
+</div>
+<div id="eig_val" class="section level4">
+<h4><span class="header-section-number">11.2.1.3</span> 计算特征值和特征向量</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_eigen &lt;-<span class="st"> </span><span class="kw">eigen</span>(iris_cov)</code></pre></div>
+<p>这里就可以看到之前提到的，特征值和特征向量是根据协方差矩阵计算的。我们选取特征值最大的两个，他们的特征值之和已经占所有的特征值之和相当大的比例：</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(iris_eigen<span class="op">$</span>values[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])<span class="op">/</span><span class="kw">sum</span>(iris_eigen<span class="op">$</span>values)</code></pre></div>
+<pre><code>## [1] 0.9776852</code></pre>
+<p>也就是说特征值对应的前两项是我们最终降维所需要的，即最终的两个主轴为 <span class="math inline">\(150 \times 2\)</span> 维矩阵，即我们原来的 <span class="math inline">\(150 \times 4\)</span> 的矩阵乘以我们选取的前两个特征值对应的 <span class="math inline">\(4 \times 2\)</span> 组成的矩阵。</p>
+<p>实际应用中我们不需要这么做了，因为太浪费时间了，我们直接用函数来得到结果即可。</p>
+</div>
+</div>
+<div id="prcom" class="section level3">
+<h3><span class="header-section-number">11.2.2</span> <code>prcomp</code> 的实现</h3>
+<p>我们用 <code>prcomp</code> 来简化实现过程，注意，根据 <span class="citation">Kemp (<a href="#ref-kemp2003modern">2003</a>)</span>，我们把 iris 数据对数化一下，并提取所有物种名字：</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;iris&quot;</span>)
+iris_pca &lt;-<span class="st"> </span><span class="kw">log</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])
+iris_species &lt;-<span class="st"> </span>iris<span class="op">$</span>Species</code></pre></div>
+<p>需要注意，我们处理时使用特征中心化。即每一维的数据都减去该维的均值。这里的“维”指的就是一个特征（或属性），变换之后每一维的均值都变成了0 (参考 <a href="pca-anylysis.html#eq:despca">(11.2)</a> )。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">value_pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(iris_pca, <span class="dt">center =</span> <span class="ot">TRUE</span>, <span class="dt">scale. =</span> <span class="ot">TRUE</span>)
+## 查看结果
+<span class="kw">summary</span>(value_pca)</code></pre></div>
+<pre><code>## Importance of components:
+##                           PC1    PC2     PC3     PC4
+## Standard deviation     1.7125 0.9524 0.36470 0.16568
+## Proportion of Variance 0.7331 0.2268 0.03325 0.00686
+## Cumulative Proportion  0.7331 0.9599 0.99314 1.00000</code></pre>
+<p>可以看到结果同我们最开始的计算相似，不同的是我们进行了对数化，而且根据 <span class="citation">Kemp (<a href="#ref-kemp2003modern">2003</a>)</span>， 这个结果更合适。</p>
+</div>
+<div id="plot_pca" class="section level3">
+<h3><span class="header-section-number">11.2.3</span> 作图</h3>
+<p>这个我们不做过多说明了，推荐两个非常好的软件包，分别是 ‘ggbiplot’, ‘factoextra’：</p>
+<p><strong>ggbiplot 作图</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggbiplot)
 
-<span class="kw">Aci</span>(Ci, ...)</code></pre></div>
-<p>因为是光合气孔导度模型的耦合，故而参数与之前的函数相同，参见 <a href="response-fit.html#fitaci-p">3.5.2</a> 和 <a href="stomotal-sim.html#fitbb-p">4.4</a> 部分的内容。</p>
-<div id="photo_exam" class="section level3">
-<h3><span class="header-section-number">6.1.1</span> <code>Photosyn</code> 使用举例</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plantecophys)
-<span class="co"># 仅使用下面几个参数运行模型</span>
-<span class="co">#（其他参数使用默认值）</span>
-<span class="co"># 利用已测量或计算的参数</span>
-<span class="kw">Photosyn</span>(<span class="dt">VPD=</span><span class="dv">2</span>, <span class="dt">g1=</span><span class="dv">4</span>, <span class="dt">Ca=</span><span class="dv">500</span>)</code></pre></div>
-<pre><code>##         Ci    ALEAF        GS    ELEAF       Ac       Aj   Ap   Rd VPD
-## 1 369.3981 14.19466 0.1706377 3.412753 15.12654 17.03685 1000 0.92   2
-##   Tleaf  Ca       Cc PPFD Patm
-## 1    25 500 369.3981 1500  100</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 部分参数相同，而某一参数或某几个参数不同时，</span>
-<span class="co"># 可以将不同的参数设置为一个序列（vectors）</span>
-r &lt;-<span class="st"> </span><span class="kw">Photosyn</span>(<span class="dt">VPD=</span><span class="kw">seq</span>(<span class="fl">0.5</span>, <span class="dv">4</span>, <span class="dt">length=</span><span class="dv">25</span>), 
-              <span class="dt">Vcmax=</span><span class="dv">50</span>, <span class="dt">Jmax=</span><span class="dv">100</span>)
-<span class="kw">with</span>(r, <span class="kw">plot</span>(VPD, ALEAF, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>))</code></pre></div>
-<div class="figure"><span id="fig:vpd"></span>
-<img src="bookdown_files/figure-html/vpd-1.png" alt="VPD VS. An" width="672" />
-<p class="caption">
-图 6.1: VPD VS. An
-</p>
-</div>
-<p>不同 VPD 下的光合速率见 <a href="photo-stomo.html#fig:vpd">6.1</a>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 设定叶肉导度的拟合</span>
-run1 &lt;-<span class="st"> </span><span class="kw">Photosyn</span>(<span class="dt">PPFD=</span><span class="kw">seq</span>(<span class="dv">50</span>,<span class="dv">1000</span>,<span class="dt">length=</span><span class="dv">25</span>), 
-                 <span class="dt">gmeso=</span><span class="fl">0.15</span>, <span class="dt">Vcmax=</span><span class="dv">40</span>, <span class="dt">Jmax=</span><span class="dv">85</span>)
-<span class="kw">with</span>(run1, <span class="kw">plot</span>(PPFD, GS, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>))</code></pre></div>
-<div class="figure"><span id="fig:ppfd"></span>
-<img src="bookdown_files/figure-html/ppfd-1.png" alt="PPFD VS. GS" width="672" />
-<p class="caption">
-图 6.2: PPFD VS. GS
-</p>
-</div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 运行ACi曲线数据（提供Ci值而不是计算）</span>
-arun1 &lt;-<span class="st"> </span><span class="kw">Aci</span>(<span class="dt">Ci=</span><span class="kw">seq</span>(<span class="dv">50</span>, <span class="dv">1200</span>, <span class="dt">length=</span><span class="dv">101</span>), 
-             <span class="dt">Vcmax=</span><span class="dv">40</span>, <span class="dt">Jmax=</span><span class="dv">85</span>)
-arun2 &lt;-<span class="st"> </span><span class="kw">Aci</span>(<span class="dt">Ci=</span><span class="kw">seq</span>(<span class="dv">50</span>, <span class="dv">1200</span>, <span class="dt">length=</span><span class="dv">101</span>), 
-             <span class="dt">Vcmax=</span><span class="dv">30</span>, <span class="dt">Jmax=</span><span class="dv">70</span>)
-<span class="kw">with</span>(arun1, <span class="kw">plot</span>(Ci, ALEAF, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>))
-<span class="kw">with</span>(arun2, <span class="kw">points</span>(Ci, ALEAF, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">lty=</span><span class="dv">5</span>))</code></pre></div>
-<div class="figure"><span id="fig:ppfd"></span>
-<img src="bookdown_files/figure-html/ppfd-2.png" alt="PPFD VS. GS" width="672" />
-<p class="caption">
-图 6.2: PPFD VS. GS
-</p>
-</div>
-<p>不同 ci 下的光合速率见 <a href="photo-stomo.html#fig:ppfd">6.2</a>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 找出CO2需求和供给的交叉点</span>
-<span class="co"># 设定部分参数</span>
-gs &lt;-<span class="st"> </span><span class="fl">0.2</span> <span class="co"># 对水的气孔导度</span>
-Ca &lt;-<span class="st"> </span><span class="dv">400</span> <span class="co"># 外部CO2</span>
-gctogw &lt;-<span class="st"> </span><span class="fl">1.57</span> <span class="co"># 转换系数</span>
-gc &lt;-<span class="st"> </span>gs <span class="op">/</span><span class="st"> </span>gctogw <span class="co"># 对 CO2 的气孔导度</span>
-<span class="co"># 需求曲线</span>
-p &lt;-<span class="st"> </span><span class="kw">Aci</span>(<span class="kw">seq</span>(<span class="dv">60</span>,<span class="dv">500</span>,<span class="dt">length=</span><span class="dv">101</span>), <span class="dt">Ca=</span><span class="dv">400</span>)
-<span class="co"># 提供气孔导度及交叉点</span>
-g &lt;-<span class="st"> </span><span class="kw">Photosyn</span>(<span class="dt">GS=</span>gs, <span class="dt">Ca=</span>Ca)
-<span class="co"># 交叉点可视化</span>
-<span class="kw">par</span>(<span class="dt">yaxs=</span><span class="st">&quot;i&quot;</span>)
-<span class="kw">with</span>(p, <span class="kw">plot</span>(Ci, ALEAF, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, 
-             <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="kw">max</span>(ALEAF))))
-<span class="kw">with</span>(g, <span class="kw">points</span>(Ci, ALEAF, <span class="dt">pch=</span><span class="dv">19</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>))
-<span class="kw">abline</span>(gc <span class="op">*</span><span class="st"> </span>Ca, <span class="op">-</span>gc, <span class="dt">lty=</span><span class="dv">5</span>)
-<span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="kw">c</span>(<span class="kw">expression</span>(
-  <span class="st">&quot;Demand:&quot;</span><span class="op">~</span><span class="er">~</span>A<span class="op">==</span><span class="kw">f</span>(C[i])),
-   <span class="kw">expression</span>(<span class="st">&quot;Supply:&quot;</span><span class="op">~</span><span class="er">~</span>A<span class="op">==</span>g[c]<span class="op">*</span>(C[a]<span class="op">-</span>C[i])),
-              <span class="st">&quot;Operating point&quot;</span>),
-   <span class="dt">lty=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="op">-</span><span class="dv">1</span>),<span class="dt">pch=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">19</span>),
-   <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;black&quot;</span>,<span class="st">&quot;black&quot;</span>,<span class="st">&quot;red&quot;</span>),
-   <span class="dt">bty=</span><span class="st">&#39;n&#39;</span>, <span class="dt">cex=</span><span class="fl">0.9</span>)</code></pre></div>
-<div class="figure"><span id="fig:supply"></span>
-<img src="bookdown_files/figure-html/supply-1.png" alt="supply VS. demand" width="672" />
-<p class="caption">
-图 6.3: supply VS. demand
-</p>
-</div>
-<p>需求与供给的作图 <a href="photo-stomo.html#fig:supply">6.3</a>。</p>
-</div>
-</div>
-<div id="photsyneb" class="section level2">
-<h2><span class="header-section-number">6.2</span> <code>PhotosynEB</code> 函数</h2>
-<p>使用同 <code>Photosyn</code>，只不过使用能量平衡法来计算叶温。 目前版本尚存在bug，不能直接提供 GS 来计算，否则会出现未知错误。</p>
-</div>
-<div id="photosyntuzet" class="section level2">
-<h2><span class="header-section-number">6.3</span> <code>PhotosynTuzet</code> 函数</h2>
-<p>同样为光合气孔导度耦合模型，只不过基于 <span class="citation">Tuzet, Perrier, and Leuning (<a href="#ref-tuzet2003a">2003</a>)</span> 的气孔导度模型，现将其描述如下：</p>
-<span class="math display" id="eq:tuzet">\[\begin{equation}
-g_{co2} = g_0 + \frac{a A}{C_i - \Gamma} f_{\Psi v}
-\tag{6.5}
-\end{equation}\]</span>
-<p>其中 g<sub>co2</sub> 为对 CO<sub>2</sub> 的气孔导度， g<sub>0</sub> 是残余导度（residual conductance）(在补偿点时限制 g<sub>CO2</sub> 的值）， A 为光合速率，C<sub>i</sub> 为胞间二氧化碳浓度，<span class="math inline">\(\Gamma\)</span> 为 CO<sub>2</sub> 补偿点，a 是经验系数。</p>
-<p>一个根据经验的逻辑方程用于描述气孔对水势的敏感性：</p>
-<span class="math display" id="eq:ftuzet">\[\begin{equation}
-f_{\Psi v} = \frac{1 + exp(s_f \Psi_f)}{1 + exp(s_f(\Psi_f - \Psi_v))}
-\tag{6.6}
-\end{equation}\]</span>
-<p><span class="math inline">\(\Psi_v\)</span> 是指叶片水势，<span class="math inline">\(\Psi_f\)</span> 是参比势能， 该方程假设在水势接近于 0 时，气孔对叶片水势不敏感，并且气孔随着 <span class="math inline">\(\Psi_v\)</span> 的下降快速关闭。<span class="math inline">\(\Psi_f\)</span> 和 <span class="math inline">\(s_f\)</span> (曲线形状参数) 依赖于不同物种的形态学适应以及生长过程中所处的环境。</p>
-<div id="photosyntuzet_para" class="section level3">
-<h3><span class="header-section-number">6.3.1</span> <code>PhotosynTuzet</code> 的参数</h3>
-<p>除 <span class="citation">Tuzet, Perrier, and Leuning (<a href="#ref-tuzet2003a">2003</a>)</span> 模型中使用的参数外，其他参数都继承了 <code>Photosyn</code> 的参数</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">PhotosynTuzet</span>(<span class="dt">g1 =</span> <span class="dv">8</span>, <span class="dt">Ca =</span> <span class="dv">400</span>, <span class="dt">psis =</span> <span class="dv">0</span>,
-              <span class="dt">kl =</span> <span class="dv">2</span>, <span class="dt">sf =</span> <span class="dv">3</span>, <span class="dt">psif =</span> <span class="op">-</span><span class="dv">2</span>,
-...)</code></pre></div>
-<ul>
-<li>g1：斜率参数，要远比 <code>fitBB</code> 中的大。</li>
-<li>Ca：外界大气 CO<sub>2</sub> 浓度</li>
-<li>psis，土壤水势（Mpa）。</li>
-<li>kl：Leaf-speciﬁc hydraulic conductance（叶片导水参数 (<span class="math inline">\(mmol \cdot m^{-2} \cdot s^{-1} \cdot MPa^{-1}\)</span>)，叶片蒸腾量、叶片面积及叶片水势计算）。</li>
-<li>sf：曲线形状参数。</li>
-<li>在气孔导度为最大值 50% 时的叶片水势。</li>
-</ul>
+p &lt;-<span class="st"> </span><span class="kw">ggbiplot</span>(value_pca, <span class="dt">obs.scale =</span> <span class="dv">1</span>, <span class="dt">var.scale =</span> <span class="dv">1</span>, 
+       <span class="dt">groups =</span> iris_species, <span class="dt">ellipse =</span> <span class="ot">TRUE</span>, 
+       <span class="dt">circle =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&#39;&#39;</span>)
 
+p1 &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.direction =</span> <span class="st">&#39;horizontal&#39;</span>, 
+       <span class="dt">legend.position =</span> <span class="st">&#39;top&#39;</span>)
+p1</code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<p><strong>factoextra 作图</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(factoextra)
 
+<span class="kw">fviz_pca_ind</span>(value_pca, <span class="dt">col.ind =</span> <span class="st">&quot;cos2&quot;</span>, 
+   <span class="dt">gradient.cols =</span> <span class="kw">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>), 
+   <span class="dt">repel =</span> <span class="ot">TRUE</span>  
+             )</code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
 </div>
 </div>
 </div>
 <h3>参考文献</h3>
 <div id="refs" class="references">
-<div id="ref-Duursma2015Plantecophys">
-<p>Duursma, Remko A. 2015. “Plantecophys-an R Package for Analysing and Modelling Leaf Gas Exchange Data.” <em>Plos One</em> 10 (11): e0143346.</p>
+<div id="ref-Smith2002">
+<p>Smith, Lindsay I. 2002. “A Tutorial on Principal Component Analysis.” <a href="http://akademik.bahcesehir.edu.tr/~tevfik/courses/cmpe5103/principal_components.pdf" class="uri">http://akademik.bahcesehir.edu.tr/~tevfik/courses/cmpe5103/principal_components.pdf</a>.</p>
 </div>
-<div id="ref-Duursma2012MAESPA">
-<p>Duursma, R. A., and B. E. Medlyn. 2012. “MAESPA: A Model to Study Interactions Between Water Limitation, Environmental Drivers and Vegetation Function at Tree and Stand Levels, with an Example Application to Co<span class="math inline">\(_2\)</span> Drought Interactions.” <em>Geoscientific Model Development Discussions</em> 5 (4): 919–40.</p>
+<div id="ref-kemp2003modern">
+<p>Kemp, Freda. 2003. “Modern Applied Statistics with S.” <em>Journal of the Royal Statistical Society Series D-the Statistician</em> 52 (4): 704–5.</p>
 </div>
-<div id="ref-tuzet2003a">
-<p>Tuzet, A, A Perrier, and R Leuning. 2003. “A Coupled Model of Stomatal Conductance, Photosynthesis and Transpiration.” <em>Plant Cell and Environment</em> 26 (7): 1097–1116.</p>
-</div>
-</div>
-<div class="footnotes">
-<hr />
-<ol start="11">
-<li id="fn11"><p>详细内容请参考原文<a href="photo-stomo.html#fnref11">↩</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="stomotal-couple.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="rhtovpd.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="anay-6800.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sessioninfo.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -448,7 +413,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/zhujiedong/photoanalysis/blob/master/05-coupled.Rmd",
+"link": "https://github.com/zhujiedong/photoanalysis/blob/master/13-pca.Rmd",
 "text": "缂栬緫"
 },
 "history": {

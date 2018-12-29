@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
+  <title>参考文献 | R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
   <meta name="description" content="R 语言分析 LI-6400XT 与 LI-6800 数据">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
+  <meta property="og:title" content="参考文献 | R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="images/cover.png" />
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="zhujiedong/R_analysis_LI-6400_LI_6800" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
+  <meta name="twitter:title" content="参考文献 | R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   
   <meta name="twitter:description" content="R 语言分析 LI-6400XT 与 LI-6800 数据" />
   <meta name="twitter:image" content="images/cover.png" />
@@ -25,7 +25,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司">
 
 
-<meta name="date" content="2018-12-25">
+<meta name="date" content="2018-12-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -196,7 +197,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="10.7.5" data-path="anay-6800.html"><a href="anay-6800.html#plotfluor"><i class="fa fa-check"></i><b>10.7.5</b> <code>jip_plot</code> 及 <code>jip_dcplot</code> 函数</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="sessioninfo.html"><a href="sessioninfo.html"><i class="fa fa-check"></i><b>11</b> 环境与配置</a></li>
+<li class="chapter" data-level="11" data-path="pca-anylysis.html"><a href="pca-anylysis.html"><i class="fa fa-check"></i><b>11</b> PCA 分析</a><ul>
+<li class="chapter" data-level="11.1" data-path="pca-anylysis.html"><a href="pca-anylysis.html#section-11.1"><i class="fa fa-check"></i><b>11.1</b> 特征向量与特征值</a></li>
+<li class="chapter" data-level="11.2" data-path="pca-anylysis.html"><a href="pca-anylysis.html#pca_R"><i class="fa fa-check"></i><b>11.2</b> PCA R 语言实现</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="pca-anylysis.html"><a href="pca-anylysis.html#man_pca"><i class="fa fa-check"></i><b>11.2.1</b> 手动实现过程</a></li>
+<li class="chapter" data-level="11.2.2" data-path="pca-anylysis.html"><a href="pca-anylysis.html#prcom"><i class="fa fa-check"></i><b>11.2.2</b> <code>prcomp</code> 的实现</a></li>
+<li class="chapter" data-level="11.2.3" data-path="pca-anylysis.html"><a href="pca-anylysis.html#plot_pca"><i class="fa fa-check"></i><b>11.2.3</b> 作图</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="sessioninfo.html"><a href="sessioninfo.html"><i class="fa fa-check"></i><b>12</b> 环境与配置</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>参考文献</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="blank">由 bookdown 驱动</a></li>
@@ -292,6 +301,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Jones, H. G. 1993. <em>Plants and Microclimate. a Quantitative Approach to Environmental Plant Physiology.</em> Cambridge University Press.</p>
 </div>
 <div>
+<p>Kemp, Freda. 2003. “Modern Applied Statistics with S.” <em>Journal of the Royal Statistical Society Series D-the Statistician</em> 52 (4): 704–5.</p>
+</div>
+<div>
 <p>Lauteri, Marco, Matthew Haworth, Rachid Serraj, Maria Cristina Monteverdi, and Mauro Centritto. 2014. “Photosynthetic Diffusional Constraints Affect Yield in Drought Stressed Rice Cultivars During Flowering.” <em>PLOS ONE</em> 9 (10).</p>
 </div>
 <div>
@@ -314,6 +326,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div>
 <p>Prado, C. H., and J. A. P. V. De Moraes. 1997. “Photosynthetic Capacity and Specific Leaf Mass in Twenty Woody Species of Cerrado Vegetation Under Field Conditions.” <em>Photosynthetica</em> 33 (1): 103–12.</p>
+</div>
+<div>
+<p>Smith, Lindsay I. 2002. “A Tutorial on Principal Component Analysis.” <a href="http://akademik.bahcesehir.edu.tr/~tevfik/courses/cmpe5103/principal_components.pdf" class="uri">http://akademik.bahcesehir.edu.tr/~tevfik/courses/cmpe5103/principal_components.pdf</a>.</p>
 </div>
 <div>
 <p>Stinziano, J. R., P. B. Morgan, D. J. Lynch, A. J. Saathoff, D. K. Mcdermitt, and D. T. Hanson. 2017. “The Rapid a-Ci Response: Photosynthesis in the Phenomic Era.” <em>Plant Cell &amp; Environment</em> 40.</p>
@@ -387,7 +402,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -397,8 +412,12 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/zhujiedong/photoanalysis/blob/master/13-reference.Rmd",
+"link": "https://github.com/zhujiedong/photoanalysis/blob/master/14-reference.Rmd",
 "text": "缂栬緫"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": ["bookdown.pdf", "bookdown.epub"],
 "toc": {
@@ -414,7 +433,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

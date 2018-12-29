@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
+  <title>第 10 章 LI-6800 的数据分析 | R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
   <meta name="description" content="R 语言分析 LI-6400XT 与 LI-6800 数据">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
+  <meta property="og:title" content="第 10 章 LI-6800 的数据分析 | R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="images/cover.png" />
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="zhujiedong/R_analysis_LI-6400_LI_6800" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
+  <meta name="twitter:title" content="第 10 章 LI-6800 的数据分析 | R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   
   <meta name="twitter:description" content="R 语言分析 LI-6400XT 与 LI-6800 数据" />
   <meta name="twitter:image" content="images/cover.png" />
@@ -25,7 +25,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司">
 
 
-<meta name="date" content="2018-12-25">
+<meta name="date" content="2018-12-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,9 +33,10 @@
   
   
 <link rel="prev" href="start-con.html">
-<link rel="next" href="sessioninfo.html">
+<link rel="next" href="pca-anylysis.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -196,7 +197,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="10.7.5" data-path="anay-6800.html"><a href="anay-6800.html#plotfluor"><i class="fa fa-check"></i><b>10.7.5</b> <code>jip_plot</code> 及 <code>jip_dcplot</code> 函数</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="sessioninfo.html"><a href="sessioninfo.html"><i class="fa fa-check"></i><b>11</b> 环境与配置</a></li>
+<li class="chapter" data-level="11" data-path="pca-anylysis.html"><a href="pca-anylysis.html"><i class="fa fa-check"></i><b>11</b> PCA 分析</a><ul>
+<li class="chapter" data-level="11.1" data-path="pca-anylysis.html"><a href="pca-anylysis.html#section-11.1"><i class="fa fa-check"></i><b>11.1</b> 特征向量与特征值</a></li>
+<li class="chapter" data-level="11.2" data-path="pca-anylysis.html"><a href="pca-anylysis.html#pca_R"><i class="fa fa-check"></i><b>11.2</b> PCA R 语言实现</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="pca-anylysis.html"><a href="pca-anylysis.html#man_pca"><i class="fa fa-check"></i><b>11.2.1</b> 手动实现过程</a></li>
+<li class="chapter" data-level="11.2.2" data-path="pca-anylysis.html"><a href="pca-anylysis.html#prcom"><i class="fa fa-check"></i><b>11.2.2</b> <code>prcomp</code> 的实现</a></li>
+<li class="chapter" data-level="11.2.3" data-path="pca-anylysis.html"><a href="pca-anylysis.html#plot_pca"><i class="fa fa-check"></i><b>11.2.3</b> 作图</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="sessioninfo.html"><a href="sessioninfo.html"><i class="fa fa-check"></i><b>12</b> 环境与配置</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>参考文献</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="blank">由 bookdown 驱动</a></li>
@@ -320,6 +329,7 @@ lrc_A &lt;-<span class="st"> </span>lrc<span class="op">$</span>A </code></pre><
 </div>
 <div id="racir_pkg" class="section level2">
 <h2><span class="header-section-number">10.5</span> racir 软件包实现 RACiR数据分析</h2>
+<p><strong>因作者将代码升级，只支持原始数据的处理，我现在没有 原始数据格式的RACiR 数据，因此下面的 racir 包代码暂时不能使用，如有需要，请将您测试数据选择一个叶片的测量和空叶室校准发给我，我再更改（目前北方没有合适的植物供我测试），也可以参考我后面手动实现的代码</strong></p>
 <p><span class="citation">Joseph R Stinziano et al. (<a href="#ref-stinziano2018">2018</a>)</span> 还给出了专门的 RACiR 数据分析软件包 <a href="https://github.com/jstinzi/racir">racir package</a>，我们下面先介绍一下这个软件包。</p>
 <p>软件的安装及调用通过如下代码实现：</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;jstinzi/racir&quot;</span>)
@@ -336,50 +346,17 @@ lrc_A &lt;-<span class="st"> </span>lrc<span class="op">$</span>A </code></pre><
 <h3><span class="header-section-number">10.5.1</span> 实现过程</h3>
 <p>手上暂时没有原始数据格式的 racir 数据，因而现在使用以前的 csv 数据进行操作（空叶室测量数据和带叶片测量数据转为 csv 格式）。</p>
 <p>首先检查空叶室校准：</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(racir)</code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;racir&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:readphoto&#39;:
-## 
-##     read_6800</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">racircalcheckcsv</span>(<span class="st">&quot;./data/empty_test.csv&quot;</span>, <span class="dv">20</span>, <span class="dv">460</span>)</code></pre></div>
-<div class="figure">
-<img src="bookdown_files/figure-html/racir_check-1.png" alt="找出最合理的校准曲线" width="672" />
-<p class="caption">
-(#fig:racir_check)找出最合理的校准曲线
-</p>
-</div>
-<div class="figure">
-<img src="bookdown_files/figure-html/racir_check-2.png" alt="找出最合理的校准曲线" width="672" />
-<p class="caption">
-(#fig:racir_check)找出最合理的校准曲线
-</p>
-</div>
-<div class="figure">
-<img src="bookdown_files/figure-html/racir_check-3.png" alt="找出最合理的校准曲线" width="672" />
-<p class="caption">
-(#fig:racir_check)找出最合理的校准曲线
-</p>
-</div>
-<pre><code>## [1] cal3rd</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(racir)
+
+<span class="kw">racircalcheckcsv</span>(<span class="st">&quot;./data/empty_test.csv&quot;</span>, <span class="dv">20</span>, <span class="dv">460</span>)</code></pre></div>
 <p>上述参数分别是空叶室校准数据的路径，以及我要删除的数据，即只保留参比室 <span class="math inline">\(CO_2\)</span> 浓度在两者之间的数据（范围可作图确定，可参考本部分手动实现的代码）。 所示。当然此步骤可以跳过，因为下面的代码包含了该步骤，直接输出一个校准后的 csv 文件，文件名为 ”原文件名“ + “_corrected&quot; + “.csv”。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">racircalcsv</span>(<span class="st">&quot;./data/empty_test.csv&quot;</span>, <span class="dv">16</span>, <span class="dv">460</span>, <span class="st">&quot;./data/leaf_test.csv&quot;</span>)</code></pre></div>
-<div class="figure">
-<img src="bookdown_files/figure-html/racir_cor_pkg-1.png" alt="校准之后的数据" width="672" />
-<p class="caption">
-(#fig:racir_cor_pkg)校准之后的数据
-</p>
-</div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plantecophys)
 df_racir &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/leaf_test.csv_corrected.csv&quot;</span>)
 fitracir &lt;-<span class="st"> </span><span class="kw">fitaci</span>(df_racir,<span class="dt">varnames =</span> <span class="kw">list</span>(<span class="dt">ALEAF =</span> <span class="st">&quot;A&quot;</span>, 
               <span class="dt">Tleaf =</span> <span class="st">&quot;Tleaf&quot;</span>, <span class="dt">Ci =</span> <span class="st">&quot;Ci&quot;</span>,   <span class="dt">PPFD  =</span> <span class="st">&quot;Qin&quot;</span>, 
               <span class="dt">Rd =</span> <span class="st">&quot;Rd&quot;</span>), <span class="dt">Patm =</span> <span class="fl">84.09</span>)
 fitracir<span class="op">$</span>pars</code></pre></div>
-<pre><code>##        Estimate Std. Error
-## Vcmax 143.59891 0.26389323
-## Jmax  229.00314 0.71289238
-## Rd     18.33568 0.04327703</code></pre>
 <p><strong>注意：RACiR 的本意是表型研究中求 Vcmax 和 Jmax，因而，请忽略 Rd 等参数的计算结果</strong></p>
 </div>
 </div>
@@ -529,6 +506,10 @@ p2 <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_co
 <p>函数仅有一个参数，即保存数据文件夹的路径，使用如下：</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(jiptest)
 jipdata &lt;-<span class="st"> </span><span class="kw">read_files</span>(<span class="st">&quot;./data/ojip&quot;</span>)</code></pre></div>
+<pre><code>## readxl works best with a newer version of the tibble package.
+## You currently have tibble v1.4.2.
+## Falling back to column name repair from tibble &lt;= v1.4.2.
+## Message displays once per session.</code></pre>
 <table>
 <caption><span id="tab:unnamed-chunk-31">表 10.2: </span>jiptest 批量导入数据后的样式</caption>
 <thead>
@@ -1149,6 +1130,8 @@ jipdata &lt;-<span class="st"> </span><span class="kw">read_files</span>(<span c
 </div>
 <p>ojip 调制式测量光 ojip 曲线的快速预览如图 <a href="anay-6800.html#fig:acplot">10.2</a></p>
 <p>ojip 连续式测量光 ojip 曲线的快速预览如图 <a href="anay-6800.html#fig:dcplot">10.3</a></p>
+
+
 </div>
 </div>
 </div>
@@ -1173,7 +1156,7 @@ jipdata &lt;-<span class="st"> </span><span class="kw">read_files</span>(<span c
         </div>
       </div>
 <a href="start-con.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="sessioninfo.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="pca-anylysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -1193,7 +1176,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -1205,6 +1188,10 @@ gitbook.start({
 "edit": {
 "link": "https://github.com/zhujiedong/photoanalysis/blob/master/12-li6800.Rmd",
 "text": "缂栬緫"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": ["bookdown.pdf", "bookdown.epub"],
 "toc": {
@@ -1220,7 +1207,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;
