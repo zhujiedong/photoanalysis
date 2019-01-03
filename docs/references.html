@@ -12,20 +12,20 @@
   <meta property="og:title" content="参考文献 | R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:image" content="images/cover.png" />
+  <meta property="og:image" content="images/coverpage.png" />
   <meta property="og:description" content="R 语言分析 LI-6400XT 与 LI-6800 数据" />
-  <meta name="github-repo" content="zhujiedong/R_analysis_LI-6400_LI_6800" />
+  <meta name="github-repo" content="zhujiedong/photoanalysis" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="参考文献 | R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   
   <meta name="twitter:description" content="R 语言分析 LI-6400XT 与 LI-6800 数据" />
-  <meta name="twitter:image" content="images/cover.png" />
+  <meta name="twitter:image" content="images/coverpage.png" />
 
 <meta name="author" content="祝介东    北京力高泰科技有限公司">
 
 
-<meta name="date" content="2018-12-29">
+<meta name="date" content="2019-01-03">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -51,41 +51,67 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="css\style.css" type="text/css" />
@@ -104,9 +130,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="./">R 光合数据分析</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="frontmatter.html"><a href="frontmatter.html"><i class="fa fa-check"></i>前言</a></li>
-<li class="chapter" data-level="" data-path="copyright.html"><a href="copyright.html"><i class="fa fa-check"></i>版权声明</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a></li>
+<li class="chapter" data-level="" data-path="frontmatter.html"><a href="frontmatter.html"><i class="fa fa-check"></i>声明</a></li>
 <li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i>关于作者</a></li>
+<li class="chapter" data-level="" data-path="copyright.html"><a href="copyright.html"><i class="fa fa-check"></i>版权</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> R 软件与 Rstudio</a><ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#rsoft"><i class="fa fa-check"></i><b>1.1</b> R 软件</a></li>
 <li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#rstudiosoft"><i class="fa fa-check"></i><b>1.2</b> Rstudio</a></li>
@@ -198,7 +225,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="pca-anylysis.html"><a href="pca-anylysis.html"><i class="fa fa-check"></i><b>11</b> PCA 分析</a><ul>
-<li class="chapter" data-level="11.1" data-path="pca-anylysis.html"><a href="pca-anylysis.html#section-11.1"><i class="fa fa-check"></i><b>11.1</b> 特征向量与特征值</a></li>
+<li class="chapter" data-level="11.1" data-path="pca-anylysis.html"><a href="pca-anylysis.html#section"><i class="fa fa-check"></i><b>11.1</b> 特征向量与特征值</a></li>
 <li class="chapter" data-level="11.2" data-path="pca-anylysis.html"><a href="pca-anylysis.html#pca_R"><i class="fa fa-check"></i><b>11.2</b> PCA R 语言实现</a><ul>
 <li class="chapter" data-level="11.2.1" data-path="pca-anylysis.html"><a href="pca-anylysis.html#man_pca"><i class="fa fa-check"></i><b>11.2.1</b> 手动实现过程</a></li>
 <li class="chapter" data-level="11.2.2" data-path="pca-anylysis.html"><a href="pca-anylysis.html#prcom"><i class="fa fa-check"></i><b>11.2.2</b> <code>prcomp</code> 的实现</a></li>
@@ -286,7 +313,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Haworth, Matthew, Dilek Killi, Alessandro Materassi, and Antonio Raschi. 2015. “Coordination of Stomatal Physiological Behavior and Morphology with Carbon Dioxide Determines Stomatal Control.” <em>American Journal of Botany</em> 102 (5): 677–88.</p>
 </div>
 <div>
-<p>Haworth, Matthew, Giovanni Marino, and Mauro Centritto. 2018. “An Introductory Guide to Gas Exchange Analysis of Photosynthesis and Its Application to Plant Phenotyping and Precision Irrigation to Enhance Water Use Efficiency.” <em>Journal of Water and Climate Change</em>. doi:<a href="https://doi.org/https://doi.org/10.2166/wcc.2018.152">https://doi.org/10.2166/wcc.2018.152</a>.</p>
+<p>Haworth, Matthew, Giovanni Marino, and Mauro Centritto. 2018. “An Introductory Guide to Gas Exchange Analysis of Photosynthesis and Its Application to Plant Phenotyping and Precision Irrigation to Enhance Water Use Efficiency.” <em>Journal of Water and Climate Change</em>. <a href="https://doi.org/https://doi.org/10.2166/wcc.2018.152">https://doi.org/https://doi.org/10.2166/wcc.2018.152</a>.</p>
 </div>
 <div>
 <p>Heath, James R, Edward Ayres, Malcolm Possell, Richard D Bardgett, Helaina I J Black, Helen Grant, Phil Ineson, and Gerhard Kerstiens. 2005. “Rising Atmospheric Co2 Reduces Sequestration of Root-Derived Soil Carbon.” <em>Science</em> 309 (5741): 1711–3.</p>
@@ -298,7 +325,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Huang, HY, XY Dou, PY Sun, B Deng, GJ Wu, and CL Peng. 2009. “Comparison of Photosynthetic Characteristics in Two Ecotypes of Jatropha Curcas in Summer.” <em>Acta Ecologica Sinica</em>, no. 29: 2861–7.</p>
 </div>
 <div>
-<p>Jones, H. G. 1993. <em>Plants and Microclimate. a Quantitative Approach to Environmental Plant Physiology.</em> Cambridge University Press.</p>
+<p>Jones, H. G. 1993. <em>Plants and Microclimate. A Quantitative Approach to Environmental Plant Physiology.</em> Cambridge University Press.</p>
 </div>
 <div>
 <p>Kemp, Freda. 2003. “Modern Applied Statistics with S.” <em>Journal of the Royal Statistical Society Series D-the Statistician</em> 52 (4): 704–5.</p>
@@ -319,7 +346,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Marshall, B, and P V Biscoe. 1980. “A Model for C3 Leaves Describing the Dependence of Net Photosynthesis on Irradiance.” <em>Journal of Experimental Botany</em> 31 (1): 29–39.</p>
 </div>
 <div>
-<p>Medlyn, B. E, E Dreyer, D Ellsworth, M Forstreuter, P. C Harley, M. U. F Kirschbaum, X Le Roux, P Montpied, J Strassemeyer, and A Walcroft. 2002. “Temperature Response of Parameters of a Biochemically Based Model of Photosynthesis. Ii. a Review of Experimental Data Review.” <em>Plant Cell &amp; Environment</em> 25 (9): 1167–79.</p>
+<p>Medlyn, B. E, E Dreyer, D Ellsworth, M Forstreuter, P. C Harley, M. U. F Kirschbaum, X Le Roux, P Montpied, J Strassemeyer, and A Walcroft. 2002. “Temperature Response of Parameters of a Biochemically Based Model of Photosynthesis. II. A Review of Experimental Data Review.” <em>Plant Cell &amp; Environment</em> 25 (9): 1167–79.</p>
 </div>
 <div>
 <p>Medlyn, Belinda E., Remko A. Duursma, Derek Eamus, David S. Ellsworth, I. Colin Prentice, Craig V. M. Barton, Kristine Y. Crous, Paolo De Angelis, Michael Freeman, and Lisa Wingate. 2011. “Reconciling the Optimal and Empirical Approaches to Modelling Stomatal Conductance.” <em>Global Change Biology</em> 17 (6): 2134–44.</p>
@@ -328,13 +355,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Prado, C. H., and J. A. P. V. De Moraes. 1997. “Photosynthetic Capacity and Specific Leaf Mass in Twenty Woody Species of Cerrado Vegetation Under Field Conditions.” <em>Photosynthetica</em> 33 (1): 103–12.</p>
 </div>
 <div>
-<p>Smith, Lindsay I. 2002. “A Tutorial on Principal Component Analysis.” <a href="http://akademik.bahcesehir.edu.tr/~tevfik/courses/cmpe5103/principal_components.pdf" class="uri">http://akademik.bahcesehir.edu.tr/~tevfik/courses/cmpe5103/principal_components.pdf</a>.</p>
-</div>
-<div>
-<p>Stinziano, J. R., P. B. Morgan, D. J. Lynch, A. J. Saathoff, D. K. Mcdermitt, and D. T. Hanson. 2017. “The Rapid a-Ci Response: Photosynthesis in the Phenomic Era.” <em>Plant Cell &amp; Environment</em> 40.</p>
+<p>Smith, Lindsay I. 2002. “A Tutorial on Principal Component Analysis.”</p>
 </div>
 <div>
 <p>Stinziano, Joseph R, Dayle K Mcdermitt, Douglas J Lynch, Aaron J Saathoff, Patrick B Morgan, and David T Hanson. 2018. “The Rapid a/Ci Response: A Guide to Best Practices.” <em>New Phytologist</em>.</p>
+</div>
+<div>
+<p>Stinziano, J. R., P. B. Morgan, D. J. Lynch, A. J. Saathoff, D. K. Mcdermitt, and D. T. Hanson. 2017. “The Rapid a-Ci Response: Photosynthesis in the Phenomic Era.” <em>Plant Cell &amp; Environment</em> 40.</p>
 </div>
 <div>
 <p>Thornley, J H M. 1976. “Mathematical Models in Plant Physiology.” <em>London: Academic Press</em>.</p>
@@ -343,7 +370,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Tuzet, A, A Perrier, and R Leuning. 2003. “A Coupled Model of Stomatal Conductance, Photosynthesis and Transpiration.” <em>Plant Cell and Environment</em> 26 (7): 1097–1116.</p>
 </div>
 <div>
-<p>Wullschleger, Stan D. 1993. “Biochemical Limitations to Carbon Assimilation in C3 Plants—A Retrospective Analysis of the a-Ci Curves from 109 Species.” <em>Journal of Experimental Botany</em> 44 (262): 907–20.</p>
+<p>Wullschleger, Stan D. 1993. “Biochemical Limitations to Carbon Assimilation in C3 Plants—a Retrospective Analysis of the a-Ci Curves from 109 Species.” <em>Journal of Experimental Botany</em> 44 (262): 907–20.</p>
 </div>
 <div>
 <p>Yin, Xinyou, P C Struik, Pascual Romero, Jeremy Harbinson, Jochem B Evers, Peter E L Van Der Putten, and J Vos. 2009. “Using Combined Measurements of Gas Exchange and Chlorophyll Fluorescence to Estimate Parameters of a Biochemical C3 Photosynthesis Model: A Critical Appraisal and a New Integrated Approach Applied to Leaves in a Wheat (Triticum Aestivum) Canopy.” <em>Plant Cell and Environment</em> 32 (5): 448–64.</p>
@@ -356,6 +383,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 </div>
 </div>
+
 
 
 
@@ -432,7 +460,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

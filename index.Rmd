@@ -1,7 +1,7 @@
 --- 
 title: "R 语言分析 LI-6400 和 LI-6800 光合仪的数据"
 author: "祝介东<br /> <br /> 北京力高泰科技有限公司"
-institution: "北京力高泰科技有限公司"
+affiliation: "北京力高泰科技有限公司"
 date: "`r Sys.Date()`"
 documentclass: krantz
 bibliography: photoR.bib
@@ -12,9 +12,19 @@ lot: yes
 lof: yes
 site: bookdown::bookdown_site
 description: "R 语言分析 LI-6400XT 与 LI-6800 数据"
-github-repo: zhujiedong/R_analysis_LI-6400_LI_6800
+github-repo: zhujiedong/photoanalysis
 graphics: yes
-cover-image: images/cover.png
+cover-image: images/coverpage.png
 ---
 
+# 前言 {- #index}
 
+------
+
+```{asis, echo=identical(knitr:::pandoc_to(), 'html')}
+**Note**: 本文内容仅为我 github 中相关repo (photoanalysis) 的在线预览版本，并不保证及时更新。
+
+<p style="text-align: center;"><img src="images/coverpage.png" /></p>
+```
+
+本文纯属个人打发出差漫漫长夜的作品，并非正式资料，并未经过校对等流程，但所用代码皆经过本人和同事的验证，所引文献均真实存在。希望对不熟悉相关知识的童鞋们有所帮助。

@@ -12,20 +12,20 @@
   <meta property="og:title" content="第 11 章 PCA 分析 | R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:image" content="images/cover.png" />
+  <meta property="og:image" content="images/coverpage.png" />
   <meta property="og:description" content="R 语言分析 LI-6400XT 与 LI-6800 数据" />
-  <meta name="github-repo" content="zhujiedong/R_analysis_LI-6400_LI_6800" />
+  <meta name="github-repo" content="zhujiedong/photoanalysis" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="第 11 章 PCA 分析 | R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   
   <meta name="twitter:description" content="R 语言分析 LI-6400XT 与 LI-6800 数据" />
-  <meta name="twitter:image" content="images/cover.png" />
+  <meta name="twitter:image" content="images/coverpage.png" />
 
 <meta name="author" content="祝介东    北京力高泰科技有限公司">
 
 
-<meta name="date" content="2018-12-29">
+<meta name="date" content="2019-01-03">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -51,41 +51,67 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="css\style.css" type="text/css" />
@@ -104,9 +130,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="./">R 光合数据分析</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="frontmatter.html"><a href="frontmatter.html"><i class="fa fa-check"></i>前言</a></li>
-<li class="chapter" data-level="" data-path="copyright.html"><a href="copyright.html"><i class="fa fa-check"></i>版权声明</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a></li>
+<li class="chapter" data-level="" data-path="frontmatter.html"><a href="frontmatter.html"><i class="fa fa-check"></i>声明</a></li>
 <li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i>关于作者</a></li>
+<li class="chapter" data-level="" data-path="copyright.html"><a href="copyright.html"><i class="fa fa-check"></i>版权</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> R 软件与 Rstudio</a><ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#rsoft"><i class="fa fa-check"></i><b>1.1</b> R 软件</a></li>
 <li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#rstudiosoft"><i class="fa fa-check"></i><b>1.2</b> Rstudio</a></li>
@@ -198,7 +225,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="pca-anylysis.html"><a href="pca-anylysis.html"><i class="fa fa-check"></i><b>11</b> PCA 分析</a><ul>
-<li class="chapter" data-level="11.1" data-path="pca-anylysis.html"><a href="pca-anylysis.html#section-11.1"><i class="fa fa-check"></i><b>11.1</b> 特征向量与特征值</a></li>
+<li class="chapter" data-level="11.1" data-path="pca-anylysis.html"><a href="pca-anylysis.html#section"><i class="fa fa-check"></i><b>11.1</b> 特征向量与特征值</a></li>
 <li class="chapter" data-level="11.2" data-path="pca-anylysis.html"><a href="pca-anylysis.html#pca_R"><i class="fa fa-check"></i><b>11.2</b> PCA R 语言实现</a><ul>
 <li class="chapter" data-level="11.2.1" data-path="pca-anylysis.html"><a href="pca-anylysis.html#man_pca"><i class="fa fa-check"></i><b>11.2.1</b> 手动实现过程</a></li>
 <li class="chapter" data-level="11.2.2" data-path="pca-anylysis.html"><a href="pca-anylysis.html#prcom"><i class="fa fa-check"></i><b>11.2.2</b> <code>prcomp</code> 的实现</a></li>
@@ -230,20 +257,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="pca-anylysis" class="section level1">
 <h1><span class="header-section-number">第 11 章</span> PCA 分析</h1>
 <p>PCA 作为一个基础的方法，应用领域覆盖很广，涵盖的统计学相关的内容有均值、标准差、协方差， 线性代数中的特征向量及特征值。当然在与光合仪相关的应用方面多数是测量的光合速率、气孔导度等配合植物的其他性状来进行研究。下面的内容将使用不那么数学的语言来观察其实现方式。</p>
-<div id="section-11.1" class="section level2">
+<div id="section" class="section level2">
 <h2><span class="header-section-number">11.1</span> 特征向量与特征值</h2>
 <p>特征向量和特征值的数学描述为：</p>
-<span class="math display" id="eq:eign">\[\begin{equation}
+<p><span class="math display" id="eq:eign">\[\begin{equation}
 A \vec{x} = \lambda \vec{x}
 \tag{11.1}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>其中 A 为 n <span class="math inline">\(\times\)</span> n 的矩阵，<span class="math inline">\(\vec{x}\)</span> 为 非零 n <span class="math inline">\(\times\)</span> 1 列向量，<span class="math inline">\(\lambda\)</span> 是标量，那么 <span class="math inline">\(\vec{x}\)</span> 为 A 的特征向量，<span class="math inline">\(\lambda\)</span> 为 A 的特征值。</p>
 <p>如果仅从数学描述上看，是十分不适合我这样没基础的人来理解的，但我们可以这么理解：</p>
-<p>A 为我们观测值（也即我们生态学上测量的数据）组成的 <span class="math inline">\(n \times n\)</span> 矩阵，每行的数据代表了一个观测值，例如光合速率是其中的一行，我们有n 个， 那么 <span class="math inline">\(\vec{x}\)</span> 和 <span class="math inline">\(\lambda\)</span> 意味着什么呢？再看一眼上面的 <a href="pca-anylysis.html#eq:eign">(11.1)</a>，这是一个等式，而 <span class="math inline">\(\vec{x}\)</span> 是 n <span class="math inline">\(\times\)</span> 1 维度，原来的数据是 n <span class="math inline">\(\times\)</span> n 维度，这就是主轴分析是降维分析的意义了，一个一维的特征向量和特征值与我们多维的观测值之间有一个相等的关系。当然，也有很多人在描述时喜欢用坐标轴旋转或这投影来形容的，如果你觉得这样好理解也没问题，不过我脑袋不擅长想象这种多维的空间。这样描述并不十分准确，只是我觉得便于理解，更正确描述应为我们下面所述的例子 (<span class="citation">L. I. Smith (<a href="#ref-Smith2002">2002</a>)</span>) ，但降维的原理即来自此处：</p>
-<span class="math display" id="eq:despca">\[\begin{equation}
+<p>A 为我们观测值（也即我们生态学上测量的数据）组成的 <span class="math inline">\(n \times n\)</span> 矩阵，每行的数据代表了一个观测值，例如光合速率是其中的一行，我们有n 个， 那么 <span class="math inline">\(\vec{x}\)</span> 和 <span class="math inline">\(\lambda\)</span> 意味着什么呢？再看一眼上面的 <a href="pca-anylysis.html#eq:eign">(11.1)</a>，这是一个等式，而 <span class="math inline">\(\vec{x}\)</span> 是 n <span class="math inline">\(\times\)</span> 1 维度，原来的数据是 n <span class="math inline">\(\times\)</span> n 维度，这就是主轴分析是降维分析的意义了，一个一维的特征向量和特征值与我们多维的观测值之间有一个相等的关系。当然，也有很多人在描述时喜欢用坐标轴旋转或这投影来形容的，如果你觉得这样好理解也没问题，不过我脑袋不擅长想象这种多维的空间。这样描述并不十分准确，只是我觉得便于理解，更正确描述应为我们下面所述的例子 (<span class="citation">Smith (<a href="#ref-Smith2002">2002</a>)</span>) ，但降维的原理即来自此处：</p>
+<p><span class="math display" id="eq:despca">\[\begin{equation}
 finaldata = rowfeaturevector \times rowdataajust
 \tag{11.2}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>finaldata 很好理解，我们用于 PCA 的最终数据，rowfeature vector 则是我们根据协相关矩阵求得的特征向量的转置，最大的特征向量再最上面， rowdataadjust 则为<strong>原始数据减去标准值</strong>。</p>
 </div>
 <div id="pca_R" class="section level2">
@@ -309,18 +336,18 @@ finaldata = rowfeaturevector \times rowdataajust
 <h3><span class="header-section-number">11.2.1</span> 手动实现过程</h3>
 <div id="av_val" class="section level4">
 <h4><span class="header-section-number">11.2.1.1</span> 均值的计算</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_mean &lt;-<span class="st"> </span><span class="kw">apply</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dv">2</span>, <span class="cf">function</span>(x) x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x))</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">iris_mean &lt;-<span class="st"> </span><span class="kw">apply</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dv">2</span>, <span class="cf">function</span>(x) x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x))</code></pre>
 <p>我只使用了前四列的性状数据，仅仅是方便结果的展示。</p>
 </div>
 <div id="cov_val" class="section level4">
 <h4><span class="header-section-number">11.2.1.2</span> 计算协方差矩阵</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_cov &lt;-<span class="st"> </span><span class="kw">cov</span>(iris_mean)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">iris_cov &lt;-<span class="st"> </span><span class="kw">cov</span>(iris_mean)</code></pre>
 </div>
 <div id="eig_val" class="section level4">
 <h4><span class="header-section-number">11.2.1.3</span> 计算特征值和特征向量</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_eigen &lt;-<span class="st"> </span><span class="kw">eigen</span>(iris_cov)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">iris_eigen &lt;-<span class="st"> </span><span class="kw">eigen</span>(iris_cov)</code></pre>
 <p>这里就可以看到之前提到的，特征值和特征向量是根据协方差矩阵计算的。我们选取特征值最大的两个，他们的特征值之和已经占所有的特征值之和相当大的比例：</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(iris_eigen<span class="op">$</span>values[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])<span class="op">/</span><span class="kw">sum</span>(iris_eigen<span class="op">$</span>values)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(iris_eigen<span class="op">$</span>values[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])<span class="op">/</span><span class="kw">sum</span>(iris_eigen<span class="op">$</span>values)</code></pre>
 <pre><code>## [1] 0.9776852</code></pre>
 <p>也就是说特征值对应的前两项是我们最终降维所需要的，即最终的两个主轴为 <span class="math inline">\(150 \times 2\)</span> 维矩阵，即我们原来的 <span class="math inline">\(150 \times 4\)</span> 的矩阵乘以我们选取的前两个特征值对应的 <span class="math inline">\(4 \times 2\)</span> 组成的矩阵。</p>
 <p>实际应用中我们不需要这么做了，因为太浪费时间了，我们直接用函数来得到结果即可。</p>
@@ -329,13 +356,13 @@ finaldata = rowfeaturevector \times rowdataajust
 <div id="prcom" class="section level3">
 <h3><span class="header-section-number">11.2.2</span> <code>prcomp</code> 的实现</h3>
 <p>我们用 <code>prcomp</code> 来简化实现过程，注意，根据 <span class="citation">Kemp (<a href="#ref-kemp2003modern">2003</a>)</span>，我们把 iris 数据对数化一下，并提取所有物种名字：</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;iris&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;iris&quot;</span>)
 iris_pca &lt;-<span class="st"> </span><span class="kw">log</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])
-iris_species &lt;-<span class="st"> </span>iris<span class="op">$</span>Species</code></pre></div>
+iris_species &lt;-<span class="st"> </span>iris<span class="op">$</span>Species</code></pre>
 <p>需要注意，我们处理时使用特征中心化。即每一维的数据都减去该维的均值。这里的“维”指的就是一个特征（或属性），变换之后每一维的均值都变成了0 (参考 <a href="pca-anylysis.html#eq:despca">(11.2)</a> )。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">value_pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(iris_pca, <span class="dt">center =</span> <span class="ot">TRUE</span>, <span class="dt">scale. =</span> <span class="ot">TRUE</span>)
-## 查看结果
-<span class="kw">summary</span>(value_pca)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">value_pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(iris_pca, <span class="dt">center =</span> <span class="ot">TRUE</span>, <span class="dt">scale. =</span> <span class="ot">TRUE</span>)
+<span class="co">## 查看结果</span>
+<span class="kw">summary</span>(value_pca)</code></pre>
 <pre><code>## Importance of components:
 ##                           PC1    PC2     PC3     PC4
 ## Standard deviation     1.7125 0.9524 0.36470 0.16568
@@ -347,7 +374,7 @@ iris_species &lt;-<span class="st"> </span>iris<span class="op">$</span>Species<
 <h3><span class="header-section-number">11.2.3</span> 作图</h3>
 <p>这个我们不做过多说明了，推荐两个非常好的软件包，分别是 ‘ggbiplot’, ‘factoextra’：</p>
 <p><strong>ggbiplot 作图</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggbiplot)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggbiplot)
 
 p &lt;-<span class="st"> </span><span class="kw">ggbiplot</span>(value_pca, <span class="dt">obs.scale =</span> <span class="dv">1</span>, <span class="dt">var.scale =</span> <span class="dv">1</span>, 
        <span class="dt">groups =</span> iris_species, <span class="dt">ellipse =</span> <span class="ot">TRUE</span>, 
@@ -355,23 +382,23 @@ p &lt;-<span class="st"> </span><span class="kw">ggbiplot</span>(value_pca, <spa
 
 p1 &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.direction =</span> <span class="st">&#39;horizontal&#39;</span>, 
        <span class="dt">legend.position =</span> <span class="st">&#39;top&#39;</span>)
-p1</code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+p1</code></pre>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
 <p><strong>factoextra 作图</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(factoextra)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(factoextra)
 
 <span class="kw">fviz_pca_ind</span>(value_pca, <span class="dt">col.ind =</span> <span class="st">&quot;cos2&quot;</span>, 
    <span class="dt">gradient.cols =</span> <span class="kw">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>), 
    <span class="dt">repel =</span> <span class="ot">TRUE</span>  
-             )</code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+             )</code></pre>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
 </div>
 </div>
 </div>
 <h3>参考文献</h3>
 <div id="refs" class="references">
 <div id="ref-Smith2002">
-<p>Smith, Lindsay I. 2002. “A Tutorial on Principal Component Analysis.” <a href="http://akademik.bahcesehir.edu.tr/~tevfik/courses/cmpe5103/principal_components.pdf" class="uri">http://akademik.bahcesehir.edu.tr/~tevfik/courses/cmpe5103/principal_components.pdf</a>.</p>
+<p>Smith, Lindsay I. 2002. “A Tutorial on Principal Component Analysis.”</p>
 </div>
 <div id="ref-kemp2003modern">
 <p>Kemp, Freda. 2003. “Modern Applied Statistics with S.” <em>Journal of the Royal Statistical Society Series D-the Statistician</em> 52 (4): 704–5.</p>
@@ -433,7 +460,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

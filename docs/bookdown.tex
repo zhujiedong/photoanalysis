@@ -1,3 +1,7 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
+%
 \documentclass[]{krantz}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
@@ -6,12 +10,9 @@
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
 \else % if luatex or xelatex
-  \ifxetex
-    \usepackage{mathspec}
-  \else
-    \usepackage{fontspec}
-  \fi
+  \usepackage{unicode-math}
   \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
 \fi
 % use upquote if available, for straight quotes in verbatim environments
@@ -21,20 +22,24 @@
 \usepackage[]{microtype}
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
-\usepackage[unicode=true]{hyperref}
-\PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\usepackage{xcolor}
+\usepackage{hyperref}
 \hypersetup{
             pdftitle={R 语言分析 LI-6400 和 LI-6800 光合仪的数据},
             pdfauthor={祝介东    北京力高泰科技有限公司},
             colorlinks=true,
             linkcolor=Maroon,
+            filecolor=Maroon,
             citecolor=Blue,
             urlcolor=Blue,
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
-\usepackage{natbib}
-\bibliographystyle{apalike}
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -44,40 +49,40 @@
 \usepackage{framed}
 \definecolor{shadecolor}{RGB}{248,248,248}
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\ImportTok}[1]{#1}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\BuiltInTok}[1]{#1}
-\newcommand{\ExtensionTok}[1]{#1}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
-\newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
 % Fix footnotes in tables (requires footnote package)
-\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{long table}}{}
+\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{longtable}}{}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -87,12 +92,6 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -115,7 +114,11 @@
 \usepackage{booktabs}
 \usepackage{ctex}
 \usepackage{longtable}
+%\usepackage{incgraph}
 \usepackage[bf,singlelinecheck=off]{caption}
+%\usepackage{geometry}          % 用于页面设置
+%\geometry{a4paper, scale=0.8}  % 设置为A4纸，边距0.8
+%\usepackage{graphics}          % 与图形有关
 
 \usepackage{framed,color}
 \definecolor{shadecolor}{RGB}{248,248,248}
@@ -165,10 +168,12 @@
 \makeatother
 
 \frontmatter
+\usepackage[]{natbib}
+\bibliographystyle{apalike}
 
 \title{R 语言分析 LI-6400 和 LI-6800 光合仪的数据}
 \author{祝介东 北京力高泰科技有限公司}
-\date{2018-12-29}
+\date{2019-01-03}
 
 \begin{document}
 \maketitle
@@ -179,8 +184,11 @@
 %\cleardoublepage\newpage\thispagestyle{empty}\null
 %\cleardoublepage\newpage
 %\begin{titlepage}
-%    \centering
-%    \includegraphics[width=5in]{images/cover.png}
+
+%\incgraph[documentpaper,
+%  overlay={\node[red] at (page.center) {\Huge Picture sized to paper};}]
+%  [width=\paperwidth,height=\paperheight]{coverpage.png}
+
 %\end{titlepage}
 
 \thispagestyle{empty}
@@ -189,24 +197,29 @@
 \setlength{\abovedisplayshortskip}{-5pt}
 
 {
-\hypersetup{linkcolor=black}
+\hypersetup{linkcolor=}
 \setcounter{tocdepth}{2}
 \tableofcontents
 }
 \listoftables
 \listoffigures
+\hypertarget{index}{%
+\chapter*{前言}\label{index}}
+
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+本文纯属个人打发出差漫漫长夜的作品，并非正式资料，并未经过校对等流程，但所用代码皆经过本人和同事的验证，所引文献均真实存在。希望对不熟悉相关知识的童鞋们有所帮助。
+
 \frontmatter
 
-\chapter*{前言}\label{frontmatter}
+\hypertarget{frontmatter}{%
+\chapter*{声明}\label{frontmatter}}
 
 
-本文内容均来自个人对相关材料的理解，\textbf{并未经过权威认证，如有异议，请参考
-R
-软件及相关软件包的使用手册或相关模型的文献}。本文所使用代码均只做示例代码使用，在做实际分析时，请结合自己的实验数据及模型使用条件做相应的调整。本文内容仅针对
-LI-6800 与 LI-6400XT 光合仪数据，尤其是 RACiR\texttrademark 部分，仅针对
-LI-6800 进行分析，且目前市面上仅 LI-6800
-光合仪可完成此项数据的测量。如您有 LI-6400XT 或 LI-6800
-使用操作相关方面的问题请发送至：
+本文内容均来自个人对相关材料的理解，\textbf{并未经过权威认证，如有异议，请参考 R 软件及相关软件包的使用手册或相关模型的文献}。本文所使用代码均只做示例代码使用，在做实际分析时，请结合自己的实验数据及模型使用条件做相应的调整。本文内容仅针对
+LI-6800 与 LI-6400XT 光合仪数据，尤其是 RACiR\texttrademark 部分，仅针对 LI-6800
+进行分析，且目前市面上仅 LI-6800 光合仪可完成此项数据的测量。如您有 LI-6400XT 或 LI-6800 使用操作相关方面的问题请发送至：
 
 \url{zhujiedong@ecotek.com.cn}
 
@@ -235,61 +248,56 @@ LI-6800 进行分析，且目前市面上仅 LI-6800
   地址：北京市西城区西直门南大街2号成铭大厦A座22F
 \end{itemize}
 
-\chapter*{版权声明}\label{copyright}
+\hypertarget{author}{%
+\chapter*{关于作者}\label{author}}
 
 
-\textbf{本文旨在对广大 LI-6400XT 和 LI-6800
-光合仪的用户提供一个数据分析的参考，本人并未从中获取任何利益，内容错误疏漏之处，欢迎指正。本人保留一切权利，禁止一切将本文内容用于商业用途的行为，禁止其他仪器公司抄袭及使用。}
-
-\chapter*{关于作者}\label{author}
-
-
-祝介东，\href{http://www.ecotek.com.cn/}{北京力高泰科技有限公司}
-工程师，本文内容为我在售后服务时所住的酒店所作（遍布国内大多数省份），本为我打发出差住酒店漫漫长夜的业余爱好，\textbf{此部分内容并非公司对我的职位所要求的内容，也并非我公司提供的服务内容，因此属于个人作品，仅供参考，我所在公司对此文内容不负任何责任}。文中代码得到了公司技术部同事：
-刘美玲、徐粒、焦阳、王昭、张启尧、张云飞等的测试，其中焦阳贡献了
-\texttt{jiptest} 包中基础荧光参数计算的代码，在此一并感谢。
+祝介东，\href{http://www.ecotek.com.cn/}{北京力高泰科技有限公司} 工程师，本文内容为我在售后服务时所住的酒店所作（遍布国内大多数省份），本为我打发出差住酒店漫漫长夜的业余爱好，\textbf{此部分内容并非公司对我的职位所要求的内容，也并非我公司提供的服务内容，因此属于个人作品，仅供参考，我所在公司对此文内容不负任何责任}。文中代码得到了公司技术部同事： 刘美玲、徐粒、焦阳、王昭、张启尧、张云飞等的测试，其中焦阳贡献了 \texttt{jiptest} 包中基础荧光参数计算的代码，在此一并感谢。
 
 文中内容如对您有帮助，我很欣慰。但本人水平有限，错误与疏漏之处还请谅解，欢迎讨论，欢迎提出宝贵意见及建议。本人或单位其他售后人员仅有提供相关仪器操作或故障解决的义务，处理数据和分析数据并非我们的本职工作，如有相关需还请多参考本文内容或网上相关资料，不足之处还请谅解。
 
+\hypertarget{copyright}{%
+\chapter*{版权}\label{copyright}}
+
+
+\textbf{本文旨在对广大 LI-6400XT 和 LI-6800 光合仪的用户提供一个数据分析的参考，本人或所在公司并未从中获取任何利益，内容错误疏漏之处，欢迎指正。本人保留一切权利，禁止一切将本文内容用于商业用途的行为，禁止商业公司使用。}
+
 \mainmatter
 
-\chapter{R 软件与 Rstudio}\label{intro}
+\hypertarget{intro}{%
+\chapter{R 软件与 Rstudio}\label{intro}}
 
-\section{R 软件}\label{rsoft}
+\hypertarget{rsoft}{%
+\section{R 软件}\label{rsoft}}
 
-R语言的官方网站是 \href{http://www.r-project.org}{R}
-，与R语言有关的网站还有CRAN（镜像），其主站网址是：
-\href{http://www.cran.r-project.org}{CRAN}。
+R语言的官方网站是 \href{http://www.r-project.org}{R} ，与R语言有关的网站还有CRAN（镜像），其主站网址是： \href{http://www.cran.r-project.org}{CRAN}。
 
-\section{Rstudio}\label{rstudiosoft}
+\hypertarget{rstudiosoft}{%
+\section{Rstudio}\label{rstudiosoft}}
 
 尽管R的功能十分强大，但是其作为一个命令行工具 \footnote{实际上在Windows系统下安装的时候提供一个十分简陋的GUI。}，在实际使用中尤为不便，因此，一款集成的开发环境十分有必要。\href{https://www.rstudio.com/products/RStudio/}{Rstudio}是一款专门针对R开发的一个集成环境，同时也支持其他多种语言，用户界面十分友好，支持代码高亮，拼写提示，作图展示等功能，因此我们推荐使用Rstudio对我们的数据进行分析。
 
-R 软件和 Rstudio
-的安装十分方便，我们按照各自系统的安装方式安装即可，安装后界面及各区功能如下：
+R 软件和 Rstudio 的安装十分方便，我们按照各自系统的安装方式安装即可，安装后界面及各区功能如下：
 
 \begin{figure}
-\includegraphics[width=4.55in]{images/rstudio} \caption{Rstudio 界面及功能}\label{fig:unnamed-chunk-1}
+\includegraphics[width=4.55in]{images/rstudio} \caption{Rstudio 界面及功能}\label{fig:unnamed-chunk-2}
 \end{figure}
 
 本文的主要内容并非介绍这些软件的功能，因此，关于软件的操作部分请仔细阅读相关资料，网络上有大量的免费资源及教程，有需要的同学可自行搜索。
 
 \begin{quote}
-注：R 与 Rstudio
-均非我公司产品，而且均免费或者有免费版本，因此请勿邮件或电话索要此两款软件。
+注：R 与 Rstudio 均非我公司产品，而且均免费或者有免费版本，因此请勿邮件或电话索要此两款软件。
 \end{quote}
 
 \cleardoublepage
 
-\chapter{批量处理光合测定数据}\label{batch_question}
+\hypertarget{batch_question}{%
+\chapter{批量处理光合测定数据}\label{batch_question}}
 
-对于多数人来讲，一个季节用光合仪测量的数据文件至少是两位数的，处理起来非常不方便，针对这个问题，简单写了一个批量读取
-LI-6400 和 LI-6800 原始数据的包(因为现有的容易实现的读取 excel
-格式的包还不支持 6800 和 6400 这种形式的公式计算)\footnote{特别注意，原始数据可以用文本编辑器打开，但为了方便使用这个软件包，准确输入与行号相关的参数，建议您使用带行号显示的软件，例如
-  windows 下的 notepad++}，使用非常简单，同时也适合处理未关闭数据文件而导致的无法生成
-excel 格式的数据时的问题。
+对于多数人来讲，一个季节用光合仪测量的数据文件至少是两位数的，处理起来非常不方便，针对这个问题，简单写了一个批量读取 LI-6400 和 LI-6800 原始数据的包(因为现有的容易实现的读取 excel 格式的包还不支持 6800 和 6400 这种形式的公式计算)\footnote{特别注意，原始数据可以用文本编辑器打开，但为了方便使用这个软件包，准确输入与行号相关的参数，建议您使用带行号显示的软件，例如 windows 下的 notepad++}，使用非常简单，同时也适合处理未关闭数据文件而导致的无法生成 excel 格式的数据时的问题。
 
-\section{安装}\label{install_readphoto}
+\hypertarget{install_readphoto}{%
+\section{安装}\label{install_readphoto}}
 
 暂时只有我的 github repo 中的版本：
 
@@ -299,7 +307,8 @@ excel 格式的数据时的问题。
 \end{Highlighting}
 \end{Shaded}
 
-\section{6400 数据整合}\label{batch64}
+\hypertarget{batch64}{%
+\section{6400 数据整合}\label{batch64}}
 
 基本参数如下：
 
@@ -314,7 +323,7 @@ excel 格式的数据时的问题。
 
 \begin{table}[t]
 
-\caption{\label{tab:unnamed-chunk-4}LI-6400 批量整合数据}
+\caption{\label{tab:unnamed-chunk-5}LI-6400 批量整合数据}
 \centering
 \begin{tabular}{llllrrrrr}
 \toprule
@@ -349,24 +358,14 @@ excel 格式的数据时的问题。
 \end{Highlighting}
 \end{Shaded}
 
-header\_line 表示你数据表头所在行，data\_start 表示你数据起始行，Obs = 1
-时所在行，不含表头。这个也要确认好了，不同的测量不能放在一起（当然一般不会出现这种情况，同一台仪器，处理数据当然是希望
-aci 和 aci 在一起，lrc 和 lrc
-在一起，调查测量和调查测量在一起），不同的测量可能起始行不同，这样就会报错，特别需要注意的是，目前路径写法仅支持
-``/'' 分隔，不能使用 ``\textbackslash{}`` 作为分隔。例如在数据放在 D
-盘的 6400 文件夹下，那么写法应为''d:/6400``, 不能为
-\textbf{``d:\textbackslash{}6400''}, 尽管后者对 R
-是合法的，主要是因为我要区分你不同数据来源的文件是哪个，也即下文提到的
-\texttt{df\$files} 列。
+header\_line 表示你数据表头所在行，data\_start 表示你数据起始行，Obs = 1 时所在行，不含表头。这个也要确认好了，不同的测量不能放在一起（当然一般不会出现这种情况，同一台仪器，处理数据当然是希望 aci 和 aci 在一起，lrc 和 lrc 在一起，调查测量和调查测量在一起），不同的测量可能起始行不同，这样就会报错，特别需要注意的是，目前路径写法仅支持 ``/'' 分隔，不能使用 ``\textbackslash{}`` 作为分隔。例如在数据放在 D 盘的 6400 文件夹下，那么写法应为''d:/6400", 不能为 \textbf{``d:\textbackslash{}6400''}, 尽管后者对 R 是合法的，主要是因为我要区分你不同数据来源的文件是哪个，也即下文提到的 \texttt{df\$files} 列。
 
-其中，数据的来源在表格中第一列，叫做
-files，是数据来源的文件名（即你起的名字）,例如本例中你看到的 aci
-是我之前数据里面 aci 响应曲线的数据。
+其中，数据的来源在表格中第一列，叫做 files，是数据来源的文件名（即你起的名字）,例如本例中你看到的 aci 是我之前数据里面 aci 响应曲线的数据。
 
-这些数据可以用于后文相关的分析中，尤其是像 \texttt{fitacis}
-这样的函数，因为本质上他们都是符合 \texttt{tidyverse} 样式的数据。
+这些数据可以用于后文相关的分析中，尤其是像 \texttt{fitacis} 这样的函数，因为本质上他们都是符合 \texttt{tidyverse} 样式的数据。
 
-\section{LI-6800 数据整合}\label{batch68}
+\hypertarget{batch68}{%
+\section{LI-6800 数据整合}\label{batch68}}
 
 相比 6400， 6800 参数要少，导入需要两行命令即可：
 
@@ -377,17 +376,13 @@ files，是数据来源的文件名（即你起的名字）,例如本例中你�
 \end{Highlighting}
 \end{Shaded}
 
-其中就两个参数，第一个为 LI-6800
-\textbf{原始数据}所在的文件夹，即文件夹内\textbf{包含且仅包含 LI-6800
-的原始数据}，不要放其他文件，不要放 excel
-数据。第二个参数即为你原始数据中表头所在的参数行的\textbf{前一行}，我使用的这些示例数据的表头在
-54 行。
+其中就两个参数，第一个为 LI-6800 \textbf{原始数据}所在的文件夹，即文件夹内\textbf{包含且仅包含 LI-6800 的原始数据}，不要放其他文件，不要放 excel 数据。第二个参数即为你原始数据中表头所在的参数行的\textbf{前一行}，我使用的这些示例数据的表头在 54 行。
 
 数据输出如下所示(仅显示前8列数据)：
 
 \begin{table}[t]
 
-\caption{\label{tab:unnamed-chunk-7}LI-6800 批量整合数据}
+\caption{\label{tab:unnamed-chunk-8}LI-6800 批量整合数据}
 \centering
 \begin{tabular}{lrrrlrrr}
 \toprule
@@ -418,36 +413,28 @@ lrc & 3 & 1513612941 & 220.0 & 20171218 10:02:20 & 1 & 1 & 1513612941\\
 
 \cleardoublepage
 
-\chapter{\texorpdfstring{CO\textsubscript{2}
-响应曲线的拟合}{CO2 响应曲线的拟合}}\label{response_fit}
+\hypertarget{response_fit}{%
+\chapter{\texorpdfstring{CO\textsubscript{2} 响应曲线的拟合}{CO2 响应曲线的拟合}}\label{response_fit}}
 
-\section{FvCB 模型}\label{fvcb_mod}
+\hypertarget{fvcb_mod}{%
+\section{FvCB 模型}\label{fvcb_mod}}
 
-在 \texttt{plantecophys} 包中使用的模型为 \citet{Farquhar1980A} 建立的
-C3 植物模型 FvCB，其基于 C3 植物碳反应的三个阶段：
+在 \texttt{plantecophys} 包中使用的模型为 \citet{Farquhar1980A} 建立的 C3 植物模型 FvCB，其基于 C3 植物碳反应的三个阶段：
 
 \begin{itemize}
 \item
-  核酮糖-1,5-双磷酸羧化酶/加氧酶 (Rubisco)的催化下,
-  核酮糖-1,5-双磷酸(RuBP)与 CO\textsubscript{2}发生羧化作用,
-  生成3-磷酸甘油酸(PGA)。
+  核酮糖-1,5-双磷酸羧化酶/加氧酶 (Rubisco)的催化下, 核酮糖-1,5-双磷酸(RuBP)与 CO\textsubscript{2}发生羧化作用, 生成3-磷酸甘油酸(PGA)。
 \item
-  在腺苷三磷酸(ATP)和还原型烟酰胺腺嘌呤 二核苷酸磷酸(NADPH)的作用下,
-  PGA被还原成磷 酸丙糖(TP)。每6个TP中有1个输出到细胞液中, 用
-  于蔗糖或者淀粉的合成。
+  在腺苷三磷酸(ATP)和还原型烟酰胺腺嘌呤 二核苷酸磷酸(NADPH)的作用下, PGA被还原成磷 酸丙糖(TP)。每6个TP中有1个输出到细胞液中,
+  用 于蔗糖或者淀粉的合成。
 \item
-  剩下的5个TP 在ATP的作用下再生为 3 个RuBP。一部分再生的
-  RuBP在Rubisco的催化下被氧化成PGA和2-磷酸乙 醇酸,
-  2-磷酸乙醇酸在ATP的作用下形成PGA, 并且 释放CO\textsubscript{2}
-  (光呼吸)。
+  剩下的5个TP 在ATP的作用下再生为 3 个RuBP。一部分再生的 RuBP在Rubisco的催化下被氧化成PGA和2-磷酸乙 醇酸,
+  2-磷酸乙醇酸在ATP的作用下形成PGA, 并且 释放CO\textsubscript{2} (光呼吸)。
 \end{itemize}
 
-在光照下, C3 植物净光合速率 (A) 取决于 3 个同时存在的速率:
-RuBP羧化速率(Vc)、RuBP氧化速率 (或光呼吸速率,
-Vo)和线粒体在光照下的呼吸速率 (或明呼吸速率, Rd;
-此名为了与暗呼吸速率对应和区分)。RuBP氧化过程中每结合1 mol
-O\textsubscript{2} 就会释放 0.5 mol CO\textsubscript{2} 。因此,
-净光合速率 A 的计算为：
+在光照下, C3 植物净光合速率 (A) 取决于 3 个同时存在的速率: RuBP羧化速率(Vc)、RuBP氧化速率 (或光呼吸速率,
+Vo)和线粒体在光照下的呼吸速率 (或明呼吸速率, Rd; 此名为了与暗呼吸速率对应和区分)。RuBP氧化过程中每结合1 mol
+O\textsubscript{2} 就会释放 0.5 mol CO\textsubscript{2} 。因此, 净光合速率 A 的计算为：
 
 \begin{figure}
 \includegraphics[width=1\linewidth]{images/fvcb} \caption{光合速率的不同的限制阶段}\label{fig:fvcb}
@@ -458,20 +445,17 @@ A\ =V_{c}\ -0.5V_{o}\ -\ R_{d}
 \label{eq:aeta}
 \end{equation}
 
-线粒体Rd不同于暗呼吸速率(Rn )。Rn是叶片在 黑暗中的线粒体呼吸速率,
-随着光照的增加, 线粒体呼吸速率下降。因此 Rd \textless{} Rn
-在黑暗条件下测定的叶 片 CO\textsubscript{2} 交换速率即 Rn , 但是 Rd
-的测定比较困难, 因为光照条件下 Rd 与 Vc、Vo
-同时存在。\citet{Hikosaka2006Temperature} 总结了几种测定 Rd 的方法，式
-\eqref{eq:aeta} 又可表达为：
+线粒体Rd不同于暗呼吸速率(Rn )。Rn是叶片在 黑暗中的线粒体呼吸速率, 随着光照的增加, 线粒体呼吸速率下降。因此 Rd \textless{}
+Rn 在黑暗条件下测定的叶 片 CO\textsubscript{2} 交换速率即 Rn , 但是 Rd 的测定比较困难, 因为光照条件下 Rd 与
+Vc、Vo 同时存在。\citet{Hikosaka2006Temperature} 总结了几种测定
+Rd 的方法，式 \eqref{eq:aeta} 又可表达为：
 
 \begin{equation}
 A\ =V_{c}\ (1\ -0.5\alpha)\ R_{d}
 \label{eq:achange}
 \end{equation}
 
-式 \eqref{eq:achange} 中 \(\alpha\) 为氧化速率和羧化速率的比值，由 Rubisco
-动力学常数确定：
+式 \eqref{eq:achange} 中 \(\alpha\) 为氧化速率和羧化速率的比值，由 Rubisco 动力学常数确定：
 
 \begin{equation}
 \begin{split}
@@ -482,18 +466,14 @@ A\ =V_{c}\ (1\ -0.5\alpha)\ R_{d}
 \label{eq:dynamic}
 \end{equation}
 
-式 \eqref{eq:dynamic} 中，Cc 和 O 分别为叶绿体部位 CO\textsubscript{2} 和
-O\textsubscript{2} 浓度。Cc 和 O 通常以气体摩尔分数
-(\(\mu mol\text{·}mol^{-1}\) ) 或分压 (Pa) 表示,
-但光合过程是在叶绿体的液相基质中发生的, 用分压表示更加恰当。Kc 与 Ko 为
-Rubisco 羧化(氧化)的米氏常数,
-代表了羧化(氧化)速率达到最大羧化(氧化)速率一半时的 CO\textsubscript{2}
-和 \(O_{2}\) 浓度。是 Rubisco 特异性因子, \(S_{\frac{c}{o}}\)表示
-Rubisco 对CO\textsubscript{2} 和 \(O_{2}\) 的偏好程度。
+式 \eqref{eq:dynamic} 中，Cc 和 O 分别为叶绿体部位 CO\textsubscript{2} 和 O\textsubscript{2} 浓度。Cc 和
+O 通常以气体摩尔分数 (\(\mu mol\text{·}mol^{-1}\) ) 或分压 (Pa) 表示, 但光合过程是在叶绿体的液相基质中发生的,
+用分压表示更加恰当。Kc 与 Ko 为 Rubisco 羧化(氧化)的米氏常数, 代表了羧化(氧化)速率达到最大羧化(氧化)速率一半时的
+CO\textsubscript{2} 和 \(O_{2}\) 浓度。是 Rubisco 特异性因子, \(S_{\frac{c}{o}}\)表示 Rubisco
+对CO\textsubscript{2} 和 \(O_{2}\) 的偏好程度。
 
-当 A = Rd , 即 RuBP 羧化的 CO\textsubscript{2} 吸收速率刚好 等于 RuBP
-氧化的 CO\textsubscript{2} 释放速率 (Vc = 2Vo ) 时, \(\alpha\) =
-0.5。此时叶绿体的 CO\textsubscript{2} 浓度就是叶绿体 CO\textsubscript{2}
+当 A = Rd , 即 RuBP 羧化的 CO\textsubscript{2} 吸收速率刚好 等于 RuBP 氧化的 CO\textsubscript{2} 释放速率
+(Vc = 2Vo ) 时, \(\alpha\) = 0.5。此时叶绿体的 CO\textsubscript{2} 浓度就是叶绿体 CO\textsubscript{2}
 光合补偿点, 标记为 \(\Gamma^{*}\)。即：
 
 \begin{equation}
@@ -515,134 +495,78 @@ A\ =V_{c}\ (1\ -\frac{\Gamma^{*}}{C_{c}})\ R_{d}
 \label{eq:combine2}
 \end{equation}
 
-在 Cc 浓度很低的时候，RuBP 供应充足 (图 \ref{fig:fvcb} Rubisco 阶段)，Vc
-等于 Rubisco 所能支持的羧化速率 w\textsubscript{c}，：
+在 Cc 浓度很低的时候，RuBP 供应充足 (图 \ref{fig:fvcb} Rubisco 阶段)，Vc 等于 Rubisco
+所能支持的羧化速率 w\textsubscript{c}，：
 
 \begin{equation}
 w_{c}\ =\ \frac{V_{cmax\ }C_{c}}{C_{c\ }+\ K_{c\ }(1\ +\ \frac{O}{K_{o}})}
 \label{eq:wc}
 \end{equation}
 
-随着 Cc 浓度的增加，Rubisco 支持的羧化速率超过了 RuBP 供应速率, Vc 受
-RuBP 再生速率的限制（图 \ref{fig:fvcb} RuBP 阶段），此时 Vc 由 RuBP
-的再生速率限制，而 RuBP 又由电子传递速率（J）决定，故：
+随着 Cc 浓度的增加，Rubisco 支持的羧化速率超过了 RuBP 供应速率, Vc 受 RuBP 再生速率的限制（图 \ref{fig:fvcb}
+RuBP 阶段），此时 Vc 由 RuBP 的再生速率限制，而 RuBP 又由电子传递速率（J）决定，故：
 
 \begin{equation}
 w_{j}\ =\ \frac{J\ C_{c}}{4C_{c\ }+\ 8\Gamma^{*}}
 \label{eq:wj}
 \end{equation}
 
-当 Cc 浓度很高，光合磷酸化超过了淀粉和蔗糖的合成速率的时候，Vc 受到 TP
-利用速率（Vp）的限制（图 \ref{fig:fvcb} TPU 阶段），一般情况下，
+当 Cc 浓度很高，光合磷酸化超过了淀粉和蔗糖的合成速率的时候，Vc 受到 TP 利用速率（Vp）的限制（图 \ref{fig:fvcb}
+TPU 阶段），一般情况下，
 
 \begin{equation}
 w_{p\ }=\ \frac{3V_{p}C_{c}}{C_{c}-\Gamma^{*}}
 \label{eq:wp}
 \end{equation}
 
-最终，C3 植物叶片的光合速率 A 由
-w\textsubscript{c}、w\textsubscript{j}、w\textsubscript{p}
-的最小者决定（图 \ref{fig:fvcb} 实现部分），当c \textgreater{}
-\(\Gamma^{*}\)时：
+最终，C3 植物叶片的光合速率 A 由 w\textsubscript{c}、w\textsubscript{j}、w\textsubscript{p}
+的最小者决定（图 \ref{fig:fvcb} 实现部分），当c \textgreater{} \(\Gamma^{*}\)时：
 
 \begin{equation}
 A=min\{w_{c},w_{j,}w_{p}\}(1-\frac{\Gamma^{*}}{C_{c}})-R_{d}
 \label{eq:fvcbfin}
 \end{equation}
 
-\section{\texorpdfstring{CO\textsubscript{2}
-响应曲线测量的注意事项}{CO2 响应曲线测量的注意事项}}\label{co2_note}
+\hypertarget{co2_note}{%
+\section{\texorpdfstring{CO\textsubscript{2} 响应曲线测量的注意事项}{CO2 响应曲线测量的注意事项}}\label{co2_note}}
 
-尽管上文对其分段性做了数学上的解释，相比来讲，不是那么通俗易懂，根据
-\citet{matthew2018} 文章中的内容，我们后面两小节的内容对其进行概述：
+尽管上文对其分段性做了数学上的解释，相比来讲，不是那么通俗易懂，根据 \citet{matthew2018} 文章中的内容，我们后面两小节的内容对其进行概述：
 
-\subsection{分段性}\label{model_3}
+\hypertarget{model_3}{%
+\subsection{分段性}\label{model_3}}
 
-与光响应曲线不同， A/Ci
-曲线是分段的，这也增加了其复杂性，在其最初阶段，\(CO_2\)
-浓度较低，在此阶段， Rubisco 更多的与 \(O_2\)
-结合，因此，即使是较小浓度的 \(CO_2\)
-的增加，也会显著提高羧化速率，我们将此阶段称之为 \(CO_2\)
-(\citet{Wullschleger1993Biochemical}) 限制或 Rubisco 限制
-(\citet{Long2003Gas})。净光合速率 A 与 Ci
-在此阶段斜率比较陡峭，实践中往往利用计算该斜率来计算 \(V_{cmax}\)。
+与光响应曲线不同， A/Ci 曲线是分段的，这也增加了其复杂性，在其最初阶段，\(CO_2\) 浓度较低，在此阶段， Rubisco 更多的与 \(O_2\) 结合，因此，即使是较小浓度的 \(CO_2\) 的增加，也会显著提高羧化速率，我们将此阶段称之为 \(CO_2\) (\citet{Wullschleger1993Biochemical}) 限制或 Rubisco 限制 (\citet{Long2003Gas})。净光合速率 A 与 Ci 在此阶段斜率比较陡峭，实践中往往利用计算该斜率来计算 \(V_{cmax}\)。
 
-在较高的 \(CO_2\) 浓度下，曲线斜率开始便的平缓，作为底物的 \(CO_2\)
-已经不在是限制因素，随着羧化速率达到最大，RUBP 的量成为了其限制因素，而
-RUBP 的再生速率受最大电子传递速率 \(J_{max}\) 的限制。此时曲线的弯曲点由
-\(V_{cmax}\) 限制转变为 \(J_{max}\)，许多研究中将饱和光下和 \(CO_2\)
-浓度下测量的光合速率称之为做大光合速率(\citet{heath2005rising})。而另一些研究中将最大光合速率定义为外界
-\(CO_2\)
-时，在饱和光强下达到的最大光合速率(\citet{marshall1980a})。这些术语上的差别需要注意。
+在较高的 \(CO_2\) 浓度下，曲线斜率开始便的平缓，作为底物的 \(CO_2\) 已经不在是限制因素，随着羧化速率达到最大，RUBP 的量成为了其限制因素，而 RUBP 的再生速率受最大电子传递速率 \(J_{max}\) 的限制。此时曲线的弯曲点由 \(V_{cmax}\) 限制转变为 \(J_{max}\)，许多研究中将饱和光下和 \(CO_2\) 浓度下测量的光合速率称之为做大光合速率(\citet{heath2005rising})。而另一些研究中将最大光合速率定义为外界 \(CO_2\) 时，在饱和光强下达到的最大光合速率(\citet{marshall1980a})。这些术语上的差别需要注意。
 
-在之后，有可能继续观测到磷酸盐限制 RUBP
-再生的情况，导致光合速率的下降。因为此时大量的磷酸丙糖与正磷酸盐结合，导致
-ATP 合成受限制(\citet{ellsworth2015phosphorus})。这就是 TPU 限制阶段。
+在之后，有可能继续观测到磷酸盐限制 RUBP 再生的情况，导致光合速率的下降。因为此时大量的磷酸丙糖与正磷酸盐结合，导致 ATP 合成受限制(\citet{ellsworth2015phosphorus})。这就是 TPU 限制阶段。
 
-\subsection{测量注意事项}\label{note_detail}
+\hypertarget{note_detail}{%
+\subsection{测量注意事项}\label{note_detail}}
 
 尽管您的操作是严格按照说明书操作的，但说明书是指仪器的正确操作方式，无法对所有测量都采用相同设置，要获得好的测量结果，有更多的因素需要注意：
 
-使用 LI-6400 或 LI-6800 测量 A/Ci
-曲线的过程也就是控制叶室或参比室气体浓度变化的过程，\textbf{只要诱导的时间足够}，气孔会在相应设置的环境条件下开到足够大，这样
-Ci 会随 Ca 而变化，一般来讲二者的比例为 0.7，但也可能在
-0.5\textasciitilde{}0.7 间变化。
+使用 LI-6400 或 LI-6800 测量 A/Ci 曲线的过程也就是控制叶室或参比室气体浓度变化的过程，\textbf{只要诱导的时间足够}，气孔会在相应设置的环境条件下开到足够大，这样 Ci 会随 Ca 而变化，一般来讲二者的比例为 0.7，但也可能在 0.5\textasciitilde{}0.7 间变化。
 
-一般来讲，测量参数是在温度为 25 \(^{\circ}\)C
-时获得，但实际测量过程中，因为外界温度过高或过低等无法控制叶室温度到 25
-\(^{\circ}\)C，这其实并非严重的问题，因为这可以通过数学上的方法将计算参数标准化为
-25 \(^{\circ}\)C
-时的结果。所以，在测量时只需控制叶室温度稳定即可（通常为 20
-\(^{\circ}\)C \textasciitilde{} 30 \(^{\circ}\)C 之间）。
-此外就是控制恒定的 VPD
-及一个饱和光强。另外就是需要注意，开始测量之前，必须在外界环境的
-\(CO_2\) 浓度下诱导足够长的时间，使光合速率达到稳定，一般需要20
-\textasciitilde{} 30 min。对于没有稳定的光保护机制的植物，一般不建议在
-50 ppm
-或更低的浓度下进行设置，此时饱和光强和建议的温度下，植物没有足够的底物进行光合作用，这样会因为光化学反应的降低发生氧化性损伤。\citet{centritto2003}
-研究表明，长时间的在 50 ppm
-下诱导气孔打开到最大时，可以观测到最大的气孔导度（非标准方式测量）。
+一般来讲，测量参数是在温度为 25 \(^{\circ}\)C 时获得，但实际测量过程中，因为外界温度过高或过低等无法控制叶室温度到 25 \(^{\circ}\)C，这其实并非严重的问题，因为这可以通过数学上的方法将计算参数标准化为 25 \(^{\circ}\)C 时的结果。所以，在测量时只需控制叶室温度稳定即可（通常为 20 \(^{\circ}\)C \textasciitilde{} 30 \(^{\circ}\)C 之间）。 此外就是控制恒定的 VPD 及一个饱和光强。另外就是需要注意，开始测量之前，必须在外界环境的 \(CO_2\) 浓度下诱导足够长的时间，使光合速率达到稳定，一般需要20 \textasciitilde{} 30 min。对于没有稳定的光保护机制的植物，一般不建议在 50 ppm 或更低的浓度下进行设置，此时饱和光强和建议的温度下，植物没有足够的底物进行光合作用，这样会因为光化学反应的降低发生氧化性损伤。\citet{centritto2003} 研究表明，长时间的在 50 ppm 下诱导气孔打开到最大时，可以观测到最大的气孔导度（非标准方式测量）。
 
-对于存在干旱胁迫的测量，由于干旱会导致气孔关闭（\citet{lauteri2014}）,
-此时没有足够多的 \(CO_2\) 进入气孔，此时的测量是没有意义的，可在 50 ppm
-诱导 1 h 等待气孔完全打开再快速升高 Ca
-的值来进行测量（\citet{centritto2003}）。该方法对于 \(V_{cmax}\)
-不受影响而 \(J_{max}\)
-降低的情况适用（\citet{Aganchich2009}）。但在某些情况下，气孔关闭速度太快，无法完成整个
-A/Ci 曲线过程 (Haworth2017)（需要考虑 LI-6800
-RACiR）。更重要的是，如果想采用拟合方式求
-gm，那么气孔必须完全打开使叶片对 \(CO_2\)
-吸收的限制降到最低。对于灌溉情况良好的植物或者土壤水分情况比较好的植物，气孔不对高于外界浓度的
-Ca
-的升高而响应(\citet{haworth2015coordination})，这可能需要更多的测量点或延长测量点的时间间隔来提高曲线的分辨率。另外，测量点的数量也要根据研究而改变，例如重点测量
-Vcamx 时，50 \textasciitilde{} 300 ppm
-的数据点要多一些，而如果研究对象是土壤磷酸盐对植物生理的限制，那么 1600
-\textasciitilde{} 2000 ppm 的数据点要适当增多。
+对于存在干旱胁迫的测量，由于干旱会导致气孔关闭（\citet{lauteri2014}）, 此时没有足够多的 \(CO_2\) 进入气孔，此时的测量是没有意义的，可在 50 ppm 诱导 1 h 等待气孔完全打开再快速升高 Ca 的值来进行测量（\citet{centritto2003}）。该方法对于 \(V_{cmax}\) 不受影响而 \(J_{max}\) 降低的情况适用（\citet{Aganchich2009}）。但在某些情况下，气孔关闭速度太快，无法完成整个 A/Ci 曲线过程 (Haworth2017)（需要考虑 LI-6800 RACiR）。更重要的是，如果想采用拟合方式求 gm，那么气孔必须完全打开使叶片对 \(CO_2\) 吸收的限制降到最低。对于灌溉情况良好的植物或者土壤水分情况比较好的植物，气孔不对高于外界浓度的 Ca 的升高而响应(\citet{haworth2015coordination})，这可能需要更多的测量点或延长测量点的时间间隔来提高曲线的分辨率。另外，测量点的数量也要根据研究而改变，例如重点测量 Vcamx 时，50 \textasciitilde{} 300 ppm 的数据点要多一些，而如果研究对象是土壤磷酸盐对植物生理的限制，那么 1600 \textasciitilde{} 2000 ppm 的数据点要适当增多。
 
-一个更精确的了解植物生理指标的方法是将 A/Ci 曲线改为 A/Cc
-曲线，但这需要了解 gm 数据。因为 Cc 通过如下方式计算：
+一个更精确的了解植物生理指标的方法是将 A/Ci 曲线改为 A/Cc 曲线，但这需要了解 gm 数据。因为 Cc 通过如下方式计算：
 
 \begin{equation}
 C_c = C_i - \frac{A}{gm}
 \label{eq:notecc}
 \end{equation}
 
-对于 gm
-的计算，比较易操作的有几种：采用光合荧光联合测量的方式计算求得。当然也可以采用曲线拟合的方式，或者
-\citet{yin2009using} 使用的方式，在低氧气体下，采用不同的光照水平求得。
+对于 gm 的计算，比较易操作的有几种：采用光合荧光联合测量的方式计算求得。当然也可以采用曲线拟合的方式，或者 \citet{yin2009using} 使用的方式，在低氧气体下，采用不同的光照水平求得。
 
-此外，测量气体交换非常重要的误差来源就是气体的扩散，因为测量时，多数时间内外界气体浓度要高于叶室内的气体浓度，那么即使使用密封性非常好的材料，由外界高
-\(CO_2\) 浓度气体向叶室低 \(CO_2\)
-浓度气体的扩散无法避免，尤其是在连续长时间测量时该效应尤为明显，因此需要经常更换叶室垫圈。具体可以通过一些方法来校正（\citet{Flexas2007leak}，rodeghiero2007major），但如果采用
-LI-6800
-测量这将不是问题，它采用的叶室增加技术并根据测量的漏气情况对结果自动修正。
+此外，测量气体交换非常重要的误差来源就是气体的扩散，因为测量时，多数时间内外界气体浓度要高于叶室内的气体浓度，那么即使使用密封性非常好的材料，由外界高 \(CO_2\) 浓度气体向叶室低 \(CO_2\) 浓度气体的扩散无法避免，尤其是在连续长时间测量时该效应尤为明显，因此需要经常更换叶室垫圈。具体可以通过一些方法来校正（\citet{Flexas2007leak}，rodeghiero2007major），但如果采用 LI-6800 测量这将不是问题，它采用的叶室增加技术并根据测量的漏气情况对结果自动修正。
 
-\section{\texorpdfstring{\texttt{plantecophys}
-软件包}{plantecophys 软件包}}\label{plantecophys}
+\hypertarget{plantecophys}{%
+\section{\texorpdfstring{\texttt{plantecophys} 软件包}{plantecophys 软件包}}\label{plantecophys}}
 
-Remko A. Duursma 在2015年发表了一篇文章
-\citet{Duursma2015Plantecophys}，\texttt{plantecophys}
-是其开发的一个R包工具集，用于对叶片气体交换数据进行分析和建模。实现了如下功能：
+Remko A. Duursma 在2015年发表了一篇文章 \citet{Duursma2015Plantecophys}，\texttt{plantecophys} 是其开发的一个R包工具集，用于对叶片气体交换数据进行分析和建模。实现了如下功能：
 
 \begin{itemize}
 \tightlist
@@ -664,16 +588,14 @@ Remko A. Duursma 在2015年发表了一篇文章
 
 \href{https://cran.r-project.org/web/packages/plantecophys/plantecophys.pdf}{plantecophys}。
 
-\section{\texorpdfstring{LI-6400XT CO\textsubscript{2}
-响应曲线的拟合}{LI-6400XT CO2 响应曲线的拟合}}\label{fit6400}
+\hypertarget{fit6400}{%
+\section{\texorpdfstring{LI-6400XT CO\textsubscript{2} 响应曲线的拟合}{LI-6400XT CO2 响应曲线的拟合}}\label{fit6400}}
 
-LI-6400XT CO\textsubscript{2} 响应曲线的拟合需要借助
-\texttt{plantecophys} 的 \texttt{fitaci} 实现，fitaci 函数为根据 FvCB
-模型对 A-Ci 曲线的测量数据进行拟合，并估算
-J\(_{max}\)、V\(_{cmax}\)、R\(_{d}\)及他们的标准差，并根据
+LI-6400XT CO\textsubscript{2} 响应曲线的拟合需要借助 \texttt{plantecophys} 的 \texttt{fitaci} 实现，fitaci 函数为根据 FvCB 模型对 A-Ci 曲线的测量数据进行拟合，并估算 J\(_{max}\)、V\(_{cmax}\)、R\(_{d}\)及他们的标准差，并根据
 \citet{Medlyn2002Temperature} 的方法考虑了温度的影响。
 
-\subsection{fitaci 函数介绍}\label{fitaci_intro}
+\hypertarget{fitaci_intro}{%
+\subsection{fitaci 函数介绍}\label{fitaci_intro}}
 
 \texttt{fitaci} 的用法如下\footnote{仅针对 C3 植物}：
 
@@ -693,7 +615,7 @@ J\(_{max}\)、V\(_{cmax}\)、R\(_{d}\)及他们的标准差，并根据
   \DataTypeTok{delsJ =} \FloatTok{641.3615}\NormalTok{, }\DataTypeTok{GammaStar =} \OtherTok{NULL}\NormalTok{, }
   \DataTypeTok{Km =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{id =} \OtherTok{NULL}\NormalTok{, ...)}
 
-\NormalTok{## S3 method for class 'acifit'}
+\CommentTok{## S3 method for class 'acifit'}
 \KeywordTok{plot}\NormalTok{(x, }\DataTypeTok{what =} \KeywordTok{c}\NormalTok{(}\StringTok{"data"}\NormalTok{, }\StringTok{"model"}\NormalTok{, }\StringTok{"none"}\NormalTok{),}
      \DataTypeTok{xlim =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{ylim =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{whichA =} \KeywordTok{c}\NormalTok{(}
        \StringTok{"Ac"}\NormalTok{, }\StringTok{"Aj"}\NormalTok{, }\StringTok{"Amin"}\NormalTok{, }\StringTok{"Ap"}\NormalTok{), }\DataTypeTok{add =} \OtherTok{FALSE}\NormalTok{,}
@@ -709,16 +631,13 @@ J\(_{max}\)、V\(_{cmax}\)、R\(_{d}\)及他们的标准差，并根据
 \begin{itemize}
 \tightlist
 \item
-  data：需要分析的数据，必须为 data.frame\footnote{具体参考 R
-    语言相关文档，为 R 语言最常用的数据格式}。 格式。
+  data：需要分析的数据，必须为 data.frame\footnote{具体参考 R 语言相关文档，为 R 语言最常用的数据格式}。
+  格式。
 \item
-  varnames：数据的表头，此处函数默认的表头为 LI-6400 的表头，分析
-  LI-6400 的数据时可以不用填写，直接使用默认的参数即可\footnote{在 R
-    中，使用参数的值为默认值时可以不用填写该参数，例如使用默认选项分析
-    LI-6400 数据时，可只填写 data 项，具体参考 R 的相关入门手册}。
+  varnames：数据的表头，此处函数默认的表头为 LI-6400 的表头，分析 LI-6400 的数据时可以不用填写，直接使用默认的参数即可\footnote{在 R 中，使用参数的值为默认值时可以不用填写该参数，例如使用默认选项分析 LI-6400 数据时，可只填写 data 项，具体参考
+    R 的相关入门手册}。
 \item
-  Tcorrect：如果为 TRUE，那么 J\(_{max}\)、V\(_{cmax}\)
-  的结果为温度校正结果，若 Tcorrect = FALSE，则为测量温度下的结果。
+  Tcorrect：如果为 TRUE，那么 J\(_{max}\)、V\(_{cmax}\) 的结果为温度校正结果，若 Tcorrect = FALSE，则为测量温度下的结果。
 \item
   Patm：为外界大气压。
 \item
@@ -729,54 +648,42 @@ J\(_{max}\)、V\(_{cmax}\)、R\(_{d}\)及他们的标准差，并根据
 \item
   fitTPU：是否拟合 TPU 限制，默认为 FALSE，参见详解。
 \item
-  x：对于plot.acifit，x 为fitaci返回的对象，简单理解为 将 fitaci
-  函数拟合结果赋值给一个变量，此处plot函数实际上为plot.acifit。
+  x：对于plot.acifit，x 为fitaci返回的对象，简单理解为 将 fitaci 函数拟合结果赋值给一个变量，此处plot函数实际上为plot.acifit。
 \item
   what：利用基础做图工具，默认为对数据和模型进行作图。
 \item
-  whichA：默认为对所有的光合速率进行作图（Aj=Jmax-limited (蓝色),
-  Ac=Vcmax- limited (红色), Hyperbolic minimum (黑色)), TPU-limited rate
-  (Ap, 如果模型有计算结果）。
+  whichA：默认为对所有的光合速率进行作图（Aj=Jmax-limited (蓝色), Ac=Vcmax- limited (红色),
+  Hyperbolic minimum (黑色)), TPU-limited rate (Ap, 如果模型有计算结果）。
 \end{itemize}
 
-其他参数请参考 FvCB 模型 \citet{Farquhar1980A} 或查看 plantecophys
-的帮助文档。
+其他参数请参考 FvCB 模型 \citet{Farquhar1980A} 或查看 plantecophys 的帮助文档。
 
-\subsubsection{fitaci函数详解}\label{fitaci_detail}
+\hypertarget{fitaci_detail}{%
+\subsubsection{fitaci函数详解}\label{fitaci_detail}}
 
 \begin{itemize}
 \item
   默认为非线性拟合，详见 \citet{Duursma2015Plantecophys}。
 \item
-  bilinear 方法使用两次线性拟合方法首先拟合 V\(_{cmax}\) 和
-  R\(_{d}\)，然后在拟合J\(_{max}\)，过渡点的选择为对所有数据拟合最适的点，类似
-  \citet{Gu2010Reliable}
-  的方法。该方法的优势时无论如何，都会返回拟合结果，尤其是非线性拟合失败时使用该方法，但若默认方法失败时，需首先检查是否数据存在问题。两种拟合方法的结果有轻微的差别\footnote{若默认拟合方法失败，数据也无问题，那么是非线性拟合初始值设定的原因}。
+  bilinear 方法使用两次线性拟合方法首先拟合 V\(_{cmax}\) 和 R\(_{d}\)，然后在拟合J\(_{max}\)，过渡点的选择为对所有数据拟合最适的点，类似 \citet{Gu2010Reliable} 的方法。该方法的优势时无论如何，都会返回拟合结果，尤其是非线性拟合失败时使用该方法，但若默认方法失败时，需首先检查是否数据存在问题。两种拟合方法的结果有轻微的差别\footnote{若默认拟合方法失败，数据也无问题，那么是非线性拟合初始值设定的原因}。
 \item
   onepoint 参考 \citet{De2016A}。
 \item
   citransition 使用时，数据将被区分为 V\(_{cmax}\) 限制（Ci \textless{}
-  citransition ）区域，以及 J\(_{max}\) 限制 (Ci \textgreater{}
-  citransition) 区域。
+  citransition ）区域，以及 J\(_{max}\) 限制 (Ci \textgreater{} citransition) 区域。
 \item
-  fitTPU：如果要计算TPU，要设置 fitTPU = TRUE，并且 fittingmethod =
-  ``bilinear''。但需要注意，当 TPU 被计算时，没有 J\(_{max}\)
-  限制的点的存在是可能的。TPU限制的发生是在A值不随 CO\(_{2}\)
-  的增加而增加时发生的，因此计算 TPU
-  是否有返回值，取决于测量数据是否有此情况出现。
+  fitTPU：如果要计算TPU，要设置 fitTPU = TRUE，并且 fittingmethod
+  = ``bilinear''。但需要注意，当 TPU 被计算时，没有 J\(_{max}\) 限制的点的存在是可能的。TPU限制的发生是在A值不随
+  CO\(_{2}\) 的增加而增加时发生的，因此计算 TPU 是否有返回值，取决于测量数据是否有此情况出现。
 \end{itemize}
 
-\section{\texorpdfstring{使用 \texttt{plantecophys} 拟合 LI-6400XT
-CO\textsubscript{2}
-响应曲线数据}{使用 plantecophys 拟合 LI-6400XT CO2 响应曲线数据}}\label{plantecophy_use}
+\hypertarget{plantecophy_use}{%
+\section{\texorpdfstring{使用 \texttt{plantecophys} 拟合 LI-6400XT CO\textsubscript{2} 响应曲线数据}{使用 plantecophys 拟合 LI-6400XT CO2 响应曲线数据}}\label{plantecophy_use}}
 
-\subsection{数据的前处理}\label{data6400}
+\hypertarget{data6400}{%
+\subsection{数据的前处理}\label{data6400}}
 
-虽然 R 软件支持直接导入 xlsx 的数据，但因为 LI-6400XT
-的数据记录文件内有其他空行或 remark
-等内容，增加了处理代码的量，\textbf{故而推荐将其数据先整理为如表
-\ref{tab:head6400} 样式，并另存为 csv 格式}\footnote{即仅保留测量值，删除其他所有头文件、空行、
-  remark 等信息}：
+虽然 R 软件支持直接导入 xlsx 的数据，但因为 LI-6400XT 的数据记录文件内有其他空行或 remark 等内容，增加了处理代码的量，\textbf{故而推荐将其数据先整理为如表 \ref{tab:head6400} 样式，并另存为 csv 格式}\footnote{即仅保留测量值，删除其他所有头文件、空行、 remark 等信息}：
 
 \begin{longtable}{rlrrrrrr}
 \caption{\label{tab:head6400}推荐 LI-6400 整理后数据样式}\\
@@ -793,11 +700,10 @@ Obs & HHMMSS & FTime & EBal. & Photo & Cond & Ci & Trmmol\\
 \bottomrule
 \end{longtable}
 
-\subsection{使用示例}\label{fitaci-p}
+\hypertarget{fitaci-p}{%
+\subsection{使用示例}\label{fitaci-p}}
 
-\texttt{plantecophys} 并非 base 的安装包，首次使用需要从 \texttt{CRAN}
-安装，可以使用图形界面安装，也可以直接用命令行安装\footnote{首次使用安装，更换电脑或者升级
-  R 软件后，如果没有拷贝 library，也需要运行安装命令}，推荐同时安装依赖。
+\texttt{plantecophys} 并非 base 的安装包，首次使用需要从 \texttt{CRAN} 安装，可以使用图形界面安装，也可以直接用命令行安装\footnote{首次使用安装，更换电脑或者升级 R 软件后，如果没有拷贝 library，也需要运行安装命令}，推荐同时安装依赖。
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1023,9 +929,7 @@ Obs & HHMMSS & FTime & EBal. & Photo & Cond & Ci & Trmmol\\
 \caption{\label{fig:fitaci6400}光合速率的不同的限制阶段}
 \end{figure}
 
-如果需要导出数据做他用，直接根据 \texttt{attributes}
-中看到的名称，选择对应的数据导出即可，如果使用 Rstudio
-的话，其自动补全的功能在选择数据上更方便。例如导出预测值和系数分别使用如下方式：
+如果需要导出数据做他用，直接根据 \texttt{attributes} 中看到的名称，选择对应的数据导出即可，如果使用 Rstudio 的话，其自动补全的功能在选择数据上更方便。例如导出预测值和系数分别使用如下方式：
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1038,21 +942,13 @@ Obs & HHMMSS & FTime & EBal. & Photo & Cond & Ci & Trmmol\\
 \end{Shaded}
 
 \begin{quote}
-需要注意的是，因为非线性拟合需要一个初始值，因此，使用默认方式（非线性拟合）的时候，会存在可能的拟合失败现象，此时可以使用
-\texttt{fitmethod\ =\ "bilinear"}，二者结果略有差别。
+需要注意的是，因为非线性拟合需要一个初始值，因此，使用默认方式（非线性拟合）的时候，会存在可能的拟合失败现象，此时可以使用 \texttt{fitmethod\ =\ "bilinear"}，二者结果略有差别。
 \end{quote}
 
-\subsubsection{\texorpdfstring{fitmethod = ``onepoint''
-介绍}{fitmethod = onepoint 介绍}}\label{onepoint}
+\hypertarget{onepoint}{%
+\subsubsection{fitmethod = ``onepoint'' 介绍}\label{onepoint}}
 
-\citet{De2016A} 发表了关于 one point 方法计算 \(V_{cmax}\) 和
-\(J_{max}\) 方法的文章，在 2017 年 11 月的更新中，plantecophys
-增加了响应的 R 软件实现方法， 该方法并非使用一个点计算 \(V_{cmax}\) 和
-\(J_{max}\)，而是对数据集中的每一个点的值进行估计，使用的方法为逆向了光合作用方程。输出为对每个原始数据加入了
-\(V_{cmax}\) 和
-\(J_{max}\)，当然一如既往的可以使用温度校准的方法。\textbf{并不建议该方法应用于整个
-ACi 曲线的数据，它的假设是在外部环境 CO\textsubscript{2}
-浓度和饱和光下，受到 Rubisco 所化速率的限制而不是 RUBP 的限制。}
+\citet{De2016A} 发表了关于 one point 方法计算 \(V_{cmax}\) 和 \(J_{max}\) 方法的文章，在 2017 年 11 月的更新中，plantecophys 增加了响应的 R 软件实现方法， 该方法并非使用一个点计算 \(V_{cmax}\) 和 \(J_{max}\)，而是对数据集中的每一个点的值进行估计，使用的方法为逆向了光合作用方程。输出为对每个原始数据加入了 \(V_{cmax}\) 和 \(J_{max}\)，当然一如既往的可以使用温度校准的方法。\textbf{并不建议该方法应用于整个 ACi 曲线的数据，它的假设是在外部环境 CO\textsubscript{2} 浓度和饱和光下，受到 Rubisco 所化速率的限制而不是 RUBP 的限制。}
 
 基于上面的描述，他们的模型如下：
 
@@ -1068,27 +964,19 @@ K_m = K_c (1 + \frac{O_i}{K_o})
 \label{eq:km}
 \end{equation}
 
-未知参数均由文献中的方法进行计算，具体可参考 \citet{De2016A}
-的原文,但上述方法的缺陷为还要使用 ACi 曲线来估算
-R\textsubscript{day}，因此作者使用了1.5\% V\textsubscript{cmax} 作为
-R\textsubscript{day}，因此公式 \eqref{eq:inverseA} 可变换为：
+未知参数均由文献中的方法进行计算，具体可参考 \citet{De2016A} 的原文,但上述方法的缺陷为还要使用 ACi 曲线来估算 R\textsubscript{day}，因此作者使用了1.5\% V\textsubscript{cmax} 作为 R\textsubscript{day}，因此公式 \eqref{eq:inverseA} 可变换为：
 
 \begin{equation}
 \hat{V}_{cmax} = A_{sat} (\frac{C_i + K_m}{C_i - \Gamma^*} - 0.015)
 \label{eq:onepoint}
 \end{equation}
 
-另一个重要的模型的假设为 J\textsubscript{max} 与 V\textsubscript{cmax}
-是成比例的， J\textsubscript{max} 的计算是通过 C\textsubscript{i}
-transition point 来实现的，文章中的比值均值为 1.9，范围在 1.68
-\textasciitilde{} 2.14 之间。
+另一个重要的模型的假设为 J\textsubscript{max} 与 V\textsubscript{cmax} 是成比例的， J\textsubscript{max} 的计算是通过 C\textsubscript{i} transition point 来实现的，文章中的比值均值为 1.9，范围在 1.68 \textasciitilde{} 2.14 之间。
 
-\subsection{\texorpdfstring{使用 `onepoint' 单独计算
-V\textsubscript{cmax} 和
-J\textsubscript{max}}{使用 onepoint 单独计算 Vcmax 和 Jmax}}\label{onpoint_fit}
+\hypertarget{onpoint_fit}{%
+\subsection{\texorpdfstring{使用 `onepoint' 单独计算 V\textsubscript{cmax} 和 J\textsubscript{max}}{使用 `onepoint' 单独计算 Vcmax 和 Jmax}}\label{onpoint_fit}}
 
-目前我手头没有相应数据，仅有使用 LI-6400 测试 auto log 2
-时的一个数据，我们用这个来示范该方法的使用：
+目前我手头没有相应数据，仅有使用 LI-6400 测试 auto log 2 时的一个数据，我们用这个来示范该方法的使用：
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1155,12 +1043,10 @@ aci\_fit.Photo & aci\_fit.Vcmax & aci\_fit.Jmax\\
 \end{tabular}
 \end{table}
 
-需要注意，为保证结果的精确，如果不设定 Rd, 也即文献中的 Rday，
-模型是无法计算的，因此上面的示例中虚构了一个，实际操作用一般使用标准的
-ACi 测量计算。
+需要注意，为保证结果的精确，如果不设定 Rd, 也即文献中的 Rday， 模型是无法计算的，因此上面的示例中虚构了一个，实际操作用一般使用标准的 ACi 测量计算。
 
-\subsection{\texorpdfstring{多条 CO\textsubscript{2}
-响应曲线的拟合}{多条 CO2 响应曲线的拟合}}\label{multi_curve}
+\hypertarget{multi_curve}{%
+\subsection{\texorpdfstring{多条 CO\textsubscript{2} 响应曲线的拟合}{多条 CO2 响应曲线的拟合}}\label{multi_curve}}
 
 fitacis 函数实际上是 fitaci 函数的扩展，方便一次拟合多条曲线\footnote{需要注意，此时fitmethod一般推荐使用bilinear。}。函数的参数如下：
 
@@ -1170,7 +1056,7 @@ fitacis 函数实际上是 fitaci 函数的扩展，方便一次拟合多条曲�
         \StringTok{"bilinear"}\NormalTok{),}\DataTypeTok{progressbar =} \OtherTok{TRUE}\NormalTok{, }
         \DataTypeTok{quiet =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{id =} \OtherTok{NULL}\NormalTok{, ...)}
 
-\NormalTok{## S3 method for class 'acifits'}
+\CommentTok{## S3 method for class 'acifits'}
 \KeywordTok{plot}\NormalTok{(x, }\DataTypeTok{how =} \KeywordTok{c}\NormalTok{(}\StringTok{"manyplots"}\NormalTok{, }\StringTok{"oneplot"}\NormalTok{), }
      \DataTypeTok{highlight =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{ylim =} \OtherTok{NULL}\NormalTok{, }
      \DataTypeTok{xlim =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{add =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{what =} \KeywordTok{c}\NormalTok{(}\StringTok{"model"}\NormalTok{,}
@@ -1180,13 +1066,12 @@ fitacis 函数实际上是 fitaci 函数的扩展，方便一次拟合多条曲�
 
 \textbf{主要参数详解：}
 
-实际上 fitacis 与 fitaci 模型算法完全一致，只不过增加了一个 group
-参数，用于区分不同测量的数据，具体请参考举例内容。
+实际上 fitacis 与 fitaci 模型算法完全一致，只不过增加了一个 group 参数，用于区分不同测量的数据，具体请参考举例内容。
 
-\subsubsection{fitacis 函数应用举例}\label{fitacis_exa}
+\hypertarget{fitacis_exa}{%
+\subsubsection{fitacis 函数应用举例}\label{fitacis_exa}}
 
-下文代码根据 plantecophys
-中的示例代码修改，进行演示，原代码请参考其帮助文档。
+下文代码根据 plantecophys 中的示例代码修改，进行演示，原代码请参考其帮助文档。
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1331,14 +1216,12 @@ fitacis 函数实际上是 fitaci 函数的扩展，方便一次拟合多条曲�
 \caption{\label{fig:fitacisr}fitacis作图结果}
 \end{figure}
 
-可以看出，\texttt{fitaci} 和 \texttt{fitacis}
-用法基本一致，各行代码均已经注释，更详细用法请参函数考帮助。
+可以看出，\texttt{fitaci} 和 \texttt{fitacis} 用法基本一致，各行代码均已经注释，更详细用法请参函数考帮助。
 
-\subsection{\texorpdfstring{\texttt{findCiTransition}
-函数}{findCiTransition 函数}}\label{transition}
+\hypertarget{transition}{%
+\subsection{\texorpdfstring{\texttt{findCiTransition} 函数}{findCiTransition 函数}}\label{transition}}
 
-计算 CiTransition 的函数，第一点为 Ac \& Aj，第二点为 Aj \&
-Ap，并且仅在计算 TPU 的前提下才会有第二点出现。
+计算 CiTransition 的函数，第一点为 Ac \& Aj，第二点为 Aj \& Ap，并且仅在计算 TPU 的前提下才会有第二点出现。
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1349,11 +1232,11 @@ Ap，并且仅在计算 TPU 的前提下才会有第二点出现。
 参数使用，object 为 fitaci 函数对象，或者整个的 \texttt{Photosyn} 函数。
 \ldots{} 为使用 \texttt{Photosyn} 时可传递的参数。
 
-\section{C4 植物光合}\label{c4}
+\hypertarget{c4}{%
+\section{C4 植物光合}\label{c4}}
 
-之前的部分模型全部为关于 C3 植物的拟合，而
-\citet{Caemmerer2000Biochemical} 的方法，则是针对 C4 植物的 A-Ci
-曲线的实现。
+之前的部分模型全部为关于 C3 植物的拟合，而 \citet{Caemmerer2000Biochemical} 的方法，则是针对
+C4 植物的 A-Ci 曲线的实现。
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1410,10 +1293,10 @@ Ap，并且仅在计算 TPU 的前提下才会有第二点出现。
   FRM：明呼吸中为叶肉呼吸的比例。
 \end{itemize}
 
-以上参数均来自
-\citet{Caemmerer2000Biochemical}，括号中的参数值均为默认值，具体应用时请按照实际情况修改。
+以上参数均来自 \citet{Caemmerer2000Biochemical}，括号中的参数值均为默认值，具体应用时请按照实际情况修改。
 
-\subsection{C4 植物光合速率的计算}\label{c4_sim}
+\hypertarget{c4_sim}{%
+\subsection{C4 植物光合速率的计算}\label{c4_sim}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1426,16 +1309,16 @@ Ap，并且仅在计算 TPU 的前提下才会有第二点出现。
 
 \begin{figure}
 \centering
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-14-1.pdf}
-\caption{\label{fig:unnamed-chunk-14}C4 植物 A-Ci 作图}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-15-1.pdf}
+\caption{\label{fig:unnamed-chunk-15}C4 植物 A-Ci 作图}
 \end{figure}
 
 \cleardoublepage
 
-\chapter{气孔导度模型的拟合}\label{stomotal_sim}
+\hypertarget{stomotal_sim}{%
+\chapter{气孔导度模型的拟合}\label{stomotal_sim}}
 
-气孔导度模型的拟合是通过 \texttt{fitBB} 来实现的，可以拟合三个
-\textbf{Ball-Berry 类型的气孔导度模型}，共有下面几个参数：
+气孔导度模型的拟合是通过 \texttt{fitBB} 来实现的，可以拟合三个 \textbf{Ball-Berry 类型的气孔导度模型}，共有下面几个参数：
 
 \begin{itemize}
 \tightlist
@@ -1451,7 +1334,8 @@ Ap，并且仅在计算 TPU 的前提下才会有第二点出现。
 
 其三个模型的简介如下：
 
-\section{BallBerry 模型}\label{ballberry}
+\hypertarget{ballberry}{%
+\section{BallBerry 模型}\label{ballberry}}
 
 \citet{Ball1987A} 发表的文章中的模型：
 
@@ -1460,11 +1344,10 @@ g_s = g0 + g1(\frac{A h_r}{C_a})
 \label{eq:ballberry}
 \end{equation}
 
-其中 A 为净光合速率，g\textsubscript{0} 和 g\textsubscript{1}
-为拟合参数，h\textsubscript{r} 为叶片表面的相对湿度，C\textsubscript{a}
-为叶片处CO\textsubscript{2}浓度。
+其中 A 为净光合速率，g\textsubscript{0} 和 g\textsubscript{1} 为拟合参数，h\textsubscript{r} 为叶片表面的相对湿度，C\textsubscript{a} 为叶片处CO\textsubscript{2}浓度。
 
-\section{BBLeuning 模型}\label{bbleuning}
+\hypertarget{bbleuning}{%
+\section{BBLeuning 模型}\label{bbleuning}}
 
 \citet{leuning1995a} 发表的文章中的模型：
 
@@ -1473,11 +1356,10 @@ g_s = g_0 + g_1(\frac{A}{(C_a - \Gamma)(1 + \frac{D}{D_0})})
 \label{eq:BBLeuning}
 \end{equation}
 
-其中 \(\Gamma\) 为 CO\textsubscript{2}
-补偿点，g\textsubscript{0}、g\textsubscript{1} 和 D\textsubscript{0}
-为拟合参数。
+其中 \(\Gamma\) 为 CO\textsubscript{2} 补偿点，g\textsubscript{0}、g\textsubscript{1} 和 D\textsubscript{0} 为拟合参数。
 
-\section{BBOptiFull 模型}\label{bboptifull}
+\hypertarget{bboptifull}{%
+\section{BBOptiFull 模型}\label{bboptifull}}
 
 \citet{Medlyn2011Reconciling} 发表的文章中的模型：
 
@@ -1487,14 +1369,13 @@ g_s^* \approx g_0 + g_1(1 + \frac{g_1}{D}) \frac{A}{C_a}
 \end{equation}
 
 额外的参数 g\textsubscript{k} 来自于 \citet{Duursma2013Near}
-
 \begin{equation}
 g_s = g_0 + 1.6(1 + \frac{g_1}{D}(1-g_k)) \frac{A}{C_a}
 \label{eq:Duursm}
 \end{equation}
 
-\section{\texorpdfstring{\texttt{fitBB}
-函数}{fitBB 函数}}\label{fitbb-p}
+\hypertarget{fitbb-p}{%
+\section{\texorpdfstring{\texttt{fitBB} 函数}{fitBB 函数}}\label{fitbb-p}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1513,9 +1394,7 @@ g_s = g_0 + 1.6(1 + \frac{g_1}{D}(1-g_k)) \frac{A}{C_a}
 \item
   data：待分析的数据文件。
 \item
-  varnames：注意，函数默认数据为 6400 格式，因此 6800
-  的数据文件要安装上文的参数修改。 相对湿度只有在使用 BallBerry
-  时才需要输入。
+  varnames：注意，函数默认数据为 6400 格式，因此 6800 的数据文件要安装上文的参数修改。 相对湿度只有在使用 BallBerry 时才需要输入。
 \item
   gsmodel：上述三个模型之一。
 \item
@@ -1548,11 +1427,10 @@ g_s = g_0 + 1.6(1 + \frac{g_1}{D}(1-g_k)) \frac{A}{C_a}
 ## (where myfit is the name of the object returned by fitBB)
 \end{verbatim}
 
-\section{\texorpdfstring{\texttt{fitBBs}
-函数}{fitBBs 函数}}\label{fitbbs}
+\hypertarget{fitbbs}{%
+\section{\texorpdfstring{\texttt{fitBBs} 函数}{fitBBs 函数}}\label{fitbbs}}
 
-如果我们有多个物种的数据，那么使用 \texttt{fitBBs}
-则可以快速拟合多条曲线的数据。我们先整合两次的数据，然后再查看运行结果：
+如果我们有多个物种的数据，那么使用 \texttt{fitBBs} 则可以快速拟合多条曲线的数据。我们先整合两次的数据，然后再查看运行结果：
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1595,22 +1473,21 @@ g_s = g_0 + 1.6(1 + \frac{g_1}{D}(1-g_k)) \frac{A}{C_a}
 
 \cleardoublepage
 
-\chapter{光合最优气孔导度耦合模型}\label{stomotal_couple}
+\hypertarget{stomotal_couple}{%
+\chapter{光合最优气孔导度耦合模型}\label{stomotal_couple}}
 
 \citet{Cowan1977Stomatal} 关于最优气孔导度的描述概括如下：
-最优气孔行为理论认为气孔的最优化行为就是在某一时间段内，
-最大化光合碳固定的同时最小化蒸腾作用，也就是说，对于一定的水分消耗，最大化光合碳固定。即使得：
+最优气孔行为理论认为气孔的最优化行为就是在某一时间段内， 最大化光合碳固定的同时最小化蒸腾作用，也就是说，对于一定的水分消耗，最大化光合碳固定。即使得：
 
 \begin{equation}
 A - \lambda E
 \label{eq:weff}
 \end{equation}
 
-有最大化，其中 \(\lambda\) 是临界水分利用效率，也即植物损耗单位水分的 C
-生产量，单位一般为
-\(mol \: CO_2 \cdot mol^{-1} H_2O\)，可通过光合速率和蒸腾速率计算。
+有最大化，其中 \(\lambda\) 是临界水分利用效率，也即植物损耗单位水分的 C 生产量，单位一般为 \(mol \: CO_2 \cdot mol^{-1} H_2O\)，可通过光合速率和蒸腾速率计算。
 
-\section{\texorpdfstring{\texttt{FARAO} 函数}{FARAO 函数}}\label{farao}
+\hypertarget{farao}{%
+\section{\texorpdfstring{\texttt{FARAO} 函数}{FARAO 函数}}\label{farao}}
 
 \texttt{FARAO} 函数用于找到最大化 \(A - \lambda E\) 的** Ci **值。
 
@@ -1627,16 +1504,14 @@ A - \lambda E
 \end{Highlighting}
 \end{Shaded}
 
-其参数同 \texttt{fitaci} 和
-\texttt{Photosyn}，在此不多做介绍，可参考\citep[\citet{Buckley2014Is},
-\citet{Medlyn2011Reconciling}]{Cowan1977Stomatal}。
+其参数同 \texttt{fitaci} 和 \texttt{Photosyn}，在此不多做介绍，可参考\citep[\citet{Buckley2014Is}, \citet{Medlyn2011Reconciling}]{Cowan1977Stomatal}。
 
 \cleardoublepage
 
-\chapter{光合气孔导度耦合模型}\label{photo_stomo}
+\hypertarget{photo_stomo}{%
+\chapter{光合气孔导度耦合模型}\label{photo_stomo}}
 
-\citet{Duursma2015Plantecophys} 对于气体交换耦合模型的简述如下
-\footnote{详细内容请参考原文}：
+\citet{Duursma2015Plantecophys} 对于气体交换耦合模型的简述如下 \footnote{详细内容请参考原文}：
 
 \begin{itemize}
 \tightlist
@@ -1678,17 +1553,12 @@ g_s = g_0 + g_1 \frac{A_n}{C_a} f(D)
 \label{eq:driver}
 \end{equation}
 
-整合公式 \eqref{eq:minfvcb}, \eqref{eq:cgm}, \eqref{eq:ficker} 和
-\eqref{eq:driver}，气体交换耦合模型有很多更大尺度上的应用，例如
-\citet{Duursma2012MAESPA} 和 wang1998a，可用于预测 An，gs
-和蒸腾速率对主要环境驱动因子的响应（除土壤水分），并包含了主要的叶片性状（g1，V\textsubscript{cmax},
-J\textsubscript{max}, R\textsubscript{d} 以及他们的温度依赖性）。
+整合公式 \eqref{eq:minfvcb}, \eqref{eq:cgm}, \eqref{eq:ficker} 和 \eqref{eq:driver}，气体交换耦合模型有很多更大尺度上的应用，例如 \citet{Duursma2012MAESPA} 和 wang1998a，可用于预测 An，gs 和蒸腾速率对主要环境驱动因子的响应（除土壤水分），并包含了主要的叶片性状（g1，V\textsubscript{cmax}, J\textsubscript{max}, R\textsubscript{d} 以及他们的温度依赖性）。
 
-\section{\texorpdfstring{\texttt{Photosyn}
-函数}{Photosyn 函数}}\label{photosyn}
+\hypertarget{photosyn}{%
+\section{\texorpdfstring{\texttt{Photosyn} 函数}{Photosyn 函数}}\label{photosyn}}
 
-Photosyn 为耦合的光合--气孔导度模型，基于 Farquhar 光合模型和 Ball-Berry
-气孔导度模型。
+Photosyn 为耦合的光合--气孔导度模型，基于 Farquhar 光合模型和 Ball-Berry 气孔导度模型。
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1712,11 +1582,10 @@ Photosyn 为耦合的光合--气孔导度模型，基于 Farquhar 光合模型�
 \end{Highlighting}
 \end{Shaded}
 
-因为是光合气孔导度模型的耦合，故而参数与之前的函数相同，参见
-\ref{fitaci-p} 和 \ref{fitbb-p} 部分的内容。
+因为是光合气孔导度模型的耦合，故而参数与之前的函数相同，参见 \ref{fitaci-p} 和 \ref{fitbb-p} 部分的内容。
 
-\subsection{\texorpdfstring{\texttt{Photosyn}
-使用举例}{Photosyn 使用举例}}\label{photo_exam}
+\hypertarget{photo_exam}{%
+\subsection{\texorpdfstring{\texttt{Photosyn} 使用举例}{Photosyn 使用举例}}\label{photo_exam}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1824,28 +1693,23 @@ Photosyn 为耦合的光合--气孔导度模型，基于 Farquhar 光合模型�
 
 需求与供给的作图 \ref{fig:supply}。
 
-\section{\texorpdfstring{\texttt{PhotosynEB}
-函数}{PhotosynEB 函数}}\label{photsyneb}
+\hypertarget{photsyneb}{%
+\section{\texorpdfstring{\texttt{PhotosynEB} 函数}{PhotosynEB 函数}}\label{photsyneb}}
 
 使用同 \texttt{Photosyn}，只不过使用能量平衡法来计算叶温。
 目前版本尚存在bug，不能直接提供 GS 来计算，否则会出现未知错误。
 
-\section{\texorpdfstring{\texttt{PhotosynTuzet}
-函数}{PhotosynTuzet 函数}}\label{photosyntuzet}
+\hypertarget{photosyntuzet}{%
+\section{\texorpdfstring{\texttt{PhotosynTuzet} 函数}{PhotosynTuzet 函数}}\label{photosyntuzet}}
 
-同样为光合气孔导度耦合模型，只不过基于 \citet{tuzet2003a}
-的气孔导度模型，现将其描述如下：
+同样为光合气孔导度耦合模型，只不过基于 \citet{tuzet2003a} 的气孔导度模型，现将其描述如下：
 
 \begin{equation}
 g_{co2} = g_0 + \frac{a A}{C_i - \Gamma} f_{\Psi v}
 \label{eq:tuzet}
 \end{equation}
 
-其中 g\textsubscript{co2} 为对 CO\textsubscript{2} 的气孔导度，
-g\textsubscript{0} 是残余导度（residual conductance）(在补偿点时限制
-g\textsubscript{CO2} 的值）， A 为光合速率，C\textsubscript{i}
-为胞间二氧化碳浓度，\(\Gamma\) 为 CO\textsubscript{2} 补偿点，a
-是经验系数。
+其中 g\textsubscript{co2} 为对 CO\textsubscript{2} 的气孔导度， g\textsubscript{0} 是残余导度（residual conductance）(在补偿点时限制 g\textsubscript{CO2} 的值）， A 为光合速率，C\textsubscript{i} 为胞间二氧化碳浓度，\(\Gamma\) 为 CO\textsubscript{2} 补偿点，a 是经验系数。
 
 一个根据经验的逻辑方程用于描述气孔对水势的敏感性：
 
@@ -1854,21 +1718,17 @@ f_{\Psi v} = \frac{1 + exp(s_f \Psi_f)}{1 + exp(s_f(\Psi_f - \Psi_v))}
 \label{eq:ftuzet}
 \end{equation}
 
-\(\Psi_v\) 是指叶片水势，\(\Psi_f\) 是参比势能， 该方程假设在水势接近于
-0 时，气孔对叶片水势不敏感，并且气孔随着 \(\Psi_v\)
-的下降快速关闭。\(\Psi_f\) 和 \(s_f\) (曲线形状参数)
-依赖于不同物种的形态学适应以及生长过程中所处的环境。
+\(\Psi_v\) 是指叶片水势，\(\Psi_f\) 是参比势能， 该方程假设在水势接近于 0 时，气孔对叶片水势不敏感，并且气孔随着 \(\Psi_v\) 的下降快速关闭。\(\Psi_f\) 和 \(s_f\) (曲线形状参数) 依赖于不同物种的形态学适应以及生长过程中所处的环境。
 
-\subsection{\texorpdfstring{\texttt{PhotosynTuzet}
-的参数}{PhotosynTuzet 的参数}}\label{photosyntuzet_para}
+\hypertarget{photosyntuzet_para}{%
+\subsection{\texorpdfstring{\texttt{PhotosynTuzet} 的参数}{PhotosynTuzet 的参数}}\label{photosyntuzet_para}}
 
-除 \citet{tuzet2003a} 模型中使用的参数外，其他参数都继承了
-\texttt{Photosyn} 的参数
+除 \citet{tuzet2003a} 模型中使用的参数外，其他参数都继承了 \texttt{Photosyn} 的参数
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{PhotosynTuzet}\NormalTok{(}\DataTypeTok{g1 =} \DecValTok{8}\NormalTok{, }\DataTypeTok{Ca =} \DecValTok{400}\NormalTok{, }\DataTypeTok{psis =} \DecValTok{0}\NormalTok{,}
-              \DataTypeTok{kl =} \DecValTok{2}\NormalTok{, }\DataTypeTok{sf =} \DecValTok{3}\NormalTok{, }\DataTypeTok{psif =} \OperatorTok{-}\DecValTok{2}\NormalTok{,}
+              \DataTypeTok{kl =} \DecValTok{2}\NormalTok{, }\DataTypeTok{sf =} \DecValTok{3}\NormalTok{, }\DataTypeTok{psif =} \DecValTok{-2}\NormalTok{,}
 \NormalTok{...)}
 \end{Highlighting}
 \end{Shaded}
@@ -1882,8 +1742,7 @@ f_{\Psi v} = \frac{1 + exp(s_f \Psi_f)}{1 + exp(s_f(\Psi_f - \Psi_v))}
 \item
   psis，土壤水势（Mpa）。
 \item
-  kl：Leaf-speciﬁc hydraulic conductance（叶片导水参数
-  (\(mmol \cdot m^{-2} \cdot s^{-1} \cdot MPa^{-1}\))，叶片蒸腾量、叶片面积及叶片水势计算）。
+  kl：Leaf-speciﬁc hydraulic conductance（叶片导水参数 (\(mmol \cdot m^{-2} \cdot s^{-1} \cdot MPa^{-1}\))，叶片蒸腾量、叶片面积及叶片水势计算）。
 \item
   sf：曲线形状参数。
 \item
@@ -1892,10 +1751,10 @@ f_{\Psi v} = \frac{1 + exp(s_f \Psi_f)}{1 + exp(s_f(\Psi_f - \Psi_v))}
 
 \cleardoublepage
 
-\chapter{RHtoVPD 函数}\label{rhtovpd}
+\hypertarget{rhtovpd}{%
+\chapter{RHtoVPD 函数}\label{rhtovpd}}
 
-该函数为一系列的工具，用于温度、湿度不同单位之间的换算
-\citet{Jones1993Plants} ：
+该函数为一系列的工具，用于温度、湿度不同单位之间的换算 \citet{Jones1993Plants} ：
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1945,11 +1804,13 @@ Tair：空气温度(\textcelsius) 。
 
 \cleardoublepage
 
-\chapter{光响应曲线的拟合}\label{lrc_fit}
+\hypertarget{lrc_fit}{%
+\chapter{光响应曲线的拟合}\label{lrc_fit}}
 
 光响应曲线模型有很多，主要分为四大类，直角双曲线，非直角双曲线，指数以及直角双曲线修正模型，我们分别对这四类进行阐述。
 
-\section{直角双曲线模型}\label{rec_mod}
+\hypertarget{rec_mod}{%
+\section{直角双曲线模型}\label{rec_mod}}
 
 \citet{BalyEC1935} 提出了直角双曲线模型，它的表达式为：
 
@@ -1965,33 +1826,29 @@ P_{n}  = \frac{\alpha I\ P_{nmax}}{\alpha I + P_{nmax}}- R_{d}
 \item
   I 为光强；
 \item
-  \(\alpha\)
-  为光响应曲线在光强为0时的斜率，即光响应曲线的初始斜率，也称之为初始量子效率；
+  \(\alpha\) 为光响应曲线在光强为0时的斜率，即光响应曲线的初始斜率，也称之为初始量子效率；
 \item
   \(P_{nmax}\) 为最大净光合速率；
 \item
   \(R_{d}\)：为暗呼吸速率。
 \end{itemize}
 
-对 \eqref{eq:rec} 求导可知其导数大于
-0，也就是直角双曲线是一个没有极值的渐近线，因此，无法由 \eqref{eq:rec}
-求得最大光合速率的饱和光强\footnote{直角双曲线和非直角双曲线模型类似，如果测量时饱和光强之后光合速率不下降，则计算的P\(_{nmax}\)则远大于实测值。}。
+对 \eqref{eq:rec} 求导可知其导数大于 0，也就是直角双曲线是一个没有极值的渐近线，因此，无法由 \eqref{eq:rec} 求得最大光合速率的饱和光强\footnote{直角双曲线和非直角双曲线模型类似，如果测量时饱和光强之后光合速率不下降，则计算的P\(_{nmax}\)则远大于实测值。}。
 
-因此就需要使用弱光条件下 (\(\leq\) 200
-\(\mu mol\cdot m^{-2}\cdot s^{-1}\)) 的数据得到表观量子效率（apparent
-quantum efficiency，AQE），利用非线性最小二乘法估算 P\(_{nmax}\)
-，然后利用 \citet{YEZiPiao2010} 的式 \eqref{eq:aqe} 求解 \(I_{sat}\)，
+因此就需要使用弱光条件下
+(\(\leq\) 200 \(\mu mol\cdot m^{-2}\cdot s^{-1}\)) 的数据得到表观量子效率（apparent
+quantum efficiency，AQE），利用非线性最小二乘法估算 P\(_{nmax}\) ，然后利用 \citet{YEZiPiao2010} 的式 \eqref{eq:aqe} 求解 \(I_{sat}\)，
 
 \begin{equation}
 P_{nmax}= AQE \times I_{sat} - R_{d}
 \label{eq:aqe}
 \end{equation}
 
-但此方法测得的光饱和点远小于实测值，我们采用 0.7P\(_{nmax}\)
-\citet{ZhangXS2009}、0.9P\(_{nmax}\)
+但此方法测得的光饱和点远小于实测值，我们采用 0.7P\(_{nmax}\) \citet{ZhangXS2009}、0.9P\(_{nmax}\)
 \citet{HuangHY2009}、或其他设定的值来的来估算\(I_{sat}\)。
 
-\subsection{直角双曲线模型的实现}\label{rec_fit}
+\hypertarget{rec_fit}{%
+\subsection{直角双曲线模型的实现}\label{rec_fit}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2101,14 +1958,10 @@ P_{nmax}= AQE \times I_{sat} - R_{d}
 \item
   数据的导入，这与之前相同，具体格式方法参考前文 \ref{fitaci}。
 \item
-  光响应曲线的拟合，使用到了非线性模型 nlsLM，也可以使用
-  nls，具体实现方法请查看参考文档。
+  光响应曲线的拟合，使用到了非线性模型 nlsLM，也可以使用 nls，具体实现方法请查看参考文档。
 \item
-  求饱和点和补偿点，补偿点的计算根据其定义，净光合速率为
-  0，求解模型在一定区间的根来计算，而饱和点则较为麻烦，若使用式
-  \eqref{eq:aqe} 计算，那么饱和点远远低于我们实际需求的，因此，我们使用了
-  0.75P\(_{nmax}\)
-  来计算，求得目标区间的根。当然也可以采用其他比例来作为饱和点光合速率。
+  求饱和点和补偿点，补偿点的计算根据其定义，净光合速率为 0，求解模型在一定区间的根来计算，而饱和点则较为麻烦，若使用式 \eqref{eq:aqe}
+  计算，那么饱和点远远低于我们实际需求的，因此，我们使用了 0.75P\(_{nmax}\) 来计算，求得目标区间的根。当然也可以采用其他比例来作为饱和点光合速率。
 \end{itemize}
 
 \begin{table}[t]
@@ -2126,12 +1979,12 @@ Rd & 0.2810926 & 0.0789338 & 3.561117 & 0.0051716\\
 \end{tabular}
 \end{table}
 
-最终的数据拟结果如图 \ref{fig:recr} 所示，拟合的参数及结果见表
-\ref{tab:rectable}。
+最终的数据拟结果如图 \ref{fig:recr} 所示，拟合的参数及结果见表 \ref{tab:rectable}。
 
 \cleardoublepage
 
-\section{非直角双曲线模型}\label{nonrec_mod}
+\hypertarget{nonrec_mod}{%
+\section{非直角双曲线模型}\label{nonrec_mod}}
 
 \citet{Thornley1976} 提出了非直角双曲线模型，它的表达式为：
 
@@ -2140,12 +1993,10 @@ P_{n} = \frac{\alpha I + P_{nmax} \sqrt{(\alpha I + P_{nmax})^{2} - 4  \theta \a
 \label{eq:nrec}
 \end{equation}
 
-其中，\(\theta\)
-为表示曲线弯曲程度的曲角参数，取值为\(0\leq \theta \leq 1\)。其他参数意义同式
-\eqref{eq:rec}。同样如同直角双曲线模型，式仍然没有极值，无法求得
-\(I_{sat}\)，可以仍然参考直角双曲线模型的方式进行计算。
+其中，\(\theta\) 为表示曲线弯曲程度的曲角参数，取值为\(0\leq \theta \leq 1\)。其他参数意义同式 \eqref{eq:rec}。同样如同直角双曲线模型，式仍然没有极值，无法求得 \(I_{sat}\)，可以仍然参考直角双曲线模型的方式进行计算。
 
-\subsection{非直角双曲线模型的实现}\label{nonrec_mode_exam}
+\hypertarget{nonrec_mode_exam}{%
+\subsection{非直角双曲线模型的实现}\label{nonrec_mode_exam}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2263,26 +2114,24 @@ theta & 0.3700908 & 0.0493403 & 7.500783 & 0.0000369\\
 \end{tabular}
 \end{table}
 
-最终的数据拟结果如图 \ref{fig:nrecr} 所示，拟合的参数及结果见表
-\ref{tab:nrectable}。单纯从作图来看，本例数据使用非直角双曲线与散点图重合程度更高。
+最终的数据拟结果如图 \ref{fig:nrecr} 所示，拟合的参数及结果见表 \ref{tab:nrectable}。单纯从作图来看，本例数据使用非直角双曲线与散点图重合程度更高。
 
 \cleardoublepage
 
-\section{指数模型}\label{lrc_exp}
+\hypertarget{lrc_exp}{%
+\section{指数模型}\label{lrc_exp}}
 
-光合指数模型较多，我们此处使用的指数函数的模型
-\citet{Prado1997Photosynthetic}，其表达式为：
+光合指数模型较多，我们此处使用的指数函数的模型 \citet{Prado1997Photosynthetic}，其表达式为：
 
 \begin{equation}
 P_{n} = P_{nmax}[1 - e^{-b(I-I_{C})}]
 \label{eq:exp}
 \end{equation}
 
-其中，\(I_{c}\) 为光补偿点，\(e\)
-为自然对数的底，b为常数，其他参数意义同
-\eqref{eq:exp}。同样，该方程仍然是没有极值的函数，但我们可以直接求得光补偿点。
+其中，\(I_{c}\) 为光补偿点，\(e\) 为自然对数的底，b为常数，其他参数意义同 \eqref{eq:exp}。同样，该方程仍然是没有极值的函数，但我们可以直接求得光补偿点。
 
-\subsection{指数模型的实现}\label{lrc_exp_exam}
+\hypertarget{lrc_exp_exam}{%
+\subsection{指数模型的实现}\label{lrc_exp_exam}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2320,7 +2169,7 @@ P_{n} = P_{nmax}[1 - e^{-b(I-I_{C})}]
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{## 拟合图形}
+\CommentTok{## 拟合图形}
 \KeywordTok{library}\NormalTok{(ggplot2)}
 \NormalTok{light <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{lrc_Q =}\NormalTok{ lrc}\OperatorTok{$}\NormalTok{PARi, }\DataTypeTok{lrc_A =}\NormalTok{ lrc}\OperatorTok{$}\NormalTok{Photo)}
 
@@ -2374,12 +2223,12 @@ b & 0.0041183 & 0.0002012 & 20.467032 & 0.0000000\\
 \end{tabular}
 \end{table}
 
-最终的数据拟结果如图 \ref{fig:nexpr} 所示，拟合的参数及结果见表
-\ref{tab:nexptable}。
+最终的数据拟结果如图 \ref{fig:nexpr} 所示，拟合的参数及结果见表 \ref{tab:nexptable}。
 
 \cleardoublepage
 
-\section{直角双曲线的修正模型}\label{rev_rec}
+\hypertarget{rev_rec}{%
+\section{直角双曲线的修正模型}\label{rev_rec}}
 
 \citet{YEZiPiao2010} 直角双曲线修正模型的表达式如式 \eqref{eq:mrec} 所示：
 
@@ -2388,11 +2237,9 @@ P_{n} = \alpha \frac{1-\beta I}{1+\gamma I} I - R_{d}
 \label{eq:mrec}
 \end{equation}
 
-其中，\(\beta\) 和 \(\gamma\)
-为系数，\(\beta\)光抑制项，\(\gamma\)光饱和项，单位为
-\(m^{2}\cdot s\cdot\mu mol^{-1}\)，其他参数与上文相同，因为该式
-\eqref{eq:mrec} 存在极值，因此，必然存在饱和光强和最大净光合速率，分别用式
-\eqref{eq:isat} 和式 \eqref{eq:ic} 求得。
+其中，\(\beta\) 和 \(\gamma\) 为系数，\(\beta\)光抑制项，\(\gamma\)光饱和项，单位为
+\(m^{2}\cdot s\cdot\mu mol^{-1}\)，其他参数与上文相同，因为该式 \eqref{eq:mrec}
+存在极值，因此，必然存在饱和光强和最大净光合速率，分别用式 \eqref{eq:isat} 和式 \eqref{eq:ic} 求得。
 
 \begin{equation}
 I_{sat} = \frac{\sqrt{\frac{(\beta+\gamma)}{\beta}-1}}{\gamma}
@@ -2406,7 +2253,8 @@ P_{nmax} = \alpha\left(\frac{\sqrt{\beta+\gamma}-\sqrt{\beta}}{\gamma}\right)^{2
 
 该模型的优点为拟合结果中光饱和点和最大净光合速率均接近实测值，还可以拟合饱和光强之后光合速率随光强下降段的曲线。
 
-\subsection{直角双曲线修正模型的实现}\label{rev_rec_exam}
+\hypertarget{rev_rec_exam}{%
+\subsection{直角双曲线修正模型的实现}\label{rev_rec_exam}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2438,7 +2286,7 @@ P_{nmax} = \alpha\left(\frac{\sqrt{\beta+\gamma}-\sqrt{\beta}}{\gamma}\right)^{2
 \StringTok{  }\NormalTok{(fitlrc_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{*}\NormalTok{fitlrc_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{+}
 \StringTok{   }\NormalTok{fitlrc_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{*}\NormalTok{fitlrc_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{])}
 
-\NormalTok{## 拟合图形}
+\CommentTok{## 拟合图形}
 \KeywordTok{library}\NormalTok{(ggplot2)}
 \NormalTok{light <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{lrc_Q =}\NormalTok{ lrc}\OperatorTok{$}\NormalTok{PARi, }\DataTypeTok{lrc_A =}\NormalTok{ lrc}\OperatorTok{$}\NormalTok{Photo)}
 
@@ -2495,12 +2343,12 @@ Rd & 0.2156186 & 0.0543505 & 3.967190 & 0.0032685\\
 \end{tabular}
 \end{table}
 
-尽管修正模型可以方便的计算饱和点和补偿点，但如同 \citet{Lobo2013Fitting}
-所指出，双曲线模型对其结果的计算常有超出生态学意义范围的值\footnote{例如本例的数据结果}，因此对模型的选择不能一概而论，需根据实际情况而选择。
+尽管修正模型可以方便的计算饱和点和补偿点，但如同 \citet{Lobo2013Fitting} 所指出，双曲线模型对其结果的计算常有超出生态学意义范围的值\footnote{例如本例的数据结果}，因此对模型的选择不能一概而论，需根据实际情况而选择。
 
 \cleardoublepage
 
-\chapter{关于非线性拟合的初始值}\label{start_con}
+\hypertarget{start_con}{%
+\chapter{关于非线性拟合的初始值}\label{start_con}}
 
 在解释初始值之前我们首先需要了解一个数学上的概念------迭代，
 
@@ -2510,10 +2358,7 @@ Rd & 0.2156186 & 0.0543505 & 3.967190 & 0.0032685\\
 
 用通俗但不是特别严谨的说法可解释为：每次执行这种算法是，程序都会从原值（也就是我抄的上面迭代法定义的旧值）推出一个新值。
 
-之所以先介绍这个迭代，原因很简单，非线性拟合就是通过迭代的方法，需要对每一个变量\textbf{最初的估计值进行不断的迭代，得到一个向一个点收缩或汇聚的值，这个估计值必须在实际值的一定范围内，程序通过不断调整这个值来改善拟合结果}。这就解释了上面的问题，初始值是让程序开始运行的前提，不然没法迭代，必须设定。我下面的内容将以
-LI-6800 的光响应曲线的测试数据，使用非直角双曲线模型进行拟合来讲解具体的
-R
-中的一些实现方法，我们首先导入数据，然后再利用这些数据逐个举例不同的确定初始值的方式。
+之所以先介绍这个迭代，原因很简单，非线性拟合就是通过迭代的方法，需要对每一个变量\textbf{最初的估计值进行不断的迭代，得到一个向一个点收缩或汇聚的值，这个估计值必须在实际值的一定范围内，程序通过不断调整这个值来改善拟合结果}。这就解释了上面的问题，初始值是让程序开始运行的前提，不然没法迭代，必须设定。我下面的内容将以 LI-6800 的光响应曲线的测试数据，使用非直角双曲线模型进行拟合来讲解具体的 R 中的一些实现方法，我们首先导入数据，然后再利用这些数据逐个举例不同的确定初始值的方式。
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2526,11 +2371,10 @@ R
 \end{Highlighting}
 \end{Shaded}
 
-\section{nlsLM 解决方案}\label{nlslm}
+\hypertarget{nlslm}{%
+\section{nlsLM 解决方案}\label{nlslm}}
 
-nlsLM 来自于 \citet{Elzhov2016minpack} 的 \texttt{minpack.lm}，利用 C
-语言的 MINPACK 库，修改了 Levenberg-Marquardt
-算法，在实际操作中，很多时候并不准确的输入初始值，他也能得出比较好的拟合结果。但结果未必完美，出现下面让人烦恼的报错：
+nlsLM 来自于 \citet{Elzhov2016minpack} 的 \texttt{minpack.lm}，利用 C 语言的 MINPACK 库，修改了 Levenberg-Marquardt 算法，在实际操作中，很多时候并不准确的输入初始值，他也能得出比较好的拟合结果。但结果未必完美，出现下面让人烦恼的报错：
 
 \begin{quote}
 singular gradient matrix at initial parameter estimates
@@ -2538,9 +2382,7 @@ singular gradient matrix at initial parameter estimates
 
 的概率会大大降低，而且尽管结果不如意，我们也可以利用他的结果缩小初始值的范围，继续尝试其他初始值。
 
-例如下面的例子中，非直角双曲线的 Rd
-的初始值我们可以利用暗呼吸的实测值大致估计，同理最大光合速率也是如此，剩下的分别为非直角双曲线曲率，我们暂定为
-1，alpha 也暂定为 0.1，使用 \texttt{nlsLM} 进行拟合，结果如下：
+例如下面的例子中，非直角双曲线的 Rd 的初始值我们可以利用暗呼吸的实测值大致估计，同理最大光合速率也是如此，剩下的分别为非直角双曲线曲率，我们暂定为 1，alpha 也暂定为 0.1，使用 \texttt{nlsLM} 进行拟合，结果如下：
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2584,7 +2426,8 @@ singular gradient matrix at initial parameter estimates
 
 结果看上去还可以\footnote{有些时候结果并不理想，该方法并不是万无一失}。
 
-\section{作图比对法}\label{plot_comp}
+\hypertarget{plot_comp}{%
+\section{作图比对法}\label{plot_comp}}
 
 模型很多参数可以用已有数据去估计，我们可以只来分析难以判断的参数，流程如下：
 
@@ -2595,17 +2438,15 @@ singular gradient matrix at initial parameter estimates
 \item
   剩余的参数，我们也可以根据经验或文献来有一个大致的判断。
 \item
-  然后我们根据数学的方式来判断哪个参数对曲线形状影响最大（例如在分母上的参数，或者是乘以该参数，该参数可以显著改变计算结果，例如整体乘以或除以
-  0.1 还是 0.01，像 Rd
-  之类的参数本身就很小，多数公式中都是减去该值，对结果影响很小，我们通常直接使用实测值
-  ）。
+  然后我们根据数学的方式来判断哪个参数对曲线形状影响最大（例如在分母上的参数，或者是乘以该参数，该参数可以显著改变计算结果，例如整体乘以或除以 0.1 还是 0.01，像 Rd 之类的参数本身就很小，多数公式中都是减去该值，对结果影响很小，我们通常直接使用实测值 ）。
 \item
   将该参数取一系列值带入模型来求解净光合速率。
 \item
   将计算的A值与光强进行作图，看我们计算的曲线与测量数据点的重合程度，必要时在修改其他参数，使曲线和散点重合度最好，重合程度最高的参数值即为我们需要的初始值。
 \end{itemize}
 
-\subsection{实现过程}\label{plot_exam}
+\hypertarget{plot_exam}{%
+\subsection{实现过程}\label{plot_exam}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2638,12 +2479,7 @@ singular gradient matrix at initial parameter estimates
 \caption{\label{fig:pomp}初步判断 alpha 的初始值}
 \end{figure}
 
-观察上图 \ref{fig:pomp} 的结果可以看到，曲线在 0-600
-的范围内，拟合值明显偏大，观察模型的方程式，以及其他起始值的设定方式，我们初步判断
-alpha
-的值偏大，于是乎我们将其改小观察，观察曲线和测量点的重合仍然不是很好，我们尝试修改
-theta 值与 alpha
-值（也即曲线高于测量点，则需要减小纵坐标的值，低于测量点，则需要增加该值，该过程省略，我大概设置了五分钟完成），最终得出的结果如下：
+观察上图 \ref{fig:pomp} 的结果可以看到，曲线在 0-600 的范围内，拟合值明显偏大，观察模型的方程式，以及其他起始值的设定方式，我们初步判断 alpha 的值偏大，于是乎我们将其改小观察，观察曲线和测量点的重合仍然不是很好，我们尝试修改 theta 值与 alpha 值（也即曲线高于测量点，则需要减小纵坐标的值，低于测量点，则需要增加该值，该过程省略，我大概设置了五分钟完成），最终得出的结果如下：
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2659,8 +2495,7 @@ theta 值与 alpha
 \caption{\label{fig:alpp}初修正后断 alpha 的初始值}
 \end{figure}
 
-图 \ref{fig:alpp}
-尽管看上去效果仍然不满意，但我们可试着进行拟合，看能否得到显著差异的结果：
+图 \ref{fig:alpp} 尽管看上去效果仍然不满意，但我们可试着进行拟合，看能否得到显著差异的结果：
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2710,15 +2545,12 @@ theta 值与 alpha
 \caption{\label{fig:alpf}检验作图法的初始值判断}
 \end{figure}
 
-从 \ref{fig:alpf} 的呈现以及 F 检验的 p
-值来讲，图形已经比较完美了。\textbf{也就是说尽管我们作图的时候看到重合度并不高，但是非线性拟合本来就是一个迭代的过程，只要我们的数据与真实值相差不大，还是能够得到完美结果的}。
+从 \ref{fig:alpf} 的呈现以及 F 检验的 p 值来讲，图形已经比较完美了。\textbf{也就是说尽管我们作图的时候看到重合度并不高，但是非线性拟合本来就是一个迭代的过程，只要我们的数据与真实值相差不大，还是能够得到完美结果的}。
 
-\subsection{直观展示}\label{show_demo}
+\hypertarget{show_demo}{%
+\subsection{直观展示}\label{show_demo}}
 
-上面的表述太啰嗦，直接用下面的图形说明一下，其中 alhpa
-的取值在此处选择从 0.01 到 0.07，每次增加 0.05，其他值分别为 Am = 12.31,
-Rd= 0.66, theta=0.71
-（此处为展示效果和方便，将这些值直接按照拟合结果设定了，实际差别不大）
+上面的表述太啰嗦，直接用下面的图形说明一下，其中 alhpa 的取值在此处选择从 0.01 到 0.07，每次增加 0.05，其他值分别为 Am = 12.31, Rd= 0.66, theta=0.71 （此处为展示效果和方便，将这些值直接按照拟合结果设定了，实际差别不大）
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2762,16 +2594,12 @@ Rd= 0.66, theta=0.71
 \caption{\label{fig:malp}多个 alpha 取值的差异}
 \end{figure}
 
-从上图 \ref{fig:malp} 我们我们可以看到，实测值在 alpha =0.04 和 alpha =
-0.05 两条曲线之间，在 0.045 时最接近测量点，也就是我们把初始值设为 0.04
-和 0.05 之间最接近，本例中可认为是0.045，实际这三个值均可。
+从上图 \ref{fig:malp} 我们我们可以看到，实测值在 alpha =0.04 和 alpha = 0.05 两条曲线之间，在 0.045 时最接近测量点，也就是我们把初始值设为 0.04 和 0.05 之间最接近，本例中可认为是0.045，实际这三个值均可。
 
-\section{自动多次尝试法}\label{mult_try}
+\hypertarget{mult_try}{%
+\section{自动多次尝试法}\label{mult_try}}
 
-该方法实际为使用 \texttt{nls2} 来实现，具体方法参考 \citet{nls2}
-的文章，可简单概括为使用一系列的起始值梯度（例如下面的代码中， alpha
-的取值在 0.01 到 0.08 之间
-），然后软件循序使用不同的起始值，即排列组合所有的起始值序列，最终找到合适的值，具体实现如下：
+该方法实际为使用 \texttt{nls2} 来实现，具体方法参考 \citet{nls2} 的文章，可简单概括为使用一系列的起始值梯度（例如下面的代码中， alpha 的取值在 0.01 到 0.08 之间 ），然后软件循序使用不同的起始值，即排列组合所有的起始值序列，最终找到合适的值，具体实现如下：
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2837,32 +2665,24 @@ Rd= 0.66, theta=0.71
 \caption{\label{fig:mcomp}两种方法结果的对比展示}
 \end{figure}
 
-图 \ref{fig:mcomp} 可以看到，使用 \texttt{nls2}
-的拟合结果似乎和测量值更匹配，当然这只是第一印象，后续的判断还要进一步通过
-F 检验、 AIC、BIC 等统计方式才能判定。
+图 \ref{fig:mcomp} 可以看到，使用 \texttt{nls2} 的拟合结果似乎和测量值更匹配，当然这只是第一印象，后续的判断还要进一步通过 F 检验、 AIC、BIC 等统计方式才能判定。
 
-\section{小结}\label{sum_start}
+\hypertarget{sum_start}{%
+\section{小结}\label{sum_start}}
 
-采用如上三种方式都可以有效的解决起始值的问题，\texttt{nlsLM}
-操作上更易实现，对初始值的大小不敏感，但设置不能太离谱，否则仍然会报错。作图比对法操作上更麻烦一些，但是这种方式一定能得出合理的初始值设置。采用
-\texttt{nls2} 类似于将手动作图方式自动化，类似于 SPSS
-中非线性拟合中需要给出一个初始值的范围，且该范围不能过大。如有一定的经验，操作起来将非常迅速。
+采用如上三种方式都可以有效的解决起始值的问题，\texttt{nlsLM} 操作上更易实现，对初始值的大小不敏感，但设置不能太离谱，否则仍然会报错。作图比对法操作上更麻烦一些，但是这种方式一定能得出合理的初始值设置。采用 \texttt{nls2} 类似于将手动作图方式自动化，类似于 SPSS 中非线性拟合中需要给出一个初始值的范围，且该范围不能过大。如有一定的经验，操作起来将非常迅速。
 
-需要注意的是，这三种方法结合起来使用会更好，例如，即使使用
-\texttt{nlsLM}
-的结果不合理，也可以参考他们参数的范围（部分结果也可能是差异显著），然后将这些结果用于手动作图判定参数或者
-\texttt{nls2}
-中判定参数范围，或者使用作图法确定大致的范围，将该范围输入到
-\texttt{nls2} 中，这样会节省时间，也更加方便。
+需要注意的是，这三种方法结合起来使用会更好，例如，即使使用 \texttt{nlsLM} 的结果不合理，也可以参考他们参数的范围（部分结果也可能是差异显著），然后将这些结果用于手动作图判定参数或者 \texttt{nls2} 中判定参数范围，或者使用作图法确定大致的范围，将该范围输入到 \texttt{nls2} 中，这样会节省时间，也更加方便。
 
 \cleardoublepage
 
-\chapter{LI-6800 的数据分析}\label{anay_6800}
+\hypertarget{anay_6800}{%
+\chapter{LI-6800 的数据分析}\label{anay_6800}}
 
-\section{数据格式}\label{data6800}
+\hypertarget{data6800}{%
+\section{数据格式}\label{data6800}}
 
-LI-6800 的数据前处理同 LI-6400 相同，如表 \ref{tab:head6800}
-所示的样式。
+LI-6800 的数据前处理同 LI-6400 相同，如表 \ref{tab:head6800} 所示的样式。
 
 \begin{longtable}{rrrlrr}
 \caption{\label{tab:head6800}推荐 LI-6800 整理后数据样式}\\
@@ -2879,12 +2699,11 @@ obs & time & elapsed & date & TIME & E\\
 \bottomrule
 \end{longtable}
 
-\section{LI-6800 与 LI-6400 使用时的差别}\label{dif}
+\hypertarget{dif}{%
+\section{LI-6800 与 LI-6400 使用时的差别}\label{dif}}
 
-\texttt{plantecophys} 使用时建立在 LI-6400XT 基础之上的软件包，因此在
-LI-6800 代码中，需要改动的是 fitaci、fitacis 及 fitBB 中的 varnames
-选项，也就是将 LI-6400XT 的表头改为 LI-6800 的表头。 以 fitaci
-函数为例：
+\texttt{plantecophys} 使用时建立在 LI-6400XT 基础之上的软件包，因此在 LI-6800 代码中，需要改动的是 fitaci、fitacis 及 fitBB 中的 varnames 选项，也就是将 LI-6400XT 的表头改为 LI-6800 的表头。
+以 fitaci 函数为例：
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2894,7 +2713,8 @@ LI-6800 代码中，需要改动的是 fitaci、fitacis 及 fitBB 中的 varname
 \end{Highlighting}
 \end{Shaded}
 
-\section{光响应曲线注意事项}\label{notice}
+\hypertarget{notice}{%
+\section{光响应曲线注意事项}\label{notice}}
 
 光响应曲线的拟合相对简单，仅需要光强和光合速率的值，其中需要修改的部分仅为光强的赋值部分，在文件名一致的前提下，修改如下代码即可：
 
@@ -2905,66 +2725,51 @@ LI-6800 代码中，需要改动的是 fitaci、fitacis 及 fitBB 中的 varname
 \end{Highlighting}
 \end{Shaded}
 
-\section{\texorpdfstring{LI-6800
-RACiR\texttrademark 的测量与拟合}{LI-6800 RACiR的测量与拟合}}\label{racir68}
+\hypertarget{racir68}{%
+\section{\texorpdfstring{LI-6800 RACiR\texttrademark 的测量与拟合}{LI-6800 RACiR的测量与拟合}}\label{racir68}}
 
-在评估作物性状时，V\(_{cmax}\) 及 J\(_{max}\)时非常有用，传统的 A--Ci
-曲线测量要求植物叶片要在一定浓度 CO\(_{2}\)
+在评估作物性状时，V\(_{cmax}\) 及 J\(_{max}\)时非常有用，传统的 A--Ci 曲线测量要求植物叶片要在一定浓度 CO\(_{2}\)
 下适应几分钟后完成测量，这样的测量有几个缺点：
 
 \begin{itemize}
 \tightlist
 \item
-  测量时间长，一条曲线至少需要 20 -- 30
-  min，样本量多，重复多时，这种方法几乎没有可行性。
+  测量时间长，一条曲线至少需要 20 -- 30 min，样本量多，重复多时，这种方法几乎没有可行性。
 \item
   整个测量过程中，时间长，酶的激活状态会有变化，叶绿体会移动，气孔的开度也会发生变化。
 \end{itemize}
 
-而 LI-6800 独有的 auto control 功能在算法上允许用户自定义 CO\(_{2}\)
-的起始浓度和种植浓度、变化方式（线性或其他）、所花费的时间，再加上其
-IRGAs 极快的响应频率，使得短时间内的 A--Ci 的测量成为现实，即快速
-CO\(_{2}\) 响应曲线 RACiR\texttrademark
-测量实验，该功能使得 5 min 内测量 A--Ci 曲线成为可能。该方法的实现可参考
-\citet{Stinziano2017} 的文章。
+而 LI-6800 独有的 auto control 功能在算法上允许用户自定义 CO\(_{2}\) 的起始浓度和种植浓度、变化方式（线性或其他）、所花费的时间，再加上其
+IRGAs 极快的响应频率，使得短时间内的 A--Ci 的测量成为现实，即快速 CO\(_{2}\) 响应曲线 RACiR\texttrademark
+测量实验，该功能使得 5 min 内测量 A--Ci 曲线成为可能。该方法的实现可参考 \citet{Stinziano2017}
+的文章。
 
-\citet{stinziano2018} 针对
-RACiR\texttrademark 技术的疑问做了解答并提出了准确测量的建议，概括如下：
+\citet{stinziano2018} 针对 RACiR\texttrademark 技术的疑问做了解答并提出了准确测量的建议，概括如下：
 
 \begin{itemize}
 \tightlist
 \item
   首先，采用 100 ppm/min 的变化速率是与标准方法重合度最高的测量。
 \item
-  其次，明确研究问题，目前已有研究表明Vcmax 与 Jmax
-  的计算结果与标准测量方法结果无显著差异。
+  其次，明确研究问题，目前已有研究表明Vcmax 与 Jmax 的计算结果与标准测量方法结果无显著差异。
 \item
   任何条件的改变，都需要做空叶室校准，例如：流速，气体浓度变化方向、温度，斜率等。
 \item
-  空叶室校准与叶片测量采用严格的同一次校准，因为 IRGA
-  的漂移，需要再次匹配时，或者环境条件改变时，需要重新做空叶室校准。是否需要匹配，可通过不加叶片的最初状态查看，此时
-  A 值应接近为0，reference 和 sample 气体浓度读数接近相等。
+  空叶室校准与叶片测量采用严格的同一次校准，因为 IRGA 的漂移，需要再次匹配时，或者环境条件改变时，需要重新做空叶室校准。是否需要匹配，可通过不加叶片的最初状态查看，此时 A 值应接近为0，reference 和 sample 气体浓度读数接近相等。
 \item
-  IRGA 分析器使用 5 此多项式进行校准，推荐使用 1 次到 5
-  次多项式进行拟合，然后根据 BIC
-  指数来确定最合适的空叶室校准系数（即非参数拟合的模型选择的问题）。
+  IRGA 分析器使用 5 此多项式进行校准，推荐使用 1 次到 5 次多项式进行拟合，然后根据 BIC 指数来确定最合适的空叶室校准系数（即非参数拟合的模型选择的问题）。
   确定最合适的浓度变化范围。通常需要去掉最初和最后 30 s的数据。
 \item
-  最小化校准和测量值之间的水分摩尔分数差异。甚至有可能需要控制 reference
-  或 sample 的水的摩尔分数而不是 Vpdleaf。 通过预实验来确定最合适的
-  \(CO_2\) 变化范围和随时间的斜率。
+  最小化校准和测量值之间的水分摩尔分数差异。甚至有可能需要控制 reference 或 sample 的水的摩尔分数而不是 Vpdleaf。
+  通过预实验来确定最合适的 \(CO_2\) 变化范围和随时间的斜率。
 \end{itemize}
 
-\section{\texorpdfstring{racir 软件包实现
-RACiR\texttrademark 数据分析}{racir 软件包实现 RACiR数据分析}}\label{racir_pkg}
+\hypertarget{racir_pkg}{%
+\section{\texorpdfstring{racir 软件包实现 RACiR\texttrademark 数据分析}{racir 软件包实现 RACiR数据分析}}\label{racir_pkg}}
 
-\textbf{因作者将代码升级，只支持原始数据的处理，我现在没有
-原始数据格式的RACiR 数据，因此下面的 racir
-包代码暂时不能使用，如有需要，请将您测试数据选择一个叶片的测量和空叶室校准发给我，我再更改（目前北方没有合适的植物供我测试），也可以参考我后面手动实现的代码}
+\textbf{因作者将代码升级，只支持原始数据的处理，我现在没有 原始数据格式的RACiR 数据，因此下面的 racir 包代码暂时不能使用，如有需要，请将您测试数据选择一个叶片的测量和空叶室校准发给我，我再更改（目前北方没有合适的植物供我测试），也可以参考我后面手动实现的代码}
 
-\citet{stinziano2018} 还给出了专门的 RACiR 数据分析软件包
-\href{https://github.com/jstinzi/racir}{racir
-package}，我们下面先介绍一下这个软件包。
+\citet{stinziano2018} 还给出了专门的 RACiR 数据分析软件包 \href{https://github.com/jstinzi/racir}{racir package}，我们下面先介绍一下这个软件包。
 
 软件的安装及调用通过如下代码实现：
 
@@ -2982,26 +2787,19 @@ package}，我们下面先介绍一下这个软件包。
 \item
   \texttt{read\_6800}： 直接读取 LI-6800 的\textbf{原始数据}。
 \item
-  \texttt{racircalcheck} \&
-  \texttt{racircalcheckcsv}，检查空叶室校准的数据并作图，两者的差别是一个读取原始数据格式，一个读取
-  csv 数据格式。
+  \texttt{racircalcheck} \& \texttt{racircalcheckcsv}，检查空叶室校准的数据并作图，两者的差别是一个读取原始数据格式，一个读取 csv 数据格式。
 \item
-  \texttt{racircal} \& \texttt{racircalcsv}:
-  空叶室校准带叶片测量的数据。分为原始数据格式和 csv 数据格式两种
+  \texttt{racircal} \& \texttt{racircalcsv}: 空叶室校准带叶片测量的数据。分为原始数据格式和 csv 数据格式两种
 \item
-  \texttt{racircalbatch} \& \texttt{racircalbatchcsv}：批量校准数据，同
-  \texttt{racircalcsv} 作用相同，不过属于批量校准，分为原始数据格式和
-  csv 数据格式两种。
+  \texttt{racircalbatch} \& \texttt{racircalbatchcsv}：批量校准数据，同 \texttt{racircalcsv} 作用相同，不过属于批量校准，分为原始数据格式和 csv 数据格式两种。
 \item
-  \texttt{compile\_racir}：将 csv
-  数据格式批量处理到一个数据表格中，通常结合 \texttt{plantecophys} 的
-  \texttt{fitacis} 使用进行批量拟合。
+  \texttt{compile\_racir}：将 csv 数据格式批量处理到一个数据表格中，通常结合 \texttt{plantecophys} 的 \texttt{fitacis} 使用进行批量拟合。
 \end{itemize}
 
-\subsection{实现过程}\label{racir_pkg_real}
+\hypertarget{racir_pkg_real}{%
+\subsection{实现过程}\label{racir_pkg_real}}
 
-手上暂时没有原始数据格式的 racir 数据，因而现在使用以前的 csv
-数据进行操作（空叶室测量数据和带叶片测量数据转为 csv 格式）。
+手上暂时没有原始数据格式的 racir 数据，因而现在使用以前的 csv 数据进行操作（空叶室测量数据和带叶片测量数据转为 csv 格式）。
 
 首先检查空叶室校准：
 
@@ -3013,11 +2811,7 @@ package}，我们下面先介绍一下这个软件包。
 \end{Highlighting}
 \end{Shaded}
 
-上述参数分别是空叶室校准数据的路径，以及我要删除的数据，即只保留参比室
-\(CO_2\)
-浓度在两者之间的数据（范围可作图确定，可参考本部分手动实现的代码）。
-所示。当然此步骤可以跳过，因为下面的代码包含了该步骤，直接输出一个校准后的
-csv 文件，文件名为 ''原文件名`` + ``\_corrected" + ``.csv''。
+上述参数分别是空叶室校准数据的路径，以及我要删除的数据，即只保留参比室 \(CO_2\) 浓度在两者之间的数据（范围可作图确定，可参考本部分手动实现的代码）。 所示。当然此步骤可以跳过，因为下面的代码包含了该步骤，直接输出一个校准后的 csv 文件，文件名为 ''原文件名`` + "\_corrected" + ``.csv''。
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3036,14 +2830,12 @@ csv 文件，文件名为 ''原文件名`` + ``\_corrected" + ``.csv''。
 \end{Highlighting}
 \end{Shaded}
 
-\textbf{注意：RACiR 的本意是表型研究中求 Vcmax 和 Jmax，因而，请忽略 Rd
-等参数的计算结果}
+\textbf{注意：RACiR 的本意是表型研究中求 Vcmax 和 Jmax，因而，请忽略 Rd 等参数的计算结果}
 
-\section{\texorpdfstring{RACiR\texttrademark 分析的手动实现}{RACiR分析的手动实现}}\label{racir68_exam}
+\hypertarget{racir68_exam}{%
+\section{\texorpdfstring{RACiR\texttrademark 分析的手动实现}{RACiR分析的手动实现}}\label{racir68_exam}}
 
-以下内容是我之前写的内容，部分代码的实现和上述软件包相似，仅供参考，尤其是当您使用
-\texttt{racir} 软件包报错时，可以参考下文代码手动实现 RACiR
-数据的分析。。
+以下内容是我之前写的内容，部分代码的实现和上述软件包相似，仅供参考，尤其是当您使用 \texttt{racir} 软件包报错时，可以参考下文代码手动实现 RACiR 数据的分析。。
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3115,7 +2907,7 @@ csv 文件，文件名为 ''原文件名`` + ``\_corrected" + ``.csv''。
 \CommentTok{# 对快速曲线作图拟合结果进行查看}
 \KeywordTok{plot}\NormalTok{(acifit, }\DataTypeTok{linecols =} \KeywordTok{c}\NormalTok{(}\StringTok{"green"}\NormalTok{, }\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{))}
 
-\NormalTok{#### ggplot2 作图}
+\CommentTok{#### ggplot2 作图}
 \NormalTok{ddata <-}\StringTok{ }\NormalTok{acifit}\OperatorTok{$}\NormalTok{df}
 
 \NormalTok{alldata <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{A =} \KeywordTok{c}\NormalTok{(acin}\OperatorTok{$}\NormalTok{A, ddata}\OperatorTok{$}\NormalTok{Ac, ddata}\OperatorTok{$}\NormalTok{Aj, cleaf}\OperatorTok{$}\NormalTok{A), }
@@ -3165,31 +2957,26 @@ csv 文件，文件名为 ''原文件名`` + ``\_corrected" + ``.csv''。
 \end{Highlighting}
 \end{Shaded}
 
-最终采用常规方法和 RACiR\texttrademark 方法结果如图 \ref{fig:racir}
-所示，其中 Aj 与 Ac 结果采用 RACiR\texttrademark 计算\footnote{注意，注意数据表头的大小写，此处代码中，为处理数据的方便，我更改了大小写，分析自己的数据时需要注意}。
+最终采用常规方法和 RACiR\texttrademark 方法结果如图 \ref{fig:racir} 所示，其中 Aj 与 Ac 结果采用 RACiR\texttrademark 计算\footnote{注意，注意数据表头的大小写，此处代码中，为处理数据的方便，我更改了大小写，分析自己的数据时需要注意}。
 
 \begin{figure}
 \includegraphics[width=1\linewidth]{images/racir} \caption{RACiR 方法与常规结果的比较}\label{fig:racir}
 \end{figure}
 
-\section{LI-6800 荧光数据分析}\label{fluro68}
+\hypertarget{fluro68}{%
+\section{LI-6800 荧光数据分析}\label{fluro68}}
 
-LI-6800
-能够直接提供基本的叶绿素荧光参数，其他参数均可通过这些基本的参数进行计算，计算也较简单，在此不赘述，需要注意的是快相荧光部分的数据，因为分析
-ojip 数据的模型有很多，很多都需要复杂的计算，在此我们先将其中较为简单的
-jip test 数据分析进行介绍。
+LI-6800 能够直接提供基本的叶绿素荧光参数，其他参数均可通过这些基本的参数进行计算，计算也较简单，在此不赘述，需要注意的是快相荧光部分的数据，因为分析 ojip 数据的模型有很多，很多都需要复杂的计算，在此我们先将其中较为简单的 jip test 数据分析进行介绍。
 
-\subsection{jip test 的实现}\label{jiptest}
+\hypertarget{jiptest}{%
+\subsection{jip test 的实现}\label{jiptest}}
 
-LI-6800 增加了 ojip 曲线测量功能，本功能主要是针对测量数据的 jip test
-的实现。
+LI-6800 增加了 ojip 曲线测量功能，本功能主要是针对测量数据的 jip test 的实现。
 
-\subsection{\texorpdfstring{\texttt{jiptest}
-软件包安装}{jiptest 软件包安装}}\label{jiptest_pack}
+\hypertarget{jiptest_pack}{%
+\subsection{\texorpdfstring{\texttt{jiptest} 软件包安装}{jiptest 软件包安装}}\label{jiptest_pack}}
 
-目前 \texttt{jiptest} 暂时放在 github 我的软件仓库内，并没提交
-CRAN，因此需要 \texttt{devtools} 的支持，然后才能从 github 安装
-\texttt{jiptest}。
+目前 \texttt{jiptest} 暂时放在 github 我的软件仓库内，并没提交 CRAN，因此需要 \texttt{devtools} 的支持，然后才能从 github 安装 \texttt{jiptest}。
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3199,16 +2986,11 @@ CRAN，因此需要 \texttt{devtools} 的支持，然后才能从 github 安装
 \end{Highlighting}
 \end{Shaded}
 
-\subsection{\texorpdfstring{\texttt{read\_files} 及
-\texttt{read\_dcfiles}
-函数}{read\_files 及 read\_dcfiles 函数}}\label{readfluor}
+\hypertarget{readfluor}{%
+\subsection{\texorpdfstring{\texttt{read\_files} 及 \texttt{read\_dcfiles} 函数}{read\_files 及 read\_dcfiles 函数}}\label{readfluor}}
 
-\texttt{read\_files}
-用于批量读取所有调制光测量数据，方便用于其他的数据分析。\textbf{函数要求所有数据必须是
-\texttt{xlsx}
-格式，并且所有测量数据都保存在同一文件夹内。}，如有其他文件或测量数据则会报错。
-\texttt{read\_dcfiles} 用于批量读取所有连续光测量数据，其他与
-\texttt{read\_dcfiles} 相同。
+\texttt{read\_files} 用于批量读取所有调制光测量数据，方便用于其他的数据分析。\textbf{函数要求所有数据必须是 \texttt{xlsx} 格式，并且所有测量数据都保存在同一文件夹内。}，如有其他文件或测量数据则会报错。
+\texttt{read\_dcfiles} 用于批量读取所有连续光测量数据，其他与 \texttt{read\_dcfiles} 相同。
 
 函数仅有一个参数，即保存数据文件夹的路径，使用如下：
 
@@ -3228,7 +3010,7 @@ CRAN，因此需要 \texttt{devtools} 的支持，然后才能从 github 安装
 
 \begin{table}[t]
 
-\caption{\label{tab:unnamed-chunk-31}jiptest 批量导入数据后的样式}
+\caption{\label{tab:unnamed-chunk-32}jiptest 批量导入数据后的样式}
 \centering
 \begin{tabular}{rrl}
 \toprule
@@ -3253,7 +3035,7 @@ SECS & FLUOR & SOURCE\\
 
 \begin{table}[t]
 
-\caption{\label{tab:unnamed-chunk-32}jiptest DC 数据批量导入数据后的样式}
+\caption{\label{tab:unnamed-chunk-33}jiptest DC 数据批量导入数据后的样式}
 \centering
 \begin{tabular}{rrl}
 \toprule
@@ -3270,13 +3052,11 @@ SECS & FLUOR & SOURCE\\
 \end{tabular}
 \end{table}
 
-\subsection{\texorpdfstring{\texttt{jip\_test} 及 \texttt{jip\_dctest}
-函数}{jip\_test 及 jip\_dctest 函数}}\label{testfluor}
+\hypertarget{testfluor}{%
+\subsection{\texorpdfstring{\texttt{jip\_test} 及 \texttt{jip\_dctest} 函数}{jip\_test 及 jip\_dctest 函数}}\label{testfluor}}
 
-\texttt{jiptest} 是 jiptest 的核心函数，用于所有数据的 jip test
-分析，函数仅包含两个参数，测量数据的保存文件夹路径，以及分析结果的导出路径，导出路径必须为\textbf{已存在的文件夹或磁盘根目录}。
-\texttt{jip\_dctest} 与 \texttt{jip\_test}
-相似，用于连续光测量数据的分析。
+\texttt{jiptest} 是 jiptest 的核心函数，用于所有数据的 jip test 分析，函数仅包含两个参数，测量数据的保存文件夹路径，以及分析结果的导出路径，导出路径必须为\textbf{已存在的文件夹或磁盘根目录}。
+\texttt{jip\_dctest} 与 \texttt{jip\_test} 相似，用于连续光测量数据的分析。
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3398,12 +3178,10 @@ DFabs & 1.924705e-01 & 3.274650e-02 & -3.276640e-02 & -9.333551e-01\\
 
 计算参数见表 \ref{tab:jipres}
 
-\subsection{\texorpdfstring{\texttt{jip\_plot} 及 \texttt{jip\_dcplot}
-函数}{jip\_plot 及 jip\_dcplot 函数}}\label{plotfluor}
+\hypertarget{plotfluor}{%
+\subsection{\texorpdfstring{\texttt{jip\_plot} 及 \texttt{jip\_dcplot} 函数}{jip\_plot 及 jip\_dcplot 函数}}\label{plotfluor}}
 
-\texttt{jip\_plot} 和 \texttt{jip\_dcplot} 基于
-\texttt{ggplot2}，用于快速预览所有测量结果的 ojip
-曲线。函数仅有一个参数，即保存数据文件夹的路径，使用如下：
+\texttt{jip\_plot} 和 \texttt{jip\_dcplot} 基于 \texttt{ggplot2}，用于快速预览所有测量结果的 ojip 曲线。函数仅有一个参数，即保存数据文件夹的路径，使用如下：
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3435,13 +3213,13 @@ ojip 连续式测量光 ojip 曲线的快速预览如图 \ref{fig:dcplot}
 
 \cleardoublepage
 
-\chapter{PCA 分析}\label{pca-anylysis}
+\hypertarget{pca-anylysis}{%
+\chapter{PCA 分析}\label{pca-anylysis}}
 
-PCA
-作为一个基础的方法，应用领域覆盖很广，涵盖的统计学相关的内容有均值、标准差、协方差，
-线性代数中的特征向量及特征值。当然在与光合仪相关的应用方面多数是测量的光合速率、气孔导度等配合植物的其他性状来进行研究。下面的内容将使用不那么数学的语言来观察其实现方式。
+PCA 作为一个基础的方法，应用领域覆盖很广，涵盖的统计学相关的内容有均值、标准差、协方差， 线性代数中的特征向量及特征值。当然在与光合仪相关的应用方面多数是测量的光合速率、气孔导度等配合植物的其他性状来进行研究。下面的内容将使用不那么数学的语言来观察其实现方式。
 
-\section{特征向量与特征值}
+\hypertarget{section}{%
+\section{特征向量与特征值}\label{section}}
 
 特征向量和特征值的数学描述为：
 
@@ -3450,34 +3228,23 @@ A \vec{x} = \lambda \vec{x}
 \label{eq:eign}
 \end{equation}
 
-其中 A 为 n \(\times\) n 的矩阵，\(\vec{x}\) 为 非零 n \(\times\) 1
-列向量，\(\lambda\) 是标量，那么 \(\vec{x}\) 为 A
-的特征向量，\(\lambda\) 为 A 的特征值。
+其中 A 为 n \(\times\) n 的矩阵，\(\vec{x}\) 为 非零 n \(\times\) 1 列向量，\(\lambda\) 是标量，那么 \(\vec{x}\) 为 A 的特征向量，\(\lambda\) 为 A 的特征值。
 
 如果仅从数学描述上看，是十分不适合我这样没基础的人来理解的，但我们可以这么理解：
 
-A 为我们观测值（也即我们生态学上测量的数据）组成的 \(n \times n\)
-矩阵，每行的数据代表了一个观测值，例如光合速率是其中的一行，我们有n 个，
-那么 \(\vec{x}\) 和 \(\lambda\) 意味着什么呢？再看一眼上面的
-\eqref{eq:eign}，这是一个等式，而 \(\vec{x}\) 是 n \(\times\) 1
-维度，原来的数据是 n \(\times\) n
-维度，这就是主轴分析是降维分析的意义了，一个一维的特征向量和特征值与我们多维的观测值之间有一个相等的关系。当然，也有很多人在描述时喜欢用坐标轴旋转或这投影来形容的，如果你觉得这样好理解也没问题，不过我脑袋不擅长想象这种多维的空间。这样描述并不十分准确，只是我觉得便于理解，更正确描述应为我们下面所述的例子
-(\citet{Smith2002}) ，但降维的原理即来自此处：
+A 为我们观测值（也即我们生态学上测量的数据）组成的 \(n \times n\) 矩阵，每行的数据代表了一个观测值，例如光合速率是其中的一行，我们有n 个， 那么 \(\vec{x}\) 和 \(\lambda\) 意味着什么呢？再看一眼上面的 \eqref{eq:eign}，这是一个等式，而 \(\vec{x}\) 是 n \(\times\) 1 维度，原来的数据是 n \(\times\) n 维度，这就是主轴分析是降维分析的意义了，一个一维的特征向量和特征值与我们多维的观测值之间有一个相等的关系。当然，也有很多人在描述时喜欢用坐标轴旋转或这投影来形容的，如果你觉得这样好理解也没问题，不过我脑袋不擅长想象这种多维的空间。这样描述并不十分准确，只是我觉得便于理解，更正确描述应为我们下面所述的例子 (\citet{Smith2002}) ，但降维的原理即来自此处：
 
 \begin{equation}
 finaldata = rowfeaturevector \times rowdataajust
 \label{eq:despca}
 \end{equation}
 
-finaldata 很好理解，我们用于 PCA 的最终数据，rowfeature vector
-则是我们根据协相关矩阵求得的特征向量的转置，最大的特征向量再最上面，
-rowdataadjust 则为\textbf{原始数据减去标准值}。
+finaldata 很好理解，我们用于 PCA 的最终数据，rowfeature vector 则是我们根据协相关矩阵求得的特征向量的转置，最大的特征向量再最上面， rowdataadjust 则为\textbf{原始数据减去标准值}。
 
-\section{PCA R 语言实现}\label{pca_R}
+\hypertarget{pca_R}{%
+\section{PCA R 语言实现}\label{pca_R}}
 
-因为我手头没有相关的数据（我这里最多的就是培训时演示用的数据，当然客户给发的数据也有，但大家都明白，基本到我这里都是怀疑有问题的数据，即使没问题，我要使用也要经过人家的同意），想来想去，我们在
-R 里见到最多的与生态学相关的数据也就是 iris，一个关于不同 iris
-品种的叶片性状相关的数据，非常生态，我们来看一下：
+因为我手头没有相关的数据（我这里最多的就是培训时演示用的数据，当然客户给发的数据也有，但大家都明白，基本到我这里都是怀疑有问题的数据，即使没问题，我要使用也要经过人家的同意），想来想去，我们在 R 里见到最多的与生态学相关的数据也就是 iris，一个关于不同 iris 品种的叶片性状相关的数据，非常生态，我们来看一下：
 
 \begin{tabular}{r|r|r|r|l}
 \hline
@@ -3497,13 +3264,13 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 \hline
 \end{tabular}
 
-数据并不复杂，但是想要得出一些规律性的东西确不那么容易，因为数据量太大了。R
-语言里面很多函数可以直接实现 PCA，例如
-\texttt{prcomp}。我们先按照最原始的方法实现一下，加深对原理的理解：
+数据并不复杂，但是想要得出一些规律性的东西确不那么容易，因为数据量太大了。R 语言里面很多函数可以直接实现 PCA，例如 \texttt{prcomp}。我们先按照最原始的方法实现一下，加深对原理的理解：
 
-\subsection{手动实现过程}\label{man_pca}
+\hypertarget{man_pca}{%
+\subsection{手动实现过程}\label{man_pca}}
 
-\subsubsection{均值的计算}\label{av_val}
+\hypertarget{av_val}{%
+\subsubsection{均值的计算}\label{av_val}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3513,7 +3280,8 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 
 我只使用了前四列的性状数据，仅仅是方便结果的展示。
 
-\subsubsection{计算协方差矩阵}\label{cov_val}
+\hypertarget{cov_val}{%
+\subsubsection{计算协方差矩阵}\label{cov_val}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3521,7 +3289,8 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 \end{Highlighting}
 \end{Shaded}
 
-\subsubsection{计算特征值和特征向量}\label{eig_val}
+\hypertarget{eig_val}{%
+\subsubsection{计算特征值和特征向量}\label{eig_val}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3541,17 +3310,14 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 ## [1] 0.9776852
 \end{verbatim}
 
-也就是说特征值对应的前两项是我们最终降维所需要的，即最终的两个主轴为
-\(150 \times 2\) 维矩阵，即我们原来的 \(150 \times 4\)
-的矩阵乘以我们选取的前两个特征值对应的 \(4 \times 2\) 组成的矩阵。
+也就是说特征值对应的前两项是我们最终降维所需要的，即最终的两个主轴为 \(150 \times 2\) 维矩阵，即我们原来的 \(150 \times 4\) 的矩阵乘以我们选取的前两个特征值对应的 \(4 \times 2\) 组成的矩阵。
 
 实际应用中我们不需要这么做了，因为太浪费时间了，我们直接用函数来得到结果即可。
 
-\subsection{\texorpdfstring{\texttt{prcomp}
-的实现}{prcomp 的实现}}\label{prcom}
+\hypertarget{prcom}{%
+\subsection{\texorpdfstring{\texttt{prcomp} 的实现}{prcomp 的实现}}\label{prcom}}
 
-我们用 \texttt{prcomp} 来简化实现过程，注意，根据
-\citet{kemp2003modern}，我们把 iris 数据对数化一下，并提取所有物种名字：
+我们用 \texttt{prcomp} 来简化实现过程，注意，根据 \citet{kemp2003modern}，我们把 iris 数据对数化一下，并提取所有物种名字：
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3561,13 +3327,12 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 \end{Highlighting}
 \end{Shaded}
 
-需要注意，我们处理时使用特征中心化。即每一维的数据都减去该维的均值。这里的``维''指的就是一个特征（或属性），变换之后每一维的均值都变成了0
-(参考 \eqref{eq:despca} )。
+需要注意，我们处理时使用特征中心化。即每一维的数据都减去该维的均值。这里的``维''指的就是一个特征（或属性），变换之后每一维的均值都变成了0 (参考 \eqref{eq:despca} )。
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{value_pca <-}\StringTok{ }\KeywordTok{prcomp}\NormalTok{(iris_pca, }\DataTypeTok{center =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{scale. =} \OtherTok{TRUE}\NormalTok{)}
-\NormalTok{## 查看结果}
+\CommentTok{## 查看结果}
 \KeywordTok{summary}\NormalTok{(value_pca)}
 \end{Highlighting}
 \end{Shaded}
@@ -3580,13 +3345,12 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 ## Cumulative Proportion  0.7331 0.9599 0.99314 1.00000
 \end{verbatim}
 
-可以看到结果同我们最开始的计算相似，不同的是我们进行了对数化，而且根据
-\citet{kemp2003modern}， 这个结果更合适。
+可以看到结果同我们最开始的计算相似，不同的是我们进行了对数化，而且根据 \citet{kemp2003modern}， 这个结果更合适。
 
-\subsection{作图}\label{plot_pca}
+\hypertarget{plot_pca}{%
+\subsection{作图}\label{plot_pca}}
 
-这个我们不做过多说明了，推荐两个非常好的软件包，分别是 `ggbiplot',
-`factoextra'：
+这个我们不做过多说明了，推荐两个非常好的软件包，分别是 `ggbiplot', `factoextra'：
 
 \textbf{ggbiplot 作图}
 
@@ -3604,7 +3368,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-40-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-41-1.pdf}
 
 \textbf{factoextra 作图}
 
@@ -3619,9 +3383,10 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-41-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-42-1.pdf}
 
-\chapter{环境与配置}\label{sessioninfo}
+\hypertarget{sessioninfo}{%
+\chapter{环境与配置}\label{sessioninfo}}
 
 本文的内容所完成的 sessioninfo 如下：
 

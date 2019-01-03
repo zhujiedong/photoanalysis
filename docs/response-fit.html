@@ -12,20 +12,20 @@
   <meta property="og:title" content="第 3 章 CO2 响应曲线的拟合 | R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:image" content="images/cover.png" />
+  <meta property="og:image" content="images/coverpage.png" />
   <meta property="og:description" content="R 语言分析 LI-6400XT 与 LI-6800 数据" />
-  <meta name="github-repo" content="zhujiedong/R_analysis_LI-6400_LI_6800" />
+  <meta name="github-repo" content="zhujiedong/photoanalysis" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="第 3 章 CO2 响应曲线的拟合 | R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   
   <meta name="twitter:description" content="R 语言分析 LI-6400XT 与 LI-6800 数据" />
-  <meta name="twitter:image" content="images/cover.png" />
+  <meta name="twitter:image" content="images/coverpage.png" />
 
 <meta name="author" content="祝介东    北京力高泰科技有限公司">
 
 
-<meta name="date" content="2018-12-29">
+<meta name="date" content="2019-01-03">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -51,41 +51,67 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="css\style.css" type="text/css" />
@@ -104,9 +130,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="./">R 光合数据分析</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="frontmatter.html"><a href="frontmatter.html"><i class="fa fa-check"></i>前言</a></li>
-<li class="chapter" data-level="" data-path="copyright.html"><a href="copyright.html"><i class="fa fa-check"></i>版权声明</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a></li>
+<li class="chapter" data-level="" data-path="frontmatter.html"><a href="frontmatter.html"><i class="fa fa-check"></i>声明</a></li>
 <li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i>关于作者</a></li>
+<li class="chapter" data-level="" data-path="copyright.html"><a href="copyright.html"><i class="fa fa-check"></i>版权</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> R 软件与 Rstudio</a><ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#rsoft"><i class="fa fa-check"></i><b>1.1</b> R 软件</a></li>
 <li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#rstudiosoft"><i class="fa fa-check"></i><b>1.2</b> Rstudio</a></li>
@@ -198,7 +225,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="pca-anylysis.html"><a href="pca-anylysis.html"><i class="fa fa-check"></i><b>11</b> PCA 分析</a><ul>
-<li class="chapter" data-level="11.1" data-path="pca-anylysis.html"><a href="pca-anylysis.html#section-11.1"><i class="fa fa-check"></i><b>11.1</b> 特征向量与特征值</a></li>
+<li class="chapter" data-level="11.1" data-path="pca-anylysis.html"><a href="pca-anylysis.html#section"><i class="fa fa-check"></i><b>11.1</b> 特征向量与特征值</a></li>
 <li class="chapter" data-level="11.2" data-path="pca-anylysis.html"><a href="pca-anylysis.html#pca_R"><i class="fa fa-check"></i><b>11.2</b> PCA R 语言实现</a><ul>
 <li class="chapter" data-level="11.2.1" data-path="pca-anylysis.html"><a href="pca-anylysis.html#man_pca"><i class="fa fa-check"></i><b>11.2.1</b> 手动实现过程</a></li>
 <li class="chapter" data-level="11.2.2" data-path="pca-anylysis.html"><a href="pca-anylysis.html#prcom"><i class="fa fa-check"></i><b>11.2.2</b> <code>prcomp</code> 的实现</a></li>
@@ -234,70 +261,87 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>在 <code>plantecophys</code> 包中使用的模型为 <span class="citation">Farquhar, Caemmerer, and Berry (<a href="#ref-Farquhar1980A">1980</a>)</span> 建立的 C3 植物模型 FvCB，其基于 C3 植物碳反应的三个阶段：</p>
 <ul>
 <li><p>核酮糖-1,5-双磷酸羧化酶/加氧酶 (Rubisco)的催化下, 核酮糖-1,5-双磷酸(RuBP)与 CO<sub>2</sub>发生羧化作用, 生成3-磷酸甘油酸(PGA)。</p></li>
-<li><p>在腺苷三磷酸(ATP)和还原型烟酰胺腺嘌呤 二核苷酸磷酸(NADPH)的作用下, PGA被还原成磷 酸丙糖(TP)。每6个TP中有1个输出到细胞液中, 用 于蔗糖或者淀粉的合成。</p></li>
-<li><p>剩下的5个TP 在ATP的作用下再生为 3 个RuBP。一部分再生的 RuBP在Rubisco的催化下被氧化成PGA和2-磷酸乙 醇酸, 2-磷酸乙醇酸在ATP的作用下形成PGA, 并且 释放CO<sub>2</sub> (光呼吸)。</p></li>
+<li><p>在腺苷三磷酸(ATP)和还原型烟酰胺腺嘌呤 二核苷酸磷酸(NADPH)的作用下, PGA被还原成磷 酸丙糖(TP)。每6个TP中有1个输出到细胞液中,
+用 于蔗糖或者淀粉的合成。</p></li>
+<li><p>剩下的5个TP 在ATP的作用下再生为 3 个RuBP。一部分再生的 RuBP在Rubisco的催化下被氧化成PGA和2-磷酸乙 醇酸,
+2-磷酸乙醇酸在ATP的作用下形成PGA, 并且 释放CO<sub>2</sub> (光呼吸)。</p></li>
 </ul>
-<p>在光照下, C3 植物净光合速率 (A) 取决于 3 个同时存在的速率: RuBP羧化速率(Vc)、RuBP氧化速率 (或光呼吸速率, Vo)和线粒体在光照下的呼吸速率 (或明呼吸速率, Rd; 此名为了与暗呼吸速率对应和区分)。RuBP氧化过程中每结合1 mol O<sub>2</sub> 就会释放 0.5 mol CO<sub>2</sub> 。因此, 净光合速率 A 的计算为：</p>
+<p>在光照下, C3 植物净光合速率 (A) 取决于 3 个同时存在的速率: RuBP羧化速率(Vc)、RuBP氧化速率 (或光呼吸速率,
+Vo)和线粒体在光照下的呼吸速率 (或明呼吸速率, Rd; 此名为了与暗呼吸速率对应和区分)。RuBP氧化过程中每结合1 mol
+O<sub>2</sub> 就会释放 0.5 mol CO<sub>2</sub> 。因此, 净光合速率 A 的计算为：</p>
 <div class="figure"><span id="fig:fvcb"></span>
 <img src="images/fvcb.png" alt="光合速率的不同的限制阶段" width="100%" />
 <p class="caption">
 图 3.1: 光合速率的不同的限制阶段
 </p>
 </div>
-<span class="math display" id="eq:aeta">\[\begin{equation}
+<p><span class="math display" id="eq:aeta">\[\begin{equation}
 A\ =V_{c}\ -0.5V_{o}\ -\ R_{d}
 \tag{3.1}
-\end{equation}\]</span>
-<p>线粒体Rd不同于暗呼吸速率(Rn )。Rn是叶片在 黑暗中的线粒体呼吸速率, 随着光照的增加, 线粒体呼吸速率下降。因此 Rd &lt; Rn 在黑暗条件下测定的叶 片 CO<sub>2</sub> 交换速率即 Rn , 但是 Rd 的测定比较困难, 因为光照条件下 Rd 与 Vc、Vo 同时存在。<span class="citation">Hikosaka et al. (<a href="#ref-Hikosaka2006Temperature">2006</a>)</span> 总结了几种测定 Rd 的方法，式 <a href="response-fit.html#eq:aeta">(3.1)</a> 又可表达为：</p>
-<span class="math display" id="eq:achange">\[\begin{equation}
+\end{equation}\]</span></p>
+<p>线粒体Rd不同于暗呼吸速率(Rn )。Rn是叶片在 黑暗中的线粒体呼吸速率, 随着光照的增加, 线粒体呼吸速率下降。因此 Rd &lt;
+Rn 在黑暗条件下测定的叶 片 CO<sub>2</sub> 交换速率即 Rn , 但是 Rd 的测定比较困难, 因为光照条件下 Rd 与
+Vc、Vo 同时存在。<span class="citation">Hikosaka et al. (<a href="#ref-Hikosaka2006Temperature">2006</a>)</span> 总结了几种测定
+Rd 的方法，式 <a href="response-fit.html#eq:aeta">(3.1)</a> 又可表达为：</p>
+<p><span class="math display" id="eq:achange">\[\begin{equation}
 A\ =V_{c}\ (1\ -0.5\alpha)\ R_{d}
 \tag{3.2}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>式 <a href="response-fit.html#eq:achange">(3.2)</a> 中 <span class="math inline">\(\alpha\)</span> 为氧化速率和羧化速率的比值，由 Rubisco 动力学常数确定：</p>
-<span class="math display" id="eq:dynamic">\[\begin{equation}
+<p><span class="math display" id="eq:dynamic">\[\begin{equation}
 \begin{split}
 \alpha &amp; =\frac{V_{O}}{V_{C}}\\
 &amp; = \frac{O}{C_c} \times \frac{V_{omax} K_c}{V_{cmax}K_{o}}\\
 &amp; = \frac{O}{C_{c}} \times \frac{1}{S_{\frac{c}{o}}}
 \end{split}
 \tag{3.3}
-\end{equation}\]</span>
-<p>式 <a href="response-fit.html#eq:dynamic">(3.3)</a> 中，Cc 和 O 分别为叶绿体部位 CO<sub>2</sub> 和 O<sub>2</sub> 浓度。Cc 和 O 通常以气体摩尔分数 (<span class="math inline">\(\mu mol\text{·}mol^{-1}\)</span> ) 或分压 (Pa) 表示, 但光合过程是在叶绿体的液相基质中发生的, 用分压表示更加恰当。Kc 与 Ko 为 Rubisco 羧化(氧化)的米氏常数, 代表了羧化(氧化)速率达到最大羧化(氧化)速率一半时的 CO<sub>2</sub> 和 <span class="math inline">\(O_{2}\)</span> 浓度。是 Rubisco 特异性因子, <span class="math inline">\(S_{\frac{c}{o}}\)</span>表示 Rubisco 对CO<sub>2</sub> 和 <span class="math inline">\(O_{2}\)</span> 的偏好程度。</p>
-<p>当 A = Rd , 即 RuBP 羧化的 CO<sub>2</sub> 吸收速率刚好 等于 RuBP 氧化的 CO<sub>2</sub> 释放速率 (Vc = 2Vo ) 时, <span class="math inline">\(\alpha\)</span> = 0.5。此时叶绿体的 CO<sub>2</sub> 浓度就是叶绿体 CO<sub>2</sub> 光合补偿点, 标记为 <span class="math inline">\(\Gamma^{*}\)</span>。即：</p>
-<span class="math display" id="eq:com">\[\begin{equation}
+\end{equation}\]</span></p>
+<p>式 <a href="response-fit.html#eq:dynamic">(3.3)</a> 中，Cc 和 O 分别为叶绿体部位 CO<sub>2</sub> 和 O<sub>2</sub> 浓度。Cc 和
+O 通常以气体摩尔分数 (<span class="math inline">\(\mu mol\text{·}mol^{-1}\)</span> ) 或分压 (Pa) 表示, 但光合过程是在叶绿体的液相基质中发生的,
+用分压表示更加恰当。Kc 与 Ko 为 Rubisco 羧化(氧化)的米氏常数, 代表了羧化(氧化)速率达到最大羧化(氧化)速率一半时的
+CO<sub>2</sub> 和 <span class="math inline">\(O_{2}\)</span> 浓度。是 Rubisco 特异性因子, <span class="math inline">\(S_{\frac{c}{o}}\)</span>表示 Rubisco
+对CO<sub>2</sub> 和 <span class="math inline">\(O_{2}\)</span> 的偏好程度。</p>
+<p>当 A = Rd , 即 RuBP 羧化的 CO<sub>2</sub> 吸收速率刚好 等于 RuBP 氧化的 CO<sub>2</sub> 释放速率
+(Vc = 2Vo ) 时, <span class="math inline">\(\alpha\)</span> = 0.5。此时叶绿体的 CO<sub>2</sub> 浓度就是叶绿体 CO<sub>2</sub>
+光合补偿点, 标记为 <span class="math inline">\(\Gamma^{*}\)</span>。即：</p>
+<p><span class="math display" id="eq:com">\[\begin{equation}
 \Gamma^{*}\ =\ \frac{0.5O}{S_{\frac{c}{o}}}
 \tag{3.4}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>由公式 <a href="response-fit.html#eq:dynamic">(3.3)</a>和公式 <a href="response-fit.html#eq:com">(3.4)</a>可得：</p>
-<span class="math display" id="eq:combine">\[\begin{equation}
+<p><span class="math display" id="eq:combine">\[\begin{equation}
 \alpha =\frac{2\Gamma^{*}}{C_{c}}
 \tag{3.5}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>代入公式 <a href="response-fit.html#eq:achange">(3.2)</a> 得到：</p>
-<span class="math display" id="eq:combine2">\[\begin{equation}
+<p><span class="math display" id="eq:combine2">\[\begin{equation}
 A\ =V_{c}\ (1\ -\frac{\Gamma^{*}}{C_{c}})\ R_{d}
 \tag{3.6}
-\end{equation}\]</span>
-<p>在 Cc 浓度很低的时候，RuBP 供应充足 (图 <a href="response-fit.html#fig:fvcb">3.1</a> Rubisco 阶段)，Vc 等于 Rubisco 所能支持的羧化速率 w<sub>c</sub>，：</p>
-<span class="math display" id="eq:wc">\[\begin{equation}
+\end{equation}\]</span></p>
+<p>在 Cc 浓度很低的时候，RuBP 供应充足 (图 <a href="response-fit.html#fig:fvcb">3.1</a> Rubisco 阶段)，Vc 等于 Rubisco
+所能支持的羧化速率 w<sub>c</sub>，：</p>
+<p><span class="math display" id="eq:wc">\[\begin{equation}
 w_{c}\ =\ \frac{V_{cmax\ }C_{c}}{C_{c\ }+\ K_{c\ }(1\ +\ \frac{O}{K_{o}})}
 \tag{3.7}
-\end{equation}\]</span>
-<p>随着 Cc 浓度的增加，Rubisco 支持的羧化速率超过了 RuBP 供应速率, Vc 受 RuBP 再生速率的限制（图 <a href="response-fit.html#fig:fvcb">3.1</a> RuBP 阶段），此时 Vc 由 RuBP 的再生速率限制，而 RuBP 又由电子传递速率（J）决定，故：</p>
-<span class="math display" id="eq:wj">\[\begin{equation}
+\end{equation}\]</span></p>
+<p>随着 Cc 浓度的增加，Rubisco 支持的羧化速率超过了 RuBP 供应速率, Vc 受 RuBP 再生速率的限制（图 <a href="response-fit.html#fig:fvcb">3.1</a>
+RuBP 阶段），此时 Vc 由 RuBP 的再生速率限制，而 RuBP 又由电子传递速率（J）决定，故：</p>
+<p><span class="math display" id="eq:wj">\[\begin{equation}
 w_{j}\ =\ \frac{J\ C_{c}}{4C_{c\ }+\ 8\Gamma^{*}}
 \tag{3.8}
-\end{equation}\]</span>
-<p>当 Cc 浓度很高，光合磷酸化超过了淀粉和蔗糖的合成速率的时候，Vc 受到 TP 利用速率（Vp）的限制（图 <a href="response-fit.html#fig:fvcb">3.1</a> TPU 阶段），一般情况下，</p>
-<span class="math display" id="eq:wp">\[\begin{equation}
+\end{equation}\]</span></p>
+<p>当 Cc 浓度很高，光合磷酸化超过了淀粉和蔗糖的合成速率的时候，Vc 受到 TP 利用速率（Vp）的限制（图 <a href="response-fit.html#fig:fvcb">3.1</a>
+TPU 阶段），一般情况下，</p>
+<p><span class="math display" id="eq:wp">\[\begin{equation}
 w_{p\ }=\ \frac{3V_{p}C_{c}}{C_{c}-\Gamma^{*}}
 \tag{3.9}
-\end{equation}\]</span>
-<p>最终，C3 植物叶片的光合速率 A 由 w<sub>c</sub>、w<sub>j</sub>、w<sub>p</sub> 的最小者决定（图 <a href="response-fit.html#fig:fvcb">3.1</a> 实现部分），当c &gt; <span class="math inline">\(\Gamma^{*}\)</span>时：</p>
-<span class="math display" id="eq:fvcbfin">\[\begin{equation}
+\end{equation}\]</span></p>
+<p>最终，C3 植物叶片的光合速率 A 由 w<sub>c</sub>、w<sub>j</sub>、w<sub>p</sub>
+的最小者决定（图 <a href="response-fit.html#fig:fvcb">3.1</a> 实现部分），当c &gt; <span class="math inline">\(\Gamma^{*}\)</span>时：</p>
+<p><span class="math display" id="eq:fvcbfin">\[\begin{equation}
 A=min\{w_{c},w_{j,}w_{p}\}(1-\frac{\Gamma^{*}}{C_{c}})-R_{d}
 \tag{3.10}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 </div>
 <div id="co2_note" class="section level2">
 <h2><span class="header-section-number">3.2</span> CO<sub>2</sub> 响应曲线测量的注意事项</h2>
@@ -306,26 +350,26 @@ A=min\{w_{c},w_{j,}w_{p}\}(1-\frac{\Gamma^{*}}{C_{c}})-R_{d}
 <h3><span class="header-section-number">3.2.1</span> 分段性</h3>
 <p>与光响应曲线不同， A/Ci 曲线是分段的，这也增加了其复杂性，在其最初阶段，<span class="math inline">\(CO_2\)</span> 浓度较低，在此阶段， Rubisco 更多的与 <span class="math inline">\(O_2\)</span> 结合，因此，即使是较小浓度的 <span class="math inline">\(CO_2\)</span> 的增加，也会显著提高羧化速率，我们将此阶段称之为 <span class="math inline">\(CO_2\)</span> (<span class="citation">Wullschleger (<a href="#ref-Wullschleger1993Biochemical">1993</a>)</span>) 限制或 Rubisco 限制 (<span class="citation">Long and Bernacchi (<a href="#ref-Long2003Gas">2003</a>)</span>)。净光合速率 A 与 Ci 在此阶段斜率比较陡峭，实践中往往利用计算该斜率来计算 <span class="math inline">\(V_{cmax}\)</span>。</p>
 <p>在较高的 <span class="math inline">\(CO_2\)</span> 浓度下，曲线斜率开始便的平缓，作为底物的 <span class="math inline">\(CO_2\)</span> 已经不在是限制因素，随着羧化速率达到最大，RUBP 的量成为了其限制因素，而 RUBP 的再生速率受最大电子传递速率 <span class="math inline">\(J_{max}\)</span> 的限制。此时曲线的弯曲点由 <span class="math inline">\(V_{cmax}\)</span> 限制转变为 <span class="math inline">\(J_{max}\)</span>，许多研究中将饱和光下和 <span class="math inline">\(CO_2\)</span> 浓度下测量的光合速率称之为做大光合速率(<span class="citation">Heath et al. (<a href="#ref-heath2005rising">2005</a>)</span>)。而另一些研究中将最大光合速率定义为外界 <span class="math inline">\(CO_2\)</span> 时，在饱和光强下达到的最大光合速率(<span class="citation">Marshall and Biscoe (<a href="#ref-marshall1980a">1980</a>)</span>)。这些术语上的差别需要注意。</p>
-<p>在之后，有可能继续观测到磷酸盐限制 RUBP 再生的情况，导致光合速率的下降。因为此时大量的磷酸丙糖与正磷酸盐结合，导致 ATP 合成受限制(<span class="citation">D. S. Ellsworth et al. (<a href="#ref-ellsworth2015phosphorus">2015</a>)</span>)。这就是 TPU 限制阶段。</p>
+<p>在之后，有可能继续观测到磷酸盐限制 RUBP 再生的情况，导致光合速率的下降。因为此时大量的磷酸丙糖与正磷酸盐结合，导致 ATP 合成受限制(<span class="citation">Ellsworth et al. (<a href="#ref-ellsworth2015phosphorus">2015</a>)</span>)。这就是 TPU 限制阶段。</p>
 </div>
 <div id="note_detail" class="section level3">
 <h3><span class="header-section-number">3.2.2</span> 测量注意事项</h3>
 <p>尽管您的操作是严格按照说明书操作的，但说明书是指仪器的正确操作方式，无法对所有测量都采用相同设置，要获得好的测量结果，有更多的因素需要注意：</p>
 <p>使用 LI-6400 或 LI-6800 测量 A/Ci 曲线的过程也就是控制叶室或参比室气体浓度变化的过程，<strong>只要诱导的时间足够</strong>，气孔会在相应设置的环境条件下开到足够大，这样 Ci 会随 Ca 而变化，一般来讲二者的比例为 0.7，但也可能在 0.5~0.7 间变化。</p>
-<p>一般来讲，测量参数是在温度为 25 <span class="math inline">\(^{\circ}\)</span>C 时获得，但实际测量过程中，因为外界温度过高或过低等无法控制叶室温度到 25 <span class="math inline">\(^{\circ}\)</span>C，这其实并非严重的问题，因为这可以通过数学上的方法将计算参数标准化为 25 <span class="math inline">\(^{\circ}\)</span>C 时的结果。所以，在测量时只需控制叶室温度稳定即可（通常为 20 <span class="math inline">\(^{\circ}\)</span>C ~ 30 <span class="math inline">\(^{\circ}\)</span>C 之间）。 此外就是控制恒定的 VPD 及一个饱和光强。另外就是需要注意，开始测量之前，必须在外界环境的 <span class="math inline">\(CO_2\)</span> 浓度下诱导足够长的时间，使光合速率达到稳定，一般需要20 ~ 30 min。对于没有稳定的光保护机制的植物，一般不建议在 50 ppm 或更低的浓度下进行设置，此时饱和光强和建议的温度下，植物没有足够的底物进行光合作用，这样会因为光化学反应的降低发生氧化性损伤。<span class="citation">M. Centritto, Loreto, and Chartzoulakis (<a href="#ref-centritto2003">2003</a>)</span> 研究表明，长时间的在 50 ppm 下诱导气孔打开到最大时，可以观测到最大的气孔导度（非标准方式测量）。</p>
-<p>对于存在干旱胁迫的测量，由于干旱会导致气孔关闭（<span class="citation">Lauteri et al. (<a href="#ref-lauteri2014">2014</a>)</span>）, 此时没有足够多的 <span class="math inline">\(CO_2\)</span> 进入气孔，此时的测量是没有意义的，可在 50 ppm 诱导 1 h 等待气孔完全打开再快速升高 Ca 的值来进行测量（<span class="citation">M. Centritto, Loreto, and Chartzoulakis (<a href="#ref-centritto2003">2003</a>)</span>）。该方法对于 <span class="math inline">\(V_{cmax}\)</span> 不受影响而 <span class="math inline">\(J_{max}\)</span> 降低的情况适用（<span class="citation">Aganchich et al. (<a href="#ref-Aganchich2009">2009</a>)</span>）。但在某些情况下，气孔关闭速度太快，无法完成整个 A/Ci 曲线过程 (Haworth2017)（需要考虑 LI-6800 RACiR）。更重要的是，如果想采用拟合方式求 gm，那么气孔必须完全打开使叶片对 <span class="math inline">\(CO_2\)</span> 吸收的限制降到最低。对于灌溉情况良好的植物或者土壤水分情况比较好的植物，气孔不对高于外界浓度的 Ca 的升高而响应(<span class="citation">Haworth et al. (<a href="#ref-haworth2015coordination">2015</a>)</span>)，这可能需要更多的测量点或延长测量点的时间间隔来提高曲线的分辨率。另外，测量点的数量也要根据研究而改变，例如重点测量 Vcamx 时，50 ~ 300 ppm 的数据点要多一些，而如果研究对象是土壤磷酸盐对植物生理的限制，那么 1600 ~ 2000 ppm 的数据点要适当增多。</p>
+<p>一般来讲，测量参数是在温度为 25 <span class="math inline">\(^{\circ}\)</span>C 时获得，但实际测量过程中，因为外界温度过高或过低等无法控制叶室温度到 25 <span class="math inline">\(^{\circ}\)</span>C，这其实并非严重的问题，因为这可以通过数学上的方法将计算参数标准化为 25 <span class="math inline">\(^{\circ}\)</span>C 时的结果。所以，在测量时只需控制叶室温度稳定即可（通常为 20 <span class="math inline">\(^{\circ}\)</span>C ~ 30 <span class="math inline">\(^{\circ}\)</span>C 之间）。 此外就是控制恒定的 VPD 及一个饱和光强。另外就是需要注意，开始测量之前，必须在外界环境的 <span class="math inline">\(CO_2\)</span> 浓度下诱导足够长的时间，使光合速率达到稳定，一般需要20 ~ 30 min。对于没有稳定的光保护机制的植物，一般不建议在 50 ppm 或更低的浓度下进行设置，此时饱和光强和建议的温度下，植物没有足够的底物进行光合作用，这样会因为光化学反应的降低发生氧化性损伤。<span class="citation">Centritto, Loreto, and Chartzoulakis (<a href="#ref-centritto2003">2003</a>)</span> 研究表明，长时间的在 50 ppm 下诱导气孔打开到最大时，可以观测到最大的气孔导度（非标准方式测量）。</p>
+<p>对于存在干旱胁迫的测量，由于干旱会导致气孔关闭（<span class="citation">Lauteri et al. (<a href="#ref-lauteri2014">2014</a>)</span>）, 此时没有足够多的 <span class="math inline">\(CO_2\)</span> 进入气孔，此时的测量是没有意义的，可在 50 ppm 诱导 1 h 等待气孔完全打开再快速升高 Ca 的值来进行测量（<span class="citation">Centritto, Loreto, and Chartzoulakis (<a href="#ref-centritto2003">2003</a>)</span>）。该方法对于 <span class="math inline">\(V_{cmax}\)</span> 不受影响而 <span class="math inline">\(J_{max}\)</span> 降低的情况适用（<span class="citation">Aganchich et al. (<a href="#ref-Aganchich2009">2009</a>)</span>）。但在某些情况下，气孔关闭速度太快，无法完成整个 A/Ci 曲线过程 (Haworth2017)（需要考虑 LI-6800 RACiR）。更重要的是，如果想采用拟合方式求 gm，那么气孔必须完全打开使叶片对 <span class="math inline">\(CO_2\)</span> 吸收的限制降到最低。对于灌溉情况良好的植物或者土壤水分情况比较好的植物，气孔不对高于外界浓度的 Ca 的升高而响应(<span class="citation">Haworth et al. (<a href="#ref-haworth2015coordination">2015</a>)</span>)，这可能需要更多的测量点或延长测量点的时间间隔来提高曲线的分辨率。另外，测量点的数量也要根据研究而改变，例如重点测量 Vcamx 时，50 ~ 300 ppm 的数据点要多一些，而如果研究对象是土壤磷酸盐对植物生理的限制，那么 1600 ~ 2000 ppm 的数据点要适当增多。</p>
 <p>一个更精确的了解植物生理指标的方法是将 A/Ci 曲线改为 A/Cc 曲线，但这需要了解 gm 数据。因为 Cc 通过如下方式计算：</p>
-<span class="math display" id="eq:notecc">\[\begin{equation}
+<p><span class="math display" id="eq:notecc">\[\begin{equation}
 C_c = C_i - \frac{A}{gm}
 \tag{3.11}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>对于 gm 的计算，比较易操作的有几种：采用光合荧光联合测量的方式计算求得。当然也可以采用曲线拟合的方式，或者 <span class="citation">Yin et al. (<a href="#ref-yin2009using">2009</a>)</span> 使用的方式，在低氧气体下，采用不同的光照水平求得。</p>
 <p>此外，测量气体交换非常重要的误差来源就是气体的扩散，因为测量时，多数时间内外界气体浓度要高于叶室内的气体浓度，那么即使使用密封性非常好的材料，由外界高 <span class="math inline">\(CO_2\)</span> 浓度气体向叶室低 <span class="math inline">\(CO_2\)</span> 浓度气体的扩散无法避免，尤其是在连续长时间测量时该效应尤为明显，因此需要经常更换叶室垫圈。具体可以通过一些方法来校正（<span class="citation">Flexas J and A (<a href="#ref-Flexas2007leak">2007</a>)</span>，rodeghiero2007major），但如果采用 LI-6800 测量这将不是问题，它采用的叶室增加技术并根据测量的漏气情况对结果自动修正。</p>
 </div>
 </div>
 <div id="plantecophys" class="section level2">
 <h2><span class="header-section-number">3.3</span> <code>plantecophys</code> 软件包</h2>
-<p>Remko A. Duursma 在2015年发表了一篇文章 <span class="citation">Remko A. Duursma (<a href="#ref-Duursma2015Plantecophys">2015</a>)</span>，<code>plantecophys</code> 是其开发的一个R包工具集，用于对叶片气体交换数据进行分析和建模。实现了如下功能：</p>
+<p>Remko A. Duursma 在2015年发表了一篇文章 <span class="citation">Duursma (<a href="#ref-Duursma2015Plantecophys">2015</a>)</span>，<code>plantecophys</code> 是其开发的一个R包工具集，用于对叶片气体交换数据进行分析和建模。实现了如下功能：</p>
 <ul>
 <li>CO<sub>2</sub> 响应曲线 (A-Ci curves) 的拟合、作图及模拟。</li>
 <li>不同气孔导度模型。</li>
@@ -339,11 +383,12 @@ C_c = C_i - \frac{A}{gm}
 </div>
 <div id="fit6400" class="section level2">
 <h2><span class="header-section-number">3.4</span> LI-6400XT CO<sub>2</sub> 响应曲线的拟合</h2>
-<p>LI-6400XT CO<sub>2</sub> 响应曲线的拟合需要借助 <code>plantecophys</code> 的 <code>fitaci</code> 实现，fitaci 函数为根据 FvCB 模型对 A-Ci 曲线的测量数据进行拟合，并估算 J<span class="math inline">\(_{max}\)</span>、V<span class="math inline">\(_{cmax}\)</span>、R<span class="math inline">\(_{d}\)</span>及他们的标准差，并根据 <span class="citation">B. E Medlyn et al. (<a href="#ref-Medlyn2002Temperature">2002</a>)</span> 的方法考虑了温度的影响。</p>
+<p>LI-6400XT CO<sub>2</sub> 响应曲线的拟合需要借助 <code>plantecophys</code> 的 <code>fitaci</code> 实现，fitaci 函数为根据 FvCB 模型对 A-Ci 曲线的测量数据进行拟合，并估算 J<span class="math inline">\(_{max}\)</span>、V<span class="math inline">\(_{cmax}\)</span>、R<span class="math inline">\(_{d}\)</span>及他们的标准差，并根据
+<span class="citation">Medlyn et al. (<a href="#ref-Medlyn2002Temperature">2002</a>)</span> 的方法考虑了温度的影响。</p>
 <div id="fitaci_intro" class="section level3">
 <h3><span class="header-section-number">3.4.1</span> fitaci 函数介绍</h3>
-<p><code>fitaci</code> 的用法如下<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>：</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fitaci</span>(data, <span class="dt">varnames =</span> <span class="kw">list</span>(<span class="dt">ALEAF =</span> <span class="st">&quot;Photo&quot;</span>, 
+<p><code>fitaci</code> 的用法如下<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>：</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fitaci</span>(data, <span class="dt">varnames =</span> <span class="kw">list</span>(<span class="dt">ALEAF =</span> <span class="st">&quot;Photo&quot;</span>, 
   <span class="dt">Tleaf =</span> <span class="st">&quot;Tleaf&quot;</span>, <span class="dt">Ci =</span> <span class="st">&quot;Ci&quot;</span>, <span class="dt">PPFD =</span> <span class="st">&quot;PARi&quot;</span>, 
   <span class="dt">Rd =</span> <span class="st">&quot;Rd&quot;</span>), <span class="dt">Tcorrect =</span> <span class="ot">TRUE</span>, <span class="dt">Patm =</span> <span class="dv">100</span>, 
   <span class="dt">citransition =</span> <span class="ot">NULL</span>, <span class="dt">quiet =</span> <span class="ot">FALSE</span>, 
@@ -357,36 +402,42 @@ C_c = C_i - \frac{A}{gm}
   <span class="dt">delsJ =</span> <span class="fl">641.3615</span>, <span class="dt">GammaStar =</span> <span class="ot">NULL</span>, 
   <span class="dt">Km =</span> <span class="ot">NULL</span>, <span class="dt">id =</span> <span class="ot">NULL</span>, ...)
 
-## S3 method for class &#39;acifit&#39;
+<span class="co">## S3 method for class &#39;acifit&#39;</span>
 <span class="kw">plot</span>(x, <span class="dt">what =</span> <span class="kw">c</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;model&quot;</span>, <span class="st">&quot;none&quot;</span>),
      <span class="dt">xlim =</span> <span class="ot">NULL</span>, <span class="dt">ylim =</span> <span class="ot">NULL</span>, <span class="dt">whichA =</span> <span class="kw">c</span>(
        <span class="st">&quot;Ac&quot;</span>, <span class="st">&quot;Aj&quot;</span>, <span class="st">&quot;Amin&quot;</span>, <span class="st">&quot;Ap&quot;</span>), <span class="dt">add =</span> <span class="ot">FALSE</span>,
 <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">addzeroline =</span> <span class="ot">TRUE</span>, <span class="dt">addlegend =</span> 
   <span class="op">!</span>add, <span class="dt">legendbty =</span> <span class="st">&quot;o&quot;</span>,<span class="dt">transitionpoint =</span> <span class="ot">TRUE</span>, 
 <span class="dt">linecols =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>), <span class="dt">lwd =</span> <span class="kw">c</span>(<span class="dv">1</span>,
-<span class="dv">2</span>), ...)</code></pre></div>
+<span class="dv">2</span>), ...)</code></pre>
 <p><em>主要参数注释：</em></p>
 <ul>
-<li>data：需要分析的数据，必须为 data.frame<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a>。 格式。</li>
-<li>varnames：数据的表头，此处函数默认的表头为 LI-6400 的表头，分析 LI-6400 的数据时可以不用填写，直接使用默认的参数即可<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a>。</li>
+<li>data：需要分析的数据，必须为 data.frame<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>。
+格式。</li>
+<li>varnames：数据的表头，此处函数默认的表头为 LI-6400 的表头，分析 LI-6400 的数据时可以不用填写，直接使用默认的参数即可<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>。</li>
 <li>Tcorrect：如果为 TRUE，那么 J<span class="math inline">\(_{max}\)</span>、V<span class="math inline">\(_{cmax}\)</span> 的结果为温度校正结果，若 Tcorrect = FALSE，则为测量温度下的结果。</li>
 <li>Patm：为外界大气压。</li>
-<li>citransition：参见详，若提供该选项，则 J<span class="math inline">\(_{max}\)</span>、V<span class="math inline">\(_{cmax}\)</span> 的区域则分别拟合<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a>。</li>
+<li>citransition：参见详，若提供该选项，则 J<span class="math inline">\(_{max}\)</span>、V<span class="math inline">\(_{cmax}\)</span>
+的区域则分别拟合<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>。</li>
 <li>fitmethod：参见详解。</li>
 <li>fitTPU：是否拟合 TPU 限制，默认为 FALSE，参见详解。</li>
 <li>x：对于plot.acifit，x 为fitaci返回的对象，简单理解为 将 fitaci 函数拟合结果赋值给一个变量，此处plot函数实际上为plot.acifit。</li>
 <li>what：利用基础做图工具，默认为对数据和模型进行作图。</li>
-<li>whichA：默认为对所有的光合速率进行作图（Aj=Jmax-limited (蓝色), Ac=Vcmax- limited (红色), Hyperbolic minimum (黑色)), TPU-limited rate (Ap, 如果模型有计算结果）。</li>
+<li>whichA：默认为对所有的光合速率进行作图（Aj=Jmax-limited (蓝色), Ac=Vcmax- limited (红色),
+Hyperbolic minimum (黑色)), TPU-limited rate (Ap, 如果模型有计算结果）。</li>
 </ul>
 <p>其他参数请参考 FvCB 模型 <span class="citation">Farquhar, Caemmerer, and Berry (<a href="#ref-Farquhar1980A">1980</a>)</span> 或查看 plantecophys 的帮助文档。</p>
 <div id="fitaci_detail" class="section level4">
 <h4><span class="header-section-number">3.4.1.1</span> fitaci函数详解</h4>
 <ul>
-<li>默认为非线性拟合，详见 <span class="citation">Remko A. Duursma (<a href="#ref-Duursma2015Plantecophys">2015</a>)</span>。</li>
-<li>bilinear 方法使用两次线性拟合方法首先拟合 V<span class="math inline">\(_{cmax}\)</span> 和 R<span class="math inline">\(_{d}\)</span>，然后在拟合J<span class="math inline">\(_{max}\)</span>，过渡点的选择为对所有数据拟合最适的点，类似 <span class="citation">Gu et al. (<a href="#ref-Gu2010Reliable">2010</a>)</span> 的方法。该方法的优势时无论如何，都会返回拟合结果，尤其是非线性拟合失败时使用该方法，但若默认方法失败时，需首先检查是否数据存在问题。两种拟合方法的结果有轻微的差别<a href="#fn7" class="footnoteRef" id="fnref7"><sup>7</sup></a>。</li>
+<li>默认为非线性拟合，详见 <span class="citation">Duursma (<a href="#ref-Duursma2015Plantecophys">2015</a>)</span>。</li>
+<li>bilinear 方法使用两次线性拟合方法首先拟合 V<span class="math inline">\(_{cmax}\)</span> 和 R<span class="math inline">\(_{d}\)</span>，然后在拟合J<span class="math inline">\(_{max}\)</span>，过渡点的选择为对所有数据拟合最适的点，类似 <span class="citation">Gu et al. (<a href="#ref-Gu2010Reliable">2010</a>)</span> 的方法。该方法的优势时无论如何，都会返回拟合结果，尤其是非线性拟合失败时使用该方法，但若默认方法失败时，需首先检查是否数据存在问题。两种拟合方法的结果有轻微的差别<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>。</li>
 <li>onepoint 参考 <span class="citation">De Kauwe et al. (<a href="#ref-De2016A">2016</a>)</span>。</li>
-<li><p>citransition 使用时，数据将被区分为 V<span class="math inline">\(_{cmax}\)</span> 限制（Ci &lt; citransition ）区域，以及 J<span class="math inline">\(_{max}\)</span> 限制 (Ci &gt; citransition) 区域。</p></li>
-<li><p>fitTPU：如果要计算TPU，要设置 fitTPU = TRUE，并且 fittingmethod = “bilinear”。但需要注意，当 TPU 被计算时，没有 J<span class="math inline">\(_{max}\)</span> 限制的点的存在是可能的。TPU限制的发生是在A值不随 CO<span class="math inline">\(_{2}\)</span> 的增加而增加时发生的，因此计算 TPU 是否有返回值，取决于测量数据是否有此情况出现。</p></li>
+<li><p>citransition 使用时，数据将被区分为 V<span class="math inline">\(_{cmax}\)</span> 限制（Ci &lt;
+citransition ）区域，以及 J<span class="math inline">\(_{max}\)</span> 限制 (Ci &gt; citransition) 区域。</p></li>
+<li><p>fitTPU：如果要计算TPU，要设置 fitTPU = TRUE，并且 fittingmethod
+= “bilinear”。但需要注意，当 TPU 被计算时，没有 J<span class="math inline">\(_{max}\)</span> 限制的点的存在是可能的。TPU限制的发生是在A值不随
+CO<span class="math inline">\(_{2}\)</span> 的增加而增加时发生的，因此计算 TPU 是否有返回值，取决于测量数据是否有此情况出现。</p></li>
 </ul>
 </div>
 </div>
@@ -395,7 +446,7 @@ C_c = C_i - \frac{A}{gm}
 <h2><span class="header-section-number">3.5</span> 使用 <code>plantecophys</code> 拟合 LI-6400XT CO<sub>2</sub> 响应曲线数据</h2>
 <div id="data6400" class="section level3">
 <h3><span class="header-section-number">3.5.1</span> 数据的前处理</h3>
-<p>虽然 R 软件支持直接导入 xlsx 的数据，但因为 LI-6400XT 的数据记录文件内有其他空行或 remark 等内容，增加了处理代码的量，<strong>故而推荐将其数据先整理为如表 <a href="response-fit.html#tab:head6400">3.1</a> 样式，并另存为 csv 格式</strong><a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a>：</p>
+<p>虽然 R 软件支持直接导入 xlsx 的数据，但因为 LI-6400XT 的数据记录文件内有其他空行或 remark 等内容，增加了处理代码的量，<strong>故而推荐将其数据先整理为如表 <a href="response-fit.html#tab:head6400">3.1</a> 样式，并另存为 csv 格式</strong><a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>：</p>
 <table>
 <caption><span id="tab:head6400">表 3.1: </span>推荐 LI-6400 整理后数据样式</caption>
 <thead>
@@ -476,9 +527,9 @@ C_c = C_i - \frac{A}{gm}
 </div>
 <div id="fitaci-p" class="section level3">
 <h3><span class="header-section-number">3.5.2</span> 使用示例</h3>
-<p><code>plantecophys</code> 并非 base 的安装包，首次使用需要从 <code>CRAN</code> 安装，可以使用图形界面安装，也可以直接用命令行安装<a href="#fn9" class="footnoteRef" id="fnref9"><sup>9</sup></a>，推荐同时安装依赖。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;plantecophys&quot;</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 载入 plantecophys </span>
+<p><code>plantecophys</code> 并非 base 的安装包，首次使用需要从 <code>CRAN</code> 安装，可以使用图形界面安装，也可以直接用命令行安装<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>，推荐同时安装依赖。</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;plantecophys&quot;</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 载入 plantecophys </span>
 <span class="kw">library</span>(<span class="st">&quot;plantecophys&quot;</span>)
 
 <span class="co"># 利用read.csv读取数据文件，</span>
@@ -491,7 +542,7 @@ aci &lt;-<span class="st"> </span><span class="kw">subset</span>(aci, Obs <span 
 <span class="co"># 不修改默认参数对数据进行拟合</span>
 acifit &lt;-<span class="st"> </span><span class="kw">fitaci</span>(aci)
 <span class="co"># 查看拟合结果的参数名称，方便导出数据使用</span>
-<span class="kw">attributes</span>(acifit)</code></pre></div>
+<span class="kw">attributes</span>(acifit)</code></pre>
 <pre><code>## $names
 ##  [1] &quot;df&quot;             &quot;pars&quot;           &quot;nlsfit&quot;         &quot;Tcorrect&quot;      
 ##  [5] &quot;Photosyn&quot;       &quot;Ci_transition&quot;  &quot;Ci_transition2&quot; &quot;Rd_measured&quot;   
@@ -501,8 +552,8 @@ acifit &lt;-<span class="st"> </span><span class="kw">fitaci</span>(aci)
 ## 
 ## $class
 ## [1] &quot;acifit&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 查看拟合结果</span>
-<span class="kw">summary</span>(acifit)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 查看拟合结果</span>
+<span class="kw">summary</span>(acifit)</code></pre>
 <pre><code>## Result of fitaci.
 ## 
 ## Data and predictions:
@@ -558,8 +609,8 @@ acifit &lt;-<span class="st"> </span><span class="kw">fitaci</span>(aci)
 ## Estimated from Tleaf (shown at mean Tleaf):
 ## GammaStar =  58.61138 
 ## Km =  1223.279</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">acifit_linear &lt;-<span class="st"> </span><span class="kw">fitaci</span>(aci,  <span class="dt">fitmethod =</span> <span class="st">&quot;bilinear&quot;</span>)
-<span class="kw">summary</span>(acifit_linear)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">acifit_linear &lt;-<span class="st"> </span><span class="kw">fitaci</span>(aci,  <span class="dt">fitmethod =</span> <span class="st">&quot;bilinear&quot;</span>)
+<span class="kw">summary</span>(acifit_linear)</code></pre>
 <pre><code>## Result of fitaci.
 ## 
 ## Data and predictions:
@@ -615,14 +666,14 @@ acifit &lt;-<span class="st"> </span><span class="kw">fitaci</span>(aci)
 ## Estimated from Tleaf (shown at mean Tleaf):
 ## GammaStar =  58.61138 
 ## Km =  1223.279</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 仅查看拟合参数, 比较两种拟合参数的差异</span>
-<span class="kw">coef</span>(acifit_linear)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 仅查看拟合参数, 比较两种拟合参数的差异</span>
+<span class="kw">coef</span>(acifit_linear)</code></pre>
 <pre><code>##       Vcmax        Jmax          Rd 
 ##  49.3787547 128.5546403   0.3828608</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(acifit)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(acifit)</code></pre>
 <pre><code>##      Vcmax       Jmax         Rd 
 ##  49.261616 126.620537   0.159449</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 设置作图参数，图形的边距及分为1行两列输出图形</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 设置作图参数，图形的边距及分为1行两列输出图形</span>
 <span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="fl">4.5</span>, <span class="fl">4.5</span>, <span class="dv">2</span>, <span class="dv">2</span>))
 <span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
 <span class="co"># 对两种拟合参数的结果作图，查看模型拟合是否正常</span>
@@ -644,7 +695,7 @@ acifit &lt;-<span class="st"> </span><span class="kw">fitaci</span>(aci)
        <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>),
        <span class="dt">col =</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;black&quot;</span>) 
 )
-<span class="kw">mtext</span>(<span class="st">&quot;fitmethod = &#39;bilinear&#39; &quot;</span>)</code></pre></div>
+<span class="kw">mtext</span>(<span class="st">&quot;fitmethod = &#39;bilinear&#39; &quot;</span>)</code></pre>
 <div class="figure"><span id="fig:fitaci6400"></span>
 <img src="bookdown_files/figure-html/fitaci6400-1.png" alt="光合速率的不同的限制阶段" width="672" />
 <p class="caption">
@@ -652,41 +703,41 @@ acifit &lt;-<span class="st"> </span><span class="kw">fitaci</span>(aci)
 </p>
 </div>
 <p>如果需要导出数据做他用，直接根据 <code>attributes</code> 中看到的名称，选择对应的数据导出即可，如果使用 Rstudio 的话，其自动补全的功能在选择数据上更方便。例如导出预测值和系数分别使用如下方式：</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 将模型拟合结果中df（即计算数据）赋给predictaci，</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 将模型拟合结果中df（即计算数据）赋给predictaci，</span>
 <span class="co"># 并用write.csv导出</span>
 predictaci &lt;-<span class="st"> </span>acifit<span class="op">$</span>df
 <span class="kw">write.csv</span>(acifit<span class="op">$</span>df, <span class="dt">file =</span> <span class="st">&quot;acipredict.csv&quot;</span>)
-<span class="kw">write.csv</span>(<span class="kw">coef</span>(acifit), <span class="dt">file =</span> <span class="st">&quot;coefaci.csv&quot;</span>)</code></pre></div>
+<span class="kw">write.csv</span>(<span class="kw">coef</span>(acifit), <span class="dt">file =</span> <span class="st">&quot;coefaci.csv&quot;</span>)</code></pre>
 <blockquote>
-<p>需要注意的是，因为非线性拟合需要一个初始值，因此，使用默认方式（非线性拟合）的时候，会存在可能的拟合失败现象，此时可以使用 <code>fitmethod = &quot;bilinear&quot;</code>，二者结果略有差别。</p>
+<p>需要注意的是，因为非线性拟合需要一个初始值，因此，使用默认方式（非线性拟合）的时候，会存在可能的拟合失败现象，此时可以使用 <code>fitmethod = "bilinear"</code>，二者结果略有差别。</p>
 </blockquote>
 <div id="onepoint" class="section level4">
 <h4><span class="header-section-number">3.5.2.1</span> fitmethod = “onepoint” 介绍</h4>
 <p><span class="citation">De Kauwe et al. (<a href="#ref-De2016A">2016</a>)</span> 发表了关于 one point 方法计算 <span class="math inline">\(V_{cmax}\)</span> 和 <span class="math inline">\(J_{max}\)</span> 方法的文章，在 2017 年 11 月的更新中，plantecophys 增加了响应的 R 软件实现方法， 该方法并非使用一个点计算 <span class="math inline">\(V_{cmax}\)</span> 和 <span class="math inline">\(J_{max}\)</span>，而是对数据集中的每一个点的值进行估计，使用的方法为逆向了光合作用方程。输出为对每个原始数据加入了 <span class="math inline">\(V_{cmax}\)</span> 和 <span class="math inline">\(J_{max}\)</span>，当然一如既往的可以使用温度校准的方法。<strong>并不建议该方法应用于整个 ACi 曲线的数据，它的假设是在外部环境 CO<sub>2</sub> 浓度和饱和光下，受到 Rubisco 所化速率的限制而不是 RUBP 的限制。</strong></p>
 <p>基于上面的描述，他们的模型如下：</p>
-<span class="math display" id="eq:inverseA">\[\begin{equation}
+<p><span class="math display" id="eq:inverseA">\[\begin{equation}
 \hat{V}_{cmax} = (A_{sat} + R_{day}) \frac{C_i + K_m}{C_i - \Gamma^*} 
 \tag{3.12}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>其中：K<sub>m</sub> 为米氏常数，其计算为：</p>
-<span class="math display" id="eq:km">\[\begin{equation}
+<p><span class="math display" id="eq:km">\[\begin{equation}
 K_m = K_c (1 + \frac{O_i}{K_o}) 
 \tag{3.13}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>未知参数均由文献中的方法进行计算，具体可参考 <span class="citation">De Kauwe et al. (<a href="#ref-De2016A">2016</a>)</span> 的原文,但上述方法的缺陷为还要使用 ACi 曲线来估算 R<sub>day</sub>，因此作者使用了1.5% V<sub>cmax</sub> 作为 R<sub>day</sub>，因此公式 <a href="response-fit.html#eq:inverseA">(3.12)</a> 可变换为：</p>
-<span class="math display" id="eq:onepoint">\[\begin{equation}
+<p><span class="math display" id="eq:onepoint">\[\begin{equation}
 \hat{V}_{cmax} = A_{sat} (\frac{C_i + K_m}{C_i - \Gamma^*} - 0.015)
 \tag{3.14}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>另一个重要的模型的假设为 J<sub>max</sub> 与 V<sub>cmax</sub> 是成比例的， J<sub>max</sub> 的计算是通过 C<sub>i</sub> transition point 来实现的，文章中的比值均值为 1.9，范围在 1.68 ~ 2.14 之间。</p>
 </div>
 </div>
 <div id="onpoint_fit" class="section level3">
 <h3><span class="header-section-number">3.5.3</span> 使用 ‘onepoint’ 单独计算 V<sub>cmax</sub> 和 J<sub>max</sub></h3>
 <p>目前我手头没有相应数据，仅有使用 LI-6400 测试 auto log 2 时的一个数据，我们用这个来示范该方法的使用：</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">one_data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/onepoint.csv&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r">one_data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/onepoint.csv&quot;</span>)
 knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">head</span>(one_data), <span class="dt">booktabs =</span> <span class="ot">TRUE</span>,
-             <span class="dt">caption =</span> <span class="st">&#39;onepoint 使用的数据&#39;</span>)</code></pre></div>
+             <span class="dt">caption =</span> <span class="st">&#39;onepoint 使用的数据&#39;</span>)</code></pre>
 <table>
 <caption><span id="tab:onepointdata">表 3.2: </span>onepoint 使用的数据</caption>
 <thead>
@@ -1130,7 +1181,7 @@ knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">he
 </table>
 <p>数据如上所示，为同一个叶片连续记录数据，故所有的光合速率十分接近。</p>
 <p>使用方法：</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plantecophys)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plantecophys)
 
 one_data &lt;-<span class="st"> </span><span class="kw">subset</span>(one_data, Obs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)
 one_data<span class="op">$</span>Rd &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="kw">length</span>(one_data<span class="op">$</span>Obs))
@@ -1139,7 +1190,7 @@ aci_fit &lt;-<span class="st"> </span><span class="kw">fitaci</span>(one_data, <
 knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">head</span>(<span class="kw">data.frame</span>(aci_fit<span class="op">$</span>Photo, 
              aci_fit<span class="op">$</span>Vcmax, aci_fit<span class="op">$</span>Jmax)),
              <span class="dt">booktabs =</span> <span class="ot">TRUE</span>,
-             <span class="dt">caption =</span> <span class="st">&#39;onepoint 法计算的结果&#39;</span>)</code></pre></div>
+             <span class="dt">caption =</span> <span class="st">&#39;onepoint 法计算的结果&#39;</span>)</code></pre>
 <table>
 <caption><span id="tab:onepoint">表 3.3: </span>onepoint 法计算的结果</caption>
 <thead>
@@ -1186,29 +1237,29 @@ knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">he
 </div>
 <div id="multi_curve" class="section level3">
 <h3><span class="header-section-number">3.5.4</span> 多条 CO<sub>2</sub> 响应曲线的拟合</h3>
-<p>fitacis 函数实际上是 fitaci 函数的扩展，方便一次拟合多条曲线<a href="#fn10" class="footnoteRef" id="fnref10"><sup>10</sup></a>。函数的参数如下：</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fitacis</span>(data, group, <span class="dt">fitmethod =</span> <span class="kw">c</span>(<span class="st">&quot;default&quot;</span>, 
+<p>fitacis 函数实际上是 fitaci 函数的扩展，方便一次拟合多条曲线<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>。函数的参数如下：</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fitacis</span>(data, group, <span class="dt">fitmethod =</span> <span class="kw">c</span>(<span class="st">&quot;default&quot;</span>, 
         <span class="st">&quot;bilinear&quot;</span>),<span class="dt">progressbar =</span> <span class="ot">TRUE</span>, 
         <span class="dt">quiet =</span> <span class="ot">FALSE</span>, <span class="dt">id =</span> <span class="ot">NULL</span>, ...)
 
-## S3 method for class &#39;acifits&#39;
+<span class="co">## S3 method for class &#39;acifits&#39;</span>
 <span class="kw">plot</span>(x, <span class="dt">how =</span> <span class="kw">c</span>(<span class="st">&quot;manyplots&quot;</span>, <span class="st">&quot;oneplot&quot;</span>), 
      <span class="dt">highlight =</span> <span class="ot">NULL</span>, <span class="dt">ylim =</span> <span class="ot">NULL</span>, 
      <span class="dt">xlim =</span> <span class="ot">NULL</span>, <span class="dt">add =</span> <span class="ot">FALSE</span>, <span class="dt">what =</span> <span class="kw">c</span>(<span class="st">&quot;model&quot;</span>,
-     <span class="st">&quot;data&quot;</span>, <span class="st">&quot;none&quot;</span>), ...)</code></pre></div>
+     <span class="st">&quot;data&quot;</span>, <span class="st">&quot;none&quot;</span>), ...)</code></pre>
 <p><strong>主要参数详解：</strong></p>
 <p>实际上 fitacis 与 fitaci 模型算法完全一致，只不过增加了一个 group 参数，用于区分不同测量的数据，具体请参考举例内容。</p>
 <div id="fitacis_exa" class="section level4">
 <h4><span class="header-section-number">3.5.4.1</span> fitacis 函数应用举例</h4>
 <p>下文代码根据 plantecophys 中的示例代码修改，进行演示，原代码请参考其帮助文档。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plantecophys)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plantecophys)
 <span class="co"># 只提取前10个不同测量的数据，节省时间进行举例</span>
 manyacidat2 &lt;-<span class="st"> </span><span class="kw">droplevels</span>(manyacidat[manyacidat<span class="op">$</span>Curve <span class="op">%in%</span><span class="st"> </span>
 <span class="st">                                       </span><span class="kw">levels</span>(manyacidat<span class="op">$</span>Curve)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>],])
 
 <span class="co"># 对多条曲线进行拟合，使用bilinear方法，</span>
 <span class="co"># 仅仅因为其比非线性拟合节省时间</span>
-fits &lt;-<span class="st"> </span><span class="kw">fitacis</span>(manyacidat2, <span class="dt">group =</span> <span class="st">&quot;Curve&quot;</span>, <span class="dt">fitmethod=</span><span class="st">&quot;bilinear&quot;</span>)</code></pre></div>
+fits &lt;-<span class="st"> </span><span class="kw">fitacis</span>(manyacidat2, <span class="dt">group =</span> <span class="st">&quot;Curve&quot;</span>, <span class="dt">fitmethod=</span><span class="st">&quot;bilinear&quot;</span>)</code></pre>
 <pre><code>## 
   |                                                        
   |                                                  |   0%
@@ -1232,8 +1283,8 @@ fits &lt;-<span class="st"> </span><span class="kw">fitacis</span>(manyacidat2, 
   |=============================================     |  90%
   |                                                        
   |==================================================| 100%</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 拟合结果为list，我们可以只提取第一个的拟合结果</span>
-fits[[<span class="dv">1</span>]]</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 拟合结果为list，我们可以只提取第一个的拟合结果</span>
+fits[[<span class="dv">1</span>]]</code></pre>
 <pre><code>## Result of fitaci.
 ## 
 ## Data and predictions:
@@ -1293,25 +1344,25 @@ fits[[<span class="dv">1</span>]]</code></pre></div>
 ## Estimated from Tleaf (shown at mean Tleaf):
 ## GammaStar =  42.31453 
 ## Km =  698.2084</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 所有参数均可传递到 plot.acifit，例如：</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 所有参数均可传递到 plot.acifit，例如：</span>
 <span class="co"># 将所有的数据点作图，并将数据点标记为蓝色</span>
 <span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="fl">4.5</span>, <span class="fl">4.5</span>, <span class="dv">2</span>, <span class="dv">2</span>))
 <span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
 <span class="kw">plot</span>(fits, <span class="dt">how=</span><span class="st">&quot;oneplot&quot;</span>, <span class="dt">what=</span><span class="st">&quot;data&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">addlegend =</span> <span class="ot">FALSE</span>)
 <span class="co"># 在上图的基础上增加模型拟合的线</span>
 <span class="kw">plot</span>(fits, <span class="dt">how=</span><span class="st">&quot;oneplot&quot;</span>, <span class="dt">what=</span><span class="st">&quot;data&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">addlegend =</span> <span class="ot">FALSE</span>)
-<span class="kw">plot</span>(fits, <span class="dt">how=</span><span class="st">&quot;oneplot&quot;</span>, <span class="dt">add=</span><span class="ot">TRUE</span>, <span class="dt">what=</span><span class="st">&quot;model&quot;</span>, <span class="dt">lwd=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">addlegend =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<span class="kw">plot</span>(fits, <span class="dt">how=</span><span class="st">&quot;oneplot&quot;</span>, <span class="dt">add=</span><span class="ot">TRUE</span>, <span class="dt">what=</span><span class="st">&quot;model&quot;</span>, <span class="dt">lwd=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">addlegend =</span> <span class="ot">FALSE</span>)</code></pre>
 <div class="figure"><span id="fig:fitacisr"></span>
 <img src="bookdown_files/figure-html/fitacisr-1.png" alt="fitacis作图结果" width="672" />
 <p class="caption">
 图 3.3: fitacis作图结果
 </p>
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 使用sapply提取拟合结果的RMSE(均方根误差)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 使用sapply提取拟合结果的RMSE(均方根误差)</span>
 rmses &lt;-<span class="st"> </span><span class="kw">sapply</span>(fits, <span class="st">&quot;[[&quot;</span>, <span class="st">&quot;RMSE&quot;</span>)
 <span class="kw">plot</span>(rmses, <span class="dt">type=</span><span class="st">&#39;h&#39;</span>, <span class="dt">ylab=</span><span class="st">&quot;RMSE&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Curve nr&quot;</span>)
 <span class="co"># 对最差的拟合结果进行作图</span>
-<span class="kw">plot</span>(fits[[<span class="kw">which.max</span>(rmses)]])</code></pre></div>
+<span class="kw">plot</span>(fits[[<span class="kw">which.max</span>(rmses)]])</code></pre>
 <div class="figure"><span id="fig:fitacisr"></span>
 <img src="bookdown_files/figure-html/fitacisr-2.png" alt="fitacis作图结果" width="672" />
 <p class="caption">
@@ -1324,19 +1375,21 @@ rmses &lt;-<span class="st"> </span><span class="kw">sapply</span>(fits, <span c
 <div id="transition" class="section level3">
 <h3><span class="header-section-number">3.5.5</span> <code>findCiTransition</code> 函数</h3>
 <p>计算 CiTransition 的函数，第一点为 Ac &amp; Aj，第二点为 Aj &amp; Ap，并且仅在计算 TPU 的前提下才会有第二点出现。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">findCiTransition</span>(object, ...)</code></pre></div>
-<p>参数使用，object 为 fitaci 函数对象，或者整个的 <code>Photosyn</code> 函数。 … 为使用 <code>Photosyn</code> 时可传递的参数。</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">findCiTransition</span>(object, ...)</code></pre>
+<p>参数使用，object 为 fitaci 函数对象，或者整个的 <code>Photosyn</code> 函数。
+… 为使用 <code>Photosyn</code> 时可传递的参数。</p>
 </div>
 </div>
 <div id="c4" class="section level2">
 <h2><span class="header-section-number">3.6</span> C4 植物光合</h2>
-<p>之前的部分模型全部为关于 C3 植物的拟合，而 <span class="citation">Caemmerer (<a href="#ref-Caemmerer2000Biochemical">2000</a>)</span> 的方法，则是针对 C4 植物的 A-Ci 曲线的实现。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">AciC4</span>(Ci, <span class="dt">PPFD =</span> <span class="dv">1500</span>, <span class="dt">Tleaf =</span> <span class="dv">25</span>, <span class="dt">VPMAX25 =</span> <span class="dv">120</span>, 
+<p>之前的部分模型全部为关于 C3 植物的拟合，而 <span class="citation">Caemmerer (<a href="#ref-Caemmerer2000Biochemical">2000</a>)</span> 的方法，则是针对
+C4 植物的 A-Ci 曲线的实现。</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">AciC4</span>(Ci, <span class="dt">PPFD =</span> <span class="dv">1500</span>, <span class="dt">Tleaf =</span> <span class="dv">25</span>, <span class="dt">VPMAX25 =</span> <span class="dv">120</span>, 
       <span class="dt">JMAX25 =</span> <span class="dv">400</span>, <span class="dt">Vcmax =</span> <span class="dv">60</span>, <span class="dt">Vpr =</span> <span class="dv">80</span>, 
       <span class="dt">alpha =</span> <span class="dv">0</span>, <span class="dt">gbs =</span> <span class="fl">0.003</span>, <span class="dt">O2 =</span> <span class="dv">210</span>, 
       <span class="dt">x =</span> <span class="fl">0.4</span>, <span class="dt">THETA =</span> <span class="fl">0.7</span>, <span class="dt">Q10 =</span> <span class="fl">2.3</span>, 
       <span class="dt">RD0 =</span> <span class="dv">1</span>, <span class="dt">RTEMP =</span> <span class="dv">25</span>, <span class="dt">TBELOW =</span> <span class="dv">0</span>, 
-      <span class="dt">DAYRESP =</span> <span class="dv">1</span>, <span class="dt">Q10F =</span> <span class="dv">2</span>, <span class="dt">FRM =</span> <span class="fl">0.5</span>, ...)</code></pre></div>
+      <span class="dt">DAYRESP =</span> <span class="dv">1</span>, <span class="dt">Q10F =</span> <span class="dv">2</span>, <span class="dt">FRM =</span> <span class="fl">0.5</span>, ...)</code></pre>
 <p><strong>参数详解</strong></p>
 <ul>
 <li>Ci：胞间二氧化碳浓度 (<span class="math inline">\(\mu mol\cdot m^{-2}\cdot s^{-1}\)</span>)。</li>
@@ -1362,12 +1415,12 @@ rmses &lt;-<span class="st"> </span><span class="kw">sapply</span>(fits, <span c
 <p>以上参数均来自 <span class="citation">Caemmerer (<a href="#ref-Caemmerer2000Biochemical">2000</a>)</span>，括号中的参数值均为默认值，具体应用时请按照实际情况修改。</p>
 <div id="c4_sim" class="section level3">
 <h3><span class="header-section-number">3.6.1</span> C4 植物光合速率的计算</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 模拟 C4 植物的 Ci 值，计算光合速率并作图</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 模拟 C4 植物的 Ci 值，计算光合速率并作图</span>
 <span class="kw">library</span>(plantecophys)
 aci &lt;-<span class="st"> </span><span class="kw">AciC4</span>(<span class="dt">Ci=</span><span class="kw">seq</span>(<span class="dv">5</span>,<span class="dv">600</span>, <span class="dt">length=</span><span class="dv">101</span>))
-<span class="kw">with</span>(aci, <span class="kw">plot</span>(Ci, ALEAF, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="kw">max</span>(ALEAF))))</code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-14"></span>
-<img src="bookdown_files/figure-html/unnamed-chunk-14-1.png" alt="C4 植物 A-Ci 作图" width="672" />
+<span class="kw">with</span>(aci, <span class="kw">plot</span>(Ci, ALEAF, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="kw">max</span>(ALEAF))))</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-15"></span>
+<img src="bookdown_files/figure-html/unnamed-chunk-15-1.png" alt="C4 植物 A-Ci 作图" width="672" />
 <p class="caption">
 图 3.4: C4 植物 A-Ci 作图
 </p>
@@ -1386,10 +1439,10 @@ aci &lt;-<span class="st"> </span><span class="kw">AciC4</span>(<span class="dt"
 <p>Hikosaka, K, K Ishikawa, A Borjigidai, O Muller, and Y Onoda. 2006. “Temperature Acclimation of Photosynthesis: Mechanisms Involved in the Changes in Temperature Dependence of Photosynthetic Rate.” <em>Journal of Experimental Botany</em> 57 (2): 291.</p>
 </div>
 <div id="ref-matthew2018">
-<p>Haworth, Matthew, Giovanni Marino, and Mauro Centritto. 2018. “An Introductory Guide to Gas Exchange Analysis of Photosynthesis and Its Application to Plant Phenotyping and Precision Irrigation to Enhance Water Use Efficiency.” <em>Journal of Water and Climate Change</em>. doi:<a href="https://doi.org/https://doi.org/10.2166/wcc.2018.152">https://doi.org/10.2166/wcc.2018.152</a>.</p>
+<p>Haworth, Matthew, Giovanni Marino, and Mauro Centritto. 2018. “An Introductory Guide to Gas Exchange Analysis of Photosynthesis and Its Application to Plant Phenotyping and Precision Irrigation to Enhance Water Use Efficiency.” <em>Journal of Water and Climate Change</em>. <a href="https://doi.org/https://doi.org/10.2166/wcc.2018.152">https://doi.org/https://doi.org/10.2166/wcc.2018.152</a>.</p>
 </div>
 <div id="ref-Wullschleger1993Biochemical">
-<p>Wullschleger, Stan D. 1993. “Biochemical Limitations to Carbon Assimilation in C3 Plants—A Retrospective Analysis of the a-Ci Curves from 109 Species.” <em>Journal of Experimental Botany</em> 44 (262): 907–20.</p>
+<p>Wullschleger, Stan D. 1993. “Biochemical Limitations to Carbon Assimilation in C3 Plants—a Retrospective Analysis of the a-Ci Curves from 109 Species.” <em>Journal of Experimental Botany</em> 44 (262): 907–20.</p>
 </div>
 <div id="ref-Long2003Gas">
 <p>Long, S. P., and C. J. Bernacchi. 2003. “Gas Exchange Measurements, What Can They Tell Us About the Underlying Limitations to Photosynthesis? Procedures and Sources of Error.” <em>Journal of Experimental Botany</em> 54 (392): 2393.</p>
@@ -1425,7 +1478,7 @@ aci &lt;-<span class="st"> </span><span class="kw">AciC4</span>(<span class="dt"
 <p>Duursma, Remko A. 2015. “Plantecophys-an R Package for Analysing and Modelling Leaf Gas Exchange Data.” <em>Plos One</em> 10 (11): e0143346.</p>
 </div>
 <div id="ref-Medlyn2002Temperature">
-<p>Medlyn, B. E, E Dreyer, D Ellsworth, M Forstreuter, P. C Harley, M. U. F Kirschbaum, X Le Roux, P Montpied, J Strassemeyer, and A Walcroft. 2002. “Temperature Response of Parameters of a Biochemically Based Model of Photosynthesis. Ii. a Review of Experimental Data Review.” <em>Plant Cell &amp; Environment</em> 25 (9): 1167–79.</p>
+<p>Medlyn, B. E, E Dreyer, D Ellsworth, M Forstreuter, P. C Harley, M. U. F Kirschbaum, X Le Roux, P Montpied, J Strassemeyer, and A Walcroft. 2002. “Temperature Response of Parameters of a Biochemically Based Model of Photosynthesis. II. A Review of Experimental Data Review.” <em>Plant Cell &amp; Environment</em> 25 (9): 1167–79.</p>
 </div>
 <div id="ref-Gu2010Reliable">
 <p>Gu, Lianhong, Stephen G Pallardy, Kevin Tu, Beverly E Law, and Stan D Wullschleger. 2010. “Reliable Estimation of Biochemical Parameters from c-3 Leaf Photosynthesis-Intercellular Carbon Dioxide Response Curves.” <em>Plant Cell &amp; Environment</em> 33 (11): 1852–74.</p>
@@ -1440,14 +1493,15 @@ aci &lt;-<span class="st"> </span><span class="kw">AciC4</span>(<span class="dt"
 <div class="footnotes">
 <hr />
 <ol start="3">
-<li id="fn3"><p>仅针对 C3 植物<a href="response-fit.html#fnref3">↩</a></p></li>
-<li id="fn4"><p>具体参考 R 语言相关文档，为 R 语言最常用的数据格式<a href="response-fit.html#fnref4">↩</a></p></li>
-<li id="fn5"><p>在 R 中，使用参数的值为默认值时可以不用填写该参数，例如使用默认选项分析 LI-6400 数据时，可只填写 data 项，具体参考 R 的相关入门手册<a href="response-fit.html#fnref5">↩</a></p></li>
-<li id="fn6"><p>为Rubisco和RuBP限制的Ci转换点，物种间差异较大，可以通过预实验确定<a href="response-fit.html#fnref6">↩</a></p></li>
-<li id="fn7"><p>若默认拟合方法失败，数据也无问题，那么是非线性拟合初始值设定的原因<a href="response-fit.html#fnref7">↩</a></p></li>
-<li id="fn8"><p>即仅保留测量值，删除其他所有头文件、空行、 remark 等信息<a href="response-fit.html#fnref8">↩</a></p></li>
-<li id="fn9"><p>首次使用安装，更换电脑或者升级 R 软件后，如果没有拷贝 library，也需要运行安装命令<a href="response-fit.html#fnref9">↩</a></p></li>
-<li id="fn10"><p>需要注意，此时fitmethod一般推荐使用bilinear。<a href="response-fit.html#fnref10">↩</a></p></li>
+<li id="fn3"><p>仅针对 C3 植物<a href="response-fit.html#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p>具体参考 R 语言相关文档，为 R 语言最常用的数据格式<a href="response-fit.html#fnref4" class="footnote-back">↩</a></p></li>
+<li id="fn5"><p>在 R 中，使用参数的值为默认值时可以不用填写该参数，例如使用默认选项分析 LI-6400 数据时，可只填写 data 项，具体参考
+R 的相关入门手册<a href="response-fit.html#fnref5" class="footnote-back">↩</a></p></li>
+<li id="fn6"><p>为Rubisco和RuBP限制的Ci转换点，物种间差异较大，可以通过预实验确定<a href="response-fit.html#fnref6" class="footnote-back">↩</a></p></li>
+<li id="fn7"><p>若默认拟合方法失败，数据也无问题，那么是非线性拟合初始值设定的原因<a href="response-fit.html#fnref7" class="footnote-back">↩</a></p></li>
+<li id="fn8"><p>即仅保留测量值，删除其他所有头文件、空行、 remark 等信息<a href="response-fit.html#fnref8" class="footnote-back">↩</a></p></li>
+<li id="fn9"><p>首次使用安装，更换电脑或者升级 R 软件后，如果没有拷贝 library，也需要运行安装命令<a href="response-fit.html#fnref9" class="footnote-back">↩</a></p></li>
+<li id="fn10"><p>需要注意，此时fitmethod一般推荐使用bilinear。<a href="response-fit.html#fnref10" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -1506,7 +1560,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

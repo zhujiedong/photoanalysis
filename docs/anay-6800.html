@@ -12,20 +12,20 @@
   <meta property="og:title" content="第 10 章 LI-6800 的数据分析 | R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:image" content="images/cover.png" />
+  <meta property="og:image" content="images/coverpage.png" />
   <meta property="og:description" content="R 语言分析 LI-6400XT 与 LI-6800 数据" />
-  <meta name="github-repo" content="zhujiedong/R_analysis_LI-6400_LI_6800" />
+  <meta name="github-repo" content="zhujiedong/photoanalysis" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="第 10 章 LI-6800 的数据分析 | R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   
   <meta name="twitter:description" content="R 语言分析 LI-6400XT 与 LI-6800 数据" />
-  <meta name="twitter:image" content="images/cover.png" />
+  <meta name="twitter:image" content="images/coverpage.png" />
 
 <meta name="author" content="祝介东    北京力高泰科技有限公司">
 
 
-<meta name="date" content="2018-12-29">
+<meta name="date" content="2019-01-03">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -51,41 +51,67 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="css\style.css" type="text/css" />
@@ -104,9 +130,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="./">R 光合数据分析</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="frontmatter.html"><a href="frontmatter.html"><i class="fa fa-check"></i>前言</a></li>
-<li class="chapter" data-level="" data-path="copyright.html"><a href="copyright.html"><i class="fa fa-check"></i>版权声明</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a></li>
+<li class="chapter" data-level="" data-path="frontmatter.html"><a href="frontmatter.html"><i class="fa fa-check"></i>声明</a></li>
 <li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i>关于作者</a></li>
+<li class="chapter" data-level="" data-path="copyright.html"><a href="copyright.html"><i class="fa fa-check"></i>版权</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> R 软件与 Rstudio</a><ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#rsoft"><i class="fa fa-check"></i><b>1.1</b> R 软件</a></li>
 <li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#rstudiosoft"><i class="fa fa-check"></i><b>1.2</b> Rstudio</a></li>
@@ -198,7 +225,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="pca-anylysis.html"><a href="pca-anylysis.html"><i class="fa fa-check"></i><b>11</b> PCA 分析</a><ul>
-<li class="chapter" data-level="11.1" data-path="pca-anylysis.html"><a href="pca-anylysis.html#section-11.1"><i class="fa fa-check"></i><b>11.1</b> 特征向量与特征值</a></li>
+<li class="chapter" data-level="11.1" data-path="pca-anylysis.html"><a href="pca-anylysis.html#section"><i class="fa fa-check"></i><b>11.1</b> 特征向量与特征值</a></li>
 <li class="chapter" data-level="11.2" data-path="pca-anylysis.html"><a href="pca-anylysis.html#pca_R"><i class="fa fa-check"></i><b>11.2</b> PCA R 语言实现</a><ul>
 <li class="chapter" data-level="11.2.1" data-path="pca-anylysis.html"><a href="pca-anylysis.html#man_pca"><i class="fa fa-check"></i><b>11.2.1</b> 手动实现过程</a></li>
 <li class="chapter" data-level="11.2.2" data-path="pca-anylysis.html"><a href="pca-anylysis.html#prcom"><i class="fa fa-check"></i><b>11.2.2</b> <code>prcomp</code> 的实现</a></li>
@@ -298,42 +325,49 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="dif" class="section level2">
 <h2><span class="header-section-number">10.2</span> LI-6800 与 LI-6400 使用时的差别</h2>
-<p><code>plantecophys</code> 使用时建立在 LI-6400XT 基础之上的软件包，因此在 LI-6800 代码中，需要改动的是 fitaci、fitacis 及 fitBB 中的 varnames 选项，也就是将 LI-6400XT 的表头改为 LI-6800 的表头。 以 fitaci 函数为例：</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> <span class="kw">fitaci</span>(aci, <span class="dt">varnames =</span> 
+<p><code>plantecophys</code> 使用时建立在 LI-6400XT 基础之上的软件包，因此在 LI-6800 代码中，需要改动的是 fitaci、fitacis 及 fitBB 中的 varnames 选项，也就是将 LI-6400XT 的表头改为 LI-6800 的表头。
+以 fitaci 函数为例：</p>
+<pre class="sourceCode r"><code class="sourceCode r"> <span class="kw">fitaci</span>(aci, <span class="dt">varnames =</span> 
         <span class="kw">list</span>(<span class="dt">ALEAF =</span> <span class="st">&quot;A&quot;</span>, <span class="dt">Tleaf =</span> <span class="st">&quot;Tleaf&quot;</span>, <span class="dt">Ci =</span> <span class="st">&quot;Ci&quot;</span>, 
-          <span class="dt">PPFD  =</span> <span class="st">&quot;Qin&quot;</span>, <span class="dt">Rd =</span> <span class="st">&quot;Rd&quot;</span>))</code></pre></div>
+          <span class="dt">PPFD  =</span> <span class="st">&quot;Qin&quot;</span>, <span class="dt">Rd =</span> <span class="st">&quot;Rd&quot;</span>))</code></pre>
 </div>
 <div id="notice" class="section level2">
 <h2><span class="header-section-number">10.3</span> 光响应曲线注意事项</h2>
 <p>光响应曲线的拟合相对简单，仅需要光强和光合速率的值，其中需要修改的部分仅为光强的赋值部分，在文件名一致的前提下，修改如下代码即可：</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lrc_Q &lt;-<span class="st"> </span>lrc<span class="op">$</span>Qin
-lrc_A &lt;-<span class="st"> </span>lrc<span class="op">$</span>A </code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">lrc_Q &lt;-<span class="st"> </span>lrc<span class="op">$</span>Qin
+lrc_A &lt;-<span class="st"> </span>lrc<span class="op">$</span>A </code></pre>
 </div>
 <div id="racir68" class="section level2">
 <h2><span class="header-section-number">10.4</span> LI-6800 RACiR的测量与拟合</h2>
-<p>在评估作物性状时，V<span class="math inline">\(_{cmax}\)</span> 及 J<span class="math inline">\(_{max}\)</span>时非常有用，传统的 A–Ci 曲线测量要求植物叶片要在一定浓度 CO<span class="math inline">\(_{2}\)</span> 下适应几分钟后完成测量，这样的测量有几个缺点：</p>
+<p>在评估作物性状时，V<span class="math inline">\(_{cmax}\)</span> 及 J<span class="math inline">\(_{max}\)</span>时非常有用，传统的 A–Ci 曲线测量要求植物叶片要在一定浓度 CO<span class="math inline">\(_{2}\)</span>
+下适应几分钟后完成测量，这样的测量有几个缺点：</p>
 <ul>
 <li>测量时间长，一条曲线至少需要 20 – 30 min，样本量多，重复多时，这种方法几乎没有可行性。</li>
 <li>整个测量过程中，时间长，酶的激活状态会有变化，叶绿体会移动，气孔的开度也会发生变化。</li>
 </ul>
-<p>而 LI-6800 独有的 auto control 功能在算法上允许用户自定义 CO<span class="math inline">\(_{2}\)</span> 的起始浓度和种植浓度、变化方式（线性或其他）、所花费的时间，再加上其 IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实，即快速 CO<span class="math inline">\(_{2}\)</span> 响应曲线 RACiR测量实验，该功能使得 5 min 内测量 A–Ci 曲线成为可能。该方法的实现可参考 <span class="citation">J. R. Stinziano et al. (<a href="#ref-Stinziano2017">2017</a>)</span> 的文章。</p>
-<p><span class="citation">Joseph R Stinziano et al. (<a href="#ref-stinziano2018">2018</a>)</span> 针对 RACiR技术的疑问做了解答并提出了准确测量的建议，概括如下：</p>
+<p>而 LI-6800 独有的 auto control 功能在算法上允许用户自定义 CO<span class="math inline">\(_{2}\)</span> 的起始浓度和种植浓度、变化方式（线性或其他）、所花费的时间，再加上其
+IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实，即快速 CO<span class="math inline">\(_{2}\)</span> 响应曲线 RACiR
+测量实验，该功能使得 5 min 内测量 A–Ci 曲线成为可能。该方法的实现可参考 <span class="citation">Stinziano et al. (<a href="#ref-Stinziano2017">2017</a>)</span>
+的文章。</p>
+<p><span class="citation">Stinziano et al. (<a href="#ref-stinziano2018">2018</a>)</span> 针对 RACiR技术的疑问做了解答并提出了准确测量的建议，概括如下：</p>
 <ul>
 <li>首先，采用 100 ppm/min 的变化速率是与标准方法重合度最高的测量。</li>
 <li>其次，明确研究问题，目前已有研究表明Vcmax 与 Jmax 的计算结果与标准测量方法结果无显著差异。</li>
 <li>任何条件的改变，都需要做空叶室校准，例如：流速，气体浓度变化方向、温度，斜率等。</li>
 <li>空叶室校准与叶片测量采用严格的同一次校准，因为 IRGA 的漂移，需要再次匹配时，或者环境条件改变时，需要重新做空叶室校准。是否需要匹配，可通过不加叶片的最初状态查看，此时 A 值应接近为0，reference 和 sample 气体浓度读数接近相等。</li>
-<li>IRGA 分析器使用 5 此多项式进行校准，推荐使用 1 次到 5 次多项式进行拟合，然后根据 BIC 指数来确定最合适的空叶室校准系数（即非参数拟合的模型选择的问题）。 确定最合适的浓度变化范围。通常需要去掉最初和最后 30 s的数据。</li>
-<li>最小化校准和测量值之间的水分摩尔分数差异。甚至有可能需要控制 reference 或 sample 的水的摩尔分数而不是 Vpdleaf。 通过预实验来确定最合适的 <span class="math inline">\(CO_2\)</span> 变化范围和随时间的斜率。</li>
+<li>IRGA 分析器使用 5 此多项式进行校准，推荐使用 1 次到 5 次多项式进行拟合，然后根据 BIC 指数来确定最合适的空叶室校准系数（即非参数拟合的模型选择的问题）。
+确定最合适的浓度变化范围。通常需要去掉最初和最后 30 s的数据。</li>
+<li>最小化校准和测量值之间的水分摩尔分数差异。甚至有可能需要控制 reference 或 sample 的水的摩尔分数而不是 Vpdleaf。
+通过预实验来确定最合适的 <span class="math inline">\(CO_2\)</span> 变化范围和随时间的斜率。</li>
 </ul>
 </div>
 <div id="racir_pkg" class="section level2">
 <h2><span class="header-section-number">10.5</span> racir 软件包实现 RACiR数据分析</h2>
 <p><strong>因作者将代码升级，只支持原始数据的处理，我现在没有 原始数据格式的RACiR 数据，因此下面的 racir 包代码暂时不能使用，如有需要，请将您测试数据选择一个叶片的测量和空叶室校准发给我，我再更改（目前北方没有合适的植物供我测试），也可以参考我后面手动实现的代码</strong></p>
-<p><span class="citation">Joseph R Stinziano et al. (<a href="#ref-stinziano2018">2018</a>)</span> 还给出了专门的 RACiR 数据分析软件包 <a href="https://github.com/jstinzi/racir">racir package</a>，我们下面先介绍一下这个软件包。</p>
+<p><span class="citation">Stinziano et al. (<a href="#ref-stinziano2018">2018</a>)</span> 还给出了专门的 RACiR 数据分析软件包 <a href="https://github.com/jstinzi/racir">racir package</a>，我们下面先介绍一下这个软件包。</p>
 <p>软件的安装及调用通过如下代码实现：</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;jstinzi/racir&quot;</span>)
-<span class="kw">library</span>(racir)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;jstinzi/racir&quot;</span>)
+<span class="kw">library</span>(racir)</code></pre>
 <p>软件包的函数很多，但可以分为下面几类：</p>
 <ul>
 <li><code>read_6800</code>： 直接读取 LI-6800 的<strong>原始数据</strong>。</li>
@@ -346,24 +380,24 @@ lrc_A &lt;-<span class="st"> </span>lrc<span class="op">$</span>A </code></pre><
 <h3><span class="header-section-number">10.5.1</span> 实现过程</h3>
 <p>手上暂时没有原始数据格式的 racir 数据，因而现在使用以前的 csv 数据进行操作（空叶室测量数据和带叶片测量数据转为 csv 格式）。</p>
 <p>首先检查空叶室校准：</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(racir)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(racir)
 
-<span class="kw">racircalcheckcsv</span>(<span class="st">&quot;./data/empty_test.csv&quot;</span>, <span class="dv">20</span>, <span class="dv">460</span>)</code></pre></div>
-<p>上述参数分别是空叶室校准数据的路径，以及我要删除的数据，即只保留参比室 <span class="math inline">\(CO_2\)</span> 浓度在两者之间的数据（范围可作图确定，可参考本部分手动实现的代码）。 所示。当然此步骤可以跳过，因为下面的代码包含了该步骤，直接输出一个校准后的 csv 文件，文件名为 ”原文件名“ + “_corrected&quot; + “.csv”。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">racircalcsv</span>(<span class="st">&quot;./data/empty_test.csv&quot;</span>, <span class="dv">16</span>, <span class="dv">460</span>, <span class="st">&quot;./data/leaf_test.csv&quot;</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plantecophys)
+<span class="kw">racircalcheckcsv</span>(<span class="st">&quot;./data/empty_test.csv&quot;</span>, <span class="dv">20</span>, <span class="dv">460</span>)</code></pre>
+<p>上述参数分别是空叶室校准数据的路径，以及我要删除的数据，即只保留参比室 <span class="math inline">\(CO_2\)</span> 浓度在两者之间的数据（范围可作图确定，可参考本部分手动实现的代码）。 所示。当然此步骤可以跳过，因为下面的代码包含了该步骤，直接输出一个校准后的 csv 文件，文件名为 ”原文件名“ + "_corrected" + “.csv”。</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">racircalcsv</span>(<span class="st">&quot;./data/empty_test.csv&quot;</span>, <span class="dv">16</span>, <span class="dv">460</span>, <span class="st">&quot;./data/leaf_test.csv&quot;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plantecophys)
 df_racir &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/leaf_test.csv_corrected.csv&quot;</span>)
 fitracir &lt;-<span class="st"> </span><span class="kw">fitaci</span>(df_racir,<span class="dt">varnames =</span> <span class="kw">list</span>(<span class="dt">ALEAF =</span> <span class="st">&quot;A&quot;</span>, 
               <span class="dt">Tleaf =</span> <span class="st">&quot;Tleaf&quot;</span>, <span class="dt">Ci =</span> <span class="st">&quot;Ci&quot;</span>,   <span class="dt">PPFD  =</span> <span class="st">&quot;Qin&quot;</span>, 
               <span class="dt">Rd =</span> <span class="st">&quot;Rd&quot;</span>), <span class="dt">Patm =</span> <span class="fl">84.09</span>)
-fitracir<span class="op">$</span>pars</code></pre></div>
+fitracir<span class="op">$</span>pars</code></pre>
 <p><strong>注意：RACiR 的本意是表型研究中求 Vcmax 和 Jmax，因而，请忽略 Rd 等参数的计算结果</strong></p>
 </div>
 </div>
 <div id="racir68_exam" class="section level2">
 <h2><span class="header-section-number">10.6</span> RACiR分析的手动实现</h2>
 <p>以下内容是我之前写的内容，部分代码的实现和上述软件包相似，仅供参考，尤其是当您使用 <code>racir</code> 软件包报错时，可以参考下文代码手动实现 RACiR 数据的分析。。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 分别读取未校准空叶室数据</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 分别读取未校准空叶室数据</span>
 <span class="co"># 未校准带叶片测量数据</span>
 <span class="co"># 标准aci曲线测量数据</span>
 uemp500 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/uncorr_emp500.csv&quot;</span>)
@@ -431,7 +465,7 @@ acifit_normal<span class="op">$</span>pars
 <span class="co"># 对快速曲线作图拟合结果进行查看</span>
 <span class="kw">plot</span>(acifit, <span class="dt">linecols =</span> <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>))
 
-#### ggplot2 作图
+<span class="co">#### ggplot2 作图</span>
 ddata &lt;-<span class="st"> </span>acifit<span class="op">$</span>df
 
 alldata &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">A =</span> <span class="kw">c</span>(acin<span class="op">$</span>A, ddata<span class="op">$</span>Ac, ddata<span class="op">$</span>Aj, cleaf<span class="op">$</span>A), 
@@ -477,8 +511,8 @@ p2 <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_co
         <span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(
           <span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&#39;bold&#39;</span>),
         <span class="dt">legend.text.align =</span> <span class="dv">0</span>,
-        <span class="dt">legend.position =</span> <span class="kw">c</span>(<span class="fl">0.8</span>, <span class="fl">0.6</span>))</code></pre></div>
-最终采用常规方法和 RACiR方法结果如图 <a href="anay-6800.html#fig:racir">10.1</a> 所示，其中 Aj 与 Ac 结果采用 RACiR计算<a href="#fn15" class="footnoteRef" id="fnref15"><sup>15</sup></a>。
+        <span class="dt">legend.position =</span> <span class="kw">c</span>(<span class="fl">0.8</span>, <span class="fl">0.6</span>))</code></pre>
+最终采用常规方法和 RACiR方法结果如图 <a href="anay-6800.html#fig:racir">10.1</a> 所示，其中 Aj 与 Ac 结果采用 RACiR计算<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a>。
 <div class="figure"><span id="fig:racir"></span>
 <img src="images/racir.png" alt="RACiR 方法与常规结果的比较" width="100%" />
 <p class="caption">
@@ -496,22 +530,23 @@ p2 <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_co
 <div id="jiptest_pack" class="section level3">
 <h3><span class="header-section-number">10.7.2</span> <code>jiptest</code> 软件包安装</h3>
 <p>目前 <code>jiptest</code> 暂时放在 github 我的软件仓库内，并没提交 CRAN，因此需要 <code>devtools</code> 的支持，然后才能从 github 安装 <code>jiptest</code>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)
 <span class="kw">library</span>(devtools)
-<span class="kw">install_github</span>(<span class="st">&quot;zhujiedong/jiptest&quot;</span>)</code></pre></div>
+<span class="kw">install_github</span>(<span class="st">&quot;zhujiedong/jiptest&quot;</span>)</code></pre>
 </div>
 <div id="readfluor" class="section level3">
 <h3><span class="header-section-number">10.7.3</span> <code>read_files</code> 及 <code>read_dcfiles</code> 函数</h3>
-<p><code>read_files</code> 用于批量读取所有调制光测量数据，方便用于其他的数据分析。<strong>函数要求所有数据必须是 <code>xlsx</code> 格式，并且所有测量数据都保存在同一文件夹内。</strong>，如有其他文件或测量数据则会报错。 <code>read_dcfiles</code> 用于批量读取所有连续光测量数据，其他与 <code>read_dcfiles</code> 相同。</p>
+<p><code>read_files</code> 用于批量读取所有调制光测量数据，方便用于其他的数据分析。<strong>函数要求所有数据必须是 <code>xlsx</code> 格式，并且所有测量数据都保存在同一文件夹内。</strong>，如有其他文件或测量数据则会报错。
+<code>read_dcfiles</code> 用于批量读取所有连续光测量数据，其他与 <code>read_dcfiles</code> 相同。</p>
 <p>函数仅有一个参数，即保存数据文件夹的路径，使用如下：</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(jiptest)
-jipdata &lt;-<span class="st"> </span><span class="kw">read_files</span>(<span class="st">&quot;./data/ojip&quot;</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(jiptest)
+jipdata &lt;-<span class="st"> </span><span class="kw">read_files</span>(<span class="st">&quot;./data/ojip&quot;</span>)</code></pre>
 <pre><code>## readxl works best with a newer version of the tibble package.
 ## You currently have tibble v1.4.2.
 ## Falling back to column name repair from tibble &lt;= v1.4.2.
 ## Message displays once per session.</code></pre>
 <table>
-<caption><span id="tab:unnamed-chunk-31">表 10.2: </span>jiptest 批量导入数据后的样式</caption>
+<caption><span id="tab:unnamed-chunk-32">表 10.2: </span>jiptest 批量导入数据后的样式</caption>
 <thead>
 <tr class="header">
 <th align="right">SECS</th>
@@ -552,9 +587,9 @@ jipdata &lt;-<span class="st"> </span><span class="kw">read_files</span>(<span c
 </tr>
 </tbody>
 </table>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dcjipdata &lt;-<span class="st"> </span><span class="kw">read_dcfiles</span>(<span class="st">&quot;./data/ojip&quot;</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">dcjipdata &lt;-<span class="st"> </span><span class="kw">read_dcfiles</span>(<span class="st">&quot;./data/ojip&quot;</span>)</code></pre>
 <table>
-<caption><span id="tab:unnamed-chunk-32">表 10.3: </span>jiptest DC 数据批量导入数据后的样式</caption>
+<caption><span id="tab:unnamed-chunk-33">表 10.3: </span>jiptest DC 数据批量导入数据后的样式</caption>
 <thead>
 <tr class="header">
 <th align="right">SECS</th>
@@ -598,8 +633,9 @@ jipdata &lt;-<span class="st"> </span><span class="kw">read_files</span>(<span c
 </div>
 <div id="testfluor" class="section level3">
 <h3><span class="header-section-number">10.7.4</span> <code>jip_test</code> 及 <code>jip_dctest</code> 函数</h3>
-<p><code>jiptest</code> 是 jiptest 的核心函数，用于所有数据的 jip test 分析，函数仅包含两个参数，测量数据的保存文件夹路径，以及分析结果的导出路径，导出路径必须为<strong>已存在的文件夹或磁盘根目录</strong>。 <code>jip_dctest</code> 与 <code>jip_test</code> 相似，用于连续光测量数据的分析。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">jip_results &lt;-<span class="st"> </span><span class="kw">jip_test</span>(<span class="st">&quot;./data/ojip&quot;</span>, <span class="st">&quot;d:/&quot;</span>)</code></pre></div>
+<p><code>jiptest</code> 是 jiptest 的核心函数，用于所有数据的 jip test 分析，函数仅包含两个参数，测量数据的保存文件夹路径，以及分析结果的导出路径，导出路径必须为<strong>已存在的文件夹或磁盘根目录</strong>。
+<code>jip_dctest</code> 与 <code>jip_test</code> 相似，用于连续光测量数据的分析。</p>
+<pre class="sourceCode r"><code class="sourceCode r">jip_results &lt;-<span class="st"> </span><span class="kw">jip_test</span>(<span class="st">&quot;./data/ojip&quot;</span>, <span class="st">&quot;d:/&quot;</span>)</code></pre>
 <pre><code>## for the current version, we suggest you use the default settings of the duration (1000 ms or more)
 ##   in the induction settings of LI-6800</code></pre>
 <table>
@@ -854,7 +890,7 @@ jipdata &lt;-<span class="st"> </span><span class="kw">read_files</span>(<span c
 </tr>
 </tbody>
 </table>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dcjip_results &lt;-<span class="st"> </span><span class="kw">jip_dctest</span>(<span class="st">&quot;./data/ojip&quot;</span>, <span class="st">&quot;d:/&quot;</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">dcjip_results &lt;-<span class="st"> </span><span class="kw">jip_dctest</span>(<span class="st">&quot;./data/ojip&quot;</span>, <span class="st">&quot;d:/&quot;</span>)</code></pre>
 <pre><code>## for the current version, we suggest you use the default settings of the duration (1000 ms or more)
 ##           in the induction settings of LI-6800</code></pre>
 <table>
@@ -1114,14 +1150,14 @@ jipdata &lt;-<span class="st"> </span><span class="kw">read_files</span>(<span c
 <div id="plotfluor" class="section level3">
 <h3><span class="header-section-number">10.7.5</span> <code>jip_plot</code> 及 <code>jip_dcplot</code> 函数</h3>
 <p><code>jip_plot</code> 和 <code>jip_dcplot</code> 基于 <code>ggplot2</code>，用于快速预览所有测量结果的 ojip 曲线。函数仅有一个参数，即保存数据文件夹的路径，使用如下：</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">jip_plot</span>(<span class="st">&quot;./data/ojip&quot;</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">jip_plot</span>(<span class="st">&quot;./data/ojip&quot;</span>)</code></pre>
 <div class="figure"><span id="fig:acplot"></span>
 <img src="bookdown_files/figure-html/acplot-1.png" alt="调制式测量的 ojip 曲线的快速预览" width="672" />
 <p class="caption">
 图 10.2: 调制式测量的 ojip 曲线的快速预览
 </p>
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">jip_dcplot</span>(<span class="st">&quot;./data/ojip&quot;</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">jip_dcplot</span>(<span class="st">&quot;./data/ojip&quot;</span>)</code></pre>
 <div class="figure"><span id="fig:dcplot"></span>
 <img src="bookdown_files/figure-html/dcplot-1.png" alt="连续式测量的 ojip 曲线的快速预览" width="672" />
 <p class="caption">
@@ -1147,7 +1183,7 @@ jipdata &lt;-<span class="st"> </span><span class="kw">read_files</span>(<span c
 <div class="footnotes">
 <hr />
 <ol start="15">
-<li id="fn15"><p>注意，注意数据表头的大小写，此处代码中，为处理数据的方便，我更改了大小写，分析自己的数据时需要注意<a href="anay-6800.html#fnref15">↩</a></p></li>
+<li id="fn15"><p>注意，注意数据表头的大小写，此处代码中，为处理数据的方便，我更改了大小写，分析自己的数据时需要注意<a href="anay-6800.html#fnref15" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -1206,7 +1242,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
