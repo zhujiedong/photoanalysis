@@ -1,0 +1,18 @@
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+
+language: R
+#sudo: false
+
+install:
+  - R -e "0" --args --bootstrap-packrat
+  - R -e "packrat::restore(restart = FALSE)"
+  
+cache:
+  directories:
+    - $TRAVIS_BUILD_DIR/packrat/src
+    - $TRAVIS_BUILD_DIR/packrat/lib
+  packages: true
+
+script:
+  - Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::pdf_book")'
+  - Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::gitbook")'
