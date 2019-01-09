@@ -25,7 +25,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司">
 
 
-<meta name="date" content="2019-01-03">
+<meta name="date" content="2019-01-09">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -142,6 +142,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1" data-path="batch-question.html"><a href="batch-question.html#install_readphoto"><i class="fa fa-check"></i><b>2.1</b> 安装</a></li>
 <li class="chapter" data-level="2.2" data-path="batch-question.html"><a href="batch-question.html#batch64"><i class="fa fa-check"></i><b>2.2</b> 6400 数据整合</a></li>
 <li class="chapter" data-level="2.3" data-path="batch-question.html"><a href="batch-question.html#batch68"><i class="fa fa-check"></i><b>2.3</b> LI-6800 数据整合</a></li>
+<li class="chapter" data-level="2.4" data-path="batch-question.html"><a href="batch-question.html#recompute_raw"><i class="fa fa-check"></i><b>2.4</b> 重计算功能</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="batch-question.html"><a href="batch-question.html#recompute6400"><i class="fa fa-check"></i><b>2.4.1</b> LI-6400 数据重计算</a></li>
+<li class="chapter" data-level="2.4.2" data-path="batch-question.html"><a href="batch-question.html#recompute6800"><i class="fa fa-check"></i><b>2.4.2</b> LI-6800 数据重计算</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="response-fit.html"><a href="response-fit.html"><i class="fa fa-check"></i><b>3</b> CO<sub>2</sub> 响应曲线的拟合</a><ul>
 <li class="chapter" data-level="3.1" data-path="response-fit.html"><a href="response-fit.html#fvcb_mod"><i class="fa fa-check"></i><b>3.1</b> FvCB 模型</a></li>
@@ -261,6 +265,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">2.1</span> 安装</h2>
 <p>暂时只有我的 github repo 中的版本：</p>
 <pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;zhujiedong/readphoto&quot;</span>)</code></pre>
+<pre><code>## Skipping install of &#39;readphoto&#39; from a github remote, the SHA1 (6cf5b432) has not changed since last install.
+##   Use `force = TRUE` to force installation</code></pre>
 </div>
 <div id="batch64" class="section level2">
 <h2><span class="header-section-number">2.2</span> 6400 数据整合</h2>
@@ -461,8 +467,8 @@ df64  &lt;-<span class="st"> </span><span class="kw">read_bat_6400</span>(<span 
 <h2><span class="header-section-number">2.3</span> LI-6800 数据整合</h2>
 <p>相比 6400， 6800 参数要少，导入需要两行命令即可：</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readphoto)
-df &lt;-<span class="st"> </span><span class="kw">read_bat_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="dt">skiplines =</span> <span class="dv">53</span>)</code></pre>
-<p>其中就两个参数，第一个为 LI-6800 <strong>原始数据</strong>所在的文件夹，即文件夹内<strong>包含且仅包含 LI-6800 的原始数据</strong>，不要放其他文件，不要放 excel 数据。第二个参数即为你原始数据中表头所在的参数行的<strong>前一行</strong>，我使用的这些示例数据的表头在 54 行。</p>
+df &lt;-<span class="st"> </span><span class="kw">read_bat_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="dt">data_start =</span> <span class="dv">56</span>)</code></pre>
+<p>其中就两个参数，第一个为 LI-6800 <strong>原始数据</strong>所在的文件夹，即文件夹内<strong>包含且仅包含 LI-6800 的原始数据</strong>，不要放其他文件，不要放 excel 数据。第二个参数即为你原始数据中测量数据的起始行，例如本例中使用数据测量值从 56 行开始。</p>
 <p>数据输出如下所示(仅显示前8列数据)：</p>
 <table>
 <caption><span id="tab:unnamed-chunk-8">表 2.2: </span>LI-6800 批量整合数据</caption>
@@ -632,8 +638,90 @@ df &lt;-<span class="st"> </span><span class="kw">read_bat_6800</span>(<span cla
 </tbody>
 </table>
 <p>其他注意事项见 LI-6400 数据整合部分</p>
+</div>
+<div id="recompute_raw" class="section level2">
+<h2><span class="header-section-number">2.4</span> 重计算功能</h2>
+<p>如果只是将原始数据批量处理，那么在遇到叶片不能充满叶室的情况时会很麻烦，这里我们提供了重新计算功能，重新计算的参数包括光合速率，蒸腾速率，对水的气孔导度以及胞间二氧化碳浓度，当然计算他们所需要的一些中间数值也做了重计算，只不过多数时候我们用不到，我们仅看这四项。</p>
+<div id="recompute6400" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> LI-6400 数据重计算</h3>
+<p>参数的重计算函数为 <code>recomp_6400</code>, 其参数除了 <code>read_bat_6400</code> 所包含的参数外，还有叶面积 S, 以及叶片正反面的气孔比例，默认值分别为 6 和 0.5。</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readphoto)
+x1 &lt;-<span class="st"> </span><span class="kw">read_bat_6400</span>(<span class="st">&quot;./data/6400&quot;</span>)
+y1 &lt;-<span class="st"> </span><span class="kw">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>, <span class="dt">header_line =</span> <span class="dv">17</span>, <span class="dt">data_start =</span> <span class="dv">27</span>, <span class="dt">S =</span> <span class="dv">6</span>, <span class="dt">K =</span> <span class="fl">0.5</span>)
+
+x1<span class="op">$</span>Photo <span class="op">-</span><span class="st"> </span>y1<span class="op">$</span>Photo</code></pre>
+<pre><code>##  [1] -0.0008873753  0.0026900500 -0.0012036469  0.0003483414  0.0006122641
+##  [6] -0.0113872639 -0.0020986076  0.0004962787  0.0188727482 -0.0294595908
+## [11] -0.0436611445 -0.0339083408  0.0046772165  0.0036653298  0.0030397988
+## [16] -0.0105901673  0.0040624956  0.0017317049 -0.0073252290  0.0054977377
+## [21]  0.0039736503  0.0021704065  0.0046772165  0.0036653298  0.0030397988
+## [26] -0.0105901673  0.0040624956  0.0017317049 -0.0073252290  0.0054977377
+## [31]  0.0039736503  0.0021704065</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">x1<span class="op">$</span>Trmmol <span class="op">-</span><span class="st"> </span>y1<span class="op">$</span>Trmmol</code></pre>
+<pre><code>##  [1] -2.998596e-04  1.407338e-04  3.189451e-05 -4.586467e-04 -3.836822e-04
+##  [6]  5.402725e-04 -2.344852e-04 -7.684772e-05  5.979599e-04 -6.534341e-04
+## [11] -6.779145e-04  2.469749e-04  3.812201e-04  2.313957e-04  3.508312e-04
+## [16] -2.794358e-04 -5.406530e-04  5.230606e-04 -9.183370e-04  7.638850e-04
+## [21] -2.578893e-04  2.203045e-04  3.812201e-04  2.313957e-04  3.508312e-04
+## [26] -2.794358e-04 -5.406530e-04  5.230606e-04 -9.183370e-04  7.638850e-04
+## [31] -2.578893e-04  2.203045e-04</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">x1<span class="op">$</span>Cond <span class="op">-</span><span class="st"> </span>y1<span class="op">$</span>Cond</code></pre>
+<pre><code>##  [1] -1.974217e-04 -3.594216e-04 -3.779119e-04 -3.806675e-04 -3.201411e-04
+##  [6] -1.483324e-04 -7.803345e-04 -2.671018e-04  1.028977e-04 -3.966192e-04
+## [11] -3.190769e-04 -2.314266e-04 -2.746300e-04  1.094050e-05 -4.584791e-05
+## [16] -1.084094e-04 -1.827768e-04 -1.344969e-04 -1.714096e-04 -8.180257e-05
+## [21] -4.687906e-05 -1.000424e-04 -2.746300e-04  1.094050e-05 -4.584791e-05
+## [26] -1.084094e-04 -1.827768e-04 -1.344969e-04 -1.714096e-04 -8.180257e-05
+## [31] -4.687906e-05 -1.000424e-04</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">x1<span class="op">$</span>Ci<span class="op">-</span>y1<span class="op">$</span>Ci</code></pre>
+<pre><code>##  [1]  0.434643936 -0.297820404 -0.308200950 -0.007847373 -0.035490198
+##  [6]  0.433706824 -0.416734067 -0.052089770  0.147655545 -0.315797917
+## [11] -0.271335987 -0.228968795  0.356519198  0.311487646  0.052196075
+## [16]  0.557128947  0.058563406  0.300198435  0.052607786  0.339000061
+## [21] -0.252622980 -0.494554616  0.356519198  0.311487646  0.052196075
+## [26]  0.557128947  0.058563406  0.300198435  0.052607786  0.339000061
+## [31] -0.252622980 -0.494554616</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">y1 &lt;-<span class="st"> </span><span class="kw">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>,  <span class="dt">header_line =</span> <span class="dv">17</span>, <span class="dt">data_start =</span> <span class="dv">27</span>, <span class="dt">S =</span> <span class="kw">rep</span>(<span class="dv">3</span>, <span class="dv">32</span>), <span class="dt">K =</span> <span class="fl">0.5</span>)
+y1<span class="op">$</span>Photo<span class="op">/</span>x1<span class="op">$</span>Photo</code></pre>
+<pre><code>##  [1] 2.000254 1.998957 2.000767 1.999234 2.007333 2.004346 2.000635
+##  [8] 1.999893 1.996299 2.005611 2.008161 2.006110 1.998550 1.998863
+## [15] 1.998980 2.003671 1.998391 1.999240 2.003866 1.995584 1.994199
+## [22] 2.010360 1.998550 1.998863 1.998980 2.003671 1.998391 1.999240
+## [29] 2.003866 1.995584 1.994199 2.010360</code></pre>
+<p>我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.</p>
+</div>
+<div id="recompute6800" class="section level3">
+<h3><span class="header-section-number">2.4.2</span> LI-6800 数据重计算</h3>
+<p>参数的重计算函数为 <code>recomp_6400</code>, 其参数除了 <code>read_bat_6400</code> 所包含的参数外，还有叶面积 S, 以及叶片正反面的气孔比例，默认值分别为 6 和 0.5。</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readphoto)
+x3 &lt;-<span class="st"> </span><span class="kw">read_bat_6800</span>(<span class="st">&quot;./data/6800&quot;</span>)
+y3 &lt;-<span class="st"> </span><span class="kw">recomp_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="dt">data_start =</span> <span class="dv">56</span>, <span class="dt">S =</span> <span class="dv">6</span>, <span class="dt">K =</span> <span class="fl">0.5</span>)
+
+x3<span class="op">$</span>A <span class="op">-</span><span class="st"> </span>y3<span class="op">$</span>A</code></pre>
+<pre><code>##  [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">x3<span class="op">$</span>E <span class="op">-</span><span class="st"> </span>y3<span class="op">$</span>E</code></pre>
+<pre><code>##  [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">x3<span class="op">$</span>gsw <span class="op">-</span><span class="st"> </span>y3<span class="op">$</span>gsw</code></pre>
+<pre><code>##  [1] -0.01231889 -0.01271539 -0.01330812 -0.01416506 -0.01491902
+##  [6] -0.01586479 -0.01566857 -0.01545520 -0.01563183 -0.01537453
+## [11] -0.01494554 -0.01433677 -0.02284560 -0.02291318 -0.02268118
+## [16] -0.02266862 -0.02250392 -0.02213352 -0.02061493 -0.02006006
+## [21] -0.01856400 -0.01678649 -0.01591079 -0.01457109 -0.01322393
+## [26] -0.02345109 -0.02312573 -0.02227497</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">x3<span class="op">$</span>Ci<span class="op">-</span>y3<span class="op">$</span>Ci</code></pre>
+<pre><code>##  [1]  4.43187567  3.13678828  1.78620310  0.49515242 -0.08437000
+##  [6]  3.51420195  3.66611259  5.56360761  6.76351008  7.70784028
+## [11]  8.45263315  9.25926640  2.58978666  2.52629775  2.49784796
+## [16]  2.38619050  2.23225682  1.92200639  1.29213044  0.92018214
+## [21]  0.76352452  0.55412066  0.20248257 -0.08219604 -0.26216626
+## [26]  2.36039345  2.40636618  2.54353742</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">y3 &lt;-<span class="st"> </span><span class="kw">recomp_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="dt">data_start =</span> <span class="dv">56</span>, <span class="dt">S =</span> <span class="kw">rep</span>(<span class="dv">3</span>, <span class="dv">28</span>), <span class="dt">K =</span> <span class="fl">0.5</span>)
+y3<span class="op">$</span>A<span class="op">/</span>x3<span class="op">$</span>A</code></pre>
+<pre><code>##  [1] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2</code></pre>
+<p>测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。</p>
 
 
+</div>
 </div>
 </div>
 <div class="footnotes">
