@@ -173,7 +173,7 @@
 
 \title{R 语言分析 LI-6400 和 LI-6800 光合仪的数据}
 \author{祝介东 北京力高泰科技有限公司}
-\date{2019-01-09}
+\date{2019-01-14}
 
 \begin{document}
 \maketitle
@@ -2022,6 +2022,16 @@ P_{nmax}= AQE \times I_{sat} - R_{d}
 \hypertarget{rec_fit}{%
 \subsection{直角双曲线模型的实现}\label{rec_fit}}
 
+若没有安装 \texttt{minpack.lm}, 则需要首先：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"minpack.lm"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+具体实现过程如下：
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# 调用非线性拟合包minpack.lm，也可以直接使用nls}
@@ -3039,14 +3049,15 @@ IRGAs 极快的响应频率，使得短时间内的 A--Ci 的测量成为现实�
 \KeywordTok{plot}\NormalTok{(cemp}\OperatorTok{$}\NormalTok{CO2_r, cemp}\OperatorTok{$}\NormalTok{A)}
 
 \CommentTok{# 采用 1~5 次多项式分别拟合}
-\NormalTok{cemp1st <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(A }\OperatorTok{~}\StringTok{ }\NormalTok{CO2_r, }\DataTypeTok{data =}\NormalTok{ cemp)}
-\NormalTok{cemp2nd <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(A }\OperatorTok{~}\StringTok{ }\KeywordTok{poly}\NormalTok{(CO2_r, }\DecValTok{2}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ cemp)}
-\NormalTok{cemp3rd <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(A }\OperatorTok{~}\StringTok{ }\KeywordTok{poly}\NormalTok{(CO2_r, }\DecValTok{3}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ cemp)}
-\NormalTok{cemp4th <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(A }\OperatorTok{~}\StringTok{ }\KeywordTok{poly}\NormalTok{(CO2_r, }\DecValTok{4}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ cemp)}
-\NormalTok{cemp5th <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(A }\OperatorTok{~}\StringTok{ }\KeywordTok{poly}\NormalTok{(CO2_r, }\DecValTok{5}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ cemp)}
+\NormalTok{cal1st <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(A }\OperatorTok{~}\StringTok{ }\NormalTok{CO2_r, }\DataTypeTok{data =}\NormalTok{ cemp)}
+\NormalTok{cal2nd <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(A }\OperatorTok{~}\StringTok{ }\KeywordTok{poly}\NormalTok{(CO2_r, }\DecValTok{2}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ cemp)}
+\NormalTok{cal3rd <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(A }\OperatorTok{~}\StringTok{ }\KeywordTok{poly}\NormalTok{(CO2_r, }\DecValTok{3}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ cemp)}
+\NormalTok{cal4th <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(A }\OperatorTok{~}\StringTok{ }\KeywordTok{poly}\NormalTok{(CO2_r, }\DecValTok{4}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ cemp)}
+\NormalTok{cal5th <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(A }\OperatorTok{~}\StringTok{ }\KeywordTok{poly}\NormalTok{(CO2_r, }\DecValTok{5}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ cemp)}
 
 \CommentTok{# 利用 BIC 找出最合理的校准方程}
 \NormalTok{bics <-}\StringTok{ }\KeywordTok{BIC}\NormalTok{(cal1st, cal2nd, cal3rd, cal4th, cal5th)}
+\CommentTok{# noquote也就是没引号，成为名字}
 \NormalTok{best <-}\StringTok{ }\KeywordTok{noquote}\NormalTok{(}\KeywordTok{rownames}\NormalTok{(bics)[bics}\OperatorTok{$}\NormalTok{BIC }\OperatorTok{==}\StringTok{ }\KeywordTok{min}\NormalTok{(bics}\OperatorTok{$}\NormalTok{BIC)])}
 \NormalTok{best}
 
@@ -3174,15 +3185,23 @@ LI-6800 增加了 ojip 曲线测量功能，本功能主要是针对测量数据
 \end{Shaded}
 
 \begin{verbatim}
-## readxl works best with a newer version of the tibble package.
-## You currently have tibble v1.4.2.
-## Falling back to column name repair from tibble <= v1.4.2.
-## Message displays once per session.
+## New names:
+## * `` -> `..1`
+## * `` -> `..2`
+## New names:
+## * `` -> `..1`
+## * `` -> `..2`
+## New names:
+## * `` -> `..1`
+## * `` -> `..2`
+## New names:
+## * `` -> `..1`
+## * `` -> `..2`
 \end{verbatim}
 
 \begin{table}[t]
 
-\caption{\label{tab:unnamed-chunk-34}jiptest 批量导入数据后的样式}
+\caption{\label{tab:unnamed-chunk-35}jiptest 批量导入数据后的样式}
 \centering
 \begin{tabular}{rrl}
 \toprule
@@ -3205,9 +3224,28 @@ SECS & FLUOR & SOURCE\\
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+## New names:
+## * `` -> `..1`
+## * `` -> `..2`
+## * `` -> `..3`
+## New names:
+## * `` -> `..1`
+## * `` -> `..2`
+## * `` -> `..3`
+## New names:
+## * `` -> `..1`
+## * `` -> `..2`
+## * `` -> `..3`
+## New names:
+## * `` -> `..1`
+## * `` -> `..2`
+## * `` -> `..3`
+\end{verbatim}
+
 \begin{table}[t]
 
-\caption{\label{tab:unnamed-chunk-35}jiptest DC 数据批量导入数据后的样式}
+\caption{\label{tab:unnamed-chunk-36}jiptest DC 数据批量导入数据后的样式}
 \centering
 \begin{tabular}{rrl}
 \toprule
@@ -3239,6 +3277,21 @@ SECS & FLUOR & SOURCE\\
 \begin{verbatim}
 ## for the current version, we suggest you use the default settings of the duration (1000 ms or more)
 ##   in the induction settings of LI-6800
+\end{verbatim}
+
+\begin{verbatim}
+## New names:
+## * `` -> `..1`
+## * `` -> `..2`
+## New names:
+## * `` -> `..1`
+## * `` -> `..2`
+## New names:
+## * `` -> `..1`
+## * `` -> `..2`
+## New names:
+## * `` -> `..1`
+## * `` -> `..2`
 \end{verbatim}
 
 \begin{longtable}{lrrrr}
@@ -3298,6 +3351,25 @@ DFabs & 0.3093655 & 0.0982884 & 0.0324348 & -0.8458942\\
 \begin{verbatim}
 ## for the current version, we suggest you use the default settings of the duration (1000 ms or more)
 ##           in the induction settings of LI-6800
+\end{verbatim}
+
+\begin{verbatim}
+## New names:
+## * `` -> `..1`
+## * `` -> `..2`
+## * `` -> `..3`
+## New names:
+## * `` -> `..1`
+## * `` -> `..2`
+## * `` -> `..3`
+## New names:
+## * `` -> `..1`
+## * `` -> `..2`
+## * `` -> `..3`
+## New names:
+## * `` -> `..1`
+## * `` -> `..2`
+## * `` -> `..3`
 \end{verbatim}
 
 \begin{longtable}{lrrrr}
@@ -3361,6 +3433,21 @@ DFabs & 1.924705e-01 & 3.274650e-02 & -3.276640e-02 & -9.333551e-01\\
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+## New names:
+## * `` -> `..1`
+## * `` -> `..2`
+## New names:
+## * `` -> `..1`
+## * `` -> `..2`
+## New names:
+## * `` -> `..1`
+## * `` -> `..2`
+## New names:
+## * `` -> `..1`
+## * `` -> `..2`
+\end{verbatim}
+
 \begin{figure}
 \centering
 \includegraphics{bookdown_files/figure-latex/acplot-1.pdf}
@@ -3372,6 +3459,25 @@ DFabs & 1.924705e-01 & 3.274650e-02 & -3.276640e-02 & -9.333551e-01\\
 \KeywordTok{jip_dcplot}\NormalTok{(}\StringTok{"./data/ojip"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## New names:
+## * `` -> `..1`
+## * `` -> `..2`
+## * `` -> `..3`
+## New names:
+## * `` -> `..1`
+## * `` -> `..2`
+## * `` -> `..3`
+## New names:
+## * `` -> `..1`
+## * `` -> `..2`
+## * `` -> `..3`
+## New names:
+## * `` -> `..1`
+## * `` -> `..2`
+## * `` -> `..3`
+\end{verbatim}
 
 \begin{figure}
 \centering
@@ -3540,7 +3646,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-43-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-44-1.pdf}
 
 \textbf{factoextra 作图}
 
@@ -3555,7 +3661,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-44-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-45-1.pdf}
 
 \hypertarget{sessioninfo}{%
 \chapter{环境与配置}\label{sessioninfo}}
@@ -3598,22 +3704,22 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 ##  [7] assertthat_0.2.0  rprojroot_1.3-2   digest_0.6.18    
 ## [10] R6_2.3.0          cellranger_1.1.0  backports_1.1.3  
 ## [13] evaluate_0.12     highr_0.7         pillar_1.3.1     
-## [16] geepack_1.2-1     rlang_0.3.0.1     rematch_1.0.1    
-## [19] lazyeval_0.2.1    readxl_1.2.0      rstudioapi_0.8   
-## [22] callr_3.1.1       Matrix_1.2-15     rmarkdown_1.11   
-## [25] desc_1.2.0        labeling_0.3      devtools_2.0.1   
-## [28] stringr_1.3.1     munsell_0.5.0     geeM_0.10.1      
-## [31] compiler_3.5.2    xfun_0.4          pkgconfig_2.0.2  
-## [34] pkgbuild_1.0.2    htmltools_0.3.6   tidyselect_0.2.5 
-## [37] tibble_1.4.2      bookdown_0.9      ggpubr_0.2       
-## [40] crayon_1.3.4      dplyr_0.7.8       withr_2.1.2      
-## [43] gtable_0.2.0      magrittr_1.5      MESS_0.5.4       
-## [46] cli_1.0.1         stringi_1.2.4     fs_1.2.6         
-## [49] remotes_2.0.2     bindrcpp_0.2.2    tools_3.5.2      
-## [52] glue_1.3.0        processx_3.2.1    pkgload_1.0.2    
-## [55] yaml_2.2.0        colorspace_1.3-2  sessioninfo_1.1.1
-## [58] memoise_1.1.0     knitr_1.21        bindr_0.1.1      
-## [61] usethis_1.4.0
+## [16] geepack_1.2-1     rlang_0.3.1       rematch_1.0.1    
+## [19] lazyeval_0.2.1    curl_3.2          readxl_1.2.0     
+## [22] rstudioapi_0.9.0  callr_3.1.1       Matrix_1.2-15    
+## [25] rmarkdown_1.11    desc_1.2.0        labeling_0.3     
+## [28] devtools_2.0.1    stringr_1.3.1     munsell_0.5.0    
+## [31] geeM_0.10.1       compiler_3.5.2    xfun_0.4         
+## [34] pkgconfig_2.0.2   pkgbuild_1.0.2    htmltools_0.3.6  
+## [37] tidyselect_0.2.5  tibble_2.0.0      bookdown_0.9     
+## [40] ggpubr_0.2        crayon_1.3.4      dplyr_0.7.8      
+## [43] withr_2.1.2       gtable_0.2.0      magrittr_1.5     
+## [46] MESS_0.5.4        cli_1.0.1         stringi_1.2.4    
+## [49] fs_1.2.6          remotes_2.0.2     bindrcpp_0.2.2   
+## [52] tools_3.5.2       glue_1.3.0        processx_3.2.1   
+## [55] pkgload_1.0.2     yaml_2.2.0        colorspace_1.3-2 
+## [58] sessioninfo_1.1.1 memoise_1.1.0     knitr_1.21       
+## [61] bindr_0.1.1       usethis_1.4.0
 \end{verbatim}
 
 \cleardoublepage

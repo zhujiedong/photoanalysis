@@ -136,14 +136,15 @@ cemp <- uemp500[which(uemp500$CO2_r >
 plot(cemp$CO2_r, cemp$A)
 
 # 采用 1~5 次多项式分别拟合
-cemp1st <- lm(A ~ CO2_r, data = cemp)
-cemp2nd <- lm(A ~ poly(CO2_r, 2), data = cemp)
-cemp3rd <- lm(A ~ poly(CO2_r, 3), data = cemp)
-cemp4th <- lm(A ~ poly(CO2_r, 4), data = cemp)
-cemp5th <- lm(A ~ poly(CO2_r, 5), data = cemp)
+cal1st <- lm(A ~ CO2_r, data = cemp)
+cal2nd <- lm(A ~ poly(CO2_r, 2), data = cemp)
+cal3rd <- lm(A ~ poly(CO2_r, 3), data = cemp)
+cal4th <- lm(A ~ poly(CO2_r, 4), data = cemp)
+cal5th <- lm(A ~ poly(CO2_r, 5), data = cemp)
 
 # 利用 BIC 找出最合理的校准方程
 bics <- BIC(cal1st, cal2nd, cal3rd, cal4th, cal5th)
+# noquote也就是没引号，成为名字
 best <- noquote(rownames(bics)[bics$BIC == min(bics$BIC)])
 best
 

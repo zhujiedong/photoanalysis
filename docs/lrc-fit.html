@@ -25,7 +25,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司">
 
 
-<meta name="date" content="2019-01-09">
+<meta name="date" content="2019-01-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -287,6 +287,9 @@ P_{nmax}= AQE \times I_{sat} - R_{d}
 <span class="citation">Huang et al. (<a href="#ref-HuangHY2009">2009</a>)</span>、或其他设定的值来的来估算<span class="math inline">\(I_{sat}\)</span>。</p>
 <div id="rec_fit" class="section level3">
 <h3><span class="header-section-number">8.1.1</span> 直角双曲线模型的实现</h3>
+<p>若没有安装 <code>minpack.lm</code>, 则需要首先：</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;minpack.lm&quot;</span>)</code></pre>
+<p>具体实现过程如下：</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 调用非线性拟合包minpack.lm，也可以直接使用nls</span>
 <span class="kw">library</span>(minpack.lm)
 <span class="co"># 读取数据，同fitaci数据格式</span>

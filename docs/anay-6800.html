@@ -25,7 +25,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司">
 
 
-<meta name="date" content="2019-01-09">
+<meta name="date" content="2019-01-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -429,14 +429,15 @@ cemp &lt;-<span class="st"> </span>uemp500[<span class="kw">which</span>(uemp500
 <span class="kw">plot</span>(cemp<span class="op">$</span>CO2_r, cemp<span class="op">$</span>A)
 
 <span class="co"># 采用 1~5 次多项式分别拟合</span>
-cemp1st &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span>CO2_r, <span class="dt">data =</span> cemp)
-cemp2nd &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(CO2_r, <span class="dv">2</span>), <span class="dt">data =</span> cemp)
-cemp3rd &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(CO2_r, <span class="dv">3</span>), <span class="dt">data =</span> cemp)
-cemp4th &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(CO2_r, <span class="dv">4</span>), <span class="dt">data =</span> cemp)
-cemp5th &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(CO2_r, <span class="dv">5</span>), <span class="dt">data =</span> cemp)
+cal1st &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span>CO2_r, <span class="dt">data =</span> cemp)
+cal2nd &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(CO2_r, <span class="dv">2</span>), <span class="dt">data =</span> cemp)
+cal3rd &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(CO2_r, <span class="dv">3</span>), <span class="dt">data =</span> cemp)
+cal4th &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(CO2_r, <span class="dv">4</span>), <span class="dt">data =</span> cemp)
+cal5th &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(CO2_r, <span class="dv">5</span>), <span class="dt">data =</span> cemp)
 
 <span class="co"># 利用 BIC 找出最合理的校准方程</span>
 bics &lt;-<span class="st"> </span><span class="kw">BIC</span>(cal1st, cal2nd, cal3rd, cal4th, cal5th)
+<span class="co"># noquote也就是没引号，成为名字</span>
 best &lt;-<span class="st"> </span><span class="kw">noquote</span>(<span class="kw">rownames</span>(bics)[bics<span class="op">$</span>BIC <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(bics<span class="op">$</span>BIC)])
 best
 
@@ -545,12 +546,20 @@ p2 <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_co
 <p>函数仅有一个参数，即保存数据文件夹的路径，使用如下：</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(jiptest)
 jipdata &lt;-<span class="st"> </span><span class="kw">read_files</span>(<span class="st">&quot;./data/ojip&quot;</span>)</code></pre>
-<pre><code>## readxl works best with a newer version of the tibble package.
-## You currently have tibble v1.4.2.
-## Falling back to column name repair from tibble &lt;= v1.4.2.
-## Message displays once per session.</code></pre>
+<pre><code>## New names:
+## * `` -&gt; `..1`
+## * `` -&gt; `..2`
+## New names:
+## * `` -&gt; `..1`
+## * `` -&gt; `..2`
+## New names:
+## * `` -&gt; `..1`
+## * `` -&gt; `..2`
+## New names:
+## * `` -&gt; `..1`
+## * `` -&gt; `..2`</code></pre>
 <table>
-<caption><span id="tab:unnamed-chunk-34">表 10.2: </span>jiptest 批量导入数据后的样式</caption>
+<caption><span id="tab:unnamed-chunk-35">表 10.2: </span>jiptest 批量导入数据后的样式</caption>
 <thead>
 <tr class="header">
 <th align="right">SECS</th>
@@ -592,8 +601,24 @@ jipdata &lt;-<span class="st"> </span><span class="kw">read_files</span>(<span c
 </tbody>
 </table>
 <pre class="sourceCode r"><code class="sourceCode r">dcjipdata &lt;-<span class="st"> </span><span class="kw">read_dcfiles</span>(<span class="st">&quot;./data/ojip&quot;</span>)</code></pre>
+<pre><code>## New names:
+## * `` -&gt; `..1`
+## * `` -&gt; `..2`
+## * `` -&gt; `..3`
+## New names:
+## * `` -&gt; `..1`
+## * `` -&gt; `..2`
+## * `` -&gt; `..3`
+## New names:
+## * `` -&gt; `..1`
+## * `` -&gt; `..2`
+## * `` -&gt; `..3`
+## New names:
+## * `` -&gt; `..1`
+## * `` -&gt; `..2`
+## * `` -&gt; `..3`</code></pre>
 <table>
-<caption><span id="tab:unnamed-chunk-35">表 10.3: </span>jiptest DC 数据批量导入数据后的样式</caption>
+<caption><span id="tab:unnamed-chunk-36">表 10.3: </span>jiptest DC 数据批量导入数据后的样式</caption>
 <thead>
 <tr class="header">
 <th align="right">SECS</th>
@@ -642,6 +667,18 @@ jipdata &lt;-<span class="st"> </span><span class="kw">read_files</span>(<span c
 <pre class="sourceCode r"><code class="sourceCode r">jip_results &lt;-<span class="st"> </span><span class="kw">jip_test</span>(<span class="st">&quot;./data/ojip&quot;</span>, <span class="st">&quot;d:/&quot;</span>)</code></pre>
 <pre><code>## for the current version, we suggest you use the default settings of the duration (1000 ms or more)
 ##   in the induction settings of LI-6800</code></pre>
+<pre><code>## New names:
+## * `` -&gt; `..1`
+## * `` -&gt; `..2`
+## New names:
+## * `` -&gt; `..1`
+## * `` -&gt; `..2`
+## New names:
+## * `` -&gt; `..1`
+## * `` -&gt; `..2`
+## New names:
+## * `` -&gt; `..1`
+## * `` -&gt; `..2`</code></pre>
 <table>
 <caption><span id="tab:jipres">表 10.4: </span>jiptest 输出的计算参数</caption>
 <thead>
@@ -897,6 +934,22 @@ jipdata &lt;-<span class="st"> </span><span class="kw">read_files</span>(<span c
 <pre class="sourceCode r"><code class="sourceCode r">dcjip_results &lt;-<span class="st"> </span><span class="kw">jip_dctest</span>(<span class="st">&quot;./data/ojip&quot;</span>, <span class="st">&quot;d:/&quot;</span>)</code></pre>
 <pre><code>## for the current version, we suggest you use the default settings of the duration (1000 ms or more)
 ##           in the induction settings of LI-6800</code></pre>
+<pre><code>## New names:
+## * `` -&gt; `..1`
+## * `` -&gt; `..2`
+## * `` -&gt; `..3`
+## New names:
+## * `` -&gt; `..1`
+## * `` -&gt; `..2`
+## * `` -&gt; `..3`
+## New names:
+## * `` -&gt; `..1`
+## * `` -&gt; `..2`
+## * `` -&gt; `..3`
+## New names:
+## * `` -&gt; `..1`
+## * `` -&gt; `..2`
+## * `` -&gt; `..3`</code></pre>
 <table>
 <caption><span id="tab:dcjipres">表 10.5: </span>jiptest DC 数据输出的计算参数</caption>
 <thead>
@@ -1155,6 +1208,18 @@ jipdata &lt;-<span class="st"> </span><span class="kw">read_files</span>(<span c
 <h3><span class="header-section-number">10.7.5</span> <code>jip_plot</code> 及 <code>jip_dcplot</code> 函数</h3>
 <p><code>jip_plot</code> 和 <code>jip_dcplot</code> 基于 <code>ggplot2</code>，用于快速预览所有测量结果的 ojip 曲线。函数仅有一个参数，即保存数据文件夹的路径，使用如下：</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">jip_plot</span>(<span class="st">&quot;./data/ojip&quot;</span>)</code></pre>
+<pre><code>## New names:
+## * `` -&gt; `..1`
+## * `` -&gt; `..2`
+## New names:
+## * `` -&gt; `..1`
+## * `` -&gt; `..2`
+## New names:
+## * `` -&gt; `..1`
+## * `` -&gt; `..2`
+## New names:
+## * `` -&gt; `..1`
+## * `` -&gt; `..2`</code></pre>
 <div class="figure"><span id="fig:acplot"></span>
 <img src="bookdown_files/figure-html/acplot-1.png" alt="调制式测量的 ojip 曲线的快速预览" width="672" />
 <p class="caption">
@@ -1162,6 +1227,22 @@ jipdata &lt;-<span class="st"> </span><span class="kw">read_files</span>(<span c
 </p>
 </div>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">jip_dcplot</span>(<span class="st">&quot;./data/ojip&quot;</span>)</code></pre>
+<pre><code>## New names:
+## * `` -&gt; `..1`
+## * `` -&gt; `..2`
+## * `` -&gt; `..3`
+## New names:
+## * `` -&gt; `..1`
+## * `` -&gt; `..2`
+## * `` -&gt; `..3`
+## New names:
+## * `` -&gt; `..1`
+## * `` -&gt; `..2`
+## * `` -&gt; `..3`
+## New names:
+## * `` -&gt; `..1`
+## * `` -&gt; `..2`
+## * `` -&gt; `..3`</code></pre>
 <div class="figure"><span id="fig:dcplot"></span>
 <img src="bookdown_files/figure-html/dcplot-1.png" alt="连续式测量的 ojip 曲线的快速预览" width="672" />
 <p class="caption">

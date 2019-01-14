@@ -33,6 +33,14 @@ P_{nmax}= AQE \times I_{sat} - R_{d}
 
 ### 直角双曲线模型的实现 {#rec_fit}
 
+若没有安装 `minpack.lm`, 则需要首先：
+
+```{r, eval=FALSE}
+install.packages("minpack.lm")
+```
+
+具体实现过程如下：
+
 ```{r, recr, fig.cap="直角双曲线模型拟合"}
 # 调用非线性拟合包minpack.lm，也可以直接使用nls
 library(minpack.lm)
