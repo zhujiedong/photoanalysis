@@ -2,11 +2,11 @@
 \contentsline {figure}{\numberline {1.1}{\ignorespaces Rstudio 界面及功能\relax }}{2}{figure.caption.7}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces 光合速率的不同的限制阶段\relax }}{12}{figure.caption.10}% 
-\contentsline {figure}{\numberline {3.2}{\ignorespaces 光合速率的不同的限制阶段\relax }}{26}{figure.caption.11}% 
-\contentsline {figure}{\numberline {3.3}{\ignorespaces fitacis作图结果\relax }}{34}{figure.caption.14}% 
-\contentsline {figure}{\numberline {3.4}{\ignorespaces fitacis作图结果\relax }}{35}{figure.caption.15}% 
-\contentsline {figure}{\numberline {3.5}{\ignorespaces C4 植物 A-Ci 作图\relax }}{37}{figure.caption.16}% 
+\contentsline {figure}{\numberline {3.1}{\ignorespaces 光合速率的不同的限制阶段\relax }}{14}{figure.caption.10}% 
+\contentsline {figure}{\numberline {3.2}{\ignorespaces 光合速率的不同的限制阶段\relax }}{28}{figure.caption.11}% 
+\contentsline {figure}{\numberline {3.3}{\ignorespaces fitacis作图结果\relax }}{35}{figure.caption.14}% 
+\contentsline {figure}{\numberline {3.4}{\ignorespaces fitacis作图结果\relax }}{36}{figure.caption.15}% 
+\contentsline {figure}{\numberline {3.5}{\ignorespaces C4 植物 A-Ci 作图\relax }}{38}{figure.caption.16}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
@@ -27,8 +27,10 @@
 \contentsline {figure}{\numberline {9.4}{\ignorespaces 多个 alpha 取值的差异\relax }}{83}{figure.caption.32}% 
 \contentsline {figure}{\numberline {9.5}{\ignorespaces 两种方法结果的对比展示\relax }}{86}{figure.caption.33}% 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {10.1}{\ignorespaces RACiR 方法与常规结果的比较\relax }}{96}{figure.caption.34}% 
-\contentsline {figure}{\numberline {10.2}{\ignorespaces 调制式测量的 ojip 曲线的快速预览\relax }}{104}{figure.caption.37}% 
-\contentsline {figure}{\numberline {10.3}{\ignorespaces 连续式测量的 ojip 曲线的快速预览\relax }}{105}{figure.caption.38}% 
+\contentsline {figure}{\numberline {10.1}{\ignorespaces (\#fig:racir\_check)找出最合理的校准曲线数据范围\relax }}{91}{figure.caption.34}% 
+\contentsline {figure}{\numberline {10.2}{\ignorespaces (\#fig:racir\_cor\_pkg)校准曲线查看\relax }}{91}{figure.caption.35}% 
+\contentsline {figure}{\numberline {10.3}{\ignorespaces RACiR 方法与常规结果的比较\relax }}{99}{figure.caption.36}% 
+\contentsline {figure}{\numberline {10.4}{\ignorespaces 调制式测量的 ojip 曲线的快速预览\relax }}{107}{figure.caption.39}% 
+\contentsline {figure}{\numberline {10.5}{\ignorespaces 连续式测量的 ojip 曲线的快速预览\relax }}{108}{figure.caption.40}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }

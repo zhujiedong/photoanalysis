@@ -55,25 +55,20 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 
 ## racir 软件包实现 RACiR\texttrademark 数据分析  {#racir_pkg}
 
-**因作者将代码升级，只支持原始数据的处理，我现在没有 原始数据格式的RACiR 数据，因此下面的 racir 包代码暂时不能使用，如有需要，请将您测试数据选择一个叶片的测量和空叶室校准发给我，我再更改（目前北方没有合适的植物供我测试），也可以参考我后面手动实现的代码**
-
-@stinziano2018 还给出了专门的 RACiR 数据分析软件包 [racir package](https://github.com/jstinzi/racir)，我们下面先介绍一下这个软件包。
-
-软件的安装及调用通过如下代码实现：
-
+**可能软件包作者没有更改叶面积的需求，他的软件包只支持原始数据的处理，但这对有更改需求的客户来讲没那么友好，而且这样导致了大量代码的重复，我根据作者原来的代码，结合我自己数据分析的习惯，重新制作了一份软件包，下面代码实现是基于我的软件包实现的，如有需求，也可使用作者原来的代码实现**
 
 ```{r, racir_install, eval=FALSE}
-devtools::install_github("jstinzi/racir")
+devtools::install_github("zhujiedong/racir")
 library(racir)
 ```
 
 软件包的函数很多，但可以分为下面几类：
 
-* `read_6800`： 直接读取 LI-6800 的**原始数据**。
-* `racircalcheck` & `racircalcheckcsv`，检查空叶室校准的数据并作图，两者的差别是一个读取原始数据格式，一个读取 csv 数据格式。
-* `racircal` & `racircalcsv`: 空叶室校准带叶片测量的数据。分为原始数据格式和 csv 数据格式两种
-* `racircalbatch` & `racircalbatchcsv`：批量校准数据，同 `racircalcsv` 作用相同，不过属于批量校准，分为原始数据格式和 csv 数据格式两种。
-* `compile_racir`：将 csv 数据格式批量处理到一个数据表格中，通常结合 `plantecophys` 的 `fitacis` 使用进行批量拟合。
+* 首先使用 `find_cut` 来查看使用数据的范围（排除野点）。
+
+* 使用 `racircheck` 来检查校正数据 (非必须，但建议进行数据质量检查)
+
+* 使用 `racircal` 进行数据的校准
 
 ### 实现过程 {#racir_pkg_real}
 
@@ -81,31 +76,94 @@ library(racir)
 
 首先检查空叶室校准：
 
-```{r, racir_check, fig.cap="找出最合理的校准曲线", eval=FALSE}
+```{r, racir_check, fig.cap="找出最合理的校准曲线数据范围"}
 library(racir)
+# only check the empty chamber data here
+em1 <- read.csv("./data/racirem/em-1.csv")
+le1 <- read.csv("./data/racirle/le-1.csv")
+find_cut(em1)
 
-racircalcheckcsv("./data/empty_test.csv", 20, 460)
-```
-上述参数分别是空叶室校准数据的路径，以及我要删除的数据，即只保留参比室 $CO_2$ 浓度在两者之间的数据（范围可作图确定，可参考本部分手动实现的代码）。 所示。当然此步骤可以跳过，因为下面的代码包含了该步骤，直接输出一个校准后的 csv 文件，文件名为 ”原文件名“ + "_corrected" + ".csv"。
-
-
-```{r, racir_cor_pkg, fig.cap="校准之后的数据", eval=FALSE}
-racircalcsv("./data/empty_test.csv", 16, 460, "./data/leaf_test.csv")
 ```
 
-```{r, racir_cor, eval=FALSE}
-library(plantecophys)
-df_racir <- read.csv("./data/leaf_test.csv_corrected.csv")
-fitracir <- fitaci(df_racir,varnames = list(ALEAF = "A", 
-              Tleaf = "Tleaf", Ci = "Ci",   PPFD  = "Qin", 
-              Rd = "Rd"), Patm = 84.09)
-fitracir$pars
+上述代码查看参比室 $CO_2$ 浓度在两者之间的数据，确定后面代码使用的 `mincut`, `maxcut` 范围。此处我选择的范围如下问代码：
+
+```{r, racir_cor_pkg, fig.cap="校准曲线查看"}
+racircheck(em1, mincut = 21 , maxcut = 463 )
 ```
+
+没有问题可直接进行校准
+
+```{r, racir_cor, fig.cap="校准后数据查看"}
+x <- racircal(em1, le1, mincut = 21, maxcut = 463)
+plot(x$CO2_r, x$A)
+```
+前两个参数分别为空叶室数据，带叶片测量数据，后面的最大最小值为 `racircheck` 确定，剩余工作就是使用 `plantecophys` 进行分析，在此不再重复这个过程。
+
 **注意：RACiR 的本意是表型研究中求 Vcmax 和 Jmax，因而，请忽略 Rd 等参数的计算结果**
+
+## 数据的批量处理 {#racirbatch}
+
+### readphoto 导入 {#imbyphoto}
+
+如果数据的导入是使用 `readphoto` 批量处理，那么所在数据文件有 files 列，作为不同文件数据的区分，那么可以使用向量化处理方式实现数据的分析，参考如下代码：
+
+```{r, eval=FALSE}
+library(readphoto)
+# read all empty data set
+all_empty <- read_bat_6800("./empty_data")
+all_leaf <- read_bat_6800("./leaf_data")
+listem  <-  split(all_empty, files)
+listle <-  split(all_leaf, files)
+cordata <- purrr::map2(listem, listle, racircal, mincut = 21, maxcut = 463)
+```
+所有的数据均保存在 cordata 中，特别注意 **此处要求 listem 与 listle 长度相同，因此，如果一个空叶室对多个带叶片测量数据，请将空叶室测量文件复制几份（注意对应顺序），使其每个带叶片测量的数据文件和空叶室测量数据文件数量相同，并且一一对应，例如 emtpy-1-1 数据文件对应 leaf-1-1**，文件命名前即制定好命名规则，方便后续数据处理。
+
+### 处理大量 csv 文件 {#imbycsv}
+
+```{r, eval=FALSE}
+# suppose leaf and empty data in 2 files in disk D:
+le=list.files("d:/racirle/")
+em=list.files("d:/racirem/")
+
+# construct the path of these csv files
+pathle = paste0("d:/racirle/", le)
+pathem = paste0("d:/racirem/", em)
+
+# import all leaf data and empty data separately
+xx <- lapply(pathle, read.csv)
+yy <- lapply(pathem, read.csv)
+
+# correct all the data
+all_correc <- purrr::map2(yy, xx, racircal, mincut = 21, maxcut=463)
+
+#  export all data to csv files, these file have the same name with leaf data
+dirc <- dir.create("d:/data/")
+finame <- "d:/data/"
+finame <- paste0(finame, le)
+purrr::walk2(all_correc,  finame, write.csv)
+```
+
+以上代码仅供参考，主要是实现批量导入并校正，在批量将校正后数据导出为 csv 文件，为方便，将导出的文件名字命名为同原来带叶片测量数据相同的文件名，。
+
+## 批量计算 $V_{cmax}$ 和 $J_max$ {#fitbatracir}
+
+```{r, eval=FALSE}
+#use csv data above
+csvdata <- lapply(all_correc, plantecophys::fitaci, 
+    varnames = list(ALEAF = "A", Tleaf = "Tleaf",
+    Ci = "Ci", PPFD= "Q", Rd = "Rd"), fitmethod ="bilinear")
+
+# use readphoto data above
+photodata <- lapply(cordata, plantecophys::fitaci, 
+    varnames = list(ALEAF = "A", Tleaf = "Tleaf",
+    Ci = "Ci", PPFD= "Q", Rd = "Rd"), fitmethod ="bilinear")
+```
+
+批量分析同样使用向量化来进行，避免了循环，效率比较高，也可以将拟合结果 `coef` 中的 $V_{cmax}$ 和 $J_max$ 结果批量导入文件，参考 @\ref(imbycsv) 部分的代码。
 
 ## RACiR\texttrademark 分析的手动实现 {#racir68_exam}
 
-以下内容是我之前写的内容，部分代码的实现和上述软件包相似，仅供参考，尤其是当您使用 `racir` 软件包报错时，可以参考下文代码手动实现 RACiR 数据的分析。。
+以下内容是我之前写的内容，部分代码的实现和上述软件包相似，仅供参考，尤其是当您使用 `racir` 软件包报错时，可以参考下文代码手动实现 RACiR 数据的分析。
 
 ```{r, eval=FALSE}
 # 分别读取未校准空叶室数据
@@ -257,17 +315,17 @@ install_github("zhujiedong/jiptest")
 
 函数仅有一个参数，即保存数据文件夹的路径，使用如下：
 
-```{r, jipdata}
+```{r, jipdata, message=FALSE}
 library(jiptest)
 jipdata <- read_files("./data/ojip")
 ```
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE}
 knitr::kable(head(jipdata),  booktabs = TRUE,
 caption = 'jiptest 批量导入数据后的样式')
 ```
 
-```{r, dcjipdata}
+```{r, dcjipdata, message=FALSE}
 dcjipdata <- read_dcfiles("./data/ojip")
 ```
 
@@ -281,7 +339,7 @@ caption = 'jiptest DC 数据批量导入数据后的样式')
  `jiptest` 是 jiptest 的核心函数，用于所有数据的 jip test 分析，函数仅包含两个参数，测量数据的保存文件夹路径，以及分析结果的导出路径，导出路径必须为**已存在的文件夹或磁盘根目录**。
  `jip_dctest` 与 `jip_test` 相似，用于连续光测量数据的分析。
  
-```{r, jiptest}
+```{r, jiptest, message=FALSE}
 jip_results <- jip_test("./data/ojip", "d:/")
 ```
 
@@ -293,7 +351,7 @@ knitr::kable(jip_results,  longtable = TRUE, booktabs = TRUE,
              caption = 'jiptest 输出的计算参数')
 ```
 
-```{r, dcjiptest}
+```{r, dcjiptest, message=FALSE}
 dcjip_results <- jip_dctest("./data/ojip", "d:/")
 ```
 

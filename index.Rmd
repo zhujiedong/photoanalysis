@@ -17,7 +17,7 @@ graphics: yes
 cover-image: images/coverpage.png
 ---
 
-# 前言 {- #index}
+# 欢迎 {- #welcome}
 
 ------
 

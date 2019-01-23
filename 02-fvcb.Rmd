@@ -263,7 +263,7 @@ attributes(acifit)
 # 查看拟合结果
 summary(acifit)
 
-acifit_linear <- fitaci(aci,  fitmethod = "bilinear")
+acifit_linear <- fitaci(aci,  fitmethod = "bilinear", quiet = TRUE)
 summary(acifit_linear)
 # 仅查看拟合参数, 比较两种拟合参数的差异
 coef(acifit_linear)
@@ -309,7 +309,7 @@ write.csv(coef(acifit), file = "coefaci.csv")
 
 #### fitmethod = "onepoint" 介绍 {#onepoint}
 
-@De2016A 发表了关于 one point 方法计算 $V_{cmax}$ 和 $J_{max}$ 方法的文章，在 2017 年 11 月的更新中，plantecophys 增加了响应的 R 软件实现方法， 该方法并非使用一个点计算 $V_{cmax}$ 和 $J_{max}$，而是对数据集中的每一个点的值进行估计，使用的方法为逆向了光合作用方程。输出为对每个原始数据加入了 $V_{cmax}$ 和 $J_{max}$，当然一如既往的可以使用温度校准的方法。**并不建议该方法应用于整个 ACi 曲线的数据，它的假设是在外部环境 CO~2~ 浓度和饱和光下，受到 Rubisco 所化速率的限制而不是 RUBP 的限制。**
+@De2016A 发表了关于 one point 方法计算 $V_{cmax}$ 和 $J_{max}$ 方法的文章，在 2017 年 11 月的更新中，plantecophys 增加了响应的 R 软件实现方法， 该方法并非使用一个点计算 $V_{cmax}$ 和 $J_{max}$，而是对数据集中的每一个点的值进行估计，使用的方法为逆向了光合作用方程。输出为对每个原始数据加入了 $V_{cmax}$ 和 $J_{max}$，当然一如既往的可以使用温度校准的方法。**并不建议该方法应用于整个 ACi 曲线的数据，它的假设是在外部环境 CO~2~ 浓度和饱和光下，受到 Rubisco 羧化速率的限制而不是 RUBP 的限制。**
 
 基于上面的描述，他们的模型如下：
 
@@ -395,7 +395,7 @@ manyacidat2 <- droplevels(manyacidat[manyacidat$Curve %in%
 
 # 对多条曲线进行拟合，使用bilinear方法，
 # 仅仅因为其比非线性拟合节省时间
-fits <- fitacis(manyacidat2, group = "Curve", fitmethod="bilinear")
+fits <- fitacis(manyacidat2, group = "Curve", fitmethod="bilinear", quiet = TRUE)
 
 # 拟合结果为list，我们可以只提取第一个的拟合结果
 fits[[1]]
