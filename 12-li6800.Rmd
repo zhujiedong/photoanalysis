@@ -76,7 +76,7 @@ library(racir)
 
 首先检查空叶室校准：
 
-```{r, racir_check, fig.cap="找出最合理的校准曲线数据范围"}
+```{r, racircheck, fig.cap="找出最合理的校准曲线数据范围"}
 library(racir)
 # only check the empty chamber data here
 em1 <- read.csv("./data/racirem/em-1.csv")
@@ -87,13 +87,13 @@ find_cut(em1)
 
 上述代码查看参比室 $CO_2$ 浓度在两者之间的数据，确定后面代码使用的 `mincut`, `maxcut` 范围。此处我选择的范围如下问代码：
 
-```{r, racir_cor_pkg, fig.cap="校准曲线查看"}
+```{r, racircorpkg, fig.cap="校准曲线查看"}
 racircheck(em1, mincut = 21 , maxcut = 463 )
 ```
 
 没有问题可直接进行校准
 
-```{r, racir_cor, fig.cap="校准后数据查看"}
+```{r, racircor, fig.cap="校准后数据查看"}
 x <- racircal(em1, le1, mincut = 21, maxcut = 463)
 plot(x$CO2_r, x$A)
 ```
@@ -101,9 +101,9 @@ plot(x$CO2_r, x$A)
 
 **注意：RACiR 的本意是表型研究中求 Vcmax 和 Jmax，因而，请忽略 Rd 等参数的计算结果**
 
-## 数据的批量处理 {#racirbatch}
+### 数据的批量处理 {#racirbatch}
 
-### readphoto 导入 {#imbyphoto}
+#### readphoto 导入 {#imbyphoto}
 
 如果数据的导入是使用 `readphoto` 批量处理，那么所在数据文件有 files 列，作为不同文件数据的区分，那么可以使用向量化处理方式实现数据的分析，参考如下代码：
 
@@ -111,6 +111,7 @@ plot(x$CO2_r, x$A)
 library(readphoto)
 # read all empty data set
 all_empty <- read_bat_6800("./empty_data")
+# read all leaf data set
 all_leaf <- read_bat_6800("./leaf_data")
 listem  <-  split(all_empty, files)
 listle <-  split(all_leaf, files)
@@ -118,7 +119,7 @@ cordata <- purrr::map2(listem, listle, racircal, mincut = 21, maxcut = 463)
 ```
 所有的数据均保存在 cordata 中，特别注意 **此处要求 listem 与 listle 长度相同，因此，如果一个空叶室对多个带叶片测量数据，请将空叶室测量文件复制几份（注意对应顺序），使其每个带叶片测量的数据文件和空叶室测量数据文件数量相同，并且一一对应，例如 emtpy-1-1 数据文件对应 leaf-1-1**，文件命名前即制定好命名规则，方便后续数据处理。
 
-### 处理大量 csv 文件 {#imbycsv}
+#### 处理大量 csv 文件 {#imbycsv}
 
 ```{r, eval=FALSE}
 # suppose leaf and empty data in 2 files in disk D:
