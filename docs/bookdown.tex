@@ -173,7 +173,7 @@
 
 \title{R 语言分析 LI-6400 和 LI-6800 光合仪的数据}
 \author{祝介东 北京力高泰科技有限公司}
-\date{2019-01-23}
+\date{2019-01-24}
 
 \begin{document}
 \maketitle
@@ -520,11 +520,11 @@ lrc & 3 & 1513612941 & 220.0 & 20171218 10:02:20 & 1 & 1 & 1513612941\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.795296 1.599479 1.446680 1.335147 1.772715 1.587753 1.629028
-##  [8] 1.372643 1.308724 1.701346 1.593059 1.881972 1.869442 1.271664
-## [15] 1.331337 1.474923 1.873902 1.249928 1.367572 1.275040 1.676806
-## [22] 1.479926 1.309871 1.202020 1.650869 1.553085 1.214914 1.579469
-## [29] 1.737922 1.436716 1.266381 1.306668
+##  [1] 1.333304 1.662016 1.221837 1.910986 1.321066 1.537543 1.297914
+##  [8] 1.360372 1.357901 1.828457 1.552266 1.825941 1.264125 1.599505
+## [15] 1.254915 1.953988 1.611954 1.397726 1.297429 1.286523 1.207314
+## [22] 1.714037 1.249377 1.541285 1.349888 1.613770 1.236800 1.303469
+## [29] 1.288249 1.536600 1.450874 1.952481
 \end{verbatim}
 
 我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.
@@ -610,10 +610,10 @@ lrc & 3 & 1513612941 & 220.0 & 20171218 10:02:20 & 1 & 1 & 1513612941\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.903340 1.292834 1.292338 1.676056 1.298504 1.423775 1.455176
-##  [8] 1.354905 1.485973 1.411250 1.366231 1.807741 1.440642 1.429616
-## [15] 1.251180 1.845017 1.445039 1.843120 1.404744 1.703895 1.259526
-## [22] 1.597782 1.691048 1.638795 1.473340 1.368634 1.877421 1.382063
+##  [1] 1.792781 1.340545 1.692679 1.753086 1.974765 1.315775 1.724578
+##  [8] 1.850394 1.414419 1.421751 1.456340 1.753863 1.223603 1.779709
+## [15] 1.331096 1.771043 1.343429 1.263477 1.200075 1.264096 1.523716
+## [22] 1.533624 1.721381 1.525893 1.217342 1.573358 1.256724 1.256842
 \end{verbatim}
 
 测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。
@@ -3266,21 +3266,6 @@ LI-6800 增加了 ojip 曲线测量功能，本功能主要是针对测量数据
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## New names:
-## * `` -> `..1`
-## * `` -> `..2`
-## New names:
-## * `` -> `..1`
-## * `` -> `..2`
-## New names:
-## * `` -> `..1`
-## * `` -> `..2`
-## New names:
-## * `` -> `..1`
-## * `` -> `..2`
-\end{verbatim}
-
 \begin{table}[t]
 
 \caption{\label{tab:unnamed-chunk-38}jiptest 批量导入数据后的样式}
@@ -3305,25 +3290,6 @@ SECS & FLUOR & SOURCE\\
 \NormalTok{dcjipdata <-}\StringTok{ }\KeywordTok{read_dcfiles}\NormalTok{(}\StringTok{"./data/ojip"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## New names:
-## * `` -> `..1`
-## * `` -> `..2`
-## * `` -> `..3`
-## New names:
-## * `` -> `..1`
-## * `` -> `..2`
-## * `` -> `..3`
-## New names:
-## * `` -> `..1`
-## * `` -> `..2`
-## * `` -> `..3`
-## New names:
-## * `` -> `..1`
-## * `` -> `..2`
-## * `` -> `..3`
-\end{verbatim}
 
 \begin{table}[t]
 
@@ -3355,26 +3321,6 @@ SECS & FLUOR & SOURCE\\
 \NormalTok{jip_results <-}\StringTok{ }\KeywordTok{jip_test}\NormalTok{(}\StringTok{"./data/ojip"}\NormalTok{, }\StringTok{"d:/"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## for the current version, we suggest you use the default settings of the duration (1000 ms or more)
-##   in the induction settings of LI-6800
-\end{verbatim}
-
-\begin{verbatim}
-## New names:
-## * `` -> `..1`
-## * `` -> `..2`
-## New names:
-## * `` -> `..1`
-## * `` -> `..2`
-## New names:
-## * `` -> `..1`
-## * `` -> `..2`
-## New names:
-## * `` -> `..1`
-## * `` -> `..2`
-\end{verbatim}
 
 \begin{longtable}{lrrrr}
 \caption{\label{tab:jipres}jiptest 输出的计算参数}\\
@@ -3429,30 +3375,6 @@ DFabs & 0.3093655 & 0.0982884 & 0.0324348 & -0.8458942\\
 \NormalTok{dcjip_results <-}\StringTok{ }\KeywordTok{jip_dctest}\NormalTok{(}\StringTok{"./data/ojip"}\NormalTok{, }\StringTok{"d:/"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## for the current version, we suggest you use the default settings of the duration (1000 ms or more)
-##           in the induction settings of LI-6800
-\end{verbatim}
-
-\begin{verbatim}
-## New names:
-## * `` -> `..1`
-## * `` -> `..2`
-## * `` -> `..3`
-## New names:
-## * `` -> `..1`
-## * `` -> `..2`
-## * `` -> `..3`
-## New names:
-## * `` -> `..1`
-## * `` -> `..2`
-## * `` -> `..3`
-## New names:
-## * `` -> `..1`
-## * `` -> `..2`
-## * `` -> `..3`
-\end{verbatim}
 
 \begin{longtable}{lrrrr}
 \caption{\label{tab:dcjipres}jiptest DC 数据输出的计算参数}\\
@@ -3515,21 +3437,6 @@ DFabs & 1.924705e-01 & 3.274650e-02 & -3.276640e-02 & -9.333551e-01\\
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## New names:
-## * `` -> `..1`
-## * `` -> `..2`
-## New names:
-## * `` -> `..1`
-## * `` -> `..2`
-## New names:
-## * `` -> `..1`
-## * `` -> `..2`
-## New names:
-## * `` -> `..1`
-## * `` -> `..2`
-\end{verbatim}
-
 \begin{figure}
 \centering
 \includegraphics{bookdown_files/figure-latex/acplot-1.pdf}
@@ -3541,25 +3448,6 @@ DFabs & 1.924705e-01 & 3.274650e-02 & -3.276640e-02 & -9.333551e-01\\
 \KeywordTok{jip_dcplot}\NormalTok{(}\StringTok{"./data/ojip"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## New names:
-## * `` -> `..1`
-## * `` -> `..2`
-## * `` -> `..3`
-## New names:
-## * `` -> `..1`
-## * `` -> `..2`
-## * `` -> `..3`
-## New names:
-## * `` -> `..1`
-## * `` -> `..2`
-## * `` -> `..3`
-## New names:
-## * `` -> `..1`
-## * `` -> `..2`
-## * `` -> `..3`
-\end{verbatim}
 
 \begin{figure}
 \centering

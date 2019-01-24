@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018/W32TeX) (preloaded format=xelatex 2019.1.3)  23 JAN 2019 16:21
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018/W32TeX) (preloaded format=xelatex 2019.1.3)  24 JAN 2019 08:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2395,26 +2395,26 @@ Overfull \hbox (50.82184pt too wide) in paragraph at lines 511--511
 
 
 Overfull \hbox (50.82184pt too wide) in paragraph at lines 528--528
-[]\TU/lmtt/m/n/10.53937 ##  [1] 1.795296 1.599479 1.446680 1.335147 1.772715 1.
-587753 1.629028[] 
+[]\TU/lmtt/m/n/10.53937 ##  [1] 1.333304 1.662016 1.221837 1.910986 1.321066 1.
+537543 1.297914[] 
  []
 
 
 Overfull \hbox (50.82184pt too wide) in paragraph at lines 528--528
-[]\TU/lmtt/m/n/10.53937 ##  [8] 1.372643 1.308724 1.701346 1.593059 1.881972 1.
-869442 1.271664[] 
+[]\TU/lmtt/m/n/10.53937 ##  [8] 1.360372 1.357901 1.828457 1.552266 1.825941 1.
+264125 1.599505[] 
  []
 
 [8]
 Overfull \hbox (50.82184pt too wide) in paragraph at lines 528--528
-[]\TU/lmtt/m/n/10.53937 ## [15] 1.331337 1.474923 1.873902 1.249928 1.367572 1.
-275040 1.676806[] 
+[]\TU/lmtt/m/n/10.53937 ## [15] 1.254915 1.953988 1.611954 1.397726 1.297429 1.
+286523 1.207314[] 
  []
 
 
 Overfull \hbox (50.82184pt too wide) in paragraph at lines 528--528
-[]\TU/lmtt/m/n/10.53937 ## [22] 1.479926 1.309871 1.202020 1.650869 1.553085 1.
-214914 1.579469[] 
+[]\TU/lmtt/m/n/10.53937 ## [22] 1.714037 1.249377 1.541285 1.349888 1.613770 1.
+236800 1.303469[] 
  []
 
 
@@ -2497,26 +2497,26 @@ Overfull \hbox (12.08984pt too wide) in paragraph at lines 601--601
 
 
 Overfull \hbox (50.82184pt too wide) in paragraph at lines 617--617
-[]\TU/lmtt/m/n/10.53937 ##  [1] 1.903340 1.292834 1.292338 1.676056 1.298504 1.
-423775 1.455176[] 
+[]\TU/lmtt/m/n/10.53937 ##  [1] 1.792781 1.340545 1.692679 1.753086 1.974765 1.
+315775 1.724578[] 
  []
 
 
 Overfull \hbox (50.82184pt too wide) in paragraph at lines 617--617
-[]\TU/lmtt/m/n/10.53937 ##  [8] 1.354905 1.485973 1.411250 1.366231 1.807741 1.
-440642 1.429616[] 
+[]\TU/lmtt/m/n/10.53937 ##  [8] 1.850394 1.414419 1.421751 1.456340 1.753863 1.
+223603 1.779709[] 
  []
 
 [10]
 Overfull \hbox (50.82184pt too wide) in paragraph at lines 617--617
-[]\TU/lmtt/m/n/10.53937 ## [15] 1.251180 1.845017 1.445039 1.843120 1.404744 1.
-703895 1.259526[] 
+[]\TU/lmtt/m/n/10.53937 ## [15] 1.331096 1.771043 1.343429 1.263477 1.200075 1.
+264096 1.523716[] 
  []
 
 
 Overfull \hbox (50.82184pt too wide) in paragraph at lines 617--617
-[]\TU/lmtt/m/n/10.53937 ## [22] 1.597782 1.691048 1.638795 1.473340 1.368634 1.
-877421 1.382063[] 
+[]\TU/lmtt/m/n/10.53937 ## [22] 1.533624 1.721381 1.525893 1.217342 1.573358 1.
+256724 1.256842[] 
  []
 
 [11]
@@ -3528,116 +3528,64 @@ Underfull \vbox (badness 10000) detected at line 3223
 [98]
 File: images/racir.png Graphic file (type bmp)
 <images/racir.png>
-[99] [100] [101] [102]
-Overfull \hbox (222.35005pt too wide) in paragraph at lines 3362--3362
-[]\TU/lmtt/m/n/10.53937 ## for the current version, we suggest you use the defa
-ult settings of the duration (1000 ms or more)[] 
- []
-
-
-Overfull \hbox (13.30293pt too wide) in alignment at lines 3379--3405
+[99] [100] [101]
+Overfull \hbox (13.30293pt too wide) in alignment at lines 3325--3351
  [] [] [] [] [] 
  []
 
 
-Overfull \hbox (13.30293pt too wide) in alignment at lines 3405--3425
+Overfull \hbox (13.30293pt too wide) in alignment at lines 3351--3371
  [] [] [] [] [] 
  []
 
-[103]
-Overfull \hbox (222.35005pt too wide) in paragraph at lines 3436--3436
-[]\TU/lmtt/m/n/10.53937 ## for the current version, we suggest you use the defa
-ult settings of the duration (1000 ms or more)[] 
- []
-
-[104]
-Overfull \hbox (22.66188pt too wide) in alignment at lines 3457--3483
+[102]
+Overfull \hbox (22.66188pt too wide) in alignment at lines 3379--3405
  [] [] [] [] [] 
  []
 
 
-Overfull \hbox (22.66188pt too wide) in alignment at lines 3483--3503
+Overfull \hbox (22.66188pt too wide) in alignment at lines 3405--3425
  [] [] [] [] [] 
  []
 
-[105] [106]
+[103] [104]
 File: bookdown_files/figure-latex/acplot-1.pdf Graphic file (type pdf)
 <use bookdown_files/figure-latex/acplot-1.pdf>
-[107]
 File: bookdown_files/figure-latex/dcplot-1.pdf Graphic file (type pdf)
 <use bookdown_files/figure-latex/dcplot-1.pdf>
-[108] [109]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+[105] [106]
+Underfull \vbox (badness 10000) detected at line 3465
+ []
 
 
-Overfull \hbox (336.25pt too wide) has occurred while \output is active
+Overfull \hbox (336.25pt too wide) detected at line 3465
 []
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 10000) detected at line 3465
+ []
 
 
-Overfull \hbox (336.25pt too wide) has occurred while \output is active
+Overfull \hbox (336.25pt too wide) detected at line 3465
 []
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 10000) detected at line 3465
+ []
 
 
-Overfull \hbox (336.25pt too wide) has occurred while \output is active
+Overfull \hbox (336.25pt too wide) detected at line 3465
 []
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Overfull \hbox (336.25pt too wide) has occurred while \output is active
-[]
+Underfull \vbox (badness 10000) detected at line 3465
  []
 
 
-Underfull \hbox (badness 10000) has occurred while \output is active
- [][][][] 
- []
-
-[110
-
-]
-Underfull \vbox (badness 10000) detected at line 3577
- []
-
-
-Overfull \hbox (336.25pt too wide) detected at line 3577
-[]
- []
-
-
-Underfull \vbox (badness 10000) detected at line 3577
- []
-
-
-Overfull \hbox (336.25pt too wide) detected at line 3577
-[]
- []
-
-
-Underfull \vbox (badness 10000) detected at line 3577
- []
-
-
-Overfull \hbox (336.25pt too wide) detected at line 3577
-[]
- []
-
-
-Underfull \vbox (badness 10000) detected at line 3577
- []
-
-
-Overfull \hbox (336.25pt too wide) detected at line 3577
+Overfull \hbox (336.25pt too wide) detected at line 3465
 []
  []
 
@@ -3647,56 +3595,57 @@ Underfull \hbox (badness 10000) has occurred while \output is active
  [][][][] 
  []
 
-[111
+[107
 
 
-] [112] [113] [114]
+
+] [108] [109] [110]
 File: bookdown_files/figure-latex/unnamed-chunk-47-1.pdf Graphic file (type pdf
 )
 <use bookdown_files/figure-latex/unnamed-chunk-47-1.pdf>
-[115]
+[111]
 File: bookdown_files/figure-latex/unnamed-chunk-48-1.pdf Graphic file (type pdf
 )
 <use bookdown_files/figure-latex/unnamed-chunk-48-1.pdf>
-[116]
-Underfull \vbox (badness 10000) detected at line 3749
+[112]
+Underfull \vbox (badness 10000) detected at line 3637
  []
 
 
-Overfull \hbox (336.25pt too wide) detected at line 3749
+Overfull \hbox (336.25pt too wide) detected at line 3637
 []
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3749
+Underfull \vbox (badness 10000) detected at line 3637
  []
 
 
-Overfull \hbox (336.25pt too wide) detected at line 3749
+Overfull \hbox (336.25pt too wide) detected at line 3637
 []
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3749
+Underfull \vbox (badness 10000) detected at line 3637
  []
 
 
-Overfull \hbox (336.25pt too wide) detected at line 3749
+Overfull \hbox (336.25pt too wide) detected at line 3637
 []
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3749
+Underfull \vbox (badness 10000) detected at line 3637
  []
 
 
-Overfull \hbox (336.25pt too wide) detected at line 3749
+Overfull \hbox (336.25pt too wide) detected at line 3637
 []
  []
 
 Chapter 12.
 
-Overfull \hbox (72.95456pt too wide) in paragraph at lines 3806--3806
+Overfull \hbox (72.95456pt too wide) in paragraph at lines 3694--3694
 []\TU/lmtt/m/n/10.53937 ## [1] grid      stats     graphics  grDevices utils   
   datasets  methods[] 
  []
@@ -3706,16 +3655,16 @@ Underfull \hbox (badness 10000) has occurred while \output is active
  [][][][] 
  []
 
-[117
+[113
 
 
 ]
-Overfull \hbox (17.6228pt too wide) in paragraph at lines 3806--3806
+Overfull \hbox (17.6228pt too wide) in paragraph at lines 3694--3694
 []\TU/lmtt/m/n/10.53937 ## [10] ggplot2_3.1.0      minpack.lm_1.2-1   plantecop
 hys_1.3-2[] 
  []
 
-[118] (./bookdown.bbl
+[114] (./bookdown.bbl
 Underfull \vbox (badness 10000) detected at line 1
  []
 
@@ -3761,11 +3710,11 @@ Underfull \hbox (badness 10000) has occurred while \output is active
  [][][][] 
  []
 
-[119
+[115
 
 
 
-] [120] [121]
+] [116] [117]
 Underfull \hbox (badness 2512) in paragraph at lines 159--163
 []\TU/lmr/m/n/10.53937 Leuning, R. (1995).  A critical appraisal of a combined 
 stom-
@@ -3775,7 +3724,7 @@ Invalid UTF-8 byte or sequence at line 165 replaced by U+FFFD.
 Missing character: There is no � in font [lmroman10-regular]:mapping=tex-text;!
 Invalid UTF-8 byte or sequence at line 166 replaced by U+FFFD.
 Missing character: There is no � in font [lmroman10-regular]:mapping=tex-text;!
-[122]) [123]
+[118]) [119]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
@@ -3812,14 +3761,14 @@ Underfull \hbox (badness 10000) has occurred while \output is active
  [][][][] 
  []
 
-[124
+[120
 
 ] (./bookdown.ind)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3815.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 3815.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3703.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 3703.
 (./bookdown.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 3815.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3815.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 3703.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3703.
 
 Package rerunfilecheck Info: File `bookdown.out' has not changed.
 (rerunfilecheck)             Checksum: 03EF8755C3F0C95AEF4667E741EE6695.
@@ -3832,7 +3781,7 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 3815.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 3703.
  ) 
 Here is how much of TeX's memory you used:
  31088 strings out of 494921
@@ -3843,4 +3792,4 @@ Here is how much of TeX's memory you used:
  14 hyphenation exceptions out of 8191
  69i,17n,134p,822b,921s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on bookdown.pdf (144 pages).
+Output written on bookdown.pdf (140 pages).

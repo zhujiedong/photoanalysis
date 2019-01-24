@@ -80,16 +80,16 @@
 \contentsline {subsection}{\numberline {10.9.1}jip test 的实现}{100}{subsection.10.9.1}% 
 \contentsline {subsection}{\numberline {10.9.2}\texttt {jiptest} 软件包安装}{100}{subsection.10.9.2}% 
 \contentsline {subsection}{\numberline {10.9.3}\texttt {read\_files} 及 \texttt {read\_dcfiles} 函数}{100}{subsection.10.9.3}% 
-\contentsline {subsection}{\numberline {10.9.4}\texttt {jip\_test} 及 \texttt {jip\_dctest} 函数}{102}{subsection.10.9.4}% 
-\contentsline {subsection}{\numberline {10.9.5}\texttt {jip\_plot} 及 \texttt {jip\_dcplot} 函数}{106}{subsection.10.9.5}% 
-\contentsline {chapter}{\numberline {11}PCA 分析}{111}{chapter.11}% 
-\contentsline {section}{\numberline {11.1}特征向量与特征值}{111}{section.11.1}% 
-\contentsline {section}{\numberline {11.2}PCA R 语言实现}{112}{section.11.2}% 
-\contentsline {subsection}{\numberline {11.2.1}手动实现过程}{113}{subsection.11.2.1}% 
-\contentsline {subsubsection}{\numberline {11.2.1.1}均值的计算}{113}{subsubsection.11.2.1.1}% 
-\contentsline {subsubsection}{\numberline {11.2.1.2}计算协方差矩阵}{113}{subsubsection.11.2.1.2}% 
-\contentsline {subsubsection}{\numberline {11.2.1.3}计算特征值和特征向量}{113}{subsubsection.11.2.1.3}% 
-\contentsline {subsection}{\numberline {11.2.2}\texttt {prcomp} 的实现}{114}{subsection.11.2.2}% 
-\contentsline {subsection}{\numberline {11.2.3}作图}{114}{subsection.11.2.3}% 
-\contentsline {chapter}{\numberline {12}环境与配置}{117}{chapter.12}% 
-\contentsline {fm}{参考文献}{119}{chapter*.41}% 
+\contentsline {subsection}{\numberline {10.9.4}\texttt {jip\_test} 及 \texttt {jip\_dctest} 函数}{101}{subsection.10.9.4}% 
+\contentsline {subsection}{\numberline {10.9.5}\texttt {jip\_plot} 及 \texttt {jip\_dcplot} 函数}{104}{subsection.10.9.5}% 
+\contentsline {chapter}{\numberline {11}PCA 分析}{107}{chapter.11}% 
+\contentsline {section}{\numberline {11.1}特征向量与特征值}{107}{section.11.1}% 
+\contentsline {section}{\numberline {11.2}PCA R 语言实现}{108}{section.11.2}% 
+\contentsline {subsection}{\numberline {11.2.1}手动实现过程}{109}{subsection.11.2.1}% 
+\contentsline {subsubsection}{\numberline {11.2.1.1}均值的计算}{109}{subsubsection.11.2.1.1}% 
+\contentsline {subsubsection}{\numberline {11.2.1.2}计算协方差矩阵}{109}{subsubsection.11.2.1.2}% 
+\contentsline {subsubsection}{\numberline {11.2.1.3}计算特征值和特征向量}{109}{subsubsection.11.2.1.3}% 
+\contentsline {subsection}{\numberline {11.2.2}\texttt {prcomp} 的实现}{110}{subsection.11.2.2}% 
+\contentsline {subsection}{\numberline {11.2.3}作图}{110}{subsection.11.2.3}% 
+\contentsline {chapter}{\numberline {12}环境与配置}{113}{chapter.12}% 
+\contentsline {fm}{参考文献}{115}{chapter*.41}% 
