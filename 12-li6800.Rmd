@@ -370,11 +370,11 @@ knitr::kable(dcjip_results,  longtable = TRUE, booktabs = TRUE,
 `jip_plot` 和 `jip_dcplot` 基于 `ggplot2`，用于快速预览所有测量结果的 ojip 曲线。函数仅有一个参数，即保存数据文件夹的路径，使用如下：
 
 
-```{r, acplot, fig.cap="调制式测量的 ojip 曲线的快速预览"}
+```{r, acplot, fig.cap="调制式测量的 ojip 曲线的快速预览", message=FALSE}
 jip_plot("./data/ojip")
 ```
 
-```{r, dcplot, fig.cap="连续式测量的 ojip 曲线的快速预览"}
+```{r, dcplot, fig.cap="连续式测量的 ojip 曲线的快速预览", message=FALSE}
 jip_dcplot("./data/ojip")
 ```
 

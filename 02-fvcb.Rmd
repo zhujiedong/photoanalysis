@@ -245,7 +245,7 @@ install.packages("plantecophys", dependencies = TRUE)
 ```
 
 
-```{r, fitaci6400, fig.cap = "光合速率的不同的限制阶段"}
+```{r, fitaci6400, fig.cap = "光合速率的不同的限制阶段", message=FALSE}
 # 载入 plantecophys 
 library("plantecophys")
 
