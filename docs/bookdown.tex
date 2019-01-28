@@ -173,7 +173,7 @@
 
 \title{R 语言分析 LI-6400 和 LI-6800 光合仪的数据}
 \author{祝介东 北京力高泰科技有限公司}
-\date{2019-01-24}
+\date{2019-01-28}
 
 \begin{document}
 \maketitle
@@ -308,7 +308,7 @@ R 软件和 Rstudio 的安装十分方便，我们按照各自系统的安装方
 \end{Shaded}
 
 \begin{verbatim}
-## Skipping install of 'readphoto' from a github remote, the SHA1 (92c4ebfb) has not changed since last install.
+## Skipping install of 'readphoto' from a github remote, the SHA1 (f2f88a7b) has not changed since last install.
 ##   Use `force = TRUE` to force installation
 \end{verbatim}
 
@@ -520,11 +520,11 @@ lrc & 3 & 1513612941 & 220.0 & 20171218 10:02:20 & 1 & 1 & 1513612941\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.333304 1.662016 1.221837 1.910986 1.321066 1.537543 1.297914
-##  [8] 1.360372 1.357901 1.828457 1.552266 1.825941 1.264125 1.599505
-## [15] 1.254915 1.953988 1.611954 1.397726 1.297429 1.286523 1.207314
-## [22] 1.714037 1.249377 1.541285 1.349888 1.613770 1.236800 1.303469
-## [29] 1.288249 1.536600 1.450874 1.952481
+##  [1] 1.730586 1.307584 1.773791 1.475280 1.908183 1.207410 1.279667
+##  [8] 1.209524 1.243920 1.494229 1.805954 1.341840 1.429287 1.796187
+## [15] 1.256114 1.802176 1.379121 1.708887 1.312317 1.696304 1.704212
+## [22] 1.389769 1.864645 1.825763 1.620126 1.325288 1.852412 1.270587
+## [29] 1.444864 1.279155 1.431893 1.678357
 \end{verbatim}
 
 我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.
@@ -610,10 +610,10 @@ lrc & 3 & 1513612941 & 220.0 & 20171218 10:02:20 & 1 & 1 & 1513612941\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.792781 1.340545 1.692679 1.753086 1.974765 1.315775 1.724578
-##  [8] 1.850394 1.414419 1.421751 1.456340 1.753863 1.223603 1.779709
-## [15] 1.331096 1.771043 1.343429 1.263477 1.200075 1.264096 1.523716
-## [22] 1.533624 1.721381 1.525893 1.217342 1.573358 1.256724 1.256842
+##  [1] 1.358162 1.974788 1.343531 1.345457 1.615164 1.887939 1.639141
+##  [8] 1.449745 1.651495 1.207411 1.533903 1.821836 1.661269 1.450964
+## [15] 1.491801 1.996356 1.275078 1.438627 1.584561 1.464760 1.317486
+## [22] 1.213011 1.234270 1.438739 1.284877 1.707214 1.846922 1.342754
 \end{verbatim}
 
 测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。
@@ -2993,8 +2993,8 @@ IRGAs 极快的响应频率，使得短时间内的 A--Ci 的测量成为现实�
 
 \begin{figure}
 \centering
-\includegraphics{bookdown_files/figure-latex/racir_check-1.pdf}
-\caption{(\#fig:racir\_check)找出最合理的校准曲线数据范围}
+\includegraphics{bookdown_files/figure-latex/racircheck-1.pdf}
+\caption{\label{fig:racircheck}找出最合理的校准曲线数据范围}
 \end{figure}
 
 上述代码查看参比室 \(CO_2\) 浓度在两者之间的数据，确定后面代码使用的 \texttt{mincut}, \texttt{maxcut} 范围。此处我选择的范围如下问代码：
@@ -3007,8 +3007,8 @@ IRGAs 极快的响应频率，使得短时间内的 A--Ci 的测量成为现实�
 
 \begin{figure}
 \centering
-\includegraphics{bookdown_files/figure-latex/racir_cor_pkg-1.pdf}
-\caption{(\#fig:racir\_cor\_pkg)校准曲线查看}
+\includegraphics{bookdown_files/figure-latex/racircorpkg-1.pdf}
+\caption{\label{fig:racircorpkg}校准曲线查看}
 \end{figure}
 
 没有问题可直接进行校准
@@ -3020,16 +3020,16 @@ IRGAs 极快的响应频率，使得短时间内的 A--Ci 的测量成为现实�
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/racir_cor-1.pdf}
+\includegraphics{bookdown_files/figure-latex/racircor-1.pdf}
 前两个参数分别为空叶室数据，带叶片测量数据，后面的最大最小值为 \texttt{racircheck} 确定，剩余工作就是使用 \texttt{plantecophys} 进行分析，在此不再重复这个过程。
 
 \textbf{注意：RACiR 的本意是表型研究中求 Vcmax 和 Jmax，因而，请忽略 Rd 等参数的计算结果}
 
 \hypertarget{racirbatch}{%
-\section{数据的批量处理}\label{racirbatch}}
+\subsection{数据的批量处理}\label{racirbatch}}
 
 \hypertarget{imbyphoto}{%
-\subsection{readphoto 导入}\label{imbyphoto}}
+\subsubsection{readphoto 导入}\label{imbyphoto}}
 
 如果数据的导入是使用 \texttt{readphoto} 批量处理，那么所在数据文件有 files 列，作为不同文件数据的区分，那么可以使用向量化处理方式实现数据的分析，参考如下代码：
 
@@ -3038,6 +3038,7 @@ IRGAs 极快的响应频率，使得短时间内的 A--Ci 的测量成为现实�
 \KeywordTok{library}\NormalTok{(readphoto)}
 \CommentTok{# read all empty data set}
 \NormalTok{all_empty <-}\StringTok{ }\KeywordTok{read_bat_6800}\NormalTok{(}\StringTok{"./empty_data"}\NormalTok{)}
+\CommentTok{# read all leaf data set}
 \NormalTok{all_leaf <-}\StringTok{ }\KeywordTok{read_bat_6800}\NormalTok{(}\StringTok{"./leaf_data"}\NormalTok{)}
 \NormalTok{listem  <-}\StringTok{  }\KeywordTok{split}\NormalTok{(all_empty, files)}
 \NormalTok{listle <-}\StringTok{  }\KeywordTok{split}\NormalTok{(all_leaf, files)}
@@ -3048,7 +3049,7 @@ IRGAs 极快的响应频率，使得短时间内的 A--Ci 的测量成为现实�
 所有的数据均保存在 cordata 中，特别注意 \textbf{此处要求 listem 与 listle 长度相同，因此，如果一个空叶室对多个带叶片测量数据，请将空叶室测量文件复制几份（注意对应顺序），使其每个带叶片测量的数据文件和空叶室测量数据文件数量相同，并且一一对应，例如 emtpy-1-1 数据文件对应 leaf-1-1}，文件命名前即制定好命名规则，方便后续数据处理。
 
 \hypertarget{imbycsv}{%
-\subsection{处理大量 csv 文件}\label{imbycsv}}
+\subsubsection{处理大量 csv 文件}\label{imbycsv}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3313,66 +3314,54 @@ SECS & FLUOR & SOURCE\\
 \hypertarget{testfluor}{%
 \subsection{\texorpdfstring{\texttt{jip\_test} 及 \texttt{jip\_dctest} 函数}{jip\_test 及 jip\_dctest 函数}}\label{testfluor}}
 
-\texttt{jiptest} 是 jiptest 的核心函数，用于所有数据的 jip test 分析，函数仅包含两个参数，测量数据的保存文件夹路径，以及分析结果的导出路径，导出路径必须为\textbf{已存在的文件夹或磁盘根目录}。
+\texttt{jiptest} 是 jiptest 的核心函数，用于所有数据的 jip test 分析，函数仅包一个参数，测量数据的保存文件夹路径。
 \texttt{jip\_dctest} 与 \texttt{jip\_test} 相似，用于连续光测量数据的分析。
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{jip_results <-}\StringTok{ }\KeywordTok{jip_test}\NormalTok{(}\StringTok{"./data/ojip"}\NormalTok{, }\StringTok{"d:/"}\NormalTok{)}
+\NormalTok{jip_results <-}\StringTok{ }\KeywordTok{jip_test}\NormalTok{(}\StringTok{"./data/ojip"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## for the current version, we suggest you use the default settings of
+## 
+##   the duration (1000 ms or more) in the induction settings of LI-6800
+\end{verbatim}
+
+\begin{verbatim}
+## New names:
+## * `` -> `..1`
+## * `` -> `..2`
+## New names:
+## * `` -> `..1`
+## * `` -> `..2`
+## New names:
+## * `` -> `..1`
+## * `` -> `..2`
+## New names:
+## * `` -> `..1`
+## * `` -> `..2`
+\end{verbatim}
 
 \begin{longtable}{lrrrr}
 \caption{\label{tab:jipres}jiptest 输出的计算参数}\\
 \toprule
 parameters & data\_file1 & data\_file2 & data\_file3 & data\_file4\\
 \midrule
-Fo & 887.0000000 & 849.0000000 & 981.0000000 & 914.0000000\\
-Fm & 4649.5200000 & 3714.2700000 & 4225.2400000 & 3754.2700000\\
-F300 & 2181.4000000 & 1798.6000000 & 2067.8000000 & 2537.2000000\\
-FJ & 2594.3000000 & 2104.6000000 & 2456.8000000 & 2569.0000000\\
-FI & 4443.1100000 & 3547.1100000 & 4009.2200000 & 3556.5300000\\
+Fo & 887.000 & 849.000 & 981.000 & 914.000\\
+Fm & 4649.520 & 3714.270 & 4225.240 & 3754.270\\
+F300 & 2181.400 & 1798.600 & 2067.800 & 2537.200\\
+FJ & 2594.300 & 2104.600 & 2456.800 & 2569.000\\
+FI & 4443.110 & 3547.110 & 4009.220 & 3556.530\\
 \addlinespace
-Tfmax & 256.0160000 & 316.0160000 & 272.0160000 & 200.0160000\\
-Area & 79.6780569 & 59.0630025 & 75.5884747 & 80.6896655\\
-Fv & 3762.5200000 & 2865.2700000 & 3244.2400000 & 2840.2700000\\
-Vj & 0.4537650 & 0.4382135 & 0.4548985 & 0.5826911\\
-Mo & 1.3760990 & 1.3256691 & 1.3399748 & 2.2859799\\
-\addlinespace
-Sm & 0.0211768 & 0.0206134 & 0.0232993 & 0.0284092\\
-Ss & 0.3297474 & 0.3305602 & 0.3394829 & 0.2548977\\
-N & 0.0642212 & 0.0623590 & 0.0686317 & 0.1114531\\
-Vav & 0.9999173 & 0.9999348 & 0.9999143 & 0.9998580\\
-phi\_po & 0.8092276 & 0.7714221 & 0.7678238 & 0.7565439\\
-\addlinespace
-phi\_ET2o & 0.4420284 & 0.4333745 & 0.4185419 & 0.3157125\\
-phi\_RE1o & 0.0443938 & 0.0450048 & 0.0511261 & 0.0526707\\
-psi\_ET2o & 0.5462350 & 0.5617865 & 0.5451015 & 0.4173089\\
-psi\_RE1o & 0.0548595 & 0.0583401 & 0.0665857 & 0.0696201\\
-delta\_RE1o & 0.1004321 & 0.1038474 & 0.1221529 & 0.1668312\\
-\addlinespace
-phi\_Do & 0.1907724 & 0.2285779 & 0.2321762 & 0.2434561\\
-phi\_Pav & 0.0000669 & 0.0000503 & 0.0000658 & 0.0001075\\
-ABS\_RC & 3.7475545 & 3.9215460 & 3.8363703 & 5.1856106\\
-TR0\_RC & 3.0326246 & 3.0251673 & 2.9456566 & 3.9231420\\
-ET2o\_RC & 1.6565256 & 1.6994981 & 1.6056817 & 1.6371621\\
-\addlinespace
-RE1o\_RC & 0.1663683 & 0.1764884 & 0.1961386 & 0.2731297\\
-DI0\_RC & 0.7149299 & 0.8963787 & 0.8907137 & 1.2624686\\
-ABC\_CS & 887.0000000 & 849.0000000 & 981.0000000 & 914.0000000\\
-TR0\_CS & 3.0326246 & 3.0251673 & 2.9456566 & 3.9231420\\
-ET0\_CS & 1.6565256 & 1.6994981 & 1.6056817 & 1.6371621\\
-\addlinespace
-DI0\_CS & 883.9673754 & 845.9748327 & 978.0543434 & 910.0768580\\
-PIabs & 1.3625603 & 1.1032809 & 1.0329666 & 0.4291734\\
-PItotal & 0.1521228 & 0.1278497 & 0.1437378 & 0.0859364\\
-DFabs & 0.3093655 & 0.0982884 & 0.0324348 & -0.8458942\\
+Tfmax & 256.016 & 316.016 & 272.016 & 200.016\\
 \bottomrule
 \end{longtable}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dcjip_results <-}\StringTok{ }\KeywordTok{jip_dctest}\NormalTok{(}\StringTok{"./data/ojip"}\NormalTok{, }\StringTok{"d:/"}\NormalTok{)}
+\NormalTok{dcjip_results <-}\StringTok{ }\KeywordTok{jip_dctest}\NormalTok{(}\StringTok{"./data/ojip"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3381,50 +3370,25 @@ DFabs & 0.3093655 & 0.0982884 & 0.0324348 & -0.8458942\\
 \toprule
 parameters & data\_file1 & data\_file2 & data\_file3 & data\_file4\\
 \midrule
-Fo & 1.540000e+05 & 1.331910e+05 & 1.566640e+05 & 1.535890e+05\\
-Fm & 7.138390e+05 & 5.606100e+05 & 6.476600e+05 & 5.848390e+05\\
-F300 & 3.380910e+05 & 2.754768e+05 & 3.228592e+05 & 3.881104e+05\\
-FJ & 4.007440e+05 & 3.202450e+05 & 3.768850e+05 & 4.066710e+05\\
-FI & 6.815050e+05 & 5.343140e+05 & 6.145900e+05 & 5.522530e+05\\
+Fo & 154000.000 & 133191.000 & 156664.000 & 153589.000\\
+Fm & 713839.000 & 560610.000 & 647660.000 & 584839.000\\
+F300 & 338091.000 & 275476.800 & 322859.200 & 388110.400\\
+FJ & 400744.000 & 320245.000 & 376885.000 & 406671.000\\
+FI & 681505.000 & 534314.000 & 614590.000 & 552253.000\\
 \addlinespace
-Tfmax & 2.760160e+02 & 3.000160e+02 & 2.880160e+02 & 2.120160e+02\\
-Area & 1.037380e+04 & 8.095231e+03 & 9.855470e+03 & 1.052059e+04\\
-Fv & 5.598390e+05 & 4.274190e+05 & 4.909960e+05 & 4.312500e+05\\
-Vj & 4.407410e-01 & 4.376361e-01 & 4.485189e-01 & 5.868568e-01\\
-Mo & 1.315314e+00 & 1.331581e+00 & 1.353943e+00 & 2.175271e+00\\
-\addlinespace
-Sm & 1.853000e-02 & 1.893980e-02 & 2.007240e-02 & 2.439560e-02\\
-Ss & 3.350843e-01 & 3.286589e-01 & 3.312686e-01 & 2.697856e-01\\
-N & 5.529940e-02 & 5.762750e-02 & 6.059250e-02 & 9.042570e-02\\
-Vav & 9.999329e-01 & 9.999369e-01 & 9.999303e-01 & 9.998849e-01\\
-phi\_po & 7.842651e-01 & 7.624177e-01 & 7.581076e-01 & 7.373824e-01\\
-\addlinespace
-phi\_ET2o & 4.386073e-01 & 4.287562e-01 & 4.180820e-01 & 3.046445e-01\\
-phi\_RE1o & 4.529590e-02 & 4.690600e-02 & 5.106070e-02 & 5.571790e-02\\
-psi\_ET2o & 5.592590e-01 & 5.623639e-01 & 5.514811e-01 & 4.131432e-01\\
-psi\_RE1o & 5.775590e-02 & 6.152280e-02 & 6.735290e-02 & 7.556170e-02\\
-delta\_RE1o & 1.032722e-01 & 1.094003e-01 & 1.221309e-01 & 1.828948e-01\\
-\addlinespace
-phi\_Do & 2.157349e-01 & 2.375823e-01 & 2.418924e-01 & 2.626176e-01\\
-phi\_Pav & 5.270000e-05 & 4.810000e-05 & 5.280000e-05 & 8.480000e-05\\
-ABS\_RC & 3.805249e+00 & 3.990815e+00 & 3.981886e+00 & 5.026763e+00\\
-TR0\_RC & 2.984324e+00 & 3.042668e+00 & 3.018699e+00 & 3.706647e+00\\
-ET2o\_RC & 1.669010e+00 & 1.711086e+00 & 1.664755e+00 & 1.531376e+00\\
-\addlinespace
-RE1o\_RC & 1.723623e-01 & 1.871934e-01 & 2.033181e-01 & 2.800807e-01\\
-DI0\_RC & 8.209251e-01 & 9.481469e-01 & 9.631878e-01 & 1.320116e+00\\
-ABC\_CS & 1.540000e+05 & 1.331910e+05 & 1.566640e+05 & 1.535890e+05\\
-TR0\_CS & 2.984324e+00 & 3.042668e+00 & 3.018699e+00 & 3.706647e+00\\
-ET0\_CS & 1.669010e+00 & 1.711086e+00 & 1.664755e+00 & 1.531376e+00\\
-\addlinespace
-DI0\_CS & 1.539970e+05 & 1.331880e+05 & 1.566610e+05 & 1.535853e+05\\
-PIabs & 1.212241e+00 & 1.033289e+00 & 9.677646e-01 & 3.932321e-01\\
-PItotal & 1.396084e-01 & 1.269280e-01 & 1.346374e-01 & 8.801820e-02\\
-DFabs & 1.924705e-01 & 3.274650e-02 & -3.276640e-02 & -9.333551e-01\\
+Tfmax & 276.016 & 300.016 & 288.016 & 212.016\\
 \bottomrule
 \end{longtable}
 
-计算参数见表 \ref{tab:jipres}
+计算参数见表 \ref{tab:jipres} 及 \ref{tab:dcjipres}，考虑到排版，仅显示部分内容。若需要将数据导出，可以使用相关命令，如：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# export the results of jiptest to a csv file}
+\KeywordTok{write.csv}\NormalTok{(jip_results, }\StringTok{"d:/data/jip_resluts.csv"}\NormalTok{)}
+\KeywordTok{write.csv}\NormalTok{(dcjip_results, }\StringTok{"d:/data/dcjip_resluts.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{plotfluor}{%
 \subsection{\texorpdfstring{\texttt{jip\_plot} 及 \texttt{jip\_dcplot} 函数}{jip\_plot 及 jip\_dcplot 函数}}\label{plotfluor}}
@@ -3458,6 +3422,8 @@ DFabs & 1.924705e-01 & 3.274650e-02 & -3.276640e-02 & -9.333551e-01\\
 ojip 调制式测量光 ojip 曲线的快速预览如图 \ref{fig:acplot}
 
 ojip 连续式测量光 ojip 曲线的快速预览如图 \ref{fig:dcplot}
+
+\textbf{建议在开始分析数据前，使用如上方式作图查看数据质量，若使用调制光数据测量的荧光信号太弱，数据点太散，则可以使用连续光测量信号进行分析，对于归一化的荧光参数，二者几乎无差别，当然避免陷入被动的最好方式还是最开始测量时注意检查数据质量}
 
 \cleardoublepage
 
@@ -3616,7 +3582,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-47-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-48-1.pdf}
 
 \textbf{factoextra 作图}
 
@@ -3631,7 +3597,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-48-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-49-1.pdf}
 
 \hypertarget{sessioninfo}{%
 \chapter{环境与配置}\label{sessioninfo}}

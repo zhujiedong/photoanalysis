@@ -1,5 +1,5 @@
 --- 
-title: "R 语言分析 LI-6400 和 LI-6800 光合仪的数据"
+title: "使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据"
 author: "祝介东<br /> <br /> 北京力高泰科技有限公司"
 affiliation: "北京力高泰科技有限公司"
 date: "`r Sys.Date()`"
@@ -11,7 +11,7 @@ colorlinks: yes
 lot: yes
 lof: yes
 site: bookdown::bookdown_site
-description: "R 语言分析 LI-6400XT 与 LI-6800 数据"
+description: "使用 R 语言分析 LI-6400XT 与 LI-6800 数据"
 github-repo: zhujiedong/photoanalysis
 graphics: yes
 cover-image: images/coverpage.png

@@ -4,7 +4,7 @@ bookdown::gitbook:
     toc:
       collapse: none
       before: |
-        <li><a href="./">R 光合数据分析</a></li>
+        <li><a href="./">R 软件与光合数据分析</a></li>
       after: |
         <li><a href="https://bookdown.org" target="blank">由 bookdown 驱动</a></li>
     download: [pdf, epub]

@@ -337,34 +337,41 @@ caption = 'jiptest DC 数据批量导入数据后的样式')
 
 ### `jip_test` 及 `jip_dctest` 函数 {#testfluor}
 
- `jiptest` 是 jiptest 的核心函数，用于所有数据的 jip test 分析，函数仅包含两个参数，测量数据的保存文件夹路径，以及分析结果的导出路径，导出路径必须为**已存在的文件夹或磁盘根目录**。
+ `jiptest` 是 jiptest 的核心函数，用于所有数据的 jip test 分析，函数仅包一个参数，测量数据的保存文件夹路径。
  `jip_dctest` 与 `jip_test` 相似，用于连续光测量数据的分析。
  
-```{r, jiptest, message=FALSE}
-jip_results <- jip_test("./data/ojip", "d:/")
+```{r, jiptest}
+jip_results <- jip_test("./data/ojip")
 ```
 
 ```{r, jipres, echo=FALSE}
 names(jip_results) <- c("parameters", "data_file1", 
                         "data_file2", "data_file3",
                         "data_file4")
-knitr::kable(jip_results,  longtable = TRUE, booktabs = TRUE, 
+knitr::kable(head(jip_results),  longtable = TRUE, booktabs = TRUE, 
              caption = 'jiptest 输出的计算参数')
 ```
 
 ```{r, dcjiptest, message=FALSE}
-dcjip_results <- jip_dctest("./data/ojip", "d:/")
+dcjip_results <- jip_dctest("./data/ojip")
 ```
 
 ```{r, dcjipres, echo=FALSE}
 names(dcjip_results) <- c("parameters", "data_file1", 
                         "data_file2", "data_file3",
                         "data_file4")
-knitr::kable(dcjip_results,  longtable = TRUE, booktabs = TRUE, 
+knitr::kable(head(dcjip_results),  longtable = TRUE, booktabs = TRUE, 
              caption = 'jiptest DC 数据输出的计算参数')
 ```
 
-计算参数见表 \@ref(tab:jipres)
+计算参数见表 \@ref(tab:jipres) 及 \@ref(tab:dcjipres)，考虑到排版，仅显示部分内容。若需要将数据导出，可以使用相关命令，如：
+
+```{r, eval=FALSE}
+# export the results of jiptest to a csv file
+write.csv(jip_results, "d:/data/jip_resluts.csv")
+write.csv(dcjip_results, "d:/data/dcjip_resluts.csv")
+```
+
 
 ### `jip_plot` 及 `jip_dcplot` 函数 {#plotfluor}
 
@@ -383,5 +390,6 @@ ojip 调制式测量光 ojip 曲线的快速预览如图 \@ref(fig:acplot)
 
 ojip 连续式测量光 ojip 曲线的快速预览如图 \@ref(fig:dcplot)
 
+**建议在开始分析数据前，使用如上方式作图查看数据质量，若使用调制光数据测量的荧光信号太弱，数据点太散，则可以使用连续光测量信号进行分析，对于归一化的荧光参数，二者几乎无差别，当然避免陷入被动的最好方式还是最开始测量时注意检查数据质量**
 
 \cleardoublepage

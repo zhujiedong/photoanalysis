@@ -1,6 +1,6 @@
-\contentsline {fm}{表格}{ix}{chapter*.1}% 
-\contentsline {fm}{插图}{xi}{chapter*.2}% 
-\contentsline {fm}{欢迎}{xiii}{chapter*.3}% 
+\contentsline {fm}{表格}{vii}{chapter*.1}% 
+\contentsline {fm}{插图}{ix}{chapter*.2}% 
+\contentsline {fm}{欢迎}{xi}{chapter*.3}% 
 \contentsline {fm}{前言}{i}{chapter*.4}% 
 \contentsline {fm}{关于作者}{iii}{chapter*.5}% 
 \contentsline {fm}{版权}{v}{chapter*.6}% 
@@ -71,25 +71,25 @@
 \contentsline {section}{\numberline {10.4}LI-6800 RACiR\texttrademark 的测量与拟合}{88}{section.10.4}% 
 \contentsline {section}{\numberline {10.5}racir 软件包实现 RACiR\texttrademark 数据分析}{89}{section.10.5}% 
 \contentsline {subsection}{\numberline {10.5.1}实现过程}{90}{subsection.10.5.1}% 
-\contentsline {section}{\numberline {10.6}数据的批量处理}{93}{section.10.6}% 
-\contentsline {subsection}{\numberline {10.6.1}readphoto 导入}{93}{subsection.10.6.1}% 
-\contentsline {subsection}{\numberline {10.6.2}处理大量 csv 文件}{93}{subsection.10.6.2}% 
-\contentsline {section}{\numberline {10.7}批量计算 \(V_{cmax}\) 和 \(J_max\)}{94}{section.10.7}% 
-\contentsline {section}{\numberline {10.8}RACiR\texttrademark 分析的手动实现}{95}{section.10.8}% 
-\contentsline {section}{\numberline {10.9}LI-6800 荧光数据分析}{100}{section.10.9}% 
-\contentsline {subsection}{\numberline {10.9.1}jip test 的实现}{100}{subsection.10.9.1}% 
-\contentsline {subsection}{\numberline {10.9.2}\texttt {jiptest} 软件包安装}{100}{subsection.10.9.2}% 
-\contentsline {subsection}{\numberline {10.9.3}\texttt {read\_files} 及 \texttt {read\_dcfiles} 函数}{100}{subsection.10.9.3}% 
-\contentsline {subsection}{\numberline {10.9.4}\texttt {jip\_test} 及 \texttt {jip\_dctest} 函数}{101}{subsection.10.9.4}% 
-\contentsline {subsection}{\numberline {10.9.5}\texttt {jip\_plot} 及 \texttt {jip\_dcplot} 函数}{104}{subsection.10.9.5}% 
-\contentsline {chapter}{\numberline {11}PCA 分析}{107}{chapter.11}% 
-\contentsline {section}{\numberline {11.1}特征向量与特征值}{107}{section.11.1}% 
-\contentsline {section}{\numberline {11.2}PCA R 语言实现}{108}{section.11.2}% 
-\contentsline {subsection}{\numberline {11.2.1}手动实现过程}{109}{subsection.11.2.1}% 
-\contentsline {subsubsection}{\numberline {11.2.1.1}均值的计算}{109}{subsubsection.11.2.1.1}% 
-\contentsline {subsubsection}{\numberline {11.2.1.2}计算协方差矩阵}{109}{subsubsection.11.2.1.2}% 
-\contentsline {subsubsection}{\numberline {11.2.1.3}计算特征值和特征向量}{109}{subsubsection.11.2.1.3}% 
-\contentsline {subsection}{\numberline {11.2.2}\texttt {prcomp} 的实现}{110}{subsection.11.2.2}% 
-\contentsline {subsection}{\numberline {11.2.3}作图}{110}{subsection.11.2.3}% 
-\contentsline {chapter}{\numberline {12}环境与配置}{113}{chapter.12}% 
-\contentsline {fm}{参考文献}{115}{chapter*.41}% 
+\contentsline {subsection}{\numberline {10.5.2}数据的批量处理}{92}{subsection.10.5.2}% 
+\contentsline {subsubsection}{\numberline {10.5.2.1}readphoto 导入}{92}{subsubsection.10.5.2.1}% 
+\contentsline {subsubsection}{\numberline {10.5.2.2}处理大量 csv 文件}{93}{subsubsection.10.5.2.2}% 
+\contentsline {section}{\numberline {10.6}批量计算 \(V_{cmax}\) 和 \(J_max\)}{94}{section.10.6}% 
+\contentsline {section}{\numberline {10.7}RACiR\texttrademark 分析的手动实现}{95}{section.10.7}% 
+\contentsline {section}{\numberline {10.8}LI-6800 荧光数据分析}{99}{section.10.8}% 
+\contentsline {subsection}{\numberline {10.8.1}jip test 的实现}{100}{subsection.10.8.1}% 
+\contentsline {subsection}{\numberline {10.8.2}\texttt {jiptest} 软件包安装}{100}{subsection.10.8.2}% 
+\contentsline {subsection}{\numberline {10.8.3}\texttt {read\_files} 及 \texttt {read\_dcfiles} 函数}{100}{subsection.10.8.3}% 
+\contentsline {subsection}{\numberline {10.8.4}\texttt {jip\_test} 及 \texttt {jip\_dctest} 函数}{101}{subsection.10.8.4}% 
+\contentsline {subsection}{\numberline {10.8.5}\texttt {jip\_plot} 及 \texttt {jip\_dcplot} 函数}{103}{subsection.10.8.5}% 
+\contentsline {chapter}{\numberline {11}PCA 分析}{105}{chapter.11}% 
+\contentsline {section}{\numberline {11.1}特征向量与特征值}{105}{section.11.1}% 
+\contentsline {section}{\numberline {11.2}PCA R 语言实现}{106}{section.11.2}% 
+\contentsline {subsection}{\numberline {11.2.1}手动实现过程}{107}{subsection.11.2.1}% 
+\contentsline {subsubsection}{\numberline {11.2.1.1}均值的计算}{107}{subsubsection.11.2.1.1}% 
+\contentsline {subsubsection}{\numberline {11.2.1.2}计算协方差矩阵}{107}{subsubsection.11.2.1.2}% 
+\contentsline {subsubsection}{\numberline {11.2.1.3}计算特征值和特征向量}{107}{subsubsection.11.2.1.3}% 
+\contentsline {subsection}{\numberline {11.2.2}\texttt {prcomp} 的实现}{108}{subsection.11.2.2}% 
+\contentsline {subsection}{\numberline {11.2.3}作图}{108}{subsection.11.2.3}% 
+\contentsline {chapter}{\numberline {12}环境与配置}{111}{chapter.12}% 
+\contentsline {fm}{参考文献}{113}{chapter*.41}% 
