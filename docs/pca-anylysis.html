@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>第 11 章 PCA 分析 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
+  <title>第 11 章 大话 PCA | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
   <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="第 11 章 PCA 分析 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
+  <meta property="og:title" content="第 11 章 大话 PCA | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="images/coverpage.png" />
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="zhujiedong/photoanalysis" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="第 11 章 PCA 分析 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
+  <meta name="twitter:title" content="第 11 章 大话 PCA | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   
   <meta name="twitter:description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
   <meta name="twitter:image" content="images/coverpage.png" />
@@ -25,7 +25,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司">
 
 
-<meta name="date" content="2019-01-29">
+<meta name="date" content="2019-02-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -230,12 +230,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.8.5" data-path="anay-6800.html"><a href="anay-6800.html#plotfluor"><i class="fa fa-check"></i><b>10.8.5</b> <code>jip_plot</code> 及 <code>jip_dcplot</code> 函数</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="pca-anylysis.html"><a href="pca-anylysis.html"><i class="fa fa-check"></i><b>11</b> PCA 分析</a><ul>
-<li class="chapter" data-level="11.1" data-path="pca-anylysis.html"><a href="pca-anylysis.html#section"><i class="fa fa-check"></i><b>11.1</b> 特征向量与特征值</a></li>
-<li class="chapter" data-level="11.2" data-path="pca-anylysis.html"><a href="pca-anylysis.html#pca_R"><i class="fa fa-check"></i><b>11.2</b> PCA R 语言实现</a><ul>
-<li class="chapter" data-level="11.2.1" data-path="pca-anylysis.html"><a href="pca-anylysis.html#man_pca"><i class="fa fa-check"></i><b>11.2.1</b> 手动实现过程</a></li>
-<li class="chapter" data-level="11.2.2" data-path="pca-anylysis.html"><a href="pca-anylysis.html#prcom"><i class="fa fa-check"></i><b>11.2.2</b> <code>prcomp</code> 的实现</a></li>
-<li class="chapter" data-level="11.2.3" data-path="pca-anylysis.html"><a href="pca-anylysis.html#plot_pca"><i class="fa fa-check"></i><b>11.2.3</b> 作图</a></li>
+<li class="chapter" data-level="11" data-path="pca-anylysis.html"><a href="pca-anylysis.html"><i class="fa fa-check"></i><b>11</b> 大话 PCA</a><ul>
+<li class="chapter" data-level="11.1" data-path="pca-anylysis.html"><a href="pca-anylysis.html#geom-pca"><i class="fa fa-check"></i><b>11.1</b> 几何解释</a></li>
+<li class="chapter" data-level="11.2" data-path="pca-anylysis.html"><a href="pca-anylysis.html#alge-pca"><i class="fa fa-check"></i><b>11.2</b> 线性代数解释</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="pca-anylysis.html"><a href="pca-anylysis.html#egi-pca"><i class="fa fa-check"></i><b>11.2.1</b> 特征向量与特征值</a></li>
+<li class="chapter" data-level="11.2.2" data-path="pca-anylysis.html"><a href="pca-anylysis.html#man_pca"><i class="fa fa-check"></i><b>11.2.2</b> 手动实现过程</a></li>
+<li class="chapter" data-level="11.2.3" data-path="pca-anylysis.html"><a href="pca-anylysis.html#prcom"><i class="fa fa-check"></i><b>11.2.3</b> <code>prcomp</code> 的实现</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="sessioninfo.html"><a href="sessioninfo.html"><i class="fa fa-check"></i><b>12</b> 环境与配置</a></li>
@@ -261,10 +261,90 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="pca-anylysis" class="section level1">
-<h1><span class="header-section-number">第 11 章</span> PCA 分析</h1>
-<p>PCA 作为一个基础的方法，应用领域覆盖很广，涵盖的统计学相关的内容有均值、标准差、协方差， 线性代数中的特征向量及特征值。当然在与光合仪相关的应用方面多数是测量的光合速率、气孔导度等配合植物的其他性状来进行研究。下面的内容将使用不那么数学的语言来观察其实现方式。</p>
-<div id="section" class="section level2">
-<h2><span class="header-section-number">11.1</span> 特征向量与特征值</h2>
+<h1><span class="header-section-number">第 11 章</span> 大话 PCA</h1>
+<p>PCA 作为一个基础的方法，应用领域覆盖很广，涵盖的统计学相关的内容有均值、标准差、协方差， 线性代数中的特征向量及特征值。当然在与光合仪相关的应用方面多数是测量的光合速率、气孔导度等配合植物的其他性状来进行研究，其适用范围，用现在流行的统计学习术语来讲，应属于非监督性学习，即我们并非预测某变量同其预测值的关系，如同我们获得了一系列包含植物光合性状在内的性状，但我们并非将其预测某些结果，如同响应曲线那般，而是用这些形状来分类或者看齐对某目的的重要程度。本章的标题之所以叫大话，是因为这是我结合我自己的理解写的内容，如有错误请谅解，请指出。</p>
+<p>另，推荐两个我认为很好的解释 PCA 的链接：</p>
+<p><a href="https://blog.bioturing.com/2018/06/14/principal-component-analysis-explained-simply/">BioTuring’s Blog</a></p>
+<p><a href="http://setosa.io/ev/principal-component-analysis/">Principal Component Analysis</a></p>
+<div id="geom-pca" class="section level2">
+<h2><span class="header-section-number">11.1</span> 几何解释</h2>
+<p>PCA 通常能够反映我们复杂数据集的一些分布特征，例如典型的 <code>iris</code> 数据集，我们看到了三个鸢尾种的四个性状：花萼的长宽、花瓣的长宽，如果给我们这么一个数据，我们肉眼很难看出他们的特征来，如果作图也很难表达，因为这是一个四维的数据，假设我们只对前两组也就是花萼的长宽作图，先看一下二维的数据情况：</p>
+<p><img src="bookdown_files/figure-html/2dim-1.png" width="672" /></p>
+<p>看上去一言难尽，此时的缺点非常明显，图中的每个点均代表了某个植株的两个性状，这个性状类似于我们说的电子云，杂乱而无规律。这还只是二维数据，如果我们将所有四个轴的数据都显示也就是四维的数据，那么对于我等肉眼凡胎来讲，还是不看为妙。</p>
+<p>我在看到上面留的两个网址之前，对主成份分析的疑惑一直没断过，什么是主成份，一直说是主轴旋转，到底是怎么旋转的，我们看一下主成份的 PC1 是怎么来做的:</p>
+<div class="figure"><span id="fig:pccenter"></span>
+<img src="images/pc1.png" alt="数据的中心化" width="100%" />
+<p class="caption">
+图 11.1: 数据的中心化
+</p>
+</div>
+<p>如图 <a href="pca-anylysis.html#fig:pccenter">11.1</a>，假设有三维的数据，可以理解为 iris 数据中前三列的观测值，每个点分别代表了一个植株的前三个性状，PCA 第一步便是中心化，将坐标轴由左边转移到右边的中心点位置作为原点，这就是所谓的平均值中心化的过程，这样就消除了测量时的偏差<sup>[<a href="https://www.mathsisfun.com/definitions/bias.html" class="uri">https://www.mathsisfun.com/definitions/bias.html</a>]，同时一般还要对数据进行缩放，以消除不同单位的影响</sup>[<a href="https://en.wikipedia.org/wiki/Scaling_(geometry)" class="uri">https://en.wikipedia.org/wiki/Scaling_(geometry)</a>]，
+例如有光合速率，有叶片面积的数据，这样能够消除不同单位的影响，通常的缩放例如对数化。</p>
+<div class="figure"><span id="fig:pc2"></span>
+<img src="images/pc2.png" alt="PC1 的诞生" width="100%" />
+<p class="caption">
+图 11.2: PC1 的诞生
+</p>
+</div>
+<p>移动坐标系后，因为进行了缩放，所有的数据具有相同的比例。我们这时做一条最佳的拟合线(图 <a href="pca-anylysis.html#fig:pc2">11.2</a>)，此时发生了两件重要的事情：</p>
+<ul>
+<li>所有的点投影到这条拟合线上，投影后的点之间的距离是最大的，该方向代表了所有变异最大，也就是最大化的区分所有的数据点，因为我们的目的就是要区分数据点之间的差异。如果在读的各位有跟我一样空间想象力有限的，可以根据图 <a href="pca-anylysis.html#fig:maxvar">11.3</a> 的极端情况来理解，蓝色线为最佳拟合线，红色的数据点投影到其上的距离之和当然大于投影到蓝色的拟合线上。</li>
+</ul>
+<div class="figure"><span id="fig:maxvar"></span>
+<img src="bookdown_files/figure-html/maxvar-1.png" alt="变异最大的极端情况" width="672" />
+<p class="caption">
+图 11.3: 变异最大的极端情况
+</p>
+</div>
+<ul>
+<li>所有点和他们相对应的点之间的距离是最小的（也就是残差最小，最佳拟合当然是残差最小），这保证了这些投影的点和原来的数据点尽可能接近，也就是变化后损失的信息最少。</li>
+</ul>
+<p>以上变化的最终结果为将变异放到最大而误差降低到最小，我们研究的最终目的无非就是这样。这个最佳拟合的线我们将其称之为 PC1，主成份1。</p>
+<div class="figure"><span id="fig:pc3"></span>
+<img src="images/pc3.png" alt="PC2 的诞生" width="100%" />
+<p class="caption">
+图 11.4: PC2 的诞生
+</p>
+</div>
+<p>如果我们做一条通过中心点并与 PC1 垂直的线，并不断旋转这条线使其满足：所有投影于其上的点，他们的距离最大，也就是变异最大，这样就做出了第二个主成份，PC2，如图 <a href="pca-anylysis.html#fig:pc3">11.4</a>。<strong>就这样不断的变换，一般情况下，我们可以使用 2~3 个主成份来解释绝大部分数据所展示的信息（所有数据都尽可能少的损失信息投影于其上）</strong>。</p>
+<p>以上为基本变换，如果我们使用 R 计算 PCA (这里推荐两个包 <code>factoextra</code> 和 <code>FactoMineR</code>)，查看其结果：</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;FactoMineR&quot;</span>)
+<span class="kw">library</span>(<span class="st">&quot;factoextra&quot;</span>)</code></pre>
+<pre><code>## Welcome! Related Books: `Practical Guide To Cluster Analysis in R` at https://goo.gl/13EFCZ</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">ir &lt;-<span class="st"> </span>iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]
+ir_pca &lt;-<span class="st"> </span><span class="kw">PCA</span>(ir, <span class="dt">graph =</span> <span class="ot">FALSE</span>)
+
+<span class="kw">fviz_eig</span>(ir_pca, <span class="dt">addlabels =</span> <span class="ot">TRUE</span>)</code></pre>
+<div class="figure"><span id="fig:scree"></span>
+<img src="bookdown_files/figure-html/scree-1.png" alt="iris 碎石图" width="672" />
+<p class="caption">
+图 11.5: iris 碎石图
+</p>
+</div>
+<p>我们可以看到，前两个成分可以解释数据 95% 以上的变异，所以我们可以只使用主成份 1 和主成份 2 对我们的结果进行解释。</p>
+<p>既然我们使用两个主成份解释整个数据，那么我们怎么把四个性状都放在这个图上呢？这就需要载荷图来展示了，如图 <a href="pca-anylysis.html#fig:loadingpca">11.6</a></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fviz_pca_var</span>(ir_pca)</code></pre>
+<div class="figure"><span id="fig:loadingpca"></span>
+<img src="bookdown_files/figure-html/loadingpca-1.png" alt="iris 载荷图" width="672" />
+<p class="caption">
+图 11.6: iris 载荷图
+</p>
+</div>
+<p>怎么解释呢，因为原始的数据点相当于在坐标轴上，这几个性状分布的产生类似于原始的数据点在拉拽某个性状，影响强的偏向某一方向，换句话说，<strong>这些性状决定主成份时有不同的权重，也就是对主成份影响的权重大小。同时他们是有方向的，如果两个性状方向接近，也就是夹角非常小，说明他们有较强的正相关性，例如图中的花瓣的长宽，如果他们互相垂直，那说明他们无相关性，例如图中花萼的长宽，如果夹角非常大，例如他们几乎在一条直线上，说明具有显著的负相关</strong>。其本质还是所有的单位向量（本例有四个性状，各个性状中心化后形成的轴，也就是向量）在现在的这个二维平面的位置。</p>
+<p>而如果我想通过这些性状来对鸢尾分类，怎么看呢？那就需要得分图来展示了，如图 <a href="pca-anylysis.html#fig:scorepca">11.7</a> ，得分图本质是各个品种的每个观测值在各个轴上的长度，也就是得分，所以其值都是每个物种性状的加权，每个点代表了每个物种的观测值。</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fviz_pca_ind</span>(ir_pca, <span class="dt">repel =</span> <span class="ot">TRUE</span>, <span class="dt">col.ind=</span> iris<span class="op">$</span>Species)</code></pre>
+<div class="figure"><span id="fig:scorepca"></span>
+<img src="bookdown_files/figure-html/scorepca-1.png" alt="iris 得分图" width="672" />
+<p class="caption">
+图 11.7: iris 得分图
+</p>
+</div>
+<p>我们明显看出来，PC1 方向，三个种的鸢尾分成了两大部分，其中 Setosa 延 PC1 同其他两个明显有区别，另外两个在 PC1 上也有较明显的区别，但二者有一定的重合，延 PC2 方向上，三者差别不大。或者反过来讲也可以，品种的差别对 PC1 影响比较显著，这也和我们的碎石图相匹配。</p>
+</div>
+<div id="alge-pca" class="section level2">
+<h2><span class="header-section-number">11.2</span> 线性代数解释</h2>
+<div id="egi-pca" class="section level3">
+<h3><span class="header-section-number">11.2.1</span> 特征向量与特征值</h3>
 <p>特征向量和特征值的数学描述为：</p>
 <p><span class="math display" id="eq:eign">\[\begin{equation}
 A \vec{x} = \lambda \vec{x}
@@ -278,10 +358,7 @@ finaldata = rowfeaturevector \times rowdataajust
 \tag{11.2}
 \end{equation}\]</span></p>
 <p>finaldata 很好理解，我们用于 PCA 的最终数据，rowfeature vector 则是我们根据协相关矩阵求得的特征向量的转置，最大的特征向量再最上面， rowdataadjust 则为<strong>原始数据减去标准值</strong>。</p>
-</div>
-<div id="pca_R" class="section level2">
-<h2><span class="header-section-number">11.2</span> PCA R 语言实现</h2>
-<p>因为我手头没有相关的数据（我这里最多的就是培训时演示用的数据，当然客户给发的数据也有，但大家都明白，基本到我这里都是怀疑有问题的数据，即使没问题，我要使用也要经过人家的同意），想来想去，我们在 R 里见到最多的与生态学相关的数据也就是 iris，一个关于不同 iris 品种的叶片性状相关的数据，非常生态，我们来看一下：</p>
+<p>因为我手头没有相关的数据，想来想去，我们在 R 里见到最多的与生态学相关的数据也就是 iris，一个关于不同 iris 品种的叶片性状相关的数据，非常生态，我们还是继续使用：</p>
 <table>
 <thead>
 <tr class="header">
@@ -337,20 +414,21 @@ finaldata = rowfeaturevector \times rowdataajust
 </tr>
 </tbody>
 </table>
-<p>数据并不复杂，但是想要得出一些规律性的东西确不那么容易，因为数据量太大了。R 语言里面很多函数可以直接实现 PCA，例如 <code>prcomp</code>。我们先按照最原始的方法实现一下，加深对原理的理解：</p>
+<p>数据并不复杂，但是想要得出一些规律性的东西确不那么容易，因为数据量太大了。R 语言里面很多函数可以直接实现 PCA，例如 <a href="pca-anylysis.html#geom-pca">11.1</a> 内容。这里按照最原始的方法实现一下，加深对原理的理解：</p>
+</div>
 <div id="man_pca" class="section level3">
-<h3><span class="header-section-number">11.2.1</span> 手动实现过程</h3>
+<h3><span class="header-section-number">11.2.2</span> 手动实现过程</h3>
 <div id="av_val" class="section level4">
-<h4><span class="header-section-number">11.2.1.1</span> 均值的计算</h4>
+<h4><span class="header-section-number">11.2.2.1</span> 均值的计算</h4>
 <pre class="sourceCode r"><code class="sourceCode r">iris_mean &lt;-<span class="st"> </span><span class="kw">apply</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dv">2</span>, <span class="cf">function</span>(x) x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x))</code></pre>
 <p>我只使用了前四列的性状数据，仅仅是方便结果的展示。</p>
 </div>
 <div id="cov_val" class="section level4">
-<h4><span class="header-section-number">11.2.1.2</span> 计算协方差矩阵</h4>
+<h4><span class="header-section-number">11.2.2.2</span> 计算协方差矩阵</h4>
 <pre class="sourceCode r"><code class="sourceCode r">iris_cov &lt;-<span class="st"> </span><span class="kw">cov</span>(iris_mean)</code></pre>
 </div>
 <div id="eig_val" class="section level4">
-<h4><span class="header-section-number">11.2.1.3</span> 计算特征值和特征向量</h4>
+<h4><span class="header-section-number">11.2.2.3</span> 计算特征值和特征向量</h4>
 <pre class="sourceCode r"><code class="sourceCode r">iris_eigen &lt;-<span class="st"> </span><span class="kw">eigen</span>(iris_cov)</code></pre>
 <p>这里就可以看到之前提到的，特征值和特征向量是根据协方差矩阵计算的。我们选取特征值最大的两个，他们的特征值之和已经占所有的特征值之和相当大的比例：</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(iris_eigen<span class="op">$</span>values[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])<span class="op">/</span><span class="kw">sum</span>(iris_eigen<span class="op">$</span>values)</code></pre>
@@ -360,7 +438,7 @@ finaldata = rowfeaturevector \times rowdataajust
 </div>
 </div>
 <div id="prcom" class="section level3">
-<h3><span class="header-section-number">11.2.2</span> <code>prcomp</code> 的实现</h3>
+<h3><span class="header-section-number">11.2.3</span> <code>prcomp</code> 的实现</h3>
 <p>我们用 <code>prcomp</code> 来简化实现过程，注意，根据 <span class="citation">Kemp (<a href="#ref-kemp2003modern">2003</a>)</span>，我们把 iris 数据对数化一下，并提取所有物种名字：</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;iris&quot;</span>)
 iris_pca &lt;-<span class="st"> </span><span class="kw">log</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])
@@ -375,29 +453,6 @@ iris_species &lt;-<span class="st"> </span>iris<span class="op">$</span>Species<
 ## Proportion of Variance 0.7331 0.2268 0.03325 0.00686
 ## Cumulative Proportion  0.7331 0.9599 0.99314 1.00000</code></pre>
 <p>可以看到结果同我们最开始的计算相似，不同的是我们进行了对数化，而且根据 <span class="citation">Kemp (<a href="#ref-kemp2003modern">2003</a>)</span>， 这个结果更合适。</p>
-</div>
-<div id="plot_pca" class="section level3">
-<h3><span class="header-section-number">11.2.3</span> 作图</h3>
-<p>这个我们不做过多说明了，推荐两个非常好的软件包，分别是 ‘ggbiplot’, ‘factoextra’：</p>
-<p><strong>ggbiplot 作图</strong></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggbiplot)
-
-p &lt;-<span class="st"> </span><span class="kw">ggbiplot</span>(value_pca, <span class="dt">obs.scale =</span> <span class="dv">1</span>, <span class="dt">var.scale =</span> <span class="dv">1</span>, 
-       <span class="dt">groups =</span> iris_species, <span class="dt">ellipse =</span> <span class="ot">TRUE</span>, 
-       <span class="dt">circle =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&#39;&#39;</span>)
-
-p1 &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.direction =</span> <span class="st">&#39;horizontal&#39;</span>, 
-       <span class="dt">legend.position =</span> <span class="st">&#39;top&#39;</span>)
-p1</code></pre>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
-<p><strong>factoextra 作图</strong></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(factoextra)
-
-<span class="kw">fviz_pca_ind</span>(value_pca, <span class="dt">col.ind =</span> <span class="st">&quot;cos2&quot;</span>, 
-   <span class="dt">gradient.cols =</span> <span class="kw">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>), 
-   <span class="dt">repel =</span> <span class="ot">TRUE</span>  
-             )</code></pre>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
 </div>
 </div>
 </div>

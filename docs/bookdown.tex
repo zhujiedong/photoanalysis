@@ -173,7 +173,7 @@
 
 \title{使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据}
 \author{祝介东 北京力高泰科技有限公司}
-\date{2019-01-29}
+\date{2019-02-20}
 
 \begin{document}
 \maketitle
@@ -520,11 +520,11 @@ lrc & 3 & 1513612941 & 220.0 & 20171218 10:02:20 & 1 & 1 & 1513612941\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.273537 1.488313 1.762310 1.539674 1.208665 1.723936 1.716106
-##  [8] 1.978813 1.443961 1.453139 1.352592 1.581507 1.903338 1.942776
-## [15] 1.834406 1.371433 1.523100 1.728107 1.447919 1.803448 1.919026
-## [22] 1.360429 1.379086 1.845869 1.733403 1.817024 1.855489 1.777163
-## [29] 1.923934 1.979211 1.303109 1.488611
+##  [1] 1.253298 1.877132 1.463590 1.494611 1.995769 1.205259 1.623770
+##  [8] 1.427682 1.343108 1.233125 1.291733 1.637470 1.681579 1.516998
+## [15] 1.379425 1.752348 1.735108 1.329665 1.671670 1.894031 1.568372
+## [22] 1.682830 1.534001 1.469225 1.772559 1.664748 1.712895 1.852975
+## [29] 1.321454 1.654393 1.454035 1.539171
 \end{verbatim}
 
 我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.
@@ -610,10 +610,10 @@ lrc & 3 & 1513612941 & 220.0 & 20171218 10:02:20 & 1 & 1 & 1513612941\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.818850 1.284561 1.202600 1.581020 1.929156 1.279330 1.233215
-##  [8] 1.771412 1.993550 1.236698 1.940879 1.561120 1.308165 1.242281
-## [15] 1.754613 1.385064 1.410756 1.375678 1.592910 1.500689 1.666236
-## [22] 1.959148 1.731813 1.722394 1.773019 1.391235 1.647143 1.390453
+##  [1] 1.463018 1.674841 1.352117 1.285558 1.279602 1.742390 1.354491
+##  [8] 1.533180 1.787716 1.476040 1.252725 1.230350 1.220739 1.667914
+## [15] 1.225012 1.216331 1.411889 1.463390 1.941834 1.454967 1.235299
+## [22] 1.382634 1.611409 1.409908 1.670695 1.312570 1.459069 1.470921
 \end{verbatim}
 
 测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。
@@ -3428,12 +3428,133 @@ ojip 连续式测量光 ojip 曲线的快速预览如图 \ref{fig:dcplot}
 \cleardoublepage
 
 \hypertarget{pca-anylysis}{%
-\chapter{PCA 分析}\label{pca-anylysis}}
+\chapter{大话 PCA}\label{pca-anylysis}}
 
-PCA 作为一个基础的方法，应用领域覆盖很广，涵盖的统计学相关的内容有均值、标准差、协方差， 线性代数中的特征向量及特征值。当然在与光合仪相关的应用方面多数是测量的光合速率、气孔导度等配合植物的其他性状来进行研究。下面的内容将使用不那么数学的语言来观察其实现方式。
+PCA 作为一个基础的方法，应用领域覆盖很广，涵盖的统计学相关的内容有均值、标准差、协方差， 线性代数中的特征向量及特征值。当然在与光合仪相关的应用方面多数是测量的光合速率、气孔导度等配合植物的其他性状来进行研究，其适用范围，用现在流行的统计学习术语来讲，应属于非监督性学习，即我们并非预测某变量同其预测值的关系，如同我们获得了一系列包含植物光合性状在内的性状，但我们并非将其预测某些结果，如同响应曲线那般，而是用这些形状来分类或者看齐对某目的的重要程度。本章的标题之所以叫大话，是因为这是我结合我自己的理解写的内容，如有错误请谅解，请指出。
 
-\hypertarget{section}{%
-\section{特征向量与特征值}\label{section}}
+另，推荐两个我认为很好的解释 PCA 的链接：
+
+\href{https://blog.bioturing.com/2018/06/14/principal-component-analysis-explained-simply/}{BioTuring's Blog}
+
+\href{http://setosa.io/ev/principal-component-analysis/}{Principal Component Analysis}
+
+\hypertarget{geom-pca}{%
+\section{几何解释}\label{geom-pca}}
+
+PCA 通常能够反映我们复杂数据集的一些分布特征，例如典型的 \texttt{iris} 数据集，我们看到了三个鸢尾种的四个性状：花萼的长宽、花瓣的长宽，如果给我们这么一个数据，我们肉眼很难看出他们的特征来，如果作图也很难表达，因为这是一个四维的数据，假设我们只对前两组也就是花萼的长宽作图，先看一下二维的数据情况：
+
+\includegraphics{bookdown_files/figure-latex/2dim-1.pdf}
+
+看上去一言难尽，此时的缺点非常明显，图中的每个点均代表了某个植株的两个性状，这个性状类似于我们说的电子云，杂乱而无规律。这还只是二维数据，如果我们将所有四个轴的数据都显示也就是四维的数据，那么对于我等肉眼凡胎来讲，还是不看为妙。
+
+我在看到上面留的两个网址之前，对主成份分析的疑惑一直没断过，什么是主成份，一直说是主轴旋转，到底是怎么旋转的，我们看一下主成份的 PC1 是怎么来做的:
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/pc1} \caption{数据的中心化}\label{fig:pccenter}
+\end{figure}
+
+如图 \ref{fig:pccenter}，假设有三维的数据，可以理解为 iris 数据中前三列的观测值，每个点分别代表了一个植株的前三个性状，PCA 第一步便是中心化，将坐标轴由左边转移到右边的中心点位置作为原点，这就是所谓的平均值中心化的过程，这样就消除了测量时的偏差\textsuperscript{{[}\url{https://www.mathsisfun.com/definitions/bias.html}{]}，同时一般还要对数据进行缩放，以消除不同单位的影响}{[}\url{https://en.wikipedia.org/wiki/Scaling_(geometry)}{]}，
+例如有光合速率，有叶片面积的数据，这样能够消除不同单位的影响，通常的缩放例如对数化。
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/pc2} \caption{PC1 的诞生}\label{fig:pc2}
+\end{figure}
+
+移动坐标系后，因为进行了缩放，所有的数据具有相同的比例。我们这时做一条最佳的拟合线(图 \ref{fig:pc2})，此时发生了两件重要的事情：
+
+\begin{itemize}
+\tightlist
+\item
+  所有的点投影到这条拟合线上，投影后的点之间的距离是最大的，该方向代表了所有变异最大，也就是最大化的区分所有的数据点，因为我们的目的就是要区分数据点之间的差异。如果在读的各位有跟我一样空间想象力有限的，可以根据图 \ref{fig:maxvar} 的极端情况来理解，蓝色线为最佳拟合线，红色的数据点投影到其上的距离之和当然大于投影到蓝色的拟合线上。
+\end{itemize}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown_files/figure-latex/maxvar-1.pdf}
+\caption{\label{fig:maxvar}变异最大的极端情况}
+\end{figure}
+
+\begin{itemize}
+\tightlist
+\item
+  所有点和他们相对应的点之间的距离是最小的（也就是残差最小，最佳拟合当然是残差最小），这保证了这些投影的点和原来的数据点尽可能接近，也就是变化后损失的信息最少。
+\end{itemize}
+
+以上变化的最终结果为将变异放到最大而误差降低到最小，我们研究的最终目的无非就是这样。这个最佳拟合的线我们将其称之为 PC1，主成份1。
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/pc3} \caption{PC2 的诞生}\label{fig:pc3}
+\end{figure}
+
+如果我们做一条通过中心点并与 PC1 垂直的线，并不断旋转这条线使其满足：所有投影于其上的点，他们的距离最大，也就是变异最大，这样就做出了第二个主成份，PC2，如图 \ref{fig:pc3}。\textbf{就这样不断的变换，一般情况下，我们可以使用 2\textasciitilde{}3 个主成份来解释绝大部分数据所展示的信息（所有数据都尽可能少的损失信息投影于其上）}。
+
+以上为基本变换，如果我们使用 R 计算 PCA (这里推荐两个包 \texttt{factoextra} 和 \texttt{FactoMineR})，查看其结果：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(}\StringTok{"FactoMineR"}\NormalTok{)}
+\KeywordTok{library}\NormalTok{(}\StringTok{"factoextra"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Welcome! Related Books: `Practical Guide To Cluster Analysis in R` at https://goo.gl/13EFCZ
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ir <-}\StringTok{ }\NormalTok{iris[, }\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{]}
+\NormalTok{ir_pca <-}\StringTok{ }\KeywordTok{PCA}\NormalTok{(ir, }\DataTypeTok{graph =} \OtherTok{FALSE}\NormalTok{)}
+
+\KeywordTok{fviz_eig}\NormalTok{(ir_pca, }\DataTypeTok{addlabels =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown_files/figure-latex/scree-1.pdf}
+\caption{\label{fig:scree}iris 碎石图}
+\end{figure}
+
+我们可以看到，前两个成分可以解释数据 95\% 以上的变异，所以我们可以只使用主成份 1 和主成份 2 对我们的结果进行解释。
+
+既然我们使用两个主成份解释整个数据，那么我们怎么把四个性状都放在这个图上呢？这就需要载荷图来展示了，如图 \ref{fig:loadingpca}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{fviz_pca_var}\NormalTok{(ir_pca)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown_files/figure-latex/loadingpca-1.pdf}
+\caption{\label{fig:loadingpca}iris 载荷图}
+\end{figure}
+
+怎么解释呢，因为原始的数据点相当于在坐标轴上，这几个性状分布的产生类似于原始的数据点在拉拽某个性状，影响强的偏向某一方向，换句话说，\textbf{这些性状决定主成份时有不同的权重，也就是对主成份影响的权重大小。同时他们是有方向的，如果两个性状方向接近，也就是夹角非常小，说明他们有较强的正相关性，例如图中的花瓣的长宽，如果他们互相垂直，那说明他们无相关性，例如图中花萼的长宽，如果夹角非常大，例如他们几乎在一条直线上，说明具有显著的负相关}。其本质还是所有的单位向量（本例有四个性状，各个性状中心化后形成的轴，也就是向量）在现在的这个二维平面的位置。
+
+而如果我想通过这些性状来对鸢尾分类，怎么看呢？那就需要得分图来展示了，如图 \ref{fig:scorepca} ，得分图本质是各个品种的每个观测值在各个轴上的长度，也就是得分，所以其值都是每个物种性状的加权，每个点代表了每个物种的观测值。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{fviz_pca_ind}\NormalTok{(ir_pca, }\DataTypeTok{repel =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{col.ind=}\NormalTok{ iris}\OperatorTok{$}\NormalTok{Species)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown_files/figure-latex/scorepca-1.pdf}
+\caption{\label{fig:scorepca}iris 得分图}
+\end{figure}
+
+我们明显看出来，PC1 方向，三个种的鸢尾分成了两大部分，其中 Setosa 延 PC1 同其他两个明显有区别，另外两个在 PC1 上也有较明显的区别，但二者有一定的重合，延 PC2 方向上，三者差别不大。或者反过来讲也可以，品种的差别对 PC1 影响比较显著，这也和我们的碎石图相匹配。
+
+\hypertarget{alge-pca}{%
+\section{线性代数解释}\label{alge-pca}}
+
+\hypertarget{egi-pca}{%
+\subsection{特征向量与特征值}\label{egi-pca}}
 
 特征向量和特征值的数学描述为：
 
@@ -3455,10 +3576,7 @@ finaldata = rowfeaturevector \times rowdataajust
 
 finaldata 很好理解，我们用于 PCA 的最终数据，rowfeature vector 则是我们根据协相关矩阵求得的特征向量的转置，最大的特征向量再最上面， rowdataadjust 则为\textbf{原始数据减去标准值}。
 
-\hypertarget{pca_R}{%
-\section{PCA R 语言实现}\label{pca_R}}
-
-因为我手头没有相关的数据（我这里最多的就是培训时演示用的数据，当然客户给发的数据也有，但大家都明白，基本到我这里都是怀疑有问题的数据，即使没问题，我要使用也要经过人家的同意），想来想去，我们在 R 里见到最多的与生态学相关的数据也就是 iris，一个关于不同 iris 品种的叶片性状相关的数据，非常生态，我们来看一下：
+因为我手头没有相关的数据，想来想去，我们在 R 里见到最多的与生态学相关的数据也就是 iris，一个关于不同 iris 品种的叶片性状相关的数据，非常生态，我们还是继续使用：
 
 \begin{tabular}{r|r|r|r|l}
 \hline
@@ -3478,7 +3596,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 \hline
 \end{tabular}
 
-数据并不复杂，但是想要得出一些规律性的东西确不那么容易，因为数据量太大了。R 语言里面很多函数可以直接实现 PCA，例如 \texttt{prcomp}。我们先按照最原始的方法实现一下，加深对原理的理解：
+数据并不复杂，但是想要得出一些规律性的东西确不那么容易，因为数据量太大了。R 语言里面很多函数可以直接实现 PCA，例如 \ref{geom-pca} 内容。这里按照最原始的方法实现一下，加深对原理的理解：
 
 \hypertarget{man_pca}{%
 \subsection{手动实现过程}\label{man_pca}}
@@ -3561,44 +3679,6 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 
 可以看到结果同我们最开始的计算相似，不同的是我们进行了对数化，而且根据 \citet{kemp2003modern}， 这个结果更合适。
 
-\hypertarget{plot_pca}{%
-\subsection{作图}\label{plot_pca}}
-
-这个我们不做过多说明了，推荐两个非常好的软件包，分别是 `ggbiplot', `factoextra'：
-
-\textbf{ggbiplot 作图}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(ggbiplot)}
-
-\NormalTok{p <-}\StringTok{ }\KeywordTok{ggbiplot}\NormalTok{(value_pca, }\DataTypeTok{obs.scale =} \DecValTok{1}\NormalTok{, }\DataTypeTok{var.scale =} \DecValTok{1}\NormalTok{, }
-       \DataTypeTok{groups =}\NormalTok{ iris_species, }\DataTypeTok{ellipse =} \OtherTok{TRUE}\NormalTok{, }
-       \DataTypeTok{circle =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_color_discrete}\NormalTok{(}\DataTypeTok{name =} \StringTok{''}\NormalTok{)}
-
-\NormalTok{p1 <-}\StringTok{ }\NormalTok{p }\OperatorTok{+}\StringTok{ }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{legend.direction =} \StringTok{'horizontal'}\NormalTok{, }
-       \DataTypeTok{legend.position =} \StringTok{'top'}\NormalTok{)}
-\NormalTok{p1}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-48-1.pdf}
-
-\textbf{factoextra 作图}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(factoextra)}
-
-\KeywordTok{fviz_pca_ind}\NormalTok{(value_pca, }\DataTypeTok{col.ind =} \StringTok{"cos2"}\NormalTok{, }
-   \DataTypeTok{gradient.cols =} \KeywordTok{c}\NormalTok{(}\StringTok{"#00AFBB"}\NormalTok{, }\StringTok{"#E7B800"}\NormalTok{, }\StringTok{"#FC4E07"}\NormalTok{), }
-   \DataTypeTok{repel =} \OtherTok{TRUE}  
-\NormalTok{             )}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-49-1.pdf}
-
 \hypertarget{sessioninfo}{%
 \chapter{环境与配置}\label{sessioninfo}}
 
@@ -3625,38 +3705,39 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 ## [5] LC_TIME=Chinese (Simplified)_China.936    
 ## 
 ## attached base packages:
-## [1] grid      stats     graphics  grDevices utils     datasets  methods  
-## [8] base     
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] factoextra_1.0.5   ggbiplot_0.55      scales_1.0.0      
-##  [4] plyr_1.8.4         jiptest_0.1.3      racir_1.0.0       
-##  [7] nls2_0.2           proto_1.0.0        purrr_0.2.5       
-## [10] ggplot2_3.1.0      minpack.lm_1.2-1   plantecophys_1.3-2
-## [13] readphoto_0.0.1   
+##  [1] factoextra_1.0.5   FactoMineR_1.41    jiptest_0.1.3     
+##  [4] racir_1.0.0        nls2_0.2           proto_1.0.0       
+##  [7] purrr_0.2.5        ggplot2_3.1.0      minpack.lm_1.2-1  
+## [10] plantecophys_1.3-2 readphoto_0.0.1   
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] ggrepel_0.8.0     Rcpp_1.0.0        lattice_0.20-38  
-##  [4] prettyunits_1.0.2 png_0.1-7         ps_1.3.0         
-##  [7] assertthat_0.2.0  rprojroot_1.3-2   digest_0.6.18    
-## [10] R6_2.3.0          cellranger_1.1.0  backports_1.1.3  
-## [13] evaluate_0.12     highr_0.7         pillar_1.3.1     
-## [16] geepack_1.2-1     rlang_0.3.1       rematch_1.0.1    
-## [19] lazyeval_0.2.1    curl_3.3          readxl_1.2.0     
-## [22] rstudioapi_0.9.0  callr_3.1.1       Matrix_1.2-15    
-## [25] rmarkdown_1.11    desc_1.2.0        labeling_0.3     
-## [28] devtools_2.0.1    stringr_1.3.1     munsell_0.5.0    
-## [31] geeM_0.10.1       compiler_3.5.2    xfun_0.4         
-## [34] pkgconfig_2.0.2   pkgbuild_1.0.2    htmltools_0.3.6  
-## [37] tidyselect_0.2.5  tibble_2.0.1      bookdown_0.9     
-## [40] ggpubr_0.2        crayon_1.3.4      dplyr_0.7.8      
-## [43] withr_2.1.2       gtable_0.2.0      magrittr_1.5     
-## [46] MESS_0.5.4        cli_1.0.1         stringi_1.2.4    
-## [49] fs_1.2.6          remotes_2.0.2     bindrcpp_0.2.2   
-## [52] tools_3.5.2       glue_1.3.0        processx_3.2.1   
-## [55] pkgload_1.0.2     yaml_2.2.0        colorspace_1.4-0 
-## [58] sessioninfo_1.1.1 memoise_1.1.0     knitr_1.21       
-## [61] bindr_0.1.1       usethis_1.4.0
+##  [1] ggrepel_0.8.0        Rcpp_1.0.0           lattice_0.20-38     
+##  [4] prettyunits_1.0.2    png_0.1-7            ps_1.3.0            
+##  [7] assertthat_0.2.0     rprojroot_1.3-2      digest_0.6.18       
+## [10] R6_2.3.0             cellranger_1.1.0     plyr_1.8.4          
+## [13] backports_1.1.3      evaluate_0.12        highr_0.7           
+## [16] pillar_1.3.1         geepack_1.2-1        rlang_0.3.1         
+## [19] rematch_1.0.1        lazyeval_0.2.1       curl_3.3            
+## [22] readxl_1.2.0         rstudioapi_0.9.0     callr_3.1.1         
+## [25] Matrix_1.2-15        rmarkdown_1.11       desc_1.2.0          
+## [28] labeling_0.3         devtools_2.0.1       stringr_1.3.1       
+## [31] munsell_0.5.0        geeM_0.10.1          compiler_3.5.2      
+## [34] xfun_0.4             pkgconfig_2.0.2      pkgbuild_1.0.2      
+## [37] htmltools_0.3.6      flashClust_1.01-2    tidyselect_0.2.5    
+## [40] tibble_2.0.1         bookdown_0.9         ggpubr_0.2          
+## [43] crayon_1.3.4         dplyr_0.7.8          withr_2.1.2         
+## [46] MASS_7.3-51.1        leaps_3.0            grid_3.5.2          
+## [49] gtable_0.2.0         magrittr_1.5         MESS_0.5.4          
+## [52] scales_1.0.0         cli_1.0.1            stringi_1.2.4       
+## [55] fs_1.2.6             remotes_2.0.2        scatterplot3d_0.3-41
+## [58] bindrcpp_0.2.2       tools_3.5.2          glue_1.3.0          
+## [61] processx_3.2.1       pkgload_1.0.2        yaml_2.2.0          
+## [64] colorspace_1.4-0     cluster_2.0.7-1      sessioninfo_1.1.1   
+## [67] memoise_1.1.0        knitr_1.21           bindr_0.1.1         
+## [70] usethis_1.4.0
 \end{verbatim}
 
 \cleardoublepage
