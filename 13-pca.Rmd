@@ -24,7 +24,7 @@ ggplot2::qplot(log(Sepal.Length), log(Sepal.Width), data = iris)
 knitr::include_graphics("images/pc1.png")
 ```
 
-如图 \@ref(fig:pccenter)，假设有三维的数据，可以理解为 iris 数据中前三列的观测值，每个点分别代表了一个植株的前三个性状，PCA 第一步便是中心化，将坐标轴由左边转移到右边的中心点位置作为原点，这就是所谓的平均值中心化的过程，这样就消除了测量时的偏差^[https://www.mathsisfun.com/definitions/bias.html]，同时一般还要对数据进行缩放，以消除不同单位的影响^[https://en.wikipedia.org/wiki/Scaling_(geometry)]，
+如图 \@ref(fig:pccenter)，假设有三维的数据，可以理解为 iris 数据中前三列的观测值，每个点分别代表了一个植株的前三个性状，PCA 第一步便是中心化，将坐标轴由左边转移到右边的中心点位置作为原点，这就是所谓的平均值中心化的过程，这样就消除了测量时的偏差 ^[https://www.mathsisfun.com/definitions/bias.html]，同时一般还要对数据进行缩放，以消除不同单位的影响 ^[https://en.wikipedia.org/wiki/Scaling_(geometry)]，
 例如有光合速率，有叶片面积的数据，这样能够消除不同单位的影响，通常的缩放例如对数化。
 
 ```{r, pc2, out.width='100%',  echo=FALSE, fig.cap="PC1 的诞生"}
@@ -78,7 +78,6 @@ fviz_pca_ind(ir_pca, repel = TRUE, col.ind= iris$Species)
 ```
 
 我们明显看出来，PC1 方向，三个种的鸢尾分成了两大部分，其中 Setosa 延 PC1 同其他两个明显有区别，另外两个在 PC1 上也有较明显的区别，但二者有一定的重合，延 PC2 方向上，三者差别不大。或者反过来讲也可以，品种的差别对 PC1 影响比较显著，这也和我们的碎石图相匹配。
-
 
 ## 线性代数解释 {#alge-pca}
 

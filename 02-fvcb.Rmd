@@ -53,7 +53,7 @@ CO~2~ 和 $O_{2}$ 浓度。是 Rubisco 特异性因子, $S_{\frac{c}{o}}$表示 
 对CO~2~ 和 $O_{2}$ 的偏好程度。
 
 当 A = Rd , 即 RuBP 羧化的 CO~2~ 吸收速率刚好 等于 RuBP 氧化的 CO~2~ 释放速率
-(Vc = 2Vo ) 时, $\alpha$ = 0.5。此时叶绿体的 CO~2~ 浓度就是叶绿体 CO~2~
+(Vc = 0.5Vo ) 时, $\alpha$ = 0.5。此时叶绿体的 CO~2~ 浓度就是叶绿体 CO~2~
 光合补偿点, 标记为 $\Gamma^{*}$。即：
 
 \begin{equation}

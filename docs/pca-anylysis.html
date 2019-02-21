@@ -25,7 +25,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司">
 
 
-<meta name="date" content="2019-02-20">
+<meta name="date" content="2019-02-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -278,7 +278,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 图 11.1: 数据的中心化
 </p>
 </div>
-<p>如图 <a href="pca-anylysis.html#fig:pccenter">11.1</a>，假设有三维的数据，可以理解为 iris 数据中前三列的观测值，每个点分别代表了一个植株的前三个性状，PCA 第一步便是中心化，将坐标轴由左边转移到右边的中心点位置作为原点，这就是所谓的平均值中心化的过程，这样就消除了测量时的偏差<sup>[<a href="https://www.mathsisfun.com/definitions/bias.html" class="uri">https://www.mathsisfun.com/definitions/bias.html</a>]，同时一般还要对数据进行缩放，以消除不同单位的影响</sup>[<a href="https://en.wikipedia.org/wiki/Scaling_(geometry)" class="uri">https://en.wikipedia.org/wiki/Scaling_(geometry)</a>]，
+<p>如图 <a href="pca-anylysis.html#fig:pccenter">11.1</a>，假设有三维的数据，可以理解为 iris 数据中前三列的观测值，每个点分别代表了一个植株的前三个性状，PCA 第一步便是中心化，将坐标轴由左边转移到右边的中心点位置作为原点，这就是所谓的平均值中心化的过程，这样就消除了测量时的偏差<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a>，同时一般还要对数据进行缩放，以消除不同单位的影响<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a>，
 例如有光合速率，有叶片面积的数据，这样能够消除不同单位的影响，通常的缩放例如对数化。</p>
 <div class="figure"><span id="fig:pc2"></span>
 <img src="images/pc2.png" alt="PC1 的诞生" width="100%" />
@@ -464,6 +464,13 @@ iris_species &lt;-<span class="st"> </span>iris<span class="op">$</span>Species<
 <div id="ref-kemp2003modern">
 <p>Kemp, Freda. 2003. “Modern Applied Statistics with S.” <em>Journal of the Royal Statistical Society Series D-the Statistician</em> 52 (4): 704–5.</p>
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="16">
+<li id="fn16"><p><a href="https://www.mathsisfun.com/definitions/bias.html" class="uri">https://www.mathsisfun.com/definitions/bias.html</a><a href="pca-anylysis.html#fnref16" class="footnote-back">↩</a></p></li>
+<li id="fn17"><p><a href="https://en.wikipedia.org/wiki/Scaling_(geometry)" class="uri">https://en.wikipedia.org/wiki/Scaling_(geometry)</a><a href="pca-anylysis.html#fnref17" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
             </section>
 
