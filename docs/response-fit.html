@@ -25,7 +25,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司">
 
 
-<meta name="date" content="2019-02-21">
+<meta name="date" content="2019-04-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -551,10 +551,10 @@ acifit &lt;-<span class="st"> </span><span class="kw">fitaci</span>(aci)
 <span class="kw">attributes</span>(acifit)</code></pre>
 <pre><code>## $names
 ##  [1] &quot;df&quot;             &quot;pars&quot;           &quot;nlsfit&quot;         &quot;Tcorrect&quot;      
-##  [5] &quot;Photosyn&quot;       &quot;Ci_transition&quot;  &quot;Ci_transition2&quot; &quot;Rd_measured&quot;   
-##  [9] &quot;GammaStar&quot;      &quot;Km&quot;             &quot;kminput&quot;        &quot;gstarinput&quot;    
-## [13] &quot;fitmethod&quot;      &quot;citransition&quot;   &quot;gmeso&quot;          &quot;fitTPU&quot;        
-## [17] &quot;alphag&quot;         &quot;RMSE&quot;           &quot;runorder&quot;      
+##  [5] &quot;Photosyn&quot;       &quot;Ci&quot;             &quot;Ci_transition&quot;  &quot;Ci_transition2&quot;
+##  [9] &quot;Rd_measured&quot;    &quot;GammaStar&quot;      &quot;Km&quot;             &quot;kminput&quot;       
+## [13] &quot;gstarinput&quot;     &quot;fitmethod&quot;      &quot;citransition&quot;   &quot;gmeso&quot;         
+## [17] &quot;fitTPU&quot;         &quot;alphag&quot;         &quot;RMSE&quot;           &quot;runorder&quot;      
 ## 
 ## $class
 ## [1] &quot;acifit&quot;</code></pre>
@@ -1328,29 +1328,21 @@ fits[[<span class="dv">1</span>]]</code></pre>
 ## Estimated from Tleaf (shown at mean Tleaf):
 ## GammaStar =  42.31453 
 ## Km =  698.2084</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 所有参数均可传递到 plot.acifit，例如：</span>
-<span class="co"># 将所有的数据点作图，并将数据点标记为蓝色</span>
-<span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="fl">4.5</span>, <span class="fl">4.5</span>, <span class="dv">2</span>, <span class="dv">2</span>))
-<span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
-<span class="kw">plot</span>(fits, <span class="dt">how=</span><span class="st">&quot;oneplot&quot;</span>, <span class="dt">what=</span><span class="st">&quot;data&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">addlegend =</span> <span class="ot">FALSE</span>)
-<span class="co"># 在上图的基础上增加模型拟合的线</span>
-<span class="kw">plot</span>(fits, <span class="dt">how=</span><span class="st">&quot;oneplot&quot;</span>, <span class="dt">what=</span><span class="st">&quot;data&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">addlegend =</span> <span class="ot">FALSE</span>)
-<span class="kw">plot</span>(fits, <span class="dt">how=</span><span class="st">&quot;oneplot&quot;</span>, <span class="dt">add=</span><span class="ot">TRUE</span>, <span class="dt">what=</span><span class="st">&quot;model&quot;</span>, <span class="dt">lwd=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">addlegend =</span> <span class="ot">FALSE</span>)</code></pre>
-<div class="figure"><span id="fig:fitacisr"></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 使用sapply提取拟合结果的RMSE(均方根误差)</span>
+rmses &lt;-<span class="st"> </span><span class="kw">sapply</span>(fits, <span class="st">&quot;[[&quot;</span>, <span class="st">&quot;RMSE&quot;</span>)
+<span class="kw">plot</span>(rmses, <span class="dt">type=</span><span class="st">&#39;h&#39;</span>, <span class="dt">ylab=</span><span class="st">&quot;RMSE&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Curve nr&quot;</span>)</code></pre>
+<div class="figure"><span id="fig:fitacisr1"></span>
 <img src="bookdown_files/figure-html/fitacisr-1.png" alt="fitacis作图结果" width="672" />
 <p class="caption">
 图 3.3: fitacis作图结果
 </p>
 </div>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 使用sapply提取拟合结果的RMSE(均方根误差)</span>
-rmses &lt;-<span class="st"> </span><span class="kw">sapply</span>(fits, <span class="st">&quot;[[&quot;</span>, <span class="st">&quot;RMSE&quot;</span>)
-<span class="kw">plot</span>(rmses, <span class="dt">type=</span><span class="st">&#39;h&#39;</span>, <span class="dt">ylab=</span><span class="st">&quot;RMSE&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Curve nr&quot;</span>)
-<span class="co"># 对最差的拟合结果进行作图</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 对最差的拟合结果进行作图</span>
 <span class="kw">plot</span>(fits[[<span class="kw">which.max</span>(rmses)]])</code></pre>
-<div class="figure"><span id="fig:fitacisr"></span>
+<div class="figure"><span id="fig:fitacisr2"></span>
 <img src="bookdown_files/figure-html/fitacisr-2.png" alt="fitacis作图结果" width="672" />
 <p class="caption">
-图 3.3: fitacis作图结果
+图 3.4: fitacis作图结果
 </p>
 </div>
 <p>可以看出，<code>fitaci</code> 和 <code>fitacis</code> 用法基本一致，各行代码均已经注释，更详细用法请参函数考帮助。</p>
@@ -1406,7 +1398,7 @@ aci &lt;-<span class="st"> </span><span class="kw">AciC4</span>(<span class="dt"
 <div class="figure"><span id="fig:unnamed-chunk-17"></span>
 <img src="bookdown_files/figure-html/unnamed-chunk-17-1.png" alt="C4 植物 A-Ci 作图" width="672" />
 <p class="caption">
-图 3.4: C4 植物 A-Ci 作图
+图 3.5: C4 植物 A-Ci 作图
 </p>
 </div>
 
@@ -1525,7 +1517,7 @@ gitbook.start({
 },
 "edit": {
 "link": "https://github.com/zhujiedong/photoanalysis/blob/master/02-fvcb.Rmd",
-"text": "缂栬緫"
+"text": "编辑"
 },
 "history": {
 "link": null,

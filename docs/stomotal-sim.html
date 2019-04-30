@@ -25,7 +25,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司">
 
 
-<meta name="date" content="2019-02-21">
+<meta name="date" content="2019-04-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -320,7 +320,8 @@ g_s = g_0 + 1.6(1 + \frac{g_1}{D}(1-g_k)) \frac{A}{C_a}
 
 aci &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/aci.csv&quot;</span>)
 aci &lt;-<span class="st"> </span><span class="kw">subset</span>(aci, Obs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)
-<span class="kw">fitBB</span>(aci, <span class="dt">gsmodel =</span> <span class="st">&quot;BBOpti&quot;</span>, <span class="dt">fitg0 =</span> <span class="ot">TRUE</span>)</code></pre>
+<span class="kw">fitBB</span>(aci, <span class="dt">varnames =</span> <span class="kw">list</span>(<span class="dt">ALEAF =</span> <span class="st">&quot;Photo&quot;</span>, <span class="dt">GS =</span> <span class="st">&quot;Cond&quot;</span>, <span class="dt">VPD =</span> <span class="st">&quot;VpdL&quot;</span>,
+  <span class="dt">Ca =</span> <span class="st">&quot;CO2S&quot;</span>, <span class="dt">RH =</span> <span class="st">&quot;RH_S&quot;</span>), <span class="dt">gsmodel =</span> <span class="st">&quot;BBOpti&quot;</span>, <span class="dt">fitg0 =</span> <span class="ot">TRUE</span>)</code></pre>
 <pre><code>## Result of fitBB.
 ## Model :  BBOpti 
 ## Both g0 and g1 were estimated.
@@ -415,7 +416,7 @@ gitbook.start({
 },
 "edit": {
 "link": "https://github.com/zhujiedong/photoanalysis/blob/master/03-stomatal.Rmd",
-"text": "缂栬緫"
+"text": "编辑"
 },
 "history": {
 "link": null,

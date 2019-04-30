@@ -2,43 +2,48 @@
 \PassOptionsToPackage{hyphens}{url}
 \PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
 %
-\documentclass[]{krantz}
+\documentclass[
+]{krantz}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provides euro and other symbols
 \else % if luatex or xelatex
   \usepackage{unicode-math}
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
 % use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-% use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage[]{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
 \usepackage{xcolor}
-\usepackage{hyperref}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-            pdftitle={使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据},
-            pdfauthor={祝介东    北京力高泰科技有限公司},
-            colorlinks=true,
-            linkcolor=Maroon,
-            filecolor=Maroon,
-            citecolor=Blue,
-            urlcolor=Blue,
-            breaklinks=true}
+  pdftitle={使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据},
+  pdfauthor={祝介东    北京力高泰科技有限公司},
+  colorlinks=true,
+  linkcolor=Maroon,
+  filecolor=Maroon,
+  citecolor=Blue,
+  urlcolor=Blue,
+  breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
 \usepackage{color}
 \usepackage{fancyvrb}
@@ -81,8 +86,9 @@
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
-% Fix footnotes in tables (requires footnote package)
-\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{longtable}}{}
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -98,12 +104,12 @@
 \setcounter{secnumdepth}{5}
 % Redefines (sub)paragraphs to behave more like sections
 \ifx\paragraph\undefined\else
-\let\oldparagraph\paragraph
-\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
 \fi
 \ifx\subparagraph\undefined\else
-\let\oldsubparagraph\subparagraph
-\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
 
 % set default figure placement to htbp
@@ -173,7 +179,7 @@
 
 \title{使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据}
 \author{祝介东 北京力高泰科技有限公司}
-\date{2019-02-20}
+\date{2019-04-30}
 
 \begin{document}
 \maketitle
@@ -306,11 +312,6 @@ R 软件和 Rstudio 的安装十分方便，我们按照各自系统的安装方
 \NormalTok{devtools}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"zhujiedong/readphoto"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## Skipping install of 'readphoto' from a github remote, the SHA1 (f2f88a7b) has not changed since last install.
-##   Use `force = TRUE` to force installation
-\end{verbatim}
 
 \hypertarget{batch64}{%
 \section{6400 数据整合}\label{batch64}}
@@ -520,11 +521,11 @@ lrc & 3 & 1513612941 & 220.0 & 20171218 10:02:20 & 1 & 1 & 1513612941\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.328797 1.782322 1.219501 1.254827 1.980150 1.988371 1.420456
-##  [8] 1.624258 1.283295 1.932125 1.671004 1.951253 1.642915 1.296863
-## [15] 1.615900 1.639173 1.256220 1.995735 1.317010 1.635653 1.874768
-## [22] 1.284413 1.706866 1.307909 1.813683 1.247689 1.685175 1.875608
-## [29] 1.239037 1.475450 1.884377 1.510228
+##  [1] 1.969204 1.884491 1.223065 1.928052 1.975639 1.824096 1.247153
+##  [8] 1.729679 1.200943 1.766765 1.424922 1.716145 1.429727 1.355275
+## [15] 1.378458 1.887322 1.605925 1.469795 1.525518 1.212448 1.438925
+## [22] 1.265107 1.769728 1.833981 1.448211 1.471964 1.842844 1.216740
+## [29] 1.841437 1.370209 1.939726 1.269561
 \end{verbatim}
 
 我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.
@@ -610,10 +611,10 @@ lrc & 3 & 1513612941 & 220.0 & 20171218 10:02:20 & 1 & 1 & 1513612941\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.332905 1.632768 1.582750 1.249737 1.567456 1.892660 1.655847
-##  [8] 1.480376 1.705475 1.279900 1.893132 1.967995 1.501320 1.622342
-## [15] 1.398703 1.217912 1.223935 1.715193 1.214730 1.722875 1.471325
-## [22] 1.631543 1.244253 1.216435 1.709957 1.628696 1.436192 1.533558
+##  [1] 1.724716 1.242192 1.775823 1.924080 1.609091 1.984582 1.449604
+##  [8] 1.312525 1.616176 1.418716 1.689123 1.505105 1.641607 1.551360
+## [15] 1.207278 1.417541 1.888545 1.786467 1.881164 1.921434 1.996138
+## [22] 1.470592 1.289689 1.592506 1.358131 1.256555 1.252235 1.783315
 \end{verbatim}
 
 测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。
@@ -940,10 +941,10 @@ Obs & HHMMSS & FTime & EBal. & Photo & Cond & Ci & Trmmol\\
 \begin{verbatim}
 ## $names
 ##  [1] "df"             "pars"           "nlsfit"         "Tcorrect"      
-##  [5] "Photosyn"       "Ci_transition"  "Ci_transition2" "Rd_measured"   
-##  [9] "GammaStar"      "Km"             "kminput"        "gstarinput"    
-## [13] "fitmethod"      "citransition"   "gmeso"          "fitTPU"        
-## [17] "alphag"         "RMSE"           "runorder"      
+##  [5] "Photosyn"       "Ci"             "Ci_transition"  "Ci_transition2"
+##  [9] "Rd_measured"    "GammaStar"      "Km"             "kminput"       
+## [13] "gstarinput"     "fitmethod"      "citransition"   "gmeso"         
+## [17] "fitTPU"         "alphag"         "RMSE"           "runorder"      
 ## 
 ## $class
 ## [1] "acifit"
@@ -1360,28 +1361,20 @@ fitacis 函数实际上是 fitaci 函数的扩展，方便一次拟合多条曲�
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# 所有参数均可传递到 plot.acifit，例如：}
-\CommentTok{# 将所有的数据点作图，并将数据点标记为蓝色}
-\KeywordTok{par}\NormalTok{(}\DataTypeTok{mar =} \KeywordTok{c}\NormalTok{(}\FloatTok{4.5}\NormalTok{, }\FloatTok{4.5}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{))}
-\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{))}
-\KeywordTok{plot}\NormalTok{(fits, }\DataTypeTok{how=}\StringTok{"oneplot"}\NormalTok{, }\DataTypeTok{what=}\StringTok{"data"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{, }\DataTypeTok{addlegend =} \OtherTok{FALSE}\NormalTok{)}
-\CommentTok{# 在上图的基础上增加模型拟合的线}
-\KeywordTok{plot}\NormalTok{(fits, }\DataTypeTok{how=}\StringTok{"oneplot"}\NormalTok{, }\DataTypeTok{what=}\StringTok{"data"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{, }\DataTypeTok{addlegend =} \OtherTok{FALSE}\NormalTok{)}
-\KeywordTok{plot}\NormalTok{(fits, }\DataTypeTok{how=}\StringTok{"oneplot"}\NormalTok{, }\DataTypeTok{add=}\OtherTok{TRUE}\NormalTok{, }\DataTypeTok{what=}\StringTok{"model"}\NormalTok{, }\DataTypeTok{lwd=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{), }\DataTypeTok{addlegend =} \OtherTok{FALSE}\NormalTok{)}
+\CommentTok{# 使用sapply提取拟合结果的RMSE(均方根误差)}
+\NormalTok{rmses <-}\StringTok{ }\KeywordTok{sapply}\NormalTok{(fits, }\StringTok{"[["}\NormalTok{, }\StringTok{"RMSE"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(rmses, }\DataTypeTok{type=}\StringTok{'h'}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"RMSE"}\NormalTok{, }\DataTypeTok{xlab=}\StringTok{"Curve nr"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{figure}
 \centering
 \includegraphics{bookdown_files/figure-latex/fitacisr-1.pdf}
-\caption{\label{fig:fitacisr}fitacis作图结果}
+\caption{\label{fig:fitacisr1}fitacis作图结果}
 \end{figure}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# 使用sapply提取拟合结果的RMSE(均方根误差)}
-\NormalTok{rmses <-}\StringTok{ }\KeywordTok{sapply}\NormalTok{(fits, }\StringTok{"[["}\NormalTok{, }\StringTok{"RMSE"}\NormalTok{)}
-\KeywordTok{plot}\NormalTok{(rmses, }\DataTypeTok{type=}\StringTok{'h'}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"RMSE"}\NormalTok{, }\DataTypeTok{xlab=}\StringTok{"Curve nr"}\NormalTok{)}
 \CommentTok{# 对最差的拟合结果进行作图}
 \KeywordTok{plot}\NormalTok{(fits[[}\KeywordTok{which.max}\NormalTok{(rmses)]])}
 \end{Highlighting}
@@ -1390,7 +1383,7 @@ fitacis 函数实际上是 fitaci 函数的扩展，方便一次拟合多条曲�
 \begin{figure}
 \centering
 \includegraphics{bookdown_files/figure-latex/fitacisr-2.pdf}
-\caption{\label{fig:fitacisr}fitacis作图结果}
+\caption{\label{fig:fitacisr2}fitacis作图结果}
 \end{figure}
 
 可以看出，\texttt{fitaci} 和 \texttt{fitacis} 用法基本一致，各行代码均已经注释，更详细用法请参函数考帮助。
@@ -1586,7 +1579,8 @@ g_s = g_0 + 1.6(1 + \frac{g_1}{D}(1-g_k)) \frac{A}{C_a}
 
 \NormalTok{aci <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"./data/aci.csv"}\NormalTok{)}
 \NormalTok{aci <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(aci, Obs }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{)}
-\KeywordTok{fitBB}\NormalTok{(aci, }\DataTypeTok{gsmodel =} \StringTok{"BBOpti"}\NormalTok{, }\DataTypeTok{fitg0 =} \OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{fitBB}\NormalTok{(aci, }\DataTypeTok{varnames =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{ALEAF =} \StringTok{"Photo"}\NormalTok{, }\DataTypeTok{GS =} \StringTok{"Cond"}\NormalTok{, }\DataTypeTok{VPD =} \StringTok{"VpdL"}\NormalTok{,}
+  \DataTypeTok{Ca =} \StringTok{"CO2S"}\NormalTok{, }\DataTypeTok{RH =} \StringTok{"RH_S"}\NormalTok{), }\DataTypeTok{gsmodel =} \StringTok{"BBOpti"}\NormalTok{, }\DataTypeTok{fitg0 =} \OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1811,7 +1805,7 @@ Photosyn 为耦合的光合--气孔导度模型，基于 Farquhar 光合模型�
 \begin{figure}
 \centering
 \includegraphics{bookdown_files/figure-latex/ppfd-1.pdf}
-\caption{\label{fig:ppfd}PPFD VS. GS}
+\caption{\label{fig:ppfd1}PPFD VS. GS}
 \end{figure}
 
 \begin{Shaded}
@@ -1829,7 +1823,7 @@ Photosyn 为耦合的光合--气孔导度模型，基于 Farquhar 光合模型�
 \begin{figure}
 \centering
 \includegraphics{bookdown_files/figure-latex/ppfd-2.pdf}
-\caption{\label{fig:ppfd}PPFD VS. GS}
+\caption{\label{fig:ppfd2}PPFD VS. GS}
 \end{figure}
 
 不同 ci 下的光合速率见 \ref{fig:ppfd}。
@@ -2100,7 +2094,19 @@ P_{nmax}= AQE \times I_{sat} - R_{d}
 \begin{Highlighting}[]
 \CommentTok{# 使用ggplot2进行作图并拟合曲线}
 \KeywordTok{library}\NormalTok{(ggplot2)}
+\end{Highlighting}
+\end{Shaded}
 
+\begin{verbatim}
+## Registered S3 methods overwritten by 'ggplot2':
+##   method         from 
+##   [.quosures     rlang
+##   c.quosures     rlang
+##   print.quosures rlang
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{light <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{lrc_Q =}\NormalTok{ lrc}\OperatorTok{$}\NormalTok{PARi, }\DataTypeTok{lrc_A =}\NormalTok{ lrc}\OperatorTok{$}\NormalTok{Photo)}
 
 \NormalTok{p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(light, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ lrc_Q, }\DataTypeTok{y =}\NormalTok{ lrc_A))}
@@ -2812,6 +2818,46 @@ singular gradient matrix at initial parameter estimates
 \StringTok{        }\NormalTok{(alpha}\OperatorTok{*}\NormalTok{lrc_Q}\OperatorTok{+}\NormalTok{Am}\OperatorTok{-}\KeywordTok{sqrt}\NormalTok{((alpha}\OperatorTok{*}\NormalTok{lrc_Q}\OperatorTok{+}\NormalTok{Am)}\OperatorTok{^}\DecValTok{2} \OperatorTok{-}\StringTok{ }
 \StringTok{                               }\DecValTok{4}\OperatorTok{*}\NormalTok{alpha}\OperatorTok{*}\NormalTok{theta}\OperatorTok{*}\NormalTok{Am}\OperatorTok{*}\NormalTok{lrc_Q))}\OperatorTok{-}\StringTok{ }
 \StringTok{        }\NormalTok{Rd, }\DataTypeTok{start =}\NormalTok{ grid.test, }\DataTypeTok{algorithm =} \StringTok{"brute-force"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \KeywordTok{summary}\NormalTok{(lrcnls2)}
 \end{Highlighting}
 \end{Shaded}
@@ -3331,17 +3377,17 @@ SECS & FLUOR & SOURCE\\
 
 \begin{verbatim}
 ## New names:
-## * `` -> `..1`
-## * `` -> `..2`
+## * `` -> ...1
+## * `` -> ...2
 ## New names:
-## * `` -> `..1`
-## * `` -> `..2`
+## * `` -> ...1
+## * `` -> ...2
 ## New names:
-## * `` -> `..1`
-## * `` -> `..2`
+## * `` -> ...1
+## * `` -> ...2
 ## New names:
-## * `` -> `..1`
-## * `` -> `..2`
+## * `` -> ...1
+## * `` -> ...2
 \end{verbatim}
 
 \begin{longtable}{lrrrr}
@@ -3453,7 +3499,7 @@ PCA 通常能够反映我们复杂数据集的一些分布特征，例如典型�
 \includegraphics[width=1\linewidth]{images/pc1} \caption{数据的中心化}\label{fig:pccenter}
 \end{figure}
 
-如图 \ref{fig:pccenter}，假设有三维的数据，可以理解为 iris 数据中前三列的观测值，每个点分别代表了一个植株的前三个性状，PCA 第一步便是中心化，将坐标轴由左边转移到右边的中心点位置作为原点，这就是所谓的平均值中心化的过程，这样就消除了测量时的偏差\textsuperscript{{[}\url{https://www.mathsisfun.com/definitions/bias.html}{]}，同时一般还要对数据进行缩放，以消除不同单位的影响}{[}\url{https://en.wikipedia.org/wiki/Scaling_(geometry)}{]}，
+如图 \ref{fig:pccenter}，假设有三维的数据，可以理解为 iris 数据中前三列的观测值，每个点分别代表了一个植株的前三个性状，PCA 第一步便是中心化，将坐标轴由左边转移到右边的中心点位置作为原点，这就是所谓的平均值中心化的过程，这样就消除了测量时的偏差 \footnote{\url{https://www.mathsisfun.com/definitions/bias.html}}，同时一般还要对数据进行缩放，以消除不同单位的影响 \footnote{\url{https://en.wikipedia.org/wiki/Scaling_(geometry)}}，
 例如有光合速率，有叶片面积的数据，这样能够消除不同单位的影响，通常的缩放例如对数化。
 
 \begin{figure}
@@ -3691,9 +3737,9 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 \end{Shaded}
 
 \begin{verbatim}
-## R version 3.5.2 (2018-12-20)
+## R version 3.6.0 (2019-04-26)
 ## Platform: x86_64-w64-mingw32/x64 (64-bit)
-## Running under: Windows 10 x64 (build 17134)
+## Running under: Windows 10 x64 (build 14393)
 ## 
 ## Matrix products: default
 ## 
@@ -3710,39 +3756,32 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 ## other attached packages:
 ##  [1] factoextra_1.0.5   FactoMineR_1.41    jiptest_0.1.3     
 ##  [4] racir_1.0.0        nls2_0.2           proto_1.0.0       
-##  [7] purrr_0.2.5        ggplot2_3.1.0      minpack.lm_1.2-1  
-## [10] plantecophys_1.3-2 readphoto_0.0.1   
+##  [7] purrr_0.3.2        ggplot2_3.1.1      minpack.lm_1.2-1  
+## [10] plantecophys_1.4-4 readphoto_0.0.1   
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] ggrepel_0.8.0        Rcpp_1.0.0           lattice_0.20-38     
-##  [4] prettyunits_1.0.2    png_0.1-7            ps_1.3.0            
-##  [7] assertthat_0.2.0     rprojroot_1.3-2      digest_0.6.18       
-## [10] R6_2.3.0             cellranger_1.1.0     plyr_1.8.4          
-## [13] backports_1.1.3      evaluate_0.12        highr_0.7           
-## [16] pillar_1.3.1         geepack_1.2-1        rlang_0.3.1         
-## [19] rematch_1.0.1        lazyeval_0.2.1       curl_3.3            
-## [22] readxl_1.2.0         rstudioapi_0.9.0     callr_3.1.1         
-## [25] Matrix_1.2-15        rmarkdown_1.11       desc_1.2.0          
-## [28] labeling_0.3         devtools_2.0.1       stringr_1.3.1       
-## [31] munsell_0.5.0        geeM_0.10.1          compiler_3.5.2      
-## [34] xfun_0.4             pkgconfig_2.0.2      pkgbuild_1.0.2      
-## [37] htmltools_0.3.6      flashClust_1.01-2    tidyselect_0.2.5    
-## [40] tibble_2.0.1         bookdown_0.9         ggpubr_0.2          
-## [43] crayon_1.3.4         dplyr_0.7.8          withr_2.1.2         
-## [46] MASS_7.3-51.1        leaps_3.0            grid_3.5.2          
-## [49] gtable_0.2.0         magrittr_1.5         MESS_0.5.4          
-## [52] scales_1.0.0         cli_1.0.1            stringi_1.2.4       
-## [55] fs_1.2.6             remotes_2.0.2        scatterplot3d_0.3-41
-## [58] bindrcpp_0.2.2       tools_3.5.2          glue_1.3.0          
-## [61] processx_3.2.1       pkgload_1.0.2        yaml_2.2.0          
-## [64] colorspace_1.4-0     cluster_2.0.7-1      sessioninfo_1.1.1   
-## [67] memoise_1.1.0        knitr_1.21           bindr_0.1.1         
-## [70] usethis_1.4.0
+##  [1] tidyselect_0.2.5     xfun_0.6             lattice_0.20-38     
+##  [4] colorspace_1.4-1     htmltools_0.3.6      yaml_2.2.0          
+##  [7] rlang_0.3.4          ggpubr_0.2           pillar_1.3.1        
+## [10] glue_1.3.1           withr_2.1.2          readxl_1.3.1        
+## [13] plyr_1.8.4           stringr_1.4.0        munsell_0.5.0       
+## [16] gtable_0.3.0         cellranger_1.1.0     leaps_3.0           
+## [19] evaluate_0.13        labeling_0.3         geepack_1.2-1       
+## [22] knitr_1.22           highr_0.8            Rcpp_1.0.1          
+## [25] flashClust_1.01-2    scales_1.0.0         scatterplot3d_0.3-41
+## [28] png_0.1-7            digest_0.6.18        stringi_1.4.3       
+## [31] ggrepel_0.8.0        bookdown_0.9         dplyr_0.8.0.1       
+## [34] grid_3.6.0           tools_3.6.0          magrittr_1.5        
+## [37] lazyeval_0.2.2       tibble_2.1.1         cluster_2.0.8       
+## [40] MESS_0.5.5           crayon_1.3.4         geeM_0.10.1         
+## [43] pkgconfig_2.0.2      MASS_7.3-51.4        Matrix_1.2-17       
+## [46] assertthat_0.2.1     rmarkdown_1.12       rematch_1.0.1       
+## [49] rstudioapi_0.10      R6_2.4.0             compiler_3.6.0
 \end{verbatim}
 
 \cleardoublepage
 
-\bibliography{photoR.bib}
+  \bibliography{photoR.bib}
 
 \backmatter
 \printindex

@@ -25,7 +25,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司">
 
 
-<meta name="date" content="2019-02-21">
+<meta name="date" content="2019-04-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -450,8 +450,40 @@ lrcnls2 &lt;-<span class="st"> </span><span class="kw">nls2</span>(lrc_A <span c
 <span class="st">        </span>(<span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>theta))<span class="op">*</span>
 <span class="st">        </span>(alpha<span class="op">*</span>lrc_Q<span class="op">+</span>Am<span class="op">-</span><span class="kw">sqrt</span>((alpha<span class="op">*</span>lrc_Q<span class="op">+</span>Am)<span class="op">^</span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span>
 <span class="st">                               </span><span class="dv">4</span><span class="op">*</span>alpha<span class="op">*</span>theta<span class="op">*</span>Am<span class="op">*</span>lrc_Q))<span class="op">-</span><span class="st"> </span>
-<span class="st">        </span>Rd, <span class="dt">start =</span> grid.test, <span class="dt">algorithm =</span> <span class="st">&quot;brute-force&quot;</span>)
-<span class="kw">summary</span>(lrcnls2)</code></pre>
+<span class="st">        </span>Rd, <span class="dt">start =</span> grid.test, <span class="dt">algorithm =</span> <span class="st">&quot;brute-force&quot;</span>)</code></pre>
+<pre><code>## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model
+## Error in numericDeriv(form[[3L]], names(ind), env) : 
+##   Missing value or an infinity produced when evaluating the model</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(lrcnls2)</code></pre>
 <pre><code>## 
 ## Formula: lrc_A ~ (1/(2 * theta)) * (alpha * lrc_Q + Am - sqrt((alpha * 
 ##     lrc_Q + Am)^2 - 4 * alpha * theta * Am * lrc_Q)) - Rd
@@ -541,7 +573,7 @@ gitbook.start({
 },
 "edit": {
 "link": "https://github.com/zhujiedong/photoanalysis/blob/master/11-start-values.Rmd",
-"text": "缂栬緫"
+"text": "编辑"
 },
 "history": {
 "link": null,

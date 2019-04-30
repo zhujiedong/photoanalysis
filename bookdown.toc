@@ -9,7 +9,7 @@
 \contentsline {section}{\numberline {1.2}Rstudio}{1}{section.1.2}% 
 \contentsline {chapter}{\numberline {2}批量处理光合测定数据}{3}{chapter.2}% 
 \contentsline {section}{\numberline {2.1}安装}{3}{section.2.1}% 
-\contentsline {section}{\numberline {2.2}6400 数据整合}{4}{section.2.2}% 
+\contentsline {section}{\numberline {2.2}6400 数据整合}{3}{section.2.2}% 
 \contentsline {section}{\numberline {2.3}LI-6800 数据整合}{5}{section.2.3}% 
 \contentsline {section}{\numberline {2.4}重计算功能}{6}{section.2.4}% 
 \contentsline {subsection}{\numberline {2.4.1}LI-6400 数据重计算}{6}{subsection.2.4.1}% 
@@ -30,9 +30,9 @@
 \contentsline {subsection}{\numberline {3.5.3}使用 `onepoint' 单独计算 V\textsubscript {cmax} 和 J\textsubscript {max}}{30}{subsection.3.5.3}% 
 \contentsline {subsection}{\numberline {3.5.4}多条 CO\textsubscript {2} 响应曲线的拟合}{31}{subsection.3.5.4}% 
 \contentsline {subsubsection}{\numberline {3.5.4.1}fitacis 函数应用举例}{32}{subsubsection.3.5.4.1}% 
-\contentsline {subsection}{\numberline {3.5.5}\texttt {findCiTransition} 函数}{36}{subsection.3.5.5}% 
-\contentsline {section}{\numberline {3.6}C4 植物光合}{37}{section.3.6}% 
-\contentsline {subsection}{\numberline {3.6.1}C4 植物光合速率的计算}{38}{subsection.3.6.1}% 
+\contentsline {subsection}{\numberline {3.5.5}\texttt {findCiTransition} 函数}{35}{subsection.3.5.5}% 
+\contentsline {section}{\numberline {3.6}C4 植物光合}{36}{section.3.6}% 
+\contentsline {subsection}{\numberline {3.6.1}C4 植物光合速率的计算}{37}{subsection.3.6.1}% 
 \contentsline {chapter}{\numberline {4}气孔导度模型的拟合}{39}{chapter.4}% 
 \contentsline {section}{\numberline {4.1}BallBerry 模型}{39}{section.4.1}% 
 \contentsline {section}{\numberline {4.2}BBLeuning 模型}{40}{section.4.2}% 
@@ -63,33 +63,33 @@
 \contentsline {subsection}{\numberline {9.2.1}实现过程}{78}{subsection.9.2.1}% 
 \contentsline {subsection}{\numberline {9.2.2}直观展示}{81}{subsection.9.2.2}% 
 \contentsline {section}{\numberline {9.3}自动多次尝试法}{84}{section.9.3}% 
-\contentsline {section}{\numberline {9.4}小结}{86}{section.9.4}% 
-\contentsline {chapter}{\numberline {10}LI-6800 的数据分析}{87}{chapter.10}% 
-\contentsline {section}{\numberline {10.1}数据格式}{87}{section.10.1}% 
-\contentsline {section}{\numberline {10.2}LI-6800 与 LI-6400 使用时的差别}{87}{section.10.2}% 
-\contentsline {section}{\numberline {10.3}光响应曲线注意事项}{88}{section.10.3}% 
-\contentsline {section}{\numberline {10.4}LI-6800 RACiR\texttrademark 的测量与拟合}{88}{section.10.4}% 
-\contentsline {section}{\numberline {10.5}racir 软件包实现 RACiR\texttrademark 数据分析}{89}{section.10.5}% 
-\contentsline {subsection}{\numberline {10.5.1}实现过程}{90}{subsection.10.5.1}% 
-\contentsline {subsection}{\numberline {10.5.2}数据的批量处理}{92}{subsection.10.5.2}% 
-\contentsline {subsubsection}{\numberline {10.5.2.1}readphoto 导入}{92}{subsubsection.10.5.2.1}% 
-\contentsline {subsubsection}{\numberline {10.5.2.2}处理大量 csv 文件}{93}{subsubsection.10.5.2.2}% 
-\contentsline {section}{\numberline {10.6}批量计算 \(V_{cmax}\) 和 \(J_max\)}{94}{section.10.6}% 
-\contentsline {section}{\numberline {10.7}RACiR\texttrademark 分析的手动实现}{95}{section.10.7}% 
-\contentsline {section}{\numberline {10.8}LI-6800 荧光数据分析}{99}{section.10.8}% 
-\contentsline {subsection}{\numberline {10.8.1}jip test 的实现}{100}{subsection.10.8.1}% 
-\contentsline {subsection}{\numberline {10.8.2}\texttt {jiptest} 软件包安装}{100}{subsection.10.8.2}% 
-\contentsline {subsection}{\numberline {10.8.3}\texttt {read\_files} 及 \texttt {read\_dcfiles} 函数}{100}{subsection.10.8.3}% 
-\contentsline {subsection}{\numberline {10.8.4}\texttt {jip\_test} 及 \texttt {jip\_dctest} 函数}{101}{subsection.10.8.4}% 
-\contentsline {subsection}{\numberline {10.8.5}\texttt {jip\_plot} 及 \texttt {jip\_dcplot} 函数}{103}{subsection.10.8.5}% 
-\contentsline {chapter}{\numberline {11}大话 PCA}{105}{chapter.11}% 
-\contentsline {section}{\numberline {11.1}几何解释}{105}{section.11.1}% 
-\contentsline {section}{\numberline {11.2}线性代数解释}{112}{section.11.2}% 
-\contentsline {subsection}{\numberline {11.2.1}特征向量与特征值}{112}{subsection.11.2.1}% 
-\contentsline {subsection}{\numberline {11.2.2}手动实现过程}{113}{subsection.11.2.2}% 
-\contentsline {subsubsection}{\numberline {11.2.2.1}均值的计算}{113}{subsubsection.11.2.2.1}% 
-\contentsline {subsubsection}{\numberline {11.2.2.2}计算协方差矩阵}{113}{subsubsection.11.2.2.2}% 
-\contentsline {subsubsection}{\numberline {11.2.2.3}计算特征值和特征向量}{113}{subsubsection.11.2.2.3}% 
-\contentsline {subsection}{\numberline {11.2.3}\texttt {prcomp} 的实现}{114}{subsection.11.2.3}% 
-\contentsline {chapter}{\numberline {12}环境与配置}{117}{chapter.12}% 
-\contentsline {fm}{参考文献}{119}{chapter*.48}% 
+\contentsline {section}{\numberline {9.4}小结}{87}{section.9.4}% 
+\contentsline {chapter}{\numberline {10}LI-6800 的数据分析}{89}{chapter.10}% 
+\contentsline {section}{\numberline {10.1}数据格式}{89}{section.10.1}% 
+\contentsline {section}{\numberline {10.2}LI-6800 与 LI-6400 使用时的差别}{89}{section.10.2}% 
+\contentsline {section}{\numberline {10.3}光响应曲线注意事项}{90}{section.10.3}% 
+\contentsline {section}{\numberline {10.4}LI-6800 RACiR\texttrademark 的测量与拟合}{90}{section.10.4}% 
+\contentsline {section}{\numberline {10.5}racir 软件包实现 RACiR\texttrademark 数据分析}{91}{section.10.5}% 
+\contentsline {subsection}{\numberline {10.5.1}实现过程}{92}{subsection.10.5.1}% 
+\contentsline {subsection}{\numberline {10.5.2}数据的批量处理}{94}{subsection.10.5.2}% 
+\contentsline {subsubsection}{\numberline {10.5.2.1}readphoto 导入}{94}{subsubsection.10.5.2.1}% 
+\contentsline {subsubsection}{\numberline {10.5.2.2}处理大量 csv 文件}{95}{subsubsection.10.5.2.2}% 
+\contentsline {section}{\numberline {10.6}批量计算 \(V_{cmax}\) 和 \(J_max\)}{96}{section.10.6}% 
+\contentsline {section}{\numberline {10.7}RACiR\texttrademark 分析的手动实现}{97}{section.10.7}% 
+\contentsline {section}{\numberline {10.8}LI-6800 荧光数据分析}{101}{section.10.8}% 
+\contentsline {subsection}{\numberline {10.8.1}jip test 的实现}{102}{subsection.10.8.1}% 
+\contentsline {subsection}{\numberline {10.8.2}\texttt {jiptest} 软件包安装}{102}{subsection.10.8.2}% 
+\contentsline {subsection}{\numberline {10.8.3}\texttt {read\_files} 及 \texttt {read\_dcfiles} 函数}{102}{subsection.10.8.3}% 
+\contentsline {subsection}{\numberline {10.8.4}\texttt {jip\_test} 及 \texttt {jip\_dctest} 函数}{103}{subsection.10.8.4}% 
+\contentsline {subsection}{\numberline {10.8.5}\texttt {jip\_plot} 及 \texttt {jip\_dcplot} 函数}{105}{subsection.10.8.5}% 
+\contentsline {chapter}{\numberline {11}大话 PCA}{107}{chapter.11}% 
+\contentsline {section}{\numberline {11.1}几何解释}{107}{section.11.1}% 
+\contentsline {section}{\numberline {11.2}线性代数解释}{114}{section.11.2}% 
+\contentsline {subsection}{\numberline {11.2.1}特征向量与特征值}{114}{subsection.11.2.1}% 
+\contentsline {subsection}{\numberline {11.2.2}手动实现过程}{115}{subsection.11.2.2}% 
+\contentsline {subsubsection}{\numberline {11.2.2.1}均值的计算}{115}{subsubsection.11.2.2.1}% 
+\contentsline {subsubsection}{\numberline {11.2.2.2}计算协方差矩阵}{115}{subsubsection.11.2.2.2}% 
+\contentsline {subsubsection}{\numberline {11.2.2.3}计算特征值和特征向量}{115}{subsubsection.11.2.2.3}% 
+\contentsline {subsection}{\numberline {11.2.3}\texttt {prcomp} 的实现}{116}{subsection.11.2.3}% 
+\contentsline {chapter}{\numberline {12}环境与配置}{119}{chapter.12}% 
+\contentsline {fm}{参考文献}{121}{chapter*.48}% 

@@ -25,7 +25,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司">
 
 
-<meta name="date" content="2019-02-21">
+<meta name="date" content="2019-04-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -336,9 +336,13 @@ Isat &lt;-<span class="st"> </span><span class="cf">function</span>(Isat){(fitlr
 <span class="kw">uniroot</span>(Isat, <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2500</span>))<span class="op">$</span>root</code></pre>
 <pre><code>## [1] 700.0946</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 使用ggplot2进行作图并拟合曲线</span>
-<span class="kw">library</span>(ggplot2)
-
-light &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">lrc_Q =</span> lrc<span class="op">$</span>PARi, <span class="dt">lrc_A =</span> lrc<span class="op">$</span>Photo)
+<span class="kw">library</span>(ggplot2)</code></pre>
+<pre><code>## Registered S3 methods overwritten by &#39;ggplot2&#39;:
+##   method         from 
+##   [.quosures     rlang
+##   c.quosures     rlang
+##   print.quosures rlang</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">light &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">lrc_Q =</span> lrc<span class="op">$</span>PARi, <span class="dt">lrc_A =</span> lrc<span class="op">$</span>Photo)
 
 p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(light, <span class="kw">aes</span>(<span class="dt">x =</span> lrc_Q, <span class="dt">y =</span> lrc_A))
 
@@ -870,7 +874,7 @@ gitbook.start({
 },
 "edit": {
 "link": "https://github.com/zhujiedong/photoanalysis/blob/master/07-rec.Rmd",
-"text": "缂栬緫"
+"text": "编辑"
 },
 "history": {
 "link": null,

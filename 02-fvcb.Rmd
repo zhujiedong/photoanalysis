@@ -400,14 +400,6 @@ fits <- fitacis(manyacidat2, group = "Curve", fitmethod="bilinear", quiet = TRUE
 # 拟合结果为list，我们可以只提取第一个的拟合结果
 fits[[1]]
 
-# 所有参数均可传递到 plot.acifit，例如：
-# 将所有的数据点作图，并将数据点标记为蓝色
-par(mar = c(4.5, 4.5, 2, 2))
-par(mfrow = c(1, 2))
-plot(fits, how="oneplot", what="data", col="blue", addlegend = FALSE)
-# 在上图的基础上增加模型拟合的线
-plot(fits, how="oneplot", what="data", col="blue", addlegend = FALSE)
-plot(fits, how="oneplot", add=TRUE, what="model", lwd=c(1,1), addlegend = FALSE)
 # 使用sapply提取拟合结果的RMSE(均方根误差)
 rmses <- sapply(fits, "[[", "RMSE")
 plot(rmses, type='h', ylab="RMSE", xlab="Curve nr")

@@ -6,7 +6,7 @@
 
 暂时只有我的 github repo 中的版本：
 
-```{r}
+```{r,eval=FALSE}
 devtools::install_github("zhujiedong/readphoto")
 ```
 

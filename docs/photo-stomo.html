@@ -25,7 +25,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司">
 
 
-<meta name="date" content="2019-02-21">
+<meta name="date" content="2019-04-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -338,7 +338,7 @@ r &lt;-<span class="st"> </span><span class="kw">Photosyn</span>(<span class="dt
 run1 &lt;-<span class="st"> </span><span class="kw">Photosyn</span>(<span class="dt">PPFD=</span><span class="kw">seq</span>(<span class="dv">50</span>,<span class="dv">1000</span>,<span class="dt">length=</span><span class="dv">25</span>), 
                  <span class="dt">gmeso=</span><span class="fl">0.15</span>, <span class="dt">Vcmax=</span><span class="dv">40</span>, <span class="dt">Jmax=</span><span class="dv">85</span>)
 <span class="kw">with</span>(run1, <span class="kw">plot</span>(PPFD, GS, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>))</code></pre>
-<div class="figure"><span id="fig:ppfd"></span>
+<div class="figure"><span id="fig:ppfd1"></span>
 <img src="bookdown_files/figure-html/ppfd-1.png" alt="PPFD VS. GS" width="672" />
 <p class="caption">
 图 6.2: PPFD VS. GS
@@ -351,13 +351,13 @@ arun2 &lt;-<span class="st"> </span><span class="kw">Aci</span>(<span class="dt"
              <span class="dt">Vcmax=</span><span class="dv">30</span>, <span class="dt">Jmax=</span><span class="dv">70</span>)
 <span class="kw">with</span>(arun1, <span class="kw">plot</span>(Ci, ALEAF, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>))
 <span class="kw">with</span>(arun2, <span class="kw">points</span>(Ci, ALEAF, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">lty=</span><span class="dv">5</span>))</code></pre>
-<div class="figure"><span id="fig:ppfd"></span>
+<div class="figure"><span id="fig:ppfd2"></span>
 <img src="bookdown_files/figure-html/ppfd-2.png" alt="PPFD VS. GS" width="672" />
 <p class="caption">
-图 6.2: PPFD VS. GS
+图 6.3: PPFD VS. GS
 </p>
 </div>
-<p>不同 ci 下的光合速率见 <a href="photo-stomo.html#fig:ppfd">6.2</a>。</p>
+<p>不同 ci 下的光合速率见 <a href="#fig:ppfd"><strong>??</strong></a>。</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 找出CO2需求和供给的交叉点</span>
 <span class="co"># 设定部分参数</span>
 gs &lt;-<span class="st"> </span><span class="fl">0.2</span> <span class="co"># 对水的气孔导度</span>
@@ -384,10 +384,10 @@ g &lt;-<span class="st"> </span><span class="kw">Photosyn</span>(<span class="dt
 <div class="figure"><span id="fig:supply"></span>
 <img src="bookdown_files/figure-html/supply-1.png" alt="supply VS. demand" width="672" />
 <p class="caption">
-图 6.3: supply VS. demand
+图 6.4: supply VS. demand
 </p>
 </div>
-<p>需求与供给的作图 <a href="photo-stomo.html#fig:supply">6.3</a>。</p>
+<p>需求与供给的作图 <a href="photo-stomo.html#fig:supply">6.4</a>。</p>
 </div>
 </div>
 <div id="photsyneb" class="section level2">
@@ -483,7 +483,7 @@ gitbook.start({
 },
 "edit": {
 "link": "https://github.com/zhujiedong/photoanalysis/blob/master/05-coupled.Rmd",
-"text": "缂栬緫"
+"text": "编辑"
 },
 "history": {
 "link": null,

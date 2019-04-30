@@ -71,7 +71,8 @@ library(plantecophys)
 
 aci <- read.csv("./data/aci.csv")
 aci <- subset(aci, Obs > 0)
-fitBB(aci, gsmodel = "BBOpti", fitg0 = TRUE)
+fitBB(aci, varnames = list(ALEAF = "Photo", GS = "Cond", VPD = "VpdL",
+  Ca = "CO2S", RH = "RH_S"), gsmodel = "BBOpti", fitg0 = TRUE)
 ```
 
 ## `fitBBs` 函数 {#fitbbs}
