@@ -25,7 +25,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司">
 
 
-<meta name="date" content="2019-06-15">
+<meta name="date" content="2019-08-15">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -710,11 +710,11 @@ y1<span class="op">$</span>Photo<span class="op">/</span>x1<span class="op">$</s
 area &lt;-<span class="st"> </span><span class="dv">6</span> <span class="op">-</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">32</span>, <span class="dv">1</span>, <span class="dv">3</span>)
 y1 &lt;-<span class="st"> </span><span class="kw">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>,  <span class="dt">header_line =</span> <span class="dv">17</span>, <span class="dt">data_start =</span> <span class="dv">27</span>, <span class="dt">S =</span> area, <span class="dt">K =</span> <span class="fl">0.5</span>)
 y1<span class="op">$</span>Photo<span class="op">/</span>x1<span class="op">$</span>Photo</code></pre>
-<pre><code>##  [1] 1.384769 1.521489 1.797968 1.396133 1.900252 1.242257 1.309717
-##  [8] 1.615699 1.213476 1.898138 1.767263 1.852480 1.282704 1.352846
-## [15] 1.204523 1.641850 1.488306 1.244898 1.653052 1.214452 1.336319
-## [22] 1.714827 1.477353 1.513658 1.207461 1.508084 1.299229 1.788245
-## [29] 1.619830 1.739134 1.531067 1.215229</code></pre>
+<pre><code>##  [1] 1.209475 1.281518 1.805788 1.213345 1.875472 1.688887 1.421186
+##  [8] 1.406447 1.618628 1.551093 1.485258 1.775077 1.289241 1.759288
+## [15] 1.549633 1.314112 1.535182 1.417377 1.542465 1.510473 1.534810
+## [22] 2.006658 1.494825 1.228237 1.341605 1.474793 1.320311 1.631002
+## [29] 1.513770 1.255688 1.702102 1.367557</code></pre>
 <p>我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.</p>
 </div>
 <div id="recompute6800" class="section level3">
@@ -750,10 +750,10 @@ y3<span class="op">$</span>A<span class="op">/</span>x3<span class="op">$</span>
 area &lt;-<span class="st"> </span><span class="dv">6</span> <span class="op">-</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">28</span>, <span class="dv">1</span>, <span class="dv">3</span>)
 y3 &lt;-<span class="st"> </span><span class="kw">recomp_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="dt">data_start =</span> <span class="dv">56</span>, <span class="dt">S =</span> area, <span class="dt">K =</span> <span class="fl">0.5</span>)
 y3<span class="op">$</span>A<span class="op">/</span>x3<span class="op">$</span>A</code></pre>
-<pre><code>##  [1] 1.219656 1.462228 1.886553 1.366222 1.540132 1.642324 1.399426
-##  [8] 1.997438 1.332051 1.419451 1.391409 1.257825 1.223739 1.441234
-## [15] 1.388636 1.562827 1.299351 1.423367 1.553300 1.214107 1.763451
-## [22] 1.571037 1.271374 1.528285 1.610050 1.754170 1.915677 1.213123</code></pre>
+<pre><code>##  [1] 1.557286 1.296059 1.207374 1.650767 1.214349 1.270697 1.663683
+##  [8] 1.468039 1.316959 1.258238 1.975333 1.298992 1.670298 1.214591
+## [15] 1.965215 1.475837 1.690965 1.646044 1.844382 1.237794 1.513243
+## [22] 1.465134 1.381361 1.636560 1.698833 1.517100 1.737408 1.339222</code></pre>
 <p>测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。</p>
 
 
@@ -802,7 +802,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/zhujiedong/photoanalysis/blob/master/01-batch-data.Rmd",
+"link": "https://github.com/zhujiedong/photoanalysis/blob/master/01-2-batch-data.Rmd",
 "text": "编辑"
 },
 "history": {

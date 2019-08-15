@@ -25,7 +25,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司">
 
 
-<meta name="date" content="2019-06-15">
+<meta name="date" content="2019-08-15">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -359,6 +359,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>光响应曲线的拟合相对简单，仅需要光强和光合速率的值，其中需要修改的部分仅为光强的赋值部分，在文件名一致的前提下，修改如下代码即可：</p>
 <pre class="sourceCode r"><code class="sourceCode r">lrc_Q &lt;-<span class="st"> </span>lrc<span class="op">$</span>Qin
 lrc_A &lt;-<span class="st"> </span>lrc<span class="op">$</span>A </code></pre>
+
+
 </div>
 <div id="racir68" class="section level2">
 <h2><span class="header-section-number">10.4</span> LI-6800 RACiR的测量与拟合</h2>
@@ -483,6 +485,8 @@ photodata &lt;-<span class="st"> </span><span class="kw">lapply</span>(cordata, 
     <span class="dt">varnames =</span> <span class="kw">list</span>(<span class="dt">ALEAF =</span> <span class="st">&quot;A&quot;</span>, <span class="dt">Tleaf =</span> <span class="st">&quot;Tleaf&quot;</span>,
     <span class="dt">Ci =</span> <span class="st">&quot;Ci&quot;</span>, <span class="dt">PPFD=</span> <span class="st">&quot;Q&quot;</span>, <span class="dt">Rd =</span> <span class="st">&quot;Rd&quot;</span>), <span class="dt">fitmethod =</span><span class="st">&quot;bilinear&quot;</span>)</code></pre>
 <p>批量分析同样使用向量化来进行，避免了循环，效率比较高，也可以将拟合结果 <code>coef</code> 中的 <span class="math inline">\(V_{cmax}\)</span> 和 <span class="math inline">\(J_max\)</span> 结果批量导入文件，参考 @(imbycsv) 部分的代码。</p>
+
+
 </div>
 <div id="racir68_exam" class="section level2">
 <h2><span class="header-section-number">10.7</span> RACiR分析的手动实现</h2>
@@ -610,6 +614,8 @@ p2 <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_co
 图 10.4: RACiR 方法与常规结果的比较
 </p>
 </div>
+
+
 </div>
 <div id="multirate-racir" class="section level2">
 <h2><span class="header-section-number">10.8</span> 利用不同速率的 RACiR 曲线研究植物的光合生理特性</h2>
@@ -3565,6 +3571,8 @@ FigS1</code></pre>
 图 10.25: Rubisco不同失活程度下的下 A VS Ci
 </p>
 </div>
+
+
 </div>
 </div>
 <div id="fluro68" class="section level2">
@@ -3891,7 +3899,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/zhujiedong/photoanalysis/blob/master/12-li6800.Rmd",
+"link": "https://github.com/zhujiedong/photoanalysis/blob/master/12-1-li6800-plantecophys.Rmd",
 "text": "编辑"
 },
 "history": {

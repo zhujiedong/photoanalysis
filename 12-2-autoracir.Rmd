@@ -1,0 +1,135 @@
+## LI-6800 RACiR\texttrademark 的测量与拟合 {#racir68}
+
+在评估作物性状时，V$_{cmax}$ 及 J$_{max}$时非常有用，传统的 A–Ci 曲线测量要求植物叶片要在一定浓度 CO$_{2}$
+下适应几分钟后完成测量，这样的测量有几个缺点：
+
+* 测量时间长，一条曲线至少需要 20 – 30 min，样本量多，重复多时，这种方法几乎没有可行性。
+* 整个测量过程中，时间长，酶的激活状态会有变化，叶绿体会移动，气孔的开度也会发生变化。
+
+而 LI-6800 独有的 auto control 功能在算法上允许用户自定义 CO$_{2}$ 的起始浓度和种植浓度、变化方式（线性或其他）、所花费的时间，再加上其
+IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实，即快速 CO$_{2}$ 响应曲线 RACiR\texttrademark
+测量实验，该功能使得 5 min 内测量 A–Ci 曲线成为可能。该方法的实现可参考  @stinziano2017
+的文章。
+
+@stinziano2018 针对 RACiR\texttrademark 技术的疑问做了解答并提出了准确测量的建议，概括如下：
+
+* 首先，采用 100 ppm/min 的变化速率是与标准方法重合度最高的测量。
+* 其次，明确研究问题，目前已有研究表明Vcmax 与 Jmax 的计算结果与标准测量方法结果无显著差异。
+* 任何条件的改变，都需要做空叶室校准，例如：流速，气体浓度变化方向、温度，斜率等。
+* 空叶室校准与叶片测量采用严格的同一次校准，因为 IRGA  的漂移，需要再次匹配时，或者环境条件改变时，需要重新做空叶室校准。是否需要匹配，可通过不加叶片的最初状态查看，此时 A 值应接近为0，reference 和 sample 气体浓度读数接近相等。
+* IRGA 分析器使用 5 此多项式进行校准，推荐使用 1 次到 5  次多项式进行拟合，然后根据 BIC 指数来确定最合适的空叶室校准系数（即非参数拟合的模型选择的问题）。
+确定最合适的浓度变化范围。通常需要去掉最初和最后 30 s的数据。
+* 最小化校准和测量值之间的水分摩尔分数差异。甚至有可能需要控制 reference 或 sample 的水的摩尔分数而不是 Vpdleaf。
+通过预实验来确定最合适的 $CO_2$ 变化范围和随时间的斜率。
+
+## racir 软件包实现 RACiR\texttrademark 数据分析  {#racir_pkg}
+
+**可能软件包作者没有更改叶面积的需求，他的软件包只支持原始数据的处理，但这对有更改需求的客户来讲没那么友好，而且这样导致了大量代码的重复，我根据作者原来的代码，结合我自己数据分析的习惯，重新制作了一份软件包，下面代码实现是基于我的软件包实现的，如有需求，也可使用作者原来的代码实现**
+
+```{r, racir_install, eval=FALSE}
+devtools::install_github("zhujiedong/racir")
+library(racir)
+```
+
+软件包的函数很多，但可以分为下面几类：
+
+* 首先使用 `find_cut` 来查看使用数据的范围（排除野点）。
+
+* 使用 `racircheck` 来检查校正数据 (非必须，但建议进行数据质量检查)
+
+* 使用 `racircal` 进行数据的校准
+
+### 实现过程 {#racir_pkg_real}
+
+手上暂时没有原始数据格式的 racir 数据，因而现在使用以前的 csv 数据进行操作（空叶室测量数据和带叶片测量数据转为 csv 格式）。
+
+首先检查空叶室校准：
+
+```{r, racircheck, fig.cap="找出最合理的校准曲线数据范围"}
+library(racir)
+# only check the empty chamber data here
+em1 <- read.csv("./data/racirem/em-1.csv")
+le1 <- read.csv("./data/racirle/le-1.csv")
+find_cut(em1)
+
+```
+
+上述代码查看参比室 $CO_2$ 浓度在两者之间的数据，确定后面代码使用的 `mincut`, `maxcut` 范围。此处我选择的范围如下问代码：
+
+```{r, racircorpkg, fig.cap="校准曲线查看"}
+racircheck(em1, mincut = 21 , maxcut = 463 )
+```
+
+没有问题可直接进行校准
+
+```{r, racircor, fig.cap="校准后数据查看"}
+x <- racircal(em1, le1, mincut = 21, maxcut = 463)
+plot(x$CO2_r, x$A)
+```
+前两个参数分别为空叶室数据，带叶片测量数据，后面的最大最小值为 `racircheck` 确定，剩余工作就是使用 `plantecophys` 进行分析，在此不再重复这个过程。
+
+**注意：RACiR 的本意是表型研究中求 Vcmax 和 Jmax，因而，请忽略 Rd 等参数的计算结果**
+
+### 数据的批量处理 {#racirbatch}
+
+#### readphoto 导入 {#imbyphoto}
+
+如果数据的导入是使用 `readphoto` 批量处理，那么所在数据文件有 files 列，作为不同文件数据的区分，那么可以使用向量化处理方式实现数据的分析，参考如下代码：
+
+```{r, eval=FALSE}
+library(readphoto)
+# read all empty data set
+all_empty <- read_bat_6800("./empty_data")
+# read all leaf data set
+all_leaf <- read_bat_6800("./leaf_data")
+listem  <-  split(all_empty, files)
+listle <-  split(all_leaf, files)
+cordata <- purrr::map2(listem, listle, racircal, mincut = 21, maxcut = 463)
+```
+所有的数据均保存在 cordata 中，特别注意 **此处要求 listem 与 listle 长度相同，因此，如果一个空叶室对多个带叶片测量数据，请将空叶室测量文件复制几份（注意对应顺序），使其每个带叶片测量的数据文件和空叶室测量数据文件数量相同，并且一一对应，例如 emtpy-1-1 数据文件对应 leaf-1-1**，文件命名前即制定好命名规则，方便后续数据处理。
+
+#### 处理大量 csv 文件 {#imbycsv}
+
+```{r, eval=FALSE}
+# suppose leaf and empty data in 2 files in disk D:
+le=list.files("d:/racirle/")
+em=list.files("d:/racirem/")
+
+# construct the path of these csv files
+pathle = paste0("d:/racirle/", le)
+pathem = paste0("d:/racirem/", em)
+
+# import all leaf data and empty data separately
+xx <- lapply(pathle, read.csv)
+yy <- lapply(pathem, read.csv)
+
+# correct all the data
+all_correc <- purrr::map2(yy, xx, racircal, mincut = 21, maxcut=463)
+
+#  export all data to csv files, these file have the same name with leaf data
+dirc <- dir.create("d:/data/")
+finame <- "d:/data/"
+finame <- paste0(finame, le)
+purrr::walk2(all_correc,  finame, write.csv)
+```
+
+以上代码仅供参考，主要是实现批量导入并校正，在批量将校正后数据导出为 csv 文件，为方便，将导出的文件名字命名为同原来带叶片测量数据相同的文件名，。
+
+## 批量计算 $V_{cmax}$ 和 $J_max$ {#fitbatracir}
+
+```{r, eval=FALSE}
+#use csv data above
+csvdata <- lapply(all_correc, plantecophys::fitaci, 
+    varnames = list(ALEAF = "A", Tleaf = "Tleaf",
+    Ci = "Ci", PPFD= "Q", Rd = "Rd"), fitmethod ="bilinear")
+
+# use readphoto data above
+photodata <- lapply(cordata, plantecophys::fitaci, 
+    varnames = list(ALEAF = "A", Tleaf = "Tleaf",
+    Ci = "Ci", PPFD= "Q", Rd = "Rd"), fitmethod ="bilinear")
+```
+
+批量分析同样使用向量化来进行，避免了循环，效率比较高，也可以将拟合结果 `coef` 中的 $V_{cmax}$ 和 $J_max$ 结果批量导入文件，参考 @\ref(imbycsv) 部分的代码。
+
+
+\cleardoublepage

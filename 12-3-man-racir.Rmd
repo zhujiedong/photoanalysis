@@ -1,0 +1,129 @@
+## RACiR\texttrademark 分析的手动实现 {#racir68_exam}
+
+以下内容是我之前写的内容，部分代码的实现和上述软件包相似，仅供参考，尤其是当您使用 `racir` 软件包报错时，可以参考下文代码手动实现 RACiR 数据的分析。
+
+```{r, eval=FALSE}
+# 分别读取未校准空叶室数据
+# 未校准带叶片测量数据
+# 标准aci曲线测量数据
+uemp500 <- read.csv("./data/uncorr_emp500.csv")
+uleaf500 <- read.csv("./data/uncorr_leaf500.csv")
+acin <- read.csv("./data/aci_ex.csv")
+
+# 防止读入空白行
+m <- length(which(uemp500$obs >= 1))
+n <- length(which(uleaf500$obs >= 1))
+uemp500 <- uemp500[1:m,]
+uleaf500 <- uleaf500[1:n,]
+
+# 观察空叶室未校准数据reference对A的图形
+plot(uemp500$CO2_r, uemp500$A)
+# 选取线性部分用于校准
+locator()
+# 执行locator命令后，在上图中的目标位置选点，
+# 选好后按 esc 可以返回所选点的坐标（选点即为在
+# 预期位置鼠标单击）
+
+# 根据上面的点，利用二氧化碳的值过滤掉不需要的数据
+# 只要在线性范围内选点，拟合结果相差很小
+cemp <- uemp500[which(uemp500$CO2_r > 
+                        45.28 & uemp500$CO2_r < 459.12),]
+plot(cemp$CO2_r, cemp$A)
+
+# 采用 1~5 次多项式分别拟合
+cal1st <- lm(A ~ CO2_r, data = cemp)
+cal2nd <- lm(A ~ poly(CO2_r, 2), data = cemp)
+cal3rd <- lm(A ~ poly(CO2_r, 3), data = cemp)
+cal4th <- lm(A ~ poly(CO2_r, 4), data = cemp)
+cal5th <- lm(A ~ poly(CO2_r, 5), data = cemp)
+
+# 利用 BIC 找出最合理的校准方程
+bics <- BIC(cal1st, cal2nd, cal3rd, cal4th, cal5th)
+# noquote也就是没引号，成为名字
+best <- noquote(rownames(bics)[bics$BIC == min(bics$BIC)])
+best
+
+# 校准带叶片测量的数据
+uleafc <- uleaf500
+uleafc$A <- uleafc$A - predict(cal4th, uleafc)
+uleafc$Ci <- ((uleafc$gtc - uleafc$E / 2) * uleafc$CO2_s - 
+                uleafc$A) / (uleafc$gtc + uleafc$E / 2)
+
+# 对校准前后的数据进行作图，查看校准效果
+plot(uleaf500$CO2_r, uleaf500$A, pch = 2, ylim = c(-20, 40))
+points(uleafc$CO2_r, uleafc$A)
+locator()
+cleaf <- uleafc[which(uleafc$CO2_r > 16.6 & 
+                        uleafc$CO2_r < 478),]
+plot(cleaf$CO2_r, cleaf$A)
+
+# 利用plantecophys拟合标准曲线和racir曲线
+library("plantecophys")
+acifit <- fitaci(cleaf, varnames = 
+                   list(ALEAF = "A", Tleaf = "Tleaf", Ci = "Ci", 
+                        PPFD  = "Qin", Rd = "Rd"), Patm = 84.09)
+acifit_normal <- fitaci(acin, varnames = 
+                          list(ALEAF = "A", Tleaf = "Tleaf", Ci = "Ci", 
+                               PPFD  = "Qin", Rd = "Rd"), Patm = 84.09)
+# 查看拟合数据
+acifit$pars
+acifit_normal$pars
+
+# 对快速曲线作图拟合结果进行查看
+plot(acifit, linecols = c("green", "blue", "red"))
+
+#### ggplot2 作图
+ddata <- acifit$df
+
+alldata <- data.frame(A = c(acin$A, ddata$Ac, ddata$Aj, cleaf$A), 
+                      Ci = c(acin$Ci, ddata$Ci, ddata$Ci, cleaf$Ci),
+                      Atype = c(
+                        rep("standard Aci curve", length(acin$A)),
+                        rep("Ac", length(ddata$Ac)), 
+                        rep("Aj", length(ddata$Aj)),
+                        rep("A corrected", length(cleaf$A))
+                      )
+)
+
+alldata$Atype <- factor(alldata$Atype, 
+                        levels = c("standard Aci curve", 
+                                   "Ac", "Aj", "A corrected"))
+
+library(ggplot2)
+p <- ggplot(alldata)
+p1 <- p + geom_point(aes(Ci,A, colour = Atype),  alpha = 0.5)
+
+p2 <- p1 + geom_smooth(aes(Ci, A, colour = Atype),
+                       method = 'auto') + 
+  labs(y=expression(paste("A ", "(", mu, 
+                          mol%.%m^-2%.%s^-1, ")")), 
+       x=expression(paste(C[i], " ",
+                          "(", mu, mol%.%mol^-1, ")")))
+
+p2 + scale_x_continuous(limits=c(0, 1800),
+                        breaks=seq(0, 1800, 200)) +  
+  scale_y_continuous(limits=c(-3, 50),
+                     breaks=seq(0, 50, 10)) + 
+  scale_colour_hue(name="  ", 
+                   labels=c('ACi curve data; ', 
+                            expression(paste(A[c], ' data; ')), 
+                            expression(paste(A[j], ' data; ')), 
+                            'RACiR data') 
+  ) + theme_set(theme_bw()) +
+  theme(axis.text.x  = element_text(size = 10, 
+                                    angle=30, vjust=0.5), 
+        axis.text.y = element_text(size = 10),
+        axis.title.x = element_text(
+          size = 12, face = 'bold'),
+        axis.title.y = element_text(
+          size = 12, face = 'bold'),
+        legend.text.align = 0,
+        legend.position = c(0.8, 0.6))
+```
+
+最终采用常规方法和 RACiR\texttrademark 方法结果如图 \@ref(fig:racir) 所示，其中 Aj 与 Ac 结果采用 RACiR\texttrademark 计算^[注意，注意数据表头的大小写，此处代码中，为处理数据的方便，我更改了大小写，分析自己的数据时需要注意]。
+```{r, racir, out.width='100%', fig.cap = "RACiR 方法与常规结果的比较", echo = FALSE}
+knitr::include_graphics("images/racir.png")
+```
+
+\cleardoublepage

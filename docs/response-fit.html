@@ -25,7 +25,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司">
 
 
-<meta name="date" content="2019-06-15">
+<meta name="date" content="2019-08-15">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -325,7 +325,7 @@ O 通常以气体摩尔分数 (<span class="math inline">\(\mu mol\text{·}mol^{
 CO<sub>2</sub> 和 <span class="math inline">\(O_{2}\)</span> 浓度。是 Rubisco 特异性因子, <span class="math inline">\(S_{\frac{c}{o}}\)</span>表示 Rubisco
 对CO<sub>2</sub> 和 <span class="math inline">\(O_{2}\)</span> 的偏好程度。</p>
 <p>当 A = Rd , 即 RuBP 羧化的 CO<sub>2</sub> 吸收速率刚好 等于 RuBP 氧化的 CO<sub>2</sub> 释放速率
-(Vc = 0.5Vo ) 时, <span class="math inline">\(\alpha\)</span> = 0.5。此时叶绿体的 CO<sub>2</sub> 浓度就是叶绿体 CO<sub>2</sub>
+(Vc = 2Vo，羧化时 CO<sub>2</sub> 提供的为 CO ) 时, <span class="math inline">\(\alpha\)</span> = 0.5。此时叶绿体的 CO<sub>2</sub> 浓度就是叶绿体 CO<sub>2</sub>
 光合补偿点, 标记为 <span class="math inline">\(\Gamma^{*}\)</span>。即：</p>
 <p><span class="math display" id="eq:com">\[\begin{equation}
 \Gamma^{*}\ =\ \frac{0.5O}{S_{\frac{c}{o}}}
@@ -388,6 +388,8 @@ C_c = C_i - \frac{A}{gm}
 \end{equation}\]</span></p>
 <p>对于 gm 的计算，比较易操作的有几种：采用光合荧光联合测量的方式计算求得。当然也可以采用曲线拟合的方式，或者 <span class="citation">Yin et al. (<a href="#ref-yin2009using">2009</a>)</span> 使用的方式，在低氧气体下，采用不同的光照水平求得。</p>
 <p>此外，测量气体交换非常重要的误差来源就是气体的扩散，因为测量时，多数时间内外界气体浓度要高于叶室内的气体浓度，那么即使使用密封性非常好的材料，由外界高 <span class="math inline">\(CO_2\)</span> 浓度气体向叶室低 <span class="math inline">\(CO_2\)</span> 浓度气体的扩散无法避免，尤其是在连续长时间测量时该效应尤为明显，因此需要经常更换叶室垫圈。具体可以通过一些方法来校正（<span class="citation">Flexas J and A (<a href="#ref-Flexas2007leak">2007</a>)</span>，rodeghiero2007major），但如果采用 LI-6800 测量这将不是问题，它采用的叶室增加技术并根据测量的漏气情况对结果自动修正。</p>
+
+
 </div>
 </div>
 <div id="plantecophys" class="section level2">
@@ -462,6 +464,8 @@ citransition ）区域，以及 J<span class="math inline">\(_{max}\)</span> 限
 = “bilinear”。但需要注意，当 TPU 被计算时，没有 J<span class="math inline">\(_{max}\)</span> 限制的点的存在是可能的。TPU限制的发生是在A值不随
 CO<span class="math inline">\(_{2}\)</span> 的增加而增加时发生的，因此计算 TPU 是否有返回值，取决于测量数据是否有此情况出现。</p></li>
 </ul>
+
+
 </div>
 </div>
 </div>
@@ -1371,6 +1375,8 @@ rmses &lt;-<span class="st"> </span><span class="kw">sapply</span>(fits, <span c
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">findCiTransition</span>(object, ...)</code></pre>
 <p>参数使用，object 为 fitaci 函数对象，或者整个的 <code>Photosyn</code> 函数。
 … 为使用 <code>Photosyn</code> 时可传递的参数。</p>
+
+
 </div>
 </div>
 <div id="c4" class="section level2">
@@ -1533,7 +1539,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/zhujiedong/photoanalysis/blob/master/02-fvcb.Rmd",
+"link": "https://github.com/zhujiedong/photoanalysis/blob/master/02-1-fvcb-theory.Rmd",
 "text": "编辑"
 },
 "history": {

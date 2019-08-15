@@ -1,0 +1,198 @@
+## 使用 `plantecophys` 拟合 LI-6400XT CO~2~ 响应曲线数据 {#plantecophy_use}
+
+### 数据的前处理 {#data6400}
+
+虽然 R 软件支持直接导入 xlsx 的数据，但因为 LI-6400XT 的数据记录文件内有其他空行或 remark 等内容，增加了处理代码的量，**故而推荐将其数据先整理为如表 \@ref(tab:head6400) 样式，并另存为 csv 格式**^[即仅保留测量值，删除其他所有头文件、空行、 remark 等信息]：
+
+
+```{r, head6400, echo=FALSE}
+style <- read.csv("./data/aci.csv")
+knitr::kable(head(style[, 1:8]),  longtable = TRUE, booktabs = TRUE, caption = '推荐 LI-6400 整理后数据样式')
+```
+
+### 使用示例 {#fitaci-p}
+
+`plantecophys` 并非 base 的安装包，首次使用需要从 `CRAN` 安装，可以使用图形界面安装，也可以直接用命令行安装^[首次使用安装，更换电脑或者升级 R 软件后，如果没有拷贝 library，也需要运行安装命令]，推荐同时安装依赖。
+
+```{r, eval=FALSE}
+install.packages("plantecophys", dependencies = TRUE)
+```
+
+
+```{r, fitaci6400, fig.cap = "光合速率的不同的限制阶段", message=FALSE}
+# 载入 plantecophys 
+library("plantecophys")
+
+# 利用read.csv读取数据文件，
+# 我的路径为当前工作路径的data文件夹内
+aci <- read.csv("./data/aci.csv")
+
+# 防止可能出现的NA值
+aci <- subset(aci, Obs > 0)
+
+# 不修改默认参数对数据进行拟合
+acifit <- fitaci(aci)
+# 查看拟合结果的参数名称，方便导出数据使用
+attributes(acifit)
+# 查看拟合结果
+summary(acifit)
+
+acifit_linear <- fitaci(aci,  fitmethod = "bilinear", quiet = TRUE)
+summary(acifit_linear)
+# 仅查看拟合参数, 比较两种拟合参数的差异
+coef(acifit_linear)
+coef(acifit)
+
+# 设置作图参数，图形的边距及分为1行两列输出图形
+par(mar = c(4.5, 4.5, 2, 2))
+par(mfrow = c(1, 2))
+# 对两种拟合参数的结果作图，查看模型拟合是否正常
+plot(acifit, addlegend = FALSE)
+legend(x = 500, y = 10, 
+       legend = c(expression(paste(A[c])), 
+                expression(paste(A[j])),
+                "Limiting rate"),
+       lty = c(1, 1, 1),
+       col =c("red", "blue", "black") 
+         )
+mtext(" fitmethod = 'default' ")
+
+plot(acifit_linear, addlegend = FALSE)
+legend(x = 500, y = 10, 
+       legend = c(expression(paste(A[c])), 
+                  expression(paste(A[j])),
+                  "Limiting rate"),
+       lty = c(1, 1, 1),
+       col =c("red", "blue", "black") 
+)
+mtext("fitmethod = 'bilinear' ")
+
+```
+
+如果需要导出数据做他用，直接根据 `attributes` 中看到的名称，选择对应的数据导出即可，如果使用 Rstudio 的话，其自动补全的功能在选择数据上更方便。例如导出预测值和系数分别使用如下方式：
+
+```{r, eval=FALSE}
+# 将模型拟合结果中df（即计算数据）赋给predictaci，
+# 并用write.csv导出
+predictaci <- acifit$df
+write.csv(acifit$df, file = "acipredict.csv")
+write.csv(coef(acifit), file = "coefaci.csv")
+```
+
+>需要注意的是，因为非线性拟合需要一个初始值，因此，使用默认方式（非线性拟合）的时候，会存在可能的拟合失败现象，此时可以使用 `fitmethod = "bilinear"`，二者结果略有差别。
+
+#### fitmethod = "onepoint" 介绍 {#onepoint}
+
+@De2016A 发表了关于 one point 方法计算 $V_{cmax}$ 和 $J_{max}$ 方法的文章，在 2017 年 11 月的更新中，plantecophys 增加了响应的 R 软件实现方法， 该方法并非使用一个点计算 $V_{cmax}$ 和 $J_{max}$，而是对数据集中的每一个点的值进行估计，使用的方法为逆向了光合作用方程。输出为对每个原始数据加入了 $V_{cmax}$ 和 $J_{max}$，当然一如既往的可以使用温度校准的方法。**并不建议该方法应用于整个 ACi 曲线的数据，它的假设是在外部环境 CO~2~ 浓度和饱和光下，受到 Rubisco 羧化速率的限制而不是 RUBP 的限制。**
+
+基于上面的描述，他们的模型如下：
+
+\begin{equation}
+\hat{V}_{cmax} = (A_{sat} + R_{day}) \frac{C_i + K_m}{C_i - \Gamma^*} 
+(\#eq:inverseA)
+\end{equation}
+
+其中：K~m~ 为米氏常数，其计算为：
+
+\begin{equation}
+K_m = K_c (1 + \frac{O_i}{K_o}) 
+(\#eq:km)
+\end{equation}
+
+未知参数均由文献中的方法进行计算，具体可参考 @De2016A 的原文,但上述方法的缺陷为还要使用 ACi 曲线来估算 R~day~，因此作者使用了1.5% V~cmax~ 作为 R~day~，因此公式 \@ref(eq:inverseA) 可变换为：
+
+\begin{equation}
+\hat{V}_{cmax} = A_{sat} (\frac{C_i + K_m}{C_i - \Gamma^*} - 0.015)
+(\#eq:onepoint)
+\end{equation}
+
+另一个重要的模型的假设为 J~max~ 与 V~cmax~ 是成比例的， J~max~ 的计算是通过 C~i~ transition point 来实现的，文章中的比值均值为 1.9，范围在 1.68 ~ 2.14 之间。 
+
+### 使用 'onepoint' 单独计算 V~cmax~ 和 J~max~ {#onpoint_fit}
+
+目前我手头没有相应数据，仅有使用 LI-6400 测试 auto log 2 时的一个数据，我们用这个来示范该方法的使用：
+
+```{r, onepointdata}
+one_data <- read.csv("./data/onepoint.csv")
+knitr::kable(head(one_data), booktabs = TRUE,
+             caption = 'onepoint 使用的数据')
+```
+
+数据如上所示，为同一个叶片连续记录数据，故所有的光合速率十分接近。
+
+使用方法：
+
+```{r, onepoint}
+library(plantecophys)
+
+one_data <- subset(one_data, Obs > 0)
+one_data$Rd <- rep(-0.5, length(one_data$Obs))
+aci_fit <- fitaci(one_data, fitmethod = "onepoint")
+
+knitr::kable(head(data.frame(aci_fit$Photo, 
+             aci_fit$Vcmax, aci_fit$Jmax)),
+             booktabs = TRUE,
+             caption = 'onepoint 法计算的结果')
+```
+
+需要注意，为保证结果的精确，如果不设定 Rd, 也即文献中的 Rday， 模型是无法计算的，因此上面的示例中虚构了一个，实际操作用一般使用标准的 ACi 测量计算。
+
+### 多条 CO~2~ 响应曲线的拟合 {#multi_curve}
+
+fitacis 函数实际上是 fitaci 函数的扩展，方便一次拟合多条曲线^[需要注意，此时fitmethod一般推荐使用bilinear。]。函数的参数如下：
+
+```{r, eval=FALSE}
+fitacis(data, group, fitmethod = c("default", 
+        "bilinear"),progressbar = TRUE, 
+        quiet = FALSE, id = NULL, ...)
+
+## S3 method for class 'acifits'
+plot(x, how = c("manyplots", "oneplot"), 
+     highlight = NULL, ylim = NULL, 
+     xlim = NULL, add = FALSE, what = c("model",
+     "data", "none"), ...)
+```
+
+**主要参数详解：**
+
+实际上 fitacis 与 fitaci 模型算法完全一致，只不过增加了一个 group 参数，用于区分不同测量的数据，具体请参考举例内容。
+
+#### fitacis 函数应用举例 {#fitacis_exa}
+
+下文代码根据 plantecophys 中的示例代码修改，进行演示，原代码请参考其帮助文档。
+
+```{r, fitacisr, fig.cap='fitacis作图结果'}
+library(plantecophys)
+# 只提取前10个不同测量的数据，节省时间进行举例
+manyacidat2 <- droplevels(manyacidat[manyacidat$Curve %in% 
+                                       levels(manyacidat$Curve)[1:10],])
+
+# 对多条曲线进行拟合，使用bilinear方法，
+# 仅仅因为其比非线性拟合节省时间
+fits <- fitacis(manyacidat2, group = "Curve", fitmethod="bilinear", quiet = TRUE)
+
+# 拟合结果为list，我们可以只提取第一个的拟合结果
+fits[[1]]
+
+# 使用sapply提取拟合结果的RMSE(均方根误差)
+rmses <- sapply(fits, "[[", "RMSE")
+plot(rmses, type='h', ylab="RMSE", xlab="Curve nr")
+# 对最差的拟合结果进行作图
+plot(fits[[which.max(rmses)]])
+```
+
+可以看出，`fitaci` 和 `fitacis` 用法基本一致，各行代码均已经注释，更详细用法请参函数考帮助。
+
+### `findCiTransition` 函数 {#transition}
+
+计算 CiTransition 的函数，第一点为 Ac & Aj，第二点为 Aj & Ap，并且仅在计算 TPU 的前提下才会有第二点出现。
+
+```{r, eval=FALSE}
+findCiTransition(object, ...)
+```
+
+参数使用，object 为 fitaci 函数对象，或者整个的 `Photosyn` 函数。
+... 为使用 `Photosyn` 时可传递的参数。
+
+
+\cleardoublepage

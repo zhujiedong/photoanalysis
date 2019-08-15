@@ -1,0 +1,53 @@
+## C4 植物光合 {#c4}
+
+之前的部分模型全部为关于 C3 植物的拟合，而 @Caemmerer2000Biochemical 的方法，则是针对
+C4 植物的 A-Ci 曲线的实现。
+
+```{r, eval=FALSE}
+AciC4(Ci, PPFD = 1500, Tleaf = 25, VPMAX25 = 120, 
+      JMAX25 = 400, Vcmax = 60, Vpr = 80, 
+      alpha = 0, gbs = 0.003, O2 = 210, 
+      x = 0.4, THETA = 0.7, Q10 = 2.3, 
+      RD0 = 1, RTEMP = 25, TBELOW = 0, 
+      DAYRESP = 1, Q10F = 2, FRM = 0.5, ...)
+```
+
+**参数详解**
+
+* Ci：胞间二氧化碳浓度 ($\mu mol\cdot m^{-2}\cdot s^{-1}$)。
+* PPFD：光合光量子通量密度 ($\mu mol\cdot m^{-2}\cdot s^{-1}$)。
+* Tleaf：叶片温度 (\textcelsius)。
+* VPMAX25：PEP 羧化最大速率 ($\mu mol\cdot m^{-2}\cdot s^{-1}$)。
+* JMAX25：最大电子传递速率 (\textcelsius))。
+* Vcmax：最大羧化速率($\mu mol\cdot m^{-2}\cdot s^{-1}$)。
+* Vpr：PEP 再生($\mu mol\cdot m^{-2}\cdot s^{-1}$)。
+* alpha：维管束鞘细胞中 PSII 活性的比例。
+* gbs：维管束鞘导度 ($mol\cdot m^{-2}\cdot s^{-1}$)。
+* O2：叶肉细胞氧气浓度。
+* x：电子传递的分配因子。
+* THETA：曲角参数。
+* Q10：Michaelis-Menten 系数中依赖于温度的参数。
+* RD0：基温下的呼吸 ($mol\cdot m^{-2}\cdot s^{-1}$)。
+* RTEMP：呼吸的基温(\textcelsius)
+* TBELOW：此温度以下呼吸为0。
+* DAYRESP：明呼吸和暗呼吸的比值。
+* Q10F：呼吸依赖于温度的参数。
+* FRM：明呼吸中为叶肉呼吸的比例。
+
+以上参数均来自 @Caemmerer2000Biochemical，括号中的参数值均为默认值，具体应用时请按照实际情况修改。
+
+### C4 植物光合速率的计算 {#c4_sim}
+
+```{r, fig.cap="C4 植物 A-Ci 作图"}
+# 模拟 C4 植物的 Ci 值，计算光合速率并作图
+library(plantecophys)
+aci <- AciC4(Ci=seq(5,600, length=101))
+with(aci, plot(Ci, ALEAF, type='l', ylim=c(0,max(ALEAF))))
+```
+
+\cleardoublepage
+
+
+
+
+

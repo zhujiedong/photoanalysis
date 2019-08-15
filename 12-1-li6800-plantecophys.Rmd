@@ -1,0 +1,32 @@
+# LI-6800 的数据分析 {#anay_6800}
+
+## 数据格式 {#data6800}
+
+LI-6800 的数据前处理同 LI-6400 相同，如表 \@ref(tab:head6800) 所示的样式。
+
+```{r, head6800, echo=FALSE}
+style1 <- read.csv("./data/aci6800.csv")
+knitr::kable(head(style1[, 1:6]),  longtable = TRUE, booktabs = TRUE, caption = '推荐 LI-6800 整理后数据样式')
+```
+
+## LI-6800 与 LI-6400 使用时的差别 {#dif}
+
+`plantecophys` 使用时建立在 LI-6400XT 基础之上的软件包，因此在 LI-6800 代码中，需要改动的是 fitaci、fitacis 及 fitBB 中的 varnames 选项，也就是将 LI-6400XT 的表头改为 LI-6800 的表头。
+以 fitaci 函数为例：
+
+```{r, eval=FALSE}
+ fitaci(aci, varnames = 
+        list(ALEAF = "A", Tleaf = "Tleaf", Ci = "Ci", 
+          PPFD  = "Qin", Rd = "Rd"))
+```
+
+## 光响应曲线注意事项 {#notice}
+
+光响应曲线的拟合相对简单，仅需要光强和光合速率的值，其中需要修改的部分仅为光强的赋值部分，在文件名一致的前提下，修改如下代码即可：
+
+```{r, eval=FALSE}
+lrc_Q <- lrc$Qin
+lrc_A <- lrc$A 
+```
+
+\cleardoublepage

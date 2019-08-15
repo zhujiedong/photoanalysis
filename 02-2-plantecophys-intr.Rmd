@@ -1,0 +1,83 @@
+## `plantecophys` 软件包 {#plantecophys}
+
+Remko A. Duursma 在2015年发表了一篇文章 @Duursma2015Plantecophys，`plantecophys` 是其开发的一个R包工具集，用于对叶片气体交换数据进行分析和建模。实现了如下功能：
+
+* CO~2~ 响应曲线 (A-Ci curves) 的拟合、作图及模拟。
+* 不同气孔导度模型。 
+* 根据 Cowan-Farquhar 的假设估算最适的气孔导度。 
+* 耦合气体交换模型的实现。 
+* 基于 Ci 模拟 C4 光合。 
+* RHtoVPD：常用单位的转换（相对湿度、水汽压亏缺、露点温度）。
+
+各参数的基本用法请参考后文内容，或官方帮助文档:
+
+[plantecophys](https://cran.r-project.org/web/packages/plantecophys/plantecophys.pdf)。
+
+## LI-6400XT CO~2~ 响应曲线的拟合 {#fit6400}
+
+LI-6400XT CO~2~ 响应曲线的拟合需要借助 `plantecophys` 的 `fitaci` 实现，fitaci 函数为根据 FvCB 模型对 A-Ci 曲线的测量数据进行拟合，并估算 J$_{max}$、V$_{cmax}$、R$_{d}$及他们的标准差，并根据
+@Medlyn2002Temperature 的方法考虑了温度的影响。
+
+### fitaci 函数介绍 {#fitaci_intro}
+
+`fitaci` 的用法如下^[仅针对 C3 植物]：
+
+```{r eval=FALSE}
+fitaci(data, varnames = list(ALEAF = "Photo", 
+  Tleaf = "Tleaf", Ci = "Ci", PPFD = "PARi", 
+  Rd = "Rd"), Tcorrect = TRUE, Patm = 100, 
+  citransition = NULL, quiet = FALSE, 
+  startValgrid = TRUE, fitmethod = 
+  c("default", "bilinear", "onepoint"), 
+  algorithm = "default", fitTPU = FALSE, 
+  useRd = FALSE, PPFD = NULL, Tleaf = NULL, 
+  alpha = 0.24, theta = 0.85, gmeso = NULL, 
+  EaV = 82620.87, EdVC = 0, delsC = 645.1013,
+  EaJ = 39676.89, EdVJ = 2e+05, 
+  delsJ = 641.3615, GammaStar = NULL, 
+  Km = NULL, id = NULL, ...)
+
+## S3 method for class 'acifit'
+plot(x, what = c("data", "model", "none"),
+     xlim = NULL, ylim = NULL, whichA = c(
+       "Ac", "Aj", "Amin", "Ap"), add = FALSE,
+pch = 19, addzeroline = TRUE, addlegend = 
+  !add, legendbty = "o",transitionpoint = TRUE, 
+linecols = c("black", "blue", "red"), lwd = c(1,
+2), ...)
+
+```
+
+
+*主要参数注释：*
+
+* data：需要分析的数据，必须为 data.frame^[具体参考 R 语言相关文档，为 R 语言最常用的数据格式]。
+格式。
+* varnames：数据的表头，此处函数默认的表头为 LI-6400 的表头，分析 LI-6400 的数据时可以不用填写，直接使用默认的参数即可^[在 R 中，使用参数的值为默认值时可以不用填写该参数，例如使用默认选项分析 LI-6400 数据时，可只填写 data 项，具体参考
+R 的相关入门手册]。
+* Tcorrect：如果为 TRUE，那么 J$_{max}$、V$_{cmax}$ 的结果为温度校正结果，若 Tcorrect = FALSE，则为测量温度下的结果。
+* Patm：为外界大气压。
+* citransition：参见详，若提供该选项，则 J$_{max}$、V$_{cmax}$
+的区域则分别拟合^[为Rubisco和RuBP限制的Ci转换点，物种间差异较大，可以通过预实验确定]。
+* fitmethod：参见详解。
+* fitTPU：是否拟合 TPU 限制，默认为 FALSE，参见详解。
+* x：对于plot.acifit，x 为fitaci返回的对象，简单理解为 将 fitaci 函数拟合结果赋值给一个变量，此处plot函数实际上为plot.acifit。
+* what：利用基础做图工具，默认为对数据和模型进行作图。
+* whichA：默认为对所有的光合速率进行作图（Aj=Jmax-limited (蓝色), Ac=Vcmax- limited (红色),
+Hyperbolic minimum (黑色)), TPU-limited rate (Ap, 如果模型有计算结果）。
+
+其他参数请参考 FvCB 模型 @Farquhar1980A 或查看 plantecophys 的帮助文档。
+
+#### fitaci函数详解 {#fitaci_detail}
+
+* 默认为非线性拟合，详见 @Duursma2015Plantecophys。
+* bilinear 方法使用两次线性拟合方法首先拟合 V$_{cmax}$ 和 R$_{d}$，然后在拟合J$_{max}$，过渡点的选择为对所有数据拟合最适的点，类似 @Gu2010Reliable 的方法。该方法的优势时无论如何，都会返回拟合结果，尤其是非线性拟合失败时使用该方法，但若默认方法失败时，需首先检查是否数据存在问题。两种拟合方法的结果有轻微的差别^[若默认拟合方法失败，数据也无问题，那么是非线性拟合初始值设定的原因]。
+* onepoint 参考 @De2016A。
+* citransition 使用时，数据将被区分为 V$_{cmax}$ 限制（Ci <
+citransition ）区域，以及 J$_{max}$ 限制 (Ci > citransition) 区域。
+
+* fitTPU：如果要计算TPU，要设置 fitTPU = TRUE，并且 fittingmethod
+= "bilinear"。但需要注意，当 TPU 被计算时，没有 J$_{max}$ 限制的点的存在是可能的。TPU限制的发生是在A值不随
+CO$_{2}$ 的增加而增加时发生的，因此计算 TPU 是否有返回值，取决于测量数据是否有此情况出现。
+
+\cleardoublepage

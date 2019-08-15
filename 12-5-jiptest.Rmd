@@ -1,0 +1,103 @@
+## LI-6800 荧光数据分析 {#fluro68}
+
+LI-6800 能够直接提供基本的叶绿素荧光参数，其他参数均可通过这些基本的参数进行计算，计算也较简单，在此不赘述，需要注意的是快相荧光部分的数据，因为分析 ojip 数据的模型有很多，很多都需要复杂的计算，在此我们先将其中较为简单的 jip test 数据分析进行介绍。
+
+### jip test 的实现 {#jiptest}
+
+LI-6800 增加了 ojip 曲线测量功能，本功能主要是针对测量数据的 jip test 的实现。
+
+### `jiptest` 软件包安装 {#jiptest_pack}
+
+目前 `jiptest` 暂时放在 github 我的软件仓库内，并没提交 CRAN，因此需要 `devtools` 的支持，然后才能从 github 安装 `jiptest`。
+
+```{r, eval=FALSE}
+
+install.packages("devtools")
+library(devtools)
+install_github("zhujiedong/jiptest")
+```
+
+### `read_files` 及 `read_dcfiles` 函数 {#readfluor}
+
+`read_files` 用于批量读取所有调制光测量数据，方便用于其他的数据分析。**函数要求所有数据必须是 `xlsx` 格式，并且所有测量数据都保存在同一文件夹内。**，如有其他文件或测量数据则会报错。
+`read_dcfiles` 用于批量读取所有连续光测量数据，其他与 `read_dcfiles` 相同。
+
+函数仅有一个参数，即保存数据文件夹的路径，使用如下：
+
+```{r, jipdata, message=FALSE}
+library(jiptest)
+jipdata <- read_files("./data/ojip")
+```
+
+```{r, echo=FALSE, message=FALSE}
+knitr::kable(head(jipdata),  booktabs = TRUE,
+caption = 'jiptest 批量导入数据后的样式')
+```
+
+```{r, dcjipdata, message=FALSE}
+dcjipdata <- read_dcfiles("./data/ojip")
+```
+
+```{r, echo=FALSE}
+knitr::kable(head(dcjipdata),  booktabs = TRUE,
+caption = 'jiptest DC 数据批量导入数据后的样式')
+```
+
+### `jip_test` 及 `jip_dctest` 函数 {#testfluor}
+
+ `jiptest` 是 jiptest 的核心函数，用于所有数据的 jip test 分析，函数仅包一个参数，测量数据的保存文件夹路径。
+ `jip_dctest` 与 `jip_test` 相似，用于连续光测量数据的分析。
+ 
+```{r, jiptest}
+jip_results <- jip_test("./data/ojip")
+```
+
+```{r, jipres, echo=FALSE}
+names(jip_results) <- c("parameters", "data_file1", 
+                        "data_file2", "data_file3",
+                        "data_file4")
+knitr::kable(head(jip_results),  longtable = TRUE, booktabs = TRUE, 
+             caption = 'jiptest 输出的计算参数')
+```
+
+```{r, dcjiptest, message=FALSE}
+dcjip_results <- jip_dctest("./data/ojip")
+```
+
+```{r, dcjipres, echo=FALSE}
+names(dcjip_results) <- c("parameters", "data_file1", 
+                        "data_file2", "data_file3",
+                        "data_file4")
+knitr::kable(head(dcjip_results),  longtable = TRUE, booktabs = TRUE, 
+             caption = 'jiptest DC 数据输出的计算参数')
+```
+
+计算参数见表 \@ref(tab:jipres) 及 \@ref(tab:dcjipres)，考虑到排版，仅显示部分内容。若需要将数据导出，可以使用相关命令，如：
+
+```{r, eval=FALSE}
+# export the results of jiptest to a csv file
+write.csv(jip_results, "d:/data/jip_resluts.csv")
+write.csv(dcjip_results, "d:/data/dcjip_resluts.csv")
+```
+
+
+### `jip_plot` 及 `jip_dcplot` 函数 {#plotfluor}
+
+`jip_plot` 和 `jip_dcplot` 基于 `ggplot2`，用于快速预览所有测量结果的 ojip 曲线。函数仅有一个参数，即保存数据文件夹的路径，使用如下：
+
+
+```{r, acplot, fig.cap="调制式测量的 ojip 曲线的快速预览", message=FALSE}
+jip_plot("./data/ojip")
+```
+
+```{r, dcplot, fig.cap="连续式测量的 ojip 曲线的快速预览", message=FALSE}
+jip_dcplot("./data/ojip")
+```
+
+ojip 调制式测量光 ojip 曲线的快速预览如图 \@ref(fig:acplot)
+
+ojip 连续式测量光 ojip 曲线的快速预览如图 \@ref(fig:dcplot)
+
+**建议在开始分析数据前，使用如上方式作图查看数据质量，若使用调制光数据测量的荧光信号太弱，数据点太散，则可以使用连续光测量信号进行分析，对于归一化的荧光参数，二者几乎无差别，当然避免陷入被动的最好方式还是最开始测量时注意检查数据质量**
+
+\cleardoublepage

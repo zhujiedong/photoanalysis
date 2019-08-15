@@ -1,0 +1,23 @@
+\mainmatter
+
+# R 软件与 Rstudio {#intro}
+
+## R 软件 {#rsoft}
+
+R语言的官方网站是 [R](http://www.r-project.org) ，与R语言有关的网站还有CRAN（镜像），其主站网址是： [CRAN](http://www.cran.r-project.org)。
+
+## Rstudio {#rstudiosoft}
+
+尽管R的功能十分强大，但是其作为一个命令行工具 ^[实际上在Windows系统下安装的时候提供一个十分简陋的GUI。]，在实际使用中尤为不便，因此，一款集成的开发环境十分有必要。[Rstudio](https://www.rstudio.com/products/RStudio/)是一款专门针对R开发的一个集成环境，同时也支持其他多种语言，用户界面十分友好，支持代码高亮，拼写提示，作图展示等功能，因此我们推荐使用Rstudio对我们的数据进行分析。
+
+R 软件和 Rstudio 的安装十分方便，我们按照各自系统的安装方式安装即可，安装后界面及各区功能如下：
+
+```{r fig.width = 2, fig.asp = 0.7, echo = FALSE, dpi = 300, fig.cap = "Rstudio 界面及功能"}
+knitr::include_graphics("images/rstudio.png")
+```
+
+本文的主要内容并非介绍这些软件的功能，因此，关于软件的操作部分请仔细阅读相关资料，网络上有大量的免费资源及教程，有需要的同学可自行搜索。
+
+>注：R 与 Rstudio 均非我公司产品，而且均免费或者有免费版本，因此请勿邮件或电话索要此两款软件。
+
+\cleardoublepage
