@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 5 章 光合最优气孔导度耦合模型 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
-  <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 5 章 光合最优气孔导度耦合模型 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
@@ -22,18 +21,18 @@
   <meta name="twitter:description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
   <meta name="twitter:image" content="images/coverpage.png" />
 
-<meta name="author" content="祝介东    北京力高泰科技有限公司">
+<meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2019-08-15">
+<meta name="date" content="2019-09-25" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="stomotal-sim.html">
-<link rel="next" href="photo-stomo.html">
+<link rel="prev" href="stomotal-sim.html"/>
+<link rel="next" href="photo-stomo.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -289,14 +287,14 @@ A - \lambda E
 <div id="farao" class="section level2">
 <h2><span class="header-section-number">5.1</span> <code>FARAO</code> 函数</h2>
 <p><code>FARAO</code> 函数用于找到最大化 <span class="math inline">\(A - \lambda E\)</span> 的** Ci **值。</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">FARAO</span>(<span class="dt">lambda =</span> <span class="fl">0.002</span>, <span class="dt">Ca =</span> <span class="dv">400</span>, <span class="dt">VPD =</span> <span class="dv">1</span>,
-      <span class="dt">photo =</span> <span class="kw">c</span>(<span class="st">&quot;BOTH&quot;</span>, <span class="st">&quot;VCMAX&quot;</span>,<span class="st">&quot;JMAX&quot;</span>), 
-      <span class="dt">energybalance =</span> <span class="ot">FALSE</span>, <span class="dt">C4 =</span> <span class="ot">FALSE</span>, 
-      <span class="dt">Tair =</span> <span class="dv">25</span>, <span class="dt">Wind =</span> <span class="dv">2</span>, <span class="dt">Wleaf =</span> <span class="fl">0.02</span>,
-      <span class="dt">StomatalRatio =</span> <span class="dv">1</span>, <span class="dt">LeafAbs =</span> <span class="fl">0.86</span>, ...)
-
-<span class="kw">FARAO2</span>(<span class="dt">lambda =</span> <span class="fl">0.002</span>, <span class="dt">Ca =</span> <span class="dv">400</span>, 
-       <span class="dt">energybalance =</span> <span class="ot">FALSE</span>, ...)</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1"><span class="kw">FARAO</span>(<span class="dt">lambda =</span> <span class="fl">0.002</span>, <span class="dt">Ca =</span> <span class="dv">400</span>, <span class="dt">VPD =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb60-2" title="2">      <span class="dt">photo =</span> <span class="kw">c</span>(<span class="st">&quot;BOTH&quot;</span>, <span class="st">&quot;VCMAX&quot;</span>,<span class="st">&quot;JMAX&quot;</span>), </a>
+<a class="sourceLine" id="cb60-3" title="3">      <span class="dt">energybalance =</span> <span class="ot">FALSE</span>, <span class="dt">C4 =</span> <span class="ot">FALSE</span>, </a>
+<a class="sourceLine" id="cb60-4" title="4">      <span class="dt">Tair =</span> <span class="dv">25</span>, <span class="dt">Wind =</span> <span class="dv">2</span>, <span class="dt">Wleaf =</span> <span class="fl">0.02</span>,</a>
+<a class="sourceLine" id="cb60-5" title="5">      <span class="dt">StomatalRatio =</span> <span class="dv">1</span>, <span class="dt">LeafAbs =</span> <span class="fl">0.86</span>, ...)</a>
+<a class="sourceLine" id="cb60-6" title="6"></a>
+<a class="sourceLine" id="cb60-7" title="7"><span class="kw">FARAO2</span>(<span class="dt">lambda =</span> <span class="fl">0.002</span>, <span class="dt">Ca =</span> <span class="dv">400</span>, </a>
+<a class="sourceLine" id="cb60-8" title="8">       <span class="dt">energybalance =</span> <span class="ot">FALSE</span>, ...)</a></code></pre></div>
 <p>其参数同 <code>fitaci</code> 和 <code>Photosyn</code>，在此不多做介绍，可参考<span class="citation">(Cowan and Farquhar <a href="#ref-Cowan1977Stomatal">1977</a>, @Buckley2014Is, @Medlyn2011Reconciling)</span>。</p>
 
 
@@ -366,8 +364,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

@@ -179,7 +179,7 @@
 
 \title{使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据}
 \author{祝介东 北京力高泰科技有限公司}
-\date{2019-06-15}
+\date{2019-09-25}
 
 \begin{document}
 \maketitle
@@ -268,6 +268,8 @@ LI-6800 与 LI-6400XT 光合仪数据，尤其是 RACiR\texttrademark 部分，�
 
 \textbf{本文旨在对广大 LI-6400XT 和 LI-6800 光合仪的用户提供一个数据分析的参考，本人或所在公司并未从中获取任何利益，内容错误疏漏之处，欢迎指正。本人保留一切权利，禁止一切将本文内容用于商业用途的行为，禁止商业公司使用。}
 
+\cleardoublepage
+
 \mainmatter
 
 \hypertarget{intro}{%
@@ -327,11 +329,11 @@ R 软件和 Rstudio 的安装十分方便，我们按照各自系统的安装方
 
 数据输出如下所示(仅显示前8列数据)：
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:unnamed-chunk-5}LI-6400 批量整合数据}
 \centering
-\begin{tabular}{llllrrrrr}
+\begin{tabular}[t]{llllrrrrr}
 \toprule
   & files & Obs & HHMMSS & FTime & EBal. & Photo & Cond & Ci\\
 \midrule
@@ -386,11 +388,11 @@ header\_line 表示你数据表头所在行，data\_start 表示你数据起始�
 
 数据输出如下所示(仅显示前8列数据)：
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:unnamed-chunk-8}LI-6800 批量整合数据}
 \centering
-\begin{tabular}{lrrrlrrr}
+\begin{tabular}[t]{lrrrlrrr}
 \toprule
 files & obs & time & elapsed & date & plot & plant & TIME\\
 \midrule
@@ -521,11 +523,11 @@ lrc & 3 & 1513612941 & 220.0 & 20171218 10:02:20 & 1 & 1 & 1513612941\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.526797 1.955327 1.846813 1.485734 1.254099 1.942496 1.397630
-##  [8] 1.831466 1.328321 1.621659 1.424022 1.309466 1.386968 1.411053
-## [15] 1.933386 1.574224 1.206083 1.339832 1.575369 1.251569 1.204440
-## [22] 1.799651 1.249103 1.450440 1.520502 1.523471 1.824935 1.229340
-## [29] 1.629910 1.711272 1.233337 1.800134
+##  [1] 1.541085 1.844106 1.523438 1.865721 1.242414 1.407609 1.327528
+##  [8] 1.533623 1.309528 1.417838 1.950869 1.351394 1.308057 1.984521
+## [15] 1.868375 1.735250 1.610121 1.684938 1.661312 1.655105 1.690641
+## [22] 1.264456 1.445111 1.987319 1.243192 1.712774 1.719597 1.624681
+## [29] 1.569942 1.812845 1.866529 1.446999
 \end{verbatim}
 
 我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.
@@ -611,10 +613,10 @@ lrc & 3 & 1513612941 & 220.0 & 20171218 10:02:20 & 1 & 1 & 1513612941\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.294310 1.798840 1.696216 1.320046 1.916465 1.375307 1.510122
-##  [8] 1.901511 1.337287 1.404141 1.856641 1.251275 1.739408 1.830320
-## [15] 1.359718 1.282576 1.507111 1.260038 1.488009 1.546680 1.587274
-## [22] 1.484716 1.686316 1.255972 1.821984 1.543852 1.540470 1.822845
+##  [1] 1.854667 1.644010 1.625541 1.607238 1.244308 1.611809 1.267222
+##  [8] 1.706810 1.796811 1.238686 1.485985 1.309748 1.815140 1.428333
+## [15] 1.337307 1.949271 1.999254 1.214373 1.460651 1.308383 1.752750
+## [22] 1.250472 1.366818 1.463668 1.428956 1.217508 1.342924 1.209744
 \end{verbatim}
 
 测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。
@@ -681,7 +683,7 @@ CO\textsubscript{2} 和 \(O_{2}\) 浓度。是 Rubisco 特异性因子, \(S_{\fr
 对CO\textsubscript{2} 和 \(O_{2}\) 的偏好程度。
 
 当 A = Rd , 即 RuBP 羧化的 CO\textsubscript{2} 吸收速率刚好 等于 RuBP 氧化的 CO\textsubscript{2} 释放速率
-(Vc = 0.5Vo ) 时, \(\alpha\) = 0.5。此时叶绿体的 CO\textsubscript{2} 浓度就是叶绿体 CO\textsubscript{2}
+(Vc = 2Vo，羧化时 CO\textsubscript{2} 提供的为 CO ) 时, \(\alpha\) = 0.5。此时叶绿体的 CO\textsubscript{2} 浓度就是叶绿体 CO\textsubscript{2}
 光合补偿点, 标记为 \(\Gamma^{*}\)。即：
 
 \begin{equation}
@@ -770,6 +772,8 @@ C_c = C_i - \frac{A}{gm}
 对于 gm 的计算，比较易操作的有几种：采用光合荧光联合测量的方式计算求得。当然也可以采用曲线拟合的方式，或者 \citet{yin2009using} 使用的方式，在低氧气体下，采用不同的光照水平求得。
 
 此外，测量气体交换非常重要的误差来源就是气体的扩散，因为测量时，多数时间内外界气体浓度要高于叶室内的气体浓度，那么即使使用密封性非常好的材料，由外界高 \(CO_2\) 浓度气体向叶室低 \(CO_2\) 浓度气体的扩散无法避免，尤其是在连续长时间测量时该效应尤为明显，因此需要经常更换叶室垫圈。具体可以通过一些方法来校正（\citet{Flexas2007leak}，rodeghiero2007major），但如果采用 LI-6800 测量这将不是问题，它采用的叶室增加技术并根据测量的漏气情况对结果自动修正。
+
+\cleardoublepage
 
 \hypertarget{plantecophys}{%
 \section{\texorpdfstring{\texttt{plantecophys} 软件包}{plantecophys 软件包}}\label{plantecophys}}
@@ -885,6 +889,8 @@ LI-6400XT CO\textsubscript{2} 响应曲线的拟合需要借助 \texttt{planteco
   CO\(_{2}\) 的增加而增加时发生的，因此计算 TPU 是否有返回值，取决于测量数据是否有此情况出现。
 \end{itemize}
 
+\cleardoublepage
+
 \hypertarget{plantecophy_use}{%
 \section{\texorpdfstring{使用 \texttt{plantecophys} 拟合 LI-6400XT CO\textsubscript{2} 响应曲线数据}{使用 plantecophys 拟合 LI-6400XT CO2 响应曲线数据}}\label{plantecophy_use}}
 
@@ -893,7 +899,7 @@ LI-6400XT CO\textsubscript{2} 响应曲线的拟合需要借助 \texttt{planteco
 
 虽然 R 软件支持直接导入 xlsx 的数据，但因为 LI-6400XT 的数据记录文件内有其他空行或 remark 等内容，增加了处理代码的量，\textbf{故而推荐将其数据先整理为如表 \ref{tab:head6400} 样式，并另存为 csv 格式}\footnote{即仅保留测量值，删除其他所有头文件、空行、 remark 等信息}：
 
-\begin{longtable}{rlrrrrrr}
+\begin{longtable}[t]{rlrrrrrr}
 \caption{\label{tab:head6400}推荐 LI-6400 整理后数据样式}\\
 \toprule
 Obs & HHMMSS & FTime & EBal. & Photo & Cond & Ci & Trmmol\\
@@ -1194,11 +1200,11 @@ K_m = K_c (1 + \frac{O_i}{K_o})
 \end{Highlighting}
 \end{Shaded}
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:onepointdata}onepoint 使用的数据}
 \centering
-\begin{tabular}{rlrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr}
+\begin{tabular}[t]{rlrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr}
 \toprule
 Obs & HHMMSS & FTime & EBal. & Photo & Cond & Ci & Trmmol & VpdL & CTleaf & Area & BLC\_1 & StmRat & BLCond & Tair & Tleaf & TBlk & CO2R & CO2S & H2OR & H2OS & RH\_R & RH\_S & Flow & PARi & PARo & Press & CsMch & HsMch & CsMchSD & HsMchSD & CrMchSD & HrMchSD & StableF & BLCslope & BLCoffst & f\_parin & f\_parout & alphaK & Status & fda & Trans & Tair\_K & Twall\_K & R.W.m2. & Tl.Ta & SVTleaf & h2o\_i & h20diff & CTair & SVTair & CndTotal & vp\_kPa & VpdA & CndCO2 & Ci\_Pa & Ci.Ca & RHsfc & C2sfc & AHs.Cs\\
 \midrule
@@ -1232,11 +1238,11 @@ Obs & HHMMSS & FTime & EBal. & Photo & Cond & Ci & Trmmol & VpdL & CTleaf & Area
 \end{Highlighting}
 \end{Shaded}
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:onepoint}onepoint 法计算的结果}
 \centering
-\begin{tabular}{rrr}
+\begin{tabular}[t]{rrr}
 \toprule
 aci\_fit.Photo & aci\_fit.Vcmax & aci\_fit.Jmax\\
 \midrule
@@ -1401,6 +1407,8 @@ fitacis 函数实际上是 fitaci 函数的扩展，方便一次拟合多条曲�
 
 参数使用，object 为 fitaci 函数对象，或者整个的 \texttt{Photosyn} 函数。
 \ldots{} 为使用 \texttt{Photosyn} 时可传递的参数。
+
+\cleardoublepage
 
 \hypertarget{c4}{%
 \section{C4 植物光合}\label{c4}}
@@ -2094,19 +2102,7 @@ P_{nmax}= AQE \times I_{sat} - R_{d}
 \begin{Highlighting}[]
 \CommentTok{# 使用ggplot2进行作图并拟合曲线}
 \KeywordTok{library}\NormalTok{(ggplot2)}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{verbatim}
-## Registered S3 methods overwritten by 'ggplot2':
-##   method         from 
-##   [.quosures     rlang
-##   c.quosures     rlang
-##   print.quosures rlang
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{light <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{lrc_Q =}\NormalTok{ lrc}\OperatorTok{$}\NormalTok{PARi, }\DataTypeTok{lrc_A =}\NormalTok{ lrc}\OperatorTok{$}\NormalTok{Photo)}
 
 \NormalTok{p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(light, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ lrc_Q, }\DataTypeTok{y =}\NormalTok{ lrc_A))}
@@ -2157,11 +2153,11 @@ P_{nmax}= AQE \times I_{sat} - R_{d}
   计算，那么饱和点远远低于我们实际需求的，因此，我们使用了 0.75P\(_{nmax}\) 来计算，求得目标区间的根。当然也可以采用其他比例来作为饱和点光合速率。
 \end{itemize}
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:rectable}直角双曲线计算参数}
 \centering
-\begin{tabular}{lrrrr}
+\begin{tabular}[t]{lrrrr}
 \toprule
   & Estimate & Std. Error & t value & Pr(>|t|)\\
 \midrule
@@ -2291,11 +2287,11 @@ P_{n} = \frac{\alpha I + P_{nmax} \sqrt{(\alpha I + P_{nmax})^{2} - 4  \theta \a
 \caption{\label{fig:nrecr}非直角双曲线模型拟合}
 \end{figure}
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:nrectable}非直角双曲线计算参数}
 \centering
-\begin{tabular}{lrrrr}
+\begin{tabular}[t]{lrrrr}
 \toprule
   & Estimate & Std. Error & t value & Pr(>|t|)\\
 \midrule
@@ -2401,11 +2397,11 @@ P_{n} = P_{nmax}[1 - e^{-b(I-I_{C})}]
 \caption{\label{fig:nexpr}指数模型拟合}
 \end{figure}
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:nexptable}指数模型计算参数}
 \centering
-\begin{tabular}{lrrrr}
+\begin{tabular}[t]{lrrrr}
 \toprule
   & Estimate & Std. Error & t value & Pr(>|t|)\\
 \midrule
@@ -2520,11 +2516,11 @@ P_{nmax} = \alpha\left(\frac{\sqrt{\beta+\gamma}-\sqrt{\beta}}{\gamma}\right)^{2
 \caption{\label{fig:mrecr}直角双曲线修正模型拟合}
 \end{figure}
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:mrectable}直角双曲线修正模型计算参数}
 \centering
-\begin{tabular}{lrrrr}
+\begin{tabular}[t]{lrrrr}
 \toprule
   & Estimate & Std. Error & t value & Pr(>|t|)\\
 \midrule
@@ -2917,7 +2913,7 @@ singular gradient matrix at initial parameter estimates
 
 LI-6800 的数据前处理同 LI-6400 相同，如表 \ref{tab:head6800} 所示的样式。
 
-\begin{longtable}{rrrlrr}
+\begin{longtable}[t]{rrrlrr}
 \caption{\label{tab:head6800}推荐 LI-6800 整理后数据样式}\\
 \toprule
 obs & time & elapsed & date & TIME & E\\
@@ -2957,6 +2953,8 @@ obs & time & elapsed & date & TIME & E\\
 \NormalTok{lrc_A <-}\StringTok{ }\NormalTok{lrc}\OperatorTok{$}\NormalTok{A }
 \end{Highlighting}
 \end{Shaded}
+
+\cleardoublepage
 
 \hypertarget{racir68}{%
 \section{\texorpdfstring{LI-6800 RACiR\texttrademark 的测量与拟合}{LI-6800 RACiR的测量与拟合}}\label{racir68}}
@@ -3143,6 +3141,8 @@ IRGAs 极快的响应频率，使得短时间内的 A--Ci 的测量成为现实�
 
 批量分析同样使用向量化来进行，避免了循环，效率比较高，也可以将拟合结果 \texttt{coef} 中的 \(V_{cmax}\) 和 \(J_max\) 结果批量导入文件，参考 @\ref(imbycsv) 部分的代码。
 
+\cleardoublepage
+
 \hypertarget{racir68_exam}{%
 \section{\texorpdfstring{RACiR\texttrademark 分析的手动实现}{RACiR分析的手动实现}}\label{racir68_exam}}
 
@@ -3274,6 +3274,8 @@ IRGAs 极快的响应频率，使得短时间内的 A--Ci 的测量成为现实�
 \begin{figure}
 \includegraphics[width=1\linewidth]{images/racir} \caption{RACiR 方法与常规结果的比较}\label{fig:racir}
 \end{figure}
+
+\cleardoublepage
 
 \hypertarget{multirate-racir}{%
 \section{利用不同速率的 RACiR 曲线研究植物的光合生理特性}\label{multirate-racir}}
@@ -6755,6 +6757,8 @@ Cidiffusion & Alow & Amedian & Ahigh & Ahigh2 & Ahigh3 & variable & conductance 
 \caption{\label{fig:deasratetplot}Rubisco不同失活程度下的下 A VS Ci}
 \end{figure}
 
+\cleardoublepage
+
 \hypertarget{fluro68}{%
 \section{LI-6800 荧光数据分析}\label{fluro68}}
 
@@ -6793,11 +6797,11 @@ LI-6800 增加了 ojip 曲线测量功能，本功能主要是针对测量数据
 \end{Highlighting}
 \end{Shaded}
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:unnamed-chunk-51}jiptest 批量导入数据后的样式}
 \centering
-\begin{tabular}{rrl}
+\begin{tabular}[t]{rrl}
 \toprule
 SECS & FLUOR & SOURCE\\
 \midrule
@@ -6818,11 +6822,11 @@ SECS & FLUOR & SOURCE\\
 \end{Highlighting}
 \end{Shaded}
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:unnamed-chunk-52}jiptest DC 数据批量导入数据后的样式}
 \centering
-\begin{tabular}{rrl}
+\begin{tabular}[t]{rrl}
 \toprule
 SECS & FLUOR & SOURCE\\
 \midrule
@@ -6870,7 +6874,7 @@ SECS & FLUOR & SOURCE\\
 ## * `` -> ...2
 \end{verbatim}
 
-\begin{longtable}{lrrrr}
+\begin{longtable}[t]{lrrrr}
 \caption{\label{tab:jipres}jiptest 输出的计算参数}\\
 \toprule
 parameters & data\_file1 & data\_file2 & data\_file3 & data\_file4\\
@@ -6891,7 +6895,7 @@ Tfmax & 256.016 & 316.016 & 272.016 & 200.016\\
 \end{Highlighting}
 \end{Shaded}
 
-\begin{longtable}{lrrrr}
+\begin{longtable}[t]{lrrrr}
 \caption{\label{tab:dcjipres}jiptest DC 数据输出的计算参数}\\
 \toprule
 parameters & data\_file1 & data\_file2 & data\_file3 & data\_file4\\
@@ -7217,7 +7221,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 \end{Shaded}
 
 \begin{verbatim}
-## R version 3.6.0 (2019-04-26)
+## R version 3.6.1 (2019-07-05)
 ## Platform: x86_64-w64-mingw32/x64 (64-bit)
 ## Running under: Windows 10 x64 (build 17763)
 ## 
@@ -7234,30 +7238,33 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] factoextra_1.0.5   FactoMineR_1.41    jiptest_0.1.3     
+##  [1] factoextra_1.0.5   FactoMineR_1.42    jiptest_0.1.3     
 ##  [4] gridExtra_2.3      plyr_1.8.4         racir_1.0.0       
 ##  [7] nls2_0.2           proto_1.0.0        purrr_0.3.2       
-## [10] ggplot2_3.1.1      minpack.lm_1.2-1   plantecophys_1.4-4
+## [10] ggplot2_3.2.1      minpack.lm_1.2-1   plantecophys_1.4-4
 ## [13] readphoto_0.0.1   
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] tidyselect_0.2.5     xfun_0.6             lattice_0.20-38     
-##  [4] colorspace_1.4-1     htmltools_0.3.6      yaml_2.2.0          
-##  [7] rlang_0.3.4          ggpubr_0.2           pillar_1.3.1        
-## [10] glue_1.3.1           withr_2.1.2          RColorBrewer_1.1-2  
-## [13] readxl_1.3.1         stringr_1.4.0        munsell_0.5.0       
-## [16] gtable_0.3.0         cellranger_1.1.0     leaps_3.0           
-## [19] evaluate_0.13        labeling_0.3         geepack_1.2-1       
-## [22] knitr_1.22           highr_0.8            Rcpp_1.0.1          
-## [25] flashClust_1.01-2    scales_1.0.0         scatterplot3d_0.3-41
-## [28] png_0.1-7            digest_0.6.18        stringi_1.4.3       
-## [31] ggrepel_0.8.0        bookdown_0.9         dplyr_0.8.0.1       
-## [34] grid_3.6.0           tools_3.6.0          magrittr_1.5        
-## [37] lazyeval_0.2.2       tibble_2.1.1         cluster_2.0.8       
-## [40] MESS_0.5.5           crayon_1.3.4         geeM_0.10.1         
-## [43] pkgconfig_2.0.2      MASS_7.3-51.4        Matrix_1.2-17       
-## [46] assertthat_0.2.1     rmarkdown_1.12       rematch_1.0.1       
-## [49] rstudioapi_0.10      R6_2.4.0             compiler_3.6.0
+##  [1] ggrepel_0.8.1        Rcpp_1.0.2           lattice_0.20-38     
+##  [4] tidyr_1.0.0          png_0.1-7            assertthat_0.2.1    
+##  [7] zeallot_0.1.0        digest_0.6.21        R6_2.4.0            
+## [10] cellranger_1.1.0     backports_1.1.4      evaluate_0.14       
+## [13] ggstance_0.3.3       highr_0.8            pillar_1.4.2        
+## [16] geepack_1.2-1        rlang_0.4.0          rematch_1.0.1       
+## [19] lazyeval_0.2.2       readxl_1.3.1         rstudioapi_0.10     
+## [22] Matrix_1.2-17        rmarkdown_1.15       labeling_0.3        
+## [25] stringr_1.4.0        munsell_0.5.0        geeM_0.10.1         
+## [28] compiler_3.6.1       xfun_0.9             pkgconfig_2.0.3     
+## [31] htmltools_0.3.6      flashClust_1.01-2    tidyselect_0.2.5    
+## [34] tibble_2.1.3         mosaicCore_0.6.0     bookdown_0.13       
+## [37] ggpubr_0.2.3         crayon_1.3.4         dplyr_0.8.3         
+## [40] withr_2.1.2          MASS_7.3-51.4        leaps_3.0           
+## [43] grid_3.6.1           gtable_0.3.0         lifecycle_0.1.0     
+## [46] ggformula_0.9.2      magrittr_1.5         MESS_0.5.6          
+## [49] scales_1.0.0         stringi_1.4.3        ggsignif_0.6.0      
+## [52] scatterplot3d_0.3-41 vctrs_0.2.0          RColorBrewer_1.1-2  
+## [55] tools_3.6.1          glue_1.3.1           yaml_2.2.0          
+## [58] colorspace_1.4-1     cluster_2.1.0        knitr_1.25
 \end{verbatim}
 
 \cleardoublepage

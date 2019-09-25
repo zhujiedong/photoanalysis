@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 11 章 大话 PCA | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
-  <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 11 章 大话 PCA | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
@@ -22,18 +21,18 @@
   <meta name="twitter:description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
   <meta name="twitter:image" content="images/coverpage.png" />
 
-<meta name="author" content="祝介东    北京力高泰科技有限公司">
+<meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2019-08-15">
+<meta name="date" content="2019-09-25" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="anay-6800.html">
-<link rel="next" href="sessioninfo.html">
+<link rel="prev" href="anay-6800.html"/>
+<link rel="next" href="sessioninfo.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -325,13 +323,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>如果我们做一条通过中心点并与 PC1 垂直的线，并不断旋转这条线使其满足：所有投影于其上的点，他们的距离最大，也就是变异最大，这样就做出了第二个主成份，PC2，如图 <a href="pca-anylysis.html#fig:pc3">11.4</a>。<strong>就这样不断的变换，一般情况下，我们可以使用 2~3 个主成份来解释绝大部分数据所展示的信息（所有数据都尽可能少的损失信息投影于其上）</strong>。</p>
 <p>以上为基本变换，如果我们使用 R 计算 PCA (这里推荐两个包 <code>factoextra</code> 和 <code>FactoMineR</code>)，查看其结果：</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;FactoMineR&quot;</span>)
-<span class="kw">library</span>(<span class="st">&quot;factoextra&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb264-1" title="1"><span class="kw">library</span>(<span class="st">&quot;FactoMineR&quot;</span>)</a>
+<a class="sourceLine" id="cb264-2" title="2"><span class="kw">library</span>(<span class="st">&quot;factoextra&quot;</span>)</a></code></pre></div>
 <pre><code>## Welcome! Related Books: `Practical Guide To Cluster Analysis in R` at https://goo.gl/13EFCZ</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">ir &lt;-<span class="st"> </span>iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]
-ir_pca &lt;-<span class="st"> </span><span class="kw">PCA</span>(ir, <span class="dt">graph =</span> <span class="ot">FALSE</span>)
-
-<span class="kw">fviz_eig</span>(ir_pca, <span class="dt">addlabels =</span> <span class="ot">TRUE</span>)</code></pre>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb266-1" title="1">ir &lt;-<span class="st"> </span>iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb266-2" title="2">ir_pca &lt;-<span class="st"> </span><span class="kw">PCA</span>(ir, <span class="dt">graph =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb266-3" title="3"></a>
+<a class="sourceLine" id="cb266-4" title="4"><span class="kw">fviz_eig</span>(ir_pca, <span class="dt">addlabels =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:scree"></span>
 <img src="bookdown_files/figure-html/scree-1.png" alt="iris 碎石图" width="672" />
 <p class="caption">
@@ -340,7 +338,7 @@ ir_pca &lt;-<span class="st"> </span><span class="kw">PCA</span>(ir, <span class
 </div>
 <p>我们可以看到，前两个成分可以解释数据 95% 以上的变异，所以我们可以只使用主成份 1 和主成份 2 对我们的结果进行解释。</p>
 <p>既然我们使用两个主成份解释整个数据，那么我们怎么把四个性状都放在这个图上呢？这就需要载荷图来展示了，如图 <a href="pca-anylysis.html#fig:loadingpca">11.6</a></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fviz_pca_var</span>(ir_pca)</code></pre>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb267-1" title="1"><span class="kw">fviz_pca_var</span>(ir_pca)</a></code></pre></div>
 <div class="figure"><span id="fig:loadingpca"></span>
 <img src="bookdown_files/figure-html/loadingpca-1.png" alt="iris 载荷图" width="672" />
 <p class="caption">
@@ -349,7 +347,7 @@ ir_pca &lt;-<span class="st"> </span><span class="kw">PCA</span>(ir, <span class
 </div>
 <p>怎么解释呢，因为原始的数据点相当于在坐标轴上，这几个性状分布的产生类似于原始的数据点在拉拽某个性状，影响强的偏向某一方向，换句话说，<strong>这些性状决定主成份时有不同的权重，也就是对主成份影响的权重大小。同时他们是有方向的，如果两个性状方向接近，也就是夹角非常小，说明他们有较强的正相关性，例如图中的花瓣的长宽，如果他们互相垂直，那说明他们无相关性，例如图中花萼的长宽，如果夹角非常大，例如他们几乎在一条直线上，说明具有显著的负相关</strong>。其本质还是所有的单位向量（本例有四个性状，各个性状中心化后形成的轴，也就是向量）在现在的这个二维平面的位置。</p>
 <p>而如果我想通过这些性状来对鸢尾分类，怎么看呢？那就需要得分图来展示了，如图 <a href="pca-anylysis.html#fig:scorepca">11.7</a> ，得分图本质是各个品种的每个观测值在各个轴上的长度，也就是得分，所以其值都是每个物种性状的加权，每个点代表了每个物种的观测值。</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fviz_pca_ind</span>(ir_pca, <span class="dt">repel =</span> <span class="ot">TRUE</span>, <span class="dt">col.ind=</span> iris<span class="op">$</span>Species)</code></pre>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb268-1" title="1"><span class="kw">fviz_pca_ind</span>(ir_pca, <span class="dt">repel =</span> <span class="ot">TRUE</span>, <span class="dt">col.ind=</span> iris<span class="op">$</span>Species)</a></code></pre></div>
 <div class="figure"><span id="fig:scorepca"></span>
 <img src="bookdown_files/figure-html/scorepca-1.png" alt="iris 得分图" width="672" />
 <p class="caption">
@@ -437,18 +435,18 @@ finaldata = rowfeaturevector \times rowdataajust
 <h3><span class="header-section-number">11.2.2</span> 手动实现过程</h3>
 <div id="av_val" class="section level4">
 <h4><span class="header-section-number">11.2.2.1</span> 均值的计算</h4>
-<pre class="sourceCode r"><code class="sourceCode r">iris_mean &lt;-<span class="st"> </span><span class="kw">apply</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dv">2</span>, <span class="cf">function</span>(x) x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x))</code></pre>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb269-1" title="1">iris_mean &lt;-<span class="st"> </span><span class="kw">apply</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dv">2</span>, <span class="cf">function</span>(x) x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x))</a></code></pre></div>
 <p>我只使用了前四列的性状数据，仅仅是方便结果的展示。</p>
 </div>
 <div id="cov_val" class="section level4">
 <h4><span class="header-section-number">11.2.2.2</span> 计算协方差矩阵</h4>
-<pre class="sourceCode r"><code class="sourceCode r">iris_cov &lt;-<span class="st"> </span><span class="kw">cov</span>(iris_mean)</code></pre>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb270-1" title="1">iris_cov &lt;-<span class="st"> </span><span class="kw">cov</span>(iris_mean)</a></code></pre></div>
 </div>
 <div id="eig_val" class="section level4">
 <h4><span class="header-section-number">11.2.2.3</span> 计算特征值和特征向量</h4>
-<pre class="sourceCode r"><code class="sourceCode r">iris_eigen &lt;-<span class="st"> </span><span class="kw">eigen</span>(iris_cov)</code></pre>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb271-1" title="1">iris_eigen &lt;-<span class="st"> </span><span class="kw">eigen</span>(iris_cov)</a></code></pre></div>
 <p>这里就可以看到之前提到的，特征值和特征向量是根据协方差矩阵计算的。我们选取特征值最大的两个，他们的特征值之和已经占所有的特征值之和相当大的比例：</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(iris_eigen<span class="op">$</span>values[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])<span class="op">/</span><span class="kw">sum</span>(iris_eigen<span class="op">$</span>values)</code></pre>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb272-1" title="1"><span class="kw">sum</span>(iris_eigen<span class="op">$</span>values[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])<span class="op">/</span><span class="kw">sum</span>(iris_eigen<span class="op">$</span>values)</a></code></pre></div>
 <pre><code>## [1] 0.9776852</code></pre>
 <p>也就是说特征值对应的前两项是我们最终降维所需要的，即最终的两个主轴为 <span class="math inline">\(150 \times 2\)</span> 维矩阵，即我们原来的 <span class="math inline">\(150 \times 4\)</span> 的矩阵乘以我们选取的前两个特征值对应的 <span class="math inline">\(4 \times 2\)</span> 组成的矩阵。</p>
 <p>实际应用中我们不需要这么做了，因为太浪费时间了，我们直接用函数来得到结果即可。</p>
@@ -457,13 +455,13 @@ finaldata = rowfeaturevector \times rowdataajust
 <div id="prcom" class="section level3">
 <h3><span class="header-section-number">11.2.3</span> <code>prcomp</code> 的实现</h3>
 <p>我们用 <code>prcomp</code> 来简化实现过程，注意，根据 <span class="citation">Kemp (<a href="#ref-kemp2003modern">2003</a>)</span>，我们把 iris 数据对数化一下，并提取所有物种名字：</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;iris&quot;</span>)
-iris_pca &lt;-<span class="st"> </span><span class="kw">log</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])
-iris_species &lt;-<span class="st"> </span>iris<span class="op">$</span>Species</code></pre>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb274-1" title="1"><span class="kw">data</span>(<span class="st">&quot;iris&quot;</span>)</a>
+<a class="sourceLine" id="cb274-2" title="2">iris_pca &lt;-<span class="st"> </span><span class="kw">log</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])</a>
+<a class="sourceLine" id="cb274-3" title="3">iris_species &lt;-<span class="st"> </span>iris<span class="op">$</span>Species</a></code></pre></div>
 <p>需要注意，我们处理时使用特征中心化。即每一维的数据都减去该维的均值。这里的“维”指的就是一个特征（或属性），变换之后每一维的均值都变成了0 (参考 <a href="pca-anylysis.html#eq:despca">(11.2)</a> )。</p>
-<pre class="sourceCode r"><code class="sourceCode r">value_pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(iris_pca, <span class="dt">center =</span> <span class="ot">TRUE</span>, <span class="dt">scale. =</span> <span class="ot">TRUE</span>)
-<span class="co">## 查看结果</span>
-<span class="kw">summary</span>(value_pca)</code></pre>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb275-1" title="1">value_pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(iris_pca, <span class="dt">center =</span> <span class="ot">TRUE</span>, <span class="dt">scale. =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb275-2" title="2"><span class="co">## 查看结果</span></a>
+<a class="sourceLine" id="cb275-3" title="3"><span class="kw">summary</span>(value_pca)</a></code></pre></div>
 <pre><code>## Importance of components:
 ##                           PC1    PC2     PC3     PC4
 ## Standard deviation     1.7125 0.9524 0.36470 0.16568
@@ -475,11 +473,11 @@ iris_species &lt;-<span class="st"> </span>iris<span class="op">$</span>Species<
 </div>
 <h3>参考文献</h3>
 <div id="refs" class="references">
-<div id="ref-Smith2002">
-<p>Smith, Lindsay I. 2002. “A Tutorial on Principal Component Analysis.”</p>
-</div>
 <div id="ref-kemp2003modern">
 <p>Kemp, Freda. 2003. “Modern Applied Statistics with S.” <em>Journal of the Royal Statistical Society Series D-the Statistician</em> 52 (4): 704–5.</p>
+</div>
+<div id="ref-Smith2002">
+<p>Smith, Lindsay I. 2002. “A Tutorial on Principal Component Analysis.”</p>
 </div>
 </div>
 <div class="footnotes">
@@ -547,8 +545,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 7 章 RHtoVPD 函数 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
-  <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 7 章 RHtoVPD 函数 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
@@ -22,18 +21,18 @@
   <meta name="twitter:description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
   <meta name="twitter:image" content="images/coverpage.png" />
 
-<meta name="author" content="祝介东    北京力高泰科技有限公司">
+<meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2019-08-15">
+<meta name="date" content="2019-09-25" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="photo-stomo.html">
-<link rel="next" href="lrc-fit.html">
+<link rel="prev" href="photo-stomo.html"/>
+<link rel="next" href="lrc-fit.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -280,29 +278,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="rhtovpd" class="section level1">
 <h1><span class="header-section-number">第 7 章</span> RHtoVPD 函数</h1>
 <p>该函数为一系列的工具，用于温度、湿度不同单位之间的换算 <span class="citation">Jones (<a href="#ref-Jones1993Plants">1993</a>)</span> ：</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># RH 转为 VPD  </span>
-<span class="kw">RHtoVPD</span>(RH, TdegC, <span class="dt">Pa =</span> <span class="dv">101</span>) 
- 
-<span class="co"># VPD 转为 RH   </span>
-<span class="kw">VPDtoRH</span>(VPD, TdegC, <span class="dt">Pa =</span> <span class="dv">101</span>) 
- 
-<span class="co">#  饱和水气压计算 </span>
-<span class="kw">esat</span>(TdegC, <span class="dt">Pa =</span> <span class="dv">101</span>) 
- 
-<span class="co">#  露点温度转换为VPD </span>
-<span class="kw">DewtoVPD</span>(Tdew, TdegC, <span class="dt">Pa =</span> <span class="dv">101</span>) 
- 
-<span class="co">#  基于叶温的 VPD 转换为基于空气温度的 VPD</span>
-<span class="kw">VPDleafToAir</span>(VPD, Tleaf, Tair, <span class="dt">Pa =</span> <span class="dv">101</span>) 
- 
-<span class="co">#  基于空气温度的 VPD 转换为基于叶温的 VPD </span>
-<span class="kw">VPDairToLeaf</span>(VPD, Tair, Tleaf, <span class="dt">Pa =</span> <span class="dv">101</span>) 
- 
-<span class="co">#  基于叶温的相对湿度转换为基于空气温度的相对湿度  </span>
-<span class="kw">RHleafToAir</span>(RH, Tleaf, Tair, <span class="dt">Pa =</span> <span class="dv">101</span>) 
- 
-<span class="co">#  基于空气温度的相对湿度转换为基于叶温的相对湿度  </span>
-<span class="kw">RHairToLeaf</span>(RH, Tair, Tleaf, <span class="dt">Pa =</span> <span class="dv">101</span>) </code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1"><span class="co"># RH 转为 VPD  </span></a>
+<a class="sourceLine" id="cb69-2" title="2"><span class="kw">RHtoVPD</span>(RH, TdegC, <span class="dt">Pa =</span> <span class="dv">101</span>) </a>
+<a class="sourceLine" id="cb69-3" title="3"> </a>
+<a class="sourceLine" id="cb69-4" title="4"><span class="co"># VPD 转为 RH   </span></a>
+<a class="sourceLine" id="cb69-5" title="5"><span class="kw">VPDtoRH</span>(VPD, TdegC, <span class="dt">Pa =</span> <span class="dv">101</span>) </a>
+<a class="sourceLine" id="cb69-6" title="6"> </a>
+<a class="sourceLine" id="cb69-7" title="7"><span class="co">#  饱和水气压计算 </span></a>
+<a class="sourceLine" id="cb69-8" title="8"><span class="kw">esat</span>(TdegC, <span class="dt">Pa =</span> <span class="dv">101</span>) </a>
+<a class="sourceLine" id="cb69-9" title="9"> </a>
+<a class="sourceLine" id="cb69-10" title="10"><span class="co">#  露点温度转换为VPD </span></a>
+<a class="sourceLine" id="cb69-11" title="11"><span class="kw">DewtoVPD</span>(Tdew, TdegC, <span class="dt">Pa =</span> <span class="dv">101</span>) </a>
+<a class="sourceLine" id="cb69-12" title="12"> </a>
+<a class="sourceLine" id="cb69-13" title="13"><span class="co">#  基于叶温的 VPD 转换为基于空气温度的 VPD</span></a>
+<a class="sourceLine" id="cb69-14" title="14"><span class="kw">VPDleafToAir</span>(VPD, Tleaf, Tair, <span class="dt">Pa =</span> <span class="dv">101</span>) </a>
+<a class="sourceLine" id="cb69-15" title="15"> </a>
+<a class="sourceLine" id="cb69-16" title="16"><span class="co">#  基于空气温度的 VPD 转换为基于叶温的 VPD </span></a>
+<a class="sourceLine" id="cb69-17" title="17"><span class="kw">VPDairToLeaf</span>(VPD, Tair, Tleaf, <span class="dt">Pa =</span> <span class="dv">101</span>) </a>
+<a class="sourceLine" id="cb69-18" title="18"> </a>
+<a class="sourceLine" id="cb69-19" title="19"><span class="co">#  基于叶温的相对湿度转换为基于空气温度的相对湿度  </span></a>
+<a class="sourceLine" id="cb69-20" title="20"><span class="kw">RHleafToAir</span>(RH, Tleaf, Tair, <span class="dt">Pa =</span> <span class="dv">101</span>) </a>
+<a class="sourceLine" id="cb69-21" title="21"> </a>
+<a class="sourceLine" id="cb69-22" title="22"><span class="co">#  基于空气温度的相对湿度转换为基于叶温的相对湿度  </span></a>
+<a class="sourceLine" id="cb69-23" title="23"><span class="kw">RHairToLeaf</span>(RH, Tair, Tleaf, <span class="dt">Pa =</span> <span class="dv">101</span>) </a></code></pre></div>
 <p>注意事项及单位：</p>
 <p>部分参数的转换需要准确的大气压用于计算，因此，有大气压选项的参数必须填入实际值。</p>
 <p>RH：相对湿度 (%) 。</p>
@@ -379,8 +377,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 2 章 批量处理光合测定数据 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
-  <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 2 章 批量处理光合测定数据 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
@@ -22,18 +21,18 @@
   <meta name="twitter:description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
   <meta name="twitter:image" content="images/coverpage.png" />
 
-<meta name="author" content="祝介东    北京力高泰科技有限公司">
+<meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2019-08-15">
+<meta name="date" content="2019-09-25" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="intro.html">
-<link rel="next" href="response-fit.html">
+<link rel="prev" href="intro.html"/>
+<link rel="next" href="response-fit.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -283,13 +281,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="install_readphoto" class="section level2">
 <h2><span class="header-section-number">2.1</span> 安装</h2>
 <p>暂时只有我的 github repo 中的版本：</p>
-<pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;zhujiedong/readphoto&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;zhujiedong/readphoto&quot;</span>)</a></code></pre></div>
 </div>
 <div id="batch64" class="section level2">
 <h2><span class="header-section-number">2.2</span> 6400 数据整合</h2>
 <p>基本参数如下：</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readphoto)
-df64  &lt;-<span class="st"> </span><span class="kw">read_bat_6400</span>(<span class="st">&quot;./data/6400&quot;</span>, <span class="dt">header_line =</span> <span class="dv">17</span>, <span class="dt">data_start =</span> <span class="dv">27</span>)</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">library</span>(readphoto)</a>
+<a class="sourceLine" id="cb2-2" title="2">df64  &lt;-<span class="st"> </span><span class="kw">read_bat_6400</span>(<span class="st">&quot;./data/6400&quot;</span>, <span class="dt">header_line =</span> <span class="dv">17</span>, <span class="dt">data_start =</span> <span class="dv">27</span>)</a></code></pre></div>
 <p>数据输出如下所示(仅显示前8列数据)：</p>
 <table>
 <caption><span id="tab:unnamed-chunk-5">表 2.1: </span>LI-6400 批量整合数据</caption>
@@ -475,7 +473,7 @@ df64  &lt;-<span class="st"> </span><span class="kw">read_bat_6400</span>(<span 
 </tbody>
 </table>
 <p>如果想另存为 csv 格式：</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write.csv</span>(df64, <span class="st">&quot;./combined.csv&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">write.csv</span>(df64, <span class="st">&quot;./combined.csv&quot;</span>)</a></code></pre></div>
 <p>header_line 表示你数据表头所在行，data_start 表示你数据起始行，Obs = 1 时所在行，不含表头。这个也要确认好了，不同的测量不能放在一起（当然一般不会出现这种情况，同一台仪器，处理数据当然是希望 aci 和 aci 在一起，lrc 和 lrc 在一起，调查测量和调查测量在一起），不同的测量可能起始行不同，这样就会报错，特别需要注意的是，目前路径写法仅支持 “/” 分隔，不能使用 “\“ 作为分隔。例如在数据放在 D 盘的 6400 文件夹下，那么写法应为”d:/6400", 不能为 <strong>“d:\6400”</strong>, 尽管后者对 R 是合法的，主要是因为我要区分你不同数据来源的文件是哪个，也即下文提到的 <code>df$files</code> 列。</p>
 <p>其中，数据的来源在表格中第一列，叫做 files，是数据来源的文件名（即你起的名字）,例如本例中你看到的 aci 是我之前数据里面 aci 响应曲线的数据。</p>
 <p>这些数据可以用于后文相关的分析中，尤其是像 <code>fitacis</code> 这样的函数，因为本质上他们都是符合 <code>tidyverse</code> 样式的数据。</p>
@@ -483,8 +481,8 @@ df64  &lt;-<span class="st"> </span><span class="kw">read_bat_6400</span>(<span 
 <div id="batch68" class="section level2">
 <h2><span class="header-section-number">2.3</span> LI-6800 数据整合</h2>
 <p>相比 6400， 6800 参数要少，导入需要两行命令即可：</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readphoto)
-df &lt;-<span class="st"> </span><span class="kw">read_bat_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="dt">data_start =</span> <span class="dv">56</span>)</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">library</span>(readphoto)</a>
+<a class="sourceLine" id="cb4-2" title="2">df &lt;-<span class="st"> </span><span class="kw">read_bat_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="dt">data_start =</span> <span class="dv">56</span>)</a></code></pre></div>
 <p>其中就两个参数，第一个为 LI-6800 <strong>原始数据</strong>所在的文件夹，即文件夹内<strong>包含且仅包含 LI-6800 的原始数据</strong>，不要放其他文件，不要放 excel 数据。第二个参数即为你原始数据中测量数据的起始行，例如本例中使用数据测量值从 56 行开始。</p>
 <p>数据输出如下所示(仅显示前8列数据)：</p>
 <table>
@@ -662,11 +660,11 @@ df &lt;-<span class="st"> </span><span class="kw">read_bat_6800</span>(<span cla
 <div id="recompute6400" class="section level3">
 <h3><span class="header-section-number">2.4.1</span> LI-6400 数据重计算</h3>
 <p>参数的重计算函数为 <code>recomp_6400</code>, 其参数除了 <code>read_bat_6400</code> 所包含的参数外，还有叶面积 S, 以及叶片正反面的气孔比例，默认值分别为 6 和 0.5。</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readphoto)
-x1 &lt;-<span class="st"> </span><span class="kw">read_bat_6400</span>(<span class="st">&quot;./data/6400&quot;</span>)
-y1 &lt;-<span class="st"> </span><span class="kw">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>, <span class="dt">header_line =</span> <span class="dv">17</span>, <span class="dt">data_start =</span> <span class="dv">27</span>, <span class="dt">S =</span> <span class="dv">6</span>, <span class="dt">K =</span> <span class="fl">0.5</span>)
-
-x1<span class="op">$</span>Photo <span class="op">-</span><span class="st"> </span>y1<span class="op">$</span>Photo</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">library</span>(readphoto)</a>
+<a class="sourceLine" id="cb5-2" title="2">x1 &lt;-<span class="st"> </span><span class="kw">read_bat_6400</span>(<span class="st">&quot;./data/6400&quot;</span>)</a>
+<a class="sourceLine" id="cb5-3" title="3">y1 &lt;-<span class="st"> </span><span class="kw">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>, <span class="dt">header_line =</span> <span class="dv">17</span>, <span class="dt">data_start =</span> <span class="dv">27</span>, <span class="dt">S =</span> <span class="dv">6</span>, <span class="dt">K =</span> <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb5-4" title="4"></a>
+<a class="sourceLine" id="cb5-5" title="5">x1<span class="op">$</span>Photo <span class="op">-</span><span class="st"> </span>y1<span class="op">$</span>Photo</a></code></pre></div>
 <pre><code>##  [1] -0.0008873753  0.0026900500 -0.0012036469  0.0003483414  0.0006122641
 ##  [6] -0.0113872639 -0.0020986076  0.0004962787  0.0188727482 -0.0294595908
 ## [11] -0.0436611445 -0.0339083408  0.0046772165  0.0036653298  0.0030397988
@@ -674,7 +672,7 @@ x1<span class="op">$</span>Photo <span class="op">-</span><span class="st"> </sp
 ## [21]  0.0039736503  0.0021704065  0.0046772165  0.0036653298  0.0030397988
 ## [26] -0.0105901673  0.0040624956  0.0017317049 -0.0073252290  0.0054977377
 ## [31]  0.0039736503  0.0021704065</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">x1<span class="op">$</span>Trmmol <span class="op">-</span><span class="st"> </span>y1<span class="op">$</span>Trmmol</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">x1<span class="op">$</span>Trmmol <span class="op">-</span><span class="st"> </span>y1<span class="op">$</span>Trmmol</a></code></pre></div>
 <pre><code>##  [1] -2.998596e-04  1.407338e-04  3.189451e-05 -4.586467e-04 -3.836822e-04
 ##  [6]  5.402725e-04 -2.344852e-04 -7.684772e-05  5.979599e-04 -6.534341e-04
 ## [11] -6.779145e-04  2.469749e-04  3.812201e-04  2.313957e-04  3.508312e-04
@@ -682,7 +680,7 @@ x1<span class="op">$</span>Photo <span class="op">-</span><span class="st"> </sp
 ## [21] -2.578893e-04  2.203045e-04  3.812201e-04  2.313957e-04  3.508312e-04
 ## [26] -2.794358e-04 -5.406530e-04  5.230606e-04 -9.183370e-04  7.638850e-04
 ## [31] -2.578893e-04  2.203045e-04</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">x1<span class="op">$</span>Cond <span class="op">-</span><span class="st"> </span>y1<span class="op">$</span>Cond</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">x1<span class="op">$</span>Cond <span class="op">-</span><span class="st"> </span>y1<span class="op">$</span>Cond</a></code></pre></div>
 <pre><code>##  [1] -1.974217e-04 -3.594216e-04 -3.779119e-04 -3.806675e-04 -3.201411e-04
 ##  [6] -1.483324e-04 -7.803345e-04 -2.671018e-04  1.028977e-04 -3.966192e-04
 ## [11] -3.190769e-04 -2.314266e-04 -2.746300e-04  1.094050e-05 -4.584791e-05
@@ -690,7 +688,7 @@ x1<span class="op">$</span>Photo <span class="op">-</span><span class="st"> </sp
 ## [21] -4.687906e-05 -1.000424e-04 -2.746300e-04  1.094050e-05 -4.584791e-05
 ## [26] -1.084094e-04 -1.827768e-04 -1.344969e-04 -1.714096e-04 -8.180257e-05
 ## [31] -4.687906e-05 -1.000424e-04</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">x1<span class="op">$</span>Ci<span class="op">-</span>y1<span class="op">$</span>Ci</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">x1<span class="op">$</span>Ci<span class="op">-</span>y1<span class="op">$</span>Ci</a></code></pre></div>
 <pre><code>##  [1]  0.434643936 -0.297820404 -0.308200950 -0.007847373 -0.035490198
 ##  [6]  0.433706824 -0.416734067 -0.052089770  0.147655545 -0.315797917
 ## [11] -0.271335987 -0.228968795  0.356519198  0.311487646  0.052196075
@@ -698,62 +696,62 @@ x1<span class="op">$</span>Photo <span class="op">-</span><span class="st"> </sp
 ## [21] -0.252622980 -0.494554616  0.356519198  0.311487646  0.052196075
 ## [26]  0.557128947  0.058563406  0.300198435  0.052607786  0.339000061
 ## [31] -0.252622980 -0.494554616</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># half of original the area</span>
-y1 &lt;-<span class="st"> </span><span class="kw">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>,  <span class="dt">header_line =</span> <span class="dv">17</span>, <span class="dt">data_start =</span> <span class="dv">27</span>, <span class="dt">S =</span> <span class="dv">3</span>, <span class="dt">K =</span> <span class="fl">0.5</span>)
-y1<span class="op">$</span>Photo<span class="op">/</span>x1<span class="op">$</span>Photo</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># half of original the area</span></a>
+<a class="sourceLine" id="cb13-2" title="2">y1 &lt;-<span class="st"> </span><span class="kw">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>,  <span class="dt">header_line =</span> <span class="dv">17</span>, <span class="dt">data_start =</span> <span class="dv">27</span>, <span class="dt">S =</span> <span class="dv">3</span>, <span class="dt">K =</span> <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb13-3" title="3">y1<span class="op">$</span>Photo<span class="op">/</span>x1<span class="op">$</span>Photo</a></code></pre></div>
 <pre><code>##  [1] 2.000254 1.998957 2.000767 1.999234 2.007333 2.004346 2.000635
 ##  [8] 1.999893 1.996299 2.005611 2.008161 2.006110 1.998550 1.998863
 ## [15] 1.998980 2.003671 1.998391 1.999240 2.003866 1.995584 1.994199
 ## [22] 2.010360 1.998550 1.998863 1.998980 2.003671 1.998391 1.999240
 ## [29] 2.003866 1.995584 1.994199 2.010360</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test with random area less than six</span>
-area &lt;-<span class="st"> </span><span class="dv">6</span> <span class="op">-</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">32</span>, <span class="dv">1</span>, <span class="dv">3</span>)
-y1 &lt;-<span class="st"> </span><span class="kw">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>,  <span class="dt">header_line =</span> <span class="dv">17</span>, <span class="dt">data_start =</span> <span class="dv">27</span>, <span class="dt">S =</span> area, <span class="dt">K =</span> <span class="fl">0.5</span>)
-y1<span class="op">$</span>Photo<span class="op">/</span>x1<span class="op">$</span>Photo</code></pre>
-<pre><code>##  [1] 1.209475 1.281518 1.805788 1.213345 1.875472 1.688887 1.421186
-##  [8] 1.406447 1.618628 1.551093 1.485258 1.775077 1.289241 1.759288
-## [15] 1.549633 1.314112 1.535182 1.417377 1.542465 1.510473 1.534810
-## [22] 2.006658 1.494825 1.228237 1.341605 1.474793 1.320311 1.631002
-## [29] 1.513770 1.255688 1.702102 1.367557</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="co"># test with random area less than six</span></a>
+<a class="sourceLine" id="cb15-2" title="2">area &lt;-<span class="st"> </span><span class="dv">6</span> <span class="op">-</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">32</span>, <span class="dv">1</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb15-3" title="3">y1 &lt;-<span class="st"> </span><span class="kw">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>,  <span class="dt">header_line =</span> <span class="dv">17</span>, <span class="dt">data_start =</span> <span class="dv">27</span>, <span class="dt">S =</span> area, <span class="dt">K =</span> <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb15-4" title="4">y1<span class="op">$</span>Photo<span class="op">/</span>x1<span class="op">$</span>Photo</a></code></pre></div>
+<pre><code>##  [1] 1.792267 1.414246 1.521604 1.280964 1.488131 1.222893 1.323786
+##  [8] 1.507253 1.546327 1.459445 1.356410 1.299565 1.545438 1.631234
+## [15] 1.295877 1.300672 1.900240 1.849912 1.776709 1.273604 1.768394
+## [22] 1.618715 1.979383 1.847570 1.646443 1.588514 1.517154 1.537171
+## [29] 1.640296 1.435469 1.648572 1.834052</code></pre>
 <p>我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.</p>
 </div>
 <div id="recompute6800" class="section level3">
 <h3><span class="header-section-number">2.4.2</span> LI-6800 数据重计算</h3>
 <p>参数的重计算函数为 <code>recomp_6800</code>, 其参数除了 <code>read_bat_6800</code> 所包含的参数外，还有叶面积 S, 以及叶片正反面的气孔比例，默认值分别为 6 和 0.5。</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readphoto)
-x3 &lt;-<span class="st"> </span><span class="kw">read_bat_6800</span>(<span class="st">&quot;./data/6800&quot;</span>)
-y3 &lt;-<span class="st"> </span><span class="kw">recomp_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="dt">data_start =</span> <span class="dv">56</span>, <span class="dt">S =</span> <span class="dv">6</span>, <span class="dt">K =</span> <span class="fl">0.5</span>)
-
-x3<span class="op">$</span>A <span class="op">-</span><span class="st"> </span>y3<span class="op">$</span>A</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">library</span>(readphoto)</a>
+<a class="sourceLine" id="cb17-2" title="2">x3 &lt;-<span class="st"> </span><span class="kw">read_bat_6800</span>(<span class="st">&quot;./data/6800&quot;</span>)</a>
+<a class="sourceLine" id="cb17-3" title="3">y3 &lt;-<span class="st"> </span><span class="kw">recomp_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="dt">data_start =</span> <span class="dv">56</span>, <span class="dt">S =</span> <span class="dv">6</span>, <span class="dt">K =</span> <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb17-4" title="4"></a>
+<a class="sourceLine" id="cb17-5" title="5">x3<span class="op">$</span>A <span class="op">-</span><span class="st"> </span>y3<span class="op">$</span>A</a></code></pre></div>
 <pre><code>##  [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">x3<span class="op">$</span>E <span class="op">-</span><span class="st"> </span>y3<span class="op">$</span>E</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">x3<span class="op">$</span>E <span class="op">-</span><span class="st"> </span>y3<span class="op">$</span>E</a></code></pre></div>
 <pre><code>##  [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">x3<span class="op">$</span>gsw <span class="op">-</span><span class="st"> </span>y3<span class="op">$</span>gsw</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">x3<span class="op">$</span>gsw <span class="op">-</span><span class="st"> </span>y3<span class="op">$</span>gsw</a></code></pre></div>
 <pre><code>##  [1] -0.01231889 -0.01271539 -0.01330812 -0.01416506 -0.01491902
 ##  [6] -0.01586479 -0.01566857 -0.01545520 -0.01563183 -0.01537453
 ## [11] -0.01494554 -0.01433677 -0.02284560 -0.02291318 -0.02268118
 ## [16] -0.02266862 -0.02250392 -0.02213352 -0.02061493 -0.02006006
 ## [21] -0.01856400 -0.01678649 -0.01591079 -0.01457109 -0.01322393
 ## [26] -0.02345109 -0.02312573 -0.02227497</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">x3<span class="op">$</span>Ci<span class="op">-</span>y3<span class="op">$</span>Ci</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1">x3<span class="op">$</span>Ci<span class="op">-</span>y3<span class="op">$</span>Ci</a></code></pre></div>
 <pre><code>##  [1]  4.43187567  3.13678828  1.78620310  0.49515242 -0.08437000
 ##  [6]  3.51420195  3.66611259  5.56360761  6.76351008  7.70784028
 ## [11]  8.45263315  9.25926640  2.58978666  2.52629775  2.49784796
 ## [16]  2.38619050  2.23225682  1.92200639  1.29213044  0.92018214
 ## [21]  0.76352452  0.55412066  0.20248257 -0.08219604 -0.26216626
 ## [26]  2.36039345  2.40636618  2.54353742</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># half of original the area</span>
-y3 &lt;-<span class="st"> </span><span class="kw">recomp_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="dt">data_start =</span> <span class="dv">56</span>, <span class="dt">S =</span> <span class="dv">3</span>, <span class="dt">K =</span> <span class="fl">0.5</span>)
-y3<span class="op">$</span>A<span class="op">/</span>x3<span class="op">$</span>A</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="co"># half of original the area</span></a>
+<a class="sourceLine" id="cb25-2" title="2">y3 &lt;-<span class="st"> </span><span class="kw">recomp_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="dt">data_start =</span> <span class="dv">56</span>, <span class="dt">S =</span> <span class="dv">3</span>, <span class="dt">K =</span> <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb25-3" title="3">y3<span class="op">$</span>A<span class="op">/</span>x3<span class="op">$</span>A</a></code></pre></div>
 <pre><code>##  [1] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test with random area less than six</span>
-area &lt;-<span class="st"> </span><span class="dv">6</span> <span class="op">-</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">28</span>, <span class="dv">1</span>, <span class="dv">3</span>)
-y3 &lt;-<span class="st"> </span><span class="kw">recomp_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="dt">data_start =</span> <span class="dv">56</span>, <span class="dt">S =</span> area, <span class="dt">K =</span> <span class="fl">0.5</span>)
-y3<span class="op">$</span>A<span class="op">/</span>x3<span class="op">$</span>A</code></pre>
-<pre><code>##  [1] 1.557286 1.296059 1.207374 1.650767 1.214349 1.270697 1.663683
-##  [8] 1.468039 1.316959 1.258238 1.975333 1.298992 1.670298 1.214591
-## [15] 1.965215 1.475837 1.690965 1.646044 1.844382 1.237794 1.513243
-## [22] 1.465134 1.381361 1.636560 1.698833 1.517100 1.737408 1.339222</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="co"># test with random area less than six</span></a>
+<a class="sourceLine" id="cb27-2" title="2">area &lt;-<span class="st"> </span><span class="dv">6</span> <span class="op">-</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">28</span>, <span class="dv">1</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb27-3" title="3">y3 &lt;-<span class="st"> </span><span class="kw">recomp_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="dt">data_start =</span> <span class="dv">56</span>, <span class="dt">S =</span> area, <span class="dt">K =</span> <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb27-4" title="4">y3<span class="op">$</span>A<span class="op">/</span>x3<span class="op">$</span>A</a></code></pre></div>
+<pre><code>##  [1] 1.997350 1.434218 1.434118 1.346124 1.291867 1.310597 1.910942
+##  [8] 1.564463 1.901200 1.878727 1.998182 1.926809 1.901695 1.919342
+## [15] 1.603546 1.270592 1.539340 1.293847 1.322082 1.217918 1.644070
+## [22] 1.503348 1.257963 1.438580 1.441216 1.386051 1.621355 1.236636</code></pre>
 <p>测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。</p>
 
 
@@ -824,8 +822,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
