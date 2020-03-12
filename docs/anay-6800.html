@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 10 章 LI-6800 的数据分析 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
   <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
-  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 10 章 LI-6800 的数据分析 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2019-09-25" />
+<meta name="date" content="2020-03-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -220,22 +223,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10.6" data-path="anay-6800.html"><a href="anay-6800.html#fitbatracir"><i class="fa fa-check"></i><b>10.6</b> 批量计算 <span class="math inline">\(V_{cmax}\)</span> 和 <span class="math inline">\(J_max\)</span></a></li>
 <li class="chapter" data-level="10.7" data-path="anay-6800.html"><a href="anay-6800.html#racir68_exam"><i class="fa fa-check"></i><b>10.7</b> RACiR分析的手动实现</a></li>
-<li class="chapter" data-level="10.8" data-path="anay-6800.html"><a href="anay-6800.html#multirate-racir"><i class="fa fa-check"></i><b>10.8</b> 利用不同速率的 RACiR 曲线研究植物的光合生理特性</a><ul>
-<li class="chapter" data-level="10.8.1" data-path="anay-6800.html"><a href="anay-6800.html#photoresp-lag"><i class="fa fa-check"></i><b>10.8.1</b> 光呼吸滞后模型</a></li>
-<li class="chapter" data-level="10.8.2" data-path="anay-6800.html"><a href="anay-6800.html#code-photoresp"><i class="fa fa-check"></i><b>10.8.2</b> 光呼吸滞后性代码 {code-photoresp}</a></li>
-<li class="chapter" data-level="10.8.3" data-path="anay-6800.html"><a href="anay-6800.html#compi-modu"><i class="fa fa-check"></i><b>10.8.3</b> 数据的构造</a></li>
-<li class="chapter" data-level="10.8.4" data-path="anay-6800.html"><a href="anay-6800.html#photo-resp-graph"><i class="fa fa-check"></i><b>10.8.4</b> 光呼吸滞后性作图</a></li>
-<li class="chapter" data-level="10.8.5" data-path="anay-6800.html"><a href="anay-6800.html#gammastar"><i class="fa fa-check"></i><b>10.8.5</b> 补偿点计算</a></li>
-<li class="chapter" data-level="10.8.6" data-path="anay-6800.html"><a href="anay-6800.html#no-phoresp-rubi"><i class="fa fa-check"></i><b>10.8.6</b> 无光呼吸酶失活模块</a></li>
-<li class="chapter" data-level="10.8.7" data-path="anay-6800.html"><a href="anay-6800.html#Graphs-deac"><i class="fa fa-check"></i><b>10.8.7</b> 酶失活作图</a></li>
-<li class="chapter" data-level="10.8.8" data-path="anay-6800.html"><a href="anay-6800.html#comp-est-dea"><i class="fa fa-check"></i><b>10.8.8</b> 不同失活程度下补偿点计算</a></li>
+<li class="chapter" data-level="10.8" data-path="anay-6800.html"><a href="anay-6800.html#multi1"><i class="fa fa-check"></i><b>10.8</b> 多个速率的 RACiR 曲线研究</a><ul>
+<li class="chapter" data-level="10.8.1" data-path="anay-6800.html"><a href="anay-6800.html#multi2"><i class="fa fa-check"></i><b>10.8.1</b> 光呼吸滞后模型</a></li>
+<li class="chapter" data-level="10.8.2" data-path="anay-6800.html"><a href="anay-6800.html#code-photoresp"><i class="fa fa-check"></i><b>10.8.2</b> 光呼吸滞后性代码</a></li>
+<li class="chapter" data-level="10.8.3" data-path="anay-6800.html"><a href="anay-6800.html#multi4"><i class="fa fa-check"></i><b>10.8.3</b> 数据的构造</a></li>
+<li class="chapter" data-level="10.8.4" data-path="anay-6800.html"><a href="anay-6800.html#multi5"><i class="fa fa-check"></i><b>10.8.4</b> 光呼吸滞后性作图</a></li>
+<li class="chapter" data-level="10.8.5" data-path="anay-6800.html"><a href="anay-6800.html#multi6"><i class="fa fa-check"></i><b>10.8.5</b> 补偿点计算</a></li>
+<li class="chapter" data-level="10.8.6" data-path="anay-6800.html"><a href="anay-6800.html#multi7"><i class="fa fa-check"></i><b>10.8.6</b> 无光呼吸酶失活模块</a></li>
+<li class="chapter" data-level="10.8.7" data-path="anay-6800.html"><a href="anay-6800.html#multi9"><i class="fa fa-check"></i><b>10.8.7</b> 酶失活作图</a></li>
+<li class="chapter" data-level="10.8.8" data-path="anay-6800.html"><a href="anay-6800.html#multi10"><i class="fa fa-check"></i><b>10.8.8</b> 不同失活程度下补偿点计算</a></li>
 </ul></li>
-<li class="chapter" data-level="10.9" data-path="anay-6800.html"><a href="anay-6800.html#diffu-limi"><i class="fa fa-check"></i><b>10.9</b> 时间延迟的扩散限制</a><ul>
-<li class="chapter" data-level="10.9.1" data-path="anay-6800.html"><a href="anay-6800.html#difu-limit"><i class="fa fa-check"></i><b>10.9.1</b> 扩散限制滞后性</a></li>
+<li class="chapter" data-level="10.9" data-path="anay-6800.html"><a href="anay-6800.html#multi11"><i class="fa fa-check"></i><b>10.9</b> 时间延迟的扩散限制</a><ul>
+<li class="chapter" data-level="10.9.1" data-path="anay-6800.html"><a href="anay-6800.html#multi12"><i class="fa fa-check"></i><b>10.9.1</b> 扩散限制滞后性</a></li>
 </ul></li>
-<li class="chapter" data-level="10.10" data-path="anay-6800.html"><a href="anay-6800.html#difu-graph"><i class="fa fa-check"></i><b>10.10</b> 扩散限制作图</a><ul>
-<li class="chapter" data-level="10.10.1" data-path="anay-6800.html"><a href="anay-6800.html#compen-estimate"><i class="fa fa-check"></i><b>10.10.1</b> 补偿点的计算</a></li>
-<li class="chapter" data-level="10.10.2" data-path="anay-6800.html"><a href="anay-6800.html#all-fig"><i class="fa fa-check"></i><b>10.10.2</b> 所有图形代码</a></li>
+<li class="chapter" data-level="10.10" data-path="anay-6800.html"><a href="anay-6800.html#multi13"><i class="fa fa-check"></i><b>10.10</b> 扩散限制作图</a><ul>
+<li class="chapter" data-level="10.10.1" data-path="anay-6800.html"><a href="anay-6800.html#multi14"><i class="fa fa-check"></i><b>10.10.1</b> 补偿点的计算</a></li>
+<li class="chapter" data-level="10.10.2" data-path="anay-6800.html"><a href="anay-6800.html#multi15"><i class="fa fa-check"></i><b>10.10.2</b> 所有图形代码</a></li>
 </ul></li>
 <li class="chapter" data-level="10.11" data-path="anay-6800.html"><a href="anay-6800.html#fluro68"><i class="fa fa-check"></i><b>10.11</b> LI-6800 荧光数据分析</a><ul>
 <li class="chapter" data-level="10.11.1" data-path="anay-6800.html"><a href="anay-6800.html#jiptest"><i class="fa fa-check"></i><b>10.11.1</b> jip test 的实现</a></li>
@@ -370,9 +373,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>而 LI-6800 独有的 auto control 功能在算法上允许用户自定义 CO<span class="math inline">\(_{2}\)</span> 的起始浓度和种植浓度、变化方式（线性或其他）、所花费的时间，再加上其
 IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实，即快速 CO<span class="math inline">\(_{2}\)</span> 响应曲线 RACiR
-测量实验，该功能使得 5 min 内测量 A–Ci 曲线成为可能。该方法的实现可参考 <span class="citation">Stinziano et al. (<a href="#ref-stinziano2017">2017</a>)</span>
+测量实验，该功能使得 5 min 内测量 A–Ci 曲线成为可能。该方法的实现可参考 <span class="citation">Stinziano et al. (<a href="#ref-stinziano2017" role="doc-biblioref">2017</a>)</span>
 的文章。</p>
-<p><span class="citation">Stinziano et al. (<a href="#ref-stinziano2018">2018</a>)</span> 针对 RACiR技术的疑问做了解答并提出了准确测量的建议，概括如下：</p>
+<p><span class="citation">Stinziano et al. (<a href="#ref-stinziano2018" role="doc-biblioref">2018</a>)</span> 针对 RACiR技术的疑问做了解答并提出了准确测量的建议，概括如下：</p>
 <ul>
 <li>首先，采用 100 ppm/min 的变化速率是与标准方法重合度最高的测量。</li>
 <li>其次，明确研究问题，目前已有研究表明Vcmax 与 Jmax 的计算结果与标准测量方法结果无显著差异。</li>
@@ -615,9 +618,9 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 
 
 </div>
-<div id="multirate-racir" class="section level2">
-<h2><span class="header-section-number">10.8</span> 利用不同速率的 RACiR 曲线研究植物的光合生理特性</h2>
-<p>自 RACiR 技术诞生以来，极大的缩短了 Vcmax 以及 Jmax 的测量时间(<span class="citation">Stinziano et al. (<a href="#ref-stinziano2017">2017</a>)</span>)，但也引起了一系列争议，作者也对业内的质疑进行了一一的解答 (<span class="citation">Stinziano et al. (<a href="#ref-stinziano2018">2018</a>)</span>)，但除了因为时间长短导致酶活性，叶绿体位置等差异外，RACiR 还能说明哪些问题呢？<span class="citation">Joseph R., Rachael K., and David T. (<a href="#ref-stinziano2019">2019</a>)</span> 最新的研究给出一系列结论：</p>
+<div id="multi1" class="section level2">
+<h2><span class="header-section-number">10.8</span> 多个速率的 RACiR 曲线研究</h2>
+<p>自 RACiR 技术诞生以来，极大的缩短了 Vcmax 以及 Jmax 的测量时间(<span class="citation">Stinziano et al. (<a href="#ref-stinziano2017" role="doc-biblioref">2017</a>)</span>)，但也引起了一系列争议，作者也对业内的质疑进行了一一的解答 (<span class="citation">Stinziano et al. (<a href="#ref-stinziano2018" role="doc-biblioref">2018</a>)</span>)，但除了因为时间长短导致酶活性，叶绿体位置等差异外，RACiR 还能说明哪些问题呢？<span class="citation">Joseph R., Rachael K., and David T. (<a href="#ref-stinziano2019" role="doc-biblioref">2019</a>)</span> 最新的研究给出一系列结论：</p>
 <ul>
 <li><p>扩散限制（<span class="math inline">\(CO_2\)</span> 总导度） 和光呼吸导致了表观上的标准 ACi 曲线和 RACiR 测量之间的偏差，表明他们的差异是由<strong>生物因子引起，而非仪器导致的人为误差</strong>。</p></li>
 <li><p>上述原因导致的二者之间的偏差，如果不进行修正，那么将显著的低估 <span class="math inline">\(\Gamma^*\)</span>, 除非使用多个速率的 RACiR 来修正。</p></li>
@@ -630,11 +633,11 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <li><p>RACiR 可检测到代谢中 <span class="math inline">\(CO_2\)</span> 的滞后性，各种滞后性的检测对标准 ACi 测量也具有指示性。</p></li>
 </ul>
 <p>文中利用 R 实现了光呼吸之后模型和气体扩散限制模型，本文内容主要对文献中附录材料的源码进行解释：</p>
-<div id="photoresp-lag" class="section level3">
+<div id="multi2" class="section level3">
 <h3><span class="header-section-number">10.8.1</span> 光呼吸滞后模型</h3>
 <p>为测试光呼吸的滞后性，作者使用一系列预先设定的参数，模拟了一条 ACc曲线，假定 Rubisco 激活状态为 100%，并且在整个测量过程中气孔导度是不变的。然后使用这些参数来模拟 RACiRs 曲线，并且假定光呼吸分别需要 0, 15, 30, 60, 120 或 300 s 来对变化的 <span class="math inline">\(CO_2\)</span> 进行响应，在实际效果上，这意味着 Cc 在最初的 0, 15, 30, 60, 120 或 300 内是不变的，最后我们对 <span class="math inline">\(\Gamma^*\)</span> 和 Ci 使用线性回归进行计算。</p>
-<div id="base-data" class="section level4">
-<h4><span class="header-section-number">10.8.1.1</span> 基础数据</h4>
+<div id="multi3" class="section level4">
+<h4><span class="header-section-number">10.8.1.1</span> 构造基础数据</h4>
 <p>模型第一步，则是对需要使用的参数，根据文献和实际情况进行赋值，具体内容参考代码注释。</p>
 <div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" title="1"><span class="kw">library</span>(ggplot2)</a>
 <a class="sourceLine" id="cb113-2" title="2"><span class="kw">library</span>(plyr)</a></code></pre></div>
@@ -710,7 +713,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 </div>
 </div>
 <div id="code-photoresp" class="section level3">
-<h3><span class="header-section-number">10.8.2</span> 光呼吸滞后性代码 {code-photoresp}</h3>
+<h3><span class="header-section-number">10.8.2</span> 光呼吸滞后性代码</h3>
 <p>下面代码的目的是为得到 ACi 响应曲线受光呼吸延迟的影响，尤其是在临近补偿点时。</p>
 <p><strong>延迟模块</strong></p>
 <div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" title="1"><span class="co">#假定有15s延迟时的数据，即相比上面构造的Cc数据减少15个点</span></a>
@@ -743,7 +746,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <a class="sourceLine" id="cb117-28" title="28">A300 &lt;-<span class="st"> </span>vc <span class="op">-</span><span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span>vo120 <span class="op">-</span><span class="st"> </span>R</a>
 <a class="sourceLine" id="cb117-29" title="29">Aapparent300 &lt;-<span class="st"> </span>vc <span class="op">-</span><span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span>vo300 </a></code></pre></div>
 </div>
-<div id="compi-modu" class="section level3">
+<div id="multi4" class="section level3">
 <h3><span class="header-section-number">10.8.3</span> 数据的构造</h3>
 <p>下面的代码主要是将上文最终计算的数据构造数据集，并导出。</p>
 <div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" title="1">Anet &lt;-<span class="st"> </span><span class="kw">c</span>(A, A15, A30, A60, A120, A300)</a>
@@ -768,7 +771,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <a class="sourceLine" id="cb118-20" title="20">PRdata &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">cbind</span>(Anet, Aapp, Ccfull, Cifull, Delay))</a>
 <a class="sourceLine" id="cb118-21" title="21"><span class="kw">write.csv</span>(PRdata, <span class="st">&quot;./data/PRdata.csv&quot;</span>)</a></code></pre></div>
 </div>
-<div id="photo-resp-graph" class="section level3">
+<div id="multi5" class="section level3">
 <h3><span class="header-section-number">10.8.4</span> 光呼吸滞后性作图</h3>
 <p>下面的代码是将光呼吸的数据进行作图。</p>
 <div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" title="1">data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/PRdata.csv&quot;</span>)</a>
@@ -885,7 +888,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 </p>
 </div>
 </div>
-<div id="gammastar" class="section level3">
+<div id="multi6" class="section level3">
 <h3><span class="header-section-number">10.8.5</span> 补偿点计算</h3>
 <p>计算不同的光呼吸时间延迟下的补偿点（基于Ci）：</p>
 <div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" title="1"><span class="co">#对于基于Ci的数据，仅采用ci&lt;100时的数据</span></a>
@@ -1620,10 +1623,10 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 </p>
 </div>
 </div>
-<div id="no-phoresp-rubi" class="section level3">
+<div id="multi7" class="section level3">
 <h3><span class="header-section-number">10.8.6</span> 无光呼吸酶失活模块</h3>
 <p>该部分内容是在测量 ACi 曲线时检测 Rubisco 失活的影响 – 从激活状态的变化导致了多少的偏移？</p>
-<div id="data-pre" class="section level4">
+<div id="multi8" class="section level4">
 <h4><span class="header-section-number">10.8.6.1</span> 数据构造</h4>
 <p>基于文献，假定 <span class="math inline">\(CO_2\)</span> 从 400 ppm 降低至 5 ppm 时，激活率从 100% 降低至 80%。</p>
 <div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" title="1"><span class="co">#Assume that Rubisco activation state drops from 100% at 400 ppm to 80% at 5 ppm Cr (line 273 is Cr of 400, Cc of 297; 5ppm Cr is 25 ppm Cc) roughly from Salvucci et al 1986, arabidopsis; assume linear response</span></a>
@@ -1724,7 +1727,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <a class="sourceLine" id="cb185-96" title="96"><span class="kw">write.csv</span>(RASdata, <span class="st">&quot;./data/RASdata.csv&quot;</span>)</a></code></pre></div>
 </div>
 </div>
-<div id="Graphs-deac" class="section level3">
+<div id="multi9" class="section level3">
 <h3><span class="header-section-number">10.8.7</span> 酶失活作图</h3>
 <div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" title="1">data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/RASdata.csv&quot;</span>)</a>
 <a class="sourceLine" id="cb186-2" title="2">data<span class="op">$</span>Ccfull &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(data<span class="op">$</span>Ccfull)</a>
@@ -1839,9 +1842,9 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 </p>
 </div>
 </div>
-<div id="comp-est-dea" class="section level3">
+<div id="multi10" class="section level3">
 <h3><span class="header-section-number">10.8.8</span> 不同失活程度下补偿点计算</h3>
-<p>此部分内容同未失活状态相似，不在额外介绍，可参考 <a href="anay-6800.html#gammastar">10.8.5</a> 内容。</p>
+<p>此部分内容同未失活状态相似，不在额外介绍，可参考 <a href="#gammastar"><strong>??</strong></a> 内容。</p>
 <div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" title="1"><span class="co">#Gamma</span></a>
 <a class="sourceLine" id="cb190-2" title="2"><span class="co"># For Ci-based estimates, only use Ci &lt; 100</span></a>
 <a class="sourceLine" id="cb190-3" title="3">dataCi &lt;-<span class="st"> </span>data[data<span class="op">$</span>Cifull <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span>, ]</a>
@@ -2224,7 +2227,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <a class="sourceLine" id="cb222-9" title="9"><span class="kw">write.csv</span>(RAScomps, <span class="st">&quot;./data/RAScomps.csv&quot;</span>)</a></code></pre></div>
 </div>
 </div>
-<div id="diffu-limi" class="section level2">
+<div id="multi11" class="section level2">
 <h2><span class="header-section-number">10.9</span> 时间延迟的扩散限制</h2>
 <p>对于扩散限制，下面的内容比较了多速率 RACiR 和标准 ACi 曲线的差别，比较实在有光呼吸和没有光呼吸的两种情况。对于没有扩散限制的表观光合速，采用了已知质量的碱石灰药品，放置于 1.7 ml 的微量离心管内，然后将其置于荧光叶室内部模拟叶片，此时叶室环境控制与其他实验不同，此时不再控制 H2OR。RACiR 测试从 500 到 0 的变化，不同样品的测量是随机的。</p>
 <p>下面内容采用了一定的假设，来计算扩散的时间。</p>
@@ -2680,7 +2683,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 </tr>
 </tbody>
 </table>
-<div id="difu-limit" class="section level3">
+<div id="multi12" class="section level3">
 <h3><span class="header-section-number">10.9.1</span> 扩散限制滞后性</h3>
 <p>下面的代码，是根据上面代码的计算结果，结合最初的扩散时间的公式，来计算出各个参数的最大最小值，中间值，构造数据：</p>
 <div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb226-1" title="1">gtot1 &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>res1</a>
@@ -2935,7 +2938,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 </table>
 </div>
 </div>
-<div id="difu-graph" class="section level2">
+<div id="multi13" class="section level2">
 <h2><span class="header-section-number">10.10</span> 扩散限制作图</h2>
 <div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" title="1">data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/DiffusionLimitsACI2.csv&quot;</span>)</a>
 <a class="sourceLine" id="cb228-2" title="2">data<span class="op">$</span>resistance &lt;-<span class="st"> </span><span class="kw">as.factor</span>(data<span class="op">$</span>resistance)</a>
@@ -3034,7 +3037,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 图 10.20: 不同阻力下的各个导度的速率变化预测值
 </p>
 </div>
-<div id="compen-estimate" class="section level3">
+<div id="multi14" class="section level3">
 <h3><span class="header-section-number">10.10.1</span> 补偿点的计算</h3>
 <p>计算补偿点，代码同前文类似，只是采用了不同导度下的数值：</p>
 <div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb234-1" title="1">data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/DiffusionLimitsACI2.csv&quot;</span>)</a>
@@ -3176,7 +3179,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <a class="sourceLine" id="cb246-2" title="2"></a>
 <a class="sourceLine" id="cb246-3" title="3">GammaCi &lt;-<span class="st"> </span><span class="kw">c</span>(Gamma0125, Gamma025, Gamma05, Gamma1, Gamma2, Gamma4)</a></code></pre></div>
 </div>
-<div id="all-fig" class="section level3">
+<div id="multi15" class="section level3">
 <h3><span class="header-section-number">10.10.2</span> 所有图形代码</h3>
 <div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb247-1" title="1">data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/PRdata.csv&quot;</span>)</a>
 <a class="sourceLine" id="cb247-2" title="2">data<span class="op">$</span>Ccfull &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(data<span class="op">$</span>Ccfull)</a>
@@ -3872,11 +3875,13 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -3884,12 +3889,11 @@ gitbook.start({
 "github": true,
 "facebook": false,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -3897,10 +3901,14 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/zhujiedong/photoanalysis/blob/master/12-1-li6800-plantecophys.Rmd",
+"link": "https://github.com/zhujiedong/photoanalysis/blob/master/12-1-plantecophys-6800.Rmd",
 "text": "编辑"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },

@@ -1,111 +1,111 @@
-\contentsline {fm}{表格}{ix}{chapter*.1}% 
-\contentsline {fm}{插图}{xi}{chapter*.2}% 
-\contentsline {fm}{欢迎}{xv}{chapter*.3}% 
-\contentsline {fm}{前言}{i}{chapter*.4}% 
-\contentsline {fm}{关于作者}{iii}{chapter*.5}% 
-\contentsline {fm}{版权}{v}{chapter*.6}% 
-\contentsline {chapter}{\numberline {1}R 软件与 Rstudio}{1}{chapter.1}% 
-\contentsline {section}{\numberline {1.1}R 软件}{1}{section.1.1}% 
-\contentsline {section}{\numberline {1.2}Rstudio}{1}{section.1.2}% 
-\contentsline {chapter}{\numberline {2}批量处理光合测定数据}{3}{chapter.2}% 
-\contentsline {section}{\numberline {2.1}安装}{3}{section.2.1}% 
-\contentsline {section}{\numberline {2.2}6400 数据整合}{3}{section.2.2}% 
-\contentsline {section}{\numberline {2.3}LI-6800 数据整合}{5}{section.2.3}% 
-\contentsline {section}{\numberline {2.4}重计算功能}{6}{section.2.4}% 
-\contentsline {subsection}{\numberline {2.4.1}LI-6400 数据重计算}{6}{subsection.2.4.1}% 
-\contentsline {subsection}{\numberline {2.4.2}LI-6800 数据重计算}{9}{subsection.2.4.2}% 
-\contentsline {chapter}{\numberline {3}CO\textsubscript {2} 响应曲线的拟合}{13}{chapter.3}% 
-\contentsline {section}{\numberline {3.1}FvCB 模型}{13}{section.3.1}% 
-\contentsline {section}{\numberline {3.2}CO\textsubscript {2} 响应曲线测量的注意事项}{16}{section.3.2}% 
-\contentsline {subsection}{\numberline {3.2.1}分段性}{16}{subsection.3.2.1}% 
-\contentsline {subsection}{\numberline {3.2.2}测量注意事项}{17}{subsection.3.2.2}% 
-\contentsline {section}{\numberline {3.3}\texttt {plantecophys} 软件包}{19}{section.3.3}% 
-\contentsline {section}{\numberline {3.4}LI-6400XT CO\textsubscript {2} 响应曲线的拟合}{19}{section.3.4}% 
-\contentsline {subsection}{\numberline {3.4.1}fitaci 函数介绍}{19}{subsection.3.4.1}% 
-\contentsline {subsubsection}{\numberline {3.4.1.1}fitaci函数详解}{21}{subsubsection.3.4.1.1}% 
-\contentsline {section}{\numberline {3.5}使用 \texttt {plantecophys} 拟合 LI-6400XT CO\textsubscript {2} 响应曲线数据}{23}{section.3.5}% 
-\contentsline {subsection}{\numberline {3.5.1}数据的前处理}{23}{subsection.3.5.1}% 
-\contentsline {subsection}{\numberline {3.5.2}使用示例}{23}{subsection.3.5.2}% 
-\contentsline {subsubsection}{\numberline {3.5.2.1}fitmethod = ``onepoint'' 介绍}{30}{subsubsection.3.5.2.1}% 
-\contentsline {subsection}{\numberline {3.5.3}使用 `onepoint' 单独计算 V\textsubscript {cmax} 和 J\textsubscript {max}}{31}{subsection.3.5.3}% 
-\contentsline {subsection}{\numberline {3.5.4}多条 CO\textsubscript {2} 响应曲线的拟合}{33}{subsection.3.5.4}% 
-\contentsline {subsubsection}{\numberline {3.5.4.1}fitacis 函数应用举例}{33}{subsubsection.3.5.4.1}% 
-\contentsline {subsection}{\numberline {3.5.5}\texttt {findCiTransition} 函数}{37}{subsection.3.5.5}% 
-\contentsline {section}{\numberline {3.6}C4 植物光合}{39}{section.3.6}% 
-\contentsline {subsection}{\numberline {3.6.1}C4 植物光合速率的计算}{40}{subsection.3.6.1}% 
-\contentsline {chapter}{\numberline {4}气孔导度模型的拟合}{41}{chapter.4}% 
-\contentsline {section}{\numberline {4.1}BallBerry 模型}{41}{section.4.1}% 
-\contentsline {section}{\numberline {4.2}BBLeuning 模型}{42}{section.4.2}% 
-\contentsline {section}{\numberline {4.3}BBOptiFull 模型}{42}{section.4.3}% 
-\contentsline {section}{\numberline {4.4}\texttt {fitBB} 函数}{42}{section.4.4}% 
-\contentsline {section}{\numberline {4.5}\texttt {fitBBs} 函数}{44}{section.4.5}% 
-\contentsline {chapter}{\numberline {5}光合最优气孔导度耦合模型}{47}{chapter.5}% 
-\contentsline {section}{\numberline {5.1}\texttt {FARAO} 函数}{47}{section.5.1}% 
-\contentsline {chapter}{\numberline {6}光合气孔导度耦合模型}{49}{chapter.6}% 
-\contentsline {section}{\numberline {6.1}\texttt {Photosyn} 函数}{50}{section.6.1}% 
-\contentsline {subsection}{\numberline {6.1.1}\texttt {Photosyn} 使用举例}{50}{subsection.6.1.1}% 
-\contentsline {section}{\numberline {6.2}\texttt {PhotosynEB} 函数}{55}{section.6.2}% 
-\contentsline {section}{\numberline {6.3}\texttt {PhotosynTuzet} 函数}{55}{section.6.3}% 
-\contentsline {subsection}{\numberline {6.3.1}\texttt {PhotosynTuzet} 的参数}{56}{subsection.6.3.1}% 
-\contentsline {chapter}{\numberline {7}RHtoVPD 函数}{57}{chapter.7}% 
-\contentsline {chapter}{\numberline {8}光响应曲线的拟合}{59}{chapter.8}% 
-\contentsline {section}{\numberline {8.1}直角双曲线模型}{59}{section.8.1}% 
-\contentsline {subsection}{\numberline {8.1.1}直角双曲线模型的实现}{60}{subsection.8.1.1}% 
-\contentsline {section}{\numberline {8.2}非直角双曲线模型}{65}{section.8.2}% 
-\contentsline {subsection}{\numberline {8.2.1}非直角双曲线模型的实现}{65}{subsection.8.2.1}% 
-\contentsline {section}{\numberline {8.3}指数模型}{69}{section.8.3}% 
-\contentsline {subsection}{\numberline {8.3.1}指数模型的实现}{69}{subsection.8.3.1}% 
-\contentsline {section}{\numberline {8.4}直角双曲线的修正模型}{73}{section.8.4}% 
-\contentsline {subsection}{\numberline {8.4.1}直角双曲线修正模型的实现}{73}{subsection.8.4.1}% 
-\contentsline {chapter}{\numberline {9}关于非线性拟合的初始值}{77}{chapter.9}% 
-\contentsline {section}{\numberline {9.1}nlsLM 解决方案}{78}{section.9.1}% 
-\contentsline {section}{\numberline {9.2}作图比对法}{79}{section.9.2}% 
-\contentsline {subsection}{\numberline {9.2.1}实现过程}{80}{subsection.9.2.1}% 
-\contentsline {subsection}{\numberline {9.2.2}直观展示}{83}{subsection.9.2.2}% 
-\contentsline {section}{\numberline {9.3}自动多次尝试法}{86}{section.9.3}% 
-\contentsline {section}{\numberline {9.4}小结}{89}{section.9.4}% 
-\contentsline {chapter}{\numberline {10}LI-6800 的数据分析}{91}{chapter.10}% 
-\contentsline {section}{\numberline {10.1}数据格式}{91}{section.10.1}% 
-\contentsline {section}{\numberline {10.2}LI-6800 与 LI-6400 使用时的差别}{91}{section.10.2}% 
-\contentsline {section}{\numberline {10.3}光响应曲线注意事项}{92}{section.10.3}% 
-\contentsline {section}{\numberline {10.4}LI-6800 RACiR\texttrademark 的测量与拟合}{93}{section.10.4}% 
-\contentsline {section}{\numberline {10.5}racir 软件包实现 RACiR\texttrademark 数据分析}{94}{section.10.5}% 
-\contentsline {subsection}{\numberline {10.5.1}实现过程}{94}{subsection.10.5.1}% 
-\contentsline {subsection}{\numberline {10.5.2}数据的批量处理}{97}{subsection.10.5.2}% 
-\contentsline {subsubsection}{\numberline {10.5.2.1}readphoto 导入}{97}{subsubsection.10.5.2.1}% 
-\contentsline {subsubsection}{\numberline {10.5.2.2}处理大量 csv 文件}{98}{subsubsection.10.5.2.2}% 
-\contentsline {section}{\numberline {10.6}批量计算 \(V_{cmax}\) 和 \(J_max\)}{99}{section.10.6}% 
-\contentsline {section}{\numberline {10.7}RACiR\texttrademark 分析的手动实现}{101}{section.10.7}% 
-\contentsline {section}{\numberline {10.8}利用不同速率的 RACiR 曲线研究植物的光合生理特性}{107}{section.10.8}% 
-\contentsline {subsection}{\numberline {10.8.1}光呼吸滞后模型}{108}{subsection.10.8.1}% 
-\contentsline {subsubsection}{\numberline {10.8.1.1}基础数据}{108}{subsubsection.10.8.1.1}% 
-\contentsline {subsection}{\numberline {10.8.2}光呼吸滞后性代码 \{code-photoresp\}}{110}{subsection.10.8.2}% 
-\contentsline {subsection}{\numberline {10.8.3}数据的构造}{112}{subsection.10.8.3}% 
-\contentsline {subsection}{\numberline {10.8.4}光呼吸滞后性作图}{112}{subsection.10.8.4}% 
-\contentsline {subsection}{\numberline {10.8.5}补偿点计算}{117}{subsection.10.8.5}% 
-\contentsline {subsection}{\numberline {10.8.6}无光呼吸酶失活模块}{144}{subsection.10.8.6}% 
-\contentsline {subsubsection}{\numberline {10.8.6.1}数据构造}{144}{subsubsection.10.8.6.1}% 
-\contentsline {subsection}{\numberline {10.8.7}酶失活作图}{148}{subsection.10.8.7}% 
-\contentsline {subsection}{\numberline {10.8.8}不同失活程度下补偿点计算}{153}{subsection.10.8.8}% 
-\contentsline {section}{\numberline {10.9}时间延迟的扩散限制}{167}{section.10.9}% 
-\contentsline {subsection}{\numberline {10.9.1}扩散限制滞后性}{180}{subsection.10.9.1}% 
-\contentsline {section}{\numberline {10.10}扩散限制作图}{186}{section.10.10}% 
-\contentsline {subsection}{\numberline {10.10.1}补偿点的计算}{190}{subsection.10.10.1}% 
-\contentsline {subsection}{\numberline {10.10.2}所有图形代码}{196}{subsection.10.10.2}% 
-\contentsline {section}{\numberline {10.11}LI-6800 荧光数据分析}{211}{section.10.11}% 
-\contentsline {subsection}{\numberline {10.11.1}jip test 的实现}{211}{subsection.10.11.1}% 
-\contentsline {subsection}{\numberline {10.11.2}\texttt {jiptest} 软件包安装}{211}{subsection.10.11.2}% 
-\contentsline {subsection}{\numberline {10.11.3}\texttt {read\_files} 及 \texttt {read\_dcfiles} 函数}{211}{subsection.10.11.3}% 
-\contentsline {subsection}{\numberline {10.11.4}\texttt {jip\_test} 及 \texttt {jip\_dctest} 函数}{213}{subsection.10.11.4}% 
-\contentsline {subsection}{\numberline {10.11.5}\texttt {jip\_plot} 及 \texttt {jip\_dcplot} 函数}{214}{subsection.10.11.5}% 
-\contentsline {chapter}{\numberline {11}大话 PCA}{217}{chapter.11}% 
-\contentsline {section}{\numberline {11.1}几何解释}{217}{section.11.1}% 
-\contentsline {section}{\numberline {11.2}线性代数解释}{224}{section.11.2}% 
-\contentsline {subsection}{\numberline {11.2.1}特征向量与特征值}{224}{subsection.11.2.1}% 
-\contentsline {subsection}{\numberline {11.2.2}手动实现过程}{225}{subsection.11.2.2}% 
-\contentsline {subsubsection}{\numberline {11.2.2.1}均值的计算}{225}{subsubsection.11.2.2.1}% 
-\contentsline {subsubsection}{\numberline {11.2.2.2}计算协方差矩阵}{225}{subsubsection.11.2.2.2}% 
-\contentsline {subsubsection}{\numberline {11.2.2.3}计算特征值和特征向量}{225}{subsubsection.11.2.2.3}% 
-\contentsline {subsection}{\numberline {11.2.3}\texttt {prcomp} 的实现}{226}{subsection.11.2.3}% 
-\contentsline {chapter}{\numberline {12}环境与配置}{229}{chapter.12}% 
-\contentsline {fm}{参考文献}{231}{chapter*.69}% 
+\contentsline {fm}{表格}{ix}{chapter*.1}%
+\contentsline {fm}{插图}{xi}{chapter*.2}%
+\contentsline {fm}{欢迎}{xv}{chapter*.3}%
+\contentsline {fm}{前言}{i}{chapter*.4}%
+\contentsline {fm}{关于作者}{iii}{chapter*.5}%
+\contentsline {fm}{版权}{v}{chapter*.6}%
+\contentsline {chapter}{\numberline {1}R 软件与 Rstudio}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}R 软件}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Rstudio}{1}{section.1.2}%
+\contentsline {chapter}{\numberline {2}批量处理光合测定数据}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}安装}{3}{section.2.1}%
+\contentsline {section}{\numberline {2.2}6400 数据整合}{3}{section.2.2}%
+\contentsline {section}{\numberline {2.3}LI-6800 数据整合}{5}{section.2.3}%
+\contentsline {section}{\numberline {2.4}重计算功能}{6}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}LI-6400 数据重计算}{6}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}LI-6800 数据重计算}{9}{subsection.2.4.2}%
+\contentsline {chapter}{\numberline {3}CO\textsubscript {2} 响应曲线的拟合}{13}{chapter.3}%
+\contentsline {section}{\numberline {3.1}FvCB 模型}{13}{section.3.1}%
+\contentsline {section}{\numberline {3.2}CO\textsubscript {2} 响应曲线测量的注意事项}{16}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}分段性}{16}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}测量注意事项}{17}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}\texttt {plantecophys} 软件包}{19}{section.3.3}%
+\contentsline {section}{\numberline {3.4}LI-6400XT CO\textsubscript {2} 响应曲线的拟合}{19}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}fitaci 函数介绍}{19}{subsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.4.1.1}fitaci函数详解}{21}{subsubsection.3.4.1.1}%
+\contentsline {section}{\numberline {3.5}使用 \texttt {plantecophys} 拟合 LI-6400XT CO\textsubscript {2} 响应曲线数据}{23}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}数据的前处理}{23}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}使用示例}{23}{subsection.3.5.2}%
+\contentsline {subsubsection}{\numberline {3.5.2.1}fitmethod = ``onepoint'' 介绍}{30}{subsubsection.3.5.2.1}%
+\contentsline {subsection}{\numberline {3.5.3}使用 `onepoint' 单独计算 V\textsubscript {cmax} 和 J\textsubscript {max}}{31}{subsection.3.5.3}%
+\contentsline {subsection}{\numberline {3.5.4}多条 CO\textsubscript {2} 响应曲线的拟合}{33}{subsection.3.5.4}%
+\contentsline {subsubsection}{\numberline {3.5.4.1}fitacis 函数应用举例}{33}{subsubsection.3.5.4.1}%
+\contentsline {subsection}{\numberline {3.5.5}\texttt {findCiTransition} 函数}{37}{subsection.3.5.5}%
+\contentsline {section}{\numberline {3.6}C4 植物光合}{39}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}C4 植物光合速率的计算}{40}{subsection.3.6.1}%
+\contentsline {chapter}{\numberline {4}气孔导度模型的拟合}{41}{chapter.4}%
+\contentsline {section}{\numberline {4.1}BallBerry 模型}{41}{section.4.1}%
+\contentsline {section}{\numberline {4.2}BBLeuning 模型}{42}{section.4.2}%
+\contentsline {section}{\numberline {4.3}BBOptiFull 模型}{42}{section.4.3}%
+\contentsline {section}{\numberline {4.4}\texttt {fitBB} 函数}{42}{section.4.4}%
+\contentsline {section}{\numberline {4.5}\texttt {fitBBs} 函数}{44}{section.4.5}%
+\contentsline {chapter}{\numberline {5}光合最优气孔导度耦合模型}{47}{chapter.5}%
+\contentsline {section}{\numberline {5.1}\texttt {FARAO} 函数}{47}{section.5.1}%
+\contentsline {chapter}{\numberline {6}光合气孔导度耦合模型}{49}{chapter.6}%
+\contentsline {section}{\numberline {6.1}\texttt {Photosyn} 函数}{50}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}\texttt {Photosyn} 使用举例}{50}{subsection.6.1.1}%
+\contentsline {section}{\numberline {6.2}\texttt {PhotosynEB} 函数}{55}{section.6.2}%
+\contentsline {section}{\numberline {6.3}\texttt {PhotosynTuzet} 函数}{55}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}\texttt {PhotosynTuzet} 的参数}{56}{subsection.6.3.1}%
+\contentsline {chapter}{\numberline {7}RHtoVPD 函数}{57}{chapter.7}%
+\contentsline {chapter}{\numberline {8}光响应曲线的拟合}{59}{chapter.8}%
+\contentsline {section}{\numberline {8.1}直角双曲线模型}{59}{section.8.1}%
+\contentsline {subsection}{\numberline {8.1.1}直角双曲线模型的实现}{60}{subsection.8.1.1}%
+\contentsline {section}{\numberline {8.2}非直角双曲线模型}{65}{section.8.2}%
+\contentsline {subsection}{\numberline {8.2.1}非直角双曲线模型的实现}{65}{subsection.8.2.1}%
+\contentsline {section}{\numberline {8.3}指数模型}{69}{section.8.3}%
+\contentsline {subsection}{\numberline {8.3.1}指数模型的实现}{69}{subsection.8.3.1}%
+\contentsline {section}{\numberline {8.4}直角双曲线的修正模型}{73}{section.8.4}%
+\contentsline {subsection}{\numberline {8.4.1}直角双曲线修正模型的实现}{73}{subsection.8.4.1}%
+\contentsline {chapter}{\numberline {9}关于非线性拟合的初始值}{77}{chapter.9}%
+\contentsline {section}{\numberline {9.1}nlsLM 解决方案}{78}{section.9.1}%
+\contentsline {section}{\numberline {9.2}作图比对法}{79}{section.9.2}%
+\contentsline {subsection}{\numberline {9.2.1}实现过程}{80}{subsection.9.2.1}%
+\contentsline {subsection}{\numberline {9.2.2}直观展示}{83}{subsection.9.2.2}%
+\contentsline {section}{\numberline {9.3}自动多次尝试法}{86}{section.9.3}%
+\contentsline {section}{\numberline {9.4}小结}{89}{section.9.4}%
+\contentsline {chapter}{\numberline {10}LI-6800 的数据分析}{91}{chapter.10}%
+\contentsline {section}{\numberline {10.1}数据格式}{91}{section.10.1}%
+\contentsline {section}{\numberline {10.2}LI-6800 与 LI-6400 使用时的差别}{91}{section.10.2}%
+\contentsline {section}{\numberline {10.3}光响应曲线注意事项}{92}{section.10.3}%
+\contentsline {section}{\numberline {10.4}LI-6800 RACiR\texttrademark 的测量与拟合}{93}{section.10.4}%
+\contentsline {section}{\numberline {10.5}racir 软件包实现 RACiR\texttrademark 数据分析}{94}{section.10.5}%
+\contentsline {subsection}{\numberline {10.5.1}实现过程}{94}{subsection.10.5.1}%
+\contentsline {subsection}{\numberline {10.5.2}数据的批量处理}{97}{subsection.10.5.2}%
+\contentsline {subsubsection}{\numberline {10.5.2.1}readphoto 导入}{97}{subsubsection.10.5.2.1}%
+\contentsline {subsubsection}{\numberline {10.5.2.2}处理大量 csv 文件}{98}{subsubsection.10.5.2.2}%
+\contentsline {section}{\numberline {10.6}批量计算 \(V_{cmax}\) 和 \(J_max\)}{99}{section.10.6}%
+\contentsline {section}{\numberline {10.7}RACiR\texttrademark 分析的手动实现}{101}{section.10.7}%
+\contentsline {section}{\numberline {10.8}多个速率的 RACiR 曲线研究}{107}{section.10.8}%
+\contentsline {subsection}{\numberline {10.8.1}光呼吸滞后模型}{108}{subsection.10.8.1}%
+\contentsline {subsubsection}{\numberline {10.8.1.1}构造基础数据}{108}{subsubsection.10.8.1.1}%
+\contentsline {subsection}{\numberline {10.8.2}光呼吸滞后性代码}{110}{subsection.10.8.2}%
+\contentsline {subsection}{\numberline {10.8.3}数据的构造}{112}{subsection.10.8.3}%
+\contentsline {subsection}{\numberline {10.8.4}光呼吸滞后性作图}{112}{subsection.10.8.4}%
+\contentsline {subsection}{\numberline {10.8.5}补偿点计算}{117}{subsection.10.8.5}%
+\contentsline {subsection}{\numberline {10.8.6}无光呼吸酶失活模块}{144}{subsection.10.8.6}%
+\contentsline {subsubsection}{\numberline {10.8.6.1}数据构造}{144}{subsubsection.10.8.6.1}%
+\contentsline {subsection}{\numberline {10.8.7}酶失活作图}{148}{subsection.10.8.7}%
+\contentsline {subsection}{\numberline {10.8.8}不同失活程度下补偿点计算}{153}{subsection.10.8.8}%
+\contentsline {section}{\numberline {10.9}时间延迟的扩散限制}{167}{section.10.9}%
+\contentsline {subsection}{\numberline {10.9.1}扩散限制滞后性}{180}{subsection.10.9.1}%
+\contentsline {section}{\numberline {10.10}扩散限制作图}{186}{section.10.10}%
+\contentsline {subsection}{\numberline {10.10.1}补偿点的计算}{190}{subsection.10.10.1}%
+\contentsline {subsection}{\numberline {10.10.2}所有图形代码}{196}{subsection.10.10.2}%
+\contentsline {section}{\numberline {10.11}LI-6800 荧光数据分析}{211}{section.10.11}%
+\contentsline {subsection}{\numberline {10.11.1}jip test 的实现}{211}{subsection.10.11.1}%
+\contentsline {subsection}{\numberline {10.11.2}\texttt {jiptest} 软件包安装}{211}{subsection.10.11.2}%
+\contentsline {subsection}{\numberline {10.11.3}\texttt {read\_files} 及 \texttt {read\_dcfiles} 函数}{211}{subsection.10.11.3}%
+\contentsline {subsection}{\numberline {10.11.4}\texttt {jip\_test} 及 \texttt {jip\_dctest} 函数}{213}{subsection.10.11.4}%
+\contentsline {subsection}{\numberline {10.11.5}\texttt {jip\_plot} 及 \texttt {jip\_dcplot} 函数}{214}{subsection.10.11.5}%
+\contentsline {chapter}{\numberline {11}大话 PCA}{217}{chapter.11}%
+\contentsline {section}{\numberline {11.1}几何解释}{217}{section.11.1}%
+\contentsline {section}{\numberline {11.2}线性代数解释}{224}{section.11.2}%
+\contentsline {subsection}{\numberline {11.2.1}特征向量与特征值}{224}{subsection.11.2.1}%
+\contentsline {subsection}{\numberline {11.2.2}手动实现过程}{225}{subsection.11.2.2}%
+\contentsline {subsubsection}{\numberline {11.2.2.1}均值的计算}{225}{subsubsection.11.2.2.1}%
+\contentsline {subsubsection}{\numberline {11.2.2.2}计算协方差矩阵}{225}{subsubsection.11.2.2.2}%
+\contentsline {subsubsection}{\numberline {11.2.2.3}计算特征值和特征向量}{225}{subsubsection.11.2.2.3}%
+\contentsline {subsection}{\numberline {11.2.3}\texttt {prcomp} 的实现}{226}{subsection.11.2.3}%
+\contentsline {chapter}{\numberline {12}环境与配置}{229}{chapter.12}%
+\contentsline {fm}{参考文献}{231}{chapter*.69}%

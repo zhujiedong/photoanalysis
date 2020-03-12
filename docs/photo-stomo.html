@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 6 章 光合气孔导度耦合模型 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
   <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
-  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 6 章 光合气孔导度耦合模型 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2019-09-25" />
+<meta name="date" content="2020-03-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -220,22 +223,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10.6" data-path="anay-6800.html"><a href="anay-6800.html#fitbatracir"><i class="fa fa-check"></i><b>10.6</b> 批量计算 <span class="math inline">\(V_{cmax}\)</span> 和 <span class="math inline">\(J_max\)</span></a></li>
 <li class="chapter" data-level="10.7" data-path="anay-6800.html"><a href="anay-6800.html#racir68_exam"><i class="fa fa-check"></i><b>10.7</b> RACiR分析的手动实现</a></li>
-<li class="chapter" data-level="10.8" data-path="anay-6800.html"><a href="anay-6800.html#multirate-racir"><i class="fa fa-check"></i><b>10.8</b> 利用不同速率的 RACiR 曲线研究植物的光合生理特性</a><ul>
-<li class="chapter" data-level="10.8.1" data-path="anay-6800.html"><a href="anay-6800.html#photoresp-lag"><i class="fa fa-check"></i><b>10.8.1</b> 光呼吸滞后模型</a></li>
-<li class="chapter" data-level="10.8.2" data-path="anay-6800.html"><a href="anay-6800.html#code-photoresp"><i class="fa fa-check"></i><b>10.8.2</b> 光呼吸滞后性代码 {code-photoresp}</a></li>
-<li class="chapter" data-level="10.8.3" data-path="anay-6800.html"><a href="anay-6800.html#compi-modu"><i class="fa fa-check"></i><b>10.8.3</b> 数据的构造</a></li>
-<li class="chapter" data-level="10.8.4" data-path="anay-6800.html"><a href="anay-6800.html#photo-resp-graph"><i class="fa fa-check"></i><b>10.8.4</b> 光呼吸滞后性作图</a></li>
-<li class="chapter" data-level="10.8.5" data-path="anay-6800.html"><a href="anay-6800.html#gammastar"><i class="fa fa-check"></i><b>10.8.5</b> 补偿点计算</a></li>
-<li class="chapter" data-level="10.8.6" data-path="anay-6800.html"><a href="anay-6800.html#no-phoresp-rubi"><i class="fa fa-check"></i><b>10.8.6</b> 无光呼吸酶失活模块</a></li>
-<li class="chapter" data-level="10.8.7" data-path="anay-6800.html"><a href="anay-6800.html#Graphs-deac"><i class="fa fa-check"></i><b>10.8.7</b> 酶失活作图</a></li>
-<li class="chapter" data-level="10.8.8" data-path="anay-6800.html"><a href="anay-6800.html#comp-est-dea"><i class="fa fa-check"></i><b>10.8.8</b> 不同失活程度下补偿点计算</a></li>
+<li class="chapter" data-level="10.8" data-path="anay-6800.html"><a href="anay-6800.html#multi1"><i class="fa fa-check"></i><b>10.8</b> 多个速率的 RACiR 曲线研究</a><ul>
+<li class="chapter" data-level="10.8.1" data-path="anay-6800.html"><a href="anay-6800.html#multi2"><i class="fa fa-check"></i><b>10.8.1</b> 光呼吸滞后模型</a></li>
+<li class="chapter" data-level="10.8.2" data-path="anay-6800.html"><a href="anay-6800.html#code-photoresp"><i class="fa fa-check"></i><b>10.8.2</b> 光呼吸滞后性代码</a></li>
+<li class="chapter" data-level="10.8.3" data-path="anay-6800.html"><a href="anay-6800.html#multi4"><i class="fa fa-check"></i><b>10.8.3</b> 数据的构造</a></li>
+<li class="chapter" data-level="10.8.4" data-path="anay-6800.html"><a href="anay-6800.html#multi5"><i class="fa fa-check"></i><b>10.8.4</b> 光呼吸滞后性作图</a></li>
+<li class="chapter" data-level="10.8.5" data-path="anay-6800.html"><a href="anay-6800.html#multi6"><i class="fa fa-check"></i><b>10.8.5</b> 补偿点计算</a></li>
+<li class="chapter" data-level="10.8.6" data-path="anay-6800.html"><a href="anay-6800.html#multi7"><i class="fa fa-check"></i><b>10.8.6</b> 无光呼吸酶失活模块</a></li>
+<li class="chapter" data-level="10.8.7" data-path="anay-6800.html"><a href="anay-6800.html#multi9"><i class="fa fa-check"></i><b>10.8.7</b> 酶失活作图</a></li>
+<li class="chapter" data-level="10.8.8" data-path="anay-6800.html"><a href="anay-6800.html#multi10"><i class="fa fa-check"></i><b>10.8.8</b> 不同失活程度下补偿点计算</a></li>
 </ul></li>
-<li class="chapter" data-level="10.9" data-path="anay-6800.html"><a href="anay-6800.html#diffu-limi"><i class="fa fa-check"></i><b>10.9</b> 时间延迟的扩散限制</a><ul>
-<li class="chapter" data-level="10.9.1" data-path="anay-6800.html"><a href="anay-6800.html#difu-limit"><i class="fa fa-check"></i><b>10.9.1</b> 扩散限制滞后性</a></li>
+<li class="chapter" data-level="10.9" data-path="anay-6800.html"><a href="anay-6800.html#multi11"><i class="fa fa-check"></i><b>10.9</b> 时间延迟的扩散限制</a><ul>
+<li class="chapter" data-level="10.9.1" data-path="anay-6800.html"><a href="anay-6800.html#multi12"><i class="fa fa-check"></i><b>10.9.1</b> 扩散限制滞后性</a></li>
 </ul></li>
-<li class="chapter" data-level="10.10" data-path="anay-6800.html"><a href="anay-6800.html#difu-graph"><i class="fa fa-check"></i><b>10.10</b> 扩散限制作图</a><ul>
-<li class="chapter" data-level="10.10.1" data-path="anay-6800.html"><a href="anay-6800.html#compen-estimate"><i class="fa fa-check"></i><b>10.10.1</b> 补偿点的计算</a></li>
-<li class="chapter" data-level="10.10.2" data-path="anay-6800.html"><a href="anay-6800.html#all-fig"><i class="fa fa-check"></i><b>10.10.2</b> 所有图形代码</a></li>
+<li class="chapter" data-level="10.10" data-path="anay-6800.html"><a href="anay-6800.html#multi13"><i class="fa fa-check"></i><b>10.10</b> 扩散限制作图</a><ul>
+<li class="chapter" data-level="10.10.1" data-path="anay-6800.html"><a href="anay-6800.html#multi14"><i class="fa fa-check"></i><b>10.10.1</b> 补偿点的计算</a></li>
+<li class="chapter" data-level="10.10.2" data-path="anay-6800.html"><a href="anay-6800.html#multi15"><i class="fa fa-check"></i><b>10.10.2</b> 所有图形代码</a></li>
 </ul></li>
 <li class="chapter" data-level="10.11" data-path="anay-6800.html"><a href="anay-6800.html#fluro68"><i class="fa fa-check"></i><b>10.11</b> LI-6800 荧光数据分析</a><ul>
 <li class="chapter" data-level="10.11.1" data-path="anay-6800.html"><a href="anay-6800.html#jiptest"><i class="fa fa-check"></i><b>10.11.1</b> jip test 的实现</a></li>
@@ -277,7 +280,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="photo_stomo" class="section level1">
 <h1><span class="header-section-number">第 6 章</span> 光合气孔导度耦合模型</h1>
-<p><span class="citation">Duursma (<a href="#ref-Duursma2015Plantecophys">2015</a>)</span> 对于气体交换耦合模型的简述如下<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a>：</p>
+<p><span class="citation">Duursma (<a href="#ref-Duursma2015Plantecophys" role="doc-biblioref">2015</a>)</span> 对于气体交换耦合模型的简述如下<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a>：</p>
 <ul>
 <li>对于 FvCB 模型有：</li>
 </ul>
@@ -304,7 +307,7 @@ A_n = \frac{g_s}{1.6}(C_a - C_i)
 g_s = g_0 + g_1 \frac{A_n}{C_a} f(D)
 \tag{6.4}
 \end{equation}\]</span></p>
-<p>整合公式 <a href="photo-stomo.html#eq:minfvcb">(6.1)</a>, <a href="photo-stomo.html#eq:cgm">(6.2)</a>, <a href="photo-stomo.html#eq:ficker">(6.3)</a> 和 <a href="photo-stomo.html#eq:driver">(6.4)</a>，气体交换耦合模型有很多更大尺度上的应用，例如 <span class="citation">Duursma and Medlyn (<a href="#ref-Duursma2012MAESPA">2012</a>)</span> 和 wang1998a，可用于预测 An，gs 和蒸腾速率对主要环境驱动因子的响应（除土壤水分），并包含了主要的叶片性状（g1，V<sub>cmax</sub>, J<sub>max</sub>, R<sub>d</sub> 以及他们的温度依赖性）。</p>
+<p>整合公式 <a href="photo-stomo.html#eq:minfvcb">(6.1)</a>, <a href="photo-stomo.html#eq:cgm">(6.2)</a>, <a href="photo-stomo.html#eq:ficker">(6.3)</a> 和 <a href="photo-stomo.html#eq:driver">(6.4)</a>，气体交换耦合模型有很多更大尺度上的应用，例如 <span class="citation">Duursma and Medlyn (<a href="#ref-Duursma2012MAESPA" role="doc-biblioref">2012</a>)</span> 和 wang1998a，可用于预测 An，gs 和蒸腾速率对主要环境驱动因子的响应（除土壤水分），并包含了主要的叶片性状（g1，V<sub>cmax</sub>, J<sub>max</sub>, R<sub>d</sub> 以及他们的温度依赖性）。</p>
 <div id="photosyn" class="section level2">
 <h2><span class="header-section-number">6.1</span> <code>Photosyn</code> 函数</h2>
 <p>Photosyn 为耦合的光合–气孔导度模型，基于 Farquhar 光合模型和 Ball-Berry 气孔导度模型。</p>
@@ -333,10 +336,10 @@ g_s = g_0 + g_1 \frac{A_n}{C_a} f(D)
 <a class="sourceLine" id="cb62-3" title="3"><span class="co">#（其他参数使用默认值）</span></a>
 <a class="sourceLine" id="cb62-4" title="4"><span class="co"># 利用已测量或计算的参数</span></a>
 <a class="sourceLine" id="cb62-5" title="5"><span class="kw">Photosyn</span>(<span class="dt">VPD=</span><span class="dv">2</span>, <span class="dt">g1=</span><span class="dv">4</span>, <span class="dt">Ca=</span><span class="dv">500</span>)</a></code></pre></div>
-<pre><code>##         Ci    ALEAF        GS    ELEAF       Ac       Aj   Ap   Rd VPD
-## 1 369.3981 14.19466 0.1706377 3.412753 15.12654 17.03685 1000 0.92   2
-##   Tleaf  Ca       Cc PPFD Patm
-## 1    25 500 369.3981 1500  100</code></pre>
+<pre><code>##         Ci    ALEAF        GS    ELEAF       Ac       Aj   Ap   Rd VPD Tleaf
+## 1 369.3981 14.19466 0.1706377 3.412753 15.12654 17.03685 1000 0.92   2    25
+##    Ca       Cc PPFD Patm
+## 1 500 369.3981 1500  100</code></pre>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1"><span class="co"># 部分参数相同，而某一参数或某几个参数不同时，</span></a>
 <a class="sourceLine" id="cb64-2" title="2"><span class="co"># 可以将不同的参数设置为一个序列（vectors）</span></a>
 <a class="sourceLine" id="cb64-3" title="3">r &lt;-<span class="st"> </span><span class="kw">Photosyn</span>(<span class="dt">VPD=</span><span class="kw">seq</span>(<span class="fl">0.5</span>, <span class="dv">4</span>, <span class="dt">length=</span><span class="dv">25</span>), </a>
@@ -412,7 +415,7 @@ g_s = g_0 + g_1 \frac{A_n}{C_a} f(D)
 </div>
 <div id="photosyntuzet" class="section level2">
 <h2><span class="header-section-number">6.3</span> <code>PhotosynTuzet</code> 函数</h2>
-<p>同样为光合气孔导度耦合模型，只不过基于 <span class="citation">Tuzet, Perrier, and Leuning (<a href="#ref-tuzet2003a">2003</a>)</span> 的气孔导度模型，现将其描述如下：</p>
+<p>同样为光合气孔导度耦合模型，只不过基于 <span class="citation">Tuzet, Perrier, and Leuning (<a href="#ref-tuzet2003a" role="doc-biblioref">2003</a>)</span> 的气孔导度模型，现将其描述如下：</p>
 <p><span class="math display" id="eq:tuzet">\[\begin{equation}
 g_{co2} = g_0 + \frac{a A}{C_i - \Gamma} f_{\Psi v}
 \tag{6.5}
@@ -426,7 +429,7 @@ f_{\Psi v} = \frac{1 + exp(s_f \Psi_f)}{1 + exp(s_f(\Psi_f - \Psi_v))}
 <p><span class="math inline">\(\Psi_v\)</span> 是指叶片水势，<span class="math inline">\(\Psi_f\)</span> 是参比势能， 该方程假设在水势接近于 0 时，气孔对叶片水势不敏感，并且气孔随着 <span class="math inline">\(\Psi_v\)</span> 的下降快速关闭。<span class="math inline">\(\Psi_f\)</span> 和 <span class="math inline">\(s_f\)</span> (曲线形状参数) 依赖于不同物种的形态学适应以及生长过程中所处的环境。</p>
 <div id="photosyntuzet_para" class="section level3">
 <h3><span class="header-section-number">6.3.1</span> <code>PhotosynTuzet</code> 的参数</h3>
-<p>除 <span class="citation">Tuzet, Perrier, and Leuning (<a href="#ref-tuzet2003a">2003</a>)</span> 模型中使用的参数外，其他参数都继承了 <code>Photosyn</code> 的参数</p>
+<p>除 <span class="citation">Tuzet, Perrier, and Leuning (<a href="#ref-tuzet2003a" role="doc-biblioref">2003</a>)</span> 模型中使用的参数外，其他参数都继承了 <code>Photosyn</code> 的参数</p>
 <div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1"><span class="kw">PhotosynTuzet</span>(<span class="dt">g1 =</span> <span class="dv">8</span>, <span class="dt">Ca =</span> <span class="dv">400</span>, <span class="dt">psis =</span> <span class="dv">0</span>,</a>
 <a class="sourceLine" id="cb68-2" title="2">              <span class="dt">kl =</span> <span class="dv">2</span>, <span class="dt">sf =</span> <span class="dv">3</span>, <span class="dt">psif =</span> <span class="dv">-2</span>,</a>
 <a class="sourceLine" id="cb68-3" title="3">...)</a></code></pre></div>
@@ -472,11 +475,13 @@ f_{\Psi v} = \frac{1 + exp(s_f \Psi_f)}{1 + exp(s_f(\Psi_f - \Psi_v))}
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -484,12 +489,11 @@ gitbook.start({
 "github": true,
 "facebook": false,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -501,6 +505,10 @@ gitbook.start({
 "text": "编辑"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>版权 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
   <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
-  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="版权 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2019-09-25" />
+<meta name="date" content="2020-03-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -220,22 +223,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10.6" data-path="anay-6800.html"><a href="anay-6800.html#fitbatracir"><i class="fa fa-check"></i><b>10.6</b> 批量计算 <span class="math inline">\(V_{cmax}\)</span> 和 <span class="math inline">\(J_max\)</span></a></li>
 <li class="chapter" data-level="10.7" data-path="anay-6800.html"><a href="anay-6800.html#racir68_exam"><i class="fa fa-check"></i><b>10.7</b> RACiR分析的手动实现</a></li>
-<li class="chapter" data-level="10.8" data-path="anay-6800.html"><a href="anay-6800.html#multirate-racir"><i class="fa fa-check"></i><b>10.8</b> 利用不同速率的 RACiR 曲线研究植物的光合生理特性</a><ul>
-<li class="chapter" data-level="10.8.1" data-path="anay-6800.html"><a href="anay-6800.html#photoresp-lag"><i class="fa fa-check"></i><b>10.8.1</b> 光呼吸滞后模型</a></li>
-<li class="chapter" data-level="10.8.2" data-path="anay-6800.html"><a href="anay-6800.html#code-photoresp"><i class="fa fa-check"></i><b>10.8.2</b> 光呼吸滞后性代码 {code-photoresp}</a></li>
-<li class="chapter" data-level="10.8.3" data-path="anay-6800.html"><a href="anay-6800.html#compi-modu"><i class="fa fa-check"></i><b>10.8.3</b> 数据的构造</a></li>
-<li class="chapter" data-level="10.8.4" data-path="anay-6800.html"><a href="anay-6800.html#photo-resp-graph"><i class="fa fa-check"></i><b>10.8.4</b> 光呼吸滞后性作图</a></li>
-<li class="chapter" data-level="10.8.5" data-path="anay-6800.html"><a href="anay-6800.html#gammastar"><i class="fa fa-check"></i><b>10.8.5</b> 补偿点计算</a></li>
-<li class="chapter" data-level="10.8.6" data-path="anay-6800.html"><a href="anay-6800.html#no-phoresp-rubi"><i class="fa fa-check"></i><b>10.8.6</b> 无光呼吸酶失活模块</a></li>
-<li class="chapter" data-level="10.8.7" data-path="anay-6800.html"><a href="anay-6800.html#Graphs-deac"><i class="fa fa-check"></i><b>10.8.7</b> 酶失活作图</a></li>
-<li class="chapter" data-level="10.8.8" data-path="anay-6800.html"><a href="anay-6800.html#comp-est-dea"><i class="fa fa-check"></i><b>10.8.8</b> 不同失活程度下补偿点计算</a></li>
+<li class="chapter" data-level="10.8" data-path="anay-6800.html"><a href="anay-6800.html#multi1"><i class="fa fa-check"></i><b>10.8</b> 多个速率的 RACiR 曲线研究</a><ul>
+<li class="chapter" data-level="10.8.1" data-path="anay-6800.html"><a href="anay-6800.html#multi2"><i class="fa fa-check"></i><b>10.8.1</b> 光呼吸滞后模型</a></li>
+<li class="chapter" data-level="10.8.2" data-path="anay-6800.html"><a href="anay-6800.html#code-photoresp"><i class="fa fa-check"></i><b>10.8.2</b> 光呼吸滞后性代码</a></li>
+<li class="chapter" data-level="10.8.3" data-path="anay-6800.html"><a href="anay-6800.html#multi4"><i class="fa fa-check"></i><b>10.8.3</b> 数据的构造</a></li>
+<li class="chapter" data-level="10.8.4" data-path="anay-6800.html"><a href="anay-6800.html#multi5"><i class="fa fa-check"></i><b>10.8.4</b> 光呼吸滞后性作图</a></li>
+<li class="chapter" data-level="10.8.5" data-path="anay-6800.html"><a href="anay-6800.html#multi6"><i class="fa fa-check"></i><b>10.8.5</b> 补偿点计算</a></li>
+<li class="chapter" data-level="10.8.6" data-path="anay-6800.html"><a href="anay-6800.html#multi7"><i class="fa fa-check"></i><b>10.8.6</b> 无光呼吸酶失活模块</a></li>
+<li class="chapter" data-level="10.8.7" data-path="anay-6800.html"><a href="anay-6800.html#multi9"><i class="fa fa-check"></i><b>10.8.7</b> 酶失活作图</a></li>
+<li class="chapter" data-level="10.8.8" data-path="anay-6800.html"><a href="anay-6800.html#multi10"><i class="fa fa-check"></i><b>10.8.8</b> 不同失活程度下补偿点计算</a></li>
 </ul></li>
-<li class="chapter" data-level="10.9" data-path="anay-6800.html"><a href="anay-6800.html#diffu-limi"><i class="fa fa-check"></i><b>10.9</b> 时间延迟的扩散限制</a><ul>
-<li class="chapter" data-level="10.9.1" data-path="anay-6800.html"><a href="anay-6800.html#difu-limit"><i class="fa fa-check"></i><b>10.9.1</b> 扩散限制滞后性</a></li>
+<li class="chapter" data-level="10.9" data-path="anay-6800.html"><a href="anay-6800.html#multi11"><i class="fa fa-check"></i><b>10.9</b> 时间延迟的扩散限制</a><ul>
+<li class="chapter" data-level="10.9.1" data-path="anay-6800.html"><a href="anay-6800.html#multi12"><i class="fa fa-check"></i><b>10.9.1</b> 扩散限制滞后性</a></li>
 </ul></li>
-<li class="chapter" data-level="10.10" data-path="anay-6800.html"><a href="anay-6800.html#difu-graph"><i class="fa fa-check"></i><b>10.10</b> 扩散限制作图</a><ul>
-<li class="chapter" data-level="10.10.1" data-path="anay-6800.html"><a href="anay-6800.html#compen-estimate"><i class="fa fa-check"></i><b>10.10.1</b> 补偿点的计算</a></li>
-<li class="chapter" data-level="10.10.2" data-path="anay-6800.html"><a href="anay-6800.html#all-fig"><i class="fa fa-check"></i><b>10.10.2</b> 所有图形代码</a></li>
+<li class="chapter" data-level="10.10" data-path="anay-6800.html"><a href="anay-6800.html#multi13"><i class="fa fa-check"></i><b>10.10</b> 扩散限制作图</a><ul>
+<li class="chapter" data-level="10.10.1" data-path="anay-6800.html"><a href="anay-6800.html#multi14"><i class="fa fa-check"></i><b>10.10.1</b> 补偿点的计算</a></li>
+<li class="chapter" data-level="10.10.2" data-path="anay-6800.html"><a href="anay-6800.html#multi15"><i class="fa fa-check"></i><b>10.10.2</b> 所有图形代码</a></li>
 </ul></li>
 <li class="chapter" data-level="10.11" data-path="anay-6800.html"><a href="anay-6800.html#fluro68"><i class="fa fa-check"></i><b>10.11</b> LI-6800 荧光数据分析</a><ul>
 <li class="chapter" data-level="10.11.1" data-path="anay-6800.html"><a href="anay-6800.html#jiptest"><i class="fa fa-check"></i><b>10.11.1</b> jip test 的实现</a></li>
@@ -293,11 +296,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -305,12 +310,11 @@ gitbook.start({
 "github": true,
 "facebook": false,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -322,6 +326,10 @@ gitbook.start({
 "text": "编辑"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },

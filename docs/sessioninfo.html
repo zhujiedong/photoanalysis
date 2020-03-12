@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 12 章 环境与配置 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
   <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
-  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 12 章 环境与配置 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2019-09-25" />
+<meta name="date" content="2020-03-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -220,22 +223,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10.6" data-path="anay-6800.html"><a href="anay-6800.html#fitbatracir"><i class="fa fa-check"></i><b>10.6</b> 批量计算 <span class="math inline">\(V_{cmax}\)</span> 和 <span class="math inline">\(J_max\)</span></a></li>
 <li class="chapter" data-level="10.7" data-path="anay-6800.html"><a href="anay-6800.html#racir68_exam"><i class="fa fa-check"></i><b>10.7</b> RACiR分析的手动实现</a></li>
-<li class="chapter" data-level="10.8" data-path="anay-6800.html"><a href="anay-6800.html#multirate-racir"><i class="fa fa-check"></i><b>10.8</b> 利用不同速率的 RACiR 曲线研究植物的光合生理特性</a><ul>
-<li class="chapter" data-level="10.8.1" data-path="anay-6800.html"><a href="anay-6800.html#photoresp-lag"><i class="fa fa-check"></i><b>10.8.1</b> 光呼吸滞后模型</a></li>
-<li class="chapter" data-level="10.8.2" data-path="anay-6800.html"><a href="anay-6800.html#code-photoresp"><i class="fa fa-check"></i><b>10.8.2</b> 光呼吸滞后性代码 {code-photoresp}</a></li>
-<li class="chapter" data-level="10.8.3" data-path="anay-6800.html"><a href="anay-6800.html#compi-modu"><i class="fa fa-check"></i><b>10.8.3</b> 数据的构造</a></li>
-<li class="chapter" data-level="10.8.4" data-path="anay-6800.html"><a href="anay-6800.html#photo-resp-graph"><i class="fa fa-check"></i><b>10.8.4</b> 光呼吸滞后性作图</a></li>
-<li class="chapter" data-level="10.8.5" data-path="anay-6800.html"><a href="anay-6800.html#gammastar"><i class="fa fa-check"></i><b>10.8.5</b> 补偿点计算</a></li>
-<li class="chapter" data-level="10.8.6" data-path="anay-6800.html"><a href="anay-6800.html#no-phoresp-rubi"><i class="fa fa-check"></i><b>10.8.6</b> 无光呼吸酶失活模块</a></li>
-<li class="chapter" data-level="10.8.7" data-path="anay-6800.html"><a href="anay-6800.html#Graphs-deac"><i class="fa fa-check"></i><b>10.8.7</b> 酶失活作图</a></li>
-<li class="chapter" data-level="10.8.8" data-path="anay-6800.html"><a href="anay-6800.html#comp-est-dea"><i class="fa fa-check"></i><b>10.8.8</b> 不同失活程度下补偿点计算</a></li>
+<li class="chapter" data-level="10.8" data-path="anay-6800.html"><a href="anay-6800.html#multi1"><i class="fa fa-check"></i><b>10.8</b> 多个速率的 RACiR 曲线研究</a><ul>
+<li class="chapter" data-level="10.8.1" data-path="anay-6800.html"><a href="anay-6800.html#multi2"><i class="fa fa-check"></i><b>10.8.1</b> 光呼吸滞后模型</a></li>
+<li class="chapter" data-level="10.8.2" data-path="anay-6800.html"><a href="anay-6800.html#code-photoresp"><i class="fa fa-check"></i><b>10.8.2</b> 光呼吸滞后性代码</a></li>
+<li class="chapter" data-level="10.8.3" data-path="anay-6800.html"><a href="anay-6800.html#multi4"><i class="fa fa-check"></i><b>10.8.3</b> 数据的构造</a></li>
+<li class="chapter" data-level="10.8.4" data-path="anay-6800.html"><a href="anay-6800.html#multi5"><i class="fa fa-check"></i><b>10.8.4</b> 光呼吸滞后性作图</a></li>
+<li class="chapter" data-level="10.8.5" data-path="anay-6800.html"><a href="anay-6800.html#multi6"><i class="fa fa-check"></i><b>10.8.5</b> 补偿点计算</a></li>
+<li class="chapter" data-level="10.8.6" data-path="anay-6800.html"><a href="anay-6800.html#multi7"><i class="fa fa-check"></i><b>10.8.6</b> 无光呼吸酶失活模块</a></li>
+<li class="chapter" data-level="10.8.7" data-path="anay-6800.html"><a href="anay-6800.html#multi9"><i class="fa fa-check"></i><b>10.8.7</b> 酶失活作图</a></li>
+<li class="chapter" data-level="10.8.8" data-path="anay-6800.html"><a href="anay-6800.html#multi10"><i class="fa fa-check"></i><b>10.8.8</b> 不同失活程度下补偿点计算</a></li>
 </ul></li>
-<li class="chapter" data-level="10.9" data-path="anay-6800.html"><a href="anay-6800.html#diffu-limi"><i class="fa fa-check"></i><b>10.9</b> 时间延迟的扩散限制</a><ul>
-<li class="chapter" data-level="10.9.1" data-path="anay-6800.html"><a href="anay-6800.html#difu-limit"><i class="fa fa-check"></i><b>10.9.1</b> 扩散限制滞后性</a></li>
+<li class="chapter" data-level="10.9" data-path="anay-6800.html"><a href="anay-6800.html#multi11"><i class="fa fa-check"></i><b>10.9</b> 时间延迟的扩散限制</a><ul>
+<li class="chapter" data-level="10.9.1" data-path="anay-6800.html"><a href="anay-6800.html#multi12"><i class="fa fa-check"></i><b>10.9.1</b> 扩散限制滞后性</a></li>
 </ul></li>
-<li class="chapter" data-level="10.10" data-path="anay-6800.html"><a href="anay-6800.html#difu-graph"><i class="fa fa-check"></i><b>10.10</b> 扩散限制作图</a><ul>
-<li class="chapter" data-level="10.10.1" data-path="anay-6800.html"><a href="anay-6800.html#compen-estimate"><i class="fa fa-check"></i><b>10.10.1</b> 补偿点的计算</a></li>
-<li class="chapter" data-level="10.10.2" data-path="anay-6800.html"><a href="anay-6800.html#all-fig"><i class="fa fa-check"></i><b>10.10.2</b> 所有图形代码</a></li>
+<li class="chapter" data-level="10.10" data-path="anay-6800.html"><a href="anay-6800.html#multi13"><i class="fa fa-check"></i><b>10.10</b> 扩散限制作图</a><ul>
+<li class="chapter" data-level="10.10.1" data-path="anay-6800.html"><a href="anay-6800.html#multi14"><i class="fa fa-check"></i><b>10.10.1</b> 补偿点的计算</a></li>
+<li class="chapter" data-level="10.10.2" data-path="anay-6800.html"><a href="anay-6800.html#multi15"><i class="fa fa-check"></i><b>10.10.2</b> 所有图形代码</a></li>
 </ul></li>
 <li class="chapter" data-level="10.11" data-path="anay-6800.html"><a href="anay-6800.html#fluro68"><i class="fa fa-check"></i><b>10.11</b> LI-6800 荧光数据分析</a><ul>
 <li class="chapter" data-level="10.11.1" data-path="anay-6800.html"><a href="anay-6800.html#jiptest"><i class="fa fa-check"></i><b>10.11.1</b> jip test 的实现</a></li>
@@ -279,9 +282,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">第 12 章</span> 环境与配置</h1>
 <p>本文的内容所完成的 sessioninfo 如下：</p>
 <div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb277-1" title="1"><span class="kw">sessionInfo</span>()</a></code></pre></div>
-<pre><code>## R version 3.6.1 (2019-07-05)
+<pre><code>## R version 3.6.3 (2020-02-29)
 ## Platform: x86_64-w64-mingw32/x64 (64-bit)
-## Running under: Windows 10 x64 (build 17763)
+## Running under: Windows 10 x64 (build 18363)
 ## 
 ## Matrix products: default
 ## 
@@ -296,33 +299,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] factoextra_1.0.5   FactoMineR_1.42    jiptest_0.1.3     
-##  [4] gridExtra_2.3      plyr_1.8.4         racir_1.0.0       
-##  [7] nls2_0.2           proto_1.0.0        purrr_0.3.2       
-## [10] ggplot2_3.2.1      minpack.lm_1.2-1   plantecophys_1.4-4
+##  [1] factoextra_1.0.6   FactoMineR_2.3     jiptest_0.1.3      gridExtra_2.3     
+##  [5] plyr_1.8.5         racir_1.0.0        nls2_0.2           proto_1.0.0       
+##  [9] purrr_0.3.3        ggplot2_3.3.0      minpack.lm_1.2-1   plantecophys_1.4-4
 ## [13] readphoto_0.0.1   
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] ggrepel_0.8.1        Rcpp_1.0.2           lattice_0.20-38     
-##  [4] tidyr_1.0.0          png_0.1-7            assertthat_0.2.1    
-##  [7] zeallot_0.1.0        digest_0.6.21        R6_2.4.0            
-## [10] cellranger_1.1.0     backports_1.1.4      evaluate_0.14       
-## [13] ggstance_0.3.3       highr_0.8            pillar_1.4.2        
-## [16] geepack_1.2-1        rlang_0.4.0          rematch_1.0.1       
-## [19] lazyeval_0.2.2       readxl_1.3.1         rstudioapi_0.10     
-## [22] Matrix_1.2-17        rmarkdown_1.15       labeling_0.3        
-## [25] stringr_1.4.0        munsell_0.5.0        geeM_0.10.1         
-## [28] compiler_3.6.1       xfun_0.9             pkgconfig_2.0.3     
-## [31] htmltools_0.3.6      flashClust_1.01-2    tidyselect_0.2.5    
-## [34] tibble_2.1.3         mosaicCore_0.6.0     bookdown_0.13       
-## [37] ggpubr_0.2.3         crayon_1.3.4         dplyr_0.8.3         
-## [40] withr_2.1.2          MASS_7.3-51.4        leaps_3.0           
-## [43] grid_3.6.1           gtable_0.3.0         lifecycle_0.1.0     
-## [46] ggformula_0.9.2      magrittr_1.5         MESS_0.5.6          
-## [49] scales_1.0.0         stringi_1.4.3        ggsignif_0.6.0      
-## [52] scatterplot3d_0.3-41 vctrs_0.2.0          RColorBrewer_1.1-2  
-## [55] tools_3.6.1          glue_1.3.1           yaml_2.2.0          
-## [58] colorspace_1.4-1     cluster_2.1.0        knitr_1.25</code></pre>
+##  [1] tidyr_1.0.2          splines_3.6.3        assertthat_0.2.1    
+##  [4] highr_0.8            ggstance_0.3.3       cellranger_1.1.0    
+##  [7] yaml_2.2.1           ggrepel_0.8.1        pillar_1.4.3        
+## [10] backports_1.1.5      lattice_0.20-40      glue_1.3.1          
+## [13] digest_0.6.25        ggsignif_0.6.0       RColorBrewer_1.1-2  
+## [16] polyclip_1.10-0      MESS_0.5.6           colorspace_1.4-1    
+## [19] htmltools_0.4.0      Matrix_1.2-18        pkgconfig_2.0.3     
+## [22] broom_0.5.5          bookdown_0.18        scales_1.1.0        
+## [25] tweenr_1.0.1         ggforce_0.3.1        tibble_2.1.3        
+## [28] mgcv_1.8-31          generics_0.0.2       farver_2.0.3        
+## [31] ggpubr_0.2.5         withr_2.1.2          geepack_1.3-1       
+## [34] lazyeval_0.2.2       magrittr_1.5         crayon_1.3.4        
+## [37] readxl_1.3.1         evaluate_0.14        nlme_3.1-144        
+## [40] MASS_7.3-51.5        geeM_0.10.1          tools_3.6.3         
+## [43] lifecycle_0.2.0      stringr_1.4.0        munsell_0.5.0       
+## [46] cluster_2.1.0        flashClust_1.01-2    compiler_3.6.3      
+## [49] rlang_0.4.5          grid_3.6.3           rstudioapi_0.11     
+## [52] leaps_3.1            mosaicCore_0.6.0     labeling_0.3        
+## [55] rmarkdown_2.1        gtable_0.3.0         rematch_1.0.1       
+## [58] R6_2.4.1             knitr_1.28           dplyr_0.8.4         
+## [61] ggformula_0.9.4      stringi_1.4.6        Rcpp_1.0.3          
+## [64] vctrs_0.2.4          png_0.1-7            scatterplot3d_0.3-41
+## [67] tidyselect_1.0.0     xfun_0.12</code></pre>
 
 
 </div>
@@ -337,11 +342,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -349,12 +356,11 @@ gitbook.start({
 "github": true,
 "facebook": false,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -366,6 +372,10 @@ gitbook.start({
 "text": "编辑"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },

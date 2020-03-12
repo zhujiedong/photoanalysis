@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 9 章 关于非线性拟合的初始值 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
   <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
-  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 9 章 关于非线性拟合的初始值 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2019-09-25" />
+<meta name="date" content="2020-03-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -220,22 +223,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10.6" data-path="anay-6800.html"><a href="anay-6800.html#fitbatracir"><i class="fa fa-check"></i><b>10.6</b> 批量计算 <span class="math inline">\(V_{cmax}\)</span> 和 <span class="math inline">\(J_max\)</span></a></li>
 <li class="chapter" data-level="10.7" data-path="anay-6800.html"><a href="anay-6800.html#racir68_exam"><i class="fa fa-check"></i><b>10.7</b> RACiR分析的手动实现</a></li>
-<li class="chapter" data-level="10.8" data-path="anay-6800.html"><a href="anay-6800.html#multirate-racir"><i class="fa fa-check"></i><b>10.8</b> 利用不同速率的 RACiR 曲线研究植物的光合生理特性</a><ul>
-<li class="chapter" data-level="10.8.1" data-path="anay-6800.html"><a href="anay-6800.html#photoresp-lag"><i class="fa fa-check"></i><b>10.8.1</b> 光呼吸滞后模型</a></li>
-<li class="chapter" data-level="10.8.2" data-path="anay-6800.html"><a href="anay-6800.html#code-photoresp"><i class="fa fa-check"></i><b>10.8.2</b> 光呼吸滞后性代码 {code-photoresp}</a></li>
-<li class="chapter" data-level="10.8.3" data-path="anay-6800.html"><a href="anay-6800.html#compi-modu"><i class="fa fa-check"></i><b>10.8.3</b> 数据的构造</a></li>
-<li class="chapter" data-level="10.8.4" data-path="anay-6800.html"><a href="anay-6800.html#photo-resp-graph"><i class="fa fa-check"></i><b>10.8.4</b> 光呼吸滞后性作图</a></li>
-<li class="chapter" data-level="10.8.5" data-path="anay-6800.html"><a href="anay-6800.html#gammastar"><i class="fa fa-check"></i><b>10.8.5</b> 补偿点计算</a></li>
-<li class="chapter" data-level="10.8.6" data-path="anay-6800.html"><a href="anay-6800.html#no-phoresp-rubi"><i class="fa fa-check"></i><b>10.8.6</b> 无光呼吸酶失活模块</a></li>
-<li class="chapter" data-level="10.8.7" data-path="anay-6800.html"><a href="anay-6800.html#Graphs-deac"><i class="fa fa-check"></i><b>10.8.7</b> 酶失活作图</a></li>
-<li class="chapter" data-level="10.8.8" data-path="anay-6800.html"><a href="anay-6800.html#comp-est-dea"><i class="fa fa-check"></i><b>10.8.8</b> 不同失活程度下补偿点计算</a></li>
+<li class="chapter" data-level="10.8" data-path="anay-6800.html"><a href="anay-6800.html#multi1"><i class="fa fa-check"></i><b>10.8</b> 多个速率的 RACiR 曲线研究</a><ul>
+<li class="chapter" data-level="10.8.1" data-path="anay-6800.html"><a href="anay-6800.html#multi2"><i class="fa fa-check"></i><b>10.8.1</b> 光呼吸滞后模型</a></li>
+<li class="chapter" data-level="10.8.2" data-path="anay-6800.html"><a href="anay-6800.html#code-photoresp"><i class="fa fa-check"></i><b>10.8.2</b> 光呼吸滞后性代码</a></li>
+<li class="chapter" data-level="10.8.3" data-path="anay-6800.html"><a href="anay-6800.html#multi4"><i class="fa fa-check"></i><b>10.8.3</b> 数据的构造</a></li>
+<li class="chapter" data-level="10.8.4" data-path="anay-6800.html"><a href="anay-6800.html#multi5"><i class="fa fa-check"></i><b>10.8.4</b> 光呼吸滞后性作图</a></li>
+<li class="chapter" data-level="10.8.5" data-path="anay-6800.html"><a href="anay-6800.html#multi6"><i class="fa fa-check"></i><b>10.8.5</b> 补偿点计算</a></li>
+<li class="chapter" data-level="10.8.6" data-path="anay-6800.html"><a href="anay-6800.html#multi7"><i class="fa fa-check"></i><b>10.8.6</b> 无光呼吸酶失活模块</a></li>
+<li class="chapter" data-level="10.8.7" data-path="anay-6800.html"><a href="anay-6800.html#multi9"><i class="fa fa-check"></i><b>10.8.7</b> 酶失活作图</a></li>
+<li class="chapter" data-level="10.8.8" data-path="anay-6800.html"><a href="anay-6800.html#multi10"><i class="fa fa-check"></i><b>10.8.8</b> 不同失活程度下补偿点计算</a></li>
 </ul></li>
-<li class="chapter" data-level="10.9" data-path="anay-6800.html"><a href="anay-6800.html#diffu-limi"><i class="fa fa-check"></i><b>10.9</b> 时间延迟的扩散限制</a><ul>
-<li class="chapter" data-level="10.9.1" data-path="anay-6800.html"><a href="anay-6800.html#difu-limit"><i class="fa fa-check"></i><b>10.9.1</b> 扩散限制滞后性</a></li>
+<li class="chapter" data-level="10.9" data-path="anay-6800.html"><a href="anay-6800.html#multi11"><i class="fa fa-check"></i><b>10.9</b> 时间延迟的扩散限制</a><ul>
+<li class="chapter" data-level="10.9.1" data-path="anay-6800.html"><a href="anay-6800.html#multi12"><i class="fa fa-check"></i><b>10.9.1</b> 扩散限制滞后性</a></li>
 </ul></li>
-<li class="chapter" data-level="10.10" data-path="anay-6800.html"><a href="anay-6800.html#difu-graph"><i class="fa fa-check"></i><b>10.10</b> 扩散限制作图</a><ul>
-<li class="chapter" data-level="10.10.1" data-path="anay-6800.html"><a href="anay-6800.html#compen-estimate"><i class="fa fa-check"></i><b>10.10.1</b> 补偿点的计算</a></li>
-<li class="chapter" data-level="10.10.2" data-path="anay-6800.html"><a href="anay-6800.html#all-fig"><i class="fa fa-check"></i><b>10.10.2</b> 所有图形代码</a></li>
+<li class="chapter" data-level="10.10" data-path="anay-6800.html"><a href="anay-6800.html#multi13"><i class="fa fa-check"></i><b>10.10</b> 扩散限制作图</a><ul>
+<li class="chapter" data-level="10.10.1" data-path="anay-6800.html"><a href="anay-6800.html#multi14"><i class="fa fa-check"></i><b>10.10.1</b> 补偿点的计算</a></li>
+<li class="chapter" data-level="10.10.2" data-path="anay-6800.html"><a href="anay-6800.html#multi15"><i class="fa fa-check"></i><b>10.10.2</b> 所有图形代码</a></li>
 </ul></li>
 <li class="chapter" data-level="10.11" data-path="anay-6800.html"><a href="anay-6800.html#fluro68"><i class="fa fa-check"></i><b>10.11</b> LI-6800 荧光数据分析</a><ul>
 <li class="chapter" data-level="10.11.1" data-path="anay-6800.html"><a href="anay-6800.html#jiptest"><i class="fa fa-check"></i><b>10.11.1</b> jip test 的实现</a></li>
@@ -281,7 +284,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote>
 <p>“迭代法”也称“辗转法”是一种不断用变量的旧值递推新值的过程。</p>
 </blockquote>
-<p>用通俗但不是特别严谨的说法可解释为：每次执行这种算法是，程序都会从原值（也就是我抄的上面迭代法定义的旧值）推出一个新值。</p>
+<p>用通俗但不是特别严谨的说法可解释为：每次执行这种算法时，程序都会从原值（也就是我抄的上面迭代法定义的旧值）推出一个新值。</p>
 <p>之所以先介绍这个迭代，原因很简单，非线性拟合就是通过迭代的方法，需要对每一个变量<strong>最初的估计值进行不断的迭代，得到一个向一个点收缩或汇聚的值，这个估计值必须在实际值的一定范围内，程序通过不断调整这个值来改善拟合结果</strong>。这就解释了上面的问题，初始值是让程序开始运行的前提，不然没法迭代，必须设定。我下面的内容将以 LI-6800 的光响应曲线的测试数据，使用非直角双曲线模型进行拟合来讲解具体的 R 中的一些实现方法，我们首先导入数据，然后再利用这些数据逐个举例不同的确定初始值的方式。</p>
 <div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" title="1">nls &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/nlstest.csv&quot;</span>)</a>
 <a class="sourceLine" id="cb85-2" title="2"></a>
@@ -291,7 +294,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb85-6" title="6">lrc_A &lt;-<span class="st"> </span>nls<span class="op">$</span>A</a></code></pre></div>
 <div id="nlslm" class="section level2">
 <h2><span class="header-section-number">9.1</span> nlsLM 解决方案</h2>
-<p>nlsLM 来自于 <span class="citation">Elzhov et al. (<a href="#ref-Elzhov2016minpack">2016</a>)</span> 的 <code>minpack.lm</code>，利用 C 语言的 MINPACK 库，修改了 Levenberg-Marquardt 算法，在实际操作中，很多时候并不准确的输入初始值，他也能得出比较好的拟合结果。但结果未必完美，出现下面让人烦恼的报错：</p>
+<p>nlsLM 来自于 <span class="citation">Elzhov et al. (<a href="#ref-Elzhov2016minpack" role="doc-biblioref">2016</a>)</span> 的 <code>minpack.lm</code>，利用 C 语言的 MINPACK 库，修改了 Levenberg-Marquardt 算法，在实际操作中，很多时候并不准确的输入初始值，他也能得出比较好的拟合结果。但结果未必完美，出现下面让人烦恼的报错：</p>
 <blockquote>
 <p>singular gradient matrix at initial parameter estimates</p>
 </blockquote>
@@ -451,7 +454,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="mult_try" class="section level2">
 <h2><span class="header-section-number">9.3</span> 自动多次尝试法</h2>
-<p>该方法实际为使用 <code>nls2</code> 来实现，具体方法参考 <span class="citation">Bouvier and Huet (<a href="#ref-nls2">1994</a>)</span> 的文章，可简单概括为使用一系列的起始值梯度（例如下面的代码中， alpha 的取值在 0.01 到 0.08 之间 ），然后软件循序使用不同的起始值，即排列组合所有的起始值序列，最终找到合适的值，具体实现如下：</p>
+<p>该方法实际为使用 <code>nls2</code> 来实现，具体方法参考 <span class="citation">Bouvier and Huet (<a href="#ref-nls2" role="doc-biblioref">1994</a>)</span> 的文章，可简单概括为使用一系列的起始值梯度（例如下面的代码中， alpha 的取值在 0.01 到 0.08 之间 ），然后软件循序使用不同的起始值，即排列组合所有的起始值序列，最终找到合适的值，具体实现如下：</p>
 <div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" title="1"><span class="kw">library</span>(nls2)</a></code></pre></div>
 <pre><code>## Loading required package: proto</code></pre>
 <div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" title="1">grid.test &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="kw">list</span>(</a>
@@ -562,11 +565,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -574,12 +579,11 @@ gitbook.start({
 "github": true,
 "facebook": false,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -591,6 +595,10 @@ gitbook.start({
 "text": "编辑"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },

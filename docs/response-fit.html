@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 3 章 CO2 响应曲线的拟合 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
   <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
-  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 3 章 CO2 响应曲线的拟合 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2019-09-25" />
+<meta name="date" content="2020-03-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -220,22 +223,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10.6" data-path="anay-6800.html"><a href="anay-6800.html#fitbatracir"><i class="fa fa-check"></i><b>10.6</b> 批量计算 <span class="math inline">\(V_{cmax}\)</span> 和 <span class="math inline">\(J_max\)</span></a></li>
 <li class="chapter" data-level="10.7" data-path="anay-6800.html"><a href="anay-6800.html#racir68_exam"><i class="fa fa-check"></i><b>10.7</b> RACiR分析的手动实现</a></li>
-<li class="chapter" data-level="10.8" data-path="anay-6800.html"><a href="anay-6800.html#multirate-racir"><i class="fa fa-check"></i><b>10.8</b> 利用不同速率的 RACiR 曲线研究植物的光合生理特性</a><ul>
-<li class="chapter" data-level="10.8.1" data-path="anay-6800.html"><a href="anay-6800.html#photoresp-lag"><i class="fa fa-check"></i><b>10.8.1</b> 光呼吸滞后模型</a></li>
-<li class="chapter" data-level="10.8.2" data-path="anay-6800.html"><a href="anay-6800.html#code-photoresp"><i class="fa fa-check"></i><b>10.8.2</b> 光呼吸滞后性代码 {code-photoresp}</a></li>
-<li class="chapter" data-level="10.8.3" data-path="anay-6800.html"><a href="anay-6800.html#compi-modu"><i class="fa fa-check"></i><b>10.8.3</b> 数据的构造</a></li>
-<li class="chapter" data-level="10.8.4" data-path="anay-6800.html"><a href="anay-6800.html#photo-resp-graph"><i class="fa fa-check"></i><b>10.8.4</b> 光呼吸滞后性作图</a></li>
-<li class="chapter" data-level="10.8.5" data-path="anay-6800.html"><a href="anay-6800.html#gammastar"><i class="fa fa-check"></i><b>10.8.5</b> 补偿点计算</a></li>
-<li class="chapter" data-level="10.8.6" data-path="anay-6800.html"><a href="anay-6800.html#no-phoresp-rubi"><i class="fa fa-check"></i><b>10.8.6</b> 无光呼吸酶失活模块</a></li>
-<li class="chapter" data-level="10.8.7" data-path="anay-6800.html"><a href="anay-6800.html#Graphs-deac"><i class="fa fa-check"></i><b>10.8.7</b> 酶失活作图</a></li>
-<li class="chapter" data-level="10.8.8" data-path="anay-6800.html"><a href="anay-6800.html#comp-est-dea"><i class="fa fa-check"></i><b>10.8.8</b> 不同失活程度下补偿点计算</a></li>
+<li class="chapter" data-level="10.8" data-path="anay-6800.html"><a href="anay-6800.html#multi1"><i class="fa fa-check"></i><b>10.8</b> 多个速率的 RACiR 曲线研究</a><ul>
+<li class="chapter" data-level="10.8.1" data-path="anay-6800.html"><a href="anay-6800.html#multi2"><i class="fa fa-check"></i><b>10.8.1</b> 光呼吸滞后模型</a></li>
+<li class="chapter" data-level="10.8.2" data-path="anay-6800.html"><a href="anay-6800.html#code-photoresp"><i class="fa fa-check"></i><b>10.8.2</b> 光呼吸滞后性代码</a></li>
+<li class="chapter" data-level="10.8.3" data-path="anay-6800.html"><a href="anay-6800.html#multi4"><i class="fa fa-check"></i><b>10.8.3</b> 数据的构造</a></li>
+<li class="chapter" data-level="10.8.4" data-path="anay-6800.html"><a href="anay-6800.html#multi5"><i class="fa fa-check"></i><b>10.8.4</b> 光呼吸滞后性作图</a></li>
+<li class="chapter" data-level="10.8.5" data-path="anay-6800.html"><a href="anay-6800.html#multi6"><i class="fa fa-check"></i><b>10.8.5</b> 补偿点计算</a></li>
+<li class="chapter" data-level="10.8.6" data-path="anay-6800.html"><a href="anay-6800.html#multi7"><i class="fa fa-check"></i><b>10.8.6</b> 无光呼吸酶失活模块</a></li>
+<li class="chapter" data-level="10.8.7" data-path="anay-6800.html"><a href="anay-6800.html#multi9"><i class="fa fa-check"></i><b>10.8.7</b> 酶失活作图</a></li>
+<li class="chapter" data-level="10.8.8" data-path="anay-6800.html"><a href="anay-6800.html#multi10"><i class="fa fa-check"></i><b>10.8.8</b> 不同失活程度下补偿点计算</a></li>
 </ul></li>
-<li class="chapter" data-level="10.9" data-path="anay-6800.html"><a href="anay-6800.html#diffu-limi"><i class="fa fa-check"></i><b>10.9</b> 时间延迟的扩散限制</a><ul>
-<li class="chapter" data-level="10.9.1" data-path="anay-6800.html"><a href="anay-6800.html#difu-limit"><i class="fa fa-check"></i><b>10.9.1</b> 扩散限制滞后性</a></li>
+<li class="chapter" data-level="10.9" data-path="anay-6800.html"><a href="anay-6800.html#multi11"><i class="fa fa-check"></i><b>10.9</b> 时间延迟的扩散限制</a><ul>
+<li class="chapter" data-level="10.9.1" data-path="anay-6800.html"><a href="anay-6800.html#multi12"><i class="fa fa-check"></i><b>10.9.1</b> 扩散限制滞后性</a></li>
 </ul></li>
-<li class="chapter" data-level="10.10" data-path="anay-6800.html"><a href="anay-6800.html#difu-graph"><i class="fa fa-check"></i><b>10.10</b> 扩散限制作图</a><ul>
-<li class="chapter" data-level="10.10.1" data-path="anay-6800.html"><a href="anay-6800.html#compen-estimate"><i class="fa fa-check"></i><b>10.10.1</b> 补偿点的计算</a></li>
-<li class="chapter" data-level="10.10.2" data-path="anay-6800.html"><a href="anay-6800.html#all-fig"><i class="fa fa-check"></i><b>10.10.2</b> 所有图形代码</a></li>
+<li class="chapter" data-level="10.10" data-path="anay-6800.html"><a href="anay-6800.html#multi13"><i class="fa fa-check"></i><b>10.10</b> 扩散限制作图</a><ul>
+<li class="chapter" data-level="10.10.1" data-path="anay-6800.html"><a href="anay-6800.html#multi14"><i class="fa fa-check"></i><b>10.10.1</b> 补偿点的计算</a></li>
+<li class="chapter" data-level="10.10.2" data-path="anay-6800.html"><a href="anay-6800.html#multi15"><i class="fa fa-check"></i><b>10.10.2</b> 所有图形代码</a></li>
 </ul></li>
 <li class="chapter" data-level="10.11" data-path="anay-6800.html"><a href="anay-6800.html#fluro68"><i class="fa fa-check"></i><b>10.11</b> LI-6800 荧光数据分析</a><ul>
 <li class="chapter" data-level="10.11.1" data-path="anay-6800.html"><a href="anay-6800.html#jiptest"><i class="fa fa-check"></i><b>10.11.1</b> jip test 的实现</a></li>
@@ -279,7 +282,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">第 3 章</span> CO<sub>2</sub> 响应曲线的拟合</h1>
 <div id="fvcb_mod" class="section level2">
 <h2><span class="header-section-number">3.1</span> FvCB 模型</h2>
-<p>在 <code>plantecophys</code> 包中使用的模型为 <span class="citation">Farquhar, Caemmerer, and Berry (<a href="#ref-Farquhar1980A">1980</a>)</span> 建立的 C3 植物模型 FvCB，其基于 C3 植物碳反应的三个阶段：</p>
+<p>在 <code>plantecophys</code> 包中使用的模型为 <span class="citation">Farquhar, Caemmerer, and Berry (<a href="#ref-Farquhar1980A" role="doc-biblioref">1980</a>)</span> 建立的 C3 植物模型 FvCB，其基于 C3 植物碳反应的三个阶段：</p>
 <ul>
 <li><p>核酮糖-1,5-双磷酸羧化酶/加氧酶 (Rubisco)的催化下, 核酮糖-1,5-双磷酸(RuBP)与 CO<sub>2</sub>发生羧化作用, 生成3-磷酸甘油酸(PGA)。</p></li>
 <li><p>在腺苷三磷酸(ATP)和还原型烟酰胺腺嘌呤 二核苷酸磷酸(NADPH)的作用下, PGA被还原成磷 酸丙糖(TP)。每6个TP中有1个输出到细胞液中,
@@ -302,7 +305,7 @@ A\ =V_{c}\ -0.5V_{o}\ -\ R_{d}
 \end{equation}\]</span></p>
 <p>线粒体Rd不同于暗呼吸速率(Rn )。Rn是叶片在 黑暗中的线粒体呼吸速率, 随着光照的增加, 线粒体呼吸速率下降。因此 Rd &lt;
 Rn 在黑暗条件下测定的叶 片 CO<sub>2</sub> 交换速率即 Rn , 但是 Rd 的测定比较困难, 因为光照条件下 Rd 与
-Vc、Vo 同时存在。<span class="citation">Hikosaka et al. (<a href="#ref-Hikosaka2006Temperature">2006</a>)</span> 总结了几种测定
+Vc、Vo 同时存在。<span class="citation">Hikosaka et al. (<a href="#ref-Hikosaka2006Temperature" role="doc-biblioref">2006</a>)</span> 总结了几种测定
 Rd 的方法，式 <a href="response-fit.html#eq:aeta">(3.1)</a> 又可表达为：</p>
 <p><span class="math display" id="eq:achange">\[\begin{equation}
 A\ =V_{c}\ (1\ -0.5\alpha)\ R_{d}
@@ -366,33 +369,33 @@ A=min\{w_{c},w_{j,}w_{p}\}(1-\frac{\Gamma^{*}}{C_{c}})-R_{d}
 </div>
 <div id="co2_note" class="section level2">
 <h2><span class="header-section-number">3.2</span> CO<sub>2</sub> 响应曲线测量的注意事项</h2>
-<p>尽管上文对其分段性做了数学上的解释，相比来讲，不是那么通俗易懂，根据 <span class="citation">Haworth, Marino, and Centritto (<a href="#ref-matthew2018">2018</a>)</span> 文章中的内容，我们后面两小节的内容对其进行概述：</p>
+<p>尽管上文对其分段性做了数学上的解释，相比来讲，不是那么通俗易懂，根据 <span class="citation">Haworth, Marino, and Centritto (<a href="#ref-matthew2018" role="doc-biblioref">2018</a>)</span> 文章中的内容，我们后面两小节的内容对其进行概述：</p>
 <div id="model_3" class="section level3">
 <h3><span class="header-section-number">3.2.1</span> 分段性</h3>
-<p>与光响应曲线不同， A/Ci 曲线是分段的，这也增加了其复杂性，在其最初阶段，<span class="math inline">\(CO_2\)</span> 浓度较低，在此阶段， Rubisco 更多的与 <span class="math inline">\(O_2\)</span> 结合，因此，即使是较小浓度的 <span class="math inline">\(CO_2\)</span> 的增加，也会显著提高羧化速率，我们将此阶段称之为 <span class="math inline">\(CO_2\)</span> (<span class="citation">Wullschleger (<a href="#ref-Wullschleger1993Biochemical">1993</a>)</span>) 限制或 Rubisco 限制 (<span class="citation">Long and Bernacchi (<a href="#ref-Long2003Gas">2003</a>)</span>)。净光合速率 A 与 Ci 在此阶段斜率比较陡峭，实践中往往利用计算该斜率来计算 <span class="math inline">\(V_{cmax}\)</span>。</p>
-<p>在较高的 <span class="math inline">\(CO_2\)</span> 浓度下，曲线斜率开始便的平缓，作为底物的 <span class="math inline">\(CO_2\)</span> 已经不在是限制因素，随着羧化速率达到最大，RUBP 的量成为了其限制因素，而 RUBP 的再生速率受最大电子传递速率 <span class="math inline">\(J_{max}\)</span> 的限制。此时曲线的弯曲点由 <span class="math inline">\(V_{cmax}\)</span> 限制转变为 <span class="math inline">\(J_{max}\)</span>，许多研究中将饱和光下和 <span class="math inline">\(CO_2\)</span> 浓度下测量的光合速率称之为做大光合速率(<span class="citation">Heath et al. (<a href="#ref-heath2005rising">2005</a>)</span>)。而另一些研究中将最大光合速率定义为外界 <span class="math inline">\(CO_2\)</span> 时，在饱和光强下达到的最大光合速率(<span class="citation">Marshall and Biscoe (<a href="#ref-marshall1980a">1980</a>)</span>)。这些术语上的差别需要注意。</p>
-<p>在之后，有可能继续观测到磷酸盐限制 RUBP 再生的情况，导致光合速率的下降。因为此时大量的磷酸丙糖与正磷酸盐结合，导致 ATP 合成受限制(<span class="citation">Ellsworth et al. (<a href="#ref-ellsworth2015phosphorus">2015</a>)</span>)。这就是 TPU 限制阶段。</p>
+<p>与光响应曲线不同， A/Ci 曲线是分段的，这也增加了其复杂性，在其最初阶段，<span class="math inline">\(CO_2\)</span> 浓度较低，在此阶段， Rubisco 更多的与 <span class="math inline">\(O_2\)</span> 结合，因此，即使是较小浓度的 <span class="math inline">\(CO_2\)</span> 的增加，也会显著提高羧化速率，我们将此阶段称之为 <span class="math inline">\(CO_2\)</span> (<span class="citation">Wullschleger (<a href="#ref-Wullschleger1993Biochemical" role="doc-biblioref">1993</a>)</span>) 限制或 Rubisco 限制 (<span class="citation">Long and Bernacchi (<a href="#ref-Long2003Gas" role="doc-biblioref">2003</a>)</span>)。净光合速率 A 与 Ci 在此阶段斜率比较陡峭，实践中往往利用计算该斜率来计算 <span class="math inline">\(V_{cmax}\)</span>。</p>
+<p>在较高的 <span class="math inline">\(CO_2\)</span> 浓度下，曲线斜率开始便的平缓，作为底物的 <span class="math inline">\(CO_2\)</span> 已经不在是限制因素，随着羧化速率达到最大，RUBP 的量成为了其限制因素，而 RUBP 的再生速率受最大电子传递速率 <span class="math inline">\(J_{max}\)</span> 的限制。此时曲线的弯曲点由 <span class="math inline">\(V_{cmax}\)</span> 限制转变为 <span class="math inline">\(J_{max}\)</span>，许多研究中将饱和光下和 <span class="math inline">\(CO_2\)</span> 浓度下测量的光合速率称之为做大光合速率(<span class="citation">Heath et al. (<a href="#ref-heath2005rising" role="doc-biblioref">2005</a>)</span>)。而另一些研究中将最大光合速率定义为外界 <span class="math inline">\(CO_2\)</span> 时，在饱和光强下达到的最大光合速率(<span class="citation">Marshall and Biscoe (<a href="#ref-marshall1980a" role="doc-biblioref">1980</a>)</span>)。这些术语上的差别需要注意。</p>
+<p>在之后，有可能继续观测到磷酸盐限制 RUBP 再生的情况，导致光合速率的下降。因为此时大量的磷酸丙糖与正磷酸盐结合，导致 ATP 合成受限制(<span class="citation">Ellsworth et al. (<a href="#ref-ellsworth2015phosphorus" role="doc-biblioref">2015</a>)</span>)。这就是 TPU 限制阶段。</p>
 </div>
 <div id="note_detail" class="section level3">
 <h3><span class="header-section-number">3.2.2</span> 测量注意事项</h3>
 <p>尽管您的操作是严格按照说明书操作的，但说明书是指仪器的正确操作方式，无法对所有测量都采用相同设置，要获得好的测量结果，有更多的因素需要注意：</p>
 <p>使用 LI-6400 或 LI-6800 测量 A/Ci 曲线的过程也就是控制叶室或参比室气体浓度变化的过程，<strong>只要诱导的时间足够</strong>，气孔会在相应设置的环境条件下开到足够大，这样 Ci 会随 Ca 而变化，一般来讲二者的比例为 0.7，但也可能在 0.5~0.7 间变化。</p>
-<p>一般来讲，测量参数是在温度为 25 <span class="math inline">\(^{\circ}\)</span>C 时获得，但实际测量过程中，因为外界温度过高或过低等无法控制叶室温度到 25 <span class="math inline">\(^{\circ}\)</span>C，这其实并非严重的问题，因为这可以通过数学上的方法将计算参数标准化为 25 <span class="math inline">\(^{\circ}\)</span>C 时的结果。所以，在测量时只需控制叶室温度稳定即可（通常为 20 <span class="math inline">\(^{\circ}\)</span>C ~ 30 <span class="math inline">\(^{\circ}\)</span>C 之间）。 此外就是控制恒定的 VPD 及一个饱和光强。另外就是需要注意，开始测量之前，必须在外界环境的 <span class="math inline">\(CO_2\)</span> 浓度下诱导足够长的时间，使光合速率达到稳定，一般需要20 ~ 30 min。对于没有稳定的光保护机制的植物，一般不建议在 50 ppm 或更低的浓度下进行设置，此时饱和光强和建议的温度下，植物没有足够的底物进行光合作用，这样会因为光化学反应的降低发生氧化性损伤。<span class="citation">Centritto, Loreto, and Chartzoulakis (<a href="#ref-centritto2003">2003</a>)</span> 研究表明，长时间的在 50 ppm 下诱导气孔打开到最大时，可以观测到最大的气孔导度（非标准方式测量）。</p>
-<p>对于存在干旱胁迫的测量，由于干旱会导致气孔关闭（<span class="citation">Lauteri et al. (<a href="#ref-lauteri2014">2014</a>)</span>）, 此时没有足够多的 <span class="math inline">\(CO_2\)</span> 进入气孔，此时的测量是没有意义的，可在 50 ppm 诱导 1 h 等待气孔完全打开再快速升高 Ca 的值来进行测量（<span class="citation">Centritto, Loreto, and Chartzoulakis (<a href="#ref-centritto2003">2003</a>)</span>）。该方法对于 <span class="math inline">\(V_{cmax}\)</span> 不受影响而 <span class="math inline">\(J_{max}\)</span> 降低的情况适用（<span class="citation">Aganchich et al. (<a href="#ref-Aganchich2009">2009</a>)</span>）。但在某些情况下，气孔关闭速度太快，无法完成整个 A/Ci 曲线过程 (Haworth2017)（需要考虑 LI-6800 RACiR）。更重要的是，如果想采用拟合方式求 gm，那么气孔必须完全打开使叶片对 <span class="math inline">\(CO_2\)</span> 吸收的限制降到最低。对于灌溉情况良好的植物或者土壤水分情况比较好的植物，气孔不对高于外界浓度的 Ca 的升高而响应(<span class="citation">Haworth et al. (<a href="#ref-haworth2015coordination">2015</a>)</span>)，这可能需要更多的测量点或延长测量点的时间间隔来提高曲线的分辨率。另外，测量点的数量也要根据研究而改变，例如重点测量 Vcamx 时，50 ~ 300 ppm 的数据点要多一些，而如果研究对象是土壤磷酸盐对植物生理的限制，那么 1600 ~ 2000 ppm 的数据点要适当增多。</p>
+<p>一般来讲，测量参数是在温度为 25 <span class="math inline">\(^{\circ}\)</span>C 时获得，但实际测量过程中，因为外界温度过高或过低等无法控制叶室温度到 25 <span class="math inline">\(^{\circ}\)</span>C，这其实并非严重的问题，因为这可以通过数学上的方法将计算参数标准化为 25 <span class="math inline">\(^{\circ}\)</span>C 时的结果。所以，在测量时只需控制叶室温度稳定即可（通常为 20 <span class="math inline">\(^{\circ}\)</span>C ~ 30 <span class="math inline">\(^{\circ}\)</span>C 之间）。 此外就是控制恒定的 VPD 及一个饱和光强。另外就是需要注意，开始测量之前，必须在外界环境的 <span class="math inline">\(CO_2\)</span> 浓度下诱导足够长的时间，使光合速率达到稳定，一般需要20 ~ 30 min。对于没有稳定的光保护机制的植物，一般不建议在 50 ppm 或更低的浓度下进行设置，此时饱和光强和建议的温度下，植物没有足够的底物进行光合作用，这样会因为光化学反应的降低发生氧化性损伤。<span class="citation">Centritto, Loreto, and Chartzoulakis (<a href="#ref-centritto2003" role="doc-biblioref">2003</a>)</span> 研究表明，长时间的在 50 ppm 下诱导气孔打开到最大时，可以观测到最大的气孔导度（非标准方式测量）。</p>
+<p>对于存在干旱胁迫的测量，由于干旱会导致气孔关闭（<span class="citation">Lauteri et al. (<a href="#ref-lauteri2014" role="doc-biblioref">2014</a>)</span>）, 此时没有足够多的 <span class="math inline">\(CO_2\)</span> 进入气孔，此时的测量是没有意义的，可在 50 ppm 诱导 1 h 等待气孔完全打开再快速升高 Ca 的值来进行测量（<span class="citation">Centritto, Loreto, and Chartzoulakis (<a href="#ref-centritto2003" role="doc-biblioref">2003</a>)</span>）。该方法对于 <span class="math inline">\(V_{cmax}\)</span> 不受影响而 <span class="math inline">\(J_{max}\)</span> 降低的情况适用（<span class="citation">Aganchich et al. (<a href="#ref-Aganchich2009" role="doc-biblioref">2009</a>)</span>）。但在某些情况下，气孔关闭速度太快，无法完成整个 A/Ci 曲线过程 (Haworth2017)（需要考虑 LI-6800 RACiR）。更重要的是，如果想采用拟合方式求 gm，那么气孔必须完全打开使叶片对 <span class="math inline">\(CO_2\)</span> 吸收的限制降到最低。对于灌溉情况良好的植物或者土壤水分情况比较好的植物，气孔不对高于外界浓度的 Ca 的升高而响应(<span class="citation">Haworth et al. (<a href="#ref-haworth2015coordination" role="doc-biblioref">2015</a>)</span>)，这可能需要更多的测量点或延长测量点的时间间隔来提高曲线的分辨率。另外，测量点的数量也要根据研究而改变，例如重点测量 Vcamx 时，50 ~ 300 ppm 的数据点要多一些，而如果研究对象是土壤磷酸盐对植物生理的限制，那么 1600 ~ 2000 ppm 的数据点要适当增多。</p>
 <p>一个更精确的了解植物生理指标的方法是将 A/Ci 曲线改为 A/Cc 曲线，但这需要了解 gm 数据。因为 Cc 通过如下方式计算：</p>
 <p><span class="math display" id="eq:notecc">\[\begin{equation}
 C_c = C_i - \frac{A}{gm}
 \tag{3.11}
 \end{equation}\]</span></p>
-<p>对于 gm 的计算，比较易操作的有几种：采用光合荧光联合测量的方式计算求得。当然也可以采用曲线拟合的方式，或者 <span class="citation">Yin et al. (<a href="#ref-yin2009using">2009</a>)</span> 使用的方式，在低氧气体下，采用不同的光照水平求得。</p>
-<p>此外，测量气体交换非常重要的误差来源就是气体的扩散，因为测量时，多数时间内外界气体浓度要高于叶室内的气体浓度，那么即使使用密封性非常好的材料，由外界高 <span class="math inline">\(CO_2\)</span> 浓度气体向叶室低 <span class="math inline">\(CO_2\)</span> 浓度气体的扩散无法避免，尤其是在连续长时间测量时该效应尤为明显，因此需要经常更换叶室垫圈。具体可以通过一些方法来校正（<span class="citation">Flexas J and A (<a href="#ref-Flexas2007leak">2007</a>)</span>，rodeghiero2007major），但如果采用 LI-6800 测量这将不是问题，它采用的叶室增加技术并根据测量的漏气情况对结果自动修正。</p>
+<p>对于 gm 的计算，比较易操作的有几种：采用光合荧光联合测量的方式计算求得。当然也可以采用曲线拟合的方式，或者 <span class="citation">Yin et al. (<a href="#ref-yin2009using" role="doc-biblioref">2009</a>)</span> 使用的方式，在低氧气体下，采用不同的光照水平求得。</p>
+<p>此外，测量气体交换非常重要的误差来源就是气体的扩散，因为测量时，多数时间内外界气体浓度要高于叶室内的气体浓度，那么即使使用密封性非常好的材料，由外界高 <span class="math inline">\(CO_2\)</span> 浓度气体向叶室低 <span class="math inline">\(CO_2\)</span> 浓度气体的扩散无法避免，尤其是在连续长时间测量时该效应尤为明显，因此需要经常更换叶室垫圈。具体可以通过一些方法来校正（<span class="citation">Flexas J and A (<a href="#ref-Flexas2007leak" role="doc-biblioref">2007</a>)</span>，rodeghiero2007major），但如果采用 LI-6800 测量这将不是问题，它采用的叶室增加技术并根据测量的漏气情况对结果自动修正。</p>
 
 
 </div>
 </div>
 <div id="plantecophys" class="section level2">
 <h2><span class="header-section-number">3.3</span> <code>plantecophys</code> 软件包</h2>
-<p>Remko A. Duursma 在2015年发表了一篇文章 <span class="citation">Duursma (<a href="#ref-Duursma2015Plantecophys">2015</a>)</span>，<code>plantecophys</code> 是其开发的一个R包工具集，用于对叶片气体交换数据进行分析和建模。实现了如下功能：</p>
+<p>Remko A. Duursma 在2015年发表了一篇文章 <span class="citation">Duursma (<a href="#ref-Duursma2015Plantecophys" role="doc-biblioref">2015</a>)</span>，<code>plantecophys</code> 是其开发的一个R包工具集，用于对叶片气体交换数据进行分析和建模。实现了如下功能：</p>
 <ul>
 <li>CO<sub>2</sub> 响应曲线 (A-Ci curves) 的拟合、作图及模拟。</li>
 <li>不同气孔导度模型。</li>
@@ -407,7 +410,7 @@ C_c = C_i - \frac{A}{gm}
 <div id="fit6400" class="section level2">
 <h2><span class="header-section-number">3.4</span> LI-6400XT CO<sub>2</sub> 响应曲线的拟合</h2>
 <p>LI-6400XT CO<sub>2</sub> 响应曲线的拟合需要借助 <code>plantecophys</code> 的 <code>fitaci</code> 实现，fitaci 函数为根据 FvCB 模型对 A-Ci 曲线的测量数据进行拟合，并估算 J<span class="math inline">\(_{max}\)</span>、V<span class="math inline">\(_{cmax}\)</span>、R<span class="math inline">\(_{d}\)</span>及他们的标准差，并根据
-<span class="citation">Medlyn et al. (<a href="#ref-Medlyn2002Temperature">2002</a>)</span> 的方法考虑了温度的影响。</p>
+<span class="citation">Medlyn et al. (<a href="#ref-Medlyn2002Temperature" role="doc-biblioref">2002</a>)</span> 的方法考虑了温度的影响。</p>
 <div id="fitaci_intro" class="section level3">
 <h3><span class="header-section-number">3.4.1</span> fitaci 函数介绍</h3>
 <p><code>fitaci</code> 的用法如下<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>：</p>
@@ -449,13 +452,13 @@ C_c = C_i - \frac{A}{gm}
 <li>whichA：默认为对所有的光合速率进行作图（Aj=Jmax-limited (蓝色), Ac=Vcmax- limited (红色),
 Hyperbolic minimum (黑色)), TPU-limited rate (Ap, 如果模型有计算结果）。</li>
 </ul>
-<p>其他参数请参考 FvCB 模型 <span class="citation">Farquhar, Caemmerer, and Berry (<a href="#ref-Farquhar1980A">1980</a>)</span> 或查看 plantecophys 的帮助文档。</p>
+<p>其他参数请参考 FvCB 模型 <span class="citation">Farquhar, Caemmerer, and Berry (<a href="#ref-Farquhar1980A" role="doc-biblioref">1980</a>)</span> 或查看 plantecophys 的帮助文档。</p>
 <div id="fitaci_detail" class="section level4">
 <h4><span class="header-section-number">3.4.1.1</span> fitaci函数详解</h4>
 <ul>
-<li>默认为非线性拟合，详见 <span class="citation">Duursma (<a href="#ref-Duursma2015Plantecophys">2015</a>)</span>。</li>
-<li>bilinear 方法使用两次线性拟合方法首先拟合 V<span class="math inline">\(_{cmax}\)</span> 和 R<span class="math inline">\(_{d}\)</span>，然后在拟合J<span class="math inline">\(_{max}\)</span>，过渡点的选择为对所有数据拟合最适的点，类似 <span class="citation">Gu et al. (<a href="#ref-Gu2010Reliable">2010</a>)</span> 的方法。该方法的优势时无论如何，都会返回拟合结果，尤其是非线性拟合失败时使用该方法，但若默认方法失败时，需首先检查是否数据存在问题。两种拟合方法的结果有轻微的差别<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>。</li>
-<li>onepoint 参考 <span class="citation">De Kauwe et al. (<a href="#ref-De2016A">2016</a>)</span>。</li>
+<li><p>默认为非线性拟合，详见 <span class="citation">Duursma (<a href="#ref-Duursma2015Plantecophys" role="doc-biblioref">2015</a>)</span>。</p></li>
+<li><p>bilinear 方法使用两次线性拟合方法首先拟合 V<span class="math inline">\(_{cmax}\)</span> 和 R<span class="math inline">\(_{d}\)</span>，然后在拟合J<span class="math inline">\(_{max}\)</span>，过渡点的选择为对所有数据拟合最适的点，类似 <span class="citation">Gu et al. (<a href="#ref-Gu2010Reliable" role="doc-biblioref">2010</a>)</span> 的方法。该方法的优势时无论如何，都会返回拟合结果，尤其是非线性拟合失败时使用该方法，但若默认方法失败时，需首先检查是否数据存在问题。两种拟合方法的结果有轻微的差别<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>。</p></li>
+<li><p>onepoint 参考 <span class="citation">De Kauwe et al. (<a href="#ref-De2016A" role="doc-biblioref">2016</a>)</span>。</p></li>
 <li><p>citransition 使用时，数据将被区分为 V<span class="math inline">\(_{cmax}\)</span> 限制（Ci &lt;
 citransition ）区域，以及 J<span class="math inline">\(_{max}\)</span> 限制 (Ci &gt; citransition) 区域。</p></li>
 <li><p>fitTPU：如果要计算TPU，要设置 fitTPU = TRUE，并且 fittingmethod
@@ -639,32 +642,32 @@ CO<span class="math inline">\(_{2}\)</span> 的增加而增加时发生的，因
 <pre><code>## Result of fitaci.
 ## 
 ## Data and predictions:
-##            Ci      Ameas     Amodel         Ac        Aj   Ap        Rd
-## 5    53.47985 -0.6575974 -0.7389447 -0.3560483  0.000000 1000 0.3828608
-## 4    85.82530  1.7971569  1.7108198  2.0938246  5.138366 1000 0.3828608
-## 3   150.67623  6.4525814  6.2098476  6.5933940 12.931333 1000 0.3828608
-## 2   217.32002 10.6562220 10.3375299 10.7220229 17.761317 1000 0.3828608
-## 1   286.39751 14.2848912 14.1477696 14.5338762 21.035722 1000 0.3828608
-## 6   292.56161 15.4296572 14.7876514 15.1743678 21.139657 1000 0.3828608
-## 7   292.96456 15.7134791 14.8694171 15.2562440 21.117718 1000 0.3828608
-## 8   450.64285 22.2659015 22.8464806 23.2527613 25.533374 3000 0.3828608
-## 9   622.03873 26.5135040 27.8030690 30.5004944 28.220254 3000 0.3828608
-## 10  992.08737 30.3898585 30.8295808 42.5006398 31.221072 3000 0.3828608
-## 11 1558.96968 33.6267056 32.8913778 55.1255986 33.279305 3000 0.3828608
-## 12 1756.16396 33.3152783 33.3316070 58.7237587 33.719013 3000 0.3828608
-##    VPD    Tleaf         Cc     PPFD Patm Ci_original
-## 5  1.5 31.12332   53.47911 1800.490  100    53.47985
-## 4  1.5 30.99093   85.82701 1800.558  100    85.82530
-## 3  1.5 30.82872  150.68244 1800.140  100   150.67623
-## 2  1.5 30.63983  217.33037 1800.524  100   217.32002
-## 1  1.5 30.46890  286.41167 1800.701  100   286.39751
-## 6  1.5 31.26338  292.57641 1799.923  100   292.56161
-## 7  1.5 31.41866  292.97944 1799.975  100   292.96456
-## 8  1.5 31.54122  450.66572 1799.826  100   450.64285
-## 9  1.5 31.63493  622.06656 1799.578  100   622.03873
-## 10 1.5 31.73910  992.11823 1800.055  100   992.08737
-## 11 1.5 31.86938 1559.00260 1800.022  100  1558.96968
-## 12 1.5 31.96654 1756.19733 1799.585  100  1756.16396
+##            Ci      Ameas     Amodel         Ac        Aj   Ap        Rd VPD
+## 5    53.47985 -0.6575974 -0.7389447 -0.3560483  0.000000 1000 0.3828608 1.5
+## 4    85.82530  1.7971569  1.7108198  2.0938246  5.138366 1000 0.3828608 1.5
+## 3   150.67623  6.4525814  6.2098476  6.5933940 12.931333 1000 0.3828608 1.5
+## 2   217.32002 10.6562220 10.3375299 10.7220229 17.761317 1000 0.3828608 1.5
+## 1   286.39751 14.2848912 14.1477696 14.5338762 21.035722 1000 0.3828608 1.5
+## 6   292.56161 15.4296572 14.7876514 15.1743678 21.139657 1000 0.3828608 1.5
+## 7   292.96456 15.7134791 14.8694171 15.2562440 21.117718 1000 0.3828608 1.5
+## 8   450.64285 22.2659015 22.8464806 23.2527613 25.533374 3000 0.3828608 1.5
+## 9   622.03873 26.5135040 27.8030690 30.5004944 28.220254 3000 0.3828608 1.5
+## 10  992.08737 30.3898585 30.8295808 42.5006398 31.221072 3000 0.3828608 1.5
+## 11 1558.96968 33.6267056 32.8913778 55.1255986 33.279305 3000 0.3828608 1.5
+## 12 1756.16396 33.3152783 33.3316070 58.7237587 33.719013 3000 0.3828608 1.5
+##       Tleaf         Cc     PPFD Patm Ci_original
+## 5  31.12332   53.47911 1800.490  100    53.47985
+## 4  30.99093   85.82701 1800.558  100    85.82530
+## 3  30.82872  150.68244 1800.140  100   150.67623
+## 2  30.63983  217.33037 1800.524  100   217.32002
+## 1  30.46890  286.41167 1800.701  100   286.39751
+## 6  31.26338  292.57641 1799.923  100   292.56161
+## 7  31.41866  292.97944 1799.975  100   292.96456
+## 8  31.54122  450.66572 1799.826  100   450.64285
+## 9  31.63493  622.06656 1799.578  100   622.03873
+## 10 31.73910  992.11823 1800.055  100   992.08737
+## 11 31.86938 1559.00260 1800.022  100  1558.96968
+## 12 31.96654 1756.19733 1799.585  100  1756.16396
 ## 
 ## Root mean squared error:  2.013045 
 ## 
@@ -738,7 +741,7 @@ CO<span class="math inline">\(_{2}\)</span> 的增加而增加时发生的，因
 </blockquote>
 <div id="onepoint" class="section level4">
 <h4><span class="header-section-number">3.5.2.1</span> fitmethod = “onepoint” 介绍</h4>
-<p><span class="citation">De Kauwe et al. (<a href="#ref-De2016A">2016</a>)</span> 发表了关于 one point 方法计算 <span class="math inline">\(V_{cmax}\)</span> 和 <span class="math inline">\(J_{max}\)</span> 方法的文章，在 2017 年 11 月的更新中，plantecophys 增加了响应的 R 软件实现方法， 该方法并非使用一个点计算 <span class="math inline">\(V_{cmax}\)</span> 和 <span class="math inline">\(J_{max}\)</span>，而是对数据集中的每一个点的值进行估计，使用的方法为逆向了光合作用方程。输出为对每个原始数据加入了 <span class="math inline">\(V_{cmax}\)</span> 和 <span class="math inline">\(J_{max}\)</span>，当然一如既往的可以使用温度校准的方法。<strong>并不建议该方法应用于整个 ACi 曲线的数据，它的假设是在外部环境 CO<sub>2</sub> 浓度和饱和光下，受到 Rubisco 羧化速率的限制而不是 RUBP 的限制。</strong></p>
+<p><span class="citation">De Kauwe et al. (<a href="#ref-De2016A" role="doc-biblioref">2016</a>)</span> 发表了关于 one point 方法计算 <span class="math inline">\(V_{cmax}\)</span> 和 <span class="math inline">\(J_{max}\)</span> 方法的文章，在 2017 年 11 月的更新中，plantecophys 增加了响应的 R 软件实现方法， 该方法并非使用一个点计算 <span class="math inline">\(V_{cmax}\)</span> 和 <span class="math inline">\(J_{max}\)</span>，而是对数据集中的每一个点的值进行估计，使用的方法为逆向了光合作用方程。输出为对每个原始数据加入了 <span class="math inline">\(V_{cmax}\)</span> 和 <span class="math inline">\(J_{max}\)</span>，当然一如既往的可以使用温度校准的方法。<strong>并不建议该方法应用于整个 ACi 曲线的数据，它的假设是在外部环境 CO<sub>2</sub> 浓度和饱和光下，受到 Rubisco 羧化速率的限制而不是 RUBP 的限制。</strong></p>
 <p>基于上面的描述，他们的模型如下：</p>
 <p><span class="math display" id="eq:inverseA">\[\begin{equation}
 \hat{V}_{cmax} = (A_{sat} + R_{day}) \frac{C_i + K_m}{C_i - \Gamma^*} 
@@ -749,7 +752,7 @@ CO<span class="math inline">\(_{2}\)</span> 的增加而增加时发生的，因
 K_m = K_c (1 + \frac{O_i}{K_o}) 
 \tag{3.13}
 \end{equation}\]</span></p>
-<p>未知参数均由文献中的方法进行计算，具体可参考 <span class="citation">De Kauwe et al. (<a href="#ref-De2016A">2016</a>)</span> 的原文,但上述方法的缺陷为还要使用 ACi 曲线来估算 R<sub>day</sub>，因此作者使用了1.5% V<sub>cmax</sub> 作为 R<sub>day</sub>，因此公式 <a href="response-fit.html#eq:inverseA">(3.12)</a> 可变换为：</p>
+<p>未知参数均由文献中的方法进行计算，具体可参考 <span class="citation">De Kauwe et al. (<a href="#ref-De2016A" role="doc-biblioref">2016</a>)</span> 的原文,但上述方法的缺陷为还要使用 ACi 曲线来估算 R<sub>day</sub>，因此作者使用了1.5% V<sub>cmax</sub> 作为 R<sub>day</sub>，因此公式 <a href="response-fit.html#eq:inverseA">(3.12)</a> 可变换为：</p>
 <p><span class="math display" id="eq:onepoint">\[\begin{equation}
 \hat{V}_{cmax} = A_{sat} (\frac{C_i + K_m}{C_i - \Gamma^*} - 0.015)
 \tag{3.14}
@@ -1291,36 +1294,36 @@ K_m = K_c (1 + \frac{O_i}{K_o})
 <pre><code>## Result of fitaci.
 ## 
 ## Data and predictions:
-##            Ci      Ameas     Amodel         Ac        Aj   Ap        Rd
-## 2    53.23129 -0.4401082  0.1014381  0.9601119  2.548123 1000 0.8586158
-## 3    79.47367  2.4824630  2.1937702  3.0526198  7.036734 1000 0.8586158
-## 4   116.74688  5.4531712  4.9419337  5.8011511 11.392394 1000 0.8586158
-## 5   188.00801  9.7099879  9.5705964 10.4310194 16.447715 1000 0.8586158
-## 6   278.44662 14.8225766 14.4261545 15.2897486 19.977583 1000 0.8586158
-## 7   343.03259 17.7982155 17.4602014 18.3289218 21.639847 1000 0.8586158
-## 1   344.72152 17.9244012 17.3165146 18.1849643 21.534276 1000 0.8586158
-## 14  344.74839 16.7933747 17.6853306 18.5545917 21.774261 1000 0.8586158
-## 8   588.08078 23.8925326 24.1309683 27.0327638 25.020148 3000 0.8586158
-## 9   833.25547 26.5674409 25.7783026 33.0856065 26.647921 3000 0.8586158
-## 10 1136.99222 25.9787890 26.8108335 38.1296944 27.676768 3000 0.8586158
-## 11 1436.86370 26.6110657 27.5409345 42.0628463 28.405453 3000 0.8586158
-## 12 1536.46772 27.4018784 27.7965881 43.3773689 28.660781 3000 0.8586158
-## 13 1731.76400 28.6752069 28.0952804 45.2475932 28.959041 3000 0.8586158
-##    VPD    Tleaf         Cc     PPFD Patm Ci_original
-## 2  1.5 24.55873   53.23139 1799.959  100    53.23129
-## 3  1.5 24.58292   79.47586 1799.590  100    79.47367
-## 4  1.5 24.71278  116.75183 1799.819  100   116.74688
-## 5  1.5 24.73687  188.01759 1800.371  100   188.00801
-## 6  1.5 24.67508  278.46106 1800.233  100   278.44662
-## 7  1.5 24.76596  343.05006 1799.575  100   343.03259
-## 1  1.5 24.51593  344.73886 1800.356  100   344.72152
-## 14 1.5 24.94098  344.76609 1799.964  100   344.74839
-## 8  1.5 24.83785  588.10494 1799.477  100   588.08078
-## 9  1.5 24.91185  833.28127 1799.969  100   833.25547
-## 10 1.5 24.87314 1137.01906 1799.525  100  1136.99222
-## 11 1.5 24.95914 1436.89126 1799.615  100  1436.86370
-## 12 1.5 25.04542 1536.49554 1799.784  100  1536.46772
-## 13 1.5 25.07566 1731.79212 1799.160  100  1731.76400
+##            Ci      Ameas     Amodel         Ac        Aj   Ap        Rd VPD
+## 2    53.23129 -0.4401082  0.1014381  0.9601119  2.548123 1000 0.8586158 1.5
+## 3    79.47367  2.4824630  2.1937702  3.0526198  7.036734 1000 0.8586158 1.5
+## 4   116.74688  5.4531712  4.9419337  5.8011511 11.392394 1000 0.8586158 1.5
+## 5   188.00801  9.7099879  9.5705964 10.4310194 16.447715 1000 0.8586158 1.5
+## 6   278.44662 14.8225766 14.4261545 15.2897486 19.977583 1000 0.8586158 1.5
+## 7   343.03259 17.7982155 17.4602014 18.3289218 21.639847 1000 0.8586158 1.5
+## 1   344.72152 17.9244012 17.3165146 18.1849643 21.534276 1000 0.8586158 1.5
+## 14  344.74839 16.7933747 17.6853306 18.5545917 21.774261 1000 0.8586158 1.5
+## 8   588.08078 23.8925326 24.1309683 27.0327638 25.020148 3000 0.8586158 1.5
+## 9   833.25547 26.5674409 25.7783026 33.0856065 26.647921 3000 0.8586158 1.5
+## 10 1136.99222 25.9787890 26.8108335 38.1296944 27.676768 3000 0.8586158 1.5
+## 11 1436.86370 26.6110657 27.5409345 42.0628463 28.405453 3000 0.8586158 1.5
+## 12 1536.46772 27.4018784 27.7965881 43.3773689 28.660781 3000 0.8586158 1.5
+## 13 1731.76400 28.6752069 28.0952804 45.2475932 28.959041 3000 0.8586158 1.5
+##       Tleaf         Cc     PPFD Patm Ci_original
+## 2  24.55873   53.23139 1799.959  100    53.23129
+## 3  24.58292   79.47586 1799.590  100    79.47367
+## 4  24.71278  116.75183 1799.819  100   116.74688
+## 5  24.73687  188.01759 1800.371  100   188.00801
+## 6  24.67508  278.46106 1800.233  100   278.44662
+## 7  24.76596  343.05006 1799.575  100   343.03259
+## 1  24.51593  344.73886 1800.356  100   344.72152
+## 14 24.94098  344.76609 1799.964  100   344.74839
+## 8  24.83785  588.10494 1799.477  100   588.08078
+## 9  24.91185  833.28127 1799.969  100   833.25547
+## 10 24.87314 1137.01906 1799.525  100  1136.99222
+## 11 24.95914 1436.89126 1799.615  100  1436.86370
+## 12 25.04542 1536.49554 1799.784  100  1536.46772
+## 13 25.07566 1731.79212 1799.160  100  1731.76400
 ## 
 ## Root mean squared error:  2.196037 
 ## 
@@ -1379,7 +1382,7 @@ K_m = K_c (1 + \frac{O_i}{K_o})
 </div>
 <div id="c4" class="section level2">
 <h2><span class="header-section-number">3.6</span> C4 植物光合</h2>
-<p>之前的部分模型全部为关于 C3 植物的拟合，而 <span class="citation">Caemmerer (<a href="#ref-Caemmerer2000Biochemical">2000</a>)</span> 的方法，则是针对
+<p>之前的部分模型全部为关于 C3 植物的拟合，而 <span class="citation">Caemmerer (<a href="#ref-Caemmerer2000Biochemical" role="doc-biblioref">2000</a>)</span> 的方法，则是针对
 C4 植物的 A-Ci 曲线的实现。</p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="kw">AciC4</span>(Ci, <span class="dt">PPFD =</span> <span class="dv">1500</span>, <span class="dt">Tleaf =</span> <span class="dv">25</span>, <span class="dt">VPMAX25 =</span> <span class="dv">120</span>, </a>
 <a class="sourceLine" id="cb51-2" title="2">      <span class="dt">JMAX25 =</span> <span class="dv">400</span>, <span class="dt">Vcmax =</span> <span class="dv">60</span>, <span class="dt">Vpr =</span> <span class="dv">80</span>, </a>
@@ -1409,7 +1412,7 @@ C4 植物的 A-Ci 曲线的实现。</p>
 <li>Q10F：呼吸依赖于温度的参数。</li>
 <li>FRM：明呼吸中为叶肉呼吸的比例。</li>
 </ul>
-<p>以上参数均来自 <span class="citation">Caemmerer (<a href="#ref-Caemmerer2000Biochemical">2000</a>)</span>，括号中的参数值均为默认值，具体应用时请按照实际情况修改。</p>
+<p>以上参数均来自 <span class="citation">Caemmerer (<a href="#ref-Caemmerer2000Biochemical" role="doc-biblioref">2000</a>)</span>，括号中的参数值均为默认值，具体应用时请按照实际情况修改。</p>
 <div id="c4_sim" class="section level3">
 <h3><span class="header-section-number">3.6.1</span> C4 植物光合速率的计算</h3>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="co"># 模拟 C4 植物的 Ci 值，计算光合速率并作图</span></a>
@@ -1492,8 +1495,6 @@ C4 植物的 A-Ci 曲线的实现。</p>
 <ol start="3">
 <li id="fn3"><p>仅针对 C3 植物<a href="response-fit.html#fnref3" class="footnote-back">↩</a></p></li>
 <li id="fn4"><p>具体参考 R 语言相关文档，为 R 语言最常用的数据格式<a href="response-fit.html#fnref4" class="footnote-back">↩</a></p></li>
-<li id="fn5"><p>在 R 中，使用参数的值为默认值时可以不用填写该参数，例如使用默认选项分析 LI-6400 数据时，可只填写 data 项，具体参考
-R 的相关入门手册<a href="response-fit.html#fnref5" class="footnote-back">↩</a></p></li>
 <li id="fn6"><p>为Rubisco和RuBP限制的Ci转换点，物种间差异较大，可以通过预实验确定<a href="response-fit.html#fnref6" class="footnote-back">↩</a></p></li>
 <li id="fn7"><p>若默认拟合方法失败，数据也无问题，那么是非线性拟合初始值设定的原因<a href="response-fit.html#fnref7" class="footnote-back">↩</a></p></li>
 <li id="fn8"><p>即仅保留测量值，删除其他所有头文件、空行、 remark 等信息<a href="response-fit.html#fnref8" class="footnote-back">↩</a></p></li>
@@ -1512,11 +1513,13 @@ R 的相关入门手册<a href="response-fit.html#fnref5" class="footnote-back">
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -1524,12 +1527,11 @@ gitbook.start({
 "github": true,
 "facebook": false,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -1541,6 +1543,10 @@ gitbook.start({
 "text": "编辑"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },

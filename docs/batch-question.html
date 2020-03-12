@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 2 章 批量处理光合测定数据 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
   <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
-  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 2 章 批量处理光合测定数据 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2019-09-25" />
+<meta name="date" content="2020-03-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -220,22 +223,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10.6" data-path="anay-6800.html"><a href="anay-6800.html#fitbatracir"><i class="fa fa-check"></i><b>10.6</b> 批量计算 <span class="math inline">\(V_{cmax}\)</span> 和 <span class="math inline">\(J_max\)</span></a></li>
 <li class="chapter" data-level="10.7" data-path="anay-6800.html"><a href="anay-6800.html#racir68_exam"><i class="fa fa-check"></i><b>10.7</b> RACiR分析的手动实现</a></li>
-<li class="chapter" data-level="10.8" data-path="anay-6800.html"><a href="anay-6800.html#multirate-racir"><i class="fa fa-check"></i><b>10.8</b> 利用不同速率的 RACiR 曲线研究植物的光合生理特性</a><ul>
-<li class="chapter" data-level="10.8.1" data-path="anay-6800.html"><a href="anay-6800.html#photoresp-lag"><i class="fa fa-check"></i><b>10.8.1</b> 光呼吸滞后模型</a></li>
-<li class="chapter" data-level="10.8.2" data-path="anay-6800.html"><a href="anay-6800.html#code-photoresp"><i class="fa fa-check"></i><b>10.8.2</b> 光呼吸滞后性代码 {code-photoresp}</a></li>
-<li class="chapter" data-level="10.8.3" data-path="anay-6800.html"><a href="anay-6800.html#compi-modu"><i class="fa fa-check"></i><b>10.8.3</b> 数据的构造</a></li>
-<li class="chapter" data-level="10.8.4" data-path="anay-6800.html"><a href="anay-6800.html#photo-resp-graph"><i class="fa fa-check"></i><b>10.8.4</b> 光呼吸滞后性作图</a></li>
-<li class="chapter" data-level="10.8.5" data-path="anay-6800.html"><a href="anay-6800.html#gammastar"><i class="fa fa-check"></i><b>10.8.5</b> 补偿点计算</a></li>
-<li class="chapter" data-level="10.8.6" data-path="anay-6800.html"><a href="anay-6800.html#no-phoresp-rubi"><i class="fa fa-check"></i><b>10.8.6</b> 无光呼吸酶失活模块</a></li>
-<li class="chapter" data-level="10.8.7" data-path="anay-6800.html"><a href="anay-6800.html#Graphs-deac"><i class="fa fa-check"></i><b>10.8.7</b> 酶失活作图</a></li>
-<li class="chapter" data-level="10.8.8" data-path="anay-6800.html"><a href="anay-6800.html#comp-est-dea"><i class="fa fa-check"></i><b>10.8.8</b> 不同失活程度下补偿点计算</a></li>
+<li class="chapter" data-level="10.8" data-path="anay-6800.html"><a href="anay-6800.html#multi1"><i class="fa fa-check"></i><b>10.8</b> 多个速率的 RACiR 曲线研究</a><ul>
+<li class="chapter" data-level="10.8.1" data-path="anay-6800.html"><a href="anay-6800.html#multi2"><i class="fa fa-check"></i><b>10.8.1</b> 光呼吸滞后模型</a></li>
+<li class="chapter" data-level="10.8.2" data-path="anay-6800.html"><a href="anay-6800.html#code-photoresp"><i class="fa fa-check"></i><b>10.8.2</b> 光呼吸滞后性代码</a></li>
+<li class="chapter" data-level="10.8.3" data-path="anay-6800.html"><a href="anay-6800.html#multi4"><i class="fa fa-check"></i><b>10.8.3</b> 数据的构造</a></li>
+<li class="chapter" data-level="10.8.4" data-path="anay-6800.html"><a href="anay-6800.html#multi5"><i class="fa fa-check"></i><b>10.8.4</b> 光呼吸滞后性作图</a></li>
+<li class="chapter" data-level="10.8.5" data-path="anay-6800.html"><a href="anay-6800.html#multi6"><i class="fa fa-check"></i><b>10.8.5</b> 补偿点计算</a></li>
+<li class="chapter" data-level="10.8.6" data-path="anay-6800.html"><a href="anay-6800.html#multi7"><i class="fa fa-check"></i><b>10.8.6</b> 无光呼吸酶失活模块</a></li>
+<li class="chapter" data-level="10.8.7" data-path="anay-6800.html"><a href="anay-6800.html#multi9"><i class="fa fa-check"></i><b>10.8.7</b> 酶失活作图</a></li>
+<li class="chapter" data-level="10.8.8" data-path="anay-6800.html"><a href="anay-6800.html#multi10"><i class="fa fa-check"></i><b>10.8.8</b> 不同失活程度下补偿点计算</a></li>
 </ul></li>
-<li class="chapter" data-level="10.9" data-path="anay-6800.html"><a href="anay-6800.html#diffu-limi"><i class="fa fa-check"></i><b>10.9</b> 时间延迟的扩散限制</a><ul>
-<li class="chapter" data-level="10.9.1" data-path="anay-6800.html"><a href="anay-6800.html#difu-limit"><i class="fa fa-check"></i><b>10.9.1</b> 扩散限制滞后性</a></li>
+<li class="chapter" data-level="10.9" data-path="anay-6800.html"><a href="anay-6800.html#multi11"><i class="fa fa-check"></i><b>10.9</b> 时间延迟的扩散限制</a><ul>
+<li class="chapter" data-level="10.9.1" data-path="anay-6800.html"><a href="anay-6800.html#multi12"><i class="fa fa-check"></i><b>10.9.1</b> 扩散限制滞后性</a></li>
 </ul></li>
-<li class="chapter" data-level="10.10" data-path="anay-6800.html"><a href="anay-6800.html#difu-graph"><i class="fa fa-check"></i><b>10.10</b> 扩散限制作图</a><ul>
-<li class="chapter" data-level="10.10.1" data-path="anay-6800.html"><a href="anay-6800.html#compen-estimate"><i class="fa fa-check"></i><b>10.10.1</b> 补偿点的计算</a></li>
-<li class="chapter" data-level="10.10.2" data-path="anay-6800.html"><a href="anay-6800.html#all-fig"><i class="fa fa-check"></i><b>10.10.2</b> 所有图形代码</a></li>
+<li class="chapter" data-level="10.10" data-path="anay-6800.html"><a href="anay-6800.html#multi13"><i class="fa fa-check"></i><b>10.10</b> 扩散限制作图</a><ul>
+<li class="chapter" data-level="10.10.1" data-path="anay-6800.html"><a href="anay-6800.html#multi14"><i class="fa fa-check"></i><b>10.10.1</b> 补偿点的计算</a></li>
+<li class="chapter" data-level="10.10.2" data-path="anay-6800.html"><a href="anay-6800.html#multi15"><i class="fa fa-check"></i><b>10.10.2</b> 所有图形代码</a></li>
 </ul></li>
 <li class="chapter" data-level="10.11" data-path="anay-6800.html"><a href="anay-6800.html#fluro68"><i class="fa fa-check"></i><b>10.11</b> LI-6800 荧光数据分析</a><ul>
 <li class="chapter" data-level="10.11.1" data-path="anay-6800.html"><a href="anay-6800.html#jiptest"><i class="fa fa-check"></i><b>10.11.1</b> jip test 的实现</a></li>
@@ -699,20 +702,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># half of original the area</span></a>
 <a class="sourceLine" id="cb13-2" title="2">y1 &lt;-<span class="st"> </span><span class="kw">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>,  <span class="dt">header_line =</span> <span class="dv">17</span>, <span class="dt">data_start =</span> <span class="dv">27</span>, <span class="dt">S =</span> <span class="dv">3</span>, <span class="dt">K =</span> <span class="fl">0.5</span>)</a>
 <a class="sourceLine" id="cb13-3" title="3">y1<span class="op">$</span>Photo<span class="op">/</span>x1<span class="op">$</span>Photo</a></code></pre></div>
-<pre><code>##  [1] 2.000254 1.998957 2.000767 1.999234 2.007333 2.004346 2.000635
-##  [8] 1.999893 1.996299 2.005611 2.008161 2.006110 1.998550 1.998863
-## [15] 1.998980 2.003671 1.998391 1.999240 2.003866 1.995584 1.994199
-## [22] 2.010360 1.998550 1.998863 1.998980 2.003671 1.998391 1.999240
-## [29] 2.003866 1.995584 1.994199 2.010360</code></pre>
+<pre><code>##  [1] 2.000254 1.998957 2.000767 1.999234 2.007333 2.004346 2.000635 1.999893
+##  [9] 1.996299 2.005611 2.008161 2.006110 1.998550 1.998863 1.998980 2.003671
+## [17] 1.998391 1.999240 2.003866 1.995584 1.994199 2.010360 1.998550 1.998863
+## [25] 1.998980 2.003671 1.998391 1.999240 2.003866 1.995584 1.994199 2.010360</code></pre>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="co"># test with random area less than six</span></a>
 <a class="sourceLine" id="cb15-2" title="2">area &lt;-<span class="st"> </span><span class="dv">6</span> <span class="op">-</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">32</span>, <span class="dv">1</span>, <span class="dv">3</span>)</a>
 <a class="sourceLine" id="cb15-3" title="3">y1 &lt;-<span class="st"> </span><span class="kw">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>,  <span class="dt">header_line =</span> <span class="dv">17</span>, <span class="dt">data_start =</span> <span class="dv">27</span>, <span class="dt">S =</span> area, <span class="dt">K =</span> <span class="fl">0.5</span>)</a>
 <a class="sourceLine" id="cb15-4" title="4">y1<span class="op">$</span>Photo<span class="op">/</span>x1<span class="op">$</span>Photo</a></code></pre></div>
-<pre><code>##  [1] 1.792267 1.414246 1.521604 1.280964 1.488131 1.222893 1.323786
-##  [8] 1.507253 1.546327 1.459445 1.356410 1.299565 1.545438 1.631234
-## [15] 1.295877 1.300672 1.900240 1.849912 1.776709 1.273604 1.768394
-## [22] 1.618715 1.979383 1.847570 1.646443 1.588514 1.517154 1.537171
-## [29] 1.640296 1.435469 1.648572 1.834052</code></pre>
+<pre><code>##  [1] 1.394256 1.209317 1.861020 1.525539 1.875184 1.339360 1.227033 1.387404
+##  [9] 1.243005 1.401373 1.293690 1.640426 1.323523 1.471863 1.756948 1.441838
+## [17] 1.650759 1.302542 1.721145 1.275656 1.583028 1.352833 1.343985 1.807029
+## [25] 1.457666 1.253034 1.842757 1.552674 1.945092 1.566944 1.368023 1.218274</code></pre>
 <p>我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.</p>
 </div>
 <div id="recompute6800" class="section level3">
@@ -727,19 +728,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">x3<span class="op">$</span>E <span class="op">-</span><span class="st"> </span>y3<span class="op">$</span>E</a></code></pre></div>
 <pre><code>##  [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</code></pre>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">x3<span class="op">$</span>gsw <span class="op">-</span><span class="st"> </span>y3<span class="op">$</span>gsw</a></code></pre></div>
-<pre><code>##  [1] -0.01231889 -0.01271539 -0.01330812 -0.01416506 -0.01491902
-##  [6] -0.01586479 -0.01566857 -0.01545520 -0.01563183 -0.01537453
-## [11] -0.01494554 -0.01433677 -0.02284560 -0.02291318 -0.02268118
-## [16] -0.02266862 -0.02250392 -0.02213352 -0.02061493 -0.02006006
-## [21] -0.01856400 -0.01678649 -0.01591079 -0.01457109 -0.01322393
-## [26] -0.02345109 -0.02312573 -0.02227497</code></pre>
+<pre><code>##  [1] -0.01231889 -0.01271539 -0.01330812 -0.01416506 -0.01491902 -0.01586479
+##  [7] -0.01566857 -0.01545520 -0.01563183 -0.01537453 -0.01494554 -0.01433677
+## [13] -0.02284560 -0.02291318 -0.02268118 -0.02266862 -0.02250392 -0.02213352
+## [19] -0.02061493 -0.02006006 -0.01856400 -0.01678649 -0.01591079 -0.01457109
+## [25] -0.01322393 -0.02345109 -0.02312573 -0.02227497</code></pre>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1">x3<span class="op">$</span>Ci<span class="op">-</span>y3<span class="op">$</span>Ci</a></code></pre></div>
-<pre><code>##  [1]  4.43187567  3.13678828  1.78620310  0.49515242 -0.08437000
-##  [6]  3.51420195  3.66611259  5.56360761  6.76351008  7.70784028
-## [11]  8.45263315  9.25926640  2.58978666  2.52629775  2.49784796
-## [16]  2.38619050  2.23225682  1.92200639  1.29213044  0.92018214
-## [21]  0.76352452  0.55412066  0.20248257 -0.08219604 -0.26216626
-## [26]  2.36039345  2.40636618  2.54353742</code></pre>
+<pre><code>##  [1]  4.43187567  3.13678828  1.78620310  0.49515242 -0.08437000  3.51420195
+##  [7]  3.66611259  5.56360761  6.76351008  7.70784028  8.45263315  9.25926640
+## [13]  2.58978666  2.52629775  2.49784796  2.38619050  2.23225682  1.92200639
+## [19]  1.29213044  0.92018214  0.76352452  0.55412066  0.20248257 -0.08219604
+## [25] -0.26216626  2.36039345  2.40636618  2.54353742</code></pre>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="co"># half of original the area</span></a>
 <a class="sourceLine" id="cb25-2" title="2">y3 &lt;-<span class="st"> </span><span class="kw">recomp_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="dt">data_start =</span> <span class="dv">56</span>, <span class="dt">S =</span> <span class="dv">3</span>, <span class="dt">K =</span> <span class="fl">0.5</span>)</a>
 <a class="sourceLine" id="cb25-3" title="3">y3<span class="op">$</span>A<span class="op">/</span>x3<span class="op">$</span>A</a></code></pre></div>
@@ -748,10 +747,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb27-2" title="2">area &lt;-<span class="st"> </span><span class="dv">6</span> <span class="op">-</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">28</span>, <span class="dv">1</span>, <span class="dv">3</span>)</a>
 <a class="sourceLine" id="cb27-3" title="3">y3 &lt;-<span class="st"> </span><span class="kw">recomp_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="dt">data_start =</span> <span class="dv">56</span>, <span class="dt">S =</span> area, <span class="dt">K =</span> <span class="fl">0.5</span>)</a>
 <a class="sourceLine" id="cb27-4" title="4">y3<span class="op">$</span>A<span class="op">/</span>x3<span class="op">$</span>A</a></code></pre></div>
-<pre><code>##  [1] 1.997350 1.434218 1.434118 1.346124 1.291867 1.310597 1.910942
-##  [8] 1.564463 1.901200 1.878727 1.998182 1.926809 1.901695 1.919342
-## [15] 1.603546 1.270592 1.539340 1.293847 1.322082 1.217918 1.644070
-## [22] 1.503348 1.257963 1.438580 1.441216 1.386051 1.621355 1.236636</code></pre>
+<pre><code>##  [1] 1.682417 1.352378 1.392126 1.821001 1.243496 1.949190 1.232408 1.929773
+##  [9] 1.885229 1.894243 1.418845 1.280066 1.907800 1.334177 1.600447 1.265311
+## [17] 1.656161 1.443926 1.588010 1.947003 1.991519 1.574074 1.250503 1.540351
+## [25] 1.446175 1.770679 1.540397 1.669355</code></pre>
 <p>测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。</p>
 
 
@@ -775,11 +774,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -787,12 +788,11 @@ gitbook.start({
 "github": true,
 "facebook": false,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -804,6 +804,10 @@ gitbook.start({
 "text": "编辑"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },

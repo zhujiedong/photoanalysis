@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 8 章 光响应曲线的拟合 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
   <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
-  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 8 章 光响应曲线的拟合 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2019-09-25" />
+<meta name="date" content="2020-03-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -220,22 +223,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10.6" data-path="anay-6800.html"><a href="anay-6800.html#fitbatracir"><i class="fa fa-check"></i><b>10.6</b> 批量计算 <span class="math inline">\(V_{cmax}\)</span> 和 <span class="math inline">\(J_max\)</span></a></li>
 <li class="chapter" data-level="10.7" data-path="anay-6800.html"><a href="anay-6800.html#racir68_exam"><i class="fa fa-check"></i><b>10.7</b> RACiR分析的手动实现</a></li>
-<li class="chapter" data-level="10.8" data-path="anay-6800.html"><a href="anay-6800.html#multirate-racir"><i class="fa fa-check"></i><b>10.8</b> 利用不同速率的 RACiR 曲线研究植物的光合生理特性</a><ul>
-<li class="chapter" data-level="10.8.1" data-path="anay-6800.html"><a href="anay-6800.html#photoresp-lag"><i class="fa fa-check"></i><b>10.8.1</b> 光呼吸滞后模型</a></li>
-<li class="chapter" data-level="10.8.2" data-path="anay-6800.html"><a href="anay-6800.html#code-photoresp"><i class="fa fa-check"></i><b>10.8.2</b> 光呼吸滞后性代码 {code-photoresp}</a></li>
-<li class="chapter" data-level="10.8.3" data-path="anay-6800.html"><a href="anay-6800.html#compi-modu"><i class="fa fa-check"></i><b>10.8.3</b> 数据的构造</a></li>
-<li class="chapter" data-level="10.8.4" data-path="anay-6800.html"><a href="anay-6800.html#photo-resp-graph"><i class="fa fa-check"></i><b>10.8.4</b> 光呼吸滞后性作图</a></li>
-<li class="chapter" data-level="10.8.5" data-path="anay-6800.html"><a href="anay-6800.html#gammastar"><i class="fa fa-check"></i><b>10.8.5</b> 补偿点计算</a></li>
-<li class="chapter" data-level="10.8.6" data-path="anay-6800.html"><a href="anay-6800.html#no-phoresp-rubi"><i class="fa fa-check"></i><b>10.8.6</b> 无光呼吸酶失活模块</a></li>
-<li class="chapter" data-level="10.8.7" data-path="anay-6800.html"><a href="anay-6800.html#Graphs-deac"><i class="fa fa-check"></i><b>10.8.7</b> 酶失活作图</a></li>
-<li class="chapter" data-level="10.8.8" data-path="anay-6800.html"><a href="anay-6800.html#comp-est-dea"><i class="fa fa-check"></i><b>10.8.8</b> 不同失活程度下补偿点计算</a></li>
+<li class="chapter" data-level="10.8" data-path="anay-6800.html"><a href="anay-6800.html#multi1"><i class="fa fa-check"></i><b>10.8</b> 多个速率的 RACiR 曲线研究</a><ul>
+<li class="chapter" data-level="10.8.1" data-path="anay-6800.html"><a href="anay-6800.html#multi2"><i class="fa fa-check"></i><b>10.8.1</b> 光呼吸滞后模型</a></li>
+<li class="chapter" data-level="10.8.2" data-path="anay-6800.html"><a href="anay-6800.html#code-photoresp"><i class="fa fa-check"></i><b>10.8.2</b> 光呼吸滞后性代码</a></li>
+<li class="chapter" data-level="10.8.3" data-path="anay-6800.html"><a href="anay-6800.html#multi4"><i class="fa fa-check"></i><b>10.8.3</b> 数据的构造</a></li>
+<li class="chapter" data-level="10.8.4" data-path="anay-6800.html"><a href="anay-6800.html#multi5"><i class="fa fa-check"></i><b>10.8.4</b> 光呼吸滞后性作图</a></li>
+<li class="chapter" data-level="10.8.5" data-path="anay-6800.html"><a href="anay-6800.html#multi6"><i class="fa fa-check"></i><b>10.8.5</b> 补偿点计算</a></li>
+<li class="chapter" data-level="10.8.6" data-path="anay-6800.html"><a href="anay-6800.html#multi7"><i class="fa fa-check"></i><b>10.8.6</b> 无光呼吸酶失活模块</a></li>
+<li class="chapter" data-level="10.8.7" data-path="anay-6800.html"><a href="anay-6800.html#multi9"><i class="fa fa-check"></i><b>10.8.7</b> 酶失活作图</a></li>
+<li class="chapter" data-level="10.8.8" data-path="anay-6800.html"><a href="anay-6800.html#multi10"><i class="fa fa-check"></i><b>10.8.8</b> 不同失活程度下补偿点计算</a></li>
 </ul></li>
-<li class="chapter" data-level="10.9" data-path="anay-6800.html"><a href="anay-6800.html#diffu-limi"><i class="fa fa-check"></i><b>10.9</b> 时间延迟的扩散限制</a><ul>
-<li class="chapter" data-level="10.9.1" data-path="anay-6800.html"><a href="anay-6800.html#difu-limit"><i class="fa fa-check"></i><b>10.9.1</b> 扩散限制滞后性</a></li>
+<li class="chapter" data-level="10.9" data-path="anay-6800.html"><a href="anay-6800.html#multi11"><i class="fa fa-check"></i><b>10.9</b> 时间延迟的扩散限制</a><ul>
+<li class="chapter" data-level="10.9.1" data-path="anay-6800.html"><a href="anay-6800.html#multi12"><i class="fa fa-check"></i><b>10.9.1</b> 扩散限制滞后性</a></li>
 </ul></li>
-<li class="chapter" data-level="10.10" data-path="anay-6800.html"><a href="anay-6800.html#difu-graph"><i class="fa fa-check"></i><b>10.10</b> 扩散限制作图</a><ul>
-<li class="chapter" data-level="10.10.1" data-path="anay-6800.html"><a href="anay-6800.html#compen-estimate"><i class="fa fa-check"></i><b>10.10.1</b> 补偿点的计算</a></li>
-<li class="chapter" data-level="10.10.2" data-path="anay-6800.html"><a href="anay-6800.html#all-fig"><i class="fa fa-check"></i><b>10.10.2</b> 所有图形代码</a></li>
+<li class="chapter" data-level="10.10" data-path="anay-6800.html"><a href="anay-6800.html#multi13"><i class="fa fa-check"></i><b>10.10</b> 扩散限制作图</a><ul>
+<li class="chapter" data-level="10.10.1" data-path="anay-6800.html"><a href="anay-6800.html#multi14"><i class="fa fa-check"></i><b>10.10.1</b> 补偿点的计算</a></li>
+<li class="chapter" data-level="10.10.2" data-path="anay-6800.html"><a href="anay-6800.html#multi15"><i class="fa fa-check"></i><b>10.10.2</b> 所有图形代码</a></li>
 </ul></li>
 <li class="chapter" data-level="10.11" data-path="anay-6800.html"><a href="anay-6800.html#fluro68"><i class="fa fa-check"></i><b>10.11</b> LI-6800 荧光数据分析</a><ul>
 <li class="chapter" data-level="10.11.1" data-path="anay-6800.html"><a href="anay-6800.html#jiptest"><i class="fa fa-check"></i><b>10.11.1</b> jip test 的实现</a></li>
@@ -280,7 +283,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>光响应曲线模型有很多，主要分为四大类，直角双曲线，非直角双曲线，指数以及直角双曲线修正模型，我们分别对这四类进行阐述。</p>
 <div id="rec_mod" class="section level2">
 <h2><span class="header-section-number">8.1</span> 直角双曲线模型</h2>
-<p><span class="citation">Baly (<a href="#ref-BalyEC1935">1935</a>)</span> 提出了直角双曲线模型，它的表达式为：</p>
+<p><span class="citation">Baly (<a href="#ref-BalyEC1935" role="doc-biblioref">1935</a>)</span> 提出了直角双曲线模型，它的表达式为：</p>
 <p><span class="math display" id="eq:rec">\[\begin{equation}
 P_{n}  = \frac{\alpha I\ P_{nmax}}{\alpha I + P_{nmax}}- R_{d}
 \tag{8.1}
@@ -295,13 +298,13 @@ P_{n}  = \frac{\alpha I\ P_{nmax}}{\alpha I + P_{nmax}}- R_{d}
 <p>对 <a href="lrc-fit.html#eq:rec">(8.1)</a> 求导可知其导数大于 0，也就是直角双曲线是一个没有极值的渐近线，因此，无法由 <a href="lrc-fit.html#eq:rec">(8.1)</a> 求得最大光合速率的饱和光强<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>。</p>
 <p>因此就需要使用弱光条件下
 (<span class="math inline">\(\leq\)</span> 200 <span class="math inline">\(\mu mol\cdot m^{-2}\cdot s^{-1}\)</span>) 的数据得到表观量子效率（apparent
-quantum efficiency，AQE），利用非线性最小二乘法估算 P<span class="math inline">\(_{nmax}\)</span> ，然后利用 <span class="citation">ZiPiao (<a href="#ref-YEZiPiao2010">2010</a>)</span> 的式 <a href="lrc-fit.html#eq:aqe">(8.2)</a> 求解 <span class="math inline">\(I_{sat}\)</span>，</p>
+quantum efficiency，AQE），利用非线性最小二乘法估算 P<span class="math inline">\(_{nmax}\)</span> ，然后利用 <span class="citation">ZiPiao (<a href="#ref-YEZiPiao2010" role="doc-biblioref">2010</a>)</span> 的式 <a href="lrc-fit.html#eq:aqe">(8.2)</a> 求解 <span class="math inline">\(I_{sat}\)</span>，</p>
 <p><span class="math display" id="eq:aqe">\[\begin{equation}
 P_{nmax}= AQE \times I_{sat} - R_{d}
 \tag{8.2}
 \end{equation}\]</span></p>
-<p>但此方法测得的光饱和点远小于实测值，我们采用 0.7P<span class="math inline">\(_{nmax}\)</span> <span class="citation">Zhang, Shen, and Song (<a href="#ref-ZhangXS2009">2009</a>)</span>、0.9P<span class="math inline">\(_{nmax}\)</span>
-<span class="citation">Huang et al. (<a href="#ref-HuangHY2009">2009</a>)</span>、或其他设定的值来的来估算<span class="math inline">\(I_{sat}\)</span>。</p>
+<p>但此方法测得的光饱和点远小于实测值，我们采用 0.7P<span class="math inline">\(_{nmax}\)</span> <span class="citation">Zhang, Shen, and Song (<a href="#ref-ZhangXS2009" role="doc-biblioref">2009</a>)</span>、0.9P<span class="math inline">\(_{nmax}\)</span>
+<span class="citation">Huang et al. (<a href="#ref-HuangHY2009" role="doc-biblioref">2009</a>)</span>、或其他设定的值来的来估算<span class="math inline">\(I_{sat}\)</span>。</p>
 <div id="rec_fit" class="section level3">
 <h3><span class="header-section-number">8.1.1</span> 直角双曲线模型的实现</h3>
 <p>若没有安装 <code>minpack.lm</code>, 则需要首先：</p>
@@ -436,7 +439,7 @@ P_{nmax}= AQE \times I_{sat} - R_{d}
 </div>
 <div id="nonrec_mod" class="section level2">
 <h2><span class="header-section-number">8.2</span> 非直角双曲线模型</h2>
-<p><span class="citation">Thornley (<a href="#ref-Thornley1976">1976</a>)</span> 提出了非直角双曲线模型，它的表达式为：</p>
+<p><span class="citation">Thornley (<a href="#ref-Thornley1976" role="doc-biblioref">1976</a>)</span> 提出了非直角双曲线模型，它的表达式为：</p>
 <p><span class="math display" id="eq:nrec">\[\begin{equation}
 P_{n} = \frac{\alpha I + P_{nmax} \sqrt{(\alpha I + P_{nmax})^{2} - 4  \theta \alpha I P_{nmax}}}{2 \theta} - R_{d}
 \tag{8.3}
@@ -572,7 +575,7 @@ P_{n} = \frac{\alpha I + P_{nmax} \sqrt{(\alpha I + P_{nmax})^{2} - 4  \theta \a
 </div>
 <div id="lrc_exp" class="section level2">
 <h2><span class="header-section-number">8.3</span> 指数模型</h2>
-<p>光合指数模型较多，我们此处使用的指数函数的模型 <span class="citation">Prado and Moraes (<a href="#ref-Prado1997Photosynthetic">1997</a>)</span>，其表达式为：</p>
+<p>光合指数模型较多，我们此处使用的指数函数的模型 <span class="citation">Prado and Moraes (<a href="#ref-Prado1997Photosynthetic" role="doc-biblioref">1997</a>)</span>，其表达式为：</p>
 <p><span class="math display" id="eq:exp">\[\begin{equation}
 P_{n} = P_{nmax}[1 - e^{-b(I-I_{C})}]
 \tag{8.4}
@@ -684,7 +687,7 @@ P_{n} = P_{nmax}[1 - e^{-b(I-I_{C})}]
 </div>
 <div id="rev_rec" class="section level2">
 <h2><span class="header-section-number">8.4</span> 直角双曲线的修正模型</h2>
-<p><span class="citation">ZiPiao (<a href="#ref-YEZiPiao2010">2010</a>)</span> 直角双曲线修正模型的表达式如式 <a href="lrc-fit.html#eq:mrec">(8.5)</a> 所示：</p>
+<p><span class="citation">ZiPiao (<a href="#ref-YEZiPiao2010" role="doc-biblioref">2010</a>)</span> 直角双曲线修正模型的表达式如式 <a href="lrc-fit.html#eq:mrec">(8.5)</a> 所示：</p>
 <p><span class="math display" id="eq:mrec">\[\begin{equation}
 P_{n} = \alpha \frac{1-\beta I}{1+\gamma I} I - R_{d}
 \tag{8.5}
@@ -811,7 +814,7 @@ P_{nmax} = \alpha\left(\frac{\sqrt{\beta+\gamma}-\sqrt{\beta}}{\gamma}\right)^{2
 </tr>
 </tbody>
 </table>
-<p>尽管修正模型可以方便的计算饱和点和补偿点，但如同 <span class="citation">Lobo et al. (<a href="#ref-Lobo2013Fitting">2013</a>)</span> 所指出，双曲线模型对其结果的计算常有超出生态学意义范围的值<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a>，因此对模型的选择不能一概而论，需根据实际情况而选择。</p>
+<p>尽管修正模型可以方便的计算饱和点和补偿点，但如同 <span class="citation">Lobo et al. (<a href="#ref-Lobo2013Fitting" role="doc-biblioref">2013</a>)</span> 所指出，双曲线模型对其结果的计算常有超出生态学意义范围的值<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a>，因此对模型的选择不能一概而论，需根据实际情况而选择。</p>
 
 
 </div>
@@ -859,11 +862,13 @@ P_{nmax} = \alpha\left(\frac{\sqrt{\beta+\gamma}-\sqrt{\beta}}{\gamma}\right)^{2
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -871,12 +876,11 @@ gitbook.start({
 "github": true,
 "facebook": false,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -888,6 +892,10 @@ gitbook.start({
 "text": "编辑"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },

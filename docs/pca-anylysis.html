@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 11 章 大话 PCA | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
   <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
-  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 11 章 大话 PCA | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2019-09-25" />
+<meta name="date" content="2020-03-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -220,22 +223,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10.6" data-path="anay-6800.html"><a href="anay-6800.html#fitbatracir"><i class="fa fa-check"></i><b>10.6</b> 批量计算 <span class="math inline">\(V_{cmax}\)</span> 和 <span class="math inline">\(J_max\)</span></a></li>
 <li class="chapter" data-level="10.7" data-path="anay-6800.html"><a href="anay-6800.html#racir68_exam"><i class="fa fa-check"></i><b>10.7</b> RACiR分析的手动实现</a></li>
-<li class="chapter" data-level="10.8" data-path="anay-6800.html"><a href="anay-6800.html#multirate-racir"><i class="fa fa-check"></i><b>10.8</b> 利用不同速率的 RACiR 曲线研究植物的光合生理特性</a><ul>
-<li class="chapter" data-level="10.8.1" data-path="anay-6800.html"><a href="anay-6800.html#photoresp-lag"><i class="fa fa-check"></i><b>10.8.1</b> 光呼吸滞后模型</a></li>
-<li class="chapter" data-level="10.8.2" data-path="anay-6800.html"><a href="anay-6800.html#code-photoresp"><i class="fa fa-check"></i><b>10.8.2</b> 光呼吸滞后性代码 {code-photoresp}</a></li>
-<li class="chapter" data-level="10.8.3" data-path="anay-6800.html"><a href="anay-6800.html#compi-modu"><i class="fa fa-check"></i><b>10.8.3</b> 数据的构造</a></li>
-<li class="chapter" data-level="10.8.4" data-path="anay-6800.html"><a href="anay-6800.html#photo-resp-graph"><i class="fa fa-check"></i><b>10.8.4</b> 光呼吸滞后性作图</a></li>
-<li class="chapter" data-level="10.8.5" data-path="anay-6800.html"><a href="anay-6800.html#gammastar"><i class="fa fa-check"></i><b>10.8.5</b> 补偿点计算</a></li>
-<li class="chapter" data-level="10.8.6" data-path="anay-6800.html"><a href="anay-6800.html#no-phoresp-rubi"><i class="fa fa-check"></i><b>10.8.6</b> 无光呼吸酶失活模块</a></li>
-<li class="chapter" data-level="10.8.7" data-path="anay-6800.html"><a href="anay-6800.html#Graphs-deac"><i class="fa fa-check"></i><b>10.8.7</b> 酶失活作图</a></li>
-<li class="chapter" data-level="10.8.8" data-path="anay-6800.html"><a href="anay-6800.html#comp-est-dea"><i class="fa fa-check"></i><b>10.8.8</b> 不同失活程度下补偿点计算</a></li>
+<li class="chapter" data-level="10.8" data-path="anay-6800.html"><a href="anay-6800.html#multi1"><i class="fa fa-check"></i><b>10.8</b> 多个速率的 RACiR 曲线研究</a><ul>
+<li class="chapter" data-level="10.8.1" data-path="anay-6800.html"><a href="anay-6800.html#multi2"><i class="fa fa-check"></i><b>10.8.1</b> 光呼吸滞后模型</a></li>
+<li class="chapter" data-level="10.8.2" data-path="anay-6800.html"><a href="anay-6800.html#code-photoresp"><i class="fa fa-check"></i><b>10.8.2</b> 光呼吸滞后性代码</a></li>
+<li class="chapter" data-level="10.8.3" data-path="anay-6800.html"><a href="anay-6800.html#multi4"><i class="fa fa-check"></i><b>10.8.3</b> 数据的构造</a></li>
+<li class="chapter" data-level="10.8.4" data-path="anay-6800.html"><a href="anay-6800.html#multi5"><i class="fa fa-check"></i><b>10.8.4</b> 光呼吸滞后性作图</a></li>
+<li class="chapter" data-level="10.8.5" data-path="anay-6800.html"><a href="anay-6800.html#multi6"><i class="fa fa-check"></i><b>10.8.5</b> 补偿点计算</a></li>
+<li class="chapter" data-level="10.8.6" data-path="anay-6800.html"><a href="anay-6800.html#multi7"><i class="fa fa-check"></i><b>10.8.6</b> 无光呼吸酶失活模块</a></li>
+<li class="chapter" data-level="10.8.7" data-path="anay-6800.html"><a href="anay-6800.html#multi9"><i class="fa fa-check"></i><b>10.8.7</b> 酶失活作图</a></li>
+<li class="chapter" data-level="10.8.8" data-path="anay-6800.html"><a href="anay-6800.html#multi10"><i class="fa fa-check"></i><b>10.8.8</b> 不同失活程度下补偿点计算</a></li>
 </ul></li>
-<li class="chapter" data-level="10.9" data-path="anay-6800.html"><a href="anay-6800.html#diffu-limi"><i class="fa fa-check"></i><b>10.9</b> 时间延迟的扩散限制</a><ul>
-<li class="chapter" data-level="10.9.1" data-path="anay-6800.html"><a href="anay-6800.html#difu-limit"><i class="fa fa-check"></i><b>10.9.1</b> 扩散限制滞后性</a></li>
+<li class="chapter" data-level="10.9" data-path="anay-6800.html"><a href="anay-6800.html#multi11"><i class="fa fa-check"></i><b>10.9</b> 时间延迟的扩散限制</a><ul>
+<li class="chapter" data-level="10.9.1" data-path="anay-6800.html"><a href="anay-6800.html#multi12"><i class="fa fa-check"></i><b>10.9.1</b> 扩散限制滞后性</a></li>
 </ul></li>
-<li class="chapter" data-level="10.10" data-path="anay-6800.html"><a href="anay-6800.html#difu-graph"><i class="fa fa-check"></i><b>10.10</b> 扩散限制作图</a><ul>
-<li class="chapter" data-level="10.10.1" data-path="anay-6800.html"><a href="anay-6800.html#compen-estimate"><i class="fa fa-check"></i><b>10.10.1</b> 补偿点的计算</a></li>
-<li class="chapter" data-level="10.10.2" data-path="anay-6800.html"><a href="anay-6800.html#all-fig"><i class="fa fa-check"></i><b>10.10.2</b> 所有图形代码</a></li>
+<li class="chapter" data-level="10.10" data-path="anay-6800.html"><a href="anay-6800.html#multi13"><i class="fa fa-check"></i><b>10.10</b> 扩散限制作图</a><ul>
+<li class="chapter" data-level="10.10.1" data-path="anay-6800.html"><a href="anay-6800.html#multi14"><i class="fa fa-check"></i><b>10.10.1</b> 补偿点的计算</a></li>
+<li class="chapter" data-level="10.10.2" data-path="anay-6800.html"><a href="anay-6800.html#multi15"><i class="fa fa-check"></i><b>10.10.2</b> 所有图形代码</a></li>
 </ul></li>
 <li class="chapter" data-level="10.11" data-path="anay-6800.html"><a href="anay-6800.html#fluro68"><i class="fa fa-check"></i><b>10.11</b> LI-6800 荧光数据分析</a><ul>
 <li class="chapter" data-level="10.11.1" data-path="anay-6800.html"><a href="anay-6800.html#jiptest"><i class="fa fa-check"></i><b>10.11.1</b> jip test 的实现</a></li>
@@ -325,7 +328,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>以上为基本变换，如果我们使用 R 计算 PCA (这里推荐两个包 <code>factoextra</code> 和 <code>FactoMineR</code>)，查看其结果：</p>
 <div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb264-1" title="1"><span class="kw">library</span>(<span class="st">&quot;FactoMineR&quot;</span>)</a>
 <a class="sourceLine" id="cb264-2" title="2"><span class="kw">library</span>(<span class="st">&quot;factoextra&quot;</span>)</a></code></pre></div>
-<pre><code>## Welcome! Related Books: `Practical Guide To Cluster Analysis in R` at https://goo.gl/13EFCZ</code></pre>
+<pre><code>## Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa</code></pre>
 <div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb266-1" title="1">ir &lt;-<span class="st"> </span>iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a>
 <a class="sourceLine" id="cb266-2" title="2">ir_pca &lt;-<span class="st"> </span><span class="kw">PCA</span>(ir, <span class="dt">graph =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb266-3" title="3"></a>
@@ -367,7 +370,7 @@ A \vec{x} = \lambda \vec{x}
 \end{equation}\]</span></p>
 <p>其中 A 为 n <span class="math inline">\(\times\)</span> n 的矩阵，<span class="math inline">\(\vec{x}\)</span> 为 非零 n <span class="math inline">\(\times\)</span> 1 列向量，<span class="math inline">\(\lambda\)</span> 是标量，那么 <span class="math inline">\(\vec{x}\)</span> 为 A 的特征向量，<span class="math inline">\(\lambda\)</span> 为 A 的特征值。</p>
 <p>如果仅从数学描述上看，是十分不适合我这样没基础的人来理解的，但我们可以这么理解：</p>
-<p>A 为我们观测值（也即我们生态学上测量的数据）组成的 <span class="math inline">\(n \times n\)</span> 矩阵，每行的数据代表了一个观测值，例如光合速率是其中的一行，我们有n 个， 那么 <span class="math inline">\(\vec{x}\)</span> 和 <span class="math inline">\(\lambda\)</span> 意味着什么呢？再看一眼上面的 <a href="pca-anylysis.html#eq:eign">(11.1)</a>，这是一个等式，而 <span class="math inline">\(\vec{x}\)</span> 是 n <span class="math inline">\(\times\)</span> 1 维度，原来的数据是 n <span class="math inline">\(\times\)</span> n 维度，这就是主轴分析是降维分析的意义了，一个一维的特征向量和特征值与我们多维的观测值之间有一个相等的关系。当然，也有很多人在描述时喜欢用坐标轴旋转或这投影来形容的，如果你觉得这样好理解也没问题，不过我脑袋不擅长想象这种多维的空间。这样描述并不十分准确，只是我觉得便于理解，更正确描述应为我们下面所述的例子 (<span class="citation">Smith (<a href="#ref-Smith2002">2002</a>)</span>) ，但降维的原理即来自此处：</p>
+<p>A 为我们观测值（也即我们生态学上测量的数据）组成的 <span class="math inline">\(n \times n\)</span> 矩阵，每行的数据代表了一个观测值，例如光合速率是其中的一行，我们有n 个， 那么 <span class="math inline">\(\vec{x}\)</span> 和 <span class="math inline">\(\lambda\)</span> 意味着什么呢？再看一眼上面的 <a href="pca-anylysis.html#eq:eign">(11.1)</a>，这是一个等式，而 <span class="math inline">\(\vec{x}\)</span> 是 n <span class="math inline">\(\times\)</span> 1 维度，原来的数据是 n <span class="math inline">\(\times\)</span> n 维度，这就是主轴分析是降维分析的意义了，一个一维的特征向量和特征值与我们多维的观测值之间有一个相等的关系。当然，也有很多人在描述时喜欢用坐标轴旋转或这投影来形容的，如果你觉得这样好理解也没问题，不过我脑袋不擅长想象这种多维的空间。这样描述并不十分准确，只是我觉得便于理解，更正确描述应为我们下面所述的例子 (<span class="citation">Smith (<a href="#ref-Smith2002" role="doc-biblioref">2002</a>)</span>) ，但降维的原理即来自此处：</p>
 <p><span class="math display" id="eq:despca">\[\begin{equation}
 finaldata = rowfeaturevector \times rowdataajust
 \tag{11.2}
@@ -454,7 +457,7 @@ finaldata = rowfeaturevector \times rowdataajust
 </div>
 <div id="prcom" class="section level3">
 <h3><span class="header-section-number">11.2.3</span> <code>prcomp</code> 的实现</h3>
-<p>我们用 <code>prcomp</code> 来简化实现过程，注意，根据 <span class="citation">Kemp (<a href="#ref-kemp2003modern">2003</a>)</span>，我们把 iris 数据对数化一下，并提取所有物种名字：</p>
+<p>我们用 <code>prcomp</code> 来简化实现过程，注意，根据 <span class="citation">Kemp (<a href="#ref-kemp2003modern" role="doc-biblioref">2003</a>)</span>，我们把 iris 数据对数化一下，并提取所有物种名字：</p>
 <div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb274-1" title="1"><span class="kw">data</span>(<span class="st">&quot;iris&quot;</span>)</a>
 <a class="sourceLine" id="cb274-2" title="2">iris_pca &lt;-<span class="st"> </span><span class="kw">log</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])</a>
 <a class="sourceLine" id="cb274-3" title="3">iris_species &lt;-<span class="st"> </span>iris<span class="op">$</span>Species</a></code></pre></div>
@@ -467,7 +470,7 @@ finaldata = rowfeaturevector \times rowdataajust
 ## Standard deviation     1.7125 0.9524 0.36470 0.16568
 ## Proportion of Variance 0.7331 0.2268 0.03325 0.00686
 ## Cumulative Proportion  0.7331 0.9599 0.99314 1.00000</code></pre>
-<p>可以看到结果同我们最开始的计算相似，不同的是我们进行了对数化，而且根据 <span class="citation">Kemp (<a href="#ref-kemp2003modern">2003</a>)</span>， 这个结果更合适。</p>
+<p>可以看到结果同我们最开始的计算相似，不同的是我们进行了对数化，而且根据 <span class="citation">Kemp (<a href="#ref-kemp2003modern" role="doc-biblioref">2003</a>)</span>， 这个结果更合适。</p>
 </div>
 </div>
 </div>
@@ -498,11 +501,13 @@ finaldata = rowfeaturevector \times rowdataajust
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -510,12 +515,11 @@ gitbook.start({
 "github": true,
 "facebook": false,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -527,6 +531,10 @@ gitbook.start({
 "text": "编辑"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },

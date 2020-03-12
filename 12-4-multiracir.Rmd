@@ -1,4 +1,4 @@
-## 利用不同速率的 RACiR 曲线研究植物的光合生理特性 {#multirate-racir}
+## 多个速率的 RACiR 曲线研究 {#multi1}
 
 自 RACiR 技术诞生以来，极大的缩短了 Vcmax 以及 Jmax 的测量时间(@stinziano2017)，但也引起了一系列争议，作者也对业内的质疑进行了一一的解答 (@stinziano2018)，但除了因为时间长短导致酶活性，叶绿体位置等差异外，RACiR 还能说明哪些问题呢？@stinziano2019 最新的研究给出一系列结论：
 
@@ -18,11 +18,11 @@
 
 文中利用 R 实现了光呼吸之后模型和气体扩散限制模型，本文内容主要对文献中附录材料的源码进行解释：
 
-### 光呼吸滞后模型 {#photoresp-lag}
+### 光呼吸滞后模型 {#multi2}
 
 为测试光呼吸的滞后性，作者使用一系列预先设定的参数，模拟了一条 ACc曲线，假定 Rubisco 激活状态为 100%，并且在整个测量过程中气孔导度是不变的。然后使用这些参数来模拟 RACiRs 曲线，并且假定光呼吸分别需要 0, 15, 30, 60, 120 或 300 s 来对变化的 $CO_2$ 进行响应，在实际效果上，这意味着 Cc 在最初的 0, 15, 30, 60, 120 或 300 内是不变的，最后我们对 $\Gamma^*$ 和 Ci 使用线性回归进行计算。
 
-#### 基础数据 {#base-data}
+#### 构造基础数据 {#multi3}
 
 模型第一步，则是对需要使用的参数，根据文献和实际情况进行赋值，具体内容参考代码注释。
 
@@ -95,7 +95,7 @@ RateCcmodel <- lm(Cc ~ Counter)
 RateCc <- coef(RateCcmodel)[2] * 60 
 ```
 
-### 光呼吸滞后性代码 {code-photoresp}
+### 光呼吸滞后性代码 {#code-photoresp}
 
 下面代码的目的是为得到 ACi 响应曲线受光呼吸延迟的影响，尤其是在临近补偿点时。
 
@@ -133,7 +133,7 @@ A300 <- vc - 0.5 * vo120 - R
 Aapparent300 <- vc - 0.5 * vo300 
 ```
 
-### 数据的构造 {#compi-modu}
+### 数据的构造 {#multi4}
 
 下面的代码主要是将上文最终计算的数据构造数据集，并导出。
 
@@ -161,7 +161,7 @@ PRdata <- as.data.frame(cbind(Anet, Aapp, Ccfull, Cifull, Delay))
 write.csv(PRdata, "./data/PRdata.csv")
 ```
 
-### 光呼吸滞后性作图 {#photo-resp-graph}
+### 光呼吸滞后性作图 {#multi5}
 
 下面的代码是将光呼吸的数据进行作图。
 
@@ -266,7 +266,7 @@ AappCi <- ggplot(data, aes(x = Cifull, y = Aapp, colour = Delay)) +
 AappCi
 ```
 
-### 补偿点计算 {#gammastar}
+### 补偿点计算 {#multi6}
 
 计算不同的光呼吸时间延迟下的补偿点（基于Ci）：
 
@@ -486,11 +486,11 @@ summary(lm(ints ~ dels))
 plot(ints ~ dels)
 ```
 
-### 无光呼吸酶失活模块 {#no-phoresp-rubi}
+### 无光呼吸酶失活模块 {#multi7}
 
 该部分内容是在测量 ACi 曲线时检测 Rubisco 失活的影响 -- 从激活状态的变化导致了多少的偏移？
 
-#### 数据构造 {#data-pre}
+#### 数据构造  {#multi8}
 
 基于文献，假定 $CO_2$ 从 400 ppm 降低至 5 ppm 时，激活率从 100% 降低至 80%。
 
@@ -593,7 +593,7 @@ RASdata <-
 write.csv(RASdata, "./data/RASdata.csv")
 ```
 
-### 酶失活作图 {#Graphs-deac}
+### 酶失活作图 {#multi9}
 
 ```{r, anetdeccc, fig.cap="Rubisco 不同失活程度时 Anet VS Cc", message=FALSE}
 data <- read.csv("./data/RASdata.csv")
@@ -698,7 +698,7 @@ AappCi <-
 AappCi
 ```
 
-### 不同失活程度下补偿点计算{#comp-est-dea}
+### 不同失活程度下补偿点计算{#multi10}
 
 此部分内容同未失活状态相似，不在额外介绍，可参考 \@ref(gammastar) 内容。
 
@@ -798,7 +798,7 @@ write.csv(RAScomps, "./data/RAScomps.csv")
 ```
 
 
-## 时间延迟的扩散限制 {#diffu-limi}
+## 时间延迟的扩散限制 {#multi11}
 
 对于扩散限制，下面的内容比较了多速率 RACiR 和标准 ACi 曲线的差别，比较实在有光呼吸和没有光呼吸的两种情况。对于没有扩散限制的表观光合速，采用了已知质量的碱石灰药品，放置于 1.7 ml 的微量离心管内，然后将其置于荧光叶室内部模拟叶片，此时叶室环境控制与其他实验不同，此时不再控制 H2OR。RACiR 测试从 500 到 0 的变化，不同样品的测量是随机的。
 
@@ -1212,7 +1212,7 @@ knitr::kable(head(Diffusion))
 ```
 
 
-### 扩散限制滞后性 {#difu-limit}
+### 扩散限制滞后性 {#multi12}
 
 下面的代码，是根据上面代码的计算结果，结合最初的扩散时间的公式，来计算出各个参数的最大最小值，中间值，构造数据：
 
@@ -1391,7 +1391,7 @@ knitr::kable(head(Diffusionplot2))
 ```
 
 
-## 扩散限制作图 {#difu-graph}
+## 扩散限制作图 {#multi13}
 
 ```{r,difuci, fig.cap="不同 Ci 扩散限制下的差异", message=FALSE}
 data <- read.csv("./data/DiffusionLimitsACI2.csv")
@@ -1462,7 +1462,7 @@ red <- 1/data2$TotalRes
 plot(ab~red)
 ```
 
-### 补偿点的计算 {#compen-estimate}
+### 补偿点的计算 {#multi14}
 
 计算补偿点，代码同前文类似，只是采用了不同导度下的数值：
 
@@ -1499,7 +1499,7 @@ Gamma4 <- -m6$coefficients[1] / m6$coefficients[2]
 GammaCi <- c(Gamma0125, Gamma025, Gamma05, Gamma1, Gamma2, Gamma4)
 ```
 
-### 所有图形代码 {#all-fig}
+### 所有图形代码 {#multi15}
 
 
 ```{r, prdataplot, fig.cap="不同时间滞后性的 Anet VS Ci", message=FALSE}
