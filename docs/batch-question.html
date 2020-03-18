@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2020-03-12" />
+<meta name="date" content="2020-03-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -656,6 +656,184 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>其他注意事项见 LI-6400 数据整合部分</p>
+<p>另外： 今天添加了使用 regex 读取 LI-6800 原始文件的方法，这个只需要路径即可（2020-3-18），简单测试，有名字重复的警告，是 TIME，不影响大局，我没时间改，过几天有时间了再改：</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">library</span>(readphoto)</a>
+<a class="sourceLine" id="cb5-2" title="2">df2 &lt;-<span class="st"> </span><span class="kw">read_regex68</span>(<span class="st">&quot;./data/6800&quot;</span>)</a></code></pre></div>
+<pre><code>## Warning: Missing column names filled in: &#39;X125&#39; [125]</code></pre>
+<pre><code>## Warning: Duplicated column names deduplicated: &#39;TIME&#39; =&gt; &#39;TIME_1&#39; [69]</code></pre>
+<pre><code>## Warning: Missing column names filled in: &#39;X125&#39; [125]</code></pre>
+<pre><code>## Warning: Duplicated column names deduplicated: &#39;TIME&#39; =&gt; &#39;TIME_1&#39; [69]</code></pre>
+<pre><code>## Warning: Missing column names filled in: &#39;X125&#39; [125]</code></pre>
+<pre><code>## Warning: Duplicated column names deduplicated: &#39;TIME&#39; =&gt; &#39;TIME_1&#39; [69]</code></pre>
+<pre><code>## Warning: Missing column names filled in: &#39;X125&#39; [125]</code></pre>
+<pre><code>## Warning: Duplicated column names deduplicated: &#39;TIME&#39; =&gt; &#39;TIME_1&#39; [69]</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-10">表 2.3: </span>LI-6800 regex 方式批量整合数据</caption>
+<thead>
+<tr class="header">
+<th align="right">obs</th>
+<th align="right">time</th>
+<th align="right">elapsed</th>
+<th align="left">date</th>
+<th align="right">plot</th>
+<th align="right">plant</th>
+<th align="right">TIME</th>
+<th align="right">E</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">1513614617</td>
+<td align="right">0.0</td>
+<td align="left">2017-12-18 10:30:16</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513614617</td>
+<td align="right">0.0045726</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">1513614731</td>
+<td align="right">114.0</td>
+<td align="left">2017-12-18 10:32:10</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513614731</td>
+<td align="right">0.0047162</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">1513614886</td>
+<td align="right">269.0</td>
+<td align="left">2017-12-18 10:34:45</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513614886</td>
+<td align="right">0.0049729</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">1513615008</td>
+<td align="right">391.0</td>
+<td align="left">2017-12-18 10:36:47</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513615008</td>
+<td align="right">0.0052632</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">1513615127</td>
+<td align="right">510.0</td>
+<td align="left">2017-12-18 10:38:46</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513615127</td>
+<td align="right">0.0053619</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="right">1513615287</td>
+<td align="right">670.5</td>
+<td align="left">2017-12-18 10:41:27</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513615287</td>
+<td align="right">0.0053909</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="right">1513615410</td>
+<td align="right">793.0</td>
+<td align="left">2017-12-18 10:43:29</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513615410</td>
+<td align="right">0.0052242</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="right">1513615566</td>
+<td align="right">949.0</td>
+<td align="left">2017-12-18 10:46:05</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513615566</td>
+<td align="right">0.0052158</td>
+</tr>
+<tr class="odd">
+<td align="right">9</td>
+<td align="right">1513615701</td>
+<td align="right">1084.0</td>
+<td align="left">2017-12-18 10:48:20</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513615701</td>
+<td align="right">0.0053947</td>
+</tr>
+<tr class="even">
+<td align="right">10</td>
+<td align="right">1513615831</td>
+<td align="right">1214.0</td>
+<td align="left">2017-12-18 10:50:30</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513615831</td>
+<td align="right">0.0054908</td>
+</tr>
+<tr class="odd">
+<td align="right">11</td>
+<td align="right">1513615940</td>
+<td align="right">1323.0</td>
+<td align="left">2017-12-18 10:52:19</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513615940</td>
+<td align="right">0.0053860</td>
+</tr>
+<tr class="even">
+<td align="right">12</td>
+<td align="right">1513616064</td>
+<td align="right">1447.4</td>
+<td align="left">2017-12-18 10:54:24</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513616064</td>
+<td align="right">0.0052159</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">1513612721</td>
+<td align="right">0.0</td>
+<td align="left">2017-12-18 09:58:40</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513612721</td>
+<td align="right">0.0067439</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">1513612832</td>
+<td align="right">111.0</td>
+<td align="left">2017-12-18 10:00:31</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513612832</td>
+<td align="right">0.0065955</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">1513612941</td>
+<td align="right">220.0</td>
+<td align="left">2017-12-18 10:02:20</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1513612941</td>
+<td align="right">0.0064493</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="recompute_raw" class="section level2">
 <h2><span class="header-section-number">2.4</span> 重计算功能</h2>
@@ -663,11 +841,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="recompute6400" class="section level3">
 <h3><span class="header-section-number">2.4.1</span> LI-6400 数据重计算</h3>
 <p>参数的重计算函数为 <code>recomp_6400</code>, 其参数除了 <code>read_bat_6400</code> 所包含的参数外，还有叶面积 S, 以及叶片正反面的气孔比例，默认值分别为 6 和 0.5。</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">library</span>(readphoto)</a>
-<a class="sourceLine" id="cb5-2" title="2">x1 &lt;-<span class="st"> </span><span class="kw">read_bat_6400</span>(<span class="st">&quot;./data/6400&quot;</span>)</a>
-<a class="sourceLine" id="cb5-3" title="3">y1 &lt;-<span class="st"> </span><span class="kw">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>, <span class="dt">header_line =</span> <span class="dv">17</span>, <span class="dt">data_start =</span> <span class="dv">27</span>, <span class="dt">S =</span> <span class="dv">6</span>, <span class="dt">K =</span> <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb5-4" title="4"></a>
-<a class="sourceLine" id="cb5-5" title="5">x1<span class="op">$</span>Photo <span class="op">-</span><span class="st"> </span>y1<span class="op">$</span>Photo</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">library</span>(readphoto)</a>
+<a class="sourceLine" id="cb14-2" title="2">x1 &lt;-<span class="st"> </span><span class="kw">read_bat_6400</span>(<span class="st">&quot;./data/6400&quot;</span>)</a>
+<a class="sourceLine" id="cb14-3" title="3">y1 &lt;-<span class="st"> </span><span class="kw">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>, <span class="dt">header_line =</span> <span class="dv">17</span>, <span class="dt">data_start =</span> <span class="dv">27</span>, <span class="dt">S =</span> <span class="dv">6</span>, <span class="dt">K =</span> <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb14-4" title="4"></a>
+<a class="sourceLine" id="cb14-5" title="5">x1<span class="op">$</span>Photo <span class="op">-</span><span class="st"> </span>y1<span class="op">$</span>Photo</a></code></pre></div>
 <pre><code>##  [1] -0.0008873753  0.0026900500 -0.0012036469  0.0003483414  0.0006122641
 ##  [6] -0.0113872639 -0.0020986076  0.0004962787  0.0188727482 -0.0294595908
 ## [11] -0.0436611445 -0.0339083408  0.0046772165  0.0036653298  0.0030397988
@@ -675,7 +853,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [21]  0.0039736503  0.0021704065  0.0046772165  0.0036653298  0.0030397988
 ## [26] -0.0105901673  0.0040624956  0.0017317049 -0.0073252290  0.0054977377
 ## [31]  0.0039736503  0.0021704065</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">x1<span class="op">$</span>Trmmol <span class="op">-</span><span class="st"> </span>y1<span class="op">$</span>Trmmol</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">x1<span class="op">$</span>Trmmol <span class="op">-</span><span class="st"> </span>y1<span class="op">$</span>Trmmol</a></code></pre></div>
 <pre><code>##  [1] -2.998596e-04  1.407338e-04  3.189451e-05 -4.586467e-04 -3.836822e-04
 ##  [6]  5.402725e-04 -2.344852e-04 -7.684772e-05  5.979599e-04 -6.534341e-04
 ## [11] -6.779145e-04  2.469749e-04  3.812201e-04  2.313957e-04  3.508312e-04
@@ -683,7 +861,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [21] -2.578893e-04  2.203045e-04  3.812201e-04  2.313957e-04  3.508312e-04
 ## [26] -2.794358e-04 -5.406530e-04  5.230606e-04 -9.183370e-04  7.638850e-04
 ## [31] -2.578893e-04  2.203045e-04</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">x1<span class="op">$</span>Cond <span class="op">-</span><span class="st"> </span>y1<span class="op">$</span>Cond</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1">x1<span class="op">$</span>Cond <span class="op">-</span><span class="st"> </span>y1<span class="op">$</span>Cond</a></code></pre></div>
 <pre><code>##  [1] -1.974217e-04 -3.594216e-04 -3.779119e-04 -3.806675e-04 -3.201411e-04
 ##  [6] -1.483324e-04 -7.803345e-04 -2.671018e-04  1.028977e-04 -3.966192e-04
 ## [11] -3.190769e-04 -2.314266e-04 -2.746300e-04  1.094050e-05 -4.584791e-05
@@ -691,7 +869,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [21] -4.687906e-05 -1.000424e-04 -2.746300e-04  1.094050e-05 -4.584791e-05
 ## [26] -1.084094e-04 -1.827768e-04 -1.344969e-04 -1.714096e-04 -8.180257e-05
 ## [31] -4.687906e-05 -1.000424e-04</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">x1<span class="op">$</span>Ci<span class="op">-</span>y1<span class="op">$</span>Ci</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">x1<span class="op">$</span>Ci<span class="op">-</span>y1<span class="op">$</span>Ci</a></code></pre></div>
 <pre><code>##  [1]  0.434643936 -0.297820404 -0.308200950 -0.007847373 -0.035490198
 ##  [6]  0.433706824 -0.416734067 -0.052089770  0.147655545 -0.315797917
 ## [11] -0.271335987 -0.228968795  0.356519198  0.311487646  0.052196075
@@ -699,58 +877,83 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [21] -0.252622980 -0.494554616  0.356519198  0.311487646  0.052196075
 ## [26]  0.557128947  0.058563406  0.300198435  0.052607786  0.339000061
 ## [31] -0.252622980 -0.494554616</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># half of original the area</span></a>
-<a class="sourceLine" id="cb13-2" title="2">y1 &lt;-<span class="st"> </span><span class="kw">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>,  <span class="dt">header_line =</span> <span class="dv">17</span>, <span class="dt">data_start =</span> <span class="dv">27</span>, <span class="dt">S =</span> <span class="dv">3</span>, <span class="dt">K =</span> <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb13-3" title="3">y1<span class="op">$</span>Photo<span class="op">/</span>x1<span class="op">$</span>Photo</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="co"># half of original the area</span></a>
+<a class="sourceLine" id="cb22-2" title="2">y1 &lt;-<span class="st"> </span><span class="kw">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>,  <span class="dt">header_line =</span> <span class="dv">17</span>, <span class="dt">data_start =</span> <span class="dv">27</span>, <span class="dt">S =</span> <span class="dv">3</span>, <span class="dt">K =</span> <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb22-3" title="3">y1<span class="op">$</span>Photo<span class="op">/</span>x1<span class="op">$</span>Photo</a></code></pre></div>
 <pre><code>##  [1] 2.000254 1.998957 2.000767 1.999234 2.007333 2.004346 2.000635 1.999893
 ##  [9] 1.996299 2.005611 2.008161 2.006110 1.998550 1.998863 1.998980 2.003671
 ## [17] 1.998391 1.999240 2.003866 1.995584 1.994199 2.010360 1.998550 1.998863
 ## [25] 1.998980 2.003671 1.998391 1.999240 2.003866 1.995584 1.994199 2.010360</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="co"># test with random area less than six</span></a>
-<a class="sourceLine" id="cb15-2" title="2">area &lt;-<span class="st"> </span><span class="dv">6</span> <span class="op">-</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">32</span>, <span class="dv">1</span>, <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb15-3" title="3">y1 &lt;-<span class="st"> </span><span class="kw">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>,  <span class="dt">header_line =</span> <span class="dv">17</span>, <span class="dt">data_start =</span> <span class="dv">27</span>, <span class="dt">S =</span> area, <span class="dt">K =</span> <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb15-4" title="4">y1<span class="op">$</span>Photo<span class="op">/</span>x1<span class="op">$</span>Photo</a></code></pre></div>
-<pre><code>##  [1] 1.394256 1.209317 1.861020 1.525539 1.875184 1.339360 1.227033 1.387404
-##  [9] 1.243005 1.401373 1.293690 1.640426 1.323523 1.471863 1.756948 1.441838
-## [17] 1.650759 1.302542 1.721145 1.275656 1.583028 1.352833 1.343985 1.807029
-## [25] 1.457666 1.253034 1.842757 1.552674 1.945092 1.566944 1.368023 1.218274</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="co"># test with random area less than six</span></a>
+<a class="sourceLine" id="cb24-2" title="2">area &lt;-<span class="st"> </span><span class="dv">6</span> <span class="op">-</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">32</span>, <span class="dv">1</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb24-3" title="3">y1 &lt;-<span class="st"> </span><span class="kw">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>,  <span class="dt">header_line =</span> <span class="dv">17</span>, <span class="dt">data_start =</span> <span class="dv">27</span>, <span class="dt">S =</span> area, <span class="dt">K =</span> <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb24-4" title="4">y1<span class="op">$</span>Photo<span class="op">/</span>x1<span class="op">$</span>Photo</a></code></pre></div>
+<pre><code>##  [1] 1.825608 1.523398 1.657727 1.719065 1.320546 1.219420 1.377137 1.674588
+##  [9] 1.531965 1.570167 1.273708 1.357638 1.713531 1.576954 1.931790 1.456363
+## [17] 1.613263 1.206229 1.781955 1.750534 1.806894 1.316800 1.703481 1.277951
+## [25] 1.926441 1.459487 1.992168 1.640920 1.640984 1.472760 1.651190 1.536894</code></pre>
 <p>我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.</p>
 </div>
 <div id="recompute6800" class="section level3">
 <h3><span class="header-section-number">2.4.2</span> LI-6800 数据重计算</h3>
 <p>参数的重计算函数为 <code>recomp_6800</code>, 其参数除了 <code>read_bat_6800</code> 所包含的参数外，还有叶面积 S, 以及叶片正反面的气孔比例，默认值分别为 6 和 0.5。</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">library</span>(readphoto)</a>
-<a class="sourceLine" id="cb17-2" title="2">x3 &lt;-<span class="st"> </span><span class="kw">read_bat_6800</span>(<span class="st">&quot;./data/6800&quot;</span>)</a>
-<a class="sourceLine" id="cb17-3" title="3">y3 &lt;-<span class="st"> </span><span class="kw">recomp_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="dt">data_start =</span> <span class="dv">56</span>, <span class="dt">S =</span> <span class="dv">6</span>, <span class="dt">K =</span> <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb17-4" title="4"></a>
-<a class="sourceLine" id="cb17-5" title="5">x3<span class="op">$</span>A <span class="op">-</span><span class="st"> </span>y3<span class="op">$</span>A</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="kw">library</span>(readphoto)</a>
+<a class="sourceLine" id="cb26-2" title="2">x3 &lt;-<span class="st"> </span><span class="kw">read_bat_6800</span>(<span class="st">&quot;./data/6800&quot;</span>)</a>
+<a class="sourceLine" id="cb26-3" title="3">y3 &lt;-<span class="st"> </span><span class="kw">recomp_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="dt">S =</span> <span class="dv">6</span>, <span class="dt">K =</span> <span class="fl">0.5</span>)</a></code></pre></div>
+<pre><code>## Warning: Missing column names filled in: &#39;X125&#39; [125]</code></pre>
+<pre><code>## Warning: Duplicated column names deduplicated: &#39;TIME&#39; =&gt; &#39;TIME_1&#39; [69]</code></pre>
+<pre><code>## Warning: Missing column names filled in: &#39;X125&#39; [125]</code></pre>
+<pre><code>## Warning: Duplicated column names deduplicated: &#39;TIME&#39; =&gt; &#39;TIME_1&#39; [69]</code></pre>
+<pre><code>## Warning: Missing column names filled in: &#39;X125&#39; [125]</code></pre>
+<pre><code>## Warning: Duplicated column names deduplicated: &#39;TIME&#39; =&gt; &#39;TIME_1&#39; [69]</code></pre>
+<pre><code>## Warning: Missing column names filled in: &#39;X125&#39; [125]</code></pre>
+<pre><code>## Warning: Duplicated column names deduplicated: &#39;TIME&#39; =&gt; &#39;TIME_1&#39; [69]</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1">x3<span class="op">$</span>A <span class="op">-</span><span class="st"> </span>y3<span class="op">$</span>A</a></code></pre></div>
 <pre><code>##  [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">x3<span class="op">$</span>E <span class="op">-</span><span class="st"> </span>y3<span class="op">$</span>E</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1">x3<span class="op">$</span>E <span class="op">-</span><span class="st"> </span>y3<span class="op">$</span>E</a></code></pre></div>
 <pre><code>##  [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">x3<span class="op">$</span>gsw <span class="op">-</span><span class="st"> </span>y3<span class="op">$</span>gsw</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1">x3<span class="op">$</span>gsw <span class="op">-</span><span class="st"> </span>y3<span class="op">$</span>gsw</a></code></pre></div>
 <pre><code>##  [1] -0.01231889 -0.01271539 -0.01330812 -0.01416506 -0.01491902 -0.01586479
 ##  [7] -0.01566857 -0.01545520 -0.01563183 -0.01537453 -0.01494554 -0.01433677
 ## [13] -0.02284560 -0.02291318 -0.02268118 -0.02266862 -0.02250392 -0.02213352
 ## [19] -0.02061493 -0.02006006 -0.01856400 -0.01678649 -0.01591079 -0.01457109
 ## [25] -0.01322393 -0.02345109 -0.02312573 -0.02227497</code></pre>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1">x3<span class="op">$</span>Ci<span class="op">-</span>y3<span class="op">$</span>Ci</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1">x3<span class="op">$</span>Ci<span class="op">-</span>y3<span class="op">$</span>Ci</a></code></pre></div>
 <pre><code>##  [1]  4.43187567  3.13678828  1.78620310  0.49515242 -0.08437000  3.51420195
 ##  [7]  3.66611259  5.56360761  6.76351008  7.70784028  8.45263315  9.25926640
 ## [13]  2.58978666  2.52629775  2.49784796  2.38619050  2.23225682  1.92200639
 ## [19]  1.29213044  0.92018214  0.76352452  0.55412066  0.20248257 -0.08219604
 ## [25] -0.26216626  2.36039345  2.40636618  2.54353742</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="co"># half of original the area</span></a>
-<a class="sourceLine" id="cb25-2" title="2">y3 &lt;-<span class="st"> </span><span class="kw">recomp_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="dt">data_start =</span> <span class="dv">56</span>, <span class="dt">S =</span> <span class="dv">3</span>, <span class="dt">K =</span> <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb25-3" title="3">y3<span class="op">$</span>A<span class="op">/</span>x3<span class="op">$</span>A</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="co"># half of original the area</span></a>
+<a class="sourceLine" id="cb43-2" title="2">y3 &lt;-<span class="st"> </span><span class="kw">recomp_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="dt">S =</span> <span class="dv">3</span>, <span class="dt">K =</span> <span class="fl">0.5</span>)</a></code></pre></div>
+<pre><code>## Warning: Missing column names filled in: &#39;X125&#39; [125]
+
+## Warning: Duplicated column names deduplicated: &#39;TIME&#39; =&gt; &#39;TIME_1&#39; [69]</code></pre>
+<pre><code>## Warning: Missing column names filled in: &#39;X125&#39; [125]</code></pre>
+<pre><code>## Warning: Duplicated column names deduplicated: &#39;TIME&#39; =&gt; &#39;TIME_1&#39; [69]</code></pre>
+<pre><code>## Warning: Missing column names filled in: &#39;X125&#39; [125]</code></pre>
+<pre><code>## Warning: Duplicated column names deduplicated: &#39;TIME&#39; =&gt; &#39;TIME_1&#39; [69]</code></pre>
+<pre><code>## Warning: Missing column names filled in: &#39;X125&#39; [125]</code></pre>
+<pre><code>## Warning: Duplicated column names deduplicated: &#39;TIME&#39; =&gt; &#39;TIME_1&#39; [69]</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1">y3<span class="op">$</span>A<span class="op">/</span>x3<span class="op">$</span>A</a></code></pre></div>
 <pre><code>##  [1] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="co"># test with random area less than six</span></a>
-<a class="sourceLine" id="cb27-2" title="2">area &lt;-<span class="st"> </span><span class="dv">6</span> <span class="op">-</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">28</span>, <span class="dv">1</span>, <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb27-3" title="3">y3 &lt;-<span class="st"> </span><span class="kw">recomp_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="dt">data_start =</span> <span class="dv">56</span>, <span class="dt">S =</span> area, <span class="dt">K =</span> <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb27-4" title="4">y3<span class="op">$</span>A<span class="op">/</span>x3<span class="op">$</span>A</a></code></pre></div>
-<pre><code>##  [1] 1.682417 1.352378 1.392126 1.821001 1.243496 1.949190 1.232408 1.929773
-##  [9] 1.885229 1.894243 1.418845 1.280066 1.907800 1.334177 1.600447 1.265311
-## [17] 1.656161 1.443926 1.588010 1.947003 1.991519 1.574074 1.250503 1.540351
-## [25] 1.446175 1.770679 1.540397 1.669355</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1"><span class="co"># test with random area less than six</span></a>
+<a class="sourceLine" id="cb53-2" title="2">area &lt;-<span class="st"> </span><span class="dv">6</span> <span class="op">-</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">28</span>, <span class="dv">1</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb53-3" title="3">y3 &lt;-<span class="st"> </span><span class="kw">recomp_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="dt">S =</span> area, <span class="dt">K =</span> <span class="fl">0.5</span>)</a></code></pre></div>
+<pre><code>## Warning: Missing column names filled in: &#39;X125&#39; [125]
+
+## Warning: Duplicated column names deduplicated: &#39;TIME&#39; =&gt; &#39;TIME_1&#39; [69]</code></pre>
+<pre><code>## Warning: Missing column names filled in: &#39;X125&#39; [125]</code></pre>
+<pre><code>## Warning: Duplicated column names deduplicated: &#39;TIME&#39; =&gt; &#39;TIME_1&#39; [69]</code></pre>
+<pre><code>## Warning: Missing column names filled in: &#39;X125&#39; [125]</code></pre>
+<pre><code>## Warning: Duplicated column names deduplicated: &#39;TIME&#39; =&gt; &#39;TIME_1&#39; [69]</code></pre>
+<pre><code>## Warning: Missing column names filled in: &#39;X125&#39; [125]</code></pre>
+<pre><code>## Warning: Duplicated column names deduplicated: &#39;TIME&#39; =&gt; &#39;TIME_1&#39; [69]</code></pre>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1">y3<span class="op">$</span>A<span class="op">/</span>x3<span class="op">$</span>A</a></code></pre></div>
+<pre><code>##  [1] 1.769655 1.787700 1.543881 1.269128 1.842959 1.294549 1.540156 1.817811
+##  [9] 1.689730 1.234707 1.274646 1.333839 1.590416 1.660776 1.775898 1.359858
+## [17] 1.264225 1.575033 1.265642 1.591507 1.580996 1.742867 1.200589 1.800535
+## [25] 1.549798 1.693142 1.639943 1.968674</code></pre>
 <p>测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。</p>
 
 

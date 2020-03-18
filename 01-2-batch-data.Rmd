@@ -49,7 +49,6 @@ library(readphoto)
 df <- read_bat_6800("./data/6800", data_start = 56)
 ```
 
-
 其中就两个参数，第一个为 LI-6800 **原始数据**所在的文件夹，即文件夹内**包含且仅包含 LI-6800 的原始数据**，不要放其他文件，不要放 excel 数据。第二个参数即为你原始数据中测量数据的起始行，例如本例中使用数据测量值从 56 行开始。
 
 数据输出如下所示(仅显示前8列数据)：
@@ -60,6 +59,18 @@ caption = 'LI-6800 批量整合数据')
 ```
 
 其他注意事项见 LI-6400 数据整合部分
+
+另外： 今天添加了使用 regex 读取 LI-6800 原始文件的方法，这个只需要路径即可（2020-3-18），简单测试，有名字重复的警告，是 TIME，不影响大局，我没时间改，过几天有时间了再改：
+
+```{r}
+library(readphoto)
+df2 <- read_regex68("./data/6800")
+```
+
+```{r,echo=FALSE}
+knitr::kable(df2[1:15, 1:8], booktabs = TRUE,
+caption = 'LI-6800 regex 方式批量整合数据')
+```
 
 ## 重计算功能 {#recompute_raw}
 
@@ -95,10 +106,10 @@ y1$Photo/x1$Photo
 
 参数的重计算函数为 `recomp_6800`, 其参数除了 `read_bat_6800` 所包含的参数外，还有叶面积 S, 以及叶片正反面的气孔比例，默认值分别为 6 和 0.5。
 
-```{r}
+```{r, message=FALSE}
 library(readphoto)
 x3 <- read_bat_6800("./data/6800")
-y3 <- recomp_6800("./data/6800", data_start = 56, S = 6, K = 0.5)
+y3 <- recomp_6800("./data/6800", S = 6, K = 0.5)
 
 x3$A - y3$A
 x3$E - y3$E
@@ -106,11 +117,11 @@ x3$gsw - y3$gsw
 x3$Ci-y3$Ci
 
 # half of original the area
-y3 <- recomp_6800("./data/6800", data_start = 56, S = 3, K = 0.5)
+y3 <- recomp_6800("./data/6800", S = 3, K = 0.5)
 y3$A/x3$A
 # test with random area less than six
 area <- 6 - runif(28, 1, 3)
-y3 <- recomp_6800("./data/6800", data_start = 56, S = area, K = 0.5)
+y3 <- recomp_6800("./data/6800", S = area, K = 0.5)
 y3$A/x3$A
 ```
 

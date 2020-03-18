@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2020-03-12" />
+<meta name="date" content="2020-03-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -321,11 +321,11 @@ g_s = g_0 + 1.6(1 + \frac{g_1}{D}(1-g_k)) \frac{A}{C_a}
 </div>
 <div id="fitbb-p" class="section level2">
 <h2><span class="header-section-number">4.4</span> <code>fitBB</code> 函数</h2>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1"><span class="kw">fitBB</span>(data, <span class="dt">varnames =</span> <span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb53-2" title="2">  <span class="dt">ALEAF =</span> <span class="st">&quot;A&quot;</span>, <span class="dt">GS =</span> <span class="st">&quot;gsw&quot;</span>, <span class="dt">VPD =</span> <span class="st">&quot;VPDleaf&quot;</span>,</a>
-<a class="sourceLine" id="cb53-3" title="3">  <span class="dt">Ca =</span><span class="st">&quot;CO2_s&quot;</span>, <span class="dt">RH =</span> <span class="st">&quot;RHcham&quot;</span>), </a>
-<a class="sourceLine" id="cb53-4" title="4">  <span class="dt">gsmodel =</span> <span class="kw">c</span>(<span class="st">&quot;BBOpti&quot;</span>, <span class="st">&quot;BBLeuning&quot;</span>, <span class="st">&quot;BallBerry&quot;</span>,</a>
-<a class="sourceLine" id="cb53-5" title="5">              <span class="st">&quot;BBOptiFull&quot;</span>), <span class="dt">fitg0 =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1"><span class="kw">fitBB</span>(data, <span class="dt">varnames =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb87-2" title="2">  <span class="dt">ALEAF =</span> <span class="st">&quot;A&quot;</span>, <span class="dt">GS =</span> <span class="st">&quot;gsw&quot;</span>, <span class="dt">VPD =</span> <span class="st">&quot;VPDleaf&quot;</span>,</a>
+<a class="sourceLine" id="cb87-3" title="3">  <span class="dt">Ca =</span><span class="st">&quot;CO2_s&quot;</span>, <span class="dt">RH =</span> <span class="st">&quot;RHcham&quot;</span>), </a>
+<a class="sourceLine" id="cb87-4" title="4">  <span class="dt">gsmodel =</span> <span class="kw">c</span>(<span class="st">&quot;BBOpti&quot;</span>, <span class="st">&quot;BBLeuning&quot;</span>, <span class="st">&quot;BallBerry&quot;</span>,</a>
+<a class="sourceLine" id="cb87-5" title="5">              <span class="st">&quot;BBOptiFull&quot;</span>), <span class="dt">fitg0 =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><strong>参数的意义:</strong></p>
 <ul>
 <li>data：待分析的数据文件。</li>
@@ -334,12 +334,12 @@ g_s = g_0 + 1.6(1 + \frac{g_1}{D}(1-g_k)) \frac{A}{C_a}
 <li>fitg0：默认不计算g0，若需要，改为TRUE。</li>
 </ul>
 <p><strong>代码示例：</strong></p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="kw">library</span>(plantecophys)</a>
-<a class="sourceLine" id="cb54-2" title="2"></a>
-<a class="sourceLine" id="cb54-3" title="3">aci &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/aci.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb54-4" title="4">aci &lt;-<span class="st"> </span><span class="kw">subset</span>(aci, Obs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb54-5" title="5"><span class="kw">fitBB</span>(aci, <span class="dt">varnames =</span> <span class="kw">list</span>(<span class="dt">ALEAF =</span> <span class="st">&quot;Photo&quot;</span>, <span class="dt">GS =</span> <span class="st">&quot;Cond&quot;</span>, <span class="dt">VPD =</span> <span class="st">&quot;VpdL&quot;</span>,</a>
-<a class="sourceLine" id="cb54-6" title="6">  <span class="dt">Ca =</span> <span class="st">&quot;CO2S&quot;</span>, <span class="dt">RH =</span> <span class="st">&quot;RH_S&quot;</span>), <span class="dt">gsmodel =</span> <span class="st">&quot;BBOpti&quot;</span>, <span class="dt">fitg0 =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" title="1"><span class="kw">library</span>(plantecophys)</a>
+<a class="sourceLine" id="cb88-2" title="2"></a>
+<a class="sourceLine" id="cb88-3" title="3">aci &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/aci.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb88-4" title="4">aci &lt;-<span class="st"> </span><span class="kw">subset</span>(aci, Obs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb88-5" title="5"><span class="kw">fitBB</span>(aci, <span class="dt">varnames =</span> <span class="kw">list</span>(<span class="dt">ALEAF =</span> <span class="st">&quot;Photo&quot;</span>, <span class="dt">GS =</span> <span class="st">&quot;Cond&quot;</span>, <span class="dt">VPD =</span> <span class="st">&quot;VpdL&quot;</span>,</a>
+<a class="sourceLine" id="cb88-6" title="6">  <span class="dt">Ca =</span> <span class="st">&quot;CO2S&quot;</span>, <span class="dt">RH =</span> <span class="st">&quot;RH_S&quot;</span>), <span class="dt">gsmodel =</span> <span class="st">&quot;BBOpti&quot;</span>, <span class="dt">fitg0 =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## Result of fitBB.
 ## Model :  BBOpti 
 ## Both g0 and g1 were estimated.
@@ -355,26 +355,26 @@ g_s = g_0 + 1.6(1 + \frac{g_1}{D}(1-g_k)) \frac{A}{C_a}
 <div id="fitbbs" class="section level2">
 <h2><span class="header-section-number">4.5</span> <code>fitBBs</code> 函数</h2>
 <p>如果我们有多个物种的数据，那么使用 <code>fitBBs</code> 则可以快速拟合多条曲线的数据。我们先整合两次的数据，然后再查看运行结果：</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1">aci01 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/aci01.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb56-2" title="2">aci01 &lt;-<span class="st"> </span><span class="kw">subset</span>(aci01, Obs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb56-3" title="3">multiBB &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
-<a class="sourceLine" id="cb56-4" title="4">  <span class="dt">A =</span> <span class="kw">c</span>(aci<span class="op">$</span>Photo, aci01<span class="op">$</span>Photo),</a>
-<a class="sourceLine" id="cb56-5" title="5">  <span class="dt">GS =</span> <span class="kw">c</span>(aci<span class="op">$</span>Cond, aci01<span class="op">$</span>Cond),</a>
-<a class="sourceLine" id="cb56-6" title="6">  <span class="dt">CO2S =</span> <span class="kw">c</span>(aci<span class="op">$</span>CO2S, aci01<span class="op">$</span>CO2S),</a>
-<a class="sourceLine" id="cb56-7" title="7">  <span class="dt">VPD =</span> <span class="kw">c</span>(aci<span class="op">$</span>VpdL, aci01<span class="op">$</span>VpdL),</a>
-<a class="sourceLine" id="cb56-8" title="8">  <span class="dt">RH =</span> <span class="kw">c</span>(aci<span class="op">$</span>RH_S, aci01<span class="op">$</span>RH_S),</a>
-<a class="sourceLine" id="cb56-9" title="9">  <span class="dt">species =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;species1&quot;</span>, <span class="kw">length</span>(aci<span class="op">$</span>Photo)),</a>
-<a class="sourceLine" id="cb56-10" title="10">  <span class="kw">rep</span>(<span class="st">&quot;species2&quot;</span>, <span class="kw">length</span>(aci01<span class="op">$</span>Photo)))</a>
-<a class="sourceLine" id="cb56-11" title="11">)</a>
-<a class="sourceLine" id="cb56-12" title="12"></a>
-<a class="sourceLine" id="cb56-13" title="13">mod2 &lt;-<span class="st"> </span><span class="kw">fitBBs</span>(multiBB, <span class="dt">group =</span> <span class="st">&quot;species&quot;</span>,  </a>
-<a class="sourceLine" id="cb56-14" title="14">               <span class="dt">varnames =</span> <span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb56-15" title="15">               <span class="dt">ALEAF =</span> <span class="st">&quot;A&quot;</span>, <span class="dt">GS =</span> <span class="st">&quot;GS&quot;</span>, <span class="dt">VPD =</span> <span class="st">&quot;VPD&quot;</span>,</a>
-<a class="sourceLine" id="cb56-16" title="16">               <span class="dt">Ca =</span><span class="st">&quot;CO2S&quot;</span>, <span class="dt">RH =</span> <span class="st">&quot;RH&quot;</span>), </a>
-<a class="sourceLine" id="cb56-17" title="17">               <span class="dt">gsmodel =</span> <span class="st">&quot;BallBerry&quot;</span>, <span class="dt">fitg0 =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" title="1">aci01 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/aci01.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb90-2" title="2">aci01 &lt;-<span class="st"> </span><span class="kw">subset</span>(aci01, Obs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb90-3" title="3">multiBB &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb90-4" title="4">  <span class="dt">A =</span> <span class="kw">c</span>(aci<span class="op">$</span>Photo, aci01<span class="op">$</span>Photo),</a>
+<a class="sourceLine" id="cb90-5" title="5">  <span class="dt">GS =</span> <span class="kw">c</span>(aci<span class="op">$</span>Cond, aci01<span class="op">$</span>Cond),</a>
+<a class="sourceLine" id="cb90-6" title="6">  <span class="dt">CO2S =</span> <span class="kw">c</span>(aci<span class="op">$</span>CO2S, aci01<span class="op">$</span>CO2S),</a>
+<a class="sourceLine" id="cb90-7" title="7">  <span class="dt">VPD =</span> <span class="kw">c</span>(aci<span class="op">$</span>VpdL, aci01<span class="op">$</span>VpdL),</a>
+<a class="sourceLine" id="cb90-8" title="8">  <span class="dt">RH =</span> <span class="kw">c</span>(aci<span class="op">$</span>RH_S, aci01<span class="op">$</span>RH_S),</a>
+<a class="sourceLine" id="cb90-9" title="9">  <span class="dt">species =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;species1&quot;</span>, <span class="kw">length</span>(aci<span class="op">$</span>Photo)),</a>
+<a class="sourceLine" id="cb90-10" title="10">  <span class="kw">rep</span>(<span class="st">&quot;species2&quot;</span>, <span class="kw">length</span>(aci01<span class="op">$</span>Photo)))</a>
+<a class="sourceLine" id="cb90-11" title="11">)</a>
+<a class="sourceLine" id="cb90-12" title="12"></a>
+<a class="sourceLine" id="cb90-13" title="13">mod2 &lt;-<span class="st"> </span><span class="kw">fitBBs</span>(multiBB, <span class="dt">group =</span> <span class="st">&quot;species&quot;</span>,  </a>
+<a class="sourceLine" id="cb90-14" title="14">               <span class="dt">varnames =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb90-15" title="15">               <span class="dt">ALEAF =</span> <span class="st">&quot;A&quot;</span>, <span class="dt">GS =</span> <span class="st">&quot;GS&quot;</span>, <span class="dt">VPD =</span> <span class="st">&quot;VPD&quot;</span>,</a>
+<a class="sourceLine" id="cb90-16" title="16">               <span class="dt">Ca =</span><span class="st">&quot;CO2S&quot;</span>, <span class="dt">RH =</span> <span class="st">&quot;RH&quot;</span>), </a>
+<a class="sourceLine" id="cb90-17" title="17">               <span class="dt">gsmodel =</span> <span class="st">&quot;BallBerry&quot;</span>, <span class="dt">fitg0 =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## RH provided in % converted to relative units.
 ## RH provided in % converted to relative units.</code></pre>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="kw">coef</span>(mod2)</a></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" title="1"><span class="kw">coef</span>(mod2)</a></code></pre></div>
 <pre><code>##      group         g0         g1
 ## 1 species1 0.32638852 -0.1734554
 ## 2 species2 0.05158725 -0.0218842</code></pre>

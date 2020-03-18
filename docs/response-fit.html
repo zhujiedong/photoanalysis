@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2020-03-12" />
+<meta name="date" content="2020-03-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -414,28 +414,28 @@ C_c = C_i - \frac{A}{gm}
 <div id="fitaci_intro" class="section level3">
 <h3><span class="header-section-number">3.4.1</span> fitaci 函数介绍</h3>
 <p><code>fitaci</code> 的用法如下<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>：</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">fitaci</span>(data, <span class="dt">varnames =</span> <span class="kw">list</span>(<span class="dt">ALEAF =</span> <span class="st">&quot;Photo&quot;</span>, </a>
-<a class="sourceLine" id="cb29-2" title="2">  <span class="dt">Tleaf =</span> <span class="st">&quot;Tleaf&quot;</span>, <span class="dt">Ci =</span> <span class="st">&quot;Ci&quot;</span>, <span class="dt">PPFD =</span> <span class="st">&quot;PARi&quot;</span>, </a>
-<a class="sourceLine" id="cb29-3" title="3">  <span class="dt">Rd =</span> <span class="st">&quot;Rd&quot;</span>), <span class="dt">Tcorrect =</span> <span class="ot">TRUE</span>, <span class="dt">Patm =</span> <span class="dv">100</span>, </a>
-<a class="sourceLine" id="cb29-4" title="4">  <span class="dt">citransition =</span> <span class="ot">NULL</span>, <span class="dt">quiet =</span> <span class="ot">FALSE</span>, </a>
-<a class="sourceLine" id="cb29-5" title="5">  <span class="dt">startValgrid =</span> <span class="ot">TRUE</span>, <span class="dt">fitmethod =</span> </a>
-<a class="sourceLine" id="cb29-6" title="6">  <span class="kw">c</span>(<span class="st">&quot;default&quot;</span>, <span class="st">&quot;bilinear&quot;</span>, <span class="st">&quot;onepoint&quot;</span>), </a>
-<a class="sourceLine" id="cb29-7" title="7">  <span class="dt">algorithm =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">fitTPU =</span> <span class="ot">FALSE</span>, </a>
-<a class="sourceLine" id="cb29-8" title="8">  <span class="dt">useRd =</span> <span class="ot">FALSE</span>, <span class="dt">PPFD =</span> <span class="ot">NULL</span>, <span class="dt">Tleaf =</span> <span class="ot">NULL</span>, </a>
-<a class="sourceLine" id="cb29-9" title="9">  <span class="dt">alpha =</span> <span class="fl">0.24</span>, <span class="dt">theta =</span> <span class="fl">0.85</span>, <span class="dt">gmeso =</span> <span class="ot">NULL</span>, </a>
-<a class="sourceLine" id="cb29-10" title="10">  <span class="dt">EaV =</span> <span class="fl">82620.87</span>, <span class="dt">EdVC =</span> <span class="dv">0</span>, <span class="dt">delsC =</span> <span class="fl">645.1013</span>,</a>
-<a class="sourceLine" id="cb29-11" title="11">  <span class="dt">EaJ =</span> <span class="fl">39676.89</span>, <span class="dt">EdVJ =</span> <span class="fl">2e+05</span>, </a>
-<a class="sourceLine" id="cb29-12" title="12">  <span class="dt">delsJ =</span> <span class="fl">641.3615</span>, <span class="dt">GammaStar =</span> <span class="ot">NULL</span>, </a>
-<a class="sourceLine" id="cb29-13" title="13">  <span class="dt">Km =</span> <span class="ot">NULL</span>, <span class="dt">id =</span> <span class="ot">NULL</span>, ...)</a>
-<a class="sourceLine" id="cb29-14" title="14"></a>
-<a class="sourceLine" id="cb29-15" title="15"><span class="co">## S3 method for class &#39;acifit&#39;</span></a>
-<a class="sourceLine" id="cb29-16" title="16"><span class="kw">plot</span>(x, <span class="dt">what =</span> <span class="kw">c</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;model&quot;</span>, <span class="st">&quot;none&quot;</span>),</a>
-<a class="sourceLine" id="cb29-17" title="17">     <span class="dt">xlim =</span> <span class="ot">NULL</span>, <span class="dt">ylim =</span> <span class="ot">NULL</span>, <span class="dt">whichA =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb29-18" title="18">       <span class="st">&quot;Ac&quot;</span>, <span class="st">&quot;Aj&quot;</span>, <span class="st">&quot;Amin&quot;</span>, <span class="st">&quot;Ap&quot;</span>), <span class="dt">add =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb29-19" title="19"><span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">addzeroline =</span> <span class="ot">TRUE</span>, <span class="dt">addlegend =</span> </a>
-<a class="sourceLine" id="cb29-20" title="20">  <span class="op">!</span>add, <span class="dt">legendbty =</span> <span class="st">&quot;o&quot;</span>,<span class="dt">transitionpoint =</span> <span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb29-21" title="21"><span class="dt">linecols =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>), <span class="dt">lwd =</span> <span class="kw">c</span>(<span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb29-22" title="22"><span class="dv">2</span>), ...)</a></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" title="1"><span class="kw">fitaci</span>(data, <span class="dt">varnames =</span> <span class="kw">list</span>(<span class="dt">ALEAF =</span> <span class="st">&quot;Photo&quot;</span>, </a>
+<a class="sourceLine" id="cb63-2" title="2">  <span class="dt">Tleaf =</span> <span class="st">&quot;Tleaf&quot;</span>, <span class="dt">Ci =</span> <span class="st">&quot;Ci&quot;</span>, <span class="dt">PPFD =</span> <span class="st">&quot;PARi&quot;</span>, </a>
+<a class="sourceLine" id="cb63-3" title="3">  <span class="dt">Rd =</span> <span class="st">&quot;Rd&quot;</span>), <span class="dt">Tcorrect =</span> <span class="ot">TRUE</span>, <span class="dt">Patm =</span> <span class="dv">100</span>, </a>
+<a class="sourceLine" id="cb63-4" title="4">  <span class="dt">citransition =</span> <span class="ot">NULL</span>, <span class="dt">quiet =</span> <span class="ot">FALSE</span>, </a>
+<a class="sourceLine" id="cb63-5" title="5">  <span class="dt">startValgrid =</span> <span class="ot">TRUE</span>, <span class="dt">fitmethod =</span> </a>
+<a class="sourceLine" id="cb63-6" title="6">  <span class="kw">c</span>(<span class="st">&quot;default&quot;</span>, <span class="st">&quot;bilinear&quot;</span>, <span class="st">&quot;onepoint&quot;</span>), </a>
+<a class="sourceLine" id="cb63-7" title="7">  <span class="dt">algorithm =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">fitTPU =</span> <span class="ot">FALSE</span>, </a>
+<a class="sourceLine" id="cb63-8" title="8">  <span class="dt">useRd =</span> <span class="ot">FALSE</span>, <span class="dt">PPFD =</span> <span class="ot">NULL</span>, <span class="dt">Tleaf =</span> <span class="ot">NULL</span>, </a>
+<a class="sourceLine" id="cb63-9" title="9">  <span class="dt">alpha =</span> <span class="fl">0.24</span>, <span class="dt">theta =</span> <span class="fl">0.85</span>, <span class="dt">gmeso =</span> <span class="ot">NULL</span>, </a>
+<a class="sourceLine" id="cb63-10" title="10">  <span class="dt">EaV =</span> <span class="fl">82620.87</span>, <span class="dt">EdVC =</span> <span class="dv">0</span>, <span class="dt">delsC =</span> <span class="fl">645.1013</span>,</a>
+<a class="sourceLine" id="cb63-11" title="11">  <span class="dt">EaJ =</span> <span class="fl">39676.89</span>, <span class="dt">EdVJ =</span> <span class="fl">2e+05</span>, </a>
+<a class="sourceLine" id="cb63-12" title="12">  <span class="dt">delsJ =</span> <span class="fl">641.3615</span>, <span class="dt">GammaStar =</span> <span class="ot">NULL</span>, </a>
+<a class="sourceLine" id="cb63-13" title="13">  <span class="dt">Km =</span> <span class="ot">NULL</span>, <span class="dt">id =</span> <span class="ot">NULL</span>, ...)</a>
+<a class="sourceLine" id="cb63-14" title="14"></a>
+<a class="sourceLine" id="cb63-15" title="15"><span class="co">## S3 method for class &#39;acifit&#39;</span></a>
+<a class="sourceLine" id="cb63-16" title="16"><span class="kw">plot</span>(x, <span class="dt">what =</span> <span class="kw">c</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;model&quot;</span>, <span class="st">&quot;none&quot;</span>),</a>
+<a class="sourceLine" id="cb63-17" title="17">     <span class="dt">xlim =</span> <span class="ot">NULL</span>, <span class="dt">ylim =</span> <span class="ot">NULL</span>, <span class="dt">whichA =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb63-18" title="18">       <span class="st">&quot;Ac&quot;</span>, <span class="st">&quot;Aj&quot;</span>, <span class="st">&quot;Amin&quot;</span>, <span class="st">&quot;Ap&quot;</span>), <span class="dt">add =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb63-19" title="19"><span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">addzeroline =</span> <span class="ot">TRUE</span>, <span class="dt">addlegend =</span> </a>
+<a class="sourceLine" id="cb63-20" title="20">  <span class="op">!</span>add, <span class="dt">legendbty =</span> <span class="st">&quot;o&quot;</span>,<span class="dt">transitionpoint =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb63-21" title="21"><span class="dt">linecols =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>), <span class="dt">lwd =</span> <span class="kw">c</span>(<span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb63-22" title="22"><span class="dv">2</span>), ...)</a></code></pre></div>
 <p><em>主要参数注释：</em></p>
 <ul>
 <li>data：需要分析的数据，必须为 data.frame<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>。
@@ -556,21 +556,21 @@ CO<span class="math inline">\(_{2}\)</span> 的增加而增加时发生的，因
 <div id="fitaci-p" class="section level3">
 <h3><span class="header-section-number">3.5.2</span> 使用示例</h3>
 <p><code>plantecophys</code> 并非 base 的安装包，首次使用需要从 <code>CRAN</code> 安装，可以使用图形界面安装，也可以直接用命令行安装<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>，推荐同时安装依赖。</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;plantecophys&quot;</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="co"># 载入 plantecophys </span></a>
-<a class="sourceLine" id="cb31-2" title="2"><span class="kw">library</span>(<span class="st">&quot;plantecophys&quot;</span>)</a>
-<a class="sourceLine" id="cb31-3" title="3"></a>
-<a class="sourceLine" id="cb31-4" title="4"><span class="co"># 利用read.csv读取数据文件，</span></a>
-<a class="sourceLine" id="cb31-5" title="5"><span class="co"># 我的路径为当前工作路径的data文件夹内</span></a>
-<a class="sourceLine" id="cb31-6" title="6">aci &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/aci.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb31-7" title="7"></a>
-<a class="sourceLine" id="cb31-8" title="8"><span class="co"># 防止可能出现的NA值</span></a>
-<a class="sourceLine" id="cb31-9" title="9">aci &lt;-<span class="st"> </span><span class="kw">subset</span>(aci, Obs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb31-10" title="10"></a>
-<a class="sourceLine" id="cb31-11" title="11"><span class="co"># 不修改默认参数对数据进行拟合</span></a>
-<a class="sourceLine" id="cb31-12" title="12">acifit &lt;-<span class="st"> </span><span class="kw">fitaci</span>(aci)</a>
-<a class="sourceLine" id="cb31-13" title="13"><span class="co"># 查看拟合结果的参数名称，方便导出数据使用</span></a>
-<a class="sourceLine" id="cb31-14" title="14"><span class="kw">attributes</span>(acifit)</a></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;plantecophys&quot;</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1"><span class="co"># 载入 plantecophys </span></a>
+<a class="sourceLine" id="cb65-2" title="2"><span class="kw">library</span>(<span class="st">&quot;plantecophys&quot;</span>)</a>
+<a class="sourceLine" id="cb65-3" title="3"></a>
+<a class="sourceLine" id="cb65-4" title="4"><span class="co"># 利用read.csv读取数据文件，</span></a>
+<a class="sourceLine" id="cb65-5" title="5"><span class="co"># 我的路径为当前工作路径的data文件夹内</span></a>
+<a class="sourceLine" id="cb65-6" title="6">aci &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/aci.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb65-7" title="7"></a>
+<a class="sourceLine" id="cb65-8" title="8"><span class="co"># 防止可能出现的NA值</span></a>
+<a class="sourceLine" id="cb65-9" title="9">aci &lt;-<span class="st"> </span><span class="kw">subset</span>(aci, Obs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb65-10" title="10"></a>
+<a class="sourceLine" id="cb65-11" title="11"><span class="co"># 不修改默认参数对数据进行拟合</span></a>
+<a class="sourceLine" id="cb65-12" title="12">acifit &lt;-<span class="st"> </span><span class="kw">fitaci</span>(aci)</a>
+<a class="sourceLine" id="cb65-13" title="13"><span class="co"># 查看拟合结果的参数名称，方便导出数据使用</span></a>
+<a class="sourceLine" id="cb65-14" title="14"><span class="kw">attributes</span>(acifit)</a></code></pre></div>
 <pre><code>## $names
 ##  [1] &quot;df&quot;             &quot;pars&quot;           &quot;nlsfit&quot;         &quot;Tcorrect&quot;      
 ##  [5] &quot;Photosyn&quot;       &quot;Ci&quot;             &quot;Ci_transition&quot;  &quot;Ci_transition2&quot;
@@ -580,8 +580,8 @@ CO<span class="math inline">\(_{2}\)</span> 的增加而增加时发生的，因
 ## 
 ## $class
 ## [1] &quot;acifit&quot;</code></pre>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="co"># 查看拟合结果</span></a>
-<a class="sourceLine" id="cb33-2" title="2"><span class="kw">summary</span>(acifit)</a></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1"><span class="co"># 查看拟合结果</span></a>
+<a class="sourceLine" id="cb67-2" title="2"><span class="kw">summary</span>(acifit)</a></code></pre></div>
 <pre><code>## Result of fitaci.
 ## 
 ## Data and predictions:
@@ -637,8 +637,8 @@ CO<span class="math inline">\(_{2}\)</span> 的增加而增加时发生的，因
 ## Estimated from Tleaf (shown at mean Tleaf):
 ## GammaStar =  58.61138 
 ## Km =  1223.279</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1">acifit_linear &lt;-<span class="st"> </span><span class="kw">fitaci</span>(aci,  <span class="dt">fitmethod =</span> <span class="st">&quot;bilinear&quot;</span>, <span class="dt">quiet =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb35-2" title="2"><span class="kw">summary</span>(acifit_linear)</a></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1">acifit_linear &lt;-<span class="st"> </span><span class="kw">fitaci</span>(aci,  <span class="dt">fitmethod =</span> <span class="st">&quot;bilinear&quot;</span>, <span class="dt">quiet =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb69-2" title="2"><span class="kw">summary</span>(acifit_linear)</a></code></pre></div>
 <pre><code>## Result of fitaci.
 ## 
 ## Data and predictions:
@@ -694,36 +694,36 @@ CO<span class="math inline">\(_{2}\)</span> 的增加而增加时发生的，因
 ## Estimated from Tleaf (shown at mean Tleaf):
 ## GammaStar =  58.61138 
 ## Km =  1223.279</code></pre>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="co"># 仅查看拟合参数, 比较两种拟合参数的差异</span></a>
-<a class="sourceLine" id="cb37-2" title="2"><span class="kw">coef</span>(acifit_linear)</a></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1"><span class="co"># 仅查看拟合参数, 比较两种拟合参数的差异</span></a>
+<a class="sourceLine" id="cb71-2" title="2"><span class="kw">coef</span>(acifit_linear)</a></code></pre></div>
 <pre><code>##       Vcmax        Jmax          Rd 
 ##  49.3787547 128.5546403   0.3828608</code></pre>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="kw">coef</span>(acifit)</a></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" title="1"><span class="kw">coef</span>(acifit)</a></code></pre></div>
 <pre><code>##      Vcmax       Jmax         Rd 
 ##  49.261616 126.620537   0.159449</code></pre>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="co"># 设置作图参数，图形的边距及分为1行两列输出图形</span></a>
-<a class="sourceLine" id="cb41-2" title="2"><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="fl">4.5</span>, <span class="fl">4.5</span>, <span class="dv">2</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb41-3" title="3"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb41-4" title="4"><span class="co"># 对两种拟合参数的结果作图，查看模型拟合是否正常</span></a>
-<a class="sourceLine" id="cb41-5" title="5"><span class="kw">plot</span>(acifit, <span class="dt">addlegend =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb41-6" title="6"><span class="kw">legend</span>(<span class="dt">x =</span> <span class="dv">500</span>, <span class="dt">y =</span> <span class="dv">10</span>, </a>
-<a class="sourceLine" id="cb41-7" title="7">       <span class="dt">legend =</span> <span class="kw">c</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(A[c])), </a>
-<a class="sourceLine" id="cb41-8" title="8">                <span class="kw">expression</span>(<span class="kw">paste</span>(A[j])),</a>
-<a class="sourceLine" id="cb41-9" title="9">                <span class="st">&quot;Limiting rate&quot;</span>),</a>
-<a class="sourceLine" id="cb41-10" title="10">       <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb41-11" title="11">       <span class="dt">col =</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;black&quot;</span>) </a>
-<a class="sourceLine" id="cb41-12" title="12">         )</a>
-<a class="sourceLine" id="cb41-13" title="13"><span class="kw">mtext</span>(<span class="st">&quot; fitmethod = &#39;default&#39; &quot;</span>)</a>
-<a class="sourceLine" id="cb41-14" title="14"></a>
-<a class="sourceLine" id="cb41-15" title="15"><span class="kw">plot</span>(acifit_linear, <span class="dt">addlegend =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb41-16" title="16"><span class="kw">legend</span>(<span class="dt">x =</span> <span class="dv">500</span>, <span class="dt">y =</span> <span class="dv">10</span>, </a>
-<a class="sourceLine" id="cb41-17" title="17">       <span class="dt">legend =</span> <span class="kw">c</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(A[c])), </a>
-<a class="sourceLine" id="cb41-18" title="18">                  <span class="kw">expression</span>(<span class="kw">paste</span>(A[j])),</a>
-<a class="sourceLine" id="cb41-19" title="19">                  <span class="st">&quot;Limiting rate&quot;</span>),</a>
-<a class="sourceLine" id="cb41-20" title="20">       <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb41-21" title="21">       <span class="dt">col =</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;black&quot;</span>) </a>
-<a class="sourceLine" id="cb41-22" title="22">)</a>
-<a class="sourceLine" id="cb41-23" title="23"><span class="kw">mtext</span>(<span class="st">&quot;fitmethod = &#39;bilinear&#39; &quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" title="1"><span class="co"># 设置作图参数，图形的边距及分为1行两列输出图形</span></a>
+<a class="sourceLine" id="cb75-2" title="2"><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="fl">4.5</span>, <span class="fl">4.5</span>, <span class="dv">2</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb75-3" title="3"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb75-4" title="4"><span class="co"># 对两种拟合参数的结果作图，查看模型拟合是否正常</span></a>
+<a class="sourceLine" id="cb75-5" title="5"><span class="kw">plot</span>(acifit, <span class="dt">addlegend =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb75-6" title="6"><span class="kw">legend</span>(<span class="dt">x =</span> <span class="dv">500</span>, <span class="dt">y =</span> <span class="dv">10</span>, </a>
+<a class="sourceLine" id="cb75-7" title="7">       <span class="dt">legend =</span> <span class="kw">c</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(A[c])), </a>
+<a class="sourceLine" id="cb75-8" title="8">                <span class="kw">expression</span>(<span class="kw">paste</span>(A[j])),</a>
+<a class="sourceLine" id="cb75-9" title="9">                <span class="st">&quot;Limiting rate&quot;</span>),</a>
+<a class="sourceLine" id="cb75-10" title="10">       <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb75-11" title="11">       <span class="dt">col =</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;black&quot;</span>) </a>
+<a class="sourceLine" id="cb75-12" title="12">         )</a>
+<a class="sourceLine" id="cb75-13" title="13"><span class="kw">mtext</span>(<span class="st">&quot; fitmethod = &#39;default&#39; &quot;</span>)</a>
+<a class="sourceLine" id="cb75-14" title="14"></a>
+<a class="sourceLine" id="cb75-15" title="15"><span class="kw">plot</span>(acifit_linear, <span class="dt">addlegend =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb75-16" title="16"><span class="kw">legend</span>(<span class="dt">x =</span> <span class="dv">500</span>, <span class="dt">y =</span> <span class="dv">10</span>, </a>
+<a class="sourceLine" id="cb75-17" title="17">       <span class="dt">legend =</span> <span class="kw">c</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(A[c])), </a>
+<a class="sourceLine" id="cb75-18" title="18">                  <span class="kw">expression</span>(<span class="kw">paste</span>(A[j])),</a>
+<a class="sourceLine" id="cb75-19" title="19">                  <span class="st">&quot;Limiting rate&quot;</span>),</a>
+<a class="sourceLine" id="cb75-20" title="20">       <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb75-21" title="21">       <span class="dt">col =</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;black&quot;</span>) </a>
+<a class="sourceLine" id="cb75-22" title="22">)</a>
+<a class="sourceLine" id="cb75-23" title="23"><span class="kw">mtext</span>(<span class="st">&quot;fitmethod = &#39;bilinear&#39; &quot;</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:fitaci6400"></span>
 <img src="bookdown_files/figure-html/fitaci6400-1.png" alt="光合速率的不同的限制阶段" width="672" />
 <p class="caption">
@@ -731,11 +731,11 @@ CO<span class="math inline">\(_{2}\)</span> 的增加而增加时发生的，因
 </p>
 </div>
 <p>如果需要导出数据做他用，直接根据 <code>attributes</code> 中看到的名称，选择对应的数据导出即可，如果使用 Rstudio 的话，其自动补全的功能在选择数据上更方便。例如导出预测值和系数分别使用如下方式：</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="co"># 将模型拟合结果中df（即计算数据）赋给predictaci，</span></a>
-<a class="sourceLine" id="cb42-2" title="2"><span class="co"># 并用write.csv导出</span></a>
-<a class="sourceLine" id="cb42-3" title="3">predictaci &lt;-<span class="st"> </span>acifit<span class="op">$</span>df</a>
-<a class="sourceLine" id="cb42-4" title="4"><span class="kw">write.csv</span>(acifit<span class="op">$</span>df, <span class="dt">file =</span> <span class="st">&quot;acipredict.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb42-5" title="5"><span class="kw">write.csv</span>(<span class="kw">coef</span>(acifit), <span class="dt">file =</span> <span class="st">&quot;coefaci.csv&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" title="1"><span class="co"># 将模型拟合结果中df（即计算数据）赋给predictaci，</span></a>
+<a class="sourceLine" id="cb76-2" title="2"><span class="co"># 并用write.csv导出</span></a>
+<a class="sourceLine" id="cb76-3" title="3">predictaci &lt;-<span class="st"> </span>acifit<span class="op">$</span>df</a>
+<a class="sourceLine" id="cb76-4" title="4"><span class="kw">write.csv</span>(acifit<span class="op">$</span>df, <span class="dt">file =</span> <span class="st">&quot;acipredict.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb76-5" title="5"><span class="kw">write.csv</span>(<span class="kw">coef</span>(acifit), <span class="dt">file =</span> <span class="st">&quot;coefaci.csv&quot;</span>)</a></code></pre></div>
 <blockquote>
 <p>需要注意的是，因为非线性拟合需要一个初始值，因此，使用默认方式（非线性拟合）的时候，会存在可能的拟合失败现象，此时可以使用 <code>fitmethod = "bilinear"</code>，二者结果略有差别。</p>
 </blockquote>
@@ -763,9 +763,9 @@ K_m = K_c (1 + \frac{O_i}{K_o})
 <div id="onpoint_fit" class="section level3">
 <h3><span class="header-section-number">3.5.3</span> 使用 ‘onepoint’ 单独计算 V<sub>cmax</sub> 和 J<sub>max</sub></h3>
 <p>目前我手头没有相应数据，仅有使用 LI-6400 测试 auto log 2 时的一个数据，我们用这个来示范该方法的使用：</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1">one_data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/onepoint.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb43-2" title="2">knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">head</span>(one_data), <span class="dt">booktabs =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb43-3" title="3">             <span class="dt">caption =</span> <span class="st">&#39;onepoint 使用的数据&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" title="1">one_data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/onepoint.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb77-2" title="2">knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">head</span>(one_data), <span class="dt">booktabs =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb77-3" title="3">             <span class="dt">caption =</span> <span class="st">&#39;onepoint 使用的数据&#39;</span>)</a></code></pre></div>
 <table>
 <caption><span id="tab:onepointdata">表 3.2: </span>onepoint 使用的数据</caption>
 <thead>
@@ -1209,16 +1209,16 @@ K_m = K_c (1 + \frac{O_i}{K_o})
 </table>
 <p>数据如上所示，为同一个叶片连续记录数据，故所有的光合速率十分接近。</p>
 <p>使用方法：</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="kw">library</span>(plantecophys)</a>
-<a class="sourceLine" id="cb44-2" title="2"></a>
-<a class="sourceLine" id="cb44-3" title="3">one_data &lt;-<span class="st"> </span><span class="kw">subset</span>(one_data, Obs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb44-4" title="4">one_data<span class="op">$</span>Rd &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="kw">length</span>(one_data<span class="op">$</span>Obs))</a>
-<a class="sourceLine" id="cb44-5" title="5">aci_fit &lt;-<span class="st"> </span><span class="kw">fitaci</span>(one_data, <span class="dt">fitmethod =</span> <span class="st">&quot;onepoint&quot;</span>)</a>
-<a class="sourceLine" id="cb44-6" title="6"></a>
-<a class="sourceLine" id="cb44-7" title="7">knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">head</span>(<span class="kw">data.frame</span>(aci_fit<span class="op">$</span>Photo, </a>
-<a class="sourceLine" id="cb44-8" title="8">             aci_fit<span class="op">$</span>Vcmax, aci_fit<span class="op">$</span>Jmax)),</a>
-<a class="sourceLine" id="cb44-9" title="9">             <span class="dt">booktabs =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb44-10" title="10">             <span class="dt">caption =</span> <span class="st">&#39;onepoint 法计算的结果&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1"><span class="kw">library</span>(plantecophys)</a>
+<a class="sourceLine" id="cb78-2" title="2"></a>
+<a class="sourceLine" id="cb78-3" title="3">one_data &lt;-<span class="st"> </span><span class="kw">subset</span>(one_data, Obs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb78-4" title="4">one_data<span class="op">$</span>Rd &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="kw">length</span>(one_data<span class="op">$</span>Obs))</a>
+<a class="sourceLine" id="cb78-5" title="5">aci_fit &lt;-<span class="st"> </span><span class="kw">fitaci</span>(one_data, <span class="dt">fitmethod =</span> <span class="st">&quot;onepoint&quot;</span>)</a>
+<a class="sourceLine" id="cb78-6" title="6"></a>
+<a class="sourceLine" id="cb78-7" title="7">knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">head</span>(<span class="kw">data.frame</span>(aci_fit<span class="op">$</span>Photo, </a>
+<a class="sourceLine" id="cb78-8" title="8">             aci_fit<span class="op">$</span>Vcmax, aci_fit<span class="op">$</span>Jmax)),</a>
+<a class="sourceLine" id="cb78-9" title="9">             <span class="dt">booktabs =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb78-10" title="10">             <span class="dt">caption =</span> <span class="st">&#39;onepoint 法计算的结果&#39;</span>)</a></code></pre></div>
 <table>
 <caption><span id="tab:onepoint">表 3.3: </span>onepoint 法计算的结果</caption>
 <thead>
@@ -1266,31 +1266,31 @@ K_m = K_c (1 + \frac{O_i}{K_o})
 <div id="multi_curve" class="section level3">
 <h3><span class="header-section-number">3.5.4</span> 多条 CO<sub>2</sub> 响应曲线的拟合</h3>
 <p>fitacis 函数实际上是 fitaci 函数的扩展，方便一次拟合多条曲线<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>。函数的参数如下：</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="kw">fitacis</span>(data, group, <span class="dt">fitmethod =</span> <span class="kw">c</span>(<span class="st">&quot;default&quot;</span>, </a>
-<a class="sourceLine" id="cb45-2" title="2">        <span class="st">&quot;bilinear&quot;</span>),<span class="dt">progressbar =</span> <span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb45-3" title="3">        <span class="dt">quiet =</span> <span class="ot">FALSE</span>, <span class="dt">id =</span> <span class="ot">NULL</span>, ...)</a>
-<a class="sourceLine" id="cb45-4" title="4"></a>
-<a class="sourceLine" id="cb45-5" title="5"><span class="co">## S3 method for class &#39;acifits&#39;</span></a>
-<a class="sourceLine" id="cb45-6" title="6"><span class="kw">plot</span>(x, <span class="dt">how =</span> <span class="kw">c</span>(<span class="st">&quot;manyplots&quot;</span>, <span class="st">&quot;oneplot&quot;</span>), </a>
-<a class="sourceLine" id="cb45-7" title="7">     <span class="dt">highlight =</span> <span class="ot">NULL</span>, <span class="dt">ylim =</span> <span class="ot">NULL</span>, </a>
-<a class="sourceLine" id="cb45-8" title="8">     <span class="dt">xlim =</span> <span class="ot">NULL</span>, <span class="dt">add =</span> <span class="ot">FALSE</span>, <span class="dt">what =</span> <span class="kw">c</span>(<span class="st">&quot;model&quot;</span>,</a>
-<a class="sourceLine" id="cb45-9" title="9">     <span class="st">&quot;data&quot;</span>, <span class="st">&quot;none&quot;</span>), ...)</a></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" title="1"><span class="kw">fitacis</span>(data, group, <span class="dt">fitmethod =</span> <span class="kw">c</span>(<span class="st">&quot;default&quot;</span>, </a>
+<a class="sourceLine" id="cb79-2" title="2">        <span class="st">&quot;bilinear&quot;</span>),<span class="dt">progressbar =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb79-3" title="3">        <span class="dt">quiet =</span> <span class="ot">FALSE</span>, <span class="dt">id =</span> <span class="ot">NULL</span>, ...)</a>
+<a class="sourceLine" id="cb79-4" title="4"></a>
+<a class="sourceLine" id="cb79-5" title="5"><span class="co">## S3 method for class &#39;acifits&#39;</span></a>
+<a class="sourceLine" id="cb79-6" title="6"><span class="kw">plot</span>(x, <span class="dt">how =</span> <span class="kw">c</span>(<span class="st">&quot;manyplots&quot;</span>, <span class="st">&quot;oneplot&quot;</span>), </a>
+<a class="sourceLine" id="cb79-7" title="7">     <span class="dt">highlight =</span> <span class="ot">NULL</span>, <span class="dt">ylim =</span> <span class="ot">NULL</span>, </a>
+<a class="sourceLine" id="cb79-8" title="8">     <span class="dt">xlim =</span> <span class="ot">NULL</span>, <span class="dt">add =</span> <span class="ot">FALSE</span>, <span class="dt">what =</span> <span class="kw">c</span>(<span class="st">&quot;model&quot;</span>,</a>
+<a class="sourceLine" id="cb79-9" title="9">     <span class="st">&quot;data&quot;</span>, <span class="st">&quot;none&quot;</span>), ...)</a></code></pre></div>
 <p><strong>主要参数详解：</strong></p>
 <p>实际上 fitacis 与 fitaci 模型算法完全一致，只不过增加了一个 group 参数，用于区分不同测量的数据，具体请参考举例内容。</p>
 <div id="fitacis_exa" class="section level4">
 <h4><span class="header-section-number">3.5.4.1</span> fitacis 函数应用举例</h4>
 <p>下文代码根据 plantecophys 中的示例代码修改，进行演示，原代码请参考其帮助文档。</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="kw">library</span>(plantecophys)</a>
-<a class="sourceLine" id="cb46-2" title="2"><span class="co"># 只提取前10个不同测量的数据，节省时间进行举例</span></a>
-<a class="sourceLine" id="cb46-3" title="3">manyacidat2 &lt;-<span class="st"> </span><span class="kw">droplevels</span>(manyacidat[manyacidat<span class="op">$</span>Curve <span class="op">%in%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb46-4" title="4"><span class="st">                                       </span><span class="kw">levels</span>(manyacidat<span class="op">$</span>Curve)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>],])</a>
-<a class="sourceLine" id="cb46-5" title="5"></a>
-<a class="sourceLine" id="cb46-6" title="6"><span class="co"># 对多条曲线进行拟合，使用bilinear方法，</span></a>
-<a class="sourceLine" id="cb46-7" title="7"><span class="co"># 仅仅因为其比非线性拟合节省时间</span></a>
-<a class="sourceLine" id="cb46-8" title="8">fits &lt;-<span class="st"> </span><span class="kw">fitacis</span>(manyacidat2, <span class="dt">group =</span> <span class="st">&quot;Curve&quot;</span>, <span class="dt">fitmethod=</span><span class="st">&quot;bilinear&quot;</span>, <span class="dt">quiet =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb46-9" title="9"></a>
-<a class="sourceLine" id="cb46-10" title="10"><span class="co"># 拟合结果为list，我们可以只提取第一个的拟合结果</span></a>
-<a class="sourceLine" id="cb46-11" title="11">fits[[<span class="dv">1</span>]]</a></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1"><span class="kw">library</span>(plantecophys)</a>
+<a class="sourceLine" id="cb80-2" title="2"><span class="co"># 只提取前10个不同测量的数据，节省时间进行举例</span></a>
+<a class="sourceLine" id="cb80-3" title="3">manyacidat2 &lt;-<span class="st"> </span><span class="kw">droplevels</span>(manyacidat[manyacidat<span class="op">$</span>Curve <span class="op">%in%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb80-4" title="4"><span class="st">                                       </span><span class="kw">levels</span>(manyacidat<span class="op">$</span>Curve)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>],])</a>
+<a class="sourceLine" id="cb80-5" title="5"></a>
+<a class="sourceLine" id="cb80-6" title="6"><span class="co"># 对多条曲线进行拟合，使用bilinear方法，</span></a>
+<a class="sourceLine" id="cb80-7" title="7"><span class="co"># 仅仅因为其比非线性拟合节省时间</span></a>
+<a class="sourceLine" id="cb80-8" title="8">fits &lt;-<span class="st"> </span><span class="kw">fitacis</span>(manyacidat2, <span class="dt">group =</span> <span class="st">&quot;Curve&quot;</span>, <span class="dt">fitmethod=</span><span class="st">&quot;bilinear&quot;</span>, <span class="dt">quiet =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb80-9" title="9"></a>
+<a class="sourceLine" id="cb80-10" title="10"><span class="co"># 拟合结果为list，我们可以只提取第一个的拟合结果</span></a>
+<a class="sourceLine" id="cb80-11" title="11">fits[[<span class="dv">1</span>]]</a></code></pre></div>
 <pre><code>## Result of fitaci.
 ## 
 ## Data and predictions:
@@ -1350,17 +1350,17 @@ K_m = K_c (1 + \frac{O_i}{K_o})
 ## Estimated from Tleaf (shown at mean Tleaf):
 ## GammaStar =  42.31453 
 ## Km =  698.2084</code></pre>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="co"># 使用sapply提取拟合结果的RMSE(均方根误差)</span></a>
-<a class="sourceLine" id="cb48-2" title="2">rmses &lt;-<span class="st"> </span><span class="kw">sapply</span>(fits, <span class="st">&quot;[[&quot;</span>, <span class="st">&quot;RMSE&quot;</span>)</a>
-<a class="sourceLine" id="cb48-3" title="3"><span class="kw">plot</span>(rmses, <span class="dt">type=</span><span class="st">&#39;h&#39;</span>, <span class="dt">ylab=</span><span class="st">&quot;RMSE&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Curve nr&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1"><span class="co"># 使用sapply提取拟合结果的RMSE(均方根误差)</span></a>
+<a class="sourceLine" id="cb82-2" title="2">rmses &lt;-<span class="st"> </span><span class="kw">sapply</span>(fits, <span class="st">&quot;[[&quot;</span>, <span class="st">&quot;RMSE&quot;</span>)</a>
+<a class="sourceLine" id="cb82-3" title="3"><span class="kw">plot</span>(rmses, <span class="dt">type=</span><span class="st">&#39;h&#39;</span>, <span class="dt">ylab=</span><span class="st">&quot;RMSE&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Curve nr&quot;</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:fitacisr1"></span>
 <img src="bookdown_files/figure-html/fitacisr-1.png" alt="fitacis作图结果" width="672" />
 <p class="caption">
 图 3.3: fitacis作图结果
 </p>
 </div>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1"><span class="co"># 对最差的拟合结果进行作图</span></a>
-<a class="sourceLine" id="cb49-2" title="2"><span class="kw">plot</span>(fits[[<span class="kw">which.max</span>(rmses)]])</a></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" title="1"><span class="co"># 对最差的拟合结果进行作图</span></a>
+<a class="sourceLine" id="cb83-2" title="2"><span class="kw">plot</span>(fits[[<span class="kw">which.max</span>(rmses)]])</a></code></pre></div>
 <div class="figure"><span id="fig:fitacisr2"></span>
 <img src="bookdown_files/figure-html/fitacisr-2.png" alt="fitacis作图结果" width="672" />
 <p class="caption">
@@ -1373,7 +1373,7 @@ K_m = K_c (1 + \frac{O_i}{K_o})
 <div id="transition" class="section level3">
 <h3><span class="header-section-number">3.5.5</span> <code>findCiTransition</code> 函数</h3>
 <p>计算 CiTransition 的函数，第一点为 Ac &amp; Aj，第二点为 Aj &amp; Ap，并且仅在计算 TPU 的前提下才会有第二点出现。</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="kw">findCiTransition</span>(object, ...)</a></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1"><span class="kw">findCiTransition</span>(object, ...)</a></code></pre></div>
 <p>参数使用，object 为 fitaci 函数对象，或者整个的 <code>Photosyn</code> 函数。
 … 为使用 <code>Photosyn</code> 时可传递的参数。</p>
 
@@ -1384,12 +1384,12 @@ K_m = K_c (1 + \frac{O_i}{K_o})
 <h2><span class="header-section-number">3.6</span> C4 植物光合</h2>
 <p>之前的部分模型全部为关于 C3 植物的拟合，而 <span class="citation">Caemmerer (<a href="#ref-Caemmerer2000Biochemical" role="doc-biblioref">2000</a>)</span> 的方法，则是针对
 C4 植物的 A-Ci 曲线的实现。</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="kw">AciC4</span>(Ci, <span class="dt">PPFD =</span> <span class="dv">1500</span>, <span class="dt">Tleaf =</span> <span class="dv">25</span>, <span class="dt">VPMAX25 =</span> <span class="dv">120</span>, </a>
-<a class="sourceLine" id="cb51-2" title="2">      <span class="dt">JMAX25 =</span> <span class="dv">400</span>, <span class="dt">Vcmax =</span> <span class="dv">60</span>, <span class="dt">Vpr =</span> <span class="dv">80</span>, </a>
-<a class="sourceLine" id="cb51-3" title="3">      <span class="dt">alpha =</span> <span class="dv">0</span>, <span class="dt">gbs =</span> <span class="fl">0.003</span>, <span class="dt">O2 =</span> <span class="dv">210</span>, </a>
-<a class="sourceLine" id="cb51-4" title="4">      <span class="dt">x =</span> <span class="fl">0.4</span>, <span class="dt">THETA =</span> <span class="fl">0.7</span>, <span class="dt">Q10 =</span> <span class="fl">2.3</span>, </a>
-<a class="sourceLine" id="cb51-5" title="5">      <span class="dt">RD0 =</span> <span class="dv">1</span>, <span class="dt">RTEMP =</span> <span class="dv">25</span>, <span class="dt">TBELOW =</span> <span class="dv">0</span>, </a>
-<a class="sourceLine" id="cb51-6" title="6">      <span class="dt">DAYRESP =</span> <span class="dv">1</span>, <span class="dt">Q10F =</span> <span class="dv">2</span>, <span class="dt">FRM =</span> <span class="fl">0.5</span>, ...)</a></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" title="1"><span class="kw">AciC4</span>(Ci, <span class="dt">PPFD =</span> <span class="dv">1500</span>, <span class="dt">Tleaf =</span> <span class="dv">25</span>, <span class="dt">VPMAX25 =</span> <span class="dv">120</span>, </a>
+<a class="sourceLine" id="cb85-2" title="2">      <span class="dt">JMAX25 =</span> <span class="dv">400</span>, <span class="dt">Vcmax =</span> <span class="dv">60</span>, <span class="dt">Vpr =</span> <span class="dv">80</span>, </a>
+<a class="sourceLine" id="cb85-3" title="3">      <span class="dt">alpha =</span> <span class="dv">0</span>, <span class="dt">gbs =</span> <span class="fl">0.003</span>, <span class="dt">O2 =</span> <span class="dv">210</span>, </a>
+<a class="sourceLine" id="cb85-4" title="4">      <span class="dt">x =</span> <span class="fl">0.4</span>, <span class="dt">THETA =</span> <span class="fl">0.7</span>, <span class="dt">Q10 =</span> <span class="fl">2.3</span>, </a>
+<a class="sourceLine" id="cb85-5" title="5">      <span class="dt">RD0 =</span> <span class="dv">1</span>, <span class="dt">RTEMP =</span> <span class="dv">25</span>, <span class="dt">TBELOW =</span> <span class="dv">0</span>, </a>
+<a class="sourceLine" id="cb85-6" title="6">      <span class="dt">DAYRESP =</span> <span class="dv">1</span>, <span class="dt">Q10F =</span> <span class="dv">2</span>, <span class="dt">FRM =</span> <span class="fl">0.5</span>, ...)</a></code></pre></div>
 <p><strong>参数详解</strong></p>
 <ul>
 <li>Ci：胞间二氧化碳浓度 (<span class="math inline">\(\mu mol\cdot m^{-2}\cdot s^{-1}\)</span>)。</li>
@@ -1415,12 +1415,12 @@ C4 植物的 A-Ci 曲线的实现。</p>
 <p>以上参数均来自 <span class="citation">Caemmerer (<a href="#ref-Caemmerer2000Biochemical" role="doc-biblioref">2000</a>)</span>，括号中的参数值均为默认值，具体应用时请按照实际情况修改。</p>
 <div id="c4_sim" class="section level3">
 <h3><span class="header-section-number">3.6.1</span> C4 植物光合速率的计算</h3>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="co"># 模拟 C4 植物的 Ci 值，计算光合速率并作图</span></a>
-<a class="sourceLine" id="cb52-2" title="2"><span class="kw">library</span>(plantecophys)</a>
-<a class="sourceLine" id="cb52-3" title="3">aci &lt;-<span class="st"> </span><span class="kw">AciC4</span>(<span class="dt">Ci=</span><span class="kw">seq</span>(<span class="dv">5</span>,<span class="dv">600</span>, <span class="dt">length=</span><span class="dv">101</span>))</a>
-<a class="sourceLine" id="cb52-4" title="4"><span class="kw">with</span>(aci, <span class="kw">plot</span>(Ci, ALEAF, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="kw">max</span>(ALEAF))))</a></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-17"></span>
-<img src="bookdown_files/figure-html/unnamed-chunk-17-1.png" alt="C4 植物 A-Ci 作图" width="672" />
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1"><span class="co"># 模拟 C4 植物的 Ci 值，计算光合速率并作图</span></a>
+<a class="sourceLine" id="cb86-2" title="2"><span class="kw">library</span>(plantecophys)</a>
+<a class="sourceLine" id="cb86-3" title="3">aci &lt;-<span class="st"> </span><span class="kw">AciC4</span>(<span class="dt">Ci=</span><span class="kw">seq</span>(<span class="dv">5</span>,<span class="dv">600</span>, <span class="dt">length=</span><span class="dv">101</span>))</a>
+<a class="sourceLine" id="cb86-4" title="4"><span class="kw">with</span>(aci, <span class="kw">plot</span>(Ci, ALEAF, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="kw">max</span>(ALEAF))))</a></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-19"></span>
+<img src="bookdown_files/figure-html/unnamed-chunk-19-1.png" alt="C4 植物 A-Ci 作图" width="672" />
 <p class="caption">
 图 3.5: C4 植物 A-Ci 作图
 </p>
