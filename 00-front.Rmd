@@ -18,13 +18,17 @@ LI-6800 与 LI-6400XT 光合仪数据，尤其是 RACiR\texttrademark 部分，�
 
 [github地址](https://github.com/zhujiedong/photoanalysis)
 
+gitee 也有同步版本
+
+[gitee 地址](http://zhu_jie_dong.gitee.io/photoanalysis/)
+
 如有其他仪器问题或者仪器购买需求，请使用下面方式与我们联系：
 
 * 北京力高泰科技有限公司 
 
 * 网址：[http://www.ecotek.com.cn](http://www.ecotek.com.cn)
 
-* 电话：010-51665551
+* 电话：010-64093960/66001653
 
 * 电子邮件：[info@ecotek.com.cn](info@ecotek.com.cn)
 
