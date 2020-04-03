@@ -126,16 +126,18 @@ knitr::kable(head(one_data), booktabs = TRUE,
 library(plantecophys)
 
 one_data <- subset(one_data, Obs > 0)
-one_data$Rd <- rep(-0.5, length(one_data$Obs))
+one_data$Rd <- 0.5
 aci_fit <- fitaci(one_data, fitmethod = "onepoint")
+```
 
+```{r, echo=FALSE}
 knitr::kable(head(data.frame(aci_fit$Photo, 
              aci_fit$Vcmax, aci_fit$Jmax)),
              booktabs = TRUE,
              caption = 'onepoint 法计算的结果')
 ```
 
-需要注意，为保证结果的精确，如果不设定 Rd, 也即文献中的 Rday， 模型是无法计算的，因此上面的示例中虚构了一个，实际操作用一般使用标准的 ACi 测量计算。
+需要注意，为保证结果的精确，如果不设定 Rd, 也即文献中的 Rday， 模型是无法计算的，因此上面的示例中虚构了一个，实际操作用一般使用低氧的 ACi 测量计算。
 
 ### 多条 CO~2~ 响应曲线的拟合 {#multi_curve}
 

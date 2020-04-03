@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2020-03-26" />
+<meta name="date" content="2020-04-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1212,15 +1212,10 @@ K_m = K_c (1 + \frac{O_i}{K_o})
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1"><span class="kw">library</span>(plantecophys)</a>
 <a class="sourceLine" id="cb78-2" title="2"></a>
 <a class="sourceLine" id="cb78-3" title="3">one_data &lt;-<span class="st"> </span><span class="kw">subset</span>(one_data, Obs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb78-4" title="4">one_data<span class="op">$</span>Rd &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="kw">length</span>(one_data<span class="op">$</span>Obs))</a>
-<a class="sourceLine" id="cb78-5" title="5">aci_fit &lt;-<span class="st"> </span><span class="kw">fitaci</span>(one_data, <span class="dt">fitmethod =</span> <span class="st">&quot;onepoint&quot;</span>)</a>
-<a class="sourceLine" id="cb78-6" title="6"></a>
-<a class="sourceLine" id="cb78-7" title="7">knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">head</span>(<span class="kw">data.frame</span>(aci_fit<span class="op">$</span>Photo, </a>
-<a class="sourceLine" id="cb78-8" title="8">             aci_fit<span class="op">$</span>Vcmax, aci_fit<span class="op">$</span>Jmax)),</a>
-<a class="sourceLine" id="cb78-9" title="9">             <span class="dt">booktabs =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb78-10" title="10">             <span class="dt">caption =</span> <span class="st">&#39;onepoint 法计算的结果&#39;</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb78-4" title="4">one_data<span class="op">$</span>Rd &lt;-<span class="st"> </span><span class="fl">0.5</span></a>
+<a class="sourceLine" id="cb78-5" title="5">aci_fit &lt;-<span class="st"> </span><span class="kw">fitaci</span>(one_data, <span class="dt">fitmethod =</span> <span class="st">&quot;onepoint&quot;</span>)</a></code></pre></div>
 <table>
-<caption><span id="tab:onepoint">表 3.3: </span>onepoint 法计算的结果</caption>
+<caption><span id="tab:unnamed-chunk-16">表 3.3: </span>onepoint 法计算的结果</caption>
 <thead>
 <tr class="header">
 <th align="right">aci_fit.Photo</th>
@@ -1261,7 +1256,7 @@ K_m = K_c (1 + \frac{O_i}{K_o})
 </tr>
 </tbody>
 </table>
-<p>需要注意，为保证结果的精确，如果不设定 Rd, 也即文献中的 Rday， 模型是无法计算的，因此上面的示例中虚构了一个，实际操作用一般使用标准的 ACi 测量计算。</p>
+<p>需要注意，为保证结果的精确，如果不设定 Rd, 也即文献中的 Rday， 模型是无法计算的，因此上面的示例中虚构了一个，实际操作用一般使用低氧的 ACi 测量计算。</p>
 </div>
 <div id="multi_curve" class="section level3">
 <h3><span class="header-section-number">3.5.4</span> 多条 CO<sub>2</sub> 响应曲线的拟合</h3>
@@ -1419,8 +1414,8 @@ C4 植物的 A-Ci 曲线的实现。</p>
 <a class="sourceLine" id="cb86-2" title="2"><span class="kw">library</span>(plantecophys)</a>
 <a class="sourceLine" id="cb86-3" title="3">aci &lt;-<span class="st"> </span><span class="kw">AciC4</span>(<span class="dt">Ci=</span><span class="kw">seq</span>(<span class="dv">5</span>,<span class="dv">600</span>, <span class="dt">length=</span><span class="dv">101</span>))</a>
 <a class="sourceLine" id="cb86-4" title="4"><span class="kw">with</span>(aci, <span class="kw">plot</span>(Ci, ALEAF, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="kw">max</span>(ALEAF))))</a></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-19"></span>
-<img src="bookdown_files/figure-html/unnamed-chunk-19-1.png" alt="C4 植物 A-Ci 作图" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-20"></span>
+<img src="bookdown_files/figure-html/unnamed-chunk-20-1.png" alt="C4 植物 A-Ci 作图" width="672" />
 <p class="caption">
 图 3.5: C4 植物 A-Ci 作图
 </p>

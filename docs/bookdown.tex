@@ -174,7 +174,7 @@
 
 \title{使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据}
 \author{祝介东 北京力高泰科技有限公司}
-\date{2020-03-26}
+\date{2020-04-03}
 
 \begin{document}
 \maketitle
@@ -591,10 +591,10 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.726133 1.293074 1.590837 1.521630 1.548202 1.995269 1.481058 1.701669
-##  [9] 1.250195 1.234698 1.297514 1.496997 1.376601 1.590880 1.649164 1.866753
-## [17] 1.708419 1.309923 1.625188 1.959380 1.324496 1.510798 1.411765 1.261133
-## [25] 1.431014 1.691561 1.977425 1.402914 1.565304 1.855616 1.270738 1.838868
+##  [1] 1.300425 1.634105 1.983314 1.571228 1.300119 1.266912 1.796888 1.501195
+##  [9] 1.302516 1.922241 1.693071 1.599533 1.454987 1.776512 1.683244 1.307979
+## [17] 1.517354 1.927367 1.752992 1.422248 1.241329 1.272049 1.438889 1.335510
+## [25] 1.601306 1.220533 1.368826 1.530037 1.335377 1.577861 1.793682 1.357508
 \end{verbatim}
 
 我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.
@@ -784,10 +784,10 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.829692 1.970179 1.917402 1.845837 1.320042 1.597060 1.738264 1.880400
-##  [9] 1.435425 1.550245 1.856255 1.744581 1.500690 1.461605 1.976982 1.550278
-## [17] 1.675430 1.237980 1.274821 1.260188 1.494082 1.304728 1.611119 1.423065
-## [25] 1.693036 1.402048 1.940158 1.473640
+##  [1] 1.355491 1.607659 1.802695 1.453457 1.346718 1.522040 1.289490 1.479042
+##  [9] 1.497428 1.438881 1.740543 1.468356 1.324355 1.556684 1.586068 1.510399
+## [17] 1.210740 1.679016 1.217279 1.210560 1.567529 1.522384 1.895240 1.384362
+## [25] 1.826288 1.713231 1.489864 1.315690
 \end{verbatim}
 
 测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。
@@ -1399,19 +1399,14 @@ Obs & HHMMSS & FTime & EBal. & Photo & Cond & Ci & Trmmol & VpdL & CTleaf & Area
 \KeywordTok{library}\NormalTok{(plantecophys)}
 
 \NormalTok{one_data <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(one_data, Obs }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{)}
-\NormalTok{one_data}\OperatorTok{$}\NormalTok{Rd <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\OperatorTok{-}\FloatTok{0.5}\NormalTok{, }\KeywordTok{length}\NormalTok{(one_data}\OperatorTok{$}\NormalTok{Obs))}
+\NormalTok{one_data}\OperatorTok{$}\NormalTok{Rd <-}\StringTok{ }\FloatTok{0.5}
 \NormalTok{aci_fit <-}\StringTok{ }\KeywordTok{fitaci}\NormalTok{(one_data, }\DataTypeTok{fitmethod =} \StringTok{"onepoint"}\NormalTok{)}
-
-\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{(}\KeywordTok{head}\NormalTok{(}\KeywordTok{data.frame}\NormalTok{(aci_fit}\OperatorTok{$}\NormalTok{Photo, }
-\NormalTok{             aci_fit}\OperatorTok{$}\NormalTok{Vcmax, aci_fit}\OperatorTok{$}\NormalTok{Jmax)),}
-             \DataTypeTok{booktabs =} \OtherTok{TRUE}\NormalTok{,}
-             \DataTypeTok{caption =} \StringTok{'onepoint 法计算的结果'}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{table}
 
-\caption{\label{tab:onepoint}onepoint 法计算的结果}
+\caption{\label{tab:unnamed-chunk-16}onepoint 法计算的结果}
 \centering
 \begin{tabular}[t]{rrr}
 \toprule
@@ -1428,7 +1423,7 @@ aci\_fit.Photo & aci\_fit.Vcmax & aci\_fit.Jmax\\
 \end{tabular}
 \end{table}
 
-需要注意，为保证结果的精确，如果不设定 Rd, 也即文献中的 Rday， 模型是无法计算的，因此上面的示例中虚构了一个，实际操作用一般使用标准的 ACi 测量计算。
+需要注意，为保证结果的精确，如果不设定 Rd, 也即文献中的 Rday， 模型是无法计算的，因此上面的示例中虚构了一个，实际操作用一般使用低氧的 ACi 测量计算。
 
 \hypertarget{multi_curve}{%
 \subsection{\texorpdfstring{多条 CO\textsubscript{2} 响应曲线的拟合}{多条 CO2 响应曲线的拟合}}\label{multi_curve}}
@@ -1658,8 +1653,8 @@ C4 植物的 A-Ci 曲线的实现。
 
 \begin{figure}
 \centering
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-19-1.pdf}
-\caption{\label{fig:unnamed-chunk-19}C4 植物 A-Ci 作图}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-20-1.pdf}
+\caption{\label{fig:unnamed-chunk-20}C4 植物 A-Ci 作图}
 \end{figure}
 
 \cleardoublepage
@@ -2172,11 +2167,11 @@ P_{n}  = \frac{\alpha I\ P_{nmax}}{\alpha I + P_{nmax}}- R_{d}
 \begin{itemize}
 \tightlist
 \item
-  其中，P\(_{n}\) 为净光合速率；
+  其中，\(P_{n}\) 为净光合速率；
 \item
   I 为光强；
 \item
-  \(\alpha\) 为光响应曲线在光强为0时的斜率，即光响应曲线的初始斜率，也称之为初始量子效率；
+  \(\alpha\) 为光响应曲线在光强为 0 时的斜率，即光响应曲线的初始斜率，也称之为初始量子效率；
 \item
   \(P_{nmax}\) 为最大净光合速率；
 \item
@@ -6970,7 +6965,7 @@ LI-6800 增加了 ojip 曲线测量功能，本功能主要是针对测量数据
 
 \begin{table}
 
-\caption{\label{tab:unnamed-chunk-53}jiptest 批量导入数据后的样式}
+\caption{\label{tab:unnamed-chunk-54}jiptest 批量导入数据后的样式}
 \centering
 \begin{tabular}[t]{rrl}
 \toprule
@@ -6995,7 +6990,7 @@ SECS & FLUOR & SOURCE\\
 
 \begin{table}
 
-\caption{\label{tab:unnamed-chunk-54}jiptest DC 数据批量导入数据后的样式}
+\caption{\label{tab:unnamed-chunk-55}jiptest DC 数据批量导入数据后的样式}
 \centering
 \begin{tabular}[t]{rrl}
 \toprule
@@ -7410,35 +7405,36 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 ## 
 ## other attached packages:
 ##  [1] factoextra_1.0.6   FactoMineR_2.3     jiptest_0.1.3      gridExtra_2.3     
-##  [5] plyr_1.8.5         racir_1.0.0        nls2_0.2           proto_1.0.0       
+##  [5] plyr_1.8.6         racir_1.0.0        nls2_0.2           proto_1.0.0       
 ##  [9] purrr_0.3.3        ggplot2_3.3.0      minpack.lm_1.2-1   plantecophys_1.4-4
 ## [13] readphoto_0.0.1   
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] tidyr_1.0.2          splines_3.6.3        assertthat_0.2.1    
 ##  [4] highr_0.8            ggstance_0.3.3       cellranger_1.1.0    
-##  [7] yaml_2.2.1           ggrepel_0.8.1        pillar_1.4.3        
+##  [7] yaml_2.2.1           ggrepel_0.8.2        pillar_1.4.3        
 ## [10] backports_1.1.5      lattice_0.20-40      glue_1.3.2          
 ## [13] digest_0.6.25        ggsignif_0.6.0       RColorBrewer_1.1-2  
 ## [16] polyclip_1.10-0      MESS_0.5.6           colorspace_1.4-1    
 ## [19] htmltools_0.4.0      Matrix_1.2-18        pkgconfig_2.0.3     
 ## [22] broom_0.5.5          bookdown_0.18        scales_1.1.0        
-## [25] tweenr_1.0.1         ggforce_0.3.1        tibble_2.1.3        
+## [25] tweenr_1.0.1         ggforce_0.3.1        tibble_3.0.0        
 ## [28] mgcv_1.8-31          generics_0.0.2       farver_2.0.3        
-## [31] ggpubr_0.2.5         withr_2.1.2          geepack_1.3-1       
-## [34] lazyeval_0.2.2       magrittr_1.5         crayon_1.3.4        
-## [37] readxl_1.3.1         evaluate_0.14        nlme_3.1-144        
-## [40] MASS_7.3-51.5        geeM_0.10.1          tools_3.6.3         
-## [43] hms_0.5.3            lifecycle_0.2.0      stringr_1.4.0       
-## [46] munsell_0.5.0        cluster_2.1.0        flashClust_1.01-2   
-## [49] compiler_3.6.3       rlang_0.4.5          grid_3.6.3          
-## [52] rstudioapi_0.11      leaps_3.1            mosaicCore_0.6.0    
-## [55] labeling_0.3         rmarkdown_2.1        gtable_0.3.0        
-## [58] rematch_1.0.1        R6_2.4.1             knitr_1.28          
-## [61] dplyr_0.8.4          ggformula_0.9.4      readr_1.3.1         
-## [64] stringi_1.4.6        Rcpp_1.0.4           vctrs_0.2.4         
-## [67] png_0.1-7            scatterplot3d_0.3-41 tidyselect_1.0.0    
-## [70] xfun_0.12
+## [31] ggpubr_0.2.5         ellipsis_0.3.0       withr_2.1.2         
+## [34] geepack_1.3-1        lazyeval_0.2.2       cli_2.0.2           
+## [37] magrittr_1.5         crayon_1.3.4         readxl_1.3.1        
+## [40] evaluate_0.14        fansi_0.4.1          nlme_3.1-145        
+## [43] MASS_7.3-51.5        geeM_0.10.1          tools_3.6.3         
+## [46] hms_0.5.3            lifecycle_0.2.0      stringr_1.4.0       
+## [49] munsell_0.5.0        cluster_2.1.0        flashClust_1.01-2   
+## [52] compiler_3.6.3       rlang_0.4.5          grid_3.6.3          
+## [55] rstudioapi_0.11      leaps_3.1            mosaicCore_0.6.0    
+## [58] labeling_0.3         rmarkdown_2.1        gtable_0.3.0        
+## [61] rematch_1.0.1        R6_2.4.1             knitr_1.28          
+## [64] dplyr_0.8.5          ggformula_0.9.4      readr_1.3.1         
+## [67] stringi_1.4.6        Rcpp_1.0.4           vctrs_0.2.4         
+## [70] png_0.1-7            scatterplot3d_0.3-41 tidyselect_1.0.0    
+## [73] xfun_0.12
 \end{verbatim}
 
 \cleardoublepage
