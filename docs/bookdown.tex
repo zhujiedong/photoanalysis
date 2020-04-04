@@ -174,7 +174,7 @@
 
 \title{使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据}
 \author{祝介东 北京力高泰科技有限公司}
-\date{2020-04-03}
+\date{2020-04-04}
 
 \begin{document}
 \maketitle
@@ -591,16 +591,19 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.300425 1.634105 1.983314 1.571228 1.300119 1.266912 1.796888 1.501195
-##  [9] 1.302516 1.922241 1.693071 1.599533 1.454987 1.776512 1.683244 1.307979
-## [17] 1.517354 1.927367 1.752992 1.422248 1.241329 1.272049 1.438889 1.335510
-## [25] 1.601306 1.220533 1.368826 1.530037 1.335377 1.577861 1.793682 1.357508
+##  [1] 1.526144 1.627252 1.663362 1.384909 1.592916 1.246273 1.483754 1.628245
+##  [9] 1.826609 1.343469 1.612389 1.773139 1.275976 1.453379 1.693405 1.632745
+## [17] 1.296560 1.211936 1.578794 1.640302 1.974946 1.814590 1.361856 1.311747
+## [25] 1.318342 1.381134 1.877841 1.339991 1.827132 1.382540 1.251336 1.920072
 \end{verbatim}
 
 我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.
 
 \hypertarget{recompute6800}{%
 \subsection{LI-6800 数据重计算}\label{recompute6800}}
+
+\hypertarget{raw-batch-68}{%
+\subsubsection{原始数据的批量计算}\label{raw-batch-68}}
 
 参数的重计算函数为 \texttt{recomp\_6800}, 其参数除了 \texttt{read\_bat\_6800} 所包含的参数外，还有叶面积 S, 以及叶片正反面的气孔比例，默认值分别为 6 和 0.5。
 
@@ -784,13 +787,112 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.355491 1.607659 1.802695 1.453457 1.346718 1.522040 1.289490 1.479042
-##  [9] 1.497428 1.438881 1.740543 1.468356 1.324355 1.556684 1.586068 1.510399
-## [17] 1.210740 1.679016 1.217279 1.210560 1.567529 1.522384 1.895240 1.384362
-## [25] 1.826288 1.713231 1.489864 1.315690
+##  [1] 1.341461 1.279837 1.534963 1.255533 1.869915 1.493941 1.684944 1.323151
+##  [9] 1.314721 1.745872 1.491016 1.406378 1.715984 1.712112 1.648924 1.348919
+## [17] 1.953454 1.796260 1.786891 1.669716 1.376177 1.298368 1.566733 1.588212
+## [25] 1.527985 1.948008 1.927973 1.955772
 \end{verbatim}
 
 测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。
+
+\hypertarget{excel-recompute-68}{%
+\subsubsection{Excel 格式的重计算}\label{excel-recompute-68}}
+
+偶然发现了 \texttt{XLConnect} 软件包的一个功能（以前知道这个软件包，但忽视了），那就是直接读取 LI-6800 Excel 格式的数据并重计算，我将其写成了函数，放在了我的 \texttt{readphoto} 软件包里，软件包的安装：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"zhujiedong/readphoto"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+当然，最近连我自己安装 github 的软件包都经常出问题，如果大家同样遇到问题，可以按照下面的方式安装：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_git}\NormalTok{(}\StringTok{"https://gitee.com/zhu_jie_dong/readphoto"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+函数的源代码其实很简单：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{function}\NormalTok{ (path, }\DataTypeTok{start_row =} \DecValTok{17}\NormalTok{, }\DataTypeTok{S =} \DecValTok{6}\NormalTok{) }
+\NormalTok{\{}
+\NormalTok{    wb <-}\StringTok{ }\NormalTok{XLConnect}\OperatorTok{::}\KeywordTok{loadWorkbook}\NormalTok{(path)}
+\NormalTok{    group_name <-}\StringTok{ }\NormalTok{XLConnect}\OperatorTok{::}\KeywordTok{readWorksheet}\NormalTok{(wb, }\DataTypeTok{sheet =} \DecValTok{1}\NormalTok{, }\DataTypeTok{startRow =}\NormalTok{ start_row }\OperatorTok{-}\StringTok{ }
+\StringTok{        }\DecValTok{3}\NormalTok{, }\DataTypeTok{endRow =}\NormalTok{ start_row }\OperatorTok{-}\StringTok{ }\DecValTok{3}\NormalTok{, }\DataTypeTok{header =} \OtherTok{FALSE}\NormalTok{)}
+\NormalTok{    header_name <-}\StringTok{ }\NormalTok{XLConnect}\OperatorTok{::}\KeywordTok{readWorksheet}\NormalTok{(wb, }\DataTypeTok{sheet =} \DecValTok{1}\NormalTok{, }\DataTypeTok{startRow =}\NormalTok{ start_row }\OperatorTok{-}\StringTok{ }
+\StringTok{        }\DecValTok{2}\NormalTok{, }\DataTypeTok{endRow =}\NormalTok{ start_row }\OperatorTok{-}\StringTok{ }\DecValTok{2}\NormalTok{, }\DataTypeTok{header =} \OtherTok{FALSE}\NormalTok{)}
+\NormalTok{    new_name <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(group_name, }\StringTok{"_"}\NormalTok{, header_name)}
+\NormalTok{    XLConnect}\OperatorTok{::}\KeywordTok{writeWorksheet}\NormalTok{(wb, }\DataTypeTok{data =}\NormalTok{ S, }\DataTypeTok{sheet =} \DecValTok{1}\NormalTok{, }\DataTypeTok{startRow =} \DecValTok{17}\NormalTok{, }
+        \DataTypeTok{startCol =} \KeywordTok{which}\NormalTok{(new_name }\OperatorTok{==}\StringTok{ "Const_S"}\NormalTok{), }\DataTypeTok{header =} \OtherTok{FALSE}\NormalTok{)}
+\NormalTok{    df <-}\StringTok{ }\NormalTok{XLConnect}\OperatorTok{::}\KeywordTok{readWorksheet}\NormalTok{(wb, }\DataTypeTok{sheet =} \DecValTok{1}\NormalTok{, }\DataTypeTok{startRow =} \DecValTok{17}\NormalTok{, }
+        \DataTypeTok{header =} \OtherTok{FALSE}\NormalTok{)}
+    \KeywordTok{names}\NormalTok{(df) <-}\StringTok{ }\NormalTok{new_name}
+\NormalTok{    df}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+其中：
+
+\begin{itemize}
+\item
+  path 是 Excel 文件的路径；
+\item
+  start\_row 是数据开始的行号；
+\item
+  S 为修改的叶面积，默认值为 6，如果叶面积无需更改，必须输入单个的值，也就是真正的叶面积，如果使用 aperture 更改了面积，且叶片能够充满叶室，比方说是 2 cm\textsuperscript{2}，该值必须输入一个长度和测量值数量完全一致的向量，例如有 3 个测量值，我们输入 \texttt{S=\ rep(2,3)}，有的没有充满叶室，有的充满叶室，该值也必须输入一个长度和测量值数量完全一致的向量，例如，一共有三个测量值，只有第一个叶片没充满叶室，面积为 1.5，则输入方式为 \texttt{S\ =\ c(1.5,\ 2,\ 2)}。
+\item
+  另外，为避免出现 LI-6800 名字重复的警告，我将他们的名字合并为 分组名+表头的形式，例如 A 改为 GasEx\_A
+\end{itemize}
+
+我们直接使用下面的例子解释，导入的数据是 6 cm\textsuperscript{2} 的默认面积：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(readphoto)}
+
+\NormalTok{df6 <-}\StringTok{ }\KeywordTok{xlconnect_read}\NormalTok{(}\StringTok{"./data/aci-xlc.xlsx"}\NormalTok{)}
+\NormalTok{df6}\OperatorTok{$}\NormalTok{GasEx_A}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 24.7381184 18.1379358 10.8055345  3.0239340 -0.9144044 26.9519572
+##  [7] 27.5088717 40.9101889 50.1393342 55.3865984 58.0662751 59.3556428
+\end{verbatim}
+
+将面积改为 3 cm\textsuperscript{2}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df3 <-}\StringTok{ }\KeywordTok{xlconnect_read}\NormalTok{(}\StringTok{"./data/aci-xlc.xlsx"}\NormalTok{, }\DataTypeTok{S =} \KeywordTok{rep}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{12}\NormalTok{))}
+\NormalTok{df6}\OperatorTok{$}\NormalTok{GasEx_A}\OperatorTok{/}\NormalTok{df3}\OperatorTok{$}\NormalTok{GasEx_A}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5
+\end{verbatim}
+
+模拟 12 个不同的叶面积，均值为 3，方差为 0.1
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df_random <-}\StringTok{ }\KeywordTok{xlconnect_read}\NormalTok{(}\StringTok{"./data/aci-xlc.xlsx"}\NormalTok{, }\DataTypeTok{S =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{12}\NormalTok{, }\DecValTok{3}\NormalTok{, }\FloatTok{0.1}\NormalTok{))}
+\NormalTok{df6}\OperatorTok{$}\NormalTok{GasEx_A}\OperatorTok{/}\NormalTok{df_random}\OperatorTok{$}\NormalTok{GasEx_A}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 0.5077033 0.4817455 0.5058961 0.4841447 0.4987591 0.5264801 0.5078803
+##  [8] 0.5046041 0.4974430 0.5000600 0.5108852 0.5293528
+\end{verbatim}
+
+最近有点忙，暂时记录下来，用这个函数实现批量处理其实很简单了，后面有时间再补充。
 
 \cleardoublepage
 
@@ -1406,7 +1508,7 @@ Obs & HHMMSS & FTime & EBal. & Photo & Cond & Ci & Trmmol & VpdL & CTleaf & Area
 
 \begin{table}
 
-\caption{\label{tab:unnamed-chunk-16}onepoint 法计算的结果}
+\caption{\label{tab:unnamed-chunk-22}onepoint 法计算的结果}
 \centering
 \begin{tabular}[t]{rrr}
 \toprule
@@ -1653,8 +1755,8 @@ C4 植物的 A-Ci 曲线的实现。
 
 \begin{figure}
 \centering
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-20-1.pdf}
-\caption{\label{fig:unnamed-chunk-20}C4 植物 A-Ci 作图}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-26-1.pdf}
+\caption{\label{fig:unnamed-chunk-26}C4 植物 A-Ci 作图}
 \end{figure}
 
 \cleardoublepage
@@ -3306,6 +3408,81 @@ IRGAs 极快的响应频率，使得短时间内的 A--Ci 的测量成为现实�
 \end{Shaded}
 
 批量分析同样使用向量化来进行，避免了循环，效率比较高，也可以将拟合结果 \texttt{coef} 中的 \(V_{cmax}\) 和 \(J_max\) 结果批量导入文件，参考 @\ref(imbycsv) 部分的代码。
+
+\cleardoublepage
+
+\hypertarget{racir-conifer}{%
+\section{\texorpdfstring{LI-6800 RACiR\texttrademark 簇状叶的测量与拟合}{LI-6800 RACiR簇状叶的测量与拟合}}\label{racir-conifer}}
+
+\citet{Coursolle12019} 测量了簇状叶黑云杉和香脂冷杉两种簇状叶植物的 RACiR，其中的试验方法和结论值得在测量时借鉴，测量方法上：
+
+\begin{itemize}
+\item
+  簇状叶室体积远大于荧光叶室和其他叶室，使用的 \(CO_2\) 的变化为： 15 min 内从 20 ppm 到 1520 ppm 的变化，即变化的速率为 \(100 ppm \cdot min^{-1}\)。但也测试了 200 - 800 ppm的部分曲线。
+\item
+  拟合使用了测量的 Rd，测量方法为：控制 reference 气路在 420 ppm 的 \(CO_2\) 和 22 \(mmol \cdot mol^{-1}\) 的 H\textsubscript{2}O 浓度，控制温度为 25 C，诱导后测量 Rd。
+\end{itemize}
+
+得到了一些有帮助的结论：
+
+\begin{itemize}
+\item
+  使用更大的叶室测量 RACiR 是可行的（36 \(cm^2\)），叶室环境的控制需要通过预实验来确定。
+\item
+  该实验使用的 ACi 曲线测量时间在 30 到 36 min，而 RACiR 使用的\textbf{完整的二氧化碳的浓度范围}时，曲线耗时最大的时间接近 22 min。但使用 200 - 800 ppm 范围的变化，则时间可以下降 50\%，\textbf{这些部分范围的测量则可以应用于植物胁迫和表型平台的研究}。
+\item
+  实验结果证明只要 match 的调整值保持不变即无需进行空叶室校准（也就是无需匹配的意思，实际的时间间隔取决于仪器的状态），但最新的 range match 功能可有效的增加空叶室校准的时间间隔（新功能，作者试验时尚未推出该功能）。
+\item
+  作者建议最好测量暗呼吸的速率，以获得最佳的 Vcmax 和 Jmax 计算结果。如果有第二台光合仪来测量则可有效的缩短测量时间。
+\end{itemize}
+
+\hypertarget{conifer-fit-racir}{%
+\subsection{数据的拟合}\label{conifer-fit-racir}}
+
+\hypertarget{name-files}{%
+\subsubsection{数据文件的命名}\label{name-files}}
+
+因为作者读取数据和修正数据都依赖于正则表达式，因此，所有文件的命名规则必须满足以下的要求：
+
+\begin{itemize}
+\item
+  空叶室校准的文件必须以 ``mpty'' 起始
+\item
+  RACiR 的文件必须以 ``fast'' 起始
+\item
+  常规 ACi 测量必须以 ``slow'' 起始
+\item
+  Rd 测量数据文件必须以 ``dark'' 起始
+\end{itemize}
+
+例如作者示例数据分别命名为：
+
+Empty\_2.xlsx，Fast.xlsx， Slow.xlsx， Dark.xksx，实际使用的正则表达式为:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pattern_empty       =}\StringTok{ "^(mpty)+.xls"}\NormalTok{,      }
+\NormalTok{pattern_rapidACi    =}\StringTok{ "^(fast)+.xls"}\NormalTok{,      }
+\NormalTok{pattern_standardACi =}\StringTok{ "^(slow)+.xls"}\NormalTok{,      }
+\NormalTok{pattern_dark        =}\StringTok{ "^(dark)+.xls"}\NormalTok{,}
+\end{Highlighting}
+\end{Shaded}
+
+如不满足要求，自然会出现错乱。准备好命名的数据文件之后，那么可以把他们放在一个文件夹内。
+
+\hypertarget{match-time}{%
+\subsubsection{匹配的问题}\label{match-time}}
+
+若进行了匹配，要重新开始空叶室校准，RapidACi 软件包采用的规则是，使用 Match 分组下的 time来区分，首先使用该时间和空叶室一致的 RACiR 数据配对校准，若无一致的数据，则选择该时间和 RACiR 测量相差最短的空叶室数据来校准 RACiR 数据。
+
+\hypertarget{conifer-racir-fit}{%
+\subsection{拟合过程}\label{conifer-racir-fit}}
+
+作何给出了详细的代码和数据，此处不再重复和演示，请参考：
+
+\href{https://github.com/ManuelLamothe/RapidACi}{github 演示}
+
+\href{https://www.frontiersin.org/articles/10.3389/fpls.2019.01276/full\#supplementary-material}{发表文章的附加材料}
 
 \cleardoublepage
 
@@ -6965,7 +7142,7 @@ LI-6800 增加了 ojip 曲线测量功能，本功能主要是针对测量数据
 
 \begin{table}
 
-\caption{\label{tab:unnamed-chunk-54}jiptest 批量导入数据后的样式}
+\caption{\label{tab:unnamed-chunk-60}jiptest 批量导入数据后的样式}
 \centering
 \begin{tabular}[t]{rrl}
 \toprule
@@ -6990,7 +7167,7 @@ SECS & FLUOR & SOURCE\\
 
 \begin{table}
 
-\caption{\label{tab:unnamed-chunk-55}jiptest DC 数据批量导入数据后的样式}
+\caption{\label{tab:unnamed-chunk-61}jiptest DC 数据批量导入数据后的样式}
 \centering
 \begin{tabular}[t]{rrl}
 \toprule
@@ -7412,8 +7589,8 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 ## loaded via a namespace (and not attached):
 ##  [1] tidyr_1.0.2          splines_3.6.3        assertthat_0.2.1    
 ##  [4] highr_0.8            ggstance_0.3.3       cellranger_1.1.0    
-##  [7] yaml_2.2.1           ggrepel_0.8.2        pillar_1.4.3        
-## [10] backports_1.1.5      lattice_0.20-40      glue_1.3.2          
+##  [7] ggrepel_0.8.2        yaml_2.2.1           pillar_1.4.3        
+## [10] backports_1.1.5      lattice_0.20-40      glue_1.4.0          
 ## [13] digest_0.6.25        ggsignif_0.6.0       RColorBrewer_1.1-2  
 ## [16] polyclip_1.10-0      MESS_0.5.6           colorspace_1.4-1    
 ## [19] htmltools_0.4.0      Matrix_1.2-18        pkgconfig_2.0.3     
@@ -7422,19 +7599,19 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 ## [28] mgcv_1.8-31          generics_0.0.2       farver_2.0.3        
 ## [31] ggpubr_0.2.5         ellipsis_0.3.0       withr_2.1.2         
 ## [34] geepack_1.3-1        lazyeval_0.2.2       cli_2.0.2           
-## [37] magrittr_1.5         crayon_1.3.4         readxl_1.3.1        
-## [40] evaluate_0.14        fansi_0.4.1          nlme_3.1-145        
-## [43] MASS_7.3-51.5        geeM_0.10.1          tools_3.6.3         
-## [46] hms_0.5.3            lifecycle_0.2.0      stringr_1.4.0       
-## [49] munsell_0.5.0        cluster_2.1.0        flashClust_1.01-2   
-## [52] compiler_3.6.3       rlang_0.4.5          grid_3.6.3          
-## [55] rstudioapi_0.11      leaps_3.1            mosaicCore_0.6.0    
-## [58] labeling_0.3         rmarkdown_2.1        gtable_0.3.0        
-## [61] rematch_1.0.1        R6_2.4.1             knitr_1.28          
-## [64] dplyr_0.8.5          ggformula_0.9.4      readr_1.3.1         
-## [67] stringi_1.4.6        Rcpp_1.0.4           vctrs_0.2.4         
-## [70] png_0.1-7            scatterplot3d_0.3-41 tidyselect_1.0.0    
-## [73] xfun_0.12
+## [37] XLConnect_1.0.1      magrittr_1.5         crayon_1.3.4        
+## [40] readxl_1.3.1         evaluate_0.14        fansi_0.4.1         
+## [43] nlme_3.1-145         MASS_7.3-51.5        geeM_0.10.1         
+## [46] tools_3.6.3          hms_0.5.3            lifecycle_0.2.0     
+## [49] stringr_1.4.0        munsell_0.5.0        cluster_2.1.0       
+## [52] flashClust_1.01-2    compiler_3.6.3       rlang_0.4.5         
+## [55] grid_3.6.3           rstudioapi_0.11      leaps_3.1           
+## [58] mosaicCore_0.6.0     labeling_0.3         rmarkdown_2.1       
+## [61] gtable_0.3.0         rematch_1.0.1        R6_2.4.1            
+## [64] knitr_1.28           dplyr_0.8.5          ggformula_0.9.4     
+## [67] readr_1.3.1          rJava_0.9-12         stringi_1.4.6       
+## [70] Rcpp_1.0.4           vctrs_0.2.4          png_0.1-7           
+## [73] scatterplot3d_0.3-41 tidyselect_1.0.0     xfun_0.12
 \end{verbatim}
 
 \cleardoublepage

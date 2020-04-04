@@ -892,14 +892,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb24-2" title="2">area &lt;-<span class="st"> </span><span class="dv">6</span> <span class="op">-</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">32</span>, <span class="dv">1</span>, <span class="dv">3</span>)</a>
 <a class="sourceLine" id="cb24-3" title="3">y1 &lt;-<span class="st"> </span><span class="kw">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>,  <span class="dt">header_line =</span> <span class="dv">17</span>, <span class="dt">data_start =</span> <span class="dv">27</span>, <span class="dt">S =</span> area, <span class="dt">K =</span> <span class="fl">0.5</span>)</a>
 <a class="sourceLine" id="cb24-4" title="4">y1<span class="op">$</span>Photo<span class="op">/</span>x1<span class="op">$</span>Photo</a></code></pre></div>
-<pre><code>##  [1] 1.391530 1.300066 1.778989 1.232339 1.275513 1.221627 1.331827 1.335974
-##  [9] 1.799579 1.808033 1.876204 1.269595 1.759601 1.372548 1.365046 1.484378
-## [17] 1.924951 1.296181 1.291073 1.376518 1.253367 1.334027 1.672919 1.559085
-## [25] 1.212756 1.380601 1.674233 1.633686 1.605242 1.438113 1.981888 1.244032</code></pre>
+<pre><code>##  [1] 1.364672 1.302444 1.205274 1.667535 1.959896 1.302635 1.233587 1.318641
+##  [9] 1.355728 1.277702 1.800883 1.243768 1.377832 1.250130 1.825049 1.739262
+## [17] 1.894221 1.244776 1.704711 1.720894 1.320633 1.406478 1.443351 1.334086
+## [25] 1.751754 1.425455 1.332081 1.525219 1.852634 1.639120 1.977129 1.335381</code></pre>
 <p>我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.</p>
 </div>
 <div id="recompute6800" class="section level3">
 <h3><span class="header-section-number">2.4.2</span> LI-6800 数据重计算</h3>
+<div id="raw-batch-68" class="section level4">
+<h4><span class="header-section-number">2.4.2.1</span> 原始数据的批量计算</h4>
 <p>参数的重计算函数为 <code>recomp_6800</code>, 其参数除了 <code>read_bat_6800</code> 所包含的参数外，还有叶面积 S, 以及叶片正反面的气孔比例，默认值分别为 6 和 0.5。</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="kw">library</span>(readphoto)</a>
 <a class="sourceLine" id="cb26-2" title="2">x3 &lt;-<span class="st"> </span><span class="kw">read_bat_6800</span>(<span class="st">&quot;./data/6800&quot;</span>)</a>
@@ -954,13 +956,61 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## Warning: Missing column names filled in: &#39;X125&#39; [125]</code></pre>
 <pre><code>## Warning: Duplicated column names deduplicated: &#39;TIME&#39; =&gt; &#39;TIME_1&#39; [69]</code></pre>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1">y3<span class="op">$</span>A<span class="op">/</span>x3<span class="op">$</span>A</a></code></pre></div>
-<pre><code>##  [1] 1.305639 1.446891 1.565486 1.313189 1.387567 1.983716 1.439159 1.815126
-##  [9] 1.376899 1.398499 1.667261 1.806708 1.513520 1.322839 1.269590 1.407295
-## [17] 1.513412 1.752906 1.362159 1.654945 1.314866 1.298429 1.701306 1.435539
-## [25] 1.732490 1.733321 1.579413 1.319848</code></pre>
+<pre><code>##  [1] 1.489841 1.781897 1.705297 1.337913 1.373227 1.561936 1.379936 1.264659
+##  [9] 1.933524 1.234934 1.486595 1.882383 1.352456 1.358280 1.565262 1.474126
+## [17] 1.614671 1.220038 1.425373 1.286758 1.564789 1.418722 1.585829 1.535494
+## [25] 1.486491 1.424112 1.464673 1.907664</code></pre>
 <p>测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。</p>
+</div>
+<div id="excel-recompute-68" class="section level4">
+<h4><span class="header-section-number">2.4.2.2</span> Excel 格式的重计算</h4>
+<p>偶然发现了 <code>XLConnect</code> 软件包的一个功能（以前知道这个软件包，但忽视了），那就是直接读取 LI-6800 Excel 格式的数据并重计算，我将其写成了函数，放在了我的 <code>readphoto</code> 软件包里，软件包的安装：</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" title="1">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;zhujiedong/readphoto&quot;</span>)</a></code></pre></div>
+<p>当然，最近连我自己安装 github 的软件包都经常出问题，如果大家同样遇到问题，可以按照下面的方式安装：</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1">remotes<span class="op">::</span><span class="kw">install_git</span>(<span class="st">&quot;https://gitee.com/zhu_jie_dong/readphoto&quot;</span>)</a></code></pre></div>
+<p>函数的源代码其实很简单：</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1"><span class="cf">function</span> (path, <span class="dt">start_row =</span> <span class="dv">17</span>, <span class="dt">S =</span> <span class="dv">6</span>) </a>
+<a class="sourceLine" id="cb65-2" title="2">{</a>
+<a class="sourceLine" id="cb65-3" title="3">    wb &lt;-<span class="st"> </span>XLConnect<span class="op">::</span><span class="kw">loadWorkbook</span>(path)</a>
+<a class="sourceLine" id="cb65-4" title="4">    group_name &lt;-<span class="st"> </span>XLConnect<span class="op">::</span><span class="kw">readWorksheet</span>(wb, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">startRow =</span> start_row <span class="op">-</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb65-5" title="5"><span class="st">        </span><span class="dv">3</span>, <span class="dt">endRow =</span> start_row <span class="op">-</span><span class="st"> </span><span class="dv">3</span>, <span class="dt">header =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb65-6" title="6">    header_name &lt;-<span class="st"> </span>XLConnect<span class="op">::</span><span class="kw">readWorksheet</span>(wb, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">startRow =</span> start_row <span class="op">-</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb65-7" title="7"><span class="st">        </span><span class="dv">2</span>, <span class="dt">endRow =</span> start_row <span class="op">-</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">header =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb65-8" title="8">    new_name &lt;-<span class="st"> </span><span class="kw">paste0</span>(group_name, <span class="st">&quot;_&quot;</span>, header_name)</a>
+<a class="sourceLine" id="cb65-9" title="9">    XLConnect<span class="op">::</span><span class="kw">writeWorksheet</span>(wb, <span class="dt">data =</span> S, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">startRow =</span> <span class="dv">17</span>, </a>
+<a class="sourceLine" id="cb65-10" title="10">        <span class="dt">startCol =</span> <span class="kw">which</span>(new_name <span class="op">==</span><span class="st"> &quot;Const_S&quot;</span>), <span class="dt">header =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb65-11" title="11">    df &lt;-<span class="st"> </span>XLConnect<span class="op">::</span><span class="kw">readWorksheet</span>(wb, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">startRow =</span> <span class="dv">17</span>, </a>
+<a class="sourceLine" id="cb65-12" title="12">        <span class="dt">header =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb65-13" title="13">    <span class="kw">names</span>(df) &lt;-<span class="st"> </span>new_name</a>
+<a class="sourceLine" id="cb65-14" title="14">    df</a>
+<a class="sourceLine" id="cb65-15" title="15">}</a></code></pre></div>
+<p>其中：</p>
+<ul>
+<li><p>path 是 Excel 文件的路径；</p></li>
+<li><p>start_row 是数据开始的行号；</p></li>
+<li><p>S 为修改的叶面积，默认值为 6，如果叶面积无需更改，必须输入单个的值，也就是真正的叶面积，如果使用 aperture 更改了面积，且叶片能够充满叶室，比方说是 2 cm<sup>2</sup>，该值必须输入一个长度和测量值数量完全一致的向量，例如有 3 个测量值，我们输入 <code>S= rep(2,3)</code>，有的没有充满叶室，有的充满叶室，该值也必须输入一个长度和测量值数量完全一致的向量，例如，一共有三个测量值，只有第一个叶片没充满叶室，面积为 1.5，则输入方式为 <code>S = c(1.5, 2, 2)</code>。</p></li>
+<li><p>另外，为避免出现 LI-6800 名字重复的警告，我将他们的名字合并为 分组名+表头的形式，例如 A 改为 GasEx_A</p></li>
+</ul>
+<p>我们直接使用下面的例子解释，导入的数据是 6 cm<sup>2</sup> 的默认面积：</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1"><span class="kw">library</span>(readphoto)</a>
+<a class="sourceLine" id="cb66-2" title="2"></a>
+<a class="sourceLine" id="cb66-3" title="3">df6 &lt;-<span class="st"> </span><span class="kw">xlconnect_read</span>(<span class="st">&quot;./data/aci-xlc.xlsx&quot;</span>)</a>
+<a class="sourceLine" id="cb66-4" title="4">df6<span class="op">$</span>GasEx_A</a></code></pre></div>
+<pre><code>##  [1] 24.7381184 18.1379358 10.8055345  3.0239340 -0.9144044 26.9519572
+##  [7] 27.5088717 40.9101889 50.1393342 55.3865984 58.0662751 59.3556428</code></pre>
+<p>将面积改为 3 cm<sup>2</sup></p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1">df3 &lt;-<span class="st"> </span><span class="kw">xlconnect_read</span>(<span class="st">&quot;./data/aci-xlc.xlsx&quot;</span>, <span class="dt">S =</span> <span class="kw">rep</span>(<span class="dv">3</span>, <span class="dv">12</span>))</a>
+<a class="sourceLine" id="cb68-2" title="2">df6<span class="op">$</span>GasEx_A<span class="op">/</span>df3<span class="op">$</span>GasEx_A</a></code></pre></div>
+<pre><code>##  [1] 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</code></pre>
+<p>模拟 12 个不同的叶面积，均值为 3，方差为 0.1</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1">df_random &lt;-<span class="st"> </span><span class="kw">xlconnect_read</span>(<span class="st">&quot;./data/aci-xlc.xlsx&quot;</span>, <span class="dt">S =</span> <span class="kw">rnorm</span>(<span class="dv">12</span>, <span class="dv">3</span>, <span class="fl">0.1</span>))</a>
+<a class="sourceLine" id="cb70-2" title="2">df6<span class="op">$</span>GasEx_A<span class="op">/</span>df_random<span class="op">$</span>GasEx_A</a></code></pre></div>
+<pre><code>##  [1] 0.5160080 0.5107847 0.5003737 0.5052279 0.4765366 0.5150570 0.4965376
+##  [8] 0.4909273 0.5148861 0.4622352 0.5052789 0.5100504</code></pre>
+<p>最近有点忙，暂时记录下来，用这个函数实现批量处理其实很简单了，后面有时间再补充。</p>
 
 
+</div>
 </div>
 </div>
 </div>

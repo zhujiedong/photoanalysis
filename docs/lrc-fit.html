@@ -312,82 +312,82 @@ P_{nmax}= AQE \times I_{sat} - R_{d}
 <div id="rec_fit" class="section level3">
 <h3><span class="header-section-number">8.1.1</span> 直角双曲线模型的实现</h3>
 <p>若没有安装 <code>minpack.lm</code>, 则需要首先：</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;minpack.lm&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;minpack.lm&quot;</span>)</a></code></pre></div>
 <p>具体实现过程如下：</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" title="1"><span class="co"># 调用非线性拟合包minpack.lm，也可以直接使用nls</span></a>
-<a class="sourceLine" id="cb105-2" title="2"><span class="kw">library</span>(minpack.lm)</a>
-<a class="sourceLine" id="cb105-3" title="3"><span class="co"># 读取数据，同fitaci数据格式</span></a>
-<a class="sourceLine" id="cb105-4" title="4">lrc &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/lrc.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb105-5" title="5">lrc &lt;-<span class="st"> </span><span class="kw">subset</span>(lrc, Obs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb105-6" title="6"></a>
-<a class="sourceLine" id="cb105-7" title="7"><span class="co"># 光响应曲线没有太多参数，</span></a>
-<a class="sourceLine" id="cb105-8" title="8"><span class="co"># 直接调出相应的光强和光合速率</span></a>
-<a class="sourceLine" id="cb105-9" title="9"><span class="co"># 方便后面调用</span></a>
-<a class="sourceLine" id="cb105-10" title="10">lrc_Q &lt;-<span class="st"> </span>lrc<span class="op">$</span>PARi</a>
-<a class="sourceLine" id="cb105-11" title="11">lrc_A &lt;-<span class="st"> </span>lrc<span class="op">$</span>Photo </a>
-<a class="sourceLine" id="cb105-12" title="12"></a>
-<a class="sourceLine" id="cb105-13" title="13"><span class="co"># 采用非线性拟合进行数据的拟合</span></a>
-<a class="sourceLine" id="cb105-14" title="14">lrcnls &lt;-<span class="st"> </span><span class="kw">nlsLM</span>(lrc_A <span class="op">~</span><span class="st"> </span>(alpha <span class="op">*</span><span class="st"> </span>lrc_Q <span class="op">*</span><span class="st"> </span>Am) <span class="op">*</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb105-15" title="15"><span class="st">                </span>(<span class="dv">1</span><span class="op">/</span>(alpha <span class="op">*</span><span class="st"> </span>lrc_Q <span class="op">+</span><span class="st"> </span>Am)) <span class="op">-</span><span class="st"> </span>Rd,  </a>
-<a class="sourceLine" id="cb105-16" title="16">              <span class="dt">start=</span><span class="kw">list</span>(<span class="dt">Am=</span>(<span class="kw">max</span>(lrc_A)<span class="op">-</span><span class="kw">min</span>(lrc_A)),</a>
-<a class="sourceLine" id="cb105-17" title="17">              <span class="dt">alpha=</span><span class="fl">0.05</span>,<span class="dt">Rd=</span><span class="op">-</span><span class="kw">min</span>(lrc_A))</a>
-<a class="sourceLine" id="cb105-18" title="18">)</a>
-<a class="sourceLine" id="cb105-19" title="19">fitlrc_rec &lt;-<span class="st"> </span><span class="kw">summary</span>(lrcnls)</a>
-<a class="sourceLine" id="cb105-20" title="20"></a>
-<a class="sourceLine" id="cb105-21" title="21"><span class="co"># 补偿点时净光合速率为0，</span></a>
-<a class="sourceLine" id="cb105-22" title="22"><span class="co"># 据此利用uniroot求解方程的根</span></a>
-<a class="sourceLine" id="cb105-23" title="23">Ic &lt;-<span class="st"> </span><span class="cf">function</span>(Ic){(fitlrc_rec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>Ic <span class="op">*</span></a>
-<a class="sourceLine" id="cb105-24" title="24"><span class="st">    </span>fitlrc_rec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>]) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span><span class="op">/</span>(fitlrc_rec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb105-25" title="25"><span class="st">    </span>Ic <span class="op">+</span><span class="st"> </span>fitlrc_rec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>])) <span class="op">-</span><span class="st"> </span>fitlrc_rec<span class="op">$</span>coef[<span class="dv">3</span>,<span class="dv">1</span>] </a>
-<a class="sourceLine" id="cb105-26" title="26">}</a>
-<a class="sourceLine" id="cb105-27" title="27"></a>
-<a class="sourceLine" id="cb105-28" title="28"><span class="kw">uniroot</span>(Ic, <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">50</span>))<span class="op">$</span>root</a></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" title="1"><span class="co"># 调用非线性拟合包minpack.lm，也可以直接使用nls</span></a>
+<a class="sourceLine" id="cb114-2" title="2"><span class="kw">library</span>(minpack.lm)</a>
+<a class="sourceLine" id="cb114-3" title="3"><span class="co"># 读取数据，同fitaci数据格式</span></a>
+<a class="sourceLine" id="cb114-4" title="4">lrc &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/lrc.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb114-5" title="5">lrc &lt;-<span class="st"> </span><span class="kw">subset</span>(lrc, Obs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb114-6" title="6"></a>
+<a class="sourceLine" id="cb114-7" title="7"><span class="co"># 光响应曲线没有太多参数，</span></a>
+<a class="sourceLine" id="cb114-8" title="8"><span class="co"># 直接调出相应的光强和光合速率</span></a>
+<a class="sourceLine" id="cb114-9" title="9"><span class="co"># 方便后面调用</span></a>
+<a class="sourceLine" id="cb114-10" title="10">lrc_Q &lt;-<span class="st"> </span>lrc<span class="op">$</span>PARi</a>
+<a class="sourceLine" id="cb114-11" title="11">lrc_A &lt;-<span class="st"> </span>lrc<span class="op">$</span>Photo </a>
+<a class="sourceLine" id="cb114-12" title="12"></a>
+<a class="sourceLine" id="cb114-13" title="13"><span class="co"># 采用非线性拟合进行数据的拟合</span></a>
+<a class="sourceLine" id="cb114-14" title="14">lrcnls &lt;-<span class="st"> </span><span class="kw">nlsLM</span>(lrc_A <span class="op">~</span><span class="st"> </span>(alpha <span class="op">*</span><span class="st"> </span>lrc_Q <span class="op">*</span><span class="st"> </span>Am) <span class="op">*</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb114-15" title="15"><span class="st">                </span>(<span class="dv">1</span><span class="op">/</span>(alpha <span class="op">*</span><span class="st"> </span>lrc_Q <span class="op">+</span><span class="st"> </span>Am)) <span class="op">-</span><span class="st"> </span>Rd,  </a>
+<a class="sourceLine" id="cb114-16" title="16">              <span class="dt">start=</span><span class="kw">list</span>(<span class="dt">Am=</span>(<span class="kw">max</span>(lrc_A)<span class="op">-</span><span class="kw">min</span>(lrc_A)),</a>
+<a class="sourceLine" id="cb114-17" title="17">              <span class="dt">alpha=</span><span class="fl">0.05</span>,<span class="dt">Rd=</span><span class="op">-</span><span class="kw">min</span>(lrc_A))</a>
+<a class="sourceLine" id="cb114-18" title="18">)</a>
+<a class="sourceLine" id="cb114-19" title="19">fitlrc_rec &lt;-<span class="st"> </span><span class="kw">summary</span>(lrcnls)</a>
+<a class="sourceLine" id="cb114-20" title="20"></a>
+<a class="sourceLine" id="cb114-21" title="21"><span class="co"># 补偿点时净光合速率为0，</span></a>
+<a class="sourceLine" id="cb114-22" title="22"><span class="co"># 据此利用uniroot求解方程的根</span></a>
+<a class="sourceLine" id="cb114-23" title="23">Ic &lt;-<span class="st"> </span><span class="cf">function</span>(Ic){(fitlrc_rec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>Ic <span class="op">*</span></a>
+<a class="sourceLine" id="cb114-24" title="24"><span class="st">    </span>fitlrc_rec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>]) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span><span class="op">/</span>(fitlrc_rec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb114-25" title="25"><span class="st">    </span>Ic <span class="op">+</span><span class="st"> </span>fitlrc_rec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>])) <span class="op">-</span><span class="st"> </span>fitlrc_rec<span class="op">$</span>coef[<span class="dv">3</span>,<span class="dv">1</span>] </a>
+<a class="sourceLine" id="cb114-26" title="26">}</a>
+<a class="sourceLine" id="cb114-27" title="27"></a>
+<a class="sourceLine" id="cb114-28" title="28"><span class="kw">uniroot</span>(Ic, <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">50</span>))<span class="op">$</span>root</a></code></pre></div>
 <pre><code>## [1] 3.650053</code></pre>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" title="1"><span class="co"># 根据饱和点定义，0.75最大光合速率为饱和点，</span></a>
-<a class="sourceLine" id="cb107-2" title="2"><span class="co"># 也可以是其他比例</span></a>
-<a class="sourceLine" id="cb107-3" title="3"><span class="co"># 据此利用uniroot求解方程的根</span></a>
-<a class="sourceLine" id="cb107-4" title="4"></a>
-<a class="sourceLine" id="cb107-5" title="5">Isat &lt;-<span class="st"> </span><span class="cf">function</span>(Isat){(fitlrc_rec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb107-6" title="6"><span class="st">        </span>Isat <span class="op">*</span><span class="st"> </span>fitlrc_rec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>]) <span class="op">*</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb107-7" title="7"><span class="st">    </span>(<span class="dv">1</span><span class="op">/</span>(fitlrc_rec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>Isat <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb107-8" title="8"><span class="st">          </span>fitlrc_rec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>])) <span class="op">-</span><span class="st"> </span>fitlrc_rec<span class="op">$</span>coef[<span class="dv">3</span>,<span class="dv">1</span>] <span class="op">-</span></a>
-<a class="sourceLine" id="cb107-9" title="9"><span class="st">    </span><span class="fl">0.75</span> <span class="op">*</span><span class="st"> </span>fitlrc_rec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb107-10" title="10">}</a>
-<a class="sourceLine" id="cb107-11" title="11"><span class="co"># 求值区间根据具体实验确定</span></a>
-<a class="sourceLine" id="cb107-12" title="12"></a>
-<a class="sourceLine" id="cb107-13" title="13"><span class="kw">uniroot</span>(Isat, <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2500</span>))<span class="op">$</span>root</a></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb116-1" title="1"><span class="co"># 根据饱和点定义，0.75最大光合速率为饱和点，</span></a>
+<a class="sourceLine" id="cb116-2" title="2"><span class="co"># 也可以是其他比例</span></a>
+<a class="sourceLine" id="cb116-3" title="3"><span class="co"># 据此利用uniroot求解方程的根</span></a>
+<a class="sourceLine" id="cb116-4" title="4"></a>
+<a class="sourceLine" id="cb116-5" title="5">Isat &lt;-<span class="st"> </span><span class="cf">function</span>(Isat){(fitlrc_rec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb116-6" title="6"><span class="st">        </span>Isat <span class="op">*</span><span class="st"> </span>fitlrc_rec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>]) <span class="op">*</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb116-7" title="7"><span class="st">    </span>(<span class="dv">1</span><span class="op">/</span>(fitlrc_rec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>Isat <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb116-8" title="8"><span class="st">          </span>fitlrc_rec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>])) <span class="op">-</span><span class="st"> </span>fitlrc_rec<span class="op">$</span>coef[<span class="dv">3</span>,<span class="dv">1</span>] <span class="op">-</span></a>
+<a class="sourceLine" id="cb116-9" title="9"><span class="st">    </span><span class="fl">0.75</span> <span class="op">*</span><span class="st"> </span>fitlrc_rec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb116-10" title="10">}</a>
+<a class="sourceLine" id="cb116-11" title="11"><span class="co"># 求值区间根据具体实验确定</span></a>
+<a class="sourceLine" id="cb116-12" title="12"></a>
+<a class="sourceLine" id="cb116-13" title="13"><span class="kw">uniroot</span>(Isat, <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2500</span>))<span class="op">$</span>root</a></code></pre></div>
 <pre><code>## [1] 700.0946</code></pre>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" title="1"><span class="co"># 使用ggplot2进行作图并拟合曲线</span></a>
-<a class="sourceLine" id="cb109-2" title="2"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb109-3" title="3"></a>
-<a class="sourceLine" id="cb109-4" title="4">light &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">lrc_Q =</span> lrc<span class="op">$</span>PARi, <span class="dt">lrc_A =</span> lrc<span class="op">$</span>Photo)</a>
-<a class="sourceLine" id="cb109-5" title="5"></a>
-<a class="sourceLine" id="cb109-6" title="6">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(light, <span class="kw">aes</span>(<span class="dt">x =</span> lrc_Q, <span class="dt">y =</span> lrc_A))</a>
-<a class="sourceLine" id="cb109-7" title="7"></a>
-<a class="sourceLine" id="cb109-8" title="8">p1 &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">16</span>, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">color =</span> <span class="st">&quot;green&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb109-9" title="9"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;nls&quot;</span>, <span class="dt">formula =</span> y <span class="op">~</span><span class="st"> </span>(alpha <span class="op">*</span><span class="st"> </span>x <span class="op">*</span><span class="st"> </span>Am) <span class="op">*</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb109-10" title="10"><span class="st">  </span>(<span class="dv">1</span><span class="op">/</span>(alpha <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>Am)) <span class="op">-</span><span class="st"> </span>Rd, <span class="dt">se =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb109-11" title="11">  <span class="dt">method.args =</span> </a>
-<a class="sourceLine" id="cb109-12" title="12">  <span class="kw">list</span>(<span class="dt">start =</span> <span class="kw">c</span>(<span class="dt">Am=</span>(<span class="kw">max</span>(lrc_A)<span class="op">-</span><span class="kw">min</span>(lrc_A)),</a>
-<a class="sourceLine" id="cb109-13" title="13">  <span class="dt">alpha=</span><span class="fl">0.05</span>,<span class="dt">Rd=</span><span class="op">-</span><span class="kw">min</span>(lrc_A)), </a>
-<a class="sourceLine" id="cb109-14" title="14">  <span class="kw">aes</span>(<span class="dt">x =</span>lrc_Q, <span class="dt">y =</span> lrc_A, <span class="dt">color=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">size =</span> <span class="fl">1.2</span>))</a>
-<a class="sourceLine" id="cb109-15" title="15">  ) <span class="op">+</span></a>
-<a class="sourceLine" id="cb109-16" title="16"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;photosynthetic rate  &quot;</span>, </a>
-<a class="sourceLine" id="cb109-17" title="17">       <span class="st">&quot;(&quot;</span>, mu, mol<span class="op">%.%</span>m<span class="op">^-</span><span class="dv">2</span><span class="op">%.%</span>s<span class="op">^-</span><span class="dv">1</span>, <span class="st">&quot;)&quot;</span>)), </a>
-<a class="sourceLine" id="cb109-18" title="18">       <span class="dt">x=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;PAR &quot;</span>, </a>
-<a class="sourceLine" id="cb109-19" title="19">       <span class="st">&quot;(&quot;</span>, mu, mol<span class="op">%.%</span>m<span class="op">^-</span><span class="dv">2</span><span class="op">%.%</span>s<span class="op">^-</span><span class="dv">1</span>, <span class="st">&quot;)&quot;</span>))</a>
-<a class="sourceLine" id="cb109-20" title="20">       )</a>
-<a class="sourceLine" id="cb109-21" title="21"></a>
-<a class="sourceLine" id="cb109-22" title="22"></a>
-<a class="sourceLine" id="cb109-23" title="23"><span class="co"># 自定义坐标轴</span></a>
-<a class="sourceLine" id="cb109-24" title="24">p1 <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">2100</span>, <span class="dt">by =</span> <span class="dv">200</span>)) <span class="op">+</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb109-25" title="25"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span> <span class="kw">round</span>(light<span class="op">$</span>lrc_A)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb109-26" title="26"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x  =</span> <span class="kw">element_text</span>(</a>
-<a class="sourceLine" id="cb109-27" title="27">    <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">angle=</span><span class="dv">30</span>, <span class="dt">vjust=</span><span class="fl">0.5</span>), </a>
-<a class="sourceLine" id="cb109-28" title="28">    <span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb109-29" title="29">    <span class="dt">axis.title.x =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&#39;bold&#39;</span>),</a>
-<a class="sourceLine" id="cb109-30" title="30">    <span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&#39;bold&#39;</span>)</a>
-<a class="sourceLine" id="cb109-31" title="31">  )</a></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" title="1"><span class="co"># 使用ggplot2进行作图并拟合曲线</span></a>
+<a class="sourceLine" id="cb118-2" title="2"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb118-3" title="3"></a>
+<a class="sourceLine" id="cb118-4" title="4">light &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">lrc_Q =</span> lrc<span class="op">$</span>PARi, <span class="dt">lrc_A =</span> lrc<span class="op">$</span>Photo)</a>
+<a class="sourceLine" id="cb118-5" title="5"></a>
+<a class="sourceLine" id="cb118-6" title="6">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(light, <span class="kw">aes</span>(<span class="dt">x =</span> lrc_Q, <span class="dt">y =</span> lrc_A))</a>
+<a class="sourceLine" id="cb118-7" title="7"></a>
+<a class="sourceLine" id="cb118-8" title="8">p1 &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">16</span>, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">color =</span> <span class="st">&quot;green&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb118-9" title="9"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;nls&quot;</span>, <span class="dt">formula =</span> y <span class="op">~</span><span class="st"> </span>(alpha <span class="op">*</span><span class="st"> </span>x <span class="op">*</span><span class="st"> </span>Am) <span class="op">*</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb118-10" title="10"><span class="st">  </span>(<span class="dv">1</span><span class="op">/</span>(alpha <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>Am)) <span class="op">-</span><span class="st"> </span>Rd, <span class="dt">se =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb118-11" title="11">  <span class="dt">method.args =</span> </a>
+<a class="sourceLine" id="cb118-12" title="12">  <span class="kw">list</span>(<span class="dt">start =</span> <span class="kw">c</span>(<span class="dt">Am=</span>(<span class="kw">max</span>(lrc_A)<span class="op">-</span><span class="kw">min</span>(lrc_A)),</a>
+<a class="sourceLine" id="cb118-13" title="13">  <span class="dt">alpha=</span><span class="fl">0.05</span>,<span class="dt">Rd=</span><span class="op">-</span><span class="kw">min</span>(lrc_A)), </a>
+<a class="sourceLine" id="cb118-14" title="14">  <span class="kw">aes</span>(<span class="dt">x =</span>lrc_Q, <span class="dt">y =</span> lrc_A, <span class="dt">color=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">size =</span> <span class="fl">1.2</span>))</a>
+<a class="sourceLine" id="cb118-15" title="15">  ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb118-16" title="16"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;photosynthetic rate  &quot;</span>, </a>
+<a class="sourceLine" id="cb118-17" title="17">       <span class="st">&quot;(&quot;</span>, mu, mol<span class="op">%.%</span>m<span class="op">^-</span><span class="dv">2</span><span class="op">%.%</span>s<span class="op">^-</span><span class="dv">1</span>, <span class="st">&quot;)&quot;</span>)), </a>
+<a class="sourceLine" id="cb118-18" title="18">       <span class="dt">x=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;PAR &quot;</span>, </a>
+<a class="sourceLine" id="cb118-19" title="19">       <span class="st">&quot;(&quot;</span>, mu, mol<span class="op">%.%</span>m<span class="op">^-</span><span class="dv">2</span><span class="op">%.%</span>s<span class="op">^-</span><span class="dv">1</span>, <span class="st">&quot;)&quot;</span>))</a>
+<a class="sourceLine" id="cb118-20" title="20">       )</a>
+<a class="sourceLine" id="cb118-21" title="21"></a>
+<a class="sourceLine" id="cb118-22" title="22"></a>
+<a class="sourceLine" id="cb118-23" title="23"><span class="co"># 自定义坐标轴</span></a>
+<a class="sourceLine" id="cb118-24" title="24">p1 <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">2100</span>, <span class="dt">by =</span> <span class="dv">200</span>)) <span class="op">+</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb118-25" title="25"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span> <span class="kw">round</span>(light<span class="op">$</span>lrc_A)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb118-26" title="26"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x  =</span> <span class="kw">element_text</span>(</a>
+<a class="sourceLine" id="cb118-27" title="27">    <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">angle=</span><span class="dv">30</span>, <span class="dt">vjust=</span><span class="fl">0.5</span>), </a>
+<a class="sourceLine" id="cb118-28" title="28">    <span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb118-29" title="29">    <span class="dt">axis.title.x =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&#39;bold&#39;</span>),</a>
+<a class="sourceLine" id="cb118-30" title="30">    <span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&#39;bold&#39;</span>)</a>
+<a class="sourceLine" id="cb118-31" title="31">  )</a></code></pre></div>
 <div class="figure"><span id="fig:recr"></span>
 <img src="bookdown_files/figure-html/recr-1.png" alt="直角双曲线模型拟合" width="672" />
 <p class="caption">
@@ -451,79 +451,79 @@ P_{n} = \frac{\alpha I + P_{nmax} \sqrt{(\alpha I + P_{nmax})^{2} - 4  \theta \a
 <p>其中，<span class="math inline">\(\theta\)</span> 为表示曲线弯曲程度的曲角参数，取值为<span class="math inline">\(0\leq \theta \leq 1\)</span>。其他参数意义同式 <a href="lrc-fit.html#eq:rec">(8.1)</a>。同样如同直角双曲线模型，式仍然没有极值，无法求得 <span class="math inline">\(I_{sat}\)</span>，可以仍然参考直角双曲线模型的方式进行计算。</p>
 <div id="nonrec_mode_exam" class="section level3">
 <h3><span class="header-section-number">8.2.1</span> 非直角双曲线模型的实现</h3>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" title="1"><span class="kw">library</span>(minpack.lm)</a>
-<a class="sourceLine" id="cb110-2" title="2"></a>
-<a class="sourceLine" id="cb110-3" title="3"><span class="co"># 读取数据，同fitaci数据格式</span></a>
-<a class="sourceLine" id="cb110-4" title="4">lrc &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/lrc.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb110-5" title="5">lrc &lt;-<span class="st"> </span><span class="kw">subset</span>(lrc, Obs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb110-6" title="6"></a>
-<a class="sourceLine" id="cb110-7" title="7"><span class="co"># 光响应曲线没有太多参数，</span></a>
-<a class="sourceLine" id="cb110-8" title="8"><span class="co"># 直接调出相应的光强和光合速率</span></a>
-<a class="sourceLine" id="cb110-9" title="9"><span class="co"># 方便后面调用</span></a>
-<a class="sourceLine" id="cb110-10" title="10">lrc_Q &lt;-<span class="st"> </span>lrc<span class="op">$</span>PARi</a>
-<a class="sourceLine" id="cb110-11" title="11">lrc_A &lt;-<span class="st"> </span>lrc<span class="op">$</span>Photo </a>
-<a class="sourceLine" id="cb110-12" title="12"></a>
-<a class="sourceLine" id="cb110-13" title="13"><span class="co"># 非直角双曲线模型的拟合</span></a>
-<a class="sourceLine" id="cb110-14" title="14">lrcnls &lt;-<span class="st"> </span><span class="kw">nlsLM</span>(lrc_A <span class="op">~</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb110-15" title="15"><span class="st">                </span>(<span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>theta))<span class="op">*</span></a>
-<a class="sourceLine" id="cb110-16" title="16"><span class="st">                </span>(alpha<span class="op">*</span>lrc_Q<span class="op">+</span>Am<span class="op">-</span><span class="kw">sqrt</span>((alpha<span class="op">*</span>lrc_Q<span class="op">+</span>Am)<span class="op">^</span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb110-17" title="17"><span class="st">                </span><span class="dv">4</span><span class="op">*</span>alpha<span class="op">*</span>theta<span class="op">*</span>Am<span class="op">*</span>lrc_Q))<span class="op">-</span><span class="st"> </span>Rd,</a>
-<a class="sourceLine" id="cb110-18" title="18">                <span class="dt">start=</span><span class="kw">list</span>(<span class="dt">Am=</span>(<span class="kw">max</span>(lrc_A)<span class="op">-</span><span class="kw">min</span>(lrc_A)),</a>
-<a class="sourceLine" id="cb110-19" title="19">                <span class="dt">alpha=</span><span class="fl">0.05</span>,<span class="dt">Rd=</span><span class="op">-</span><span class="kw">min</span>(lrc_A),<span class="dt">theta=</span><span class="dv">1</span>)) </a>
-<a class="sourceLine" id="cb110-20" title="20"></a>
-<a class="sourceLine" id="cb110-21" title="21">fitlrc_nrec &lt;-<span class="st"> </span><span class="kw">summary</span>(lrcnls)</a>
-<a class="sourceLine" id="cb110-22" title="22"></a>
-<a class="sourceLine" id="cb110-23" title="23"><span class="co"># 光补偿点</span></a>
-<a class="sourceLine" id="cb110-24" title="24">Ic &lt;-<span class="st"> </span><span class="cf">function</span>(Ic){</a>
-<a class="sourceLine" id="cb110-25" title="25">  (<span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">4</span>,<span class="dv">1</span>])) <span class="op">*</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb110-26" title="26"><span class="st">    </span>(fitlrc_nrec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>Ic <span class="op">+</span><span class="st"> </span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb110-27" title="27"><span class="st">    </span><span class="kw">sqrt</span>((fitlrc_nrec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>Ic <span class="op">+</span><span class="st"> </span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb110-28" title="28">    )<span class="op">^</span><span class="dv">2</span> <span class="op">-</span><span class="st">  </span><span class="dv">4</span> <span class="op">*</span><span class="st"> </span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb110-29" title="29"><span class="st">    </span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">4</span>,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>Ic)) <span class="op">-</span></a>
-<a class="sourceLine" id="cb110-30" title="30"><span class="st">    </span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">3</span>,<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb110-31" title="31">}</a>
-<a class="sourceLine" id="cb110-32" title="32"></a>
-<a class="sourceLine" id="cb110-33" title="33"><span class="kw">uniroot</span>(Ic, <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">50</span>))<span class="op">$</span>root  </a></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" title="1"><span class="kw">library</span>(minpack.lm)</a>
+<a class="sourceLine" id="cb119-2" title="2"></a>
+<a class="sourceLine" id="cb119-3" title="3"><span class="co"># 读取数据，同fitaci数据格式</span></a>
+<a class="sourceLine" id="cb119-4" title="4">lrc &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/lrc.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb119-5" title="5">lrc &lt;-<span class="st"> </span><span class="kw">subset</span>(lrc, Obs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb119-6" title="6"></a>
+<a class="sourceLine" id="cb119-7" title="7"><span class="co"># 光响应曲线没有太多参数，</span></a>
+<a class="sourceLine" id="cb119-8" title="8"><span class="co"># 直接调出相应的光强和光合速率</span></a>
+<a class="sourceLine" id="cb119-9" title="9"><span class="co"># 方便后面调用</span></a>
+<a class="sourceLine" id="cb119-10" title="10">lrc_Q &lt;-<span class="st"> </span>lrc<span class="op">$</span>PARi</a>
+<a class="sourceLine" id="cb119-11" title="11">lrc_A &lt;-<span class="st"> </span>lrc<span class="op">$</span>Photo </a>
+<a class="sourceLine" id="cb119-12" title="12"></a>
+<a class="sourceLine" id="cb119-13" title="13"><span class="co"># 非直角双曲线模型的拟合</span></a>
+<a class="sourceLine" id="cb119-14" title="14">lrcnls &lt;-<span class="st"> </span><span class="kw">nlsLM</span>(lrc_A <span class="op">~</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb119-15" title="15"><span class="st">                </span>(<span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>theta))<span class="op">*</span></a>
+<a class="sourceLine" id="cb119-16" title="16"><span class="st">                </span>(alpha<span class="op">*</span>lrc_Q<span class="op">+</span>Am<span class="op">-</span><span class="kw">sqrt</span>((alpha<span class="op">*</span>lrc_Q<span class="op">+</span>Am)<span class="op">^</span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb119-17" title="17"><span class="st">                </span><span class="dv">4</span><span class="op">*</span>alpha<span class="op">*</span>theta<span class="op">*</span>Am<span class="op">*</span>lrc_Q))<span class="op">-</span><span class="st"> </span>Rd,</a>
+<a class="sourceLine" id="cb119-18" title="18">                <span class="dt">start=</span><span class="kw">list</span>(<span class="dt">Am=</span>(<span class="kw">max</span>(lrc_A)<span class="op">-</span><span class="kw">min</span>(lrc_A)),</a>
+<a class="sourceLine" id="cb119-19" title="19">                <span class="dt">alpha=</span><span class="fl">0.05</span>,<span class="dt">Rd=</span><span class="op">-</span><span class="kw">min</span>(lrc_A),<span class="dt">theta=</span><span class="dv">1</span>)) </a>
+<a class="sourceLine" id="cb119-20" title="20"></a>
+<a class="sourceLine" id="cb119-21" title="21">fitlrc_nrec &lt;-<span class="st"> </span><span class="kw">summary</span>(lrcnls)</a>
+<a class="sourceLine" id="cb119-22" title="22"></a>
+<a class="sourceLine" id="cb119-23" title="23"><span class="co"># 光补偿点</span></a>
+<a class="sourceLine" id="cb119-24" title="24">Ic &lt;-<span class="st"> </span><span class="cf">function</span>(Ic){</a>
+<a class="sourceLine" id="cb119-25" title="25">  (<span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">4</span>,<span class="dv">1</span>])) <span class="op">*</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb119-26" title="26"><span class="st">    </span>(fitlrc_nrec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>Ic <span class="op">+</span><span class="st"> </span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb119-27" title="27"><span class="st">    </span><span class="kw">sqrt</span>((fitlrc_nrec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>Ic <span class="op">+</span><span class="st"> </span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb119-28" title="28">    )<span class="op">^</span><span class="dv">2</span> <span class="op">-</span><span class="st">  </span><span class="dv">4</span> <span class="op">*</span><span class="st"> </span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb119-29" title="29"><span class="st">    </span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">4</span>,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>Ic)) <span class="op">-</span></a>
+<a class="sourceLine" id="cb119-30" title="30"><span class="st">    </span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">3</span>,<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb119-31" title="31">}</a>
+<a class="sourceLine" id="cb119-32" title="32"></a>
+<a class="sourceLine" id="cb119-33" title="33"><span class="kw">uniroot</span>(Ic, <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">50</span>))<span class="op">$</span>root  </a></code></pre></div>
 <pre><code>## [1] 2.234292</code></pre>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" title="1"><span class="co"># 光饱和点</span></a>
-<a class="sourceLine" id="cb112-2" title="2">Isat &lt;-<span class="st"> </span><span class="cf">function</span>(Isat){</a>
-<a class="sourceLine" id="cb112-3" title="3">  (<span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">4</span>,<span class="dv">1</span>])) <span class="op">*</span><span class="st"> </span>(fitlrc_nrec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb112-4" title="4"><span class="st">  </span>Isat <span class="op">+</span><span class="st"> </span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span><span class="kw">sqrt</span>(</a>
-<a class="sourceLine" id="cb112-5" title="5">  (fitlrc_nrec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>Isat <span class="op">+</span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>])<span class="op">^</span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb112-6" title="6"><span class="st">  </span><span class="dv">4</span><span class="op">*</span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">4</span>,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb112-7" title="7"><span class="st">  </span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>Isat)) <span class="op">-</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb112-8" title="8"><span class="st">  </span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">3</span>,<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>(<span class="fl">0.9</span><span class="op">*</span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>])}</a>
-<a class="sourceLine" id="cb112-9" title="9"></a>
-<a class="sourceLine" id="cb112-10" title="10"><span class="kw">uniroot</span>(Isat, <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2000</span>))<span class="op">$</span>root</a></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" title="1"><span class="co"># 光饱和点</span></a>
+<a class="sourceLine" id="cb121-2" title="2">Isat &lt;-<span class="st"> </span><span class="cf">function</span>(Isat){</a>
+<a class="sourceLine" id="cb121-3" title="3">  (<span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">4</span>,<span class="dv">1</span>])) <span class="op">*</span><span class="st"> </span>(fitlrc_nrec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb121-4" title="4"><span class="st">  </span>Isat <span class="op">+</span><span class="st"> </span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span><span class="kw">sqrt</span>(</a>
+<a class="sourceLine" id="cb121-5" title="5">  (fitlrc_nrec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>Isat <span class="op">+</span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>])<span class="op">^</span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb121-6" title="6"><span class="st">  </span><span class="dv">4</span><span class="op">*</span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">4</span>,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb121-7" title="7"><span class="st">  </span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>Isat)) <span class="op">-</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb121-8" title="8"><span class="st">  </span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">3</span>,<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>(<span class="fl">0.9</span><span class="op">*</span>fitlrc_nrec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>])}</a>
+<a class="sourceLine" id="cb121-9" title="9"></a>
+<a class="sourceLine" id="cb121-10" title="10"><span class="kw">uniroot</span>(Isat, <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2000</span>))<span class="op">$</span>root</a></code></pre></div>
 <pre><code>## [1] 1596.286</code></pre>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" title="1"><span class="co"># 使用ggplot2进行作图并拟合曲线</span></a>
-<a class="sourceLine" id="cb114-2" title="2"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb114-3" title="3">light &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">lrc_Q =</span> lrc<span class="op">$</span>PARi, <span class="dt">lrc_A =</span> lrc<span class="op">$</span>Photo)</a>
-<a class="sourceLine" id="cb114-4" title="4"></a>
-<a class="sourceLine" id="cb114-5" title="5">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(light, <span class="kw">aes</span>(<span class="dt">x =</span> lrc_Q, <span class="dt">y =</span> lrc_A))</a>
-<a class="sourceLine" id="cb114-6" title="6"></a>
-<a class="sourceLine" id="cb114-7" title="7">p1 &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">16</span>, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">color =</span> <span class="st">&quot;green&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb114-8" title="8"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;nls&quot;</span>, <span class="dt">formula =</span> y <span class="op">~</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb114-9" title="9"><span class="st">  </span>(<span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>theta))<span class="op">*</span>(alpha<span class="op">*</span>x<span class="op">+</span>Am<span class="op">-</span><span class="kw">sqrt</span>((alpha<span class="op">*</span>x<span class="op">+</span>Am)<span class="op">^</span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb114-10" title="10"><span class="st">   </span><span class="dv">4</span><span class="op">*</span>alpha<span class="op">*</span>theta<span class="op">*</span>Am<span class="op">*</span>x))<span class="op">-</span><span class="st"> </span>Rd, <span class="dt">se =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb114-11" title="11">   <span class="dt">method.args =</span> <span class="kw">list</span>(<span class="dt">start =</span> <span class="kw">c</span>(<span class="dt">Am=</span>(<span class="kw">max</span>(lrc_A)<span class="op">-</span><span class="kw">min</span>(lrc_A)), </a>
-<a class="sourceLine" id="cb114-12" title="12">   <span class="dt">alpha=</span><span class="fl">0.05</span>, <span class="dt">Rd=</span><span class="op">-</span><span class="kw">min</span>(lrc_A), <span class="dt">theta=</span><span class="dv">1</span>), </a>
-<a class="sourceLine" id="cb114-13" title="13">    <span class="kw">aes</span>(<span class="dt">x =</span>lrc_Q, <span class="dt">y =</span> lrc_A, <span class="dt">color=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">size =</span> <span class="fl">1.2</span>))</a>
-<a class="sourceLine" id="cb114-14" title="14">) <span class="op">+</span></a>
-<a class="sourceLine" id="cb114-15" title="15"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;photosynthetic rate  &quot;</span>, </a>
-<a class="sourceLine" id="cb114-16" title="16">          <span class="st">&quot;(&quot;</span>, mu, mol<span class="op">%.%</span>m<span class="op">^-</span><span class="dv">2</span><span class="op">%.%</span>s<span class="op">^-</span><span class="dv">1</span>, <span class="st">&quot;)&quot;</span>)), </a>
-<a class="sourceLine" id="cb114-17" title="17">       <span class="dt">x=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;PAR &quot;</span>, </a>
-<a class="sourceLine" id="cb114-18" title="18">           <span class="st">&quot;(&quot;</span>, mu, mol<span class="op">%.%</span>m<span class="op">^-</span><span class="dv">2</span><span class="op">%.%</span>s<span class="op">^-</span><span class="dv">1</span>, <span class="st">&quot;)&quot;</span>)))</a>
-<a class="sourceLine" id="cb114-19" title="19"></a>
-<a class="sourceLine" id="cb114-20" title="20"><span class="co"># 自定义坐标轴</span></a>
-<a class="sourceLine" id="cb114-21" title="21">p1 <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">2100</span>, <span class="dt">by =</span> <span class="dv">200</span>)) <span class="op">+</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb114-22" title="22"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span> <span class="kw">round</span>(light<span class="op">$</span>lrc_A)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb114-23" title="23"><span class="st">   </span><span class="kw">theme</span>(<span class="dt">axis.text.x  =</span> <span class="kw">element_text</span>(</a>
-<a class="sourceLine" id="cb114-24" title="24">    <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">angle=</span><span class="dv">30</span>, <span class="dt">vjust=</span><span class="fl">0.5</span>), </a>
-<a class="sourceLine" id="cb114-25" title="25">    <span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb114-26" title="26">    <span class="dt">axis.title.x =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&#39;bold&#39;</span>),</a>
-<a class="sourceLine" id="cb114-27" title="27">    <span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&#39;bold&#39;</span>)</a>
-<a class="sourceLine" id="cb114-28" title="28">  )</a></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" title="1"><span class="co"># 使用ggplot2进行作图并拟合曲线</span></a>
+<a class="sourceLine" id="cb123-2" title="2"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb123-3" title="3">light &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">lrc_Q =</span> lrc<span class="op">$</span>PARi, <span class="dt">lrc_A =</span> lrc<span class="op">$</span>Photo)</a>
+<a class="sourceLine" id="cb123-4" title="4"></a>
+<a class="sourceLine" id="cb123-5" title="5">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(light, <span class="kw">aes</span>(<span class="dt">x =</span> lrc_Q, <span class="dt">y =</span> lrc_A))</a>
+<a class="sourceLine" id="cb123-6" title="6"></a>
+<a class="sourceLine" id="cb123-7" title="7">p1 &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">16</span>, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">color =</span> <span class="st">&quot;green&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb123-8" title="8"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;nls&quot;</span>, <span class="dt">formula =</span> y <span class="op">~</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb123-9" title="9"><span class="st">  </span>(<span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>theta))<span class="op">*</span>(alpha<span class="op">*</span>x<span class="op">+</span>Am<span class="op">-</span><span class="kw">sqrt</span>((alpha<span class="op">*</span>x<span class="op">+</span>Am)<span class="op">^</span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb123-10" title="10"><span class="st">   </span><span class="dv">4</span><span class="op">*</span>alpha<span class="op">*</span>theta<span class="op">*</span>Am<span class="op">*</span>x))<span class="op">-</span><span class="st"> </span>Rd, <span class="dt">se =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb123-11" title="11">   <span class="dt">method.args =</span> <span class="kw">list</span>(<span class="dt">start =</span> <span class="kw">c</span>(<span class="dt">Am=</span>(<span class="kw">max</span>(lrc_A)<span class="op">-</span><span class="kw">min</span>(lrc_A)), </a>
+<a class="sourceLine" id="cb123-12" title="12">   <span class="dt">alpha=</span><span class="fl">0.05</span>, <span class="dt">Rd=</span><span class="op">-</span><span class="kw">min</span>(lrc_A), <span class="dt">theta=</span><span class="dv">1</span>), </a>
+<a class="sourceLine" id="cb123-13" title="13">    <span class="kw">aes</span>(<span class="dt">x =</span>lrc_Q, <span class="dt">y =</span> lrc_A, <span class="dt">color=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">size =</span> <span class="fl">1.2</span>))</a>
+<a class="sourceLine" id="cb123-14" title="14">) <span class="op">+</span></a>
+<a class="sourceLine" id="cb123-15" title="15"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;photosynthetic rate  &quot;</span>, </a>
+<a class="sourceLine" id="cb123-16" title="16">          <span class="st">&quot;(&quot;</span>, mu, mol<span class="op">%.%</span>m<span class="op">^-</span><span class="dv">2</span><span class="op">%.%</span>s<span class="op">^-</span><span class="dv">1</span>, <span class="st">&quot;)&quot;</span>)), </a>
+<a class="sourceLine" id="cb123-17" title="17">       <span class="dt">x=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;PAR &quot;</span>, </a>
+<a class="sourceLine" id="cb123-18" title="18">           <span class="st">&quot;(&quot;</span>, mu, mol<span class="op">%.%</span>m<span class="op">^-</span><span class="dv">2</span><span class="op">%.%</span>s<span class="op">^-</span><span class="dv">1</span>, <span class="st">&quot;)&quot;</span>)))</a>
+<a class="sourceLine" id="cb123-19" title="19"></a>
+<a class="sourceLine" id="cb123-20" title="20"><span class="co"># 自定义坐标轴</span></a>
+<a class="sourceLine" id="cb123-21" title="21">p1 <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">2100</span>, <span class="dt">by =</span> <span class="dv">200</span>)) <span class="op">+</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb123-22" title="22"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span> <span class="kw">round</span>(light<span class="op">$</span>lrc_A)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb123-23" title="23"><span class="st">   </span><span class="kw">theme</span>(<span class="dt">axis.text.x  =</span> <span class="kw">element_text</span>(</a>
+<a class="sourceLine" id="cb123-24" title="24">    <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">angle=</span><span class="dv">30</span>, <span class="dt">vjust=</span><span class="fl">0.5</span>), </a>
+<a class="sourceLine" id="cb123-25" title="25">    <span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb123-26" title="26">    <span class="dt">axis.title.x =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&#39;bold&#39;</span>),</a>
+<a class="sourceLine" id="cb123-27" title="27">    <span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&#39;bold&#39;</span>)</a>
+<a class="sourceLine" id="cb123-28" title="28">  )</a></code></pre></div>
 <div class="figure"><span id="fig:nrecr"></span>
 <img src="bookdown_files/figure-html/nrecr-1.png" alt="非直角双曲线模型拟合" width="672" />
 <p class="caption">
@@ -587,62 +587,62 @@ P_{n} = P_{nmax}[1 - e^{-b(I-I_{C})}]
 <p>其中，<span class="math inline">\(I_{c}\)</span> 为光补偿点，<span class="math inline">\(e\)</span> 为自然对数的底，b为常数，其他参数意义同 <a href="lrc-fit.html#eq:exp">(8.4)</a>。同样，该方程仍然是没有极值的函数，但我们可以直接求得光补偿点。</p>
 <div id="lrc_exp_exam" class="section level3">
 <h3><span class="header-section-number">8.3.1</span> 指数模型的实现</h3>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" title="1"><span class="kw">library</span>(minpack.lm)</a>
-<a class="sourceLine" id="cb115-2" title="2"></a>
-<a class="sourceLine" id="cb115-3" title="3"><span class="co"># 读取数据，同fitaci数据格式</span></a>
-<a class="sourceLine" id="cb115-4" title="4">lrc &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/lrc.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb115-5" title="5">lrc &lt;-<span class="st"> </span><span class="kw">subset</span>(lrc, Obs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb115-6" title="6"></a>
-<a class="sourceLine" id="cb115-7" title="7"><span class="co"># 光响应曲线没有太多参数，</span></a>
-<a class="sourceLine" id="cb115-8" title="8"><span class="co"># 直接调出相应的光强和光合速率</span></a>
-<a class="sourceLine" id="cb115-9" title="9"><span class="co"># 方便后面调用</span></a>
-<a class="sourceLine" id="cb115-10" title="10">lrc_Q &lt;-<span class="st"> </span>lrc<span class="op">$</span>PARi</a>
-<a class="sourceLine" id="cb115-11" title="11">lrc_A &lt;-<span class="st"> </span>lrc<span class="op">$</span>Photo </a>
-<a class="sourceLine" id="cb115-12" title="12"></a>
-<a class="sourceLine" id="cb115-13" title="13"><span class="co"># 模型的拟合</span></a>
-<a class="sourceLine" id="cb115-14" title="14">lrcnls &lt;-<span class="st"> </span><span class="kw">nlsLM</span>(lrc_A <span class="op">~</span><span class="st"> </span>Am<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span><span class="kw">exp</span>((<span class="op">-</span>b)<span class="op">*</span>(lrc_Q<span class="op">-</span>Ic))),</a>
-<a class="sourceLine" id="cb115-15" title="15">                <span class="dt">start=</span><span class="kw">list</span>(<span class="dt">Am=</span>(<span class="kw">max</span>(lrc_A)<span class="op">-</span><span class="kw">min</span>(lrc_A)),</a>
-<a class="sourceLine" id="cb115-16" title="16">                           <span class="dt">Ic=</span><span class="dv">5</span>, <span class="dt">b=</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb115-17" title="17">                )</a>
-<a class="sourceLine" id="cb115-18" title="18">fitlrc_exp &lt;-<span class="st"> </span><span class="kw">summary</span>(lrcnls)</a>
-<a class="sourceLine" id="cb115-19" title="19"></a>
-<a class="sourceLine" id="cb115-20" title="20"><span class="co"># 光饱和点</span></a>
-<a class="sourceLine" id="cb115-21" title="21">Isat &lt;-<span class="st"> </span><span class="cf">function</span>(Isat){fitlrc_exp<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>]<span class="op">*</span></a>
-<a class="sourceLine" id="cb115-22" title="22"><span class="st">    </span>(<span class="dv">1</span><span class="op">-</span><span class="kw">exp</span>((<span class="op">-</span>fitlrc_exp<span class="op">$</span>coef[<span class="dv">3</span>,<span class="dv">1</span>])<span class="op">*</span>(Isat<span class="op">-</span></a>
-<a class="sourceLine" id="cb115-23" title="23"><span class="st">    </span>fitlrc_exp<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>])))<span class="op">-</span><span class="fl">0.9</span><span class="op">*</span>fitlrc_exp<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>]}</a>
-<a class="sourceLine" id="cb115-24" title="24"></a>
-<a class="sourceLine" id="cb115-25" title="25"><span class="kw">uniroot</span>(Isat, <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2000</span>))<span class="op">$</span>root</a></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" title="1"><span class="kw">library</span>(minpack.lm)</a>
+<a class="sourceLine" id="cb124-2" title="2"></a>
+<a class="sourceLine" id="cb124-3" title="3"><span class="co"># 读取数据，同fitaci数据格式</span></a>
+<a class="sourceLine" id="cb124-4" title="4">lrc &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/lrc.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb124-5" title="5">lrc &lt;-<span class="st"> </span><span class="kw">subset</span>(lrc, Obs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb124-6" title="6"></a>
+<a class="sourceLine" id="cb124-7" title="7"><span class="co"># 光响应曲线没有太多参数，</span></a>
+<a class="sourceLine" id="cb124-8" title="8"><span class="co"># 直接调出相应的光强和光合速率</span></a>
+<a class="sourceLine" id="cb124-9" title="9"><span class="co"># 方便后面调用</span></a>
+<a class="sourceLine" id="cb124-10" title="10">lrc_Q &lt;-<span class="st"> </span>lrc<span class="op">$</span>PARi</a>
+<a class="sourceLine" id="cb124-11" title="11">lrc_A &lt;-<span class="st"> </span>lrc<span class="op">$</span>Photo </a>
+<a class="sourceLine" id="cb124-12" title="12"></a>
+<a class="sourceLine" id="cb124-13" title="13"><span class="co"># 模型的拟合</span></a>
+<a class="sourceLine" id="cb124-14" title="14">lrcnls &lt;-<span class="st"> </span><span class="kw">nlsLM</span>(lrc_A <span class="op">~</span><span class="st"> </span>Am<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span><span class="kw">exp</span>((<span class="op">-</span>b)<span class="op">*</span>(lrc_Q<span class="op">-</span>Ic))),</a>
+<a class="sourceLine" id="cb124-15" title="15">                <span class="dt">start=</span><span class="kw">list</span>(<span class="dt">Am=</span>(<span class="kw">max</span>(lrc_A)<span class="op">-</span><span class="kw">min</span>(lrc_A)),</a>
+<a class="sourceLine" id="cb124-16" title="16">                           <span class="dt">Ic=</span><span class="dv">5</span>, <span class="dt">b=</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb124-17" title="17">                )</a>
+<a class="sourceLine" id="cb124-18" title="18">fitlrc_exp &lt;-<span class="st"> </span><span class="kw">summary</span>(lrcnls)</a>
+<a class="sourceLine" id="cb124-19" title="19"></a>
+<a class="sourceLine" id="cb124-20" title="20"><span class="co"># 光饱和点</span></a>
+<a class="sourceLine" id="cb124-21" title="21">Isat &lt;-<span class="st"> </span><span class="cf">function</span>(Isat){fitlrc_exp<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>]<span class="op">*</span></a>
+<a class="sourceLine" id="cb124-22" title="22"><span class="st">    </span>(<span class="dv">1</span><span class="op">-</span><span class="kw">exp</span>((<span class="op">-</span>fitlrc_exp<span class="op">$</span>coef[<span class="dv">3</span>,<span class="dv">1</span>])<span class="op">*</span>(Isat<span class="op">-</span></a>
+<a class="sourceLine" id="cb124-23" title="23"><span class="st">    </span>fitlrc_exp<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>])))<span class="op">-</span><span class="fl">0.9</span><span class="op">*</span>fitlrc_exp<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>]}</a>
+<a class="sourceLine" id="cb124-24" title="24"></a>
+<a class="sourceLine" id="cb124-25" title="25"><span class="kw">uniroot</span>(Isat, <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2000</span>))<span class="op">$</span>root</a></code></pre></div>
 <pre><code>## [1] 558.6038</code></pre>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" title="1"><span class="co">## 拟合图形</span></a>
-<a class="sourceLine" id="cb117-2" title="2"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb117-3" title="3">light &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">lrc_Q =</span> lrc<span class="op">$</span>PARi, <span class="dt">lrc_A =</span> lrc<span class="op">$</span>Photo)</a>
-<a class="sourceLine" id="cb117-4" title="4"></a>
-<a class="sourceLine" id="cb117-5" title="5">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(light, <span class="kw">aes</span>(<span class="dt">x =</span> lrc_Q, <span class="dt">y =</span> lrc_A))</a>
-<a class="sourceLine" id="cb117-6" title="6"></a>
-<a class="sourceLine" id="cb117-7" title="7">p1 &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb117-8" title="8"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">16</span>, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">color =</span> <span class="st">&quot;green&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb117-9" title="9"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;nls&quot;</span>, <span class="dt">formula =</span> </a>
-<a class="sourceLine" id="cb117-10" title="10">    y <span class="op">~</span><span class="st"> </span>Am<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span><span class="kw">exp</span>((<span class="op">-</span>b)<span class="op">*</span>(x <span class="op">-</span>Ic))), </a>
-<a class="sourceLine" id="cb117-11" title="11">    <span class="dt">se =</span> <span class="ot">FALSE</span>, <span class="dt">method.args =</span> <span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb117-12" title="12">    <span class="dt">start =</span> <span class="kw">c</span>(<span class="dt">Am=</span>(<span class="kw">max</span>(lrc_A)<span class="op">-</span><span class="kw">min</span>(lrc_A)),</a>
-<a class="sourceLine" id="cb117-13" title="13">    <span class="dt">Ic=</span><span class="dv">5</span>, <span class="dt">b=</span><span class="fl">0.002</span>), <span class="kw">aes</span>(<span class="dt">x =</span>lrc_Q, <span class="dt">y =</span> lrc_A, </a>
-<a class="sourceLine" id="cb117-14" title="14">    <span class="dt">color=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">size =</span> <span class="fl">1.2</span>))</a>
-<a class="sourceLine" id="cb117-15" title="15">  ) <span class="op">+</span></a>
-<a class="sourceLine" id="cb117-16" title="16"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;photosynthetic rate  &quot;</span>, </a>
-<a class="sourceLine" id="cb117-17" title="17">          <span class="st">&quot;(&quot;</span>, mu, mol<span class="op">%.%</span>m<span class="op">^-</span><span class="dv">2</span><span class="op">%.%</span>s<span class="op">^-</span><span class="dv">1</span>, <span class="st">&quot;)&quot;</span>)), </a>
-<a class="sourceLine" id="cb117-18" title="18">       <span class="dt">x=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;PAR &quot;</span>, </a>
-<a class="sourceLine" id="cb117-19" title="19">           <span class="st">&quot;(&quot;</span>, mu, mol<span class="op">%.%</span>m<span class="op">^-</span><span class="dv">2</span><span class="op">%.%</span>s<span class="op">^-</span><span class="dv">1</span>, <span class="st">&quot;)&quot;</span>)))</a>
-<a class="sourceLine" id="cb117-20" title="20"></a>
-<a class="sourceLine" id="cb117-21" title="21"></a>
-<a class="sourceLine" id="cb117-22" title="22"><span class="co"># 自定义坐标轴</span></a>
-<a class="sourceLine" id="cb117-23" title="23">p1 <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">2100</span>, <span class="dt">by =</span> <span class="dv">200</span>)) <span class="op">+</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb117-24" title="24"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span> <span class="kw">round</span>(light<span class="op">$</span>lrc_A)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb117-25" title="25"><span class="st">   </span><span class="kw">theme</span>(<span class="dt">axis.text.x  =</span> <span class="kw">element_text</span>(</a>
-<a class="sourceLine" id="cb117-26" title="26">    <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">angle=</span><span class="dv">30</span>, <span class="dt">vjust=</span><span class="fl">0.5</span>), </a>
-<a class="sourceLine" id="cb117-27" title="27">    <span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb117-28" title="28">    <span class="dt">axis.title.x =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&#39;bold&#39;</span>),</a>
-<a class="sourceLine" id="cb117-29" title="29">    <span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&#39;bold&#39;</span>)</a>
-<a class="sourceLine" id="cb117-30" title="30">  )</a></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" title="1"><span class="co">## 拟合图形</span></a>
+<a class="sourceLine" id="cb126-2" title="2"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb126-3" title="3">light &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">lrc_Q =</span> lrc<span class="op">$</span>PARi, <span class="dt">lrc_A =</span> lrc<span class="op">$</span>Photo)</a>
+<a class="sourceLine" id="cb126-4" title="4"></a>
+<a class="sourceLine" id="cb126-5" title="5">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(light, <span class="kw">aes</span>(<span class="dt">x =</span> lrc_Q, <span class="dt">y =</span> lrc_A))</a>
+<a class="sourceLine" id="cb126-6" title="6"></a>
+<a class="sourceLine" id="cb126-7" title="7">p1 &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb126-8" title="8"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">16</span>, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">color =</span> <span class="st">&quot;green&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb126-9" title="9"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;nls&quot;</span>, <span class="dt">formula =</span> </a>
+<a class="sourceLine" id="cb126-10" title="10">    y <span class="op">~</span><span class="st"> </span>Am<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span><span class="kw">exp</span>((<span class="op">-</span>b)<span class="op">*</span>(x <span class="op">-</span>Ic))), </a>
+<a class="sourceLine" id="cb126-11" title="11">    <span class="dt">se =</span> <span class="ot">FALSE</span>, <span class="dt">method.args =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb126-12" title="12">    <span class="dt">start =</span> <span class="kw">c</span>(<span class="dt">Am=</span>(<span class="kw">max</span>(lrc_A)<span class="op">-</span><span class="kw">min</span>(lrc_A)),</a>
+<a class="sourceLine" id="cb126-13" title="13">    <span class="dt">Ic=</span><span class="dv">5</span>, <span class="dt">b=</span><span class="fl">0.002</span>), <span class="kw">aes</span>(<span class="dt">x =</span>lrc_Q, <span class="dt">y =</span> lrc_A, </a>
+<a class="sourceLine" id="cb126-14" title="14">    <span class="dt">color=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">size =</span> <span class="fl">1.2</span>))</a>
+<a class="sourceLine" id="cb126-15" title="15">  ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb126-16" title="16"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;photosynthetic rate  &quot;</span>, </a>
+<a class="sourceLine" id="cb126-17" title="17">          <span class="st">&quot;(&quot;</span>, mu, mol<span class="op">%.%</span>m<span class="op">^-</span><span class="dv">2</span><span class="op">%.%</span>s<span class="op">^-</span><span class="dv">1</span>, <span class="st">&quot;)&quot;</span>)), </a>
+<a class="sourceLine" id="cb126-18" title="18">       <span class="dt">x=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;PAR &quot;</span>, </a>
+<a class="sourceLine" id="cb126-19" title="19">           <span class="st">&quot;(&quot;</span>, mu, mol<span class="op">%.%</span>m<span class="op">^-</span><span class="dv">2</span><span class="op">%.%</span>s<span class="op">^-</span><span class="dv">1</span>, <span class="st">&quot;)&quot;</span>)))</a>
+<a class="sourceLine" id="cb126-20" title="20"></a>
+<a class="sourceLine" id="cb126-21" title="21"></a>
+<a class="sourceLine" id="cb126-22" title="22"><span class="co"># 自定义坐标轴</span></a>
+<a class="sourceLine" id="cb126-23" title="23">p1 <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">2100</span>, <span class="dt">by =</span> <span class="dv">200</span>)) <span class="op">+</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb126-24" title="24"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span> <span class="kw">round</span>(light<span class="op">$</span>lrc_A)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb126-25" title="25"><span class="st">   </span><span class="kw">theme</span>(<span class="dt">axis.text.x  =</span> <span class="kw">element_text</span>(</a>
+<a class="sourceLine" id="cb126-26" title="26">    <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">angle=</span><span class="dv">30</span>, <span class="dt">vjust=</span><span class="fl">0.5</span>), </a>
+<a class="sourceLine" id="cb126-27" title="27">    <span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb126-28" title="28">    <span class="dt">axis.title.x =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&#39;bold&#39;</span>),</a>
+<a class="sourceLine" id="cb126-29" title="29">    <span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&#39;bold&#39;</span>)</a>
+<a class="sourceLine" id="cb126-30" title="30">  )</a></code></pre></div>
 <div class="figure"><span id="fig:nexpr"></span>
 <img src="bookdown_files/figure-html/nexpr-1.png" alt="指数模型拟合" width="672" />
 <p class="caption">
@@ -710,66 +710,66 @@ P_{nmax} = \alpha\left(\frac{\sqrt{\beta+\gamma}-\sqrt{\beta}}{\gamma}\right)^{2
 <p>该模型的优点为拟合结果中光饱和点和最大净光合速率均接近实测值，还可以拟合饱和光强之后光合速率随光强下降段的曲线。</p>
 <div id="rev_rec_exam" class="section level3">
 <h3><span class="header-section-number">8.4.1</span> 直角双曲线修正模型的实现</h3>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" title="1"><span class="kw">library</span>(minpack.lm)</a>
-<a class="sourceLine" id="cb118-2" title="2"></a>
-<a class="sourceLine" id="cb118-3" title="3"><span class="co"># 读取数据，同fitaci数据格式</span></a>
-<a class="sourceLine" id="cb118-4" title="4">lrc &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/lrc.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb118-5" title="5">lrc &lt;-<span class="st"> </span><span class="kw">subset</span>(lrc, Obs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb118-6" title="6"></a>
-<a class="sourceLine" id="cb118-7" title="7"><span class="co"># 光响应曲线没有太多参数，</span></a>
-<a class="sourceLine" id="cb118-8" title="8"><span class="co"># 直接调出相应的光强和光合速率</span></a>
-<a class="sourceLine" id="cb118-9" title="9"><span class="co"># 方便后面调用</span></a>
-<a class="sourceLine" id="cb118-10" title="10">lrc_Q &lt;-<span class="st"> </span>lrc<span class="op">$</span>PARi</a>
-<a class="sourceLine" id="cb118-11" title="11">lrc_A &lt;-<span class="st"> </span>lrc<span class="op">$</span>Photo </a>
-<a class="sourceLine" id="cb118-12" title="12"></a>
-<a class="sourceLine" id="cb118-13" title="13"><span class="co"># 模型的拟合</span></a>
-<a class="sourceLine" id="cb118-14" title="14">lrcnls &lt;-<span class="st"> </span><span class="kw">nlsLM</span>(lrc_A <span class="op">~</span><span class="st"> </span>alpha <span class="op">*</span><span class="st"> </span>((<span class="dv">1</span> <span class="op">-</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb118-15" title="15"><span class="st">              </span>beta<span class="op">*</span>lrc_Q)<span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>gamma <span class="op">*</span><span class="st"> </span>lrc_Q)) <span class="op">*</span><span class="st"> </span>lrc_Q <span class="op">-</span><span class="st"> </span>Rd,</a>
-<a class="sourceLine" id="cb118-16" title="16">                <span class="dt">start=</span><span class="kw">list</span>(<span class="dt">alpha =</span> <span class="fl">0.07</span>, <span class="dt">beta =</span> <span class="fl">0.00005</span>,</a>
-<a class="sourceLine" id="cb118-17" title="17">                           <span class="dt">gamma=</span><span class="fl">0.004</span>, <span class="dt">Rd =</span> <span class="fl">0.2</span>)</a>
-<a class="sourceLine" id="cb118-18" title="18">                )</a>
-<a class="sourceLine" id="cb118-19" title="19">fitlrc_mrec &lt;-<span class="st"> </span><span class="kw">summary</span>(lrcnls)</a>
-<a class="sourceLine" id="cb118-20" title="20"></a>
-<a class="sourceLine" id="cb118-21" title="21"><span class="co"># 饱和点计算</span></a>
-<a class="sourceLine" id="cb118-22" title="22">Isat &lt;-<span class="st">  </span><span class="kw">sqrt</span>((fitlrc_mrec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">3</span>,<span class="dv">1</span>])<span class="op">/</span></a>
-<a class="sourceLine" id="cb118-23" title="23"><span class="st">              </span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">-</span><span class="dv">1</span>)<span class="op">/</span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">3</span>,<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb118-24" title="24"><span class="co"># 补偿点计算</span></a>
-<a class="sourceLine" id="cb118-25" title="25">Ic &lt;-<span class="st"> </span>(fitlrc_mrec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">4</span>,<span class="dv">1</span>])<span class="op">/</span></a>
-<a class="sourceLine" id="cb118-26" title="26"><span class="st">  </span>(fitlrc_mrec<span class="op">$</span>coef[<span class="dv">3</span>,<span class="dv">1</span>]<span class="op">*</span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">4</span>,<span class="dv">1</span>]<span class="op">+</span></a>
-<a class="sourceLine" id="cb118-27" title="27"><span class="st">   </span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>]<span class="op">*</span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>])</a>
-<a class="sourceLine" id="cb118-28" title="28"></a>
-<a class="sourceLine" id="cb118-29" title="29"><span class="co">## 拟合图形</span></a>
-<a class="sourceLine" id="cb118-30" title="30"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb118-31" title="31">light &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">lrc_Q =</span> lrc<span class="op">$</span>PARi, <span class="dt">lrc_A =</span> lrc<span class="op">$</span>Photo)</a>
-<a class="sourceLine" id="cb118-32" title="32"></a>
-<a class="sourceLine" id="cb118-33" title="33">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(light, <span class="kw">aes</span>(<span class="dt">x =</span> lrc_Q, <span class="dt">y =</span> lrc_A))</a>
-<a class="sourceLine" id="cb118-34" title="34"></a>
-<a class="sourceLine" id="cb118-35" title="35">p1 &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb118-36" title="36"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">16</span>, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">color =</span> <span class="st">&quot;green&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb118-37" title="37"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;nls&quot;</span>, <span class="dt">formula =</span> </a>
-<a class="sourceLine" id="cb118-38" title="38">   y <span class="op">~</span><span class="st"> </span>alpha <span class="op">*</span><span class="st"> </span>((<span class="dv">1</span> <span class="op">-</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb118-39" title="39"><span class="st">              </span>beta<span class="op">*</span>x)<span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>gamma <span class="op">*</span><span class="st"> </span>x)) <span class="op">*</span><span class="st"> </span>x <span class="op">-</span><span class="st"> </span>Rd, </a>
-<a class="sourceLine" id="cb118-40" title="40">    <span class="dt">se =</span> <span class="ot">FALSE</span>, <span class="dt">method.args =</span> <span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb118-41" title="41">    <span class="dt">start =</span> <span class="kw">c</span>(<span class="dt">alpha =</span> <span class="fl">0.07</span>, <span class="dt">beta =</span> <span class="fl">0.00005</span>,</a>
-<a class="sourceLine" id="cb118-42" title="42">              <span class="dt">gamma=</span><span class="fl">0.004</span>, <span class="dt">Rd =</span> <span class="fl">0.2</span>), </a>
-<a class="sourceLine" id="cb118-43" title="43">    <span class="kw">aes</span>(<span class="dt">x =</span>lrc_Q, <span class="dt">y =</span> lrc_A, </a>
-<a class="sourceLine" id="cb118-44" title="44">    <span class="dt">color=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">size =</span> <span class="fl">1.2</span>))</a>
-<a class="sourceLine" id="cb118-45" title="45">  ) <span class="op">+</span></a>
-<a class="sourceLine" id="cb118-46" title="46"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;photosynthetic rate  &quot;</span>, </a>
-<a class="sourceLine" id="cb118-47" title="47">          <span class="st">&quot;(&quot;</span>, mu, mol<span class="op">%.%</span>m<span class="op">^-</span><span class="dv">2</span><span class="op">%.%</span>s<span class="op">^-</span><span class="dv">1</span>, <span class="st">&quot;)&quot;</span>)), </a>
-<a class="sourceLine" id="cb118-48" title="48">       <span class="dt">x=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;PAR &quot;</span>, </a>
-<a class="sourceLine" id="cb118-49" title="49">           <span class="st">&quot;(&quot;</span>, mu, mol<span class="op">%.%</span>m<span class="op">^-</span><span class="dv">2</span><span class="op">%.%</span>s<span class="op">^-</span><span class="dv">1</span>, <span class="st">&quot;)&quot;</span>)))</a>
-<a class="sourceLine" id="cb118-50" title="50"></a>
-<a class="sourceLine" id="cb118-51" title="51"></a>
-<a class="sourceLine" id="cb118-52" title="52"><span class="co"># 自定义坐标轴</span></a>
-<a class="sourceLine" id="cb118-53" title="53">p1 <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">2100</span>, <span class="dt">by =</span> <span class="dv">200</span>)) <span class="op">+</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb118-54" title="54"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span> <span class="kw">round</span>(light<span class="op">$</span>lrc_A)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb118-55" title="55"><span class="st">   </span><span class="kw">theme</span>(<span class="dt">axis.text.x  =</span> <span class="kw">element_text</span>(</a>
-<a class="sourceLine" id="cb118-56" title="56">    <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">angle=</span><span class="dv">30</span>, <span class="dt">vjust=</span><span class="fl">0.5</span>), </a>
-<a class="sourceLine" id="cb118-57" title="57">    <span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb118-58" title="58">    <span class="dt">axis.title.x =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&#39;bold&#39;</span>),</a>
-<a class="sourceLine" id="cb118-59" title="59">    <span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&#39;bold&#39;</span>)</a>
-<a class="sourceLine" id="cb118-60" title="60">  )</a></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" title="1"><span class="kw">library</span>(minpack.lm)</a>
+<a class="sourceLine" id="cb127-2" title="2"></a>
+<a class="sourceLine" id="cb127-3" title="3"><span class="co"># 读取数据，同fitaci数据格式</span></a>
+<a class="sourceLine" id="cb127-4" title="4">lrc &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/lrc.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb127-5" title="5">lrc &lt;-<span class="st"> </span><span class="kw">subset</span>(lrc, Obs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb127-6" title="6"></a>
+<a class="sourceLine" id="cb127-7" title="7"><span class="co"># 光响应曲线没有太多参数，</span></a>
+<a class="sourceLine" id="cb127-8" title="8"><span class="co"># 直接调出相应的光强和光合速率</span></a>
+<a class="sourceLine" id="cb127-9" title="9"><span class="co"># 方便后面调用</span></a>
+<a class="sourceLine" id="cb127-10" title="10">lrc_Q &lt;-<span class="st"> </span>lrc<span class="op">$</span>PARi</a>
+<a class="sourceLine" id="cb127-11" title="11">lrc_A &lt;-<span class="st"> </span>lrc<span class="op">$</span>Photo </a>
+<a class="sourceLine" id="cb127-12" title="12"></a>
+<a class="sourceLine" id="cb127-13" title="13"><span class="co"># 模型的拟合</span></a>
+<a class="sourceLine" id="cb127-14" title="14">lrcnls &lt;-<span class="st"> </span><span class="kw">nlsLM</span>(lrc_A <span class="op">~</span><span class="st"> </span>alpha <span class="op">*</span><span class="st"> </span>((<span class="dv">1</span> <span class="op">-</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb127-15" title="15"><span class="st">              </span>beta<span class="op">*</span>lrc_Q)<span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>gamma <span class="op">*</span><span class="st"> </span>lrc_Q)) <span class="op">*</span><span class="st"> </span>lrc_Q <span class="op">-</span><span class="st"> </span>Rd,</a>
+<a class="sourceLine" id="cb127-16" title="16">                <span class="dt">start=</span><span class="kw">list</span>(<span class="dt">alpha =</span> <span class="fl">0.07</span>, <span class="dt">beta =</span> <span class="fl">0.00005</span>,</a>
+<a class="sourceLine" id="cb127-17" title="17">                           <span class="dt">gamma=</span><span class="fl">0.004</span>, <span class="dt">Rd =</span> <span class="fl">0.2</span>)</a>
+<a class="sourceLine" id="cb127-18" title="18">                )</a>
+<a class="sourceLine" id="cb127-19" title="19">fitlrc_mrec &lt;-<span class="st"> </span><span class="kw">summary</span>(lrcnls)</a>
+<a class="sourceLine" id="cb127-20" title="20"></a>
+<a class="sourceLine" id="cb127-21" title="21"><span class="co"># 饱和点计算</span></a>
+<a class="sourceLine" id="cb127-22" title="22">Isat &lt;-<span class="st">  </span><span class="kw">sqrt</span>((fitlrc_mrec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">3</span>,<span class="dv">1</span>])<span class="op">/</span></a>
+<a class="sourceLine" id="cb127-23" title="23"><span class="st">              </span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">-</span><span class="dv">1</span>)<span class="op">/</span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">3</span>,<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb127-24" title="24"><span class="co"># 补偿点计算</span></a>
+<a class="sourceLine" id="cb127-25" title="25">Ic &lt;-<span class="st"> </span>(fitlrc_mrec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">4</span>,<span class="dv">1</span>])<span class="op">/</span></a>
+<a class="sourceLine" id="cb127-26" title="26"><span class="st">  </span>(fitlrc_mrec<span class="op">$</span>coef[<span class="dv">3</span>,<span class="dv">1</span>]<span class="op">*</span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">4</span>,<span class="dv">1</span>]<span class="op">+</span></a>
+<a class="sourceLine" id="cb127-27" title="27"><span class="st">   </span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>]<span class="op">*</span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>])</a>
+<a class="sourceLine" id="cb127-28" title="28"></a>
+<a class="sourceLine" id="cb127-29" title="29"><span class="co">## 拟合图形</span></a>
+<a class="sourceLine" id="cb127-30" title="30"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb127-31" title="31">light &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">lrc_Q =</span> lrc<span class="op">$</span>PARi, <span class="dt">lrc_A =</span> lrc<span class="op">$</span>Photo)</a>
+<a class="sourceLine" id="cb127-32" title="32"></a>
+<a class="sourceLine" id="cb127-33" title="33">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(light, <span class="kw">aes</span>(<span class="dt">x =</span> lrc_Q, <span class="dt">y =</span> lrc_A))</a>
+<a class="sourceLine" id="cb127-34" title="34"></a>
+<a class="sourceLine" id="cb127-35" title="35">p1 &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb127-36" title="36"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">16</span>, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">color =</span> <span class="st">&quot;green&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb127-37" title="37"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;nls&quot;</span>, <span class="dt">formula =</span> </a>
+<a class="sourceLine" id="cb127-38" title="38">   y <span class="op">~</span><span class="st"> </span>alpha <span class="op">*</span><span class="st"> </span>((<span class="dv">1</span> <span class="op">-</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb127-39" title="39"><span class="st">              </span>beta<span class="op">*</span>x)<span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>gamma <span class="op">*</span><span class="st"> </span>x)) <span class="op">*</span><span class="st"> </span>x <span class="op">-</span><span class="st"> </span>Rd, </a>
+<a class="sourceLine" id="cb127-40" title="40">    <span class="dt">se =</span> <span class="ot">FALSE</span>, <span class="dt">method.args =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb127-41" title="41">    <span class="dt">start =</span> <span class="kw">c</span>(<span class="dt">alpha =</span> <span class="fl">0.07</span>, <span class="dt">beta =</span> <span class="fl">0.00005</span>,</a>
+<a class="sourceLine" id="cb127-42" title="42">              <span class="dt">gamma=</span><span class="fl">0.004</span>, <span class="dt">Rd =</span> <span class="fl">0.2</span>), </a>
+<a class="sourceLine" id="cb127-43" title="43">    <span class="kw">aes</span>(<span class="dt">x =</span>lrc_Q, <span class="dt">y =</span> lrc_A, </a>
+<a class="sourceLine" id="cb127-44" title="44">    <span class="dt">color=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">size =</span> <span class="fl">1.2</span>))</a>
+<a class="sourceLine" id="cb127-45" title="45">  ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb127-46" title="46"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;photosynthetic rate  &quot;</span>, </a>
+<a class="sourceLine" id="cb127-47" title="47">          <span class="st">&quot;(&quot;</span>, mu, mol<span class="op">%.%</span>m<span class="op">^-</span><span class="dv">2</span><span class="op">%.%</span>s<span class="op">^-</span><span class="dv">1</span>, <span class="st">&quot;)&quot;</span>)), </a>
+<a class="sourceLine" id="cb127-48" title="48">       <span class="dt">x=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;PAR &quot;</span>, </a>
+<a class="sourceLine" id="cb127-49" title="49">           <span class="st">&quot;(&quot;</span>, mu, mol<span class="op">%.%</span>m<span class="op">^-</span><span class="dv">2</span><span class="op">%.%</span>s<span class="op">^-</span><span class="dv">1</span>, <span class="st">&quot;)&quot;</span>)))</a>
+<a class="sourceLine" id="cb127-50" title="50"></a>
+<a class="sourceLine" id="cb127-51" title="51"></a>
+<a class="sourceLine" id="cb127-52" title="52"><span class="co"># 自定义坐标轴</span></a>
+<a class="sourceLine" id="cb127-53" title="53">p1 <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">2100</span>, <span class="dt">by =</span> <span class="dv">200</span>)) <span class="op">+</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb127-54" title="54"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span> <span class="kw">round</span>(light<span class="op">$</span>lrc_A)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb127-55" title="55"><span class="st">   </span><span class="kw">theme</span>(<span class="dt">axis.text.x  =</span> <span class="kw">element_text</span>(</a>
+<a class="sourceLine" id="cb127-56" title="56">    <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">angle=</span><span class="dv">30</span>, <span class="dt">vjust=</span><span class="fl">0.5</span>), </a>
+<a class="sourceLine" id="cb127-57" title="57">    <span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb127-58" title="58">    <span class="dt">axis.title.x =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&#39;bold&#39;</span>),</a>
+<a class="sourceLine" id="cb127-59" title="59">    <span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&#39;bold&#39;</span>)</a>
+<a class="sourceLine" id="cb127-60" title="60">  )</a></code></pre></div>
 <div class="figure"><span id="fig:mrecr"></span>
 <img src="bookdown_files/figure-html/mrecr-1.png" alt="直角双曲线修正模型拟合" width="672" />
 <p class="caption">
