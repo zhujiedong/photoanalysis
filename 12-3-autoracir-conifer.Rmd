@@ -1,0 +1,58 @@
+## LI-6800 RACiR\texttrademark 簇状叶的测量与拟合 {#racir-conifer}
+
+@Coursolle12019 测量了簇状叶黑云杉和香脂冷杉两种簇状叶植物的 RACiR，其中的试验方法和结论值得在测量时借鉴，测量方法上：
+
+- 簇状叶室体积远大于荧光叶室和其他叶室，使用的 $CO_2$ 的变化为： 15 min 内从 20 ppm 到 1520 ppm 的变化，即变化的速率为 $100 ppm \cdot min^{-1}$。但也测试了 200 - 800 ppm的部分曲线。
+
+- 拟合使用了测量的 Rd，测量方法为：控制 reference 气路在 420 ppm 的 $CO_2$ 和 22 $mmol \cdot mol^{-1}$ 的 H~2~O 浓度，控制温度为 25 C，诱导后测量 Rd。
+
+得到了一些有帮助的结论：
+
+- 使用更大的叶室测量 RACiR 是可行的（36 $cm^2$），叶室环境的控制需要通过预实验来确定。
+
+- 该实验使用的 ACi 曲线测量时间在 30 到 36 min，而 RACiR 使用的**完整的二氧化碳的浓度范围**时，曲线耗时最大的时间接近 22 min。但使用 200 - 800 ppm 范围的变化，则时间可以下降 50%，**这些部分范围的测量则可以应用于植物胁迫和表型平台的研究**。
+
+- 实验结果证明只要 match 的调整值保持不变即无需进行空叶室校准（也就是无需匹配的意思，实际的时间间隔取决于仪器的状态），但最新的 range match 功能可有效的增加空叶室校准的时间间隔（新功能，作者试验时尚未推出该功能）。
+
+- 作者建议最好测量暗呼吸的速率，以获得最佳的 Vcmax 和 Jmax 计算结果。如果有第二台光合仪来测量则可有效的缩短测量时间。
+
+### 数据的拟合 {#conifer-fit-racir}
+
+#### 数据文件的命名 {#name-files}
+
+因为作者读取数据和修正数据都依赖于正则表达式，因此，所有文件的命名规则必须满足以下的要求：
+
+- 空叶室校准的文件必须以 "mpty" 起始
+
+- RACiR 的文件必须以 "fast" 起始
+
+- 常规 ACi 测量必须以 "slow" 起始
+
+- Rd 测量数据文件必须以 "dark" 起始
+
+例如作者示例数据分别命名为：
+
+Empty_2.xlsx，Fast.xlsx， Slow.xlsx， Dark.xksx，实际使用的正则表达式为:
+
+```r
+pattern_empty       = "^(mpty)+.xls",      
+pattern_rapidACi    = "^(fast)+.xls",      
+pattern_standardACi = "^(slow)+.xls",      
+pattern_dark        = "^(dark)+.xls",
+```
+如不满足要求，自然会出现错乱。准备好命名的数据文件之后，那么可以把他们放在一个文件夹内。
+
+#### 匹配的问题 {#match-time}
+
+若进行了匹配，要重新开始空叶室校准，RapidACi 软件包采用的规则是，使用 Match 分组下的 time来区分，首先使用该时间和空叶室一致的 RACiR 数据配对校准，若无一致的数据，则选择该时间和 RACiR 测量相差最短的空叶室数据来校准 RACiR 数据。
+
+### 拟合过程 {#conifer-racir-fit}
+
+作何给出了详细的代码和数据，此处不再重复和演示，请参考：
+
+[github 演示](https://github.com/ManuelLamothe/RapidACi)
+
+[发表文章的附加材料](https://www.frontiersin.org/articles/10.3389/fpls.2019.01276/full#supplementary-material)
+
+
+\cleardoublepage
