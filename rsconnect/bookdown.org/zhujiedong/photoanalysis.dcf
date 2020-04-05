@@ -1,0 +1,13 @@
+name: photoanalysis
+title: photoanalysis
+username: zhujiedong
+account: zhujiedong
+server: bookdown.org
+hostUrl: https://bookdown.org/__api__
+appId: 4108
+bundleId: 20049
+url: https://bookdown.org/zhujiedong/photoanalysis/
+when: 1586074207.81206
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .Rbuildignore|.travis.yml|_bookdown.yml|_output.yml|00-front.Rmd|01-1-startR.Rmd|01-2-batch-data.Rmd|02-1-fvcb-theory.Rmd|02-2-plantecophys-intr.Rmd|02-3-plantecophys-C3.Rmd|02-4-plantecophys-C4.Rmd|03-stomatal.Rmd|04-optimize.Rmd|05-coupled.Rmd|06-units.Rmd|07-rec.Rmd|08-nonrec.Rmd|09-exp.Rmd|10-modified-rec.Rmd|11-start-values.Rmd|12-1-plantecophys-6800.Rmd|12-2-autoracir.Rmd|12-3-autoracir-conifer.Rmd|12-4-man-racir.Rmd|12-5-multiracir.Rmd|12-6-jiptest.Rmd|13-pca.Rmd|14-reference.Rmd|bookdown.aux|bookdown.idx|bookdown.lof|bookdown.log|bookdown.lot|bookdown.out|bookdown.toc|DESCRIPTION|index.Rmd|krantz.cls|LICENSE|packages.bib|photoR.bib|README.md|css/style.css|latex/after_body.tex|latex/before_body.tex|latex/preamble.tex|_bookdown_files|data|images
