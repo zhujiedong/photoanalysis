@@ -174,7 +174,7 @@
 
 \title{使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据}
 \author{祝介东 北京力高泰科技有限公司}
-\date{2020-04-04}
+\date{2020-04-08}
 
 \begin{document}
 \maketitle
@@ -591,10 +591,10 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.526144 1.627252 1.663362 1.384909 1.592916 1.246273 1.483754 1.628245
-##  [9] 1.826609 1.343469 1.612389 1.773139 1.275976 1.453379 1.693405 1.632745
-## [17] 1.296560 1.211936 1.578794 1.640302 1.974946 1.814590 1.361856 1.311747
-## [25] 1.318342 1.381134 1.877841 1.339991 1.827132 1.382540 1.251336 1.920072
+##  [1] 1.509294 1.597756 1.914897 1.599330 1.261861 1.982479 1.354234 1.333221
+##  [9] 1.647675 1.687652 1.790732 1.203740 1.686395 1.740333 1.359064 1.439192
+## [17] 1.611608 1.778071 1.617332 1.533882 1.536126 1.224909 1.709624 1.676401
+## [25] 1.902451 1.965052 1.225450 1.354542 1.342629 1.207718 1.779636 1.210086
 \end{verbatim}
 
 我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.
@@ -787,10 +787,10 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.341461 1.279837 1.534963 1.255533 1.869915 1.493941 1.684944 1.323151
-##  [9] 1.314721 1.745872 1.491016 1.406378 1.715984 1.712112 1.648924 1.348919
-## [17] 1.953454 1.796260 1.786891 1.669716 1.376177 1.298368 1.566733 1.588212
-## [25] 1.527985 1.948008 1.927973 1.955772
+##  [1] 1.513884 1.826525 1.655843 1.353199 1.620778 1.327018 1.772171 1.208482
+##  [9] 1.202724 1.324640 1.492103 1.539540 1.245629 1.381014 1.841301 1.582173
+## [17] 1.363642 1.998404 1.453741 1.340591 1.430967 1.526995 1.288134 1.864221
+## [25] 1.585225 1.877283 1.246131 1.316850
 \end{verbatim}
 
 测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。
@@ -888,8 +888,8 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 0.5077033 0.4817455 0.5058961 0.4841447 0.4987591 0.5264801 0.5078803
-##  [8] 0.5046041 0.4974430 0.5000600 0.5108852 0.5293528
+##  [1] 0.4933800 0.4960123 0.4814094 0.5027282 0.5185308 0.5255618 0.4706755
+##  [8] 0.4730558 0.4785806 0.4964273 0.4950430 0.5057513
 \end{verbatim}
 
 最近有点忙，暂时记录下来，用这个函数实现批量处理其实很简单了，后面有时间再补充。
@@ -3493,130 +3493,107 @@ Empty\_2.xlsx，Fast.xlsx， Slow.xlsx， Dark.xksx，实际使用的正则表�
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# 分别读取未校准空叶室数据}
-\CommentTok{# 未校准带叶片测量数据}
-\CommentTok{# 标准aci曲线测量数据}
-\NormalTok{uemp500 <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"./data/uncorr_emp500.csv"}\NormalTok{)}
-\NormalTok{uleaf500 <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"./data/uncorr_leaf500.csv"}\NormalTok{)}
-\NormalTok{acin <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"./data/aci_ex.csv"}\NormalTok{)}
+\CommentTok{# 加载需要的软件包  ---------------------------------------------------------------}
+
+\KeywordTok{library}\NormalTok{(}\StringTok{"plantecophys"}\NormalTok{)}
+
+\CommentTok{#准备数据 ------------------------------------------------------------------}
+\NormalTok{empty_uc <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"./data/racir-csv/uncorr_emp500.csv"}\NormalTok{)}
+\NormalTok{leaf_uc <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"./data/racir-csv/uncorr_leaf500.csv"}\NormalTok{)}
+\NormalTok{aci <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"./data/racir-csv/aci_ex.csv"}\NormalTok{)}
 
 \CommentTok{# 防止读入空白行}
-\NormalTok{m <-}\StringTok{ }\KeywordTok{length}\NormalTok{(}\KeywordTok{which}\NormalTok{(uemp500}\OperatorTok{$}\NormalTok{obs }\OperatorTok{>=}\StringTok{ }\DecValTok{1}\NormalTok{))}
-\NormalTok{n <-}\StringTok{ }\KeywordTok{length}\NormalTok{(}\KeywordTok{which}\NormalTok{(uleaf500}\OperatorTok{$}\NormalTok{obs }\OperatorTok{>=}\StringTok{ }\DecValTok{1}\NormalTok{))}
-\NormalTok{uemp500 <-}\StringTok{ }\NormalTok{uemp500[}\DecValTok{1}\OperatorTok{:}\NormalTok{m,]}
-\NormalTok{uleaf500 <-}\StringTok{ }\NormalTok{uleaf500[}\DecValTok{1}\OperatorTok{:}\NormalTok{n,]}
+\NormalTok{empty_uc <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(empty_uc, obs }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{)}
+\NormalTok{leaf_uc <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(leaf_uc , obs }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{)}
+\NormalTok{aci <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(aci, obs }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{)}
+
+\CommentTok{# 空叶室校准的系数计算 --------------------------------------------------------------}
 
 \CommentTok{# 观察空叶室未校准数据reference对A的图形}
-\KeywordTok{plot}\NormalTok{(uemp500}\OperatorTok{$}\NormalTok{CO2_r, uemp500}\OperatorTok{$}\NormalTok{A)}
+\KeywordTok{plot}\NormalTok{(empty_uc}\OperatorTok{$}\NormalTok{CO2_r, empty_uc}\OperatorTok{$}\NormalTok{A)}
 \CommentTok{# 选取线性部分用于校准}
 \KeywordTok{locator}\NormalTok{()}
+
 \CommentTok{# 执行locator命令后，在上图中的目标位置选点，}
 \CommentTok{# 选好后按 esc 可以返回所选点的坐标（选点即为在}
 \CommentTok{# 预期位置鼠标单击）}
-
 \CommentTok{# 根据上面的点，利用二氧化碳的值过滤掉不需要的数据}
 \CommentTok{# 只要在线性范围内选点，拟合结果相差很小}
-\NormalTok{cemp <-}\StringTok{ }\NormalTok{uemp500[}\KeywordTok{which}\NormalTok{(uemp500}\OperatorTok{$}\NormalTok{CO2_r }\OperatorTok{>}\StringTok{ }
-\StringTok{                        }\FloatTok{45.28} \OperatorTok{&}\StringTok{ }\NormalTok{uemp500}\OperatorTok{$}\NormalTok{CO2_r }\OperatorTok{<}\StringTok{ }\FloatTok{459.12}\NormalTok{),]}
-\KeywordTok{plot}\NormalTok{(cemp}\OperatorTok{$}\NormalTok{CO2_r, cemp}\OperatorTok{$}\NormalTok{A)}
+
+\NormalTok{empty_ct <-}\StringTok{ }\NormalTok{empty_uc[}\KeywordTok{which}\NormalTok{(empty_uc}\OperatorTok{$}\NormalTok{CO2_r }\OperatorTok{>}
+\StringTok{  }\FloatTok{45.28} \OperatorTok{&}\StringTok{ }\NormalTok{empty_uc}\OperatorTok{$}\NormalTok{CO2_r }\OperatorTok{<}\StringTok{ }\FloatTok{459.12}\NormalTok{), ]}
+\KeywordTok{plot}\NormalTok{(empty_ct}\OperatorTok{$}\NormalTok{CO2_r, empty_ct}\OperatorTok{$}\NormalTok{A)}
 
 \CommentTok{# 采用 1~5 次多项式分别拟合}
-\NormalTok{cal1st <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(A }\OperatorTok{~}\StringTok{ }\NormalTok{CO2_r, }\DataTypeTok{data =}\NormalTok{ cemp)}
-\NormalTok{cal2nd <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(A }\OperatorTok{~}\StringTok{ }\KeywordTok{poly}\NormalTok{(CO2_r, }\DecValTok{2}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ cemp)}
-\NormalTok{cal3rd <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(A }\OperatorTok{~}\StringTok{ }\KeywordTok{poly}\NormalTok{(CO2_r, }\DecValTok{3}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ cemp)}
-\NormalTok{cal4th <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(A }\OperatorTok{~}\StringTok{ }\KeywordTok{poly}\NormalTok{(CO2_r, }\DecValTok{4}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ cemp)}
-\NormalTok{cal5th <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(A }\OperatorTok{~}\StringTok{ }\KeywordTok{poly}\NormalTok{(CO2_r, }\DecValTok{5}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ cemp)}
-
+\NormalTok{cal1st <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(A }\OperatorTok{~}\StringTok{ }\NormalTok{CO2_r, }\DataTypeTok{data =}\NormalTok{ empty_ct)}
+\NormalTok{cal2nd <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(A }\OperatorTok{~}\StringTok{ }\KeywordTok{poly}\NormalTok{(CO2_r, }\DecValTok{2}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ empty_ct)}
+\NormalTok{cal3rd <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(A }\OperatorTok{~}\StringTok{ }\KeywordTok{poly}\NormalTok{(CO2_r, }\DecValTok{3}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ empty_ct)}
+\NormalTok{cal4th <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(A }\OperatorTok{~}\StringTok{ }\KeywordTok{poly}\NormalTok{(CO2_r, }\DecValTok{4}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ empty_ct)}
+\NormalTok{cal5th <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(A }\OperatorTok{~}\StringTok{ }\KeywordTok{poly}\NormalTok{(CO2_r, }\DecValTok{5}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ empty_ct)}
 \CommentTok{# 利用 BIC 找出最合理的校准方程}
 \NormalTok{bics <-}\StringTok{ }\KeywordTok{BIC}\NormalTok{(cal1st, cal2nd, cal3rd, cal4th, cal5th)}
 \CommentTok{# noquote也就是没引号，成为名字}
 \NormalTok{best <-}\StringTok{ }\KeywordTok{noquote}\NormalTok{(}\KeywordTok{rownames}\NormalTok{(bics)[bics}\OperatorTok{$}\NormalTok{BIC }\OperatorTok{==}\StringTok{ }\KeywordTok{min}\NormalTok{(bics}\OperatorTok{$}\NormalTok{BIC)])}
 \NormalTok{best}
 
-\CommentTok{# 校准带叶片测量的数据}
-\NormalTok{uleafc <-}\StringTok{ }\NormalTok{uleaf500}
-\NormalTok{uleafc}\OperatorTok{$}\NormalTok{A <-}\StringTok{ }\NormalTok{uleafc}\OperatorTok{$}\NormalTok{A }\OperatorTok{-}\StringTok{ }\KeywordTok{predict}\NormalTok{(cal4th, uleafc)}
-\NormalTok{uleafc}\OperatorTok{$}\NormalTok{Ci <-}\StringTok{ }\NormalTok{((uleafc}\OperatorTok{$}\NormalTok{gtc }\OperatorTok{-}\StringTok{ }\NormalTok{uleafc}\OperatorTok{$}\NormalTok{E }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{uleafc}\OperatorTok{$}\NormalTok{CO2_s }\OperatorTok{-}\StringTok{ }
-\StringTok{                }\NormalTok{uleafc}\OperatorTok{$}\NormalTok{A) }\OperatorTok{/}\StringTok{ }\NormalTok{(uleafc}\OperatorTok{$}\NormalTok{gtc }\OperatorTok{+}\StringTok{ }\NormalTok{uleafc}\OperatorTok{$}\NormalTok{E }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
 
-\CommentTok{# 对校准前后的数据进行作图，查看校准效果}
-\KeywordTok{plot}\NormalTok{(uleaf500}\OperatorTok{$}\NormalTok{CO2_r, uleaf500}\OperatorTok{$}\NormalTok{A, }\DataTypeTok{pch =} \DecValTok{2}\NormalTok{, }\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{20}\NormalTok{, }\DecValTok{40}\NormalTok{))}
-\KeywordTok{points}\NormalTok{(uleafc}\OperatorTok{$}\NormalTok{CO2_r, uleafc}\OperatorTok{$}\NormalTok{A)}
+\CommentTok{# 校准带叶片测量的数据 --------------------------------------------------------------}
+
+\NormalTok{leaf_uc}\OperatorTok{$}\NormalTok{A <-}\StringTok{ }\NormalTok{leaf_uc}\OperatorTok{$}\NormalTok{A }\OperatorTok{-}\StringTok{ }\KeywordTok{predict}\NormalTok{(cal4th, leaf_uc)}
+\NormalTok{leaf_uc}\OperatorTok{$}\NormalTok{Ci <-}\StringTok{ }\NormalTok{((leaf_uc}\OperatorTok{$}\NormalTok{gtc }\OperatorTok{-}\StringTok{ }\NormalTok{leaf_uc}\OperatorTok{$}\NormalTok{E }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{leaf_uc}\OperatorTok{$}\NormalTok{CO2_s }\OperatorTok{-}
+\StringTok{                 }\NormalTok{leaf_uc}\OperatorTok{$}\NormalTok{A) }\OperatorTok{/}\StringTok{ }\NormalTok{(leaf_uc}\OperatorTok{$}\NormalTok{gtc }\OperatorTok{+}\StringTok{ }\NormalTok{leaf_uc}\OperatorTok{$}\NormalTok{E }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
+
+\CommentTok{# 对校准后的数据进行作图，查看校准效果}
+\KeywordTok{plot}\NormalTok{(leaf_uc}\OperatorTok{$}\NormalTok{CO2_r,}
+\NormalTok{     leaf_uc}\OperatorTok{$}\NormalTok{A,}
+     \DataTypeTok{pch =} \DecValTok{2}\NormalTok{,}
+     \DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{20}\NormalTok{, }\DecValTok{40}\NormalTok{))}
+
+\CommentTok{# 选取带叶片测量的有效数据的范围}
 \KeywordTok{locator}\NormalTok{()}
-\NormalTok{cleaf <-}\StringTok{ }\NormalTok{uleafc[}\KeywordTok{which}\NormalTok{(uleafc}\OperatorTok{$}\NormalTok{CO2_r }\OperatorTok{>}\StringTok{ }\FloatTok{16.6} \OperatorTok{&}\StringTok{ }
-\StringTok{                        }\NormalTok{uleafc}\OperatorTok{$}\NormalTok{CO2_r }\OperatorTok{<}\StringTok{ }\DecValTok{478}\NormalTok{),]}
-\KeywordTok{plot}\NormalTok{(cleaf}\OperatorTok{$}\NormalTok{CO2_r, cleaf}\OperatorTok{$}\NormalTok{A)}
 
-\CommentTok{# 利用plantecophys拟合标准曲线和racir曲线}
-\KeywordTok{library}\NormalTok{(}\StringTok{"plantecophys"}\NormalTok{)}
-\NormalTok{acifit <-}\StringTok{ }\KeywordTok{fitaci}\NormalTok{(cleaf, }\DataTypeTok{varnames =} 
-                   \KeywordTok{list}\NormalTok{(}\DataTypeTok{ALEAF =} \StringTok{"A"}\NormalTok{, }\DataTypeTok{Tleaf =} \StringTok{"Tleaf"}\NormalTok{, }\DataTypeTok{Ci =} \StringTok{"Ci"}\NormalTok{, }
-                        \DataTypeTok{PPFD  =} \StringTok{"Qin"}\NormalTok{, }\DataTypeTok{Rd =} \StringTok{"Rd"}\NormalTok{), }\DataTypeTok{Patm =} \FloatTok{84.09}\NormalTok{)}
-\NormalTok{acifit_normal <-}\StringTok{ }\KeywordTok{fitaci}\NormalTok{(acin, }\DataTypeTok{varnames =} 
-                          \KeywordTok{list}\NormalTok{(}\DataTypeTok{ALEAF =} \StringTok{"A"}\NormalTok{, }\DataTypeTok{Tleaf =} \StringTok{"Tleaf"}\NormalTok{, }\DataTypeTok{Ci =} \StringTok{"Ci"}\NormalTok{, }
-                               \DataTypeTok{PPFD  =} \StringTok{"Qin"}\NormalTok{, }\DataTypeTok{Rd =} \StringTok{"Rd"}\NormalTok{), }\DataTypeTok{Patm =} \FloatTok{84.09}\NormalTok{)}
-\CommentTok{# 查看拟合数据}
-\NormalTok{acifit}\OperatorTok{$}\NormalTok{pars}
-\NormalTok{acifit_normal}\OperatorTok{$}\NormalTok{pars}
+\NormalTok{leaf_ct <-}\StringTok{ }\NormalTok{leaf_uc[}\KeywordTok{which}\NormalTok{(leaf_uc}\OperatorTok{$}\NormalTok{CO2_r }\OperatorTok{>}\StringTok{ }\FloatTok{13.6} \OperatorTok{&}
+\StringTok{   }\NormalTok{leaf_uc}\OperatorTok{$}\NormalTok{CO2_r }\OperatorTok{<}\StringTok{ }\DecValTok{471}\NormalTok{), ]}
+\KeywordTok{plot}\NormalTok{(leaf_uc}\OperatorTok{$}\NormalTok{CO2_r, leaf_uc}\OperatorTok{$}\NormalTok{A)}
 
-\CommentTok{# 对快速曲线作图拟合结果进行查看}
-\KeywordTok{plot}\NormalTok{(acifit, }\DataTypeTok{linecols =} \KeywordTok{c}\NormalTok{(}\StringTok{"green"}\NormalTok{, }\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{))}
 
-\CommentTok{#### ggplot2 作图}
-\NormalTok{ddata <-}\StringTok{ }\NormalTok{acifit}\OperatorTok{$}\NormalTok{df}
-
-\NormalTok{alldata <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{A =} \KeywordTok{c}\NormalTok{(acin}\OperatorTok{$}\NormalTok{A, ddata}\OperatorTok{$}\NormalTok{Ac, ddata}\OperatorTok{$}\NormalTok{Aj, cleaf}\OperatorTok{$}\NormalTok{A), }
-                      \DataTypeTok{Ci =} \KeywordTok{c}\NormalTok{(acin}\OperatorTok{$}\NormalTok{Ci, ddata}\OperatorTok{$}\NormalTok{Ci, ddata}\OperatorTok{$}\NormalTok{Ci, cleaf}\OperatorTok{$}\NormalTok{Ci),}
-                      \DataTypeTok{Atype =} \KeywordTok{c}\NormalTok{(}
-                        \KeywordTok{rep}\NormalTok{(}\StringTok{"standard Aci curve"}\NormalTok{, }\KeywordTok{length}\NormalTok{(acin}\OperatorTok{$}\NormalTok{A)),}
-                        \KeywordTok{rep}\NormalTok{(}\StringTok{"Ac"}\NormalTok{, }\KeywordTok{length}\NormalTok{(ddata}\OperatorTok{$}\NormalTok{Ac)), }
-                        \KeywordTok{rep}\NormalTok{(}\StringTok{"Aj"}\NormalTok{, }\KeywordTok{length}\NormalTok{(ddata}\OperatorTok{$}\NormalTok{Aj)),}
-                        \KeywordTok{rep}\NormalTok{(}\StringTok{"A corrected"}\NormalTok{, }\KeywordTok{length}\NormalTok{(cleaf}\OperatorTok{$}\NormalTok{A))}
-\NormalTok{                      )}
+\CommentTok{# 拟合 ----------------------------------------------------------------------}
+\NormalTok{racir <-}\StringTok{ }\KeywordTok{fitaci}\NormalTok{(}
+\NormalTok{  leaf_ct,}
+  \DataTypeTok{varnames =}
+    \KeywordTok{list}\NormalTok{(}
+      \DataTypeTok{ALEAF =} \StringTok{"A"}\NormalTok{,}
+      \DataTypeTok{Tleaf =} \StringTok{"Tleaf"}\NormalTok{,}
+      \DataTypeTok{Ci =} \StringTok{"Ci"}\NormalTok{,}
+      \DataTypeTok{PPFD  =} \StringTok{"Qin"}\NormalTok{,}
+      \DataTypeTok{Rd =} \StringTok{"Rd"}
+\NormalTok{    ),}
+  \DataTypeTok{Patm =} \FloatTok{84.09}
 \NormalTok{)}
 
-\NormalTok{alldata}\OperatorTok{$}\NormalTok{Atype <-}\StringTok{ }\KeywordTok{factor}\NormalTok{(alldata}\OperatorTok{$}\NormalTok{Atype, }
-                        \DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\StringTok{"standard Aci curve"}\NormalTok{, }
-                                   \StringTok{"Ac"}\NormalTok{, }\StringTok{"Aj"}\NormalTok{, }\StringTok{"A corrected"}\NormalTok{))}
+\NormalTok{slow <-}\StringTok{ }\KeywordTok{fitaci}\NormalTok{(}
+\NormalTok{  aci,}
+  \DataTypeTok{varnames =}
+    \KeywordTok{list}\NormalTok{(}
+      \DataTypeTok{ALEAF =} \StringTok{"A"}\NormalTok{,}
+      \DataTypeTok{Tleaf =} \StringTok{"Tleaf"}\NormalTok{,}
+      \DataTypeTok{Ci =} \StringTok{"Ci"}\NormalTok{,}
+      \DataTypeTok{PPFD  =} \StringTok{"Qin"}\NormalTok{,}
+      \DataTypeTok{Rd =} \StringTok{"Rd"}
+\NormalTok{    ),}
+  \DataTypeTok{Patm =} \FloatTok{84.09}
+\NormalTok{)}
 
-\KeywordTok{library}\NormalTok{(ggplot2)}
-\NormalTok{p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(alldata)}
-\NormalTok{p1 <-}\StringTok{ }\NormalTok{p }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(Ci,A, }\DataTypeTok{colour =}\NormalTok{ Atype),  }\DataTypeTok{alpha =} \FloatTok{0.5}\NormalTok{)}
+\CommentTok{# 查看拟合数据}
+\NormalTok{racir}\OperatorTok{$}\NormalTok{pars}
+\NormalTok{slow}\OperatorTok{$}\NormalTok{pars}
 
-\NormalTok{p2 <-}\StringTok{ }\NormalTok{p1 }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{(}\KeywordTok{aes}\NormalTok{(Ci, A, }\DataTypeTok{colour =}\NormalTok{ Atype),}
-                       \DataTypeTok{method =} \StringTok{'auto'}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{y=}\KeywordTok{expression}\NormalTok{(}\KeywordTok{paste}\NormalTok{(}\StringTok{"A "}\NormalTok{, }\StringTok{"("}\NormalTok{, mu, }
-\NormalTok{                          mol}\OperatorTok{%.%}\NormalTok{m}\OperatorTok{^-}\DecValTok{2}\OperatorTok{%.%}\NormalTok{s}\OperatorTok{^-}\DecValTok{1}\NormalTok{, }\StringTok{")"}\NormalTok{)), }
-       \DataTypeTok{x=}\KeywordTok{expression}\NormalTok{(}\KeywordTok{paste}\NormalTok{(C[i], }\StringTok{" "}\NormalTok{,}
-                          \StringTok{"("}\NormalTok{, mu, mol}\OperatorTok{%.%}\NormalTok{mol}\OperatorTok{^-}\DecValTok{1}\NormalTok{, }\StringTok{")"}\NormalTok{)))}
-
-\NormalTok{p2 }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{limits=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1800}\NormalTok{),}
-                        \DataTypeTok{breaks=}\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1800}\NormalTok{, }\DecValTok{200}\NormalTok{)) }\OperatorTok{+}\StringTok{  }
-\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{limits=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{3}\NormalTok{, }\DecValTok{50}\NormalTok{),}
-                     \DataTypeTok{breaks=}\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{10}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{scale_colour_hue}\NormalTok{(}\DataTypeTok{name=}\StringTok{"  "}\NormalTok{, }
-                   \DataTypeTok{labels=}\KeywordTok{c}\NormalTok{(}\StringTok{'ACi curve data; '}\NormalTok{, }
-                            \KeywordTok{expression}\NormalTok{(}\KeywordTok{paste}\NormalTok{(A[c], }\StringTok{' data; '}\NormalTok{)), }
-                            \KeywordTok{expression}\NormalTok{(}\KeywordTok{paste}\NormalTok{(A[j], }\StringTok{' data; '}\NormalTok{)), }
-                            \StringTok{'RACiR data'}\NormalTok{) }
-\NormalTok{  ) }\OperatorTok{+}\StringTok{ }\KeywordTok{theme_set}\NormalTok{(}\KeywordTok{theme_bw}\NormalTok{()) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x  =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{10}\NormalTok{, }
-                                    \DataTypeTok{angle=}\DecValTok{30}\NormalTok{, }\DataTypeTok{vjust=}\FloatTok{0.5}\NormalTok{), }
-        \DataTypeTok{axis.text.y =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{10}\NormalTok{),}
-        \DataTypeTok{axis.title.x =} \KeywordTok{element_text}\NormalTok{(}
-          \DataTypeTok{size =} \DecValTok{12}\NormalTok{, }\DataTypeTok{face =} \StringTok{'bold'}\NormalTok{),}
-        \DataTypeTok{axis.title.y =} \KeywordTok{element_text}\NormalTok{(}
-          \DataTypeTok{size =} \DecValTok{12}\NormalTok{, }\DataTypeTok{face =} \StringTok{'bold'}\NormalTok{),}
-        \DataTypeTok{legend.text.align =} \DecValTok{0}\NormalTok{,}
-        \DataTypeTok{legend.position =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.8}\NormalTok{, }\FloatTok{0.6}\NormalTok{))}
+\CommentTok{# 对快速曲线作图拟合结果进行查看}
+\KeywordTok{plot}\NormalTok{(racir, }\DataTypeTok{linecols =} \KeywordTok{c}\NormalTok{(}\StringTok{"green"}\NormalTok{, }\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
-最终采用常规方法和 RACiR\texttrademark 方法结果如图 \ref{fig:racir} 所示，其中 Aj 与 Ac 结果采用 RACiR\texttrademark 计算\footnote{注意，注意数据表头的大小写，此处代码中，为处理数据的方便，我更改了大小写，分析自己的数据时需要注意}。
-
-\begin{figure}
-\includegraphics[width=1\linewidth]{images/racir} \caption{RACiR 方法与常规结果的比较}\label{fig:racir}
-\end{figure}
+注意，注意数据表头的大小写，此处代码中，为处理数据的方便，我更改了大小写，分析自己的数据时需要注意。
 
 \cleardoublepage
 
@@ -7581,16 +7558,16 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] factoextra_1.0.6   FactoMineR_2.3     jiptest_0.1.3      gridExtra_2.3     
+##  [1] factoextra_1.0.7   FactoMineR_2.3     jiptest_0.1.3      gridExtra_2.3     
 ##  [5] plyr_1.8.6         racir_1.0.0        nls2_0.2           proto_1.0.0       
 ##  [9] purrr_0.3.3        ggplot2_3.3.0      minpack.lm_1.2-1   plantecophys_1.4-4
 ## [13] readphoto_0.0.1   
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] tidyr_1.0.2          splines_3.6.3        assertthat_0.2.1    
-##  [4] highr_0.8            ggstance_0.3.3       cellranger_1.1.0    
+##  [4] highr_0.8            ggstance_0.3.4       cellranger_1.1.0    
 ##  [7] ggrepel_0.8.2        yaml_2.2.1           pillar_1.4.3        
-## [10] backports_1.1.5      lattice_0.20-40      glue_1.4.0          
+## [10] backports_1.1.5      lattice_0.20-41      glue_1.4.0          
 ## [13] digest_0.6.25        ggsignif_0.6.0       RColorBrewer_1.1-2  
 ## [16] polyclip_1.10-0      MESS_0.5.6           colorspace_1.4-1    
 ## [19] htmltools_0.4.0      Matrix_1.2-18        pkgconfig_2.0.3     

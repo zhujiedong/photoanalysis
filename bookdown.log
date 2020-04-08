@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/W32TeX) (preloaded format=xelatex 2020.3.1)  4 APR 2020 20:39
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/W32TeX) (preloaded format=xelatex 2020.3.1)  8 APR 2020 23:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2273,26 +2273,26 @@ Overfull \hbox (100.62036pt too wide) in paragraph at lines 582--582
 
 [9]
 Overfull \hbox (100.62036pt too wide) in paragraph at lines 598--598
-[]\TU/lmtt/m/n/10.53937 ##  [1] 1.526144 1.627252 1.663362 1.384909 1.592916 1.
-246273 1.483754 1.628245[] 
+[]\TU/lmtt/m/n/10.53937 ##  [1] 1.509294 1.597756 1.914897 1.599330 1.261861 1.
+982479 1.354234 1.333221[] 
  []
 
 
 Overfull \hbox (100.62036pt too wide) in paragraph at lines 598--598
-[]\TU/lmtt/m/n/10.53937 ##  [9] 1.826609 1.343469 1.612389 1.773139 1.275976 1.
-453379 1.693405 1.632745[] 
+[]\TU/lmtt/m/n/10.53937 ##  [9] 1.647675 1.687652 1.790732 1.203740 1.686395 1.
+740333 1.359064 1.439192[] 
  []
 
 
 Overfull \hbox (100.62036pt too wide) in paragraph at lines 598--598
-[]\TU/lmtt/m/n/10.53937 ## [17] 1.296560 1.211936 1.578794 1.640302 1.974946 1.
-814590 1.361856 1.311747[] 
+[]\TU/lmtt/m/n/10.53937 ## [17] 1.611608 1.778071 1.617332 1.533882 1.536126 1.
+224909 1.709624 1.676401[] 
  []
 
 
 Overfull \hbox (100.62036pt too wide) in paragraph at lines 598--598
-[]\TU/lmtt/m/n/10.53937 ## [25] 1.318342 1.381134 1.877841 1.339991 1.827132 1.
-382540 1.251336 1.920072[] 
+[]\TU/lmtt/m/n/10.53937 ## [25] 1.902451 1.965052 1.225450 1.354542 1.342629 1.
+207718 1.779636 1.210086[] 
  []
 
 LaTeX Font Info:    Font shape `TU/SimSun(0)/b/n' will be
@@ -2437,20 +2437,20 @@ E[] => []TIME_1[] [69][]
 
 
 Overfull \hbox (100.62036pt too wide) in paragraph at lines 794--794
-[]\TU/lmtt/m/n/10.53937 ##  [1] 1.341461 1.279837 1.534963 1.255533 1.869915 1.
-493941 1.684944 1.323151[] 
+[]\TU/lmtt/m/n/10.53937 ##  [1] 1.513884 1.826525 1.655843 1.353199 1.620778 1.
+327018 1.772171 1.208482[] 
  []
 
 
 Overfull \hbox (100.62036pt too wide) in paragraph at lines 794--794
-[]\TU/lmtt/m/n/10.53937 ##  [9] 1.314721 1.745872 1.491016 1.406378 1.715984 1.
-712112 1.648924 1.348919[] 
+[]\TU/lmtt/m/n/10.53937 ##  [9] 1.202724 1.324640 1.492103 1.539540 1.245629 1.
+381014 1.841301 1.582173[] 
  []
 
 
 Overfull \hbox (100.62036pt too wide) in paragraph at lines 794--794
-[]\TU/lmtt/m/n/10.53937 ## [17] 1.953454 1.796260 1.786891 1.669716 1.376177 1.
-298368 1.566733 1.588212[] 
+[]\TU/lmtt/m/n/10.53937 ## [17] 1.363642 1.998404 1.453741 1.340591 1.430967 1.
+526995 1.288134 1.864221[] 
  []
 
 [13] [14]
@@ -2467,8 +2467,8 @@ Overfull \hbox (67.4213pt too wide) in paragraph at lines 866--866
 
 [15]
 Overfull \hbox (89.55394pt too wide) in paragraph at lines 893--893
-[]\TU/lmtt/m/n/10.53937 ##  [1] 0.5077033 0.4817455 0.5058961 0.4841447 0.49875
-91 0.5264801 0.5078803[] 
+[]\TU/lmtt/m/n/10.53937 ##  [1] 0.4933800 0.4960123 0.4814094 0.5027282 0.51853
+08 0.5255618 0.4706755[] 
  []
 
 [16]
@@ -3726,1587 +3726,1547 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 [108
 
 ] [109]
-Underfull \vbox (badness 10000) detected at line 3613
+Underfull \vbox (badness 10000) detected at line 3594
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3613
+Underfull \vbox (badness 10000) detected at line 3594
  []
 
 [110]
-Underfull \vbox (badness 10000) detected at line 3613
+Underfull \vbox (badness 10000) detected at line 3594
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3613
+Underfull \vbox (badness 10000) detected at line 3594
  []
 
-[111]
-File: images/racir.png Graphic file (type bmp)
-<images/racir.png>
-[112] [113]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+[111] [112] [113
 
-
-Overfull \hbox (336.25pt too wide) has occurred while \output is active
-[]
+] [114]
+Underfull \vbox (badness 10000) detected at line 3722
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Overfull \hbox (336.25pt too wide) has occurred while \output is active
-[]
+Underfull \vbox (badness 10000) detected at line 3722
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Overfull \hbox (336.25pt too wide) has occurred while \output is active
-[]
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Overfull \hbox (336.25pt too wide) has occurred while \output is active
-[]
- []
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
- [][][][] 
- []
-
-[114
-
-] [115] [116]
-Underfull \vbox (badness 10000) detected at line 3745
- []
-
-
-Underfull \vbox (badness 10000) detected at line 3745
- []
-
-[117] [118] [119] [120]
+[115] [116] [117] [118]
 File: bookdown_files/figure-latex/anetcc-1.pdf Graphic file (type pdf)
 <use bookdown_files/figure-latex/anetcc-1.pdf>
-[121]
-Underfull \vbox (badness 10000) detected at line 3885
+[119]
+Underfull \vbox (badness 10000) detected at line 3862
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3885
+Underfull \vbox (badness 10000) detected at line 3862
  []
 
-[122]
+[120]
 File: bookdown_files/figure-latex/anetci-1.pdf Graphic file (type pdf)
 <use bookdown_files/figure-latex/anetci-1.pdf>
-[123]
+[121]
 File: bookdown_files/figure-latex/aappcc-1.pdf Graphic file (type pdf)
 <use bookdown_files/figure-latex/aappcc-1.pdf>
-[124]
+[122]
 File: bookdown_files/figure-latex/aappci-1.pdf Graphic file (type pdf)
 <use bookdown_files/figure-latex/aappci-1.pdf>
-[125] [126]
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 3998--3998
+[123] [124]
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 3975--3975
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 3998--3998
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 3975--3975
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.582e+05 on 1 and 69 DF,  p-value: < 2
 .2e-16[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4030--4030
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4007--4007
 []\TU/lmtt/m/n/10.53937 ## (Intercept)     -7.0873326  0.0198665  -356.7   <2e-
 16 ***[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4030--4030
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4007--4007
 []\TU/lmtt/m/n/10.53937 ## dataCi15$Cifull  0.1225900  0.0003078   398.3   <2e-
 16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 4030--4030
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 4007--4007
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
-[127]
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4030--4030
+[125]
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4007--4007
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.586e+05 on 1 and 69 DF,  p-value: < 2
 .2e-16[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4061--4061
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4038--4038
 []\TU/lmtt/m/n/10.53937 ## (Intercept)     -6.9553180  0.0198028  -351.2   <2e-
 16 ***[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4061--4061
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4038--4038
 []\TU/lmtt/m/n/10.53937 ## dataCi30$Cifull  0.1223321  0.0003068   398.7   <2e-
 16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 4061--4061
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 4038--4038
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
-[128]
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 4092--4092
+[126]
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 4069--4069
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4092--4092
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4069--4069
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.596e+05 on 1 and 69 DF,  p-value: < 2
 .2e-16[] 
  []
 
-[129]
-Overfull \hbox (6.55647pt too wide) in paragraph at lines 4123--4123
+[127]
+Overfull \hbox (6.55647pt too wide) in paragraph at lines 4100--4100
 []\TU/lmtt/m/n/10.53937 ## (Intercept)      -6.2616980  0.0195062  -321.0   <2e
 -16 ***[] 
  []
 
 
-Overfull \hbox (6.55646pt too wide) in paragraph at lines 4123--4123
+Overfull \hbox (6.55646pt too wide) in paragraph at lines 4100--4100
 []\TU/lmtt/m/n/10.53937 ## dataCi120$Cifull  0.1210486  0.0003022   400.5   <2e
 -16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 4123--4123
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 4100--4100
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4123--4123
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4100--4100
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.604e+05 on 1 and 69 DF,  p-value: < 2
 .2e-16[] 
  []
 
-[130]
-Overfull \hbox (6.55647pt too wide) in paragraph at lines 4154--4154
+[128]
+Overfull \hbox (6.55647pt too wide) in paragraph at lines 4131--4131
 []\TU/lmtt/m/n/10.53937 ## (Intercept)      -6.2616980  0.0195062  -321.0   <2e
 -16 ***[] 
  []
 
 
-Overfull \hbox (6.55646pt too wide) in paragraph at lines 4154--4154
+Overfull \hbox (6.55646pt too wide) in paragraph at lines 4131--4131
 []\TU/lmtt/m/n/10.53937 ## dataCi300$Cifull  0.1210486  0.0003022   400.5   <2e
 -16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 4154--4154
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 4131--4131
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4154--4154
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4131--4131
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.604e+05 on 1 and 69 DF,  p-value: < 2
 .2e-16[] 
  []
 
-[131]
-Overfull \hbox (61.88818pt too wide) in paragraph at lines 4212--4212
+[129]
+Overfull \hbox (61.88818pt too wide) in paragraph at lines 4189--4189
 []\TU/lmtt/m/n/10.53937 ##   (Intercept) (Intercept).1 (Intercept).2 (Intercept
 ).3 (Intercept).4[] 
  []
 
 
-Overfull \hbox (61.88826pt too wide) in paragraph at lines 4212--4212
+Overfull \hbox (61.88826pt too wide) in paragraph at lines 4189--4189
 []\TU/lmtt/m/n/10.53937 ##      -0.20351      -0.11262      -0.02719       0.12
 853       0.38691[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 4212--4212
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 4189--4189
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 File: bookdown_files/figure-latex/intdelay-1.pdf Graphic file (type pdf)
 <use bookdown_files/figure-latex/intdelay-1.pdf>
-[132]
+[130]
 File: bookdown_files/figure-latex/intslps-1.pdf Graphic file (type pdf)
 <use bookdown_files/figure-latex/intslps-1.pdf>
 
-Overfull \hbox (50.82188pt too wide) in paragraph at lines 4264--4264
+Overfull \hbox (50.82188pt too wide) in paragraph at lines 4241--4241
 []\TU/lmtt/m/n/10.53937 ##                   dataCi15$Cifull  dataCi30$Cifull  
 dataCi60$Cifull[] 
  []
 
 
-Overfull \hbox (50.82188pt too wide) in paragraph at lines 4264--4264
+Overfull \hbox (50.82188pt too wide) in paragraph at lines 4241--4241
 []\TU/lmtt/m/n/10.53937 ##       -2.711e-19       -1.574e-04       -2.995e-04  
      -5.424e-04[] 
  []
 
-[133]
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 4264--4264
+[131]
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 4241--4241
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.02328pt too wide) in paragraph at lines 4264--4264
+Overfull \hbox (1.02328pt too wide) in paragraph at lines 4241--4241
 []\TU/lmtt/m/n/10.53937 ## Residual standard error: 0.0005383 on 5 degrees of f
 reedom[] 
  []
 
-[134]
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 4304--4304
+[132]
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 4281--4281
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4304--4304
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4281--4281
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.664e+05 on 1 and 48 DF,  p-value: < 2
 .2e-16[] 
  []
 
-[135]
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4335--4335
+[133]
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4312--4312
 []\TU/lmtt/m/n/10.53937 ## (Intercept)     -8.2659145  0.0181243  -456.1   <2e-
 16 ***[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4335--4335
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4312--4312
 []\TU/lmtt/m/n/10.53937 ## dataCc15$Ccfull  0.1435470  0.0003515   408.4   <2e-
 16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 4335--4335
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 4312--4312
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4335--4335
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4312--4312
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.668e+05 on 1 and 48 DF,  p-value: < 2
 .2e-16[] 
  []
 
-[136]
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4366--4366
+[134]
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4343--4343
 []\TU/lmtt/m/n/10.53937 ## (Intercept)     -8.1312578  0.0180681  -450.0   <2e-
 16 ***[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4366--4366
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4343--4343
 []\TU/lmtt/m/n/10.53937 ## dataCc30$Ccfull  0.1432414  0.0003504   408.8   <2e-
 16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 4366--4366
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 4343--4343
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4366--4366
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4343--4343
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.671e+05 on 1 and 48 DF,  p-value: < 2
 .2e-16[] 
  []
 
-[137]
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4397--4397
+[135]
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4374--4374
 []\TU/lmtt/m/n/10.53937 ## (Intercept)     -7.8775340  0.0179675  -438.4   <2e-
 16 ***[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4397--4397
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4374--4374
 []\TU/lmtt/m/n/10.53937 ## dataCc60$Ccfull  0.1426797  0.0003485   409.4   <2e-
 16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 4397--4397
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 4374--4374
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4397--4397
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4374--4374
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.676e+05 on 1 and 48 DF,  p-value: < 2
 .2e-16[] 
  []
 
 
-Overfull \hbox (6.55647pt too wide) in paragraph at lines 4428--4428
+Overfull \hbox (6.55647pt too wide) in paragraph at lines 4405--4405
 []\TU/lmtt/m/n/10.53937 ## (Intercept)      -7.4246412  0.0178052  -417.0   <2e
 -16 ***[] 
  []
 
 
-Overfull \hbox (6.55646pt too wide) in paragraph at lines 4428--4428
+Overfull \hbox (6.55646pt too wide) in paragraph at lines 4405--4405
 []\TU/lmtt/m/n/10.53937 ## dataCc120$Ccfull  0.1417238  0.0003453   410.4   <2e
 -16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 4428--4428
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 4405--4405
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
-[138]
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4428--4428
+[136]
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4405--4405
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.684e+05 on 1 and 48 DF,  p-value: < 2
 .2e-16[] 
  []
 
 
-Overfull \hbox (6.55647pt too wide) in paragraph at lines 4459--4459
+Overfull \hbox (6.55647pt too wide) in paragraph at lines 4436--4436
 []\TU/lmtt/m/n/10.53937 ## (Intercept)      -7.4246412  0.0178052  -417.0   <2e
 -16 ***[] 
  []
 
 
-Overfull \hbox (6.55646pt too wide) in paragraph at lines 4459--4459
+Overfull \hbox (6.55646pt too wide) in paragraph at lines 4436--4436
 []\TU/lmtt/m/n/10.53937 ## dataCc300$Ccfull  0.1417238  0.0003453   410.4   <2e
 -16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 4459--4459
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 4436--4436
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4459--4459
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4436--4436
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.684e+05 on 1 and 48 DF,  p-value: < 2
 .2e-16[] 
  []
 
-[139]
+[137]
 File: bookdown_files/figure-latex/intdelaycc-1.pdf Graphic file (type pdf)
 <use bookdown_files/figure-latex/intdelaycc-1.pdf>
-[140]
-Overfull \hbox (61.88818pt too wide) in paragraph at lines 4518--4518
+[138]
+Overfull \hbox (61.88818pt too wide) in paragraph at lines 4495--4495
 []\TU/lmtt/m/n/10.53937 ##   (Intercept) (Intercept).1 (Intercept).2 (Intercept
 ).3 (Intercept).4[] 
  []
 
 
-Overfull \hbox (61.88826pt too wide) in paragraph at lines 4518--4518
+Overfull \hbox (61.88826pt too wide) in paragraph at lines 4495--4495
 []\TU/lmtt/m/n/10.53937 ##      -0.20760      -0.11478      -0.02759       0.13
 119       0.39421[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 4518--4518
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 4495--4495
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
-[141]
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 4555--4555
+[139]
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 4532--4532
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4555--4555
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4532--4532
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.582e+05 on 1 and 69 DF,  p-value: < 2
 .2e-16[] 
  []
 
-[142]
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4584--4584
+[140]
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4561--4561
 []\TU/lmtt/m/n/10.53937 ## (Intercept)     -5.0873326  0.0198665  -256.1   <2e-
 16 ***[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4584--4584
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4561--4561
 []\TU/lmtt/m/n/10.53937 ## dataCi15$Cifull  0.1225900  0.0003078   398.3   <2e-
 16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 4584--4584
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 4561--4561
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4584--4584
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4561--4561
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.586e+05 on 1 and 69 DF,  p-value: < 2
 .2e-16[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4613--4613
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4590--4590
 []\TU/lmtt/m/n/10.53937 ## (Intercept)     -4.9553180  0.0198028  -250.2   <2e-
 16 ***[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4613--4613
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4590--4590
 []\TU/lmtt/m/n/10.53937 ## dataCi30$Cifull  0.1223321  0.0003068   398.7   <2e-
 16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 4613--4613
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 4590--4590
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
-[143]
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 4642--4642
+[141]
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 4619--4619
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4642--4642
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4619--4619
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.596e+05 on 1 and 69 DF,  p-value: < 2
 .2e-16[] 
  []
 
-[144]
-Overfull \hbox (6.55647pt too wide) in paragraph at lines 4671--4671
+[142]
+Overfull \hbox (6.55647pt too wide) in paragraph at lines 4648--4648
 []\TU/lmtt/m/n/10.53937 ## (Intercept)      -4.2616980  0.0195062  -218.5   <2e
 -16 ***[] 
  []
 
 
-Overfull \hbox (6.55646pt too wide) in paragraph at lines 4671--4671
+Overfull \hbox (6.55646pt too wide) in paragraph at lines 4648--4648
 []\TU/lmtt/m/n/10.53937 ## dataCi120$Cifull  0.1210486  0.0003022   400.5   <2e
 -16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 4671--4671
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 4648--4648
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4671--4671
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4648--4648
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.604e+05 on 1 and 69 DF,  p-value: < 2
 .2e-16[] 
  []
 
-[145]
-Overfull \hbox (6.55647pt too wide) in paragraph at lines 4700--4700
+[143]
+Overfull \hbox (6.55647pt too wide) in paragraph at lines 4677--4677
 []\TU/lmtt/m/n/10.53937 ## (Intercept)      -3.2402030  0.0191773  -169.0   <2e
 -16 ***[] 
  []
 
 
-Overfull \hbox (6.55646pt too wide) in paragraph at lines 4700--4700
+Overfull \hbox (6.55646pt too wide) in paragraph at lines 4677--4677
 []\TU/lmtt/m/n/10.53937 ## dataCi300$Cifull  0.1193852  0.0002971   401.8   <2e
 -16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 4700--4700
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 4677--4677
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4700--4700
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4677--4677
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.615e+05 on 1 and 69 DF,  p-value: < 2
 .2e-16[] 
  []
 
-[146]
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 4741--4741
+[144]
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 4718--4718
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4741--4741
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4718--4718
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.664e+05 on 1 and 48 DF,  p-value: < 2
 .2e-16[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4770--4770
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4747--4747
 []\TU/lmtt/m/n/10.53937 ## (Intercept)     -6.2659145  0.0181243  -345.7   <2e-
 16 ***[] 
  []
 
-[147]
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4770--4770
+[145]
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4747--4747
 []\TU/lmtt/m/n/10.53937 ## dataCc15$Ccfull  0.1435470  0.0003515   408.4   <2e-
 16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 4770--4770
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 4747--4747
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4770--4770
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4747--4747
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.668e+05 on 1 and 48 DF,  p-value: < 2
 .2e-16[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4799--4799
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4776--4776
 []\TU/lmtt/m/n/10.53937 ## (Intercept)     -6.1312578  0.0180681  -339.3   <2e-
 16 ***[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4799--4799
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4776--4776
 []\TU/lmtt/m/n/10.53937 ## dataCc30$Ccfull  0.1432414  0.0003504   408.8   <2e-
 16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 4799--4799
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 4776--4776
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4799--4799
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4776--4776
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.671e+05 on 1 and 48 DF,  p-value: < 2
 .2e-16[] 
  []
 
-[148]
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4828--4828
+[146]
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4805--4805
 []\TU/lmtt/m/n/10.53937 ## (Intercept)     -5.8775340  0.0179675  -327.1   <2e-
 16 ***[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4828--4828
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4805--4805
 []\TU/lmtt/m/n/10.53937 ## dataCc60$Ccfull  0.1426797  0.0003485   409.4   <2e-
 16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 4828--4828
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 4805--4805
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4828--4828
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4805--4805
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.676e+05 on 1 and 48 DF,  p-value: < 2
 .2e-16[] 
  []
 
-[149]
-Overfull \hbox (6.55647pt too wide) in paragraph at lines 4857--4857
+[147]
+Overfull \hbox (6.55647pt too wide) in paragraph at lines 4834--4834
 []\TU/lmtt/m/n/10.53937 ## (Intercept)      -5.4246412  0.0178052  -304.7   <2e
 -16 ***[] 
  []
 
 
-Overfull \hbox (6.55646pt too wide) in paragraph at lines 4857--4857
+Overfull \hbox (6.55646pt too wide) in paragraph at lines 4834--4834
 []\TU/lmtt/m/n/10.53937 ## dataCc120$Ccfull  0.1417238  0.0003453   410.4   <2e
 -16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 4857--4857
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 4834--4834
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4857--4857
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4834--4834
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.684e+05 on 1 and 48 DF,  p-value: < 2
 .2e-16[] 
  []
 
 
-Overfull \hbox (6.55647pt too wide) in paragraph at lines 4886--4886
+Overfull \hbox (6.55647pt too wide) in paragraph at lines 4863--4863
 []\TU/lmtt/m/n/10.53937 ## (Intercept)      -4.3867121  0.0175110  -250.5   <2e
 -16 ***[] 
  []
 
 
-Overfull \hbox (6.55646pt too wide) in paragraph at lines 4886--4886
+Overfull \hbox (6.55646pt too wide) in paragraph at lines 4863--4863
 []\TU/lmtt/m/n/10.53937 ## dataCc300$Ccfull  0.1397661  0.0003396   411.5   <2e
 -16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 4886--4886
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 4863--4863
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
-[150]
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 4886--4886
+[148]
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4863--4863
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.694e+05 on 1 and 48 DF,  p-value: < 2
 .2e-16[] 
  []
 
-[151]
-Overfull \hbox (61.88818pt too wide) in paragraph at lines 4935--4935
+[149]
+Overfull \hbox (61.88818pt too wide) in paragraph at lines 4912--4912
 []\TU/lmtt/m/n/10.53937 ##   (Intercept) (Intercept).1 (Intercept).2 (Intercept
 ).3 (Intercept).4[] 
  []
 
 
-Overfull \hbox (61.88818pt too wide) in paragraph at lines 4935--4935
+Overfull \hbox (61.88818pt too wide) in paragraph at lines 4912--4912
 []\TU/lmtt/m/n/10.53937 ##    -0.0751633    -0.0347043     0.0001247     0.0541
 933     0.1077758[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 4935--4935
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 4912--4912
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 File: bookdown_files/figure-latex/slpdelaycc-1.pdf Graphic file (type pdf)
 <use bookdown_files/figure-latex/slpdelaycc-1.pdf>
+[150]
+Underfull \vbox (badness 10000) detected at line 5035
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 5035
+ []
+
+[151]
+Underfull \vbox (badness 10000) detected at line 5035
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 5035
+ []
+
 [152]
-Underfull \vbox (badness 10000) detected at line 5058
+Underfull \vbox (badness 10000) detected at line 5035
  []
 
 
-Underfull \vbox (badness 10000) detected at line 5058
+Underfull \vbox (badness 10000) detected at line 5035
  []
 
-[153]
-Underfull \vbox (badness 10000) detected at line 5058
- []
-
-
-Underfull \vbox (badness 10000) detected at line 5058
- []
-
-[154]
-Underfull \vbox (badness 10000) detected at line 5058
- []
-
-
-Underfull \vbox (badness 10000) detected at line 5058
- []
-
-[155] [156]
+[153] [154]
 File: bookdown_files/figure-latex/anetdeccc-1.pdf Graphic file (type pdf)
 <use bookdown_files/figure-latex/anetdeccc-1.pdf>
-[157]
+[155]
 File: bookdown_files/figure-latex/anetdecci-1.pdf Graphic file (type pdf)
 <use bookdown_files/figure-latex/anetdecci-1.pdf>
-[158]
+[156]
 File: bookdown_files/figure-latex/aappdeccc-1.pdf Graphic file (type pdf)
 <use bookdown_files/figure-latex/aappdeccc-1.pdf>
-[159]
-Underfull \vbox (badness 10000) detected at line 5187
+[157]
+Underfull \vbox (badness 10000) detected at line 5164
  []
 
 
-Underfull \vbox (badness 10000) detected at line 5187
+Underfull \vbox (badness 10000) detected at line 5164
  []
 
-[160]
+[158]
 File: bookdown_files/figure-latex/aappdecci-1.pdf Graphic file (type pdf)
 <use bookdown_files/figure-latex/aappdecci-1.pdf>
 
-LaTeX Warning: Reference `gammastar' on page 161 undefined on input line 5198.
+LaTeX Warning: Reference `gammastar' on page 159 undefined on input line 5175.
 
-[161]
-Overfull \hbox (12.08965pt too wide) in paragraph at lines 5233--5233
+[159]
+Overfull \hbox (12.08965pt too wide) in paragraph at lines 5210--5210
 []\TU/lmtt/m/n/10.53937 ## (Intercept)       -7.2248105  0.0199353  -362.4   <2
 e-16 ***[] 
  []
 
 
-Overfull \hbox (12.08963pt too wide) in paragraph at lines 5233--5233
+Overfull \hbox (12.08963pt too wide) in paragraph at lines 5210--5210
 []\TU/lmtt/m/n/10.53937 ## dataCinone$Cifull  0.1228632  0.0003089   397.8   <2
 e-16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 5233--5233
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 5210--5210
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 5233--5233
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5210--5210
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.582e+05 on 1 and 69 DF,  p-value: < 2
 .2e-16[] 
  []
 
-[162]
-Overfull \hbox (6.55649pt too wide) in paragraph at lines 5262--5262
+[160]
+Overfull \hbox (6.55649pt too wide) in paragraph at lines 5239--5239
 []\TU/lmtt/m/n/10.53937 ## (Intercept)      -6.444e+00  5.343e-03   -1206   <2e
 -16 ***[] 
  []
 
 
-Overfull \hbox (6.55646pt too wide) in paragraph at lines 5262--5262
+Overfull \hbox (6.55646pt too wide) in paragraph at lines 5239--5239
 []\TU/lmtt/m/n/10.53937 ## dataCilow$Cifull  1.049e-01  8.341e-05    1258   <2e
 -16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 5262--5262
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 5239--5239
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 5262--5262
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5239--5239
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.582e+06 on 1 and 69 DF,  p-value: < 2
 .2e-16[] 
  []
 
 
-Overfull \hbox (1.0234pt too wide) in paragraph at lines 5291--5291
+Overfull \hbox (1.0234pt too wide) in paragraph at lines 5268--5268
 []\TU/lmtt/m/n/10.53937 ##                       Estimate Std. Error t value Pr
 (>|t|)[] 
  []
 
 
-Overfull \hbox (23.15599pt too wide) in paragraph at lines 5291--5291
+Overfull \hbox (23.15599pt too wide) in paragraph at lines 5268--5268
 []\TU/lmtt/m/n/10.53937 ## (Intercept)         -4.8015337  0.0277371  -173.1   
 <2e-16 ***[] 
  []
 
-[163]
-Overfull \hbox (23.15598pt too wide) in paragraph at lines 5291--5291
+[161]
+Overfull \hbox (23.15598pt too wide) in paragraph at lines 5268--5268
 []\TU/lmtt/m/n/10.53937 ## dataCimedium$Cifull  0.0671064  0.0004311   155.7   
 <2e-16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 5291--5291
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 5268--5268
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 5291--5291
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5268--5268
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 2.423e+04 on 1 and 71 DF,  p-value: < 2
 .2e-16[] 
  []
 
 
-Overfull \hbox (12.08965pt too wide) in paragraph at lines 5320--5320
+Overfull \hbox (12.08965pt too wide) in paragraph at lines 5297--5297
 []\TU/lmtt/m/n/10.53937 ## (Intercept)       -3.9450658  0.0467537  -84.38   <2
 e-16 ***[] 
  []
 
 
-Overfull \hbox (12.08963pt too wide) in paragraph at lines 5320--5320
+Overfull \hbox (12.08963pt too wide) in paragraph at lines 5297--5297
 []\TU/lmtt/m/n/10.53937 ## dataCihigh$Cifull  0.0473551  0.0007255   65.27   <2
 e-16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 5320--5320
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 5297--5297
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
-[164]
-Overfull \hbox (12.08965pt too wide) in paragraph at lines 5358--5358
+[162]
+Overfull \hbox (12.08965pt too wide) in paragraph at lines 5335--5335
 []\TU/lmtt/m/n/10.53937 ## (Intercept)       -8.4062011  0.0181852  -462.3   <2
 e-16 ***[] 
  []
 
 
-Overfull \hbox (12.08963pt too wide) in paragraph at lines 5358--5358
+Overfull \hbox (12.08963pt too wide) in paragraph at lines 5335--5335
 []\TU/lmtt/m/n/10.53937 ## dataCcnone$Ccfull  0.1438710  0.0003527   407.9   <2
 e-16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 5358--5358
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 5335--5335
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 5358--5358
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5335--5335
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.664e+05 on 1 and 48 DF,  p-value: < 2
 .2e-16[] 
  []
 
-[165]
-Overfull \hbox (6.55649pt too wide) in paragraph at lines 5387--5387
+[163]
+Overfull \hbox (6.55649pt too wide) in paragraph at lines 5364--5364
 []\TU/lmtt/m/n/10.53937 ## (Intercept)      -7.243e+00  4.716e-03   -1536   <2e
 -16 ***[] 
  []
 
 
-Overfull \hbox (6.55646pt too wide) in paragraph at lines 5387--5387
+Overfull \hbox (6.55646pt too wide) in paragraph at lines 5364--5364
 []\TU/lmtt/m/n/10.53937 ## dataCclow$Ccfull  1.182e-01  9.146e-05    1292   <2e
 -16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 5387--5387
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 5364--5364
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.02328pt too wide) in paragraph at lines 5387--5387
+Overfull \hbox (1.02328pt too wide) in paragraph at lines 5364--5364
 []\TU/lmtt/m/n/10.53937 ## Residual standard error: 0.009333 on 48 degrees of f
 reedom[] 
  []
 
-[166]
-Overfull \hbox (17.62283pt too wide) in paragraph at lines 5416--5416
+[164]
+Overfull \hbox (17.62283pt too wide) in paragraph at lines 5393--5393
 []\TU/lmtt/m/n/10.53937 ## (Intercept)         -4.917283   0.022223  -221.3   <
 2e-16 ***[] 
  []
 
 
-Overfull \hbox (17.62283pt too wide) in paragraph at lines 5416--5416
+Overfull \hbox (17.62283pt too wide) in paragraph at lines 5393--5393
 []\TU/lmtt/m/n/10.53937 ## dataCcmedium$Ccfull  0.066832   0.000431   155.1   <
 2e-16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 5416--5416
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 5393--5393
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 5416--5416
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5393--5393
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 2.404e+04 on 1 and 48 DF,  p-value: < 2
 .2e-16[] 
  []
 
 
-Overfull \hbox (12.08965pt too wide) in paragraph at lines 5445--5445
+Overfull \hbox (12.08965pt too wide) in paragraph at lines 5422--5422
 []\TU/lmtt/m/n/10.53937 ## (Intercept)       -3.7543099  0.0356922 -105.19   <2
 e-16 ***[] 
  []
 
 
-Overfull \hbox (12.08963pt too wide) in paragraph at lines 5445--5445
+Overfull \hbox (12.08963pt too wide) in paragraph at lines 5422--5422
 []\TU/lmtt/m/n/10.53937 ## dataCchigh$Ccfull  0.0411528  0.0006922   59.45   <2
 e-16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 5445--5445
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 5422--5422
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
-[167]
-Overfull \hbox (12.08965pt too wide) in paragraph at lines 5484--5484
+[165]
+Overfull \hbox (12.08965pt too wide) in paragraph at lines 5461--5461
 []\TU/lmtt/m/n/10.53937 ## (Intercept)       -5.2248105  0.0199353  -262.1   <2
 e-16 ***[] 
  []
 
 
-Overfull \hbox (12.08963pt too wide) in paragraph at lines 5484--5484
+Overfull \hbox (12.08963pt too wide) in paragraph at lines 5461--5461
 []\TU/lmtt/m/n/10.53937 ## dataCinone$Cifull  0.1228632  0.0003089   397.8   <2
 e-16 ***[] 
  []
 
-[168]
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 5484--5484
+[166]
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 5461--5461
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 5484--5484
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5461--5461
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.582e+05 on 1 and 69 DF,  p-value: < 2
 .2e-16[] 
  []
 
 
-Overfull \hbox (6.55647pt too wide) in paragraph at lines 5513--5513
+Overfull \hbox (6.55647pt too wide) in paragraph at lines 5490--5490
 []\TU/lmtt/m/n/10.53937 ## (Intercept)      -4.444e+00  5.343e-03  -831.7   <2e
 -16 ***[] 
  []
 
 
-Overfull \hbox (6.55644pt too wide) in paragraph at lines 5513--5513
+Overfull \hbox (6.55644pt too wide) in paragraph at lines 5490--5490
 []\TU/lmtt/m/n/10.53937 ## dataCilow$Cifull  1.049e-01  8.341e-05  1257.8   <2e
 -16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 5513--5513
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 5490--5490
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 5513--5513
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5490--5490
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.582e+06 on 1 and 69 DF,  p-value: < 2
 .2e-16[] 
  []
 
-[169]
-Overfull \hbox (1.0234pt too wide) in paragraph at lines 5542--5542
+[167]
+Overfull \hbox (1.0234pt too wide) in paragraph at lines 5519--5519
 []\TU/lmtt/m/n/10.53937 ##                       Estimate Std. Error t value Pr
 (>|t|)[] 
  []
 
 
-Overfull \hbox (23.15599pt too wide) in paragraph at lines 5542--5542
+Overfull \hbox (23.15599pt too wide) in paragraph at lines 5519--5519
 []\TU/lmtt/m/n/10.53937 ## (Intercept)         -2.8015337  0.0277371  -101.0   
 <2e-16 ***[] 
  []
 
 
-Overfull \hbox (23.15598pt too wide) in paragraph at lines 5542--5542
+Overfull \hbox (23.15598pt too wide) in paragraph at lines 5519--5519
 []\TU/lmtt/m/n/10.53937 ## dataCimedium$Cifull  0.0671064  0.0004311   155.7   
 <2e-16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 5542--5542
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 5519--5519
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 5542--5542
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5519--5519
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 2.423e+04 on 1 and 71 DF,  p-value: < 2
 .2e-16[] 
  []
 
-[170]
-Overfull \hbox (12.08965pt too wide) in paragraph at lines 5571--5571
+[168]
+Overfull \hbox (12.08965pt too wide) in paragraph at lines 5548--5548
 []\TU/lmtt/m/n/10.53937 ## (Intercept)       -1.9450658  0.0467537  -41.60   <2
 e-16 ***[] 
  []
 
 
-Overfull \hbox (12.08963pt too wide) in paragraph at lines 5571--5571
+Overfull \hbox (12.08963pt too wide) in paragraph at lines 5548--5548
 []\TU/lmtt/m/n/10.53937 ## dataCihigh$Cifull  0.0473551  0.0007255   65.27   <2
 e-16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 5571--5571
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 5548--5548
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
-[171]
-Overfull \hbox (12.08965pt too wide) in paragraph at lines 5610--5610
+[169]
+Overfull \hbox (12.08965pt too wide) in paragraph at lines 5587--5587
 []\TU/lmtt/m/n/10.53937 ## (Intercept)       -6.4062011  0.0181852  -352.3   <2
 e-16 ***[] 
  []
 
 
-Overfull \hbox (12.08963pt too wide) in paragraph at lines 5610--5610
+Overfull \hbox (12.08963pt too wide) in paragraph at lines 5587--5587
 []\TU/lmtt/m/n/10.53937 ## dataCcnone$Ccfull  0.1438710  0.0003527   407.9   <2
 e-16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 5610--5610
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 5587--5587
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 5610--5610
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5587--5587
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.664e+05 on 1 and 48 DF,  p-value: < 2
 .2e-16[] 
  []
 
 
-Overfull \hbox (6.55649pt too wide) in paragraph at lines 5639--5639
+Overfull \hbox (6.55649pt too wide) in paragraph at lines 5616--5616
 []\TU/lmtt/m/n/10.53937 ## (Intercept)      -5.243e+00  4.716e-03   -1112   <2e
 -16 ***[] 
  []
 
 
-Overfull \hbox (6.55646pt too wide) in paragraph at lines 5639--5639
+Overfull \hbox (6.55646pt too wide) in paragraph at lines 5616--5616
 []\TU/lmtt/m/n/10.53937 ## dataCclow$Ccfull  1.182e-01  9.146e-05    1292   <2e
 -16 ***[] 
  []
 
-[172]
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 5639--5639
+[170]
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 5616--5616
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.02328pt too wide) in paragraph at lines 5639--5639
+Overfull \hbox (1.02328pt too wide) in paragraph at lines 5616--5616
 []\TU/lmtt/m/n/10.53937 ## Residual standard error: 0.009333 on 48 degrees of f
 reedom[] 
  []
 
 
-Overfull \hbox (17.62283pt too wide) in paragraph at lines 5668--5668
+Overfull \hbox (17.62283pt too wide) in paragraph at lines 5645--5645
 []\TU/lmtt/m/n/10.53937 ## (Intercept)         -2.917283   0.022223  -131.3   <
 2e-16 ***[] 
  []
 
 
-Overfull \hbox (17.62283pt too wide) in paragraph at lines 5668--5668
+Overfull \hbox (17.62283pt too wide) in paragraph at lines 5645--5645
 []\TU/lmtt/m/n/10.53937 ## dataCcmedium$Ccfull  0.066832   0.000431   155.1   <
 2e-16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 5668--5668
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 5645--5645
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 5668--5668
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5645--5645
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 2.404e+04 on 1 and 48 DF,  p-value: < 2
 .2e-16[] 
  []
 
-[173]
-Overfull \hbox (12.08965pt too wide) in paragraph at lines 5697--5697
+[171]
+Overfull \hbox (12.08965pt too wide) in paragraph at lines 5674--5674
 []\TU/lmtt/m/n/10.53937 ## (Intercept)       -1.7543099  0.0356922  -49.15   <2
 e-16 ***[] 
  []
 
 
-Overfull \hbox (12.08963pt too wide) in paragraph at lines 5697--5697
+Overfull \hbox (12.08963pt too wide) in paragraph at lines 5674--5674
 []\TU/lmtt/m/n/10.53937 ## dataCchigh$Ccfull  0.0411528  0.0006922   59.45   <2
 e-16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 5697--5697
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 5674--5674
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
-[174] [175] [176]
-Underfull \vbox (badness 10000) detected at line 6125
+[172] [173] [174]
+Underfull \vbox (badness 10000) detected at line 6102
  []
 
 
-Underfull \vbox (badness 10000) detected at line 6125
+Underfull \vbox (badness 10000) detected at line 6102
+ []
+
+[175]
+Underfull \vbox (badness 10000) detected at line 6102
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 6102
+ []
+
+[176]
+Underfull \vbox (badness 10000) detected at line 6102
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 6102
  []
 
 [177]
-Underfull \vbox (badness 10000) detected at line 6125
+Underfull \vbox (badness 10000) detected at line 6102
  []
 
 
-Underfull \vbox (badness 10000) detected at line 6125
+Underfull \vbox (badness 10000) detected at line 6102
  []
 
 [178]
-Underfull \vbox (badness 10000) detected at line 6125
+Underfull \vbox (badness 10000) detected at line 6102
  []
 
 
-Underfull \vbox (badness 10000) detected at line 6125
+Underfull \vbox (badness 10000) detected at line 6102
  []
 
 [179]
-Underfull \vbox (badness 10000) detected at line 6125
+Underfull \vbox (badness 10000) detected at line 6102
  []
 
 
-Underfull \vbox (badness 10000) detected at line 6125
+Underfull \vbox (badness 10000) detected at line 6102
  []
 
 [180]
-Underfull \vbox (badness 10000) detected at line 6125
+Underfull \vbox (badness 10000) detected at line 6102
  []
 
 
-Underfull \vbox (badness 10000) detected at line 6125
+Underfull \vbox (badness 10000) detected at line 6102
  []
 
 [181]
-Underfull \vbox (badness 10000) detected at line 6125
+Underfull \vbox (badness 10000) detected at line 6102
  []
 
 
-Underfull \vbox (badness 10000) detected at line 6125
+Underfull \vbox (badness 10000) detected at line 6102
  []
 
 [182]
-Underfull \vbox (badness 10000) detected at line 6125
+Underfull \vbox (badness 10000) detected at line 6102
  []
 
 
-Underfull \vbox (badness 10000) detected at line 6125
+Underfull \vbox (badness 10000) detected at line 6102
  []
 
 [183]
-Underfull \vbox (badness 10000) detected at line 6125
+Underfull \vbox (badness 10000) detected at line 6102
  []
 
 
-Underfull \vbox (badness 10000) detected at line 6125
+Underfull \vbox (badness 10000) detected at line 6102
  []
 
-[184]
-Underfull \vbox (badness 10000) detected at line 6125
- []
-
-
-Underfull \vbox (badness 10000) detected at line 6125
- []
-
-[185]
-Underfull \vbox (badness 10000) detected at line 6125
- []
-
-
-Underfull \vbox (badness 10000) detected at line 6125
- []
-
-[186] [187]
-Overfull \hbox (83.3265pt too wide) in paragraph at lines 6133--6150
+[184] [185]
+Overfull \hbox (83.3265pt too wide) in paragraph at lines 6110--6127
 [][] 
+ []
+
+[186]
+Underfull \vbox (badness 10000) detected at line 6301
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 6301
+ []
+
+[187]
+Underfull \vbox (badness 10000) detected at line 6301
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 6301
  []
 
 [188]
-Underfull \vbox (badness 10000) detected at line 6324
+Underfull \vbox (badness 10000) detected at line 6301
  []
 
 
-Underfull \vbox (badness 10000) detected at line 6324
+Underfull \vbox (badness 10000) detected at line 6301
  []
 
 [189]
-Underfull \vbox (badness 10000) detected at line 6324
+Underfull \vbox (badness 10000) detected at line 6301
  []
 
 
-Underfull \vbox (badness 10000) detected at line 6324
+Underfull \vbox (badness 10000) detected at line 6301
  []
 
 [190]
-Underfull \vbox (badness 10000) detected at line 6324
- []
-
-
-Underfull \vbox (badness 10000) detected at line 6324
- []
-
-[191]
-Underfull \vbox (badness 10000) detected at line 6324
- []
-
-
-Underfull \vbox (badness 10000) detected at line 6324
- []
-
-[192]
-Overfull \hbox (477.69177pt too wide) in paragraph at lines 6334--6351
+Overfull \hbox (477.69177pt too wide) in paragraph at lines 6311--6328
 [][] 
  []
 
-[193]
+[191]
 File: bookdown_files/figure-latex/difuci-1.pdf Graphic file (type pdf)
 <use bookdown_files/figure-latex/difuci-1.pdf>
-[194]
-Underfull \vbox (badness 10000) detected at line 6406
+[192]
+Underfull \vbox (badness 10000) detected at line 6383
  []
 
 
-Underfull \vbox (badness 10000) detected at line 6406
+Underfull \vbox (badness 10000) detected at line 6383
  []
 
-[195]
+[193]
 File: bookdown_files/figure-latex/difuci11-1.pdf Graphic file (type pdf)
 <use bookdown_files/figure-latex/difuci11-1.pdf>
-[196]
+[194]
 File: bookdown_files/figure-latex/tolresis-1.pdf Graphic file (type pdf)
 <use bookdown_files/figure-latex/tolresis-1.pdf>
 
-Overfull \hbox (61.88818pt too wide) in paragraph at lines 6464--6464
+Overfull \hbox (61.88818pt too wide) in paragraph at lines 6441--6441
 []\TU/lmtt/m/n/10.53937 ## lm(formula = Rates ~ I(1/TotalRes) + I((1/TotalRes)^
 2), data = data2)[] 
  []
 
-[197]
-Overfull \hbox (1.02336pt too wide) in paragraph at lines 6464--6464
+[195]
+Overfull \hbox (1.02336pt too wide) in paragraph at lines 6441--6441
 []\TU/lmtt/m/n/10.53937 ## (Intercept)         13.042      1.684   7.745 3.18e-
 06 ***[] 
  []
 
 
-Overfull \hbox (1.02333pt too wide) in paragraph at lines 6464--6464
+Overfull \hbox (1.02333pt too wide) in paragraph at lines 6441--6441
 []\TU/lmtt/m/n/10.53937 ## I(1/TotalRes)      421.928     22.487  18.763 8.49e-
 11 ***[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 6464--6464
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 6441--6441
 []\TU/lmtt/m/n/10.53937 ## I((1/TotalRes)^2) -737.690     65.500 -11.262 4.46e-
 08 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 6464--6464
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 6441--6441
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 File: bookdown_files/figure-latex/tolre-1.pdf Graphic file (type pdf)
 <use bookdown_files/figure-latex/tolre-1.pdf>
-[198]
-Overfull \hbox (17.62292pt too wide) in paragraph at lines 6521--6521
+[196]
+Overfull \hbox (17.62292pt too wide) in paragraph at lines 6498--6498
 []\TU/lmtt/m/n/10.53937 ##                          Estimate Std. Error t value
  Pr(>|t|)[] 
  []
 
 
-Overfull \hbox (39.75551pt too wide) in paragraph at lines 6521--6521
+Overfull \hbox (39.75551pt too wide) in paragraph at lines 6498--6498
 []\TU/lmtt/m/n/10.53937 ## (Intercept)            -3.836e+00  4.318e-03  -888.5
    <2e-16 ***[] 
  []
 
 
-Overfull \hbox (39.75548pt too wide) in paragraph at lines 6521--6521
+Overfull \hbox (39.75548pt too wide) in paragraph at lines 6498--6498
 []\TU/lmtt/m/n/10.53937 ## dataCi0125$Cidiffusion  6.665e-02  7.873e-05   846.6
    <2e-16 ***[] 
  []
 
-[199]
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 6521--6521
+[197]
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 6498--6498
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 6521--6521
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 6498--6498
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 7.167e+05 on 1 and 52 DF,  p-value: < 2
 .2e-16[] 
  []
 
 
-Overfull \hbox (12.08975pt too wide) in paragraph at lines 6550--6550
+Overfull \hbox (12.08975pt too wide) in paragraph at lines 6527--6527
 []\TU/lmtt/m/n/10.53937 ##                         Estimate Std. Error t value 
 Pr(>|t|)[] 
  []
 
 
-Overfull \hbox (34.22234pt too wide) in paragraph at lines 6550--6550
+Overfull \hbox (34.22234pt too wide) in paragraph at lines 6527--6527
 []\TU/lmtt/m/n/10.53937 ## (Intercept)           -5.2507346  0.0092187  -569.6 
   <2e-16 ***[] 
  []
 
 
-Overfull \hbox (34.2223pt too wide) in paragraph at lines 6550--6550
+Overfull \hbox (34.2223pt too wide) in paragraph at lines 6527--6527
 []\TU/lmtt/m/n/10.53937 ## dataCi025$Cidiffusion  0.0904227  0.0001544   585.5 
   <2e-16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 6550--6550
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 6527--6527
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 6550--6550
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 6527--6527
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 3.428e+05 on 1 and 59 DF,  p-value: < 2
 .2e-16[] 
  []
 
-[200]
-Overfull \hbox (6.55658pt too wide) in paragraph at lines 6579--6579
+[198]
+Overfull \hbox (6.55658pt too wide) in paragraph at lines 6556--6556
 []\TU/lmtt/m/n/10.53937 ##                        Estimate Std. Error t value P
 r(>|t|)[] 
  []
 
 
-Overfull \hbox (28.68918pt too wide) in paragraph at lines 6579--6579
+Overfull \hbox (28.68918pt too wide) in paragraph at lines 6556--6556
 []\TU/lmtt/m/n/10.53937 ## (Intercept)          -6.4051036  0.0150363    -426  
  <2e-16 ***[] 
  []
 
 
-Overfull \hbox (28.68913pt too wide) in paragraph at lines 6579--6579
+Overfull \hbox (28.68913pt too wide) in paragraph at lines 6556--6556
 []\TU/lmtt/m/n/10.53937 ## dataCi05$Cidiffusion  0.1097686  0.0002391     459  
  <2e-16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 6579--6579
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 6556--6556
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 6579--6579
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 6556--6556
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 2.107e+05 on 1 and 65 DF,  p-value: < 2
 .2e-16[] 
  []
 
-[201]
-Overfull \hbox (1.0234pt too wide) in paragraph at lines 6608--6608
+[199]
+Overfull \hbox (1.0234pt too wide) in paragraph at lines 6585--6585
 []\TU/lmtt/m/n/10.53937 ##                       Estimate Std. Error t value Pr
 (>|t|)[] 
  []
 
 
-Overfull \hbox (23.15599pt too wide) in paragraph at lines 6608--6608
+Overfull \hbox (23.15599pt too wide) in paragraph at lines 6585--6585
 []\TU/lmtt/m/n/10.53937 ## (Intercept)         -7.1817472  0.0199135  -360.6   
 <2e-16 ***[] 
  []
 
 
-Overfull \hbox (23.15598pt too wide) in paragraph at lines 6608--6608
+Overfull \hbox (23.15598pt too wide) in paragraph at lines 6585--6585
 []\TU/lmtt/m/n/10.53937 ## dataCi1$Cidiffusion  0.1227771  0.0003085   398.0   
 <2e-16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 6608--6608
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 6585--6585
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 6608--6608
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 6585--6585
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.584e+05 on 1 and 69 DF,  p-value: < 2
 .2e-16[] 
  []
 
 
-Overfull \hbox (1.0234pt too wide) in paragraph at lines 6637--6637
+Overfull \hbox (1.0234pt too wide) in paragraph at lines 6614--6614
 []\TU/lmtt/m/n/10.53937 ##                       Estimate Std. Error t value Pr
 (>|t|)[] 
  []
 
 
-Overfull \hbox (23.15599pt too wide) in paragraph at lines 6637--6637
+Overfull \hbox (23.15599pt too wide) in paragraph at lines 6614--6614
 []\TU/lmtt/m/n/10.53937 ## (Intercept)         -7.6427727  0.0230595  -331.4   
 <2e-16 ***[] 
  []
 
 
-Overfull \hbox (23.15598pt too wide) in paragraph at lines 6637--6637
+Overfull \hbox (23.15598pt too wide) in paragraph at lines 6614--6614
 []\TU/lmtt/m/n/10.53937 ## dataCi2$Cidiffusion  0.1305083  0.0003538   368.9   
 <2e-16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 6637--6637
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 6614--6614
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
-[202]
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 6637--6637
+[200]
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 6614--6614
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.361e+05 on 1 and 71 DF,  p-value: < 2
 .2e-16[] 
  []
 
 
-Overfull \hbox (1.0234pt too wide) in paragraph at lines 6666--6666
+Overfull \hbox (1.0234pt too wide) in paragraph at lines 6643--6643
 []\TU/lmtt/m/n/10.53937 ##                       Estimate Std. Error t value Pr
 (>|t|)[] 
  []
 
 
-Overfull \hbox (23.15599pt too wide) in paragraph at lines 6666--6666
+Overfull \hbox (23.15599pt too wide) in paragraph at lines 6643--6643
 []\TU/lmtt/m/n/10.53937 ## (Intercept)         -7.8955772  0.0248634  -317.6   
 <2e-16 ***[] 
  []
 
 
-Overfull \hbox (23.15598pt too wide) in paragraph at lines 6666--6666
+Overfull \hbox (23.15598pt too wide) in paragraph at lines 6643--6643
 []\TU/lmtt/m/n/10.53937 ## dataCi4$Cidiffusion  0.1347503  0.0003799   354.7   
 <2e-16 ***[] 
  []
 
 
-Overfull \hbox (23.15605pt too wide) in paragraph at lines 6666--6666
+Overfull \hbox (23.15605pt too wide) in paragraph at lines 6643--6643
 []\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 []***[] 0.001 []**[] 0.01 []*[] 0.
 05 [].[] 0.1 [] [] 1[] 
  []
 
 
-Overfull \hbox (1.0233pt too wide) in paragraph at lines 6666--6666
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 6643--6643
 []\TU/lmtt/m/n/10.53937 ## F-statistic: 1.258e+05 on 1 and 72 DF,  p-value: < 2
 .2e-16[] 
  []
 
-[203] [204]
-Underfull \vbox (badness 10000) detected at line 6747
+[201] [202]
+Underfull \vbox (badness 10000) detected at line 6724
  []
 
 
-Underfull \vbox (badness 10000) detected at line 6747
+Underfull \vbox (badness 10000) detected at line 6724
+ []
+
+[203]
+File: bookdown_files/figure-latex/prdataplot-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/prdataplot-1.pdf>
+[204]
+Underfull \vbox (badness 10000) detected at line 6848
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 6848
  []
 
 [205]
-File: bookdown_files/figure-latex/prdataplot-1.pdf Graphic file (type pdf)
-<use bookdown_files/figure-latex/prdataplot-1.pdf>
-[206]
-Underfull \vbox (badness 10000) detected at line 6871
+Underfull \vbox (badness 10000) detected at line 6848
  []
 
 
-Underfull \vbox (badness 10000) detected at line 6871
+Underfull \vbox (badness 10000) detected at line 6848
+ []
+
+[206]
+Underfull \vbox (badness 10000) detected at line 6848
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 6848
  []
 
 [207]
-Underfull \vbox (badness 10000) detected at line 6871
- []
-
-
-Underfull \vbox (badness 10000) detected at line 6871
- []
-
+File: bookdown_files/figure-latex/resistplot-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/resistplot-1.pdf>
 [208]
-Underfull \vbox (badness 10000) detected at line 6871
+Underfull \vbox (badness 10000) detected at line 6928
  []
 
 
-Underfull \vbox (badness 10000) detected at line 6871
+Underfull \vbox (badness 10000) detected at line 6928
  []
 
 [209]
-File: bookdown_files/figure-latex/resistplot-1.pdf Graphic file (type pdf)
-<use bookdown_files/figure-latex/resistplot-1.pdf>
+Underfull \vbox (badness 10000) detected at line 6928
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 6928
+ []
+
 [210]
-Underfull \vbox (badness 10000) detected at line 6951
- []
-
-
-Underfull \vbox (badness 10000) detected at line 6951
- []
-
+File: bookdown_files/figure-latex/high3tplot-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/high3tplot-1.pdf>
 [211]
-Underfull \vbox (badness 10000) detected at line 6951
+Underfull \vbox (badness 10000) detected at line 6997
  []
 
 
-Underfull \vbox (badness 10000) detected at line 6951
+Underfull \vbox (badness 10000) detected at line 6997
  []
 
 [212]
-File: bookdown_files/figure-latex/high3tplot-1.pdf Graphic file (type pdf)
-<use bookdown_files/figure-latex/high3tplot-1.pdf>
+File: bookdown_files/figure-latex/toresratetplot-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/toresratetplot-1.pdf>
 [213]
-Underfull \vbox (badness 10000) detected at line 7020
+Underfull \vbox (badness 10000) detected at line 7072
  []
 
 
-Underfull \vbox (badness 10000) detected at line 7020
+Underfull \vbox (badness 10000) detected at line 7072
  []
 
 [214]
-File: bookdown_files/figure-latex/toresratetplot-1.pdf Graphic file (type pdf)
-<use bookdown_files/figure-latex/toresratetplot-1.pdf>
+Underfull \vbox (badness 10000) detected at line 7072
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 7072
+ []
+
 [215]
-Underfull \vbox (badness 10000) detected at line 7095
- []
-
-
-Underfull \vbox (badness 10000) detected at line 7095
- []
-
-[216]
-Underfull \vbox (badness 10000) detected at line 7095
- []
-
-
-Underfull \vbox (badness 10000) detected at line 7095
- []
-
-[217]
 File: bookdown_files/figure-latex/deasratetplot-1.pdf Graphic file (type pdf)
 <use bookdown_files/figure-latex/deasratetplot-1.pdf>
-[218] [219
+[216] [217
 
-] [220]
-Overfull \hbox (50.82181pt too wide) in paragraph at lines 7203--7203
+] [218]
+Overfull \hbox (50.82181pt too wide) in paragraph at lines 7180--7180
 []\TU/lmtt/m/n/10.53937 ## for the current version, we suggest you use the defa
 ult settings of[] 
  []
 
 
-Overfull \hbox (61.88815pt too wide) in paragraph at lines 7203--7203
+Overfull \hbox (61.88815pt too wide) in paragraph at lines 7180--7180
 []\TU/lmtt/m/n/10.53937 ##   the duration (1000 ms or more) in the induction se
 ttings of LI-6800[] 
  []
 
-[221]
+[219]
 File: bookdown_files/figure-latex/acplot-1.pdf Graphic file (type pdf)
 <use bookdown_files/figure-latex/acplot-1.pdf>
-[222]
+[220]
 File: bookdown_files/figure-latex/dcplot-1.pdf Graphic file (type pdf)
 <use bookdown_files/figure-latex/dcplot-1.pdf>
-[223] [224]
-Underfull \vbox (badness 10000) detected at line 7304
+[221] [222]
+Underfull \vbox (badness 10000) detected at line 7281
  []
 
 
-Overfull \hbox (336.25pt too wide) detected at line 7304
+Overfull \hbox (336.25pt too wide) detected at line 7281
 []
  []
 
 
-Underfull \vbox (badness 10000) detected at line 7304
+Underfull \vbox (badness 10000) detected at line 7281
  []
 
 
-Overfull \hbox (336.25pt too wide) detected at line 7304
+Overfull \hbox (336.25pt too wide) detected at line 7281
 []
  []
 
 
-Underfull \vbox (badness 10000) detected at line 7304
+Underfull \vbox (badness 10000) detected at line 7281
  []
 
 
-Overfull \hbox (336.25pt too wide) detected at line 7304
+Overfull \hbox (336.25pt too wide) detected at line 7281
 []
  []
 
 
-Underfull \vbox (badness 10000) detected at line 7304
+Underfull \vbox (badness 10000) detected at line 7281
  []
 
 
-Overfull \hbox (336.25pt too wide) detected at line 7304
+Overfull \hbox (336.25pt too wide) detected at line 7281
 []
  []
 
 Chapter 11.
 
-Underfull \hbox (badness 10000) in paragraph at lines 7310--7310
+Underfull \hbox (badness 10000) in paragraph at lines 7287--7287
 [][][][][]$[][][][][] [] [] [] [][][][] [] [][][][][][][][][] [] [][][] [] [][]
 [][] [] [][] [] [][] [] [][][][][][][][][] [][] [][][][][][][][][] [][] [][][][
 ][][][][] [][] [][][][][][][][][] [][]
@@ -5317,7 +5277,7 @@ Underfull \hbox (badness 10000) has occurred while \output is active
  [][][][] 
  []
 
-[225
+[223
 
 
 
@@ -5328,13 +5288,13 @@ File: images/pc1.png Graphic file (type bmp)
 <images/pc1.png>
 File: images/pc2.png Graphic file (type bmp)
 <images/pc2.png>
-[226]
+[224]
 File: bookdown_files/figure-latex/maxvar-1.pdf Graphic file (type pdf)
 <use bookdown_files/figure-latex/maxvar-1.pdf>
 File: images/pc3.png Graphic file (type bmp)
 <images/pc3.png>
-[227] [228]
-Overfull \hbox (155.95203pt too wide) in paragraph at lines 7375--7375
+[225] [226]
+Overfull \hbox (155.95203pt too wide) in paragraph at lines 7352--7352
 []\TU/lmtt/m/n/10.53937 ## Welcome! Want to learn more? See two factoextra-rela
 ted books at https://goo.gl/ve3WBa[] 
  []
@@ -5343,10 +5303,10 @@ File: bookdown_files/figure-latex/scree-1.pdf Graphic file (type pdf)
 <use bookdown_files/figure-latex/scree-1.pdf>
 File: bookdown_files/figure-latex/loadingpca-1.pdf Graphic file (type pdf)
 <use bookdown_files/figure-latex/loadingpca-1.pdf>
-[229] [230]
+[227] [228]
 File: bookdown_files/figure-latex/scorepca-1.pdf Graphic file (type pdf)
 <use bookdown_files/figure-latex/scorepca-1.pdf>
-[231] [232] [233] [234] [235]
+[229] [230] [231] [232] [233]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
@@ -5383,65 +5343,65 @@ Underfull \hbox (badness 10000) has occurred while \output is active
  [][][][] 
  []
 
-[236
+[234
 
 ]
-Underfull \vbox (badness 10000) detected at line 7556
+Underfull \vbox (badness 10000) detected at line 7533
  []
 
 
-Overfull \hbox (336.25pt too wide) detected at line 7556
+Overfull \hbox (336.25pt too wide) detected at line 7533
 []
  []
 
 
-Underfull \vbox (badness 10000) detected at line 7556
+Underfull \vbox (badness 10000) detected at line 7533
  []
 
 
-Overfull \hbox (336.25pt too wide) detected at line 7556
+Overfull \hbox (336.25pt too wide) detected at line 7533
 []
  []
 
 
-Underfull \vbox (badness 10000) detected at line 7556
+Underfull \vbox (badness 10000) detected at line 7533
  []
 
 
-Overfull \hbox (336.25pt too wide) detected at line 7556
+Overfull \hbox (336.25pt too wide) detected at line 7533
 []
  []
 
 
-Underfull \vbox (badness 10000) detected at line 7556
+Underfull \vbox (badness 10000) detected at line 7533
  []
 
 
-Overfull \hbox (336.25pt too wide) detected at line 7556
+Overfull \hbox (336.25pt too wide) detected at line 7533
 []
  []
 
 Chapter 12.
 
-Overfull \hbox (56.35504pt too wide) in paragraph at lines 7615--7615
+Overfull \hbox (56.35504pt too wide) in paragraph at lines 7592--7592
 []\TU/lmtt/m/n/10.53937 ## [1] stats     graphics  grDevices utils     datasets
   methods   base[] 
  []
 
 
-Overfull \hbox (95.0872pt too wide) in paragraph at lines 7615--7615
-[]\TU/lmtt/m/n/10.53937 ##  [1] factoextra_1.0.6   FactoMineR_2.3     jiptest_0
+Overfull \hbox (95.0872pt too wide) in paragraph at lines 7592--7592
+[]\TU/lmtt/m/n/10.53937 ##  [1] factoextra_1.0.7   FactoMineR_2.3     jiptest_0
 .1.3      gridExtra_2.3[] 
  []
 
 
-Overfull \hbox (84.02092pt too wide) in paragraph at lines 7615--7615
+Overfull \hbox (84.02092pt too wide) in paragraph at lines 7592--7592
 []\TU/lmtt/m/n/10.53937 ##  [5] plyr_1.8.6         racir_1.0.0        nls2_0.2 
           proto_1.0.0[] 
  []
 
 
-Overfull \hbox (122.75304pt too wide) in paragraph at lines 7615--7615
+Overfull \hbox (122.75304pt too wide) in paragraph at lines 7592--7592
 []\TU/lmtt/m/n/10.53937 ##  [9] purrr_0.3.3        ggplot2_3.3.0      minpack.l
 m_1.2-1   plantecophys_1.4-4[] 
  []
@@ -5451,123 +5411,123 @@ Underfull \hbox (badness 10000) has occurred while \output is active
  [][][][] 
  []
 
-[237
+[235
 
 ]
-Overfull \hbox (28.6892pt too wide) in paragraph at lines 7615--7615
+Overfull \hbox (28.6892pt too wide) in paragraph at lines 7592--7592
 []\TU/lmtt/m/n/10.53937 ##  [1] tidyr_1.0.2          splines_3.6.3        asser
 tthat_0.2.1[] 
  []
 
 
-Overfull \hbox (28.68918pt too wide) in paragraph at lines 7615--7615
-[]\TU/lmtt/m/n/10.53937 ##  [4] highr_0.8            ggstance_0.3.3       cellr
+Overfull \hbox (28.68918pt too wide) in paragraph at lines 7592--7592
+[]\TU/lmtt/m/n/10.53937 ##  [4] highr_0.8            ggstance_0.3.4       cellr
 anger_1.1.0[] 
  []
 
 
-Overfull \hbox (6.55653pt too wide) in paragraph at lines 7615--7615
+Overfull \hbox (6.55653pt too wide) in paragraph at lines 7592--7592
 []\TU/lmtt/m/n/10.53937 ##  [7] ggrepel_0.8.2        yaml_2.2.1           pilla
 r_1.4.3[] 
  []
 
 
-Overfull \hbox (39.75551pt too wide) in paragraph at lines 7615--7615
+Overfull \hbox (39.75551pt too wide) in paragraph at lines 7592--7592
 []\TU/lmtt/m/n/10.53937 ## [13] digest_0.6.25        ggsignif_0.6.0       RColo
 rBrewer_1.1-2[] 
  []
 
 
-Overfull \hbox (28.68918pt too wide) in paragraph at lines 7615--7615
+Overfull \hbox (28.68918pt too wide) in paragraph at lines 7592--7592
 []\TU/lmtt/m/n/10.53937 ## [16] polyclip_1.10-0      MESS_0.5.6           color
 space_1.4-1[] 
  []
 
 
-Overfull \hbox (23.156pt too wide) in paragraph at lines 7615--7615
+Overfull \hbox (23.156pt too wide) in paragraph at lines 7592--7592
 []\TU/lmtt/m/n/10.53937 ## [19] htmltools_0.4.0      Matrix_1.2-18        pkgco
 nfig_2.0.3[] 
  []
 
 
-Overfull \hbox (6.55653pt too wide) in paragraph at lines 7615--7615
+Overfull \hbox (6.55653pt too wide) in paragraph at lines 7592--7592
 []\TU/lmtt/m/n/10.53937 ## [22] broom_0.5.5          bookdown_0.18        scale
 s_1.1.0[] 
  []
 
 
-Overfull \hbox (6.55653pt too wide) in paragraph at lines 7615--7615
+Overfull \hbox (6.55653pt too wide) in paragraph at lines 7592--7592
 []\TU/lmtt/m/n/10.53937 ## [25] tweenr_1.0.1         ggforce_0.3.1        tibbl
 e_3.0.0[] 
  []
 
 
-Overfull \hbox (6.55652pt too wide) in paragraph at lines 7615--7615
+Overfull \hbox (6.55652pt too wide) in paragraph at lines 7592--7592
 []\TU/lmtt/m/n/10.53937 ## [28] mgcv_1.8-31          generics_0.0.2       farve
 r_2.0.3[] 
  []
 
 
-Overfull \hbox (1.02335pt too wide) in paragraph at lines 7615--7615
+Overfull \hbox (1.02335pt too wide) in paragraph at lines 7592--7592
 []\TU/lmtt/m/n/10.53937 ## [31] ggpubr_0.2.5         ellipsis_0.3.0       withr
 _2.1.2[] 
  []
 
 
-Overfull \hbox (6.55652pt too wide) in paragraph at lines 7615--7615
+Overfull \hbox (6.55652pt too wide) in paragraph at lines 7592--7592
 []\TU/lmtt/m/n/10.53937 ## [37] XLConnect_1.0.1      magrittr_1.5         crayo
 n_1.3.4[] 
  []
 
 
-Overfull \hbox (1.02336pt too wide) in paragraph at lines 7615--7615
+Overfull \hbox (1.02336pt too wide) in paragraph at lines 7592--7592
 []\TU/lmtt/m/n/10.53937 ## [40] readxl_1.3.1         evaluate_0.14        fansi
 _0.4.1[] 
  []
 
 
-Overfull \hbox (1.02336pt too wide) in paragraph at lines 7615--7615
+Overfull \hbox (1.02336pt too wide) in paragraph at lines 7592--7592
 []\TU/lmtt/m/n/10.53937 ## [43] nlme_3.1-145         MASS_7.3-51.5        geeM_
 0.10.1[] 
  []
 
 
-Overfull \hbox (23.15604pt too wide) in paragraph at lines 7615--7615
+Overfull \hbox (23.15604pt too wide) in paragraph at lines 7592--7592
 []\TU/lmtt/m/n/10.53937 ## [46] tools_3.6.3          hms_0.5.3            lifec
 ycle_0.2.0[] 
  []
 
 
-Overfull \hbox (12.0897pt too wide) in paragraph at lines 7615--7615
+Overfull \hbox (12.0897pt too wide) in paragraph at lines 7592--7592
 []\TU/lmtt/m/n/10.53937 ## [49] stringr_1.4.0        munsell_0.5.0        clust
 er_2.1.0[] 
  []
 
 
-Overfull \hbox (1.02332pt too wide) in paragraph at lines 7615--7615
+Overfull \hbox (1.02332pt too wide) in paragraph at lines 7592--7592
 []\TU/lmtt/m/n/10.53937 ## [52] flashClust_1.01-2    compiler_3.6.3       rlang
 _0.4.5[] 
  []
 
 
-Overfull \hbox (12.08968pt too wide) in paragraph at lines 7615--7615
+Overfull \hbox (12.08968pt too wide) in paragraph at lines 7592--7592
 []\TU/lmtt/m/n/10.53937 ## [58] mosaicCore_0.6.0     labeling_0.3         rmark
 down_2.1[] 
  []
 
 
-Overfull \hbox (23.15604pt too wide) in paragraph at lines 7615--7615
+Overfull \hbox (23.15604pt too wide) in paragraph at lines 7592--7592
 []\TU/lmtt/m/n/10.53937 ## [64] knitr_1.28           dplyr_0.8.5          ggfor
 mula_0.9.4[] 
  []
 
 
-Overfull \hbox (12.08969pt too wide) in paragraph at lines 7615--7615
+Overfull \hbox (12.08969pt too wide) in paragraph at lines 7592--7592
 []\TU/lmtt/m/n/10.53937 ## [67] readr_1.3.1          rJava_0.9-12         strin
 gi_1.4.6[] 
  []
 
-[238] (./bookdown.bbl
+[236] (./bookdown.bbl
 Underfull \vbox (badness 10000) detected at line 1
  []
 
@@ -5613,11 +5573,11 @@ Underfull \hbox (badness 10000) has occurred while \output is active
  [][][][] 
  []
 
-[239
+[237
 
 
 
-] [240] [241]
+] [238] [239]
 Underfull \hbox (badness 2512) in paragraph at lines 171--175
 []\TU/lmr/m/n/10.53937 Leuning, R. (1995).  A critical appraisal of a combined 
 stom-
@@ -5627,30 +5587,30 @@ Invalid UTF-8 byte or sequence at line 177 replaced by U+FFFD.
 Missing character: There is no � in font [lmroman10-regular]:mapping=tex-text;!
 Invalid UTF-8 byte or sequence at line 178 replaced by U+FFFD.
 Missing character: There is no � in font [lmroman10-regular]:mapping=tex-text;!
-[242] [243]) [244] (./bookdown.ind)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 7624.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 7624.
+[240] [241]) [242] (./bookdown.ind)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 7601.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 7601.
 (./bookdown.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 7624.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 7624.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 7601.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 7601.
 
 Package rerunfilecheck Info: File `bookdown.out' has not changed.
-(rerunfilecheck)             Checksum: 53A019FD960DEC365F587E76F1E002CD;13112.
+(rerunfilecheck)             Checksum: 8B6E1BB6DE9523EA74007505128DB975;13112.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 7624.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 7601.
  ) 
 Here is how much of TeX's memory you used:
- 23450 strings out of 481790
- 469177 string characters out of 5935795
- 948555 words of memory out of 5000000
- 39955 multiletter control sequences out of 15000+600000
+ 23438 strings out of 481790
+ 468991 string characters out of 5935795
+ 948456 words of memory out of 5000000
+ 39944 multiletter control sequences out of 15000+600000
  548927 words of font info for 185 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  66i,17n,128p,902b,937s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on bookdown.pdf (266 pages).
+Output written on bookdown.pdf (264 pages).

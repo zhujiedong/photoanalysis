@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2020-04-04" />
+<meta name="date" content="2020-04-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -543,129 +543,104 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <div id="racir68_exam" class="section level2">
 <h2><span class="header-section-number">10.8</span> RACiR分析的手动实现</h2>
 <p>以下内容是我之前写的内容，部分代码的实现和上述软件包相似，仅供参考，尤其是当您使用 <code>racir</code> 软件包报错时，可以参考下文代码手动实现 RACiR 数据的分析。</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" title="1"><span class="co"># 分别读取未校准空叶室数据</span></a>
-<a class="sourceLine" id="cb156-2" title="2"><span class="co"># 未校准带叶片测量数据</span></a>
-<a class="sourceLine" id="cb156-3" title="3"><span class="co"># 标准aci曲线测量数据</span></a>
-<a class="sourceLine" id="cb156-4" title="4">uemp500 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/uncorr_emp500.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb156-5" title="5">uleaf500 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/uncorr_leaf500.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb156-6" title="6">acin &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/aci_ex.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb156-7" title="7"></a>
-<a class="sourceLine" id="cb156-8" title="8"><span class="co"># 防止读入空白行</span></a>
-<a class="sourceLine" id="cb156-9" title="9">m &lt;-<span class="st"> </span><span class="kw">length</span>(<span class="kw">which</span>(uemp500<span class="op">$</span>obs <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb156-10" title="10">n &lt;-<span class="st"> </span><span class="kw">length</span>(<span class="kw">which</span>(uleaf500<span class="op">$</span>obs <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb156-11" title="11">uemp500 &lt;-<span class="st"> </span>uemp500[<span class="dv">1</span><span class="op">:</span>m,]</a>
-<a class="sourceLine" id="cb156-12" title="12">uleaf500 &lt;-<span class="st"> </span>uleaf500[<span class="dv">1</span><span class="op">:</span>n,]</a>
-<a class="sourceLine" id="cb156-13" title="13"></a>
-<a class="sourceLine" id="cb156-14" title="14"><span class="co"># 观察空叶室未校准数据reference对A的图形</span></a>
-<a class="sourceLine" id="cb156-15" title="15"><span class="kw">plot</span>(uemp500<span class="op">$</span>CO2_r, uemp500<span class="op">$</span>A)</a>
-<a class="sourceLine" id="cb156-16" title="16"><span class="co"># 选取线性部分用于校准</span></a>
-<a class="sourceLine" id="cb156-17" title="17"><span class="kw">locator</span>()</a>
-<a class="sourceLine" id="cb156-18" title="18"><span class="co"># 执行locator命令后，在上图中的目标位置选点，</span></a>
-<a class="sourceLine" id="cb156-19" title="19"><span class="co"># 选好后按 esc 可以返回所选点的坐标（选点即为在</span></a>
-<a class="sourceLine" id="cb156-20" title="20"><span class="co"># 预期位置鼠标单击）</span></a>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" title="1"><span class="co"># 加载需要的软件包  ---------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb156-2" title="2"></a>
+<a class="sourceLine" id="cb156-3" title="3"><span class="kw">library</span>(<span class="st">&quot;plantecophys&quot;</span>)</a>
+<a class="sourceLine" id="cb156-4" title="4"></a>
+<a class="sourceLine" id="cb156-5" title="5"><span class="co">#准备数据 ------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb156-6" title="6">empty_uc &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/racir-csv/uncorr_emp500.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb156-7" title="7">leaf_uc &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/racir-csv/uncorr_leaf500.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb156-8" title="8">aci &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/racir-csv/aci_ex.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb156-9" title="9"></a>
+<a class="sourceLine" id="cb156-10" title="10"><span class="co"># 防止读入空白行</span></a>
+<a class="sourceLine" id="cb156-11" title="11">empty_uc &lt;-<span class="st"> </span><span class="kw">subset</span>(empty_uc, obs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb156-12" title="12">leaf_uc &lt;-<span class="st"> </span><span class="kw">subset</span>(leaf_uc , obs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb156-13" title="13">aci &lt;-<span class="st"> </span><span class="kw">subset</span>(aci, obs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb156-14" title="14"></a>
+<a class="sourceLine" id="cb156-15" title="15"><span class="co"># 空叶室校准的系数计算 --------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb156-16" title="16"></a>
+<a class="sourceLine" id="cb156-17" title="17"><span class="co"># 观察空叶室未校准数据reference对A的图形</span></a>
+<a class="sourceLine" id="cb156-18" title="18"><span class="kw">plot</span>(empty_uc<span class="op">$</span>CO2_r, empty_uc<span class="op">$</span>A)</a>
+<a class="sourceLine" id="cb156-19" title="19"><span class="co"># 选取线性部分用于校准</span></a>
+<a class="sourceLine" id="cb156-20" title="20"><span class="kw">locator</span>()</a>
 <a class="sourceLine" id="cb156-21" title="21"></a>
-<a class="sourceLine" id="cb156-22" title="22"><span class="co"># 根据上面的点，利用二氧化碳的值过滤掉不需要的数据</span></a>
-<a class="sourceLine" id="cb156-23" title="23"><span class="co"># 只要在线性范围内选点，拟合结果相差很小</span></a>
-<a class="sourceLine" id="cb156-24" title="24">cemp &lt;-<span class="st"> </span>uemp500[<span class="kw">which</span>(uemp500<span class="op">$</span>CO2_r <span class="op">&gt;</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb156-25" title="25"><span class="st">                        </span><span class="fl">45.28</span> <span class="op">&amp;</span><span class="st"> </span>uemp500<span class="op">$</span>CO2_r <span class="op">&lt;</span><span class="st"> </span><span class="fl">459.12</span>),]</a>
-<a class="sourceLine" id="cb156-26" title="26"><span class="kw">plot</span>(cemp<span class="op">$</span>CO2_r, cemp<span class="op">$</span>A)</a>
+<a class="sourceLine" id="cb156-22" title="22"><span class="co"># 执行locator命令后，在上图中的目标位置选点，</span></a>
+<a class="sourceLine" id="cb156-23" title="23"><span class="co"># 选好后按 esc 可以返回所选点的坐标（选点即为在</span></a>
+<a class="sourceLine" id="cb156-24" title="24"><span class="co"># 预期位置鼠标单击）</span></a>
+<a class="sourceLine" id="cb156-25" title="25"><span class="co"># 根据上面的点，利用二氧化碳的值过滤掉不需要的数据</span></a>
+<a class="sourceLine" id="cb156-26" title="26"><span class="co"># 只要在线性范围内选点，拟合结果相差很小</span></a>
 <a class="sourceLine" id="cb156-27" title="27"></a>
-<a class="sourceLine" id="cb156-28" title="28"><span class="co"># 采用 1~5 次多项式分别拟合</span></a>
-<a class="sourceLine" id="cb156-29" title="29">cal1st &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span>CO2_r, <span class="dt">data =</span> cemp)</a>
-<a class="sourceLine" id="cb156-30" title="30">cal2nd &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(CO2_r, <span class="dv">2</span>), <span class="dt">data =</span> cemp)</a>
-<a class="sourceLine" id="cb156-31" title="31">cal3rd &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(CO2_r, <span class="dv">3</span>), <span class="dt">data =</span> cemp)</a>
-<a class="sourceLine" id="cb156-32" title="32">cal4th &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(CO2_r, <span class="dv">4</span>), <span class="dt">data =</span> cemp)</a>
-<a class="sourceLine" id="cb156-33" title="33">cal5th &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(CO2_r, <span class="dv">5</span>), <span class="dt">data =</span> cemp)</a>
-<a class="sourceLine" id="cb156-34" title="34"></a>
-<a class="sourceLine" id="cb156-35" title="35"><span class="co"># 利用 BIC 找出最合理的校准方程</span></a>
-<a class="sourceLine" id="cb156-36" title="36">bics &lt;-<span class="st"> </span><span class="kw">BIC</span>(cal1st, cal2nd, cal3rd, cal4th, cal5th)</a>
-<a class="sourceLine" id="cb156-37" title="37"><span class="co"># noquote也就是没引号，成为名字</span></a>
-<a class="sourceLine" id="cb156-38" title="38">best &lt;-<span class="st"> </span><span class="kw">noquote</span>(<span class="kw">rownames</span>(bics)[bics<span class="op">$</span>BIC <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(bics<span class="op">$</span>BIC)])</a>
-<a class="sourceLine" id="cb156-39" title="39">best</a>
-<a class="sourceLine" id="cb156-40" title="40"></a>
-<a class="sourceLine" id="cb156-41" title="41"><span class="co"># 校准带叶片测量的数据</span></a>
-<a class="sourceLine" id="cb156-42" title="42">uleafc &lt;-<span class="st"> </span>uleaf500</a>
-<a class="sourceLine" id="cb156-43" title="43">uleafc<span class="op">$</span>A &lt;-<span class="st"> </span>uleafc<span class="op">$</span>A <span class="op">-</span><span class="st"> </span><span class="kw">predict</span>(cal4th, uleafc)</a>
-<a class="sourceLine" id="cb156-44" title="44">uleafc<span class="op">$</span>Ci &lt;-<span class="st"> </span>((uleafc<span class="op">$</span>gtc <span class="op">-</span><span class="st"> </span>uleafc<span class="op">$</span>E <span class="op">/</span><span class="st"> </span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span>uleafc<span class="op">$</span>CO2_s <span class="op">-</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb156-45" title="45"><span class="st">                </span>uleafc<span class="op">$</span>A) <span class="op">/</span><span class="st"> </span>(uleafc<span class="op">$</span>gtc <span class="op">+</span><span class="st"> </span>uleafc<span class="op">$</span>E <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb156-28" title="28">empty_ct &lt;-<span class="st"> </span>empty_uc[<span class="kw">which</span>(empty_uc<span class="op">$</span>CO2_r <span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb156-29" title="29"><span class="st">  </span><span class="fl">45.28</span> <span class="op">&amp;</span><span class="st"> </span>empty_uc<span class="op">$</span>CO2_r <span class="op">&lt;</span><span class="st"> </span><span class="fl">459.12</span>), ]</a>
+<a class="sourceLine" id="cb156-30" title="30"><span class="kw">plot</span>(empty_ct<span class="op">$</span>CO2_r, empty_ct<span class="op">$</span>A)</a>
+<a class="sourceLine" id="cb156-31" title="31"></a>
+<a class="sourceLine" id="cb156-32" title="32"><span class="co"># 采用 1~5 次多项式分别拟合</span></a>
+<a class="sourceLine" id="cb156-33" title="33">cal1st &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span>CO2_r, <span class="dt">data =</span> empty_ct)</a>
+<a class="sourceLine" id="cb156-34" title="34">cal2nd &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(CO2_r, <span class="dv">2</span>), <span class="dt">data =</span> empty_ct)</a>
+<a class="sourceLine" id="cb156-35" title="35">cal3rd &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(CO2_r, <span class="dv">3</span>), <span class="dt">data =</span> empty_ct)</a>
+<a class="sourceLine" id="cb156-36" title="36">cal4th &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(CO2_r, <span class="dv">4</span>), <span class="dt">data =</span> empty_ct)</a>
+<a class="sourceLine" id="cb156-37" title="37">cal5th &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(CO2_r, <span class="dv">5</span>), <span class="dt">data =</span> empty_ct)</a>
+<a class="sourceLine" id="cb156-38" title="38"><span class="co"># 利用 BIC 找出最合理的校准方程</span></a>
+<a class="sourceLine" id="cb156-39" title="39">bics &lt;-<span class="st"> </span><span class="kw">BIC</span>(cal1st, cal2nd, cal3rd, cal4th, cal5th)</a>
+<a class="sourceLine" id="cb156-40" title="40"><span class="co"># noquote也就是没引号，成为名字</span></a>
+<a class="sourceLine" id="cb156-41" title="41">best &lt;-<span class="st"> </span><span class="kw">noquote</span>(<span class="kw">rownames</span>(bics)[bics<span class="op">$</span>BIC <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(bics<span class="op">$</span>BIC)])</a>
+<a class="sourceLine" id="cb156-42" title="42">best</a>
+<a class="sourceLine" id="cb156-43" title="43"></a>
+<a class="sourceLine" id="cb156-44" title="44"></a>
+<a class="sourceLine" id="cb156-45" title="45"><span class="co"># 校准带叶片测量的数据 --------------------------------------------------------------</span></a>
 <a class="sourceLine" id="cb156-46" title="46"></a>
-<a class="sourceLine" id="cb156-47" title="47"><span class="co"># 对校准前后的数据进行作图，查看校准效果</span></a>
-<a class="sourceLine" id="cb156-48" title="48"><span class="kw">plot</span>(uleaf500<span class="op">$</span>CO2_r, uleaf500<span class="op">$</span>A, <span class="dt">pch =</span> <span class="dv">2</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>, <span class="dv">40</span>))</a>
-<a class="sourceLine" id="cb156-49" title="49"><span class="kw">points</span>(uleafc<span class="op">$</span>CO2_r, uleafc<span class="op">$</span>A)</a>
-<a class="sourceLine" id="cb156-50" title="50"><span class="kw">locator</span>()</a>
-<a class="sourceLine" id="cb156-51" title="51">cleaf &lt;-<span class="st"> </span>uleafc[<span class="kw">which</span>(uleafc<span class="op">$</span>CO2_r <span class="op">&gt;</span><span class="st"> </span><span class="fl">16.6</span> <span class="op">&amp;</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb156-52" title="52"><span class="st">                        </span>uleafc<span class="op">$</span>CO2_r <span class="op">&lt;</span><span class="st"> </span><span class="dv">478</span>),]</a>
-<a class="sourceLine" id="cb156-53" title="53"><span class="kw">plot</span>(cleaf<span class="op">$</span>CO2_r, cleaf<span class="op">$</span>A)</a>
-<a class="sourceLine" id="cb156-54" title="54"></a>
-<a class="sourceLine" id="cb156-55" title="55"><span class="co"># 利用plantecophys拟合标准曲线和racir曲线</span></a>
-<a class="sourceLine" id="cb156-56" title="56"><span class="kw">library</span>(<span class="st">&quot;plantecophys&quot;</span>)</a>
-<a class="sourceLine" id="cb156-57" title="57">acifit &lt;-<span class="st"> </span><span class="kw">fitaci</span>(cleaf, <span class="dt">varnames =</span> </a>
-<a class="sourceLine" id="cb156-58" title="58">                   <span class="kw">list</span>(<span class="dt">ALEAF =</span> <span class="st">&quot;A&quot;</span>, <span class="dt">Tleaf =</span> <span class="st">&quot;Tleaf&quot;</span>, <span class="dt">Ci =</span> <span class="st">&quot;Ci&quot;</span>, </a>
-<a class="sourceLine" id="cb156-59" title="59">                        <span class="dt">PPFD  =</span> <span class="st">&quot;Qin&quot;</span>, <span class="dt">Rd =</span> <span class="st">&quot;Rd&quot;</span>), <span class="dt">Patm =</span> <span class="fl">84.09</span>)</a>
-<a class="sourceLine" id="cb156-60" title="60">acifit_normal &lt;-<span class="st"> </span><span class="kw">fitaci</span>(acin, <span class="dt">varnames =</span> </a>
-<a class="sourceLine" id="cb156-61" title="61">                          <span class="kw">list</span>(<span class="dt">ALEAF =</span> <span class="st">&quot;A&quot;</span>, <span class="dt">Tleaf =</span> <span class="st">&quot;Tleaf&quot;</span>, <span class="dt">Ci =</span> <span class="st">&quot;Ci&quot;</span>, </a>
-<a class="sourceLine" id="cb156-62" title="62">                               <span class="dt">PPFD  =</span> <span class="st">&quot;Qin&quot;</span>, <span class="dt">Rd =</span> <span class="st">&quot;Rd&quot;</span>), <span class="dt">Patm =</span> <span class="fl">84.09</span>)</a>
-<a class="sourceLine" id="cb156-63" title="63"><span class="co"># 查看拟合数据</span></a>
-<a class="sourceLine" id="cb156-64" title="64">acifit<span class="op">$</span>pars</a>
-<a class="sourceLine" id="cb156-65" title="65">acifit_normal<span class="op">$</span>pars</a>
-<a class="sourceLine" id="cb156-66" title="66"></a>
-<a class="sourceLine" id="cb156-67" title="67"><span class="co"># 对快速曲线作图拟合结果进行查看</span></a>
-<a class="sourceLine" id="cb156-68" title="68"><span class="kw">plot</span>(acifit, <span class="dt">linecols =</span> <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>))</a>
-<a class="sourceLine" id="cb156-69" title="69"></a>
-<a class="sourceLine" id="cb156-70" title="70"><span class="co">#### ggplot2 作图</span></a>
-<a class="sourceLine" id="cb156-71" title="71">ddata &lt;-<span class="st"> </span>acifit<span class="op">$</span>df</a>
-<a class="sourceLine" id="cb156-72" title="72"></a>
-<a class="sourceLine" id="cb156-73" title="73">alldata &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">A =</span> <span class="kw">c</span>(acin<span class="op">$</span>A, ddata<span class="op">$</span>Ac, ddata<span class="op">$</span>Aj, cleaf<span class="op">$</span>A), </a>
-<a class="sourceLine" id="cb156-74" title="74">                      <span class="dt">Ci =</span> <span class="kw">c</span>(acin<span class="op">$</span>Ci, ddata<span class="op">$</span>Ci, ddata<span class="op">$</span>Ci, cleaf<span class="op">$</span>Ci),</a>
-<a class="sourceLine" id="cb156-75" title="75">                      <span class="dt">Atype =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb156-76" title="76">                        <span class="kw">rep</span>(<span class="st">&quot;standard Aci curve&quot;</span>, <span class="kw">length</span>(acin<span class="op">$</span>A)),</a>
-<a class="sourceLine" id="cb156-77" title="77">                        <span class="kw">rep</span>(<span class="st">&quot;Ac&quot;</span>, <span class="kw">length</span>(ddata<span class="op">$</span>Ac)), </a>
-<a class="sourceLine" id="cb156-78" title="78">                        <span class="kw">rep</span>(<span class="st">&quot;Aj&quot;</span>, <span class="kw">length</span>(ddata<span class="op">$</span>Aj)),</a>
-<a class="sourceLine" id="cb156-79" title="79">                        <span class="kw">rep</span>(<span class="st">&quot;A corrected&quot;</span>, <span class="kw">length</span>(cleaf<span class="op">$</span>A))</a>
-<a class="sourceLine" id="cb156-80" title="80">                      )</a>
-<a class="sourceLine" id="cb156-81" title="81">)</a>
-<a class="sourceLine" id="cb156-82" title="82"></a>
-<a class="sourceLine" id="cb156-83" title="83">alldata<span class="op">$</span>Atype &lt;-<span class="st"> </span><span class="kw">factor</span>(alldata<span class="op">$</span>Atype, </a>
-<a class="sourceLine" id="cb156-84" title="84">                        <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;standard Aci curve&quot;</span>, </a>
-<a class="sourceLine" id="cb156-85" title="85">                                   <span class="st">&quot;Ac&quot;</span>, <span class="st">&quot;Aj&quot;</span>, <span class="st">&quot;A corrected&quot;</span>))</a>
-<a class="sourceLine" id="cb156-86" title="86"></a>
-<a class="sourceLine" id="cb156-87" title="87"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb156-88" title="88">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(alldata)</a>
-<a class="sourceLine" id="cb156-89" title="89">p1 &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(Ci,A, <span class="dt">colour =</span> Atype),  <span class="dt">alpha =</span> <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb156-90" title="90"></a>
-<a class="sourceLine" id="cb156-91" title="91">p2 &lt;-<span class="st"> </span>p1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="kw">aes</span>(Ci, A, <span class="dt">colour =</span> Atype),</a>
-<a class="sourceLine" id="cb156-92" title="92">                       <span class="dt">method =</span> <span class="st">&#39;auto&#39;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb156-93" title="93"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;A &quot;</span>, <span class="st">&quot;(&quot;</span>, mu, </a>
-<a class="sourceLine" id="cb156-94" title="94">                          mol<span class="op">%.%</span>m<span class="op">^-</span><span class="dv">2</span><span class="op">%.%</span>s<span class="op">^-</span><span class="dv">1</span>, <span class="st">&quot;)&quot;</span>)), </a>
-<a class="sourceLine" id="cb156-95" title="95">       <span class="dt">x=</span><span class="kw">expression</span>(<span class="kw">paste</span>(C[i], <span class="st">&quot; &quot;</span>,</a>
-<a class="sourceLine" id="cb156-96" title="96">                          <span class="st">&quot;(&quot;</span>, mu, mol<span class="op">%.%</span>mol<span class="op">^-</span><span class="dv">1</span>, <span class="st">&quot;)&quot;</span>)))</a>
-<a class="sourceLine" id="cb156-97" title="97"></a>
-<a class="sourceLine" id="cb156-98" title="98">p2 <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1800</span>),</a>
-<a class="sourceLine" id="cb156-99" title="99">                        <span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1800</span>, <span class="dv">200</span>)) <span class="op">+</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb156-100" title="100"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">50</span>),</a>
-<a class="sourceLine" id="cb156-101" title="101">                     <span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">50</span>, <span class="dv">10</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb156-102" title="102"><span class="st">  </span><span class="kw">scale_colour_hue</span>(<span class="dt">name=</span><span class="st">&quot;  &quot;</span>, </a>
-<a class="sourceLine" id="cb156-103" title="103">                   <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&#39;ACi curve data; &#39;</span>, </a>
-<a class="sourceLine" id="cb156-104" title="104">                            <span class="kw">expression</span>(<span class="kw">paste</span>(A[c], <span class="st">&#39; data; &#39;</span>)), </a>
-<a class="sourceLine" id="cb156-105" title="105">                            <span class="kw">expression</span>(<span class="kw">paste</span>(A[j], <span class="st">&#39; data; &#39;</span>)), </a>
-<a class="sourceLine" id="cb156-106" title="106">                            <span class="st">&#39;RACiR data&#39;</span>) </a>
-<a class="sourceLine" id="cb156-107" title="107">  ) <span class="op">+</span><span class="st"> </span><span class="kw">theme_set</span>(<span class="kw">theme_bw</span>()) <span class="op">+</span></a>
-<a class="sourceLine" id="cb156-108" title="108"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x  =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>, </a>
-<a class="sourceLine" id="cb156-109" title="109">                                    <span class="dt">angle=</span><span class="dv">30</span>, <span class="dt">vjust=</span><span class="fl">0.5</span>), </a>
-<a class="sourceLine" id="cb156-110" title="110">        <span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb156-111" title="111">        <span class="dt">axis.title.x =</span> <span class="kw">element_text</span>(</a>
-<a class="sourceLine" id="cb156-112" title="112">          <span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&#39;bold&#39;</span>),</a>
-<a class="sourceLine" id="cb156-113" title="113">        <span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(</a>
-<a class="sourceLine" id="cb156-114" title="114">          <span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&#39;bold&#39;</span>),</a>
-<a class="sourceLine" id="cb156-115" title="115">        <span class="dt">legend.text.align =</span> <span class="dv">0</span>,</a>
-<a class="sourceLine" id="cb156-116" title="116">        <span class="dt">legend.position =</span> <span class="kw">c</span>(<span class="fl">0.8</span>, <span class="fl">0.6</span>))</a></code></pre></div>
-最终采用常规方法和 RACiR方法结果如图 <a href="anay-6800.html#fig:racir">10.4</a> 所示，其中 Aj 与 Ac 结果采用 RACiR计算<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a>。
-<div class="figure"><span id="fig:racir"></span>
-<img src="images/racir.png" alt="RACiR 方法与常规结果的比较" width="100%" />
-<p class="caption">
-图 10.4: RACiR 方法与常规结果的比较
-</p>
-</div>
+<a class="sourceLine" id="cb156-47" title="47">leaf_uc<span class="op">$</span>A &lt;-<span class="st"> </span>leaf_uc<span class="op">$</span>A <span class="op">-</span><span class="st"> </span><span class="kw">predict</span>(cal4th, leaf_uc)</a>
+<a class="sourceLine" id="cb156-48" title="48">leaf_uc<span class="op">$</span>Ci &lt;-<span class="st"> </span>((leaf_uc<span class="op">$</span>gtc <span class="op">-</span><span class="st"> </span>leaf_uc<span class="op">$</span>E <span class="op">/</span><span class="st"> </span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span>leaf_uc<span class="op">$</span>CO2_s <span class="op">-</span></a>
+<a class="sourceLine" id="cb156-49" title="49"><span class="st">                 </span>leaf_uc<span class="op">$</span>A) <span class="op">/</span><span class="st"> </span>(leaf_uc<span class="op">$</span>gtc <span class="op">+</span><span class="st"> </span>leaf_uc<span class="op">$</span>E <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb156-50" title="50"></a>
+<a class="sourceLine" id="cb156-51" title="51"><span class="co"># 对校准后的数据进行作图，查看校准效果</span></a>
+<a class="sourceLine" id="cb156-52" title="52"><span class="kw">plot</span>(leaf_uc<span class="op">$</span>CO2_r,</a>
+<a class="sourceLine" id="cb156-53" title="53">     leaf_uc<span class="op">$</span>A,</a>
+<a class="sourceLine" id="cb156-54" title="54">     <span class="dt">pch =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb156-55" title="55">     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>, <span class="dv">40</span>))</a>
+<a class="sourceLine" id="cb156-56" title="56"></a>
+<a class="sourceLine" id="cb156-57" title="57"><span class="co"># 选取带叶片测量的有效数据的范围</span></a>
+<a class="sourceLine" id="cb156-58" title="58"><span class="kw">locator</span>()</a>
+<a class="sourceLine" id="cb156-59" title="59"></a>
+<a class="sourceLine" id="cb156-60" title="60">leaf_ct &lt;-<span class="st"> </span>leaf_uc[<span class="kw">which</span>(leaf_uc<span class="op">$</span>CO2_r <span class="op">&gt;</span><span class="st"> </span><span class="fl">13.6</span> <span class="op">&amp;</span></a>
+<a class="sourceLine" id="cb156-61" title="61"><span class="st">   </span>leaf_uc<span class="op">$</span>CO2_r <span class="op">&lt;</span><span class="st"> </span><span class="dv">471</span>), ]</a>
+<a class="sourceLine" id="cb156-62" title="62"><span class="kw">plot</span>(leaf_uc<span class="op">$</span>CO2_r, leaf_uc<span class="op">$</span>A)</a>
+<a class="sourceLine" id="cb156-63" title="63"></a>
+<a class="sourceLine" id="cb156-64" title="64"></a>
+<a class="sourceLine" id="cb156-65" title="65"><span class="co"># 拟合 ----------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb156-66" title="66">racir &lt;-<span class="st"> </span><span class="kw">fitaci</span>(</a>
+<a class="sourceLine" id="cb156-67" title="67">  leaf_ct,</a>
+<a class="sourceLine" id="cb156-68" title="68">  <span class="dt">varnames =</span></a>
+<a class="sourceLine" id="cb156-69" title="69">    <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb156-70" title="70">      <span class="dt">ALEAF =</span> <span class="st">&quot;A&quot;</span>,</a>
+<a class="sourceLine" id="cb156-71" title="71">      <span class="dt">Tleaf =</span> <span class="st">&quot;Tleaf&quot;</span>,</a>
+<a class="sourceLine" id="cb156-72" title="72">      <span class="dt">Ci =</span> <span class="st">&quot;Ci&quot;</span>,</a>
+<a class="sourceLine" id="cb156-73" title="73">      <span class="dt">PPFD  =</span> <span class="st">&quot;Qin&quot;</span>,</a>
+<a class="sourceLine" id="cb156-74" title="74">      <span class="dt">Rd =</span> <span class="st">&quot;Rd&quot;</span></a>
+<a class="sourceLine" id="cb156-75" title="75">    ),</a>
+<a class="sourceLine" id="cb156-76" title="76">  <span class="dt">Patm =</span> <span class="fl">84.09</span></a>
+<a class="sourceLine" id="cb156-77" title="77">)</a>
+<a class="sourceLine" id="cb156-78" title="78"></a>
+<a class="sourceLine" id="cb156-79" title="79">slow &lt;-<span class="st"> </span><span class="kw">fitaci</span>(</a>
+<a class="sourceLine" id="cb156-80" title="80">  aci,</a>
+<a class="sourceLine" id="cb156-81" title="81">  <span class="dt">varnames =</span></a>
+<a class="sourceLine" id="cb156-82" title="82">    <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb156-83" title="83">      <span class="dt">ALEAF =</span> <span class="st">&quot;A&quot;</span>,</a>
+<a class="sourceLine" id="cb156-84" title="84">      <span class="dt">Tleaf =</span> <span class="st">&quot;Tleaf&quot;</span>,</a>
+<a class="sourceLine" id="cb156-85" title="85">      <span class="dt">Ci =</span> <span class="st">&quot;Ci&quot;</span>,</a>
+<a class="sourceLine" id="cb156-86" title="86">      <span class="dt">PPFD  =</span> <span class="st">&quot;Qin&quot;</span>,</a>
+<a class="sourceLine" id="cb156-87" title="87">      <span class="dt">Rd =</span> <span class="st">&quot;Rd&quot;</span></a>
+<a class="sourceLine" id="cb156-88" title="88">    ),</a>
+<a class="sourceLine" id="cb156-89" title="89">  <span class="dt">Patm =</span> <span class="fl">84.09</span></a>
+<a class="sourceLine" id="cb156-90" title="90">)</a>
+<a class="sourceLine" id="cb156-91" title="91"></a>
+<a class="sourceLine" id="cb156-92" title="92"><span class="co"># 查看拟合数据</span></a>
+<a class="sourceLine" id="cb156-93" title="93">racir<span class="op">$</span>pars</a>
+<a class="sourceLine" id="cb156-94" title="94">slow<span class="op">$</span>pars</a>
+<a class="sourceLine" id="cb156-95" title="95"></a>
+<a class="sourceLine" id="cb156-96" title="96"><span class="co"># 对快速曲线作图拟合结果进行查看</span></a>
+<a class="sourceLine" id="cb156-97" title="97"><span class="kw">plot</span>(racir, <span class="dt">linecols =</span> <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>))</a></code></pre></div>
+<p>注意，注意数据表头的大小写，此处代码中，为处理数据的方便，我更改了大小写，分析自己的数据时需要注意。</p>
 
 
 </div>
@@ -854,7 +829,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <div class="figure"><span id="fig:anetcc"></span>
 <img src="bookdown_files/figure-html/anetcc-1.png" alt="Anet VS. Cc" width="672" />
 <p class="caption">
-图 10.5: Anet VS. Cc
+图 10.4: Anet VS. Cc
 </p>
 </div>
 <div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" title="1"><span class="co">#净光合速率与Ci作图</span></a>
@@ -881,7 +856,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <div class="figure"><span id="fig:anetci"></span>
 <img src="bookdown_files/figure-html/anetci-1.png" alt="Anet VS. Ci" width="672" />
 <p class="caption">
-图 10.6: Anet VS. Ci
+图 10.5: Anet VS. Ci
 </p>
 </div>
 <div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" title="1"><span class="co">#表观光合与Cc作图</span></a>
@@ -908,7 +883,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <div class="figure"><span id="fig:aappcc"></span>
 <img src="bookdown_files/figure-html/aappcc-1.png" alt="Aapparent VS. Cc" width="672" />
 <p class="caption">
-图 10.7: Aapparent VS. Cc
+图 10.6: Aapparent VS. Cc
 </p>
 </div>
 <div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" title="1"><span class="co">#表观与Ci作图</span></a>
@@ -935,7 +910,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <div class="figure"><span id="fig:aappci"></span>
 <img src="bookdown_files/figure-html/aappci-1.png" alt="Aapparent VS. Ci" width="672" />
 <p class="caption">
-图 10.8: Aapparent VS. Ci
+图 10.7: Aapparent VS. Ci
 </p>
 </div>
 </div>
@@ -1136,14 +1111,14 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <div class="figure"><span id="fig:intdelay"></span>
 <img src="bookdown_files/figure-html/intdelay-1.png" alt="基于 Ci 的不同延时下的截距" width="672" />
 <p class="caption">
-图 10.9: 基于 Ci 的不同延时下的截距
+图 10.8: 基于 Ci 的不同延时下的截距
 </p>
 </div>
 <div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" title="1"><span class="kw">plot</span>(slps <span class="op">~</span><span class="st"> </span>dels)</a></code></pre></div>
 <div class="figure"><span id="fig:intslps"></span>
 <img src="bookdown_files/figure-html/intslps-1.png" alt="基于 Ci 的不同延时下的斜率变化" width="672" />
 <p class="caption">
-图 10.10: 基于 Ci 的不同延时下的斜率变化
+图 10.9: 基于 Ci 的不同延时下的斜率变化
 </p>
 </div>
 <div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" title="1"><span class="kw">summary</span>(<span class="kw">lm</span>(slps <span class="op">~</span><span class="st"> </span>dels <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</a></code></pre></div>
@@ -1329,7 +1304,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <div class="figure"><span id="fig:intdelaycc"></span>
 <img src="bookdown_files/figure-html/intdelaycc-1.png" alt="基于 Cc 的不同延时下的时间" width="672" />
 <p class="caption">
-图 10.11: 基于 Cc 的不同延时下的时间
+图 10.10: 基于 Cc 的不同延时下的时间
 </p>
 </div>
 <div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" title="1"><span class="kw">summary</span>(<span class="kw">lm</span>(ints <span class="op">~</span><span class="st"> </span>dels))</a></code></pre></div>
@@ -1670,7 +1645,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <div class="figure"><span id="fig:slpdelaycc"></span>
 <img src="bookdown_files/figure-html/slpdelaycc-1.png" alt="基于 Cc 的不同延时下的截距" width="672" />
 <p class="caption">
-图 10.12: 基于 Cc 的不同延时下的截距
+图 10.11: 基于 Cc 的不同延时下的截距
 </p>
 </div>
 </div>
@@ -1808,7 +1783,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <div class="figure"><span id="fig:anetdeccc"></span>
 <img src="bookdown_files/figure-html/anetdeccc-1.png" alt="Rubisco 不同失活程度时 Anet VS Cc" width="672" />
 <p class="caption">
-图 10.13: Rubisco 不同失活程度时 Anet VS Cc
+图 10.12: Rubisco 不同失活程度时 Anet VS Cc
 </p>
 </div>
 <div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" title="1">AnetCi &lt;-</a>
@@ -1835,7 +1810,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <div class="figure"><span id="fig:anetdecci"></span>
 <img src="bookdown_files/figure-html/anetdecci-1.png" alt="Rubisco 不同失活程度时 Anet VS Ci" width="672" />
 <p class="caption">
-图 10.14: Rubisco 不同失活程度时 Anet VS Ci
+图 10.13: Rubisco 不同失活程度时 Anet VS Ci
 </p>
 </div>
 <div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb232-1" title="1">AappCc &lt;-</a>
@@ -1862,7 +1837,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <div class="figure"><span id="fig:aappdeccc"></span>
 <img src="bookdown_files/figure-html/aappdeccc-1.png" alt="Rubisco 不同失活程度时 Aapp VS Cc" width="672" />
 <p class="caption">
-图 10.15: Rubisco 不同失活程度时 Aapp VS Cc
+图 10.14: Rubisco 不同失活程度时 Aapp VS Cc
 </p>
 </div>
 <div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb233-1" title="1">AappCi &lt;-</a>
@@ -1889,7 +1864,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <div class="figure"><span id="fig:aappdecci"></span>
 <img src="bookdown_files/figure-html/aappdecci-1.png" alt="Rubisco 不同失活程度时 Aapp VS Ci" width="672" />
 <p class="caption">
-图 10.16: Rubisco 不同失活程度时 Aapp VS Ci
+图 10.15: Rubisco 不同失活程度时 Aapp VS Ci
 </p>
 </div>
 </div>
@@ -3012,7 +2987,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <div class="figure"><span id="fig:difuci"></span>
 <img src="bookdown_files/figure-html/difuci-1.png" alt="不同 Ci 扩散限制下的差异" width="672" />
 <p class="caption">
-图 10.17: 不同 Ci 扩散限制下的差异
+图 10.16: 不同 Ci 扩散限制下的差异
 </p>
 </div>
 <div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb273-1" title="1">datahigh &lt;-<span class="st"> </span>data[data<span class="op">$</span>resistance <span class="op">==</span><span class="st"> &quot;11&quot;</span>,]</a>
@@ -3037,7 +3012,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <div class="figure"><span id="fig:difuci11"></span>
 <img src="bookdown_files/figure-html/difuci11-1.png" alt="不同 Ci 扩散限制下的差异（resistance = 11）" width="672" />
 <p class="caption">
-图 10.18: 不同 Ci 扩散限制下的差异（resistance = 11）
+图 10.17: 不同 Ci 扩散限制下的差异（resistance = 11）
 </p>
 </div>
 <div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb274-1" title="1">data2 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/DiffusionLimits.csv&quot;</span>)</a>
@@ -3055,7 +3030,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <div class="figure"><span id="fig:tolresis"></span>
 <img src="bookdown_files/figure-html/tolresis-1.png" alt="不同总导度下的各个导度的速率变化" width="672" />
 <p class="caption">
-图 10.19: 不同总导度下的各个导度的速率变化
+图 10.18: 不同总导度下的各个导度的速率变化
 </p>
 </div>
 <div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb275-1" title="1">m1 &lt;-<span class="st"> </span><span class="kw">lm</span>(Rates <span class="op">~</span><span class="st"> </span><span class="kw">I</span>(<span class="dv">1</span><span class="op">/</span>TotalRes)<span class="op">+</span><span class="kw">I</span>((<span class="dv">1</span><span class="op">/</span>TotalRes)<span class="op">^</span><span class="dv">2</span>),<span class="dt">data=</span>data2)</a>
@@ -3085,7 +3060,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <div class="figure"><span id="fig:tolre"></span>
 <img src="bookdown_files/figure-html/tolre-1.png" alt="不同阻力下的各个导度的速率变化预测值" width="672" />
 <p class="caption">
-图 10.20: 不同阻力下的各个导度的速率变化预测值
+图 10.19: 不同阻力下的各个导度的速率变化预测值
 </p>
 </div>
 <div id="multi14" class="section level3">
@@ -3300,7 +3275,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <div class="figure"><span id="fig:prdataplot"></span>
 <img src="bookdown_files/figure-html/prdataplot-1.png" alt="不同时间滞后性的 Anet VS Ci" width="672" />
 <p class="caption">
-图 10.21: 不同时间滞后性的 Anet VS Ci
+图 10.20: 不同时间滞后性的 Anet VS Ci
 </p>
 </div>
 <div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb292-1" title="1">Panel_1A_inset &lt;-</a>
@@ -3419,7 +3394,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <div class="figure"><span id="fig:resistplot"></span>
 <img src="bookdown_files/figure-html/resistplot-1.png" alt="不同总阻力下的 Anet VS Ci" width="672" />
 <p class="caption">
-图 10.22: 不同总阻力下的 Anet VS Ci
+图 10.21: 不同总阻力下的 Anet VS Ci
 </p>
 </div>
 <div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb293-1" title="1">data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/DiffusionLimitsACI2.csv&quot;</span>)</a>
@@ -3494,7 +3469,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <div class="figure"><span id="fig:high3tplot"></span>
 <img src="bookdown_files/figure-html/high3tplot-1.png" alt="不同导度下的 A VS Ci" width="672" />
 <p class="caption">
-图 10.23: 不同导度下的 A VS Ci
+图 10.22: 不同导度下的 A VS Ci
 </p>
 </div>
 <div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb294-1" title="1">data2 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/DiffusionLimits.csv&quot;</span>)</a>
@@ -3558,7 +3533,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <div class="figure"><span id="fig:toresratetplot"></span>
 <img src="bookdown_files/figure-html/toresratetplot-1.png" alt="不同总导度下的各个导度的变化" width="672" />
 <p class="caption">
-图 10.24: 不同总导度下的各个导度的变化
+图 10.23: 不同总导度下的各个导度的变化
 </p>
 </div>
 <div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb295-1" title="1">data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/RASdata.csv&quot;</span>)</a>
@@ -3620,7 +3595,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <div class="figure"><span id="fig:deasratetplot"></span>
 <img src="bookdown_files/figure-html/deasratetplot-1.png" alt="Rubisco不同失活程度下的下 A VS Ci" width="672" />
 <p class="caption">
-图 10.25: Rubisco不同失活程度下的下 A VS Ci
+图 10.24: Rubisco不同失活程度下的下 A VS Ci
 </p>
 </div>
 
@@ -3879,18 +3854,18 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <div class="figure"><span id="fig:acplot"></span>
 <img src="bookdown_files/figure-html/acplot-1.png" alt="调制式测量的 ojip 曲线的快速预览" width="672" />
 <p class="caption">
-图 10.26: 调制式测量的 ojip 曲线的快速预览
+图 10.25: 调制式测量的 ojip 曲线的快速预览
 </p>
 </div>
 <div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb307-1" title="1"><span class="kw">jip_dcplot</span>(<span class="st">&quot;./data/ojip&quot;</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:dcplot"></span>
 <img src="bookdown_files/figure-html/dcplot-1.png" alt="连续式测量的 ojip 曲线的快速预览" width="672" />
 <p class="caption">
-图 10.27: 连续式测量的 ojip 曲线的快速预览
+图 10.26: 连续式测量的 ojip 曲线的快速预览
 </p>
 </div>
-<p>ojip 调制式测量光 ojip 曲线的快速预览如图 <a href="anay-6800.html#fig:acplot">10.26</a></p>
-<p>ojip 连续式测量光 ojip 曲线的快速预览如图 <a href="anay-6800.html#fig:dcplot">10.27</a></p>
+<p>ojip 调制式测量光 ojip 曲线的快速预览如图 <a href="anay-6800.html#fig:acplot">10.25</a></p>
+<p>ojip 连续式测量光 ojip 曲线的快速预览如图 <a href="anay-6800.html#fig:dcplot">10.26</a></p>
 <p><strong>建议在开始分析数据前，使用如上方式作图查看数据质量，若使用调制光数据测量的荧光信号太弱，数据点太散，则可以使用连续光测量信号进行分析，对于归一化的荧光参数，二者几乎无差别，当然避免陷入被动的最好方式还是最开始测量时注意检查数据质量</strong></p>
 
 
@@ -3911,12 +3886,6 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <div id="ref-stinziano2017">
 <p>Stinziano, J. R., P. B. Morgan, D. J. Lynch, A. J. Saathoff, D. K. Mcdermitt, and D. T. Hanson. 2017. “The Rapid a-Ci Response: Photosynthesis in the Phenomic Era.” <em>Plant Cell &amp; Environment</em> 40.</p>
 </div>
-</div>
-<div class="footnotes">
-<hr />
-<ol start="15">
-<li id="fn15"><p>注意，注意数据表头的大小写，此处代码中，为处理数据的方便，我更改了大小写，分析自己的数据时需要注意<a href="anay-6800.html#fnref15" class="footnote-back">↩</a></p></li>
-</ol>
 </div>
             </section>
 
