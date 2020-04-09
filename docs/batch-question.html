@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2020-04-08" />
+<meta name="date" content="2020-04-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -892,10 +892,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb24-2" title="2">area &lt;-<span class="st"> </span><span class="dv">6</span> <span class="op">-</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">32</span>, <span class="dv">1</span>, <span class="dv">3</span>)</a>
 <a class="sourceLine" id="cb24-3" title="3">y1 &lt;-<span class="st"> </span><span class="kw">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>,  <span class="dt">header_line =</span> <span class="dv">17</span>, <span class="dt">data_start =</span> <span class="dv">27</span>, <span class="dt">S =</span> area, <span class="dt">K =</span> <span class="fl">0.5</span>)</a>
 <a class="sourceLine" id="cb24-4" title="4">y1<span class="op">$</span>Photo<span class="op">/</span>x1<span class="op">$</span>Photo</a></code></pre></div>
-<pre><code>##  [1] 1.412571 1.281633 1.360842 1.226529 1.271344 1.684642 1.431356 1.716726
-##  [9] 1.576491 1.611617 1.350988 1.645656 1.658753 1.807990 1.235724 1.236395
-## [17] 1.240291 1.344487 1.463466 1.408797 1.357867 1.424464 1.593604 1.367586
-## [25] 1.341680 1.244272 1.679763 1.689246 1.235269 1.584863 1.666003 1.707335</code></pre>
+<pre><code>##  [1] 1.880726 1.496806 1.463931 1.995599 1.338146 1.398622 1.210572 1.491065
+##  [9] 1.237579 1.988169 1.936228 1.342146 1.495749 1.614024 1.257898 1.614744
+## [17] 1.703701 1.291986 1.486593 1.320289 1.498592 1.307681 1.618098 1.303922
+## [25] 1.719186 1.500613 1.414787 1.329692 1.443678 1.911648 1.676170 1.524191</code></pre>
 <p>我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.</p>
 </div>
 <div id="recompute6800" class="section level3">
@@ -956,10 +956,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## Warning: Missing column names filled in: &#39;X125&#39; [125]</code></pre>
 <pre><code>## Warning: Duplicated column names deduplicated: &#39;TIME&#39; =&gt; &#39;TIME_1&#39; [69]</code></pre>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1">y3<span class="op">$</span>A<span class="op">/</span>x3<span class="op">$</span>A</a></code></pre></div>
-<pre><code>##  [1] 1.777586 1.327482 1.663980 1.863654 1.617421 1.432122 1.226530 1.874383
-##  [9] 1.409917 1.229768 1.303870 1.962705 1.492211 1.950044 1.493678 1.245340
-## [17] 1.687315 1.591624 1.690397 1.754349 1.803071 1.388324 1.993953 1.231666
-## [25] 1.568700 1.588383 1.817208 1.896460</code></pre>
+<pre><code>##  [1] 1.246937 1.565620 1.637099 1.234185 1.730302 1.338702 1.415068 1.218143
+##  [9] 1.563054 1.257190 1.617561 1.864413 1.554593 1.239001 1.611993 1.354484
+## [17] 1.239459 1.399467 1.763179 1.467345 1.324873 1.341885 1.210370 1.553731
+## [25] 1.719802 1.855961 1.463466 1.735825</code></pre>
 <p>测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。</p>
 </div>
 <div id="excel-recompute-68" class="section level4">
@@ -1005,8 +1005,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>模拟 12 个不同的叶面积，均值为 3，方差为 0.1</p>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1">df_random &lt;-<span class="st"> </span><span class="kw">xlconnect_read</span>(<span class="st">&quot;./data/aci-xlc.xlsx&quot;</span>, <span class="dt">S =</span> <span class="kw">rnorm</span>(<span class="dv">12</span>, <span class="dv">3</span>, <span class="fl">0.1</span>))</a>
 <a class="sourceLine" id="cb70-2" title="2">df6<span class="op">$</span>GasEx_A<span class="op">/</span>df_random<span class="op">$</span>GasEx_A</a></code></pre></div>
-<pre><code>##  [1] 0.5018702 0.4715171 0.4915229 0.5036882 0.4753774 0.4904459 0.5193848
-##  [8] 0.5304800 0.4420502 0.4848599 0.4699912 0.5283107</code></pre>
+<pre><code>##  [1] 0.5256562 0.5088297 0.5051898 0.4873378 0.4801648 0.5033633 0.5053563
+##  [8] 0.5010876 0.5295819 0.5047005 0.5241031 0.4743887</code></pre>
 <p>最近有点忙，暂时记录下来，用这个函数实现批量处理其实很简单了，后面有时间再补充。</p>
 
 
