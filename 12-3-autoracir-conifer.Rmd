@@ -106,7 +106,7 @@ results
 # 如果报错：unable to start png() device
 # 那么可能是权限的原因无法建立 figure 文件夹
 dir.create("./figure/", showWarnings = FALSE)
-
+# delta 为 A diff的差值，默认设定了 0.05
 diagnose_sample(results, sample_name = "fastdemo")
 
 # 添加 racir 
