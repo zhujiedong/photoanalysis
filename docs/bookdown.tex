@@ -174,7 +174,7 @@
 
 \title{使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据}
 \author{祝介东 北京力高泰科技有限公司}
-\date{2020-04-09}
+\date{2020-04-26}
 
 \begin{document}
 \maketitle
@@ -591,10 +591,10 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.221961 1.757949 1.929286 1.673135 1.698272 1.411170 1.693392 1.764584
-##  [9] 1.732612 1.850704 1.241058 1.436934 1.365916 1.401836 1.311709 1.625211
-## [17] 1.686848 1.951622 1.277210 1.341752 1.793850 1.753443 1.931429 1.326702
-## [25] 1.365292 1.720318 1.569016 1.446191 1.987894 1.555431 1.481162 1.427592
+##  [1] 1.202033 1.552185 1.535255 1.849072 1.405832 1.236827 1.653901 1.871847
+##  [9] 1.655730 1.337101 1.269356 1.726700 1.715755 1.493560 1.659205 1.494201
+## [17] 1.471930 1.968169 1.667669 1.387784 1.860027 1.828201 1.875357 1.372044
+## [25] 1.299979 1.369949 1.496780 1.429893 1.552594 1.274186 1.453545 1.366646
 \end{verbatim}
 
 我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.
@@ -787,10 +787,10 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.874012 1.489844 1.336683 1.585395 1.746452 1.309355 1.606604 1.246973
-##  [9] 1.670635 1.651270 1.486982 1.750872 1.504350 1.748871 1.393206 1.755696
-## [17] 1.251519 1.226475 1.661977 1.217588 1.535184 1.346172 1.773412 1.333953
-## [25] 1.505820 1.503165 1.788758 1.676955
+##  [1] 1.203277 1.274066 1.532662 1.762247 1.559150 1.260450 1.741171 1.739324
+##  [9] 1.708782 1.402528 1.212657 1.247874 1.723580 1.375233 1.246388 1.766606
+## [17] 1.992021 1.876530 1.976055 1.393623 1.233407 1.731593 1.391094 1.606887
+## [25] 1.735255 1.490056 1.339984 1.626967
 \end{verbatim}
 
 测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。
@@ -888,8 +888,8 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 0.5036717 0.4965643 0.5217580 0.5234085 0.4987808 0.5078260 0.4773779
-##  [8] 0.5200916 0.4640951 0.5004481 0.4935628 0.5312103
+##  [1] 0.4812391 0.4943427 0.4952689 0.4875032 0.5050353 0.5163469 0.4952593
+##  [8] 0.4719141 0.4984856 0.4751621 0.4849489 0.4942775
 \end{verbatim}
 
 最近有点忙，暂时记录下来，用这个函数实现批量处理其实很简单了，后面有时间再补充。
@@ -3537,7 +3537,7 @@ Empty\_2.xlsx，Fast.xlsx， Slow.xlsx， Dark.xksx，实际使用的正则表�
 \CommentTok{# 如果报错：unable to start png() device}
 \CommentTok{# 那么可能是权限的原因无法建立 figure 文件夹}
 \KeywordTok{dir.create}\NormalTok{(}\StringTok{"./figure/"}\NormalTok{, }\DataTypeTok{showWarnings =} \OtherTok{FALSE}\NormalTok{)}
-
+\CommentTok{# delta 为 A diff的差值，默认设定了 0.05}
 \KeywordTok{diagnose_sample}\NormalTok{(results, }\DataTypeTok{sample_name =} \StringTok{"fastdemo"}\NormalTok{)}
 
 \CommentTok{# 添加 racir }
@@ -7617,7 +7617,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 \end{Shaded}
 
 \begin{verbatim}
-## R version 3.6.3 (2020-02-29)
+## R version 4.0.0 (2020-04-24)
 ## Platform: x86_64-w64-mingw32/x64 (64-bit)
 ## Running under: Windows 10 x64 (build 18363)
 ## 
@@ -7636,35 +7636,35 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 ## other attached packages:
 ##  [1] factoextra_1.0.7   FactoMineR_2.3     jiptest_0.1.3      gridExtra_2.3     
 ##  [5] plyr_1.8.6         racir_1.0.0        nls2_0.2           proto_1.0.0       
-##  [9] purrr_0.3.3        ggplot2_3.3.0      minpack.lm_1.2-1   plantecophys_1.4-4
+##  [9] purrr_0.3.4        ggplot2_3.3.0      minpack.lm_1.2-1   plantecophys_1.4-4
 ## [13] readphoto_0.0.1   
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] tidyr_1.0.2          splines_3.6.3        assertthat_0.2.1    
+##  [1] tidyr_1.0.2          splines_4.0.0        assertthat_0.2.1    
 ##  [4] highr_0.8            ggstance_0.3.4       cellranger_1.1.0    
-##  [7] ggrepel_0.8.2        yaml_2.2.1           pillar_1.4.3        
-## [10] backports_1.1.5      lattice_0.20-41      glue_1.4.0          
+##  [7] yaml_2.2.1           ggrepel_0.8.2        pillar_1.4.3        
+## [10] backports_1.1.6      lattice_0.20-41      glue_1.4.0          
 ## [13] digest_0.6.25        ggsignif_0.6.0       RColorBrewer_1.1-2  
 ## [16] polyclip_1.10-0      MESS_0.5.6           colorspace_1.4-1    
 ## [19] htmltools_0.4.0      Matrix_1.2-18        pkgconfig_2.0.3     
-## [22] broom_0.5.5          bookdown_0.18        scales_1.1.0        
-## [25] tweenr_1.0.1         ggforce_0.3.1        tibble_3.0.0        
+## [22] broom_0.5.6          bookdown_0.18        scales_1.1.0        
+## [25] tweenr_1.0.1         ggforce_0.3.1        tibble_3.0.1        
 ## [28] mgcv_1.8-31          generics_0.0.2       farver_2.0.3        
-## [31] ggpubr_0.2.5         ellipsis_0.3.0       withr_2.1.2         
-## [34] geepack_1.3-1        lazyeval_0.2.2       cli_2.0.2           
-## [37] XLConnect_1.0.1      magrittr_1.5         crayon_1.3.4        
-## [40] readxl_1.3.1         evaluate_0.14        fansi_0.4.1         
-## [43] nlme_3.1-145         MASS_7.3-51.5        geeM_0.10.1         
-## [46] tools_3.6.3          hms_0.5.3            lifecycle_0.2.0     
-## [49] stringr_1.4.0        munsell_0.5.0        cluster_2.1.0       
-## [52] flashClust_1.01-2    compiler_3.6.3       rlang_0.4.5         
-## [55] grid_3.6.3           rstudioapi_0.11      leaps_3.1           
-## [58] mosaicCore_0.6.0     labeling_0.3         rmarkdown_2.1       
-## [61] gtable_0.3.0         rematch_1.0.1        R6_2.4.1            
-## [64] knitr_1.28           dplyr_0.8.5          ggformula_0.9.4     
-## [67] readr_1.3.1          rJava_0.9-12         stringi_1.4.6       
-## [70] Rcpp_1.0.4           vctrs_0.2.4          png_0.1-7           
-## [73] scatterplot3d_0.3-41 tidyselect_1.0.0     xfun_0.12
+## [31] ggpubr_0.2.5         ellipsis_0.3.0       withr_2.2.0         
+## [34] geepack_1.3-1        lazyeval_0.2.2       XLConnect_1.0.1     
+## [37] magrittr_1.5         crayon_1.3.4         readxl_1.3.1        
+## [40] evaluate_0.14        nlme_3.1-147         MASS_7.3-51.5       
+## [43] geeM_0.10.1          tools_4.0.0          hms_0.5.3           
+## [46] lifecycle_0.2.0      stringr_1.4.0        munsell_0.5.0       
+## [49] cluster_2.1.0        flashClust_1.01-2    compiler_4.0.0      
+## [52] rlang_0.4.5          grid_4.0.0           rstudioapi_0.11     
+## [55] leaps_3.1            mosaicCore_0.6.0     labeling_0.3        
+## [58] rmarkdown_2.1        gtable_0.3.0         rematch_1.0.1       
+## [61] R6_2.4.1             knitr_1.28           dplyr_0.8.5         
+## [64] ggformula_0.9.4      readr_1.3.1          rJava_0.9-12        
+## [67] stringi_1.4.6        Rcpp_1.0.4.6         vctrs_0.2.4         
+## [70] png_0.1-7            scatterplot3d_0.3-41 tidyselect_1.0.0    
+## [73] xfun_0.13
 \end{verbatim}
 
 \cleardoublepage
