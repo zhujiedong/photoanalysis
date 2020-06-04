@@ -171,7 +171,6 @@ function (path, start_row = 17, S = 6)
 
 - S 为修改的叶面积，默认值为 6，如果叶面积无需更改，必须输入单个的值，也就是真正的叶面积，如果使用 aperture 更改了面积，且叶片能够充满叶室，比方说是 2 cm^2^，该值必须输入一个长度和测量值数量完全一致的向量，例如有 3 个测量值，我们输入 `S= rep(2,3)`，有的没有充满叶室，有的充满叶室，该值也必须输入一个长度和测量值数量完全一致的向量，例如，一共有三个测量值，只有第一个叶片没充满叶室，面积为 1.5，则输入方式为 `S = c(1.5, 2, 2)`。
 
-- 另外，为避免出现 LI-6800 名字重复的警告，我将他们的名字合并为 分组名+表头的形式，例如 A 改为 GasEx_A
 
 我们直接使用下面的例子解释，导入的数据是 6 cm^2^ 的默认面积：
 
@@ -179,21 +178,21 @@ function (path, start_row = 17, S = 6)
 library(readphoto)
 
 df6 <- xlconnect_read("./data/aci-xlc.xlsx")
-df6$GasEx_A
+df6$A
 ```
 
 将面积改为 3 cm^2^
 
 ```{r}
 df3 <- xlconnect_read("./data/aci-xlc.xlsx", S = rep(3, 12))
-df6$GasEx_A/df3$GasEx_A
+df6$A/df3$A
 ```
 
 模拟 12 个不同的叶面积，均值为 3，方差为 0.1
 
 ```{r}
 df_random <- xlconnect_read("./data/aci-xlc.xlsx", S = rnorm(12, 3, 0.1))
-df6$GasEx_A/df_random$GasEx_A
+df6$A/df_random$A
 ```
 
 最近有点忙，暂时记录下来，用这个函数实现批量处理其实很简单了，后面有时间再补充。
