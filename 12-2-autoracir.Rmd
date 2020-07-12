@@ -39,7 +39,7 @@ library(racir)
 
 * 使用 `racircal` 进行数据的校准
 
-### 实现过程 {#racir_pkg_real}
+### 实现方法 1 {#racir_pkg_1}
 
 手上暂时没有原始数据格式的 racir 数据，因而现在使用以前的 csv 数据进行操作（空叶室测量数据和带叶片测量数据转为 csv 格式）。
 
@@ -69,6 +69,86 @@ plot(x$CO2_r, x$A)
 前两个参数分别为空叶室数据，带叶片测量数据，后面的最大最小值为 `racircheck` 确定，剩余工作就是使用 `plantecophys` 进行分析，在此不再重复这个过程。
 
 **注意：RACiR 的本意是表型研究中求 Vcmax 和 Jmax，因而，请忽略 Rd 等参数的计算结果**
+
+### 实现方法 2 {#racir_pkg_2}
+
+以上的实现方法是基于肉眼判断，删除不需要的数据，自动化程度较低，同时不适合这样的方法，例如，在 400 ppm 的浓度下达到光合稳定状态后，直接开始 RACiR 从 5 到 1505 这样的变化，因为浓度先下降后上升，曲线会出现下面的形状：
+
+```{r, racir-steady-start, echo = FALSE, fig.cap="稳定后从低到高的 RACiR 实验数据"}
+rawleaf <- xls_read("data/Fast.xlsx")
+plot(A ~ CO2_r,
+     data = rawleaf,
+     xlab = "reference IRGA readings",
+     ylab = "uncorrected A",
+     pch = 21,
+     col = ifelse(rawleaf$CO2_r <420, "red", "blue"))
+abline(h = 13, col = "red", lwd = 0.8, lty = 3)
+```
+直接批量删除是不可取的。容易出错或者残留无效数据，针对这个情况，今天花了点时间，专门写了几个新的函数，创意基于 [ManuelLamothe
+/RapidACi](https://github.com/ManuelLamothe/RapidACi) 的方法，做了一些修改，并抛弃了 `tidyverse` 的方式，以减少依赖，以及可能的软件包升级导致的无法运行。主要的修改：
+
+* 独立的 `xls_read` 函数用于读取 excel 格式数据并修改叶面积。
+* 独立的“清洗”空叶室数据的函数 `tidy_data_empty`。
+* 独立的“清洗"带叶片测量数据的函数 `tidy_data`。
+* 修正带叶片测量数据的函数还是使用上面的方法处理
+
+使用的方法如下：
+
+#### 查看相邻数据的差值设置 {#delta_max-check}
+
+数据的清洗其实比较简单，主要利用相邻的两个测量 A 值的差值来进行，为方便确定差值，针对空叶室和带叶片测量的数据，单独设定了两个函数，来确定合理的过滤范围，这样说太抽象，我们导入数据后直接看图：
+
+**1. 导入数据：**
+
+```{r}
+library(racir)
+library(plantecophys)
+empty <- xls_read("data/Empty.xlsx", S =10.947)
+leaf <- xls_read("data/Fast.xlsx", S =10.947)
+```
+此函数的设计主要是用于修改叶面积，如果叶面积不需要修改，可以直接采用其他方式导入数据，因此，S 选项必须和实际的叶面积一致，目前暂时没时间对这个函数做修改。
+
+**2. 关于空叶室的数据过滤范围的选取:**
+
+```{r, emtpy-delta-max, fig.cap="空叶室数据的查看"}
+check_delta_empty(empty, delta_max = 0.05)
+```
+这里首先不要被第二幅图的波动所迷惑，主要是坐标轴差异太小。然后第一幅图中，尽管在从外界稳定二氧化碳浓度下降过程中有一部分数据落在了一个比较小的范围（前后 A 值 差异小），但是我会使用其他的过滤规则（直接删掉光合速率为负值之前的所有数据）来修正数据，我们只需要看后面的范围是不是在设定的 delta_max 范围内即可（此处默认前后两个的差值在 0.05 时即为二氧化碳控制稳定后，逐步上升的数据）。显示所有的数据是方便我们查看数据的质量如何。
+
+**3. 关于带叶片测量的数据过滤范围的选取:**
+
+```{r, leaf-delta-max, fig.cap="带叶片测量数据的查看"}
+check_delta(leaf, delta_max = 0.2)
+```
+带叶片的数据同上，但因为叶片光合的存在，前后两个数据的差异不可能同空叶室那样小，因此此处的范围要设置大一些，实际上的波动也要远大于空叶室（取决于光合速率的大小，光合速率大，上升快，差值就大）。另外需要注意，观察右图的光合速率，有没有删除过多的点（delta_max 默认为 0.2，但设置稍小，看上去右图形状无问题，会缺少很少的点，但这些点可能都是初期二氧化碳浓度低的点，尽管对拟合影响不大，大时会缺少一部分数据，有可能影响Rubisco 限制阶段的数据解读）
+
+**4. 确定范围后数据的清洗:**
+
+```{r}
+tidy_leaf <- tidy_data(leaf)
+tidy_empty <- tidy_data_empty(empty, delta_max = 0.2)
+
+# 修正带叶片测量数据
+z <- correct_leaf(tidy_empty, tidy_leaf)
+```
+**4. 拟合后的数据：**
+
+```{r}
+fitz <- fitaci(z,
+       varnames =
+         list(
+           ALEAF = "A",
+           Tleaf = "Tleaf",
+           Ci = "Ci",
+           PPFD  = "Qin",
+           Rd = "Rd"
+         ))
+fitz$pars
+```
+
+```{r, filter-fit-plot, echo = FALSE, fig.cap="拟合结果的图形"}
+plot(fitz)
+```
 
 ### 数据的批量处理 {#racirbatch}
 

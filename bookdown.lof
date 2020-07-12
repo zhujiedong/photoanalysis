@@ -29,35 +29,36 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {10.1}{\ignorespaces 找出最合理的校准曲线数据范围\relax }}{99}{figure.caption.35}%
 \contentsline {figure}{\numberline {10.2}{\ignorespaces 校准曲线查看\relax }}{100}{figure.caption.36}%
-\contentsline {figure}{\numberline {10.3}{\ignorespaces Anet VS. Cc\relax }}{122}{figure.caption.37}%
-\contentsline {figure}{\numberline {10.4}{\ignorespaces Anet VS. Ci\relax }}{123}{figure.caption.38}%
-\contentsline {figure}{\numberline {10.5}{\ignorespaces Aapparent VS. Cc\relax }}{124}{figure.caption.39}%
-\contentsline {figure}{\numberline {10.6}{\ignorespaces Aapparent VS. Ci\relax }}{126}{figure.caption.40}%
-\contentsline {figure}{\numberline {10.7}{\ignorespaces 基于 Ci 的不同延时下的截距\relax }}{133}{figure.caption.41}%
-\contentsline {figure}{\numberline {10.8}{\ignorespaces 基于 Ci 的不同延时下的斜率变化\relax }}{134}{figure.caption.42}%
-\contentsline {figure}{\numberline {10.9}{\ignorespaces 基于 Cc 的不同延时下的时间\relax }}{140}{figure.caption.43}%
-\contentsline {figure}{\numberline {10.10}{\ignorespaces 基于 Cc 的不同延时下的截距\relax }}{153}{figure.caption.44}%
-\contentsline {figure}{\numberline {10.11}{\ignorespaces Rubisco 不同失活程度时 Anet VS Cc\relax }}{157}{figure.caption.45}%
-\contentsline {figure}{\numberline {10.12}{\ignorespaces Rubisco 不同失活程度时 Anet VS Ci\relax }}{159}{figure.caption.46}%
-\contentsline {figure}{\numberline {10.13}{\ignorespaces Rubisco 不同失活程度时 Aapp VS Cc\relax }}{160}{figure.caption.47}%
-\contentsline {figure}{\numberline {10.14}{\ignorespaces Rubisco 不同失活程度时 Aapp VS Ci\relax }}{161}{figure.caption.48}%
-\contentsline {figure}{\numberline {10.15}{\ignorespaces 不同 Ci 扩散限制下的差异\relax }}{195}{figure.caption.49}%
-\contentsline {figure}{\numberline {10.16}{\ignorespaces 不同 Ci 扩散限制下的差异（resistance = 11）\relax }}{196}{figure.caption.50}%
-\contentsline {figure}{\numberline {10.17}{\ignorespaces 不同总导度下的各个导度的速率变化\relax }}{197}{figure.caption.51}%
-\contentsline {figure}{\numberline {10.18}{\ignorespaces 不同阻力下的各个导度的速率变化预测值\relax }}{199}{figure.caption.52}%
-\contentsline {figure}{\numberline {10.19}{\ignorespaces 不同时间滞后性的 Anet VS Ci\relax }}{206}{figure.caption.53}%
-\contentsline {figure}{\numberline {10.20}{\ignorespaces 不同总阻力下的 Anet VS Ci\relax }}{210}{figure.caption.54}%
-\contentsline {figure}{\numberline {10.21}{\ignorespaces 不同导度下的 A VS Ci\relax }}{213}{figure.caption.55}%
-\contentsline {figure}{\numberline {10.22}{\ignorespaces 不同总导度下的各个导度的变化\relax }}{216}{figure.caption.56}%
-\contentsline {figure}{\numberline {10.23}{\ignorespaces Rubisco不同失活程度下的下 A VS Ci\relax }}{218}{figure.caption.57}%
-\contentsline {figure}{\numberline {10.24}{\ignorespaces 调制式测量的 ojip 曲线的快速预览\relax }}{223}{figure.caption.60}%
-\contentsline {figure}{\numberline {10.25}{\ignorespaces 连续式测量的 ojip 曲线的快速预览\relax }}{224}{figure.caption.61}%
+\contentsline {figure}{\numberline {10.3}{\ignorespaces 拟合结果的图形\relax }}{106}{figure.caption.37}%
+\contentsline {figure}{\numberline {10.4}{\ignorespaces Anet VS. Cc\relax }}{126}{figure.caption.38}%
+\contentsline {figure}{\numberline {10.5}{\ignorespaces Anet VS. Ci\relax }}{127}{figure.caption.39}%
+\contentsline {figure}{\numberline {10.6}{\ignorespaces Aapparent VS. Cc\relax }}{128}{figure.caption.40}%
+\contentsline {figure}{\numberline {10.7}{\ignorespaces Aapparent VS. Ci\relax }}{130}{figure.caption.41}%
+\contentsline {figure}{\numberline {10.8}{\ignorespaces 基于 Ci 的不同延时下的截距\relax }}{137}{figure.caption.42}%
+\contentsline {figure}{\numberline {10.9}{\ignorespaces 基于 Ci 的不同延时下的斜率变化\relax }}{138}{figure.caption.43}%
+\contentsline {figure}{\numberline {10.10}{\ignorespaces 基于 Cc 的不同延时下的时间\relax }}{144}{figure.caption.44}%
+\contentsline {figure}{\numberline {10.11}{\ignorespaces 基于 Cc 的不同延时下的截距\relax }}{157}{figure.caption.45}%
+\contentsline {figure}{\numberline {10.12}{\ignorespaces Rubisco 不同失活程度时 Anet VS Cc\relax }}{161}{figure.caption.46}%
+\contentsline {figure}{\numberline {10.13}{\ignorespaces Rubisco 不同失活程度时 Anet VS Ci\relax }}{163}{figure.caption.47}%
+\contentsline {figure}{\numberline {10.14}{\ignorespaces Rubisco 不同失活程度时 Aapp VS Cc\relax }}{164}{figure.caption.48}%
+\contentsline {figure}{\numberline {10.15}{\ignorespaces Rubisco 不同失活程度时 Aapp VS Ci\relax }}{165}{figure.caption.49}%
+\contentsline {figure}{\numberline {10.16}{\ignorespaces 不同 Ci 扩散限制下的差异\relax }}{199}{figure.caption.50}%
+\contentsline {figure}{\numberline {10.17}{\ignorespaces 不同 Ci 扩散限制下的差异（resistance = 11）\relax }}{200}{figure.caption.51}%
+\contentsline {figure}{\numberline {10.18}{\ignorespaces 不同总导度下的各个导度的速率变化\relax }}{201}{figure.caption.52}%
+\contentsline {figure}{\numberline {10.19}{\ignorespaces 不同阻力下的各个导度的速率变化预测值\relax }}{203}{figure.caption.53}%
+\contentsline {figure}{\numberline {10.20}{\ignorespaces 不同时间滞后性的 Anet VS Ci\relax }}{210}{figure.caption.54}%
+\contentsline {figure}{\numberline {10.21}{\ignorespaces 不同总阻力下的 Anet VS Ci\relax }}{214}{figure.caption.55}%
+\contentsline {figure}{\numberline {10.22}{\ignorespaces 不同导度下的 A VS Ci\relax }}{217}{figure.caption.56}%
+\contentsline {figure}{\numberline {10.23}{\ignorespaces 不同总导度下的各个导度的变化\relax }}{220}{figure.caption.57}%
+\contentsline {figure}{\numberline {10.24}{\ignorespaces Rubisco不同失活程度下的下 A VS Ci\relax }}{222}{figure.caption.58}%
+\contentsline {figure}{\numberline {10.25}{\ignorespaces 调制式测量的 ojip 曲线的快速预览\relax }}{227}{figure.caption.61}%
+\contentsline {figure}{\numberline {10.26}{\ignorespaces 连续式测量的 ojip 曲线的快速预览\relax }}{228}{figure.caption.62}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {11.1}{\ignorespaces 数据的中心化\relax }}{227}{figure.caption.62}%
-\contentsline {figure}{\numberline {11.2}{\ignorespaces PC1 的诞生\relax }}{227}{figure.caption.63}%
-\contentsline {figure}{\numberline {11.3}{\ignorespaces 变异最大的极端情况\relax }}{228}{figure.caption.64}%
-\contentsline {figure}{\numberline {11.4}{\ignorespaces PC2 的诞生\relax }}{228}{figure.caption.65}%
-\contentsline {figure}{\numberline {11.5}{\ignorespaces iris 碎石图\relax }}{230}{figure.caption.66}%
-\contentsline {figure}{\numberline {11.6}{\ignorespaces iris 载荷图\relax }}{230}{figure.caption.67}%
-\contentsline {figure}{\numberline {11.7}{\ignorespaces iris 得分图\relax }}{231}{figure.caption.68}%
+\contentsline {figure}{\numberline {11.1}{\ignorespaces 数据的中心化\relax }}{231}{figure.caption.63}%
+\contentsline {figure}{\numberline {11.2}{\ignorespaces PC1 的诞生\relax }}{231}{figure.caption.64}%
+\contentsline {figure}{\numberline {11.3}{\ignorespaces 变异最大的极端情况\relax }}{232}{figure.caption.65}%
+\contentsline {figure}{\numberline {11.4}{\ignorespaces PC2 的诞生\relax }}{232}{figure.caption.66}%
+\contentsline {figure}{\numberline {11.5}{\ignorespaces iris 碎石图\relax }}{234}{figure.caption.67}%
+\contentsline {figure}{\numberline {11.6}{\ignorespaces iris 载荷图\relax }}{234}{figure.caption.68}%
+\contentsline {figure}{\numberline {11.7}{\ignorespaces iris 得分图\relax }}{235}{figure.caption.69}%
 \addvspace {10\p@ }

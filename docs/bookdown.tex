@@ -174,7 +174,7 @@
 
 \title{使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据}
 \author{祝介东 北京力高泰科技有限公司}
-\date{2020-04-26}
+\date{2020-07-12}
 
 \begin{document}
 \maketitle
@@ -218,7 +218,7 @@
 \chapter*{前言}\label{frontmatter}}
 
 
-本文内容均来自个人对相关材料的理解，\textbf{并未经过权威认证，如有异议，请参考 R 软件及相关软件包的使用手册或相关模型的文献}。本文所使用代码均只做示例代码使用，在做实际分析时，请结合自己的实验数据及模型使用条件做相应的调整。本文内容仅针对
+本文内容均来自个人对相关材料的理解，事实上，直到这本书的内容定型时，我的代码水平还处在初级水平，因此，如果你刚接触 R，不要把这本书当作规范，因为成型后我几乎没怎么改过，一是懒，二是忙。文中内容\textbf{并未经过权威认证，如有异议，请参考 R 软件及相关软件包的使用手册或相关模型的文献}。本文所使用代码均只做示例代码使用，在做实际分析时，请结合自己的实验数据及模型使用条件做相应的调整。本文内容仅针对
 LI-6800 与 LI-6400XT 光合仪数据，尤其是 RACiR\texttrademark 部分，仅针对 LI-6800
 进行分析，且目前市面上仅 LI-6800 光合仪可完成此项数据的测量。如您有 LI-6400XT 或 LI-6800 使用操作相关方面的问题请发送至：
 
@@ -591,10 +591,10 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.202033 1.552185 1.535255 1.849072 1.405832 1.236827 1.653901 1.871847
-##  [9] 1.655730 1.337101 1.269356 1.726700 1.715755 1.493560 1.659205 1.494201
-## [17] 1.471930 1.968169 1.667669 1.387784 1.860027 1.828201 1.875357 1.372044
-## [25] 1.299979 1.369949 1.496780 1.429893 1.552594 1.274186 1.453545 1.366646
+##  [1] 1.327305 1.205767 1.594091 1.375014 1.248968 1.263748 1.418427 1.535349
+##  [9] 1.777565 1.585952 1.429785 1.451724 1.624514 1.301591 1.471991 1.634323
+## [17] 1.889532 1.672004 1.316173 1.700095 1.238952 1.712013 1.644893 1.346821
+## [25] 1.638892 1.402133 1.795456 1.395634 1.271307 1.634023 1.231247 1.718765
 \end{verbatim}
 
 我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.
@@ -787,10 +787,10 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.203277 1.274066 1.532662 1.762247 1.559150 1.260450 1.741171 1.739324
-##  [9] 1.708782 1.402528 1.212657 1.247874 1.723580 1.375233 1.246388 1.766606
-## [17] 1.992021 1.876530 1.976055 1.393623 1.233407 1.731593 1.391094 1.606887
-## [25] 1.735255 1.490056 1.339984 1.626967
+##  [1] 1.479572 1.804621 1.317953 1.353811 1.412068 1.495731 1.841596 1.353700
+##  [9] 1.329178 1.440082 1.953482 1.222457 1.303184 1.254123 1.401942 1.490427
+## [17] 1.435836 1.344377 1.347314 1.770725 1.431316 1.717431 1.620489 1.286744
+## [25] 1.880263 1.803743 1.325951 1.338791
 \end{verbatim}
 
 测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。
@@ -845,8 +845,6 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
   start\_row 是数据开始的行号；
 \item
   S 为修改的叶面积，默认值为 6，如果叶面积无需更改，必须输入单个的值，也就是真正的叶面积，如果使用 aperture 更改了面积，且叶片能够充满叶室，比方说是 2 cm\textsuperscript{2}，该值必须输入一个长度和测量值数量完全一致的向量，例如有 3 个测量值，我们输入 \texttt{S=\ rep(2,3)}，有的没有充满叶室，有的充满叶室，该值也必须输入一个长度和测量值数量完全一致的向量，例如，一共有三个测量值，只有第一个叶片没充满叶室，面积为 1.5，则输入方式为 \texttt{S\ =\ c(1.5,\ 2,\ 2)}。
-\item
-  另外，为避免出现 LI-6800 名字重复的警告，我将他们的名字合并为 分组名+表头的形式，例如 A 改为 GasEx\_A
 \end{itemize}
 
 我们直接使用下面的例子解释，导入的数据是 6 cm\textsuperscript{2} 的默认面积：
@@ -856,7 +854,7 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \KeywordTok{library}\NormalTok{(readphoto)}
 
 \NormalTok{df6 <-}\StringTok{ }\KeywordTok{xlconnect_read}\NormalTok{(}\StringTok{"./data/aci-xlc.xlsx"}\NormalTok{)}
-\NormalTok{df6}\OperatorTok{$}\NormalTok{GasEx_A}
+\NormalTok{df6}\OperatorTok{$}\NormalTok{A}
 \end{Highlighting}
 \end{Shaded}
 
@@ -870,7 +868,7 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{df3 <-}\StringTok{ }\KeywordTok{xlconnect_read}\NormalTok{(}\StringTok{"./data/aci-xlc.xlsx"}\NormalTok{, }\DataTypeTok{S =} \KeywordTok{rep}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{12}\NormalTok{))}
-\NormalTok{df6}\OperatorTok{$}\NormalTok{GasEx_A}\OperatorTok{/}\NormalTok{df3}\OperatorTok{$}\NormalTok{GasEx_A}
+\NormalTok{df6}\OperatorTok{$}\NormalTok{A}\OperatorTok{/}\NormalTok{df3}\OperatorTok{$}\NormalTok{A}
 \end{Highlighting}
 \end{Shaded}
 
@@ -883,13 +881,13 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{df_random <-}\StringTok{ }\KeywordTok{xlconnect_read}\NormalTok{(}\StringTok{"./data/aci-xlc.xlsx"}\NormalTok{, }\DataTypeTok{S =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{12}\NormalTok{, }\DecValTok{3}\NormalTok{, }\FloatTok{0.1}\NormalTok{))}
-\NormalTok{df6}\OperatorTok{$}\NormalTok{GasEx_A}\OperatorTok{/}\NormalTok{df_random}\OperatorTok{$}\NormalTok{GasEx_A}
+\NormalTok{df6}\OperatorTok{$}\NormalTok{A}\OperatorTok{/}\NormalTok{df_random}\OperatorTok{$}\NormalTok{A}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 0.4812391 0.4943427 0.4952689 0.4875032 0.5050353 0.5163469 0.4952593
-##  [8] 0.4719141 0.4984856 0.4751621 0.4849489 0.4942775
+##  [1] 0.5189815 0.4848236 0.5119757 0.5049938 0.5017920 0.5129830 0.4965640
+##  [8] 0.4831829 0.5003264 0.4941518 0.5359605 0.5226851
 \end{verbatim}
 
 最近有点忙，暂时记录下来，用这个函数实现批量处理其实很简单了，后面有时间再补充。
@@ -3286,8 +3284,8 @@ IRGAs 极快的响应频率，使得短时间内的 A--Ci 的测量成为现实�
   使用 \texttt{racircal} 进行数据的校准
 \end{itemize}
 
-\hypertarget{racir_pkg_real}{%
-\subsection{实现过程}\label{racir_pkg_real}}
+\hypertarget{racir_pkg_1}{%
+\subsection{实现方法 1}\label{racir_pkg_1}}
 
 手上暂时没有原始数据格式的 racir 数据，因而现在使用以前的 csv 数据进行操作（空叶室测量数据和带叶片测量数据转为 csv 格式）。
 
@@ -3336,6 +3334,111 @@ IRGAs 极快的响应频率，使得短时间内的 A--Ci 的测量成为现实�
 前两个参数分别为空叶室数据，带叶片测量数据，后面的最大最小值为 \texttt{racircheck} 确定，剩余工作就是使用 \texttt{plantecophys} 进行分析，在此不再重复这个过程。
 
 \textbf{注意：RACiR 的本意是表型研究中求 Vcmax 和 Jmax，因而，请忽略 Rd 等参数的计算结果}
+
+\hypertarget{racir_pkg_2}{%
+\subsection{实现方法 2}\label{racir_pkg_2}}
+
+以上的实现方法是基于肉眼判断，删除不需要的数据，自动化程度较低，同时不适合这样的方法，例如，在 400 ppm 的浓度下达到光合稳定状态后，直接开始 RACiR 从 5 到 1505 这样的变化，因为浓度先下降后上升，曲线会出现下面的形状：
+
+\includegraphics{bookdown_files/figure-latex/racir-steady-start-1.pdf}
+直接批量删除是不可取的。容易出错或者残留无效数据，针对这个情况，今天花了点时间，专门写了几个新的函数，创意基于 \href{https://github.com/ManuelLamothe/RapidACi}{ManuelLamothe
+/RapidACi} 的方法，做了一些修改，并抛弃了 \texttt{tidyverse} 的方式，以减少依赖，以及可能的软件包升级导致的无法运行。主要的修改：
+
+\begin{itemize}
+\tightlist
+\item
+  独立的 \texttt{xls\_read} 函数用于读取 excel 格式数据并修改叶面积。
+\item
+  独立的``清洗''空叶室数据的函数 \texttt{tidy\_data\_empty}。
+\item
+  独立的``清洗''带叶片测量数据的函数 \texttt{tidy\_data}。
+\item
+  修正带叶片测量数据的函数还是使用上面的方法处理
+\end{itemize}
+
+使用的方法如下：
+
+\hypertarget{delta_max-check}{%
+\subsubsection{查看相邻数据的差值设置}\label{delta_max-check}}
+
+数据的清洗其实比较简单，主要利用相邻的两个测量 A 值的差值来进行，为方便确定差值，针对空叶室和带叶片测量的数据，单独设定了两个函数，来确定合理的过滤范围，这样说太抽象，我们导入数据后直接看图：
+
+\textbf{1. 导入数据：}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(racir)}
+\KeywordTok{library}\NormalTok{(plantecophys)}
+\NormalTok{empty <-}\StringTok{ }\KeywordTok{xls_read}\NormalTok{(}\StringTok{"data/Empty.xlsx"}\NormalTok{, }\DataTypeTok{S =}\FloatTok{10.947}\NormalTok{)}
+\NormalTok{leaf <-}\StringTok{ }\KeywordTok{xls_read}\NormalTok{(}\StringTok{"data/Fast.xlsx"}\NormalTok{, }\DataTypeTok{S =}\FloatTok{10.947}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+此函数的设计主要是用于修改叶面积，如果叶面积不需要修改，可以直接采用其他方式导入数据，因此，S 选项必须和实际的叶面积一致，目前暂时没时间对这个函数做修改。
+
+\textbf{2. 关于空叶室的数据过滤范围的选取:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{check_delta_empty}\NormalTok{(empty, }\DataTypeTok{delta_max =} \FloatTok{0.05}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown_files/figure-latex/emtpy-delta-max-1.pdf}
+这里首先不要被第二幅图的波动所迷惑，主要是坐标轴差异太小。然后第一幅图中，尽管在从外界稳定二氧化碳浓度下降过程中有一部分数据落在了一个比较小的范围（前后 A 值 差异小），但是我会使用其他的过滤规则（直接删掉光合速率为负值之前的所有数据）来修正数据，我们只需要看后面的范围是不是在设定的 delta\_max 范围内即可（此处默认前后两个的差值在 0.05 时即为二氧化碳控制稳定后，逐步上升的数据）。显示所有的数据是方便我们查看数据的质量如何。
+
+\textbf{3. 关于带叶片测量的数据过滤范围的选取:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{check_delta}\NormalTok{(leaf, }\DataTypeTok{delta_max =} \FloatTok{0.2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown_files/figure-latex/leaf-delta-max-1.pdf}
+带叶片的数据同上，但因为叶片光合的存在，前后两个数据的差异不可能同空叶室那样小，因此此处的范围要设置大一些，实际上的波动也要远大于空叶室（取决于光合速率的大小，光合速率大，上升快，差值就大）。另外需要注意，观察右图的光合速率，有没有删除过多的点（delta\_max 默认为 0.2，但设置稍小，看上去右图形状无问题，会缺少很少的点，但这些点可能都是初期二氧化碳浓度低的点，尽管对拟合影响不大，大时会缺少一部分数据，有可能影响Rubisco 限制阶段的数据解读）
+
+\textbf{4. 确定范围后数据的清洗:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tidy_leaf <-}\StringTok{ }\KeywordTok{tidy_data}\NormalTok{(leaf)}
+\NormalTok{tidy_empty <-}\StringTok{ }\KeywordTok{tidy_data_empty}\NormalTok{(empty, }\DataTypeTok{delta_max =} \FloatTok{0.2}\NormalTok{)}
+
+\CommentTok{# 修正带叶片测量数据}
+\NormalTok{z <-}\StringTok{ }\KeywordTok{correct_leaf}\NormalTok{(tidy_empty, tidy_leaf)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{4. 拟合后的数据：}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fitz <-}\StringTok{ }\KeywordTok{fitaci}\NormalTok{(z,}
+       \DataTypeTok{varnames =}
+         \KeywordTok{list}\NormalTok{(}
+           \DataTypeTok{ALEAF =} \StringTok{"A"}\NormalTok{,}
+           \DataTypeTok{Tleaf =} \StringTok{"Tleaf"}\NormalTok{,}
+           \DataTypeTok{Ci =} \StringTok{"Ci"}\NormalTok{,}
+           \DataTypeTok{PPFD  =} \StringTok{"Qin"}\NormalTok{,}
+           \DataTypeTok{Rd =} \StringTok{"Rd"}
+\NormalTok{         ))}
+\NormalTok{fitz}\OperatorTok{$}\NormalTok{pars}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         Estimate Std. Error
+## Vcmax  66.369161 0.30463596
+## Jmax  133.855185 0.41185092
+## Rd      1.933009 0.07897756
+\end{verbatim}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown_files/figure-latex/filter-fit-plot-1.pdf}
+\caption{\label{fig:filter-fit-plot}拟合结果的图形}
+\end{figure}
 
 \hypertarget{racirbatch}{%
 \subsection{数据的批量处理}\label{racirbatch}}
@@ -7195,7 +7298,7 @@ LI-6800 增加了 ojip 曲线测量功能，本功能主要是针对测量数据
 
 \begin{table}
 
-\caption{\label{tab:unnamed-chunk-61}jiptest 批量导入数据后的样式}
+\caption{\label{tab:unnamed-chunk-64}jiptest 批量导入数据后的样式}
 \centering
 \begin{tabular}[t]{rrl}
 \toprule
@@ -7220,7 +7323,7 @@ SECS & FLUOR & SOURCE\\
 
 \begin{table}
 
-\caption{\label{tab:unnamed-chunk-62}jiptest DC 数据批量导入数据后的样式}
+\caption{\label{tab:unnamed-chunk-65}jiptest DC 数据批量导入数据后的样式}
 \centering
 \begin{tabular}[t]{rrl}
 \toprule
@@ -7619,7 +7722,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 \begin{verbatim}
 ## R version 4.0.0 (2020-04-24)
 ## Platform: x86_64-w64-mingw32/x64 (64-bit)
-## Running under: Windows 10 x64 (build 18363)
+## Running under: Windows 10 x64 (build 19041)
 ## 
 ## Matrix products: default
 ## 
@@ -7642,27 +7745,27 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 ## loaded via a namespace (and not attached):
 ##  [1] tidyr_1.0.2          splines_4.0.0        assertthat_0.2.1    
 ##  [4] highr_0.8            ggstance_0.3.4       cellranger_1.1.0    
-##  [7] yaml_2.2.1           ggrepel_0.8.2        pillar_1.4.3        
-## [10] backports_1.1.6      lattice_0.20-41      glue_1.4.0          
+##  [7] yaml_2.2.1           ggrepel_0.8.2        pillar_1.4.4        
+## [10] backports_1.1.6      lattice_0.20-41      glue_1.4.1          
 ## [13] digest_0.6.25        ggsignif_0.6.0       RColorBrewer_1.1-2  
 ## [16] polyclip_1.10-0      MESS_0.5.6           colorspace_1.4-1    
 ## [19] htmltools_0.4.0      Matrix_1.2-18        pkgconfig_2.0.3     
 ## [22] broom_0.5.6          bookdown_0.18        scales_1.1.0        
 ## [25] tweenr_1.0.1         ggforce_0.3.1        tibble_3.0.1        
 ## [28] mgcv_1.8-31          generics_0.0.2       farver_2.0.3        
-## [31] ggpubr_0.2.5         ellipsis_0.3.0       withr_2.2.0         
+## [31] ggpubr_0.2.5         ellipsis_0.3.1       withr_2.2.0         
 ## [34] geepack_1.3-1        lazyeval_0.2.2       XLConnect_1.0.1     
 ## [37] magrittr_1.5         crayon_1.3.4         readxl_1.3.1        
 ## [40] evaluate_0.14        nlme_3.1-147         MASS_7.3-51.5       
 ## [43] geeM_0.10.1          tools_4.0.0          hms_0.5.3           
 ## [46] lifecycle_0.2.0      stringr_1.4.0        munsell_0.5.0       
 ## [49] cluster_2.1.0        flashClust_1.01-2    compiler_4.0.0      
-## [52] rlang_0.4.5          grid_4.0.0           rstudioapi_0.11     
+## [52] rlang_0.4.6          grid_4.0.0           rstudioapi_0.11     
 ## [55] leaps_3.1            mosaicCore_0.6.0     labeling_0.3        
 ## [58] rmarkdown_2.1        gtable_0.3.0         rematch_1.0.1       
 ## [61] R6_2.4.1             knitr_1.28           dplyr_0.8.5         
 ## [64] ggformula_0.9.4      readr_1.3.1          rJava_0.9-12        
-## [67] stringi_1.4.6        Rcpp_1.0.4.6         vctrs_0.2.4         
+## [67] stringi_1.4.6        Rcpp_1.0.4.6         vctrs_0.3.0         
 ## [70] png_0.1-7            scatterplot3d_0.3-41 tidyselect_1.0.0    
 ## [73] xfun_0.13
 \end{verbatim}
