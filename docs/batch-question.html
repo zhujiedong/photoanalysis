@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 2 章 批量处理光合测定数据 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
   <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 2 章 批量处理光合测定数据 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2020-07-12" />
+<meta name="date" content="2020-08-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -301,7 +301,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <caption><span id="tab:unnamed-chunk-5">表 2.1: </span>LI-6400 批量整合数据</caption>
 <thead>
 <tr class="header">
-<th></th>
+<th align="left"></th>
 <th align="left">files</th>
 <th align="left">Obs</th>
 <th align="left">HHMMSS</th>
@@ -314,7 +314,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </thead>
 <tbody>
 <tr class="odd">
-<td>1</td>
+<td align="left">1</td>
 <td align="left">aci</td>
 <td align="left">1</td>
 <td align="left">10:55:14</td>
@@ -325,7 +325,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="right">251.0</td>
 </tr>
 <tr class="even">
-<td>4</td>
+<td align="left">4</td>
 <td align="left">aci</td>
 <td align="left">2</td>
 <td align="left">10:57:35</td>
@@ -336,7 +336,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="right">192.0</td>
 </tr>
 <tr class="odd">
-<td>7</td>
+<td align="left">7</td>
 <td align="left">aci</td>
 <td align="left">3</td>
 <td align="left">10:59:55</td>
@@ -347,7 +347,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="right">136.0</td>
 </tr>
 <tr class="even">
-<td>10</td>
+<td align="left">10</td>
 <td align="left">aci</td>
 <td align="left">4</td>
 <td align="left">11:02:26</td>
@@ -358,7 +358,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="right">81.9</td>
 </tr>
 <tr class="odd">
-<td>13</td>
+<td align="left">13</td>
 <td align="left">aci</td>
 <td align="left">5</td>
 <td align="left">11:04:46</td>
@@ -369,7 +369,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="right">52.7</td>
 </tr>
 <tr class="even">
-<td>16</td>
+<td align="left">16</td>
 <td align="left">aci</td>
 <td align="left">6</td>
 <td align="left">11:07:23</td>
@@ -380,7 +380,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="right">305.0</td>
 </tr>
 <tr class="odd">
-<td>19</td>
+<td align="left">19</td>
 <td align="left">aci</td>
 <td align="left">7</td>
 <td align="left">11:09:43</td>
@@ -391,7 +391,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="right">284.0</td>
 </tr>
 <tr class="even">
-<td>22</td>
+<td align="left">22</td>
 <td align="left">aci</td>
 <td align="left">8</td>
 <td align="left">11:12:04</td>
@@ -402,7 +402,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="right">438.0</td>
 </tr>
 <tr class="odd">
-<td>25</td>
+<td align="left">25</td>
 <td align="left">aci</td>
 <td align="left">9</td>
 <td align="left">11:14:24</td>
@@ -413,7 +413,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="right">616.0</td>
 </tr>
 <tr class="even">
-<td>28</td>
+<td align="left">28</td>
 <td align="left">aci</td>
 <td align="left">10</td>
 <td align="left">11:16:44</td>
@@ -424,7 +424,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="right">795.0</td>
 </tr>
 <tr class="odd">
-<td>31</td>
+<td align="left">31</td>
 <td align="left">aci</td>
 <td align="left">11</td>
 <td align="left">11:19:49</td>
@@ -435,7 +435,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="right">970.0</td>
 </tr>
 <tr class="even">
-<td>34</td>
+<td align="left">34</td>
 <td align="left">aci</td>
 <td align="left">12</td>
 <td align="left">11:22:09</td>
@@ -446,7 +446,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="right">1150.0</td>
 </tr>
 <tr class="odd">
-<td>41</td>
+<td align="left">41</td>
 <td align="left">aq</td>
 <td align="left">2</td>
 <td align="left">10:12:52</td>
@@ -457,7 +457,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="right">239.0</td>
 </tr>
 <tr class="even">
-<td>44</td>
+<td align="left">44</td>
 <td align="left">aq</td>
 <td align="left">3</td>
 <td align="left">10:15:12</td>
@@ -468,7 +468,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="right">235.0</td>
 </tr>
 <tr class="odd">
-<td>47</td>
+<td align="left">47</td>
 <td align="left">aq</td>
 <td align="left">4</td>
 <td align="left">10:17:32</td>
@@ -893,10 +893,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb24-2" title="2">area &lt;-<span class="st"> </span><span class="dv">6</span> <span class="op">-</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">32</span>, <span class="dv">1</span>, <span class="dv">3</span>)</a>
 <a class="sourceLine" id="cb24-3" title="3">y1 &lt;-<span class="st"> </span><span class="kw">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>,  <span class="dt">header_line =</span> <span class="dv">17</span>, <span class="dt">data_start =</span> <span class="dv">27</span>, <span class="dt">S =</span> area, <span class="dt">K =</span> <span class="fl">0.5</span>)</a>
 <a class="sourceLine" id="cb24-4" title="4">y1<span class="op">$</span>Photo<span class="op">/</span>x1<span class="op">$</span>Photo</a></code></pre></div>
-<pre><code>##  [1] 1.258931 1.370240 1.254121 1.638816 1.529326 1.698830 1.652332 1.252000
-##  [9] 1.328966 1.922224 1.349561 1.718754 1.788783 1.771434 1.326793 1.499728
-## [17] 1.421185 1.731942 1.336159 1.839563 1.745764 1.502666 1.199329 1.410381
-## [25] 1.565603 1.829138 1.313810 1.595150 1.237588 1.603122 1.722890 1.262783</code></pre>
+<pre><code>##  [1] 1.693532 1.308336 1.207637 1.673144 1.643691 1.397070 1.347042 1.244591
+##  [9] 1.343813 1.821263 1.746527 1.305096 1.392686 1.272348 1.267674 1.211743
+## [17] 1.905239 1.769965 1.241957 1.538975 1.232639 1.244320 1.542969 1.674330
+## [25] 1.502691 1.295448 1.565937 1.871800 1.700817 1.614053 1.498579 1.216971</code></pre>
 <p>我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.</p>
 </div>
 <div id="recompute6800" class="section level3">
@@ -957,10 +957,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## Warning: Missing column names filled in: &#39;X125&#39; [125]</code></pre>
 <pre><code>## Warning: Duplicated column names deduplicated: &#39;TIME&#39; =&gt; &#39;TIME_1&#39; [69]</code></pre>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1">y3<span class="op">$</span>A<span class="op">/</span>x3<span class="op">$</span>A</a></code></pre></div>
-<pre><code>##  [1] 1.507597 1.303505 1.716944 1.937932 1.356744 1.370190 1.351617 1.440031
-##  [9] 1.641805 1.314681 1.434245 1.273253 1.234477 1.285205 1.206380 1.933068
-## [17] 1.774145 1.616111 1.365651 1.437764 1.391279 1.476822 1.235393 1.936211
-## [25] 1.669372 1.404262 1.331359 1.689725</code></pre>
+<pre><code>##  [1] 1.219200 1.643083 1.328472 1.386037 1.366846 1.345304 1.441635 1.615945
+##  [9] 1.564372 1.274757 1.419541 1.908728 1.559220 1.379192 1.903082 1.583197
+## [17] 1.282801 1.727817 1.511024 1.639460 1.478645 1.984459 1.223387 1.555592
+## [25] 1.344848 1.512327 1.670795 1.659355</code></pre>
 <p>测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。</p>
 </div>
 <div id="excel-recompute-68" class="section level4">
@@ -969,45 +969,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" title="1">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;zhujiedong/readphoto&quot;</span>)</a></code></pre></div>
 <p>当然，最近连我自己安装 github 的软件包都经常出问题，如果大家同样遇到问题，可以按照下面的方式安装：</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1">remotes<span class="op">::</span><span class="kw">install_git</span>(<span class="st">&quot;https://gitee.com/zhu_jie_dong/readphoto&quot;</span>)</a></code></pre></div>
-<p>函数的源代码其实很简单：</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1"><span class="cf">function</span> (path, <span class="dt">start_row =</span> <span class="dv">17</span>, <span class="dt">S =</span> <span class="dv">6</span>) </a>
-<a class="sourceLine" id="cb65-2" title="2">{</a>
-<a class="sourceLine" id="cb65-3" title="3">    wb &lt;-<span class="st"> </span>XLConnect<span class="op">::</span><span class="kw">loadWorkbook</span>(path)</a>
-<a class="sourceLine" id="cb65-4" title="4">    group_name &lt;-<span class="st"> </span>XLConnect<span class="op">::</span><span class="kw">readWorksheet</span>(wb, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">startRow =</span> start_row <span class="op">-</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb65-5" title="5"><span class="st">        </span><span class="dv">3</span>, <span class="dt">endRow =</span> start_row <span class="op">-</span><span class="st"> </span><span class="dv">3</span>, <span class="dt">header =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb65-6" title="6">    header_name &lt;-<span class="st"> </span>XLConnect<span class="op">::</span><span class="kw">readWorksheet</span>(wb, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">startRow =</span> start_row <span class="op">-</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb65-7" title="7"><span class="st">        </span><span class="dv">2</span>, <span class="dt">endRow =</span> start_row <span class="op">-</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">header =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb65-8" title="8">    new_name &lt;-<span class="st"> </span><span class="kw">paste0</span>(group_name, <span class="st">&quot;_&quot;</span>, header_name)</a>
-<a class="sourceLine" id="cb65-9" title="9">    XLConnect<span class="op">::</span><span class="kw">writeWorksheet</span>(wb, <span class="dt">data =</span> S, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">startRow =</span> <span class="dv">17</span>, </a>
-<a class="sourceLine" id="cb65-10" title="10">        <span class="dt">startCol =</span> <span class="kw">which</span>(new_name <span class="op">==</span><span class="st"> &quot;Const_S&quot;</span>), <span class="dt">header =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb65-11" title="11">    df &lt;-<span class="st"> </span>XLConnect<span class="op">::</span><span class="kw">readWorksheet</span>(wb, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">startRow =</span> <span class="dv">17</span>, </a>
-<a class="sourceLine" id="cb65-12" title="12">        <span class="dt">header =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb65-13" title="13">    <span class="kw">names</span>(df) &lt;-<span class="st"> </span>new_name</a>
-<a class="sourceLine" id="cb65-14" title="14">    df</a>
-<a class="sourceLine" id="cb65-15" title="15">}</a></code></pre></div>
 <p>其中：</p>
 <ul>
 <li><p>path 是 Excel 文件的路径；</p></li>
 <li><p>start_row 是数据开始的行号；</p></li>
-<li><p>S 为修改的叶面积，默认值为 6，如果叶面积无需更改，必须输入单个的值，也就是真正的叶面积，如果使用 aperture 更改了面积，且叶片能够充满叶室，比方说是 2 cm<sup>2</sup>，该值必须输入一个长度和测量值数量完全一致的向量，例如有 3 个测量值，我们输入 <code>S= rep(2,3)</code>，有的没有充满叶室，有的充满叶室，该值也必须输入一个长度和测量值数量完全一致的向量，例如，一共有三个测量值，只有第一个叶片没充满叶室，面积为 1.5，则输入方式为 <code>S = c(1.5, 2, 2)</code>。</p></li>
+<li><p>S 为修改的叶面积，默认值为 6，如果叶面积无需更改，则使用默认的 NULL。如果使用 aperture 更改了面积，且叶片能够充满叶室，比方说是 2 cm<sup>2</sup>，该值必须输入一个长度和测量值数量完全一致的向量，例如有 3 个测量值，我们输入 <code>S= rep(2,3)</code>，有的没有充满叶室，有的充满叶室，该值也必须输入一个长度和测量值数量完全一致的向量，例如，一共有三个测量值，只有第一个叶片没充满叶室，面积为 1.5，则输入方式为 <code>S = c(1.5, 2, 2)</code>。</p></li>
 </ul>
 <p>我们直接使用下面的例子解释，导入的数据是 6 cm<sup>2</sup> 的默认面积：</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1"><span class="kw">library</span>(readphoto)</a>
-<a class="sourceLine" id="cb66-2" title="2"></a>
-<a class="sourceLine" id="cb66-3" title="3">df6 &lt;-<span class="st"> </span><span class="kw">xlconnect_read</span>(<span class="st">&quot;./data/aci-xlc.xlsx&quot;</span>)</a>
-<a class="sourceLine" id="cb66-4" title="4">df6<span class="op">$</span>A</a></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1"><span class="kw">library</span>(readphoto)</a>
+<a class="sourceLine" id="cb65-2" title="2"></a>
+<a class="sourceLine" id="cb65-3" title="3">df6 &lt;-<span class="st"> </span><span class="kw">xlconnect_read</span>(<span class="st">&quot;./data/aci-xlc.xlsx&quot;</span>)</a>
+<a class="sourceLine" id="cb65-4" title="4">df6<span class="op">$</span>A</a></code></pre></div>
 <pre><code>##  [1] 24.7381184 18.1379358 10.8055345  3.0239340 -0.9144044 26.9519572
 ##  [7] 27.5088717 40.9101889 50.1393342 55.3865984 58.0662751 59.3556428</code></pre>
 <p>将面积改为 3 cm<sup>2</sup></p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1">df3 &lt;-<span class="st"> </span><span class="kw">xlconnect_read</span>(<span class="st">&quot;./data/aci-xlc.xlsx&quot;</span>, <span class="dt">S =</span> <span class="kw">rep</span>(<span class="dv">3</span>, <span class="dv">12</span>))</a>
-<a class="sourceLine" id="cb68-2" title="2">df6<span class="op">$</span>A<span class="op">/</span>df3<span class="op">$</span>A</a></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1">df3 &lt;-<span class="st"> </span><span class="kw">xlconnect_read</span>(<span class="st">&quot;./data/aci-xlc.xlsx&quot;</span>, <span class="dt">S =</span> <span class="kw">rep</span>(<span class="dv">3</span>, <span class="dv">12</span>))</a>
+<a class="sourceLine" id="cb67-2" title="2">df6<span class="op">$</span>A<span class="op">/</span>df3<span class="op">$</span>A</a></code></pre></div>
 <pre><code>##  [1] 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</code></pre>
 <p>模拟 12 个不同的叶面积，均值为 3，方差为 0.1</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1">df_random &lt;-<span class="st"> </span><span class="kw">xlconnect_read</span>(<span class="st">&quot;./data/aci-xlc.xlsx&quot;</span>, <span class="dt">S =</span> <span class="kw">rnorm</span>(<span class="dv">12</span>, <span class="dv">3</span>, <span class="fl">0.1</span>))</a>
-<a class="sourceLine" id="cb70-2" title="2">df6<span class="op">$</span>A<span class="op">/</span>df_random<span class="op">$</span>A</a></code></pre></div>
-<pre><code>##  [1] 0.4913362 0.5075024 0.4776529 0.5042911 0.4840078 0.4874041 0.4997550
-##  [8] 0.4956820 0.4836818 0.5151495 0.4844624 0.5293158</code></pre>
-<p>最近有点忙，暂时记录下来，用这个函数实现批量处理其实很简单了，后面有时间再补充。</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1">df_random &lt;-<span class="st"> </span><span class="kw">xlconnect_read</span>(<span class="st">&quot;./data/aci-xlc.xlsx&quot;</span>, <span class="dt">S =</span> <span class="kw">rnorm</span>(<span class="dv">12</span>, <span class="dv">3</span>, <span class="fl">0.1</span>))</a>
+<a class="sourceLine" id="cb69-2" title="2">df6<span class="op">$</span>A<span class="op">/</span>df_random<span class="op">$</span>A</a></code></pre></div>
+<pre><code>##  [1] 0.5147337 0.5022070 0.5116056 0.4964251 0.4978301 0.4703495 0.5025363
+##  [8] 0.5041637 0.5001900 0.5163184 0.5195898 0.4792830</code></pre>
 
 
 </div>

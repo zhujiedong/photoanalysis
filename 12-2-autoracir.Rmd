@@ -85,7 +85,7 @@ plot(A ~ CO2_r,
 abline(h = 13, col = "red", lwd = 0.8, lty = 3)
 ```
 直接批量删除是不可取的。容易出错或者残留无效数据，针对这个情况，今天花了点时间，专门写了几个新的函数，创意基于 [ManuelLamothe
-/RapidACi](https://github.com/ManuelLamothe/RapidACi) 的方法，做了一些修改，并抛弃了 `tidyverse` 的方式，以减少依赖，以及可能的软件包升级导致的无法运行。主要的修改：
+/RapidACi](https://github.com/ManuelLamothe/RapidACi) 的方法（数据同样来自于此），做了一些修改，并抛弃了 `tidyverse` 的方式，以减少依赖，以及可能的软件包升级导致的无法运行。主要的修改：
 
 * 独立的 `xls_read` 函数用于读取 excel 格式数据并修改叶面积。
 * 独立的“清洗”空叶室数据的函数 `tidy_data_empty`。
@@ -100,13 +100,18 @@ abline(h = 13, col = "red", lwd = 0.8, lty = 3)
 
 **1. 导入数据：**
 
+此函数本质上是 `xlconnect_read`，如无需修改叶面积，则使用默认值。如果需要修改叶面积，需要输入 S 参数，叶面积修改值必须和 A 的值一一对应，否则因为叶面积错误，则导致其他的错误，例如上面修改叶面积为原来的一半：
+
 ```{r}
 library(racir)
 library(plantecophys)
-empty <- xls_read("data/Empty.xlsx", S =10.947)
-leaf <- xls_read("data/Fast.xlsx", S =10.947)
+empty <- xls_read("data/Empty.xlsx")
+leaf <- xls_read("data/Fast.xlsx")
+half_leaf <- xls_read("data/Fast.xlsx", S = leaf$S/2)
+head(half_leaf$A/leaf$A)
+tail(half_leaf$A/leaf$A)
 ```
-此函数的设计主要是用于修改叶面积，如果叶面积不需要修改，可以直接采用其他方式导入数据，因此，S 选项必须和实际的叶面积一致，目前暂时没时间对这个函数做修改。
+
 
 **2. 关于空叶室的数据过滤范围的选取:**
 

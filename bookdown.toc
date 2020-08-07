@@ -75,46 +75,46 @@
 \contentsline {subsection}{\numberline {10.5.1}实现方法 1}{98}{subsection.10.5.1}%
 \contentsline {subsection}{\numberline {10.5.2}实现方法 2}{101}{subsection.10.5.2}%
 \contentsline {subsubsection}{\numberline {10.5.2.1}查看相邻数据的差值设置}{102}{subsubsection.10.5.2.1}%
-\contentsline {subsection}{\numberline {10.5.3}数据的批量处理}{105}{subsection.10.5.3}%
-\contentsline {subsubsection}{\numberline {10.5.3.1}readphoto 导入}{105}{subsubsection.10.5.3.1}%
+\contentsline {subsection}{\numberline {10.5.3}数据的批量处理}{107}{subsection.10.5.3}%
+\contentsline {subsubsection}{\numberline {10.5.3.1}readphoto 导入}{107}{subsubsection.10.5.3.1}%
 \contentsline {subsubsection}{\numberline {10.5.3.2}处理大量 csv 文件}{107}{subsubsection.10.5.3.2}%
 \contentsline {section}{\numberline {10.6}批量计算 \(V_{cmax}\) 和 \(J_max\)}{108}{section.10.6}%
-\contentsline {section}{\numberline {10.7}LI-6800 RACiR\texttrademark 簇状叶的测量与拟合}{109}{section.10.7}%
-\contentsline {subsection}{\numberline {10.7.1}数据的拟合}{110}{subsection.10.7.1}%
-\contentsline {subsubsection}{\numberline {10.7.1.1}数据文件的命名}{110}{subsubsection.10.7.1.1}%
-\contentsline {subsubsection}{\numberline {10.7.1.2}匹配的问题}{110}{subsubsection.10.7.1.2}%
-\contentsline {subsection}{\numberline {10.7.2}拟合过程}{111}{subsection.10.7.2}%
-\contentsline {section}{\numberline {10.8}RACiR\texttrademark 分析的手动实现}{115}{section.10.8}%
-\contentsline {section}{\numberline {10.9}多个速率的 RACiR 曲线研究}{119}{section.10.9}%
-\contentsline {subsection}{\numberline {10.9.1}光呼吸滞后模型}{120}{subsection.10.9.1}%
-\contentsline {subsubsection}{\numberline {10.9.1.1}构造基础数据}{120}{subsubsection.10.9.1.1}%
-\contentsline {subsection}{\numberline {10.9.2}光呼吸滞后性代码}{122}{subsection.10.9.2}%
-\contentsline {subsection}{\numberline {10.9.3}数据的构造}{124}{subsection.10.9.3}%
-\contentsline {subsection}{\numberline {10.9.4}光呼吸滞后性作图}{124}{subsection.10.9.4}%
-\contentsline {subsection}{\numberline {10.9.5}补偿点计算}{129}{subsection.10.9.5}%
-\contentsline {subsection}{\numberline {10.9.6}无光呼吸酶失活模块}{156}{subsection.10.9.6}%
-\contentsline {subsubsection}{\numberline {10.9.6.1}数据构造}{156}{subsubsection.10.9.6.1}%
-\contentsline {subsection}{\numberline {10.9.7}酶失活作图}{160}{subsection.10.9.7}%
-\contentsline {subsection}{\numberline {10.9.8}不同失活程度下补偿点计算}{165}{subsection.10.9.8}%
-\contentsline {section}{\numberline {10.10}时间延迟的扩散限制}{179}{section.10.10}%
-\contentsline {subsection}{\numberline {10.10.1}扩散限制滞后性}{192}{subsection.10.10.1}%
-\contentsline {section}{\numberline {10.11}扩散限制作图}{198}{section.10.11}%
-\contentsline {subsection}{\numberline {10.11.1}补偿点的计算}{202}{subsection.10.11.1}%
-\contentsline {subsection}{\numberline {10.11.2}所有图形代码}{208}{subsection.10.11.2}%
-\contentsline {section}{\numberline {10.12}LI-6800 荧光数据分析}{223}{section.10.12}%
-\contentsline {subsection}{\numberline {10.12.1}jip test 的实现}{223}{subsection.10.12.1}%
-\contentsline {subsection}{\numberline {10.12.2}\texttt {jiptest} 软件包安装}{223}{subsection.10.12.2}%
-\contentsline {subsection}{\numberline {10.12.3}\texttt {read\_files} 及 \texttt {read\_dcfiles} 函数}{223}{subsection.10.12.3}%
-\contentsline {subsection}{\numberline {10.12.4}\texttt {jip\_test} 及 \texttt {jip\_dctest} 函数}{225}{subsection.10.12.4}%
-\contentsline {subsection}{\numberline {10.12.5}\texttt {jip\_plot} 及 \texttt {jip\_dcplot} 函数}{226}{subsection.10.12.5}%
-\contentsline {chapter}{\numberline {11}大话 PCA}{229}{chapter.11}%
-\contentsline {section}{\numberline {11.1}几何解释}{229}{section.11.1}%
-\contentsline {section}{\numberline {11.2}线性代数解释}{236}{section.11.2}%
-\contentsline {subsection}{\numberline {11.2.1}特征向量与特征值}{236}{subsection.11.2.1}%
-\contentsline {subsection}{\numberline {11.2.2}手动实现过程}{237}{subsection.11.2.2}%
-\contentsline {subsubsection}{\numberline {11.2.2.1}均值的计算}{237}{subsubsection.11.2.2.1}%
-\contentsline {subsubsection}{\numberline {11.2.2.2}计算协方差矩阵}{237}{subsubsection.11.2.2.2}%
-\contentsline {subsubsection}{\numberline {11.2.2.3}计算特征值和特征向量}{237}{subsubsection.11.2.2.3}%
-\contentsline {subsection}{\numberline {11.2.3}\texttt {prcomp} 的实现}{238}{subsection.11.2.3}%
-\contentsline {chapter}{\numberline {12}环境与配置}{241}{chapter.12}%
-\contentsline {fm}{参考文献}{243}{chapter*.70}%
+\contentsline {section}{\numberline {10.7}LI-6800 RACiR\texttrademark 簇状叶的测量与拟合}{111}{section.10.7}%
+\contentsline {subsection}{\numberline {10.7.1}数据的拟合}{112}{subsection.10.7.1}%
+\contentsline {subsubsection}{\numberline {10.7.1.1}数据文件的命名}{112}{subsubsection.10.7.1.1}%
+\contentsline {subsubsection}{\numberline {10.7.1.2}匹配的问题}{112}{subsubsection.10.7.1.2}%
+\contentsline {subsection}{\numberline {10.7.2}拟合过程}{113}{subsection.10.7.2}%
+\contentsline {section}{\numberline {10.8}RACiR\texttrademark 分析的手动实现}{117}{section.10.8}%
+\contentsline {section}{\numberline {10.9}多个速率的 RACiR 曲线研究}{121}{section.10.9}%
+\contentsline {subsection}{\numberline {10.9.1}光呼吸滞后模型}{122}{subsection.10.9.1}%
+\contentsline {subsubsection}{\numberline {10.9.1.1}构造基础数据}{122}{subsubsection.10.9.1.1}%
+\contentsline {subsection}{\numberline {10.9.2}光呼吸滞后性代码}{124}{subsection.10.9.2}%
+\contentsline {subsection}{\numberline {10.9.3}数据的构造}{126}{subsection.10.9.3}%
+\contentsline {subsection}{\numberline {10.9.4}光呼吸滞后性作图}{126}{subsection.10.9.4}%
+\contentsline {subsection}{\numberline {10.9.5}补偿点计算}{131}{subsection.10.9.5}%
+\contentsline {subsection}{\numberline {10.9.6}无光呼吸酶失活模块}{158}{subsection.10.9.6}%
+\contentsline {subsubsection}{\numberline {10.9.6.1}数据构造}{158}{subsubsection.10.9.6.1}%
+\contentsline {subsection}{\numberline {10.9.7}酶失活作图}{162}{subsection.10.9.7}%
+\contentsline {subsection}{\numberline {10.9.8}不同失活程度下补偿点计算}{167}{subsection.10.9.8}%
+\contentsline {section}{\numberline {10.10}时间延迟的扩散限制}{181}{section.10.10}%
+\contentsline {subsection}{\numberline {10.10.1}扩散限制滞后性}{194}{subsection.10.10.1}%
+\contentsline {section}{\numberline {10.11}扩散限制作图}{200}{section.10.11}%
+\contentsline {subsection}{\numberline {10.11.1}补偿点的计算}{204}{subsection.10.11.1}%
+\contentsline {subsection}{\numberline {10.11.2}所有图形代码}{210}{subsection.10.11.2}%
+\contentsline {section}{\numberline {10.12}LI-6800 荧光数据分析}{225}{section.10.12}%
+\contentsline {subsection}{\numberline {10.12.1}jip test 的实现}{225}{subsection.10.12.1}%
+\contentsline {subsection}{\numberline {10.12.2}\texttt {jiptest} 软件包安装}{225}{subsection.10.12.2}%
+\contentsline {subsection}{\numberline {10.12.3}\texttt {read\_files} 及 \texttt {read\_dcfiles} 函数}{225}{subsection.10.12.3}%
+\contentsline {subsection}{\numberline {10.12.4}\texttt {jip\_test} 及 \texttt {jip\_dctest} 函数}{227}{subsection.10.12.4}%
+\contentsline {subsection}{\numberline {10.12.5}\texttt {jip\_plot} 及 \texttt {jip\_dcplot} 函数}{228}{subsection.10.12.5}%
+\contentsline {chapter}{\numberline {11}大话 PCA}{231}{chapter.11}%
+\contentsline {section}{\numberline {11.1}几何解释}{231}{section.11.1}%
+\contentsline {section}{\numberline {11.2}线性代数解释}{238}{section.11.2}%
+\contentsline {subsection}{\numberline {11.2.1}特征向量与特征值}{238}{subsection.11.2.1}%
+\contentsline {subsection}{\numberline {11.2.2}手动实现过程}{239}{subsection.11.2.2}%
+\contentsline {subsubsection}{\numberline {11.2.2.1}均值的计算}{239}{subsubsection.11.2.2.1}%
+\contentsline {subsubsection}{\numberline {11.2.2.2}计算协方差矩阵}{239}{subsubsection.11.2.2.2}%
+\contentsline {subsubsection}{\numberline {11.2.2.3}计算特征值和特征向量}{239}{subsubsection.11.2.2.3}%
+\contentsline {subsection}{\numberline {11.2.3}\texttt {prcomp} 的实现}{240}{subsection.11.2.3}%
+\contentsline {chapter}{\numberline {12}环境与配置}{243}{chapter.12}%
+\contentsline {fm}{参考文献}{245}{chapter*.70}%

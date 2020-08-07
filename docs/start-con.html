@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 9 章 关于非线性拟合的初始值 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
   <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 9 章 关于非线性拟合的初始值 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2020-07-12" />
+<meta name="date" content="2020-08-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -291,12 +291,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </blockquote>
 <p>用通俗但不是特别严谨的说法可解释为：每次执行这种算法时，程序都会从原值（也就是我抄的上面迭代法定义的旧值）推出一个新值。</p>
 <p>之所以先介绍这个迭代，原因很简单，非线性拟合就是通过迭代的方法，需要对每一个变量<strong>最初的估计值进行不断的迭代，得到一个向一个点收缩或汇聚的值，这个估计值必须在实际值的一定范围内，程序通过不断调整这个值来改善拟合结果</strong>。这就解释了上面的问题，初始值是让程序开始运行的前提，不然没法迭代，必须设定。我下面的内容将以 LI-6800 的光响应曲线的测试数据，使用非直角双曲线模型进行拟合来讲解具体的 R 中的一些实现方法，我们首先导入数据，然后再利用这些数据逐个举例不同的确定初始值的方式。</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" title="1">nls &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/nlstest.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb128-2" title="2"></a>
-<a class="sourceLine" id="cb128-3" title="3"></a>
-<a class="sourceLine" id="cb128-4" title="4"><span class="co"># 光响应曲线比较简单，我们将需要的数据直接提取，方便后面操作</span></a>
-<a class="sourceLine" id="cb128-5" title="5">lrc_Q &lt;-<span class="st"> </span>nls<span class="op">$</span>Qin</a>
-<a class="sourceLine" id="cb128-6" title="6">lrc_A &lt;-<span class="st"> </span>nls<span class="op">$</span>A</a></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" title="1">nls &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/nlstest.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb127-2" title="2"></a>
+<a class="sourceLine" id="cb127-3" title="3"></a>
+<a class="sourceLine" id="cb127-4" title="4"><span class="co"># 光响应曲线比较简单，我们将需要的数据直接提取，方便后面操作</span></a>
+<a class="sourceLine" id="cb127-5" title="5">lrc_Q &lt;-<span class="st"> </span>nls<span class="op">$</span>Qin</a>
+<a class="sourceLine" id="cb127-6" title="6">lrc_A &lt;-<span class="st"> </span>nls<span class="op">$</span>A</a></code></pre></div>
 <div id="nlslm" class="section level2">
 <h2><span class="header-section-number">9.1</span> nlsLM 解决方案</h2>
 <p>nlsLM 来自于 <span class="citation">Elzhov et al. (<a href="#ref-Elzhov2016minpack" role="doc-biblioref">2016</a>)</span> 的 <code>minpack.lm</code>，利用 C 语言的 MINPACK 库，修改了 Levenberg-Marquardt 算法，在实际操作中，很多时候并不准确的输入初始值，他也能得出比较好的拟合结果。但结果未必完美，出现下面让人烦恼的报错：</p>
@@ -305,15 +305,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </blockquote>
 <p>的概率会大大降低，而且尽管结果不如意，我们也可以利用他的结果缩小初始值的范围，继续尝试其他初始值。</p>
 <p>例如下面的例子中，非直角双曲线的 Rd 的初始值我们可以利用暗呼吸的实测值大致估计，同理最大光合速率也是如此，剩下的分别为非直角双曲线曲率，我们暂定为 1，alpha 也暂定为 0.1，使用 <code>nlsLM</code> 进行拟合，结果如下：</p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" title="1"><span class="kw">library</span>(minpack.lm)</a>
-<a class="sourceLine" id="cb129-2" title="2"></a>
-<a class="sourceLine" id="cb129-3" title="3">lrcnls_lm &lt;-<span class="st"> </span><span class="kw">nlsLM</span>(lrc_A <span class="op">~</span><span class="st"> </span>(<span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>theta))<span class="op">*</span></a>
-<a class="sourceLine" id="cb129-4" title="4"><span class="st">        </span>(alpha<span class="op">*</span>lrc_Q<span class="op">+</span>Am<span class="op">-</span><span class="kw">sqrt</span>((alpha<span class="op">*</span>lrc_Q<span class="op">+</span>Am)<span class="op">^</span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb129-5" title="5"><span class="st">        </span><span class="dv">4</span><span class="op">*</span>alpha<span class="op">*</span>theta<span class="op">*</span>Am<span class="op">*</span>lrc_Q))<span class="op">-</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb129-6" title="6"><span class="st">        </span>Rd, <span class="dt">start=</span><span class="kw">list</span>(<span class="dt">Am=</span>(<span class="kw">max</span>(lrc_A)<span class="op">-</span><span class="kw">min</span>(lrc_A)),</a>
-<a class="sourceLine" id="cb129-7" title="7">        <span class="dt">alpha=</span><span class="fl">0.1</span>,<span class="dt">Rd=</span><span class="op">-</span><span class="kw">min</span>(lrc_A),<span class="dt">theta=</span><span class="fl">0.8</span>)) </a></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" title="1"><span class="kw">library</span>(minpack.lm)</a>
+<a class="sourceLine" id="cb128-2" title="2"></a>
+<a class="sourceLine" id="cb128-3" title="3">lrcnls_lm &lt;-<span class="st"> </span><span class="kw">nlsLM</span>(lrc_A <span class="op">~</span><span class="st"> </span>(<span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>theta))<span class="op">*</span></a>
+<a class="sourceLine" id="cb128-4" title="4"><span class="st">        </span>(alpha<span class="op">*</span>lrc_Q<span class="op">+</span>Am<span class="op">-</span><span class="kw">sqrt</span>((alpha<span class="op">*</span>lrc_Q<span class="op">+</span>Am)<span class="op">^</span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb128-5" title="5"><span class="st">        </span><span class="dv">4</span><span class="op">*</span>alpha<span class="op">*</span>theta<span class="op">*</span>Am<span class="op">*</span>lrc_Q))<span class="op">-</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb128-6" title="6"><span class="st">        </span>Rd, <span class="dt">start=</span><span class="kw">list</span>(<span class="dt">Am=</span>(<span class="kw">max</span>(lrc_A)<span class="op">-</span><span class="kw">min</span>(lrc_A)),</a>
+<a class="sourceLine" id="cb128-7" title="7">        <span class="dt">alpha=</span><span class="fl">0.1</span>,<span class="dt">Rd=</span><span class="op">-</span><span class="kw">min</span>(lrc_A),<span class="dt">theta=</span><span class="fl">0.8</span>)) </a></code></pre></div>
 <p>结果没有报错，看上去没有问题，那我们观察一下具体的拟合结果：</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" title="1"><span class="kw">summary</span>(lrcnls_lm)</a></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" title="1"><span class="kw">summary</span>(lrcnls_lm)</a></code></pre></div>
 <pre><code>## 
 ## Formula: lrc_A ~ (1/(2 * theta)) * (alpha * lrc_Q + Am - sqrt((alpha * 
 ##     lrc_Q + Am)^2 - 4 * alpha * theta * Am * lrc_Q)) - Rd
@@ -345,21 +345,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div id="plot_exam" class="section level3">
 <h3><span class="header-section-number">9.2.1</span> 实现过程</h3>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" title="1"><span class="co"># 我们选择的模型，将其写为一个函数，用于计算净光合速率</span></a>
-<a class="sourceLine" id="cb132-2" title="2">expfct &lt;-<span class="st"> </span><span class="cf">function</span>(x, Am, alpha, Rd, theta) {</a>
-<a class="sourceLine" id="cb132-3" title="3">  (<span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>theta)) <span class="op">*</span><span class="st"> </span>(alpha <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>Am <span class="op">-</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb132-4" title="4"><span class="st">  </span><span class="kw">sqrt</span>((alpha <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>Am)<span class="op">^</span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">4</span> <span class="op">*</span><span class="st"> </span>alpha <span class="op">*</span><span class="st"> </span>theta <span class="op">*</span><span class="st"> </span>Am <span class="op">*</span><span class="st"> </span>x)) <span class="op">-</span><span class="st"> </span>Rd</a>
-<a class="sourceLine" id="cb132-5" title="5">}</a>
-<a class="sourceLine" id="cb132-6" title="6"></a>
-<a class="sourceLine" id="cb132-7" title="7"><span class="co"># 我们的数据</span></a>
-<a class="sourceLine" id="cb132-8" title="8">test &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> lrc_Q, <span class="dt">y =</span> lrc_A)</a></code></pre></div>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" title="1"><span class="co"># 先做实测数据的散点图</span></a>
-<a class="sourceLine" id="cb133-2" title="2"><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> test)</a>
-<a class="sourceLine" id="cb133-3" title="3"></a>
-<a class="sourceLine" id="cb133-4" title="4"><span class="co"># 利用上面的函数，假定 alpha 的值为0.8，看计算值与测量值重合程度</span></a>
-<a class="sourceLine" id="cb133-5" title="5"><span class="kw">curve</span>(<span class="kw">expfct</span>(x, <span class="dt">Am =</span> (<span class="kw">max</span>(lrc_A)<span class="op">-</span><span class="kw">min</span>(lrc_A)),</a>
-<a class="sourceLine" id="cb133-6" title="6">     <span class="dt">alpha=</span><span class="fl">0.8</span>, <span class="dt">Rd=</span><span class="op">-</span><span class="kw">min</span>(lrc_A), <span class="dt">theta=</span><span class="fl">0.8</span>), <span class="dt">add =</span> <span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb133-7" title="7">             )</a></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" title="1"><span class="co"># 我们选择的模型，将其写为一个函数，用于计算净光合速率</span></a>
+<a class="sourceLine" id="cb131-2" title="2">expfct &lt;-<span class="st"> </span><span class="cf">function</span>(x, Am, alpha, Rd, theta) {</a>
+<a class="sourceLine" id="cb131-3" title="3">  (<span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>theta)) <span class="op">*</span><span class="st"> </span>(alpha <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>Am <span class="op">-</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb131-4" title="4"><span class="st">  </span><span class="kw">sqrt</span>((alpha <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>Am)<span class="op">^</span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">4</span> <span class="op">*</span><span class="st"> </span>alpha <span class="op">*</span><span class="st"> </span>theta <span class="op">*</span><span class="st"> </span>Am <span class="op">*</span><span class="st"> </span>x)) <span class="op">-</span><span class="st"> </span>Rd</a>
+<a class="sourceLine" id="cb131-5" title="5">}</a>
+<a class="sourceLine" id="cb131-6" title="6"></a>
+<a class="sourceLine" id="cb131-7" title="7"><span class="co"># 我们的数据</span></a>
+<a class="sourceLine" id="cb131-8" title="8">test &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> lrc_Q, <span class="dt">y =</span> lrc_A)</a></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" title="1"><span class="co"># 先做实测数据的散点图</span></a>
+<a class="sourceLine" id="cb132-2" title="2"><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> test)</a>
+<a class="sourceLine" id="cb132-3" title="3"></a>
+<a class="sourceLine" id="cb132-4" title="4"><span class="co"># 利用上面的函数，假定 alpha 的值为0.8，看计算值与测量值重合程度</span></a>
+<a class="sourceLine" id="cb132-5" title="5"><span class="kw">curve</span>(<span class="kw">expfct</span>(x, <span class="dt">Am =</span> (<span class="kw">max</span>(lrc_A)<span class="op">-</span><span class="kw">min</span>(lrc_A)),</a>
+<a class="sourceLine" id="cb132-6" title="6">     <span class="dt">alpha=</span><span class="fl">0.8</span>, <span class="dt">Rd=</span><span class="op">-</span><span class="kw">min</span>(lrc_A), <span class="dt">theta=</span><span class="fl">0.8</span>), <span class="dt">add =</span> <span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb132-7" title="7">             )</a></code></pre></div>
 <div class="figure"><span id="fig:pomp"></span>
 <img src="bookdown_files/figure-html/pomp-1.png" alt="初步判断 alpha 的初始值" width="672" />
 <p class="caption">
@@ -367,9 +367,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </p>
 </div>
 <p>观察上图 <a href="start-con.html#fig:pomp">9.1</a> 的结果可以看到，曲线在 0-600 的范围内，拟合值明显偏大，观察模型的方程式，以及其他起始值的设定方式，我们初步判断 alpha 的值偏大，于是乎我们将其改小观察，观察曲线和测量点的重合仍然不是很好，我们尝试修改 theta 值与 alpha 值（也即曲线高于测量点，则需要减小纵坐标的值，低于测量点，则需要增加该值，该过程省略，我大概设置了五分钟完成），最终得出的结果如下：</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" title="1"><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> test)</a>
-<a class="sourceLine" id="cb134-2" title="2"><span class="kw">curve</span>(<span class="kw">expfct</span>(x, <span class="dt">Am =</span> (<span class="kw">max</span>(lrc_A)<span class="op">-</span><span class="kw">min</span>(lrc_A)),</a>
-<a class="sourceLine" id="cb134-3" title="3">     <span class="dt">alpha=</span><span class="fl">0.06</span>, <span class="dt">Rd=</span><span class="op">-</span><span class="kw">min</span>(lrc_A), <span class="dt">theta=</span><span class="fl">0.82</span>), <span class="dt">add =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" title="1"><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> test)</a>
+<a class="sourceLine" id="cb133-2" title="2"><span class="kw">curve</span>(<span class="kw">expfct</span>(x, <span class="dt">Am =</span> (<span class="kw">max</span>(lrc_A)<span class="op">-</span><span class="kw">min</span>(lrc_A)),</a>
+<a class="sourceLine" id="cb133-3" title="3">     <span class="dt">alpha=</span><span class="fl">0.06</span>, <span class="dt">Rd=</span><span class="op">-</span><span class="kw">min</span>(lrc_A), <span class="dt">theta=</span><span class="fl">0.82</span>), <span class="dt">add =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:alpp"></span>
 <img src="bookdown_files/figure-html/alpp-1.png" alt="初修正后断 alpha 的初始值" width="672" />
 <p class="caption">
@@ -377,13 +377,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </p>
 </div>
 <p>图 <a href="start-con.html#fig:alpp">9.2</a> 尽管看上去效果仍然不满意，但我们可试着进行拟合，看能否得到显著差异的结果：</p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" title="1">lrcnls_manual &lt;-<span class="st"> </span><span class="kw">nls</span>(lrc_A <span class="op">~</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb135-2" title="2"><span class="st">        </span>(<span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>theta))<span class="op">*</span></a>
-<a class="sourceLine" id="cb135-3" title="3"><span class="st">        </span>(alpha<span class="op">*</span>lrc_Q<span class="op">+</span>Am<span class="op">-</span><span class="kw">sqrt</span>((alpha<span class="op">*</span>lrc_Q<span class="op">+</span>Am)<span class="op">^</span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb135-4" title="4"><span class="st">                               </span><span class="dv">4</span><span class="op">*</span>alpha<span class="op">*</span>theta<span class="op">*</span>Am<span class="op">*</span>lrc_Q))<span class="op">-</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb135-5" title="5"><span class="st">        </span>Rd, <span class="dt">start=</span><span class="kw">list</span>(<span class="dt">Am=</span>(<span class="kw">max</span>(lrc_A)<span class="op">-</span><span class="kw">min</span>(lrc_A)),</a>
-<a class="sourceLine" id="cb135-6" title="6">                       <span class="dt">alpha=</span><span class="fl">0.03</span>,<span class="dt">Rd=</span><span class="op">-</span><span class="kw">min</span>(lrc_A),<span class="dt">theta=</span><span class="fl">0.6</span>))</a>
-<a class="sourceLine" id="cb135-7" title="7"><span class="kw">summary</span>(lrcnls_manual)</a></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" title="1">lrcnls_manual &lt;-<span class="st"> </span><span class="kw">nls</span>(lrc_A <span class="op">~</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb134-2" title="2"><span class="st">        </span>(<span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>theta))<span class="op">*</span></a>
+<a class="sourceLine" id="cb134-3" title="3"><span class="st">        </span>(alpha<span class="op">*</span>lrc_Q<span class="op">+</span>Am<span class="op">-</span><span class="kw">sqrt</span>((alpha<span class="op">*</span>lrc_Q<span class="op">+</span>Am)<span class="op">^</span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb134-4" title="4"><span class="st">                               </span><span class="dv">4</span><span class="op">*</span>alpha<span class="op">*</span>theta<span class="op">*</span>Am<span class="op">*</span>lrc_Q))<span class="op">-</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb134-5" title="5"><span class="st">        </span>Rd, <span class="dt">start=</span><span class="kw">list</span>(<span class="dt">Am=</span>(<span class="kw">max</span>(lrc_A)<span class="op">-</span><span class="kw">min</span>(lrc_A)),</a>
+<a class="sourceLine" id="cb134-6" title="6">                       <span class="dt">alpha=</span><span class="fl">0.03</span>,<span class="dt">Rd=</span><span class="op">-</span><span class="kw">min</span>(lrc_A),<span class="dt">theta=</span><span class="fl">0.6</span>))</a>
+<a class="sourceLine" id="cb134-7" title="7"><span class="kw">summary</span>(lrcnls_manual)</a></code></pre></div>
 <pre><code>## 
 ## Formula: lrc_A ~ (1/(2 * theta)) * (alpha * lrc_Q + Am - sqrt((alpha * 
 ##     lrc_Q + Am)^2 - 4 * alpha * theta * Am * lrc_Q)) - Rd
@@ -401,11 +401,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## Number of iterations to convergence: 7 
 ## Achieved convergence tolerance: 4.601e-06</code></pre>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" title="1"><span class="co"># 对拟合之后的结果作图，观察使用我们的估计值，</span></a>
-<a class="sourceLine" id="cb137-2" title="2"><span class="co"># 迭代的最终值与元数据的重合程度</span></a>
-<a class="sourceLine" id="cb137-3" title="3"><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> test, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">14</span>))</a>
-<a class="sourceLine" id="cb137-4" title="4"><span class="kw">curve</span>(<span class="kw">expfct</span>(x, <span class="dt">Am =</span> <span class="fl">12.307586</span>,</a>
-<a class="sourceLine" id="cb137-5" title="5">     <span class="dt">alpha=</span><span class="fl">0.045706</span>, <span class="dt">Rd=</span> <span class="fl">0.656643</span>, <span class="dt">theta=</span><span class="fl">0.707518</span>), <span class="dt">add =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" title="1"><span class="co"># 对拟合之后的结果作图，观察使用我们的估计值，</span></a>
+<a class="sourceLine" id="cb136-2" title="2"><span class="co"># 迭代的最终值与元数据的重合程度</span></a>
+<a class="sourceLine" id="cb136-3" title="3"><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> test, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">14</span>))</a>
+<a class="sourceLine" id="cb136-4" title="4"><span class="kw">curve</span>(<span class="kw">expfct</span>(x, <span class="dt">Am =</span> <span class="fl">12.307586</span>,</a>
+<a class="sourceLine" id="cb136-5" title="5">     <span class="dt">alpha=</span><span class="fl">0.045706</span>, <span class="dt">Rd=</span> <span class="fl">0.656643</span>, <span class="dt">theta=</span><span class="fl">0.707518</span>), <span class="dt">add =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:alpf"></span>
 <img src="bookdown_files/figure-html/alpf-1.png" alt="检验作图法的初始值判断" width="672" />
 <p class="caption">
@@ -417,37 +417,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="show_demo" class="section level3">
 <h3><span class="header-section-number">9.2.2</span> 直观展示</h3>
 <p>上面的表述太啰嗦，直接用下面的图形说明一下，其中 alhpa 的取值在此处选择从 0.01 到 0.07，每次增加 0.05，其他值分别为 Am = 12.31, Rd= 0.66, theta=0.71 （此处为展示效果和方便，将这些值直接按照拟合结果设定了，实际差别不大）</p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" title="1"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb138-2" title="2"><span class="kw">library</span>(purrr)</a>
-<a class="sourceLine" id="cb138-3" title="3"></a>
-<a class="sourceLine" id="cb138-4" title="4">lrc &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/nlstest.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb138-5" title="5"></a>
-<a class="sourceLine" id="cb138-6" title="6"><span class="co"># 光响应曲线比较简单，我们将需要的数据直接提取，方便后面操作</span></a>
-<a class="sourceLine" id="cb138-7" title="7">lrc_Q &lt;-<span class="st"> </span>lrc<span class="op">$</span>Qin</a>
-<a class="sourceLine" id="cb138-8" title="8">lrc_A &lt;-<span class="st"> </span>lrc<span class="op">$</span>A</a>
-<a class="sourceLine" id="cb138-9" title="9">n &lt;-<span class="st"> </span><span class="kw">length</span>(lrc_A)</a>
-<a class="sourceLine" id="cb138-10" title="10"></a>
-<a class="sourceLine" id="cb138-11" title="11"></a>
-<a class="sourceLine" id="cb138-12" title="12">alp &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;a=&quot;</span>, <span class="kw">seq</span>(<span class="fl">0.01</span>, <span class="fl">0.07</span>, <span class="dt">by =</span> <span class="fl">0.005</span>))</a>
-<a class="sourceLine" id="cb138-13" title="13">alpn &lt;-<span class="st"> </span><span class="kw">rep</span>(alp, <span class="dt">each =</span> n)</a>
-<a class="sourceLine" id="cb138-14" title="14"></a>
-<a class="sourceLine" id="cb138-15" title="15">expfct &lt;-<span class="st"> </span><span class="cf">function</span>(x, Am, alpha, Rd, theta) {(<span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>theta)) <span class="op">*</span><span class="st"> </span>(alpha <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>Am <span class="op">-</span><span class="st"> </span><span class="kw">sqrt</span>((alpha <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>Am)<span class="op">^</span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">4</span> <span class="op">*</span><span class="st"> </span>alpha <span class="op">*</span><span class="st"> </span>theta <span class="op">*</span><span class="st"> </span>Am <span class="op">*</span><span class="st"> </span>x)) <span class="op">-</span><span class="st"> </span>Rd</a>
-<a class="sourceLine" id="cb138-16" title="16">}</a>
-<a class="sourceLine" id="cb138-17" title="17"></a>
-<a class="sourceLine" id="cb138-18" title="18">paras &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">alpha =</span> <span class="kw">rep</span>(<span class="kw">seq</span>(<span class="fl">0.01</span>, <span class="fl">0.07</span>, <span class="dt">by =</span> <span class="fl">0.005</span>), <span class="dt">each =</span> n), </a>
-<a class="sourceLine" id="cb138-19" title="19">           <span class="dt">x =</span> <span class="kw">rep</span>(lrc_Q, n), <span class="dt">Am =</span> <span class="kw">rep</span>(<span class="fl">12.31</span>, n), <span class="dt">Rd =</span> <span class="kw">rep</span>(<span class="fl">0.66</span>, n), </a>
-<a class="sourceLine" id="cb138-20" title="20">           <span class="dt">theta =</span> <span class="kw">rep</span>(<span class="fl">0.71</span>, n))</a>
-<a class="sourceLine" id="cb138-21" title="21">y =<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">pmap</span>(paras, expfct))</a>
-<a class="sourceLine" id="cb138-22" title="22"></a>
-<a class="sourceLine" id="cb138-23" title="23">show &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">rep</span>(lrc_Q, <span class="dv">14</span>),</a>
-<a class="sourceLine" id="cb138-24" title="24">           <span class="dt">y =</span> <span class="kw">c</span>(lrc_A, y), </a>
-<a class="sourceLine" id="cb138-25" title="25">           <span class="dt">a =</span> <span class="kw">factor</span>(<span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;measured&quot;</span>, n), alpn),</a>
-<a class="sourceLine" id="cb138-26" title="26">           <span class="dt">level =</span> <span class="kw">c</span>(<span class="st">&quot;measured&quot;</span>, alp)</a>
-<a class="sourceLine" id="cb138-27" title="27">             ))</a>
-<a class="sourceLine" id="cb138-28" title="28"></a>
-<a class="sourceLine" id="cb138-29" title="29"><span class="kw">ggplot</span>(<span class="dt">data =</span> show, <span class="kw">aes</span>(x, y, <span class="dt">group =</span> a, <span class="dt">color=</span>a)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb138-30" title="30"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb138-31" title="31"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> <span class="ot">FALSE</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" title="1"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb137-2" title="2"><span class="kw">library</span>(purrr)</a>
+<a class="sourceLine" id="cb137-3" title="3"></a>
+<a class="sourceLine" id="cb137-4" title="4">lrc &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/nlstest.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb137-5" title="5"></a>
+<a class="sourceLine" id="cb137-6" title="6"><span class="co"># 光响应曲线比较简单，我们将需要的数据直接提取，方便后面操作</span></a>
+<a class="sourceLine" id="cb137-7" title="7">lrc_Q &lt;-<span class="st"> </span>lrc<span class="op">$</span>Qin</a>
+<a class="sourceLine" id="cb137-8" title="8">lrc_A &lt;-<span class="st"> </span>lrc<span class="op">$</span>A</a>
+<a class="sourceLine" id="cb137-9" title="9">n &lt;-<span class="st"> </span><span class="kw">length</span>(lrc_A)</a>
+<a class="sourceLine" id="cb137-10" title="10"></a>
+<a class="sourceLine" id="cb137-11" title="11"></a>
+<a class="sourceLine" id="cb137-12" title="12">alp &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;a=&quot;</span>, <span class="kw">seq</span>(<span class="fl">0.01</span>, <span class="fl">0.07</span>, <span class="dt">by =</span> <span class="fl">0.005</span>))</a>
+<a class="sourceLine" id="cb137-13" title="13">alpn &lt;-<span class="st"> </span><span class="kw">rep</span>(alp, <span class="dt">each =</span> n)</a>
+<a class="sourceLine" id="cb137-14" title="14"></a>
+<a class="sourceLine" id="cb137-15" title="15">expfct &lt;-<span class="st"> </span><span class="cf">function</span>(x, Am, alpha, Rd, theta) {(<span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>theta)) <span class="op">*</span><span class="st"> </span>(alpha <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>Am <span class="op">-</span><span class="st"> </span><span class="kw">sqrt</span>((alpha <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>Am)<span class="op">^</span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">4</span> <span class="op">*</span><span class="st"> </span>alpha <span class="op">*</span><span class="st"> </span>theta <span class="op">*</span><span class="st"> </span>Am <span class="op">*</span><span class="st"> </span>x)) <span class="op">-</span><span class="st"> </span>Rd</a>
+<a class="sourceLine" id="cb137-16" title="16">}</a>
+<a class="sourceLine" id="cb137-17" title="17"></a>
+<a class="sourceLine" id="cb137-18" title="18">paras &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">alpha =</span> <span class="kw">rep</span>(<span class="kw">seq</span>(<span class="fl">0.01</span>, <span class="fl">0.07</span>, <span class="dt">by =</span> <span class="fl">0.005</span>), <span class="dt">each =</span> n), </a>
+<a class="sourceLine" id="cb137-19" title="19">           <span class="dt">x =</span> <span class="kw">rep</span>(lrc_Q, n), <span class="dt">Am =</span> <span class="kw">rep</span>(<span class="fl">12.31</span>, n), <span class="dt">Rd =</span> <span class="kw">rep</span>(<span class="fl">0.66</span>, n), </a>
+<a class="sourceLine" id="cb137-20" title="20">           <span class="dt">theta =</span> <span class="kw">rep</span>(<span class="fl">0.71</span>, n))</a>
+<a class="sourceLine" id="cb137-21" title="21">y =<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">pmap</span>(paras, expfct))</a>
+<a class="sourceLine" id="cb137-22" title="22"></a>
+<a class="sourceLine" id="cb137-23" title="23">show &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">rep</span>(lrc_Q, <span class="dv">14</span>),</a>
+<a class="sourceLine" id="cb137-24" title="24">           <span class="dt">y =</span> <span class="kw">c</span>(lrc_A, y), </a>
+<a class="sourceLine" id="cb137-25" title="25">           <span class="dt">a =</span> <span class="kw">factor</span>(<span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;measured&quot;</span>, n), alpn),</a>
+<a class="sourceLine" id="cb137-26" title="26">           <span class="dt">level =</span> <span class="kw">c</span>(<span class="st">&quot;measured&quot;</span>, alp)</a>
+<a class="sourceLine" id="cb137-27" title="27">             ))</a>
+<a class="sourceLine" id="cb137-28" title="28"></a>
+<a class="sourceLine" id="cb137-29" title="29"><span class="kw">ggplot</span>(<span class="dt">data =</span> show, <span class="kw">aes</span>(x, y, <span class="dt">group =</span> a, <span class="dt">color=</span>a)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb137-30" title="30"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb137-31" title="31"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> <span class="ot">FALSE</span>) </a></code></pre></div>
 <div class="figure"><span id="fig:malp"></span>
 <img src="bookdown_files/figure-html/malp-1.png" alt="多个 alpha 取值的差异" width="672" />
 <p class="caption">
@@ -460,20 +460,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="mult_try" class="section level2">
 <h2><span class="header-section-number">9.3</span> 自动多次尝试法</h2>
 <p>该方法实际为使用 <code>nls2</code> 来实现，具体方法参考 <span class="citation">Bouvier and Huet (<a href="#ref-nls2" role="doc-biblioref">1994</a>)</span> 的文章，可简单概括为使用一系列的起始值梯度（例如下面的代码中， alpha 的取值在 0.01 到 0.08 之间 ），然后软件循序使用不同的起始值，即排列组合所有的起始值序列，最终找到合适的值，具体实现如下：</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" title="1"><span class="kw">library</span>(nls2)</a></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" title="1"><span class="kw">library</span>(nls2)</a></code></pre></div>
 <pre><code>## Loading required package: proto</code></pre>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" title="1">grid.test &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb141-2" title="2">  <span class="dt">Am=</span><span class="kw">c</span>(<span class="dv">12</span>),</a>
-<a class="sourceLine" id="cb141-3" title="3">  <span class="dt">alpha =</span> <span class="kw">seq</span>(<span class="fl">0.01</span>, <span class="fl">0.08</span>, <span class="dt">by =</span><span class="fl">0.01</span>),</a>
-<a class="sourceLine" id="cb141-4" title="4">  <span class="dt">Rd =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">3</span>),</a>
-<a class="sourceLine" id="cb141-5" title="5">  <span class="dt">theta=</span><span class="kw">seq</span>(<span class="fl">0.1</span>, <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)</a>
-<a class="sourceLine" id="cb141-6" title="6">  ))</a>
-<a class="sourceLine" id="cb141-7" title="7"></a>
-<a class="sourceLine" id="cb141-8" title="8">lrcnls2 &lt;-<span class="st"> </span><span class="kw">nls2</span>(lrc_A <span class="op">~</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb141-9" title="9"><span class="st">        </span>(<span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>theta))<span class="op">*</span></a>
-<a class="sourceLine" id="cb141-10" title="10"><span class="st">        </span>(alpha<span class="op">*</span>lrc_Q<span class="op">+</span>Am<span class="op">-</span><span class="kw">sqrt</span>((alpha<span class="op">*</span>lrc_Q<span class="op">+</span>Am)<span class="op">^</span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb141-11" title="11"><span class="st">                               </span><span class="dv">4</span><span class="op">*</span>alpha<span class="op">*</span>theta<span class="op">*</span>Am<span class="op">*</span>lrc_Q))<span class="op">-</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb141-12" title="12"><span class="st">        </span>Rd, <span class="dt">start =</span> grid.test, <span class="dt">algorithm =</span> <span class="st">&quot;brute-force&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb140-1" title="1">grid.test &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb140-2" title="2">  <span class="dt">Am=</span><span class="kw">c</span>(<span class="dv">12</span>),</a>
+<a class="sourceLine" id="cb140-3" title="3">  <span class="dt">alpha =</span> <span class="kw">seq</span>(<span class="fl">0.01</span>, <span class="fl">0.08</span>, <span class="dt">by =</span><span class="fl">0.01</span>),</a>
+<a class="sourceLine" id="cb140-4" title="4">  <span class="dt">Rd =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb140-5" title="5">  <span class="dt">theta=</span><span class="kw">seq</span>(<span class="fl">0.1</span>, <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)</a>
+<a class="sourceLine" id="cb140-6" title="6">  ))</a>
+<a class="sourceLine" id="cb140-7" title="7"></a>
+<a class="sourceLine" id="cb140-8" title="8">lrcnls2 &lt;-<span class="st"> </span><span class="kw">nls2</span>(lrc_A <span class="op">~</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb140-9" title="9"><span class="st">        </span>(<span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>theta))<span class="op">*</span></a>
+<a class="sourceLine" id="cb140-10" title="10"><span class="st">        </span>(alpha<span class="op">*</span>lrc_Q<span class="op">+</span>Am<span class="op">-</span><span class="kw">sqrt</span>((alpha<span class="op">*</span>lrc_Q<span class="op">+</span>Am)<span class="op">^</span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb140-11" title="11"><span class="st">                               </span><span class="dv">4</span><span class="op">*</span>alpha<span class="op">*</span>theta<span class="op">*</span>Am<span class="op">*</span>lrc_Q))<span class="op">-</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb140-12" title="12"><span class="st">        </span>Rd, <span class="dt">start =</span> grid.test, <span class="dt">algorithm =</span> <span class="st">&quot;brute-force&quot;</span>)</a></code></pre></div>
 <pre><code>## Error in numericDeriv(form[[3L]], names(ind), env) : 
 ##   Missing value or an infinity produced when evaluating the model
 ## Error in numericDeriv(form[[3L]], names(ind), env) : 
@@ -506,7 +506,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   Missing value or an infinity produced when evaluating the model
 ## Error in numericDeriv(form[[3L]], names(ind), env) : 
 ##   Missing value or an infinity produced when evaluating the model</code></pre>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" title="1"><span class="kw">summary</span>(lrcnls2)</a></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" title="1"><span class="kw">summary</span>(lrcnls2)</a></code></pre></div>
 <pre><code>## 
 ## Formula: lrc_A ~ (1/(2 * theta)) * (alpha * lrc_Q + Am - sqrt((alpha * 
 ##     lrc_Q + Am)^2 - 4 * alpha * theta * Am * lrc_Q)) - Rd
@@ -525,9 +525,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Number of iterations to convergence: 320 
 ## Achieved convergence tolerance: NA</code></pre>
 <p>通过结果可以看到，虽然和之前采用手动方法判定的结果比较接近，但是还是略有差异，可以看一下他们各自的结果同测量值的重合程度：</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" title="1"><span class="kw">plot</span>(lrc_Q, lrc_A)</a>
-<a class="sourceLine" id="cb145-2" title="2"><span class="kw">lines</span>(lrc_Q,  <span class="kw">predict</span>(lrcnls2), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a>
-<a class="sourceLine" id="cb145-3" title="3"><span class="kw">lines</span>(lrc_Q,  <span class="kw">predict</span>(lrcnls_manual), <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" title="1"><span class="kw">plot</span>(lrc_Q, lrc_A)</a>
+<a class="sourceLine" id="cb144-2" title="2"><span class="kw">lines</span>(lrc_Q,  <span class="kw">predict</span>(lrcnls2), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb144-3" title="3"><span class="kw">lines</span>(lrc_Q,  <span class="kw">predict</span>(lrcnls_manual), <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:mcomp"></span>
 <img src="bookdown_files/figure-html/mcomp-1.png" alt="两种方法结果的对比展示" width="672" />
 <p class="caption">

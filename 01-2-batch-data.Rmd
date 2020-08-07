@@ -143,33 +143,13 @@ remotes::install_github("zhujiedong/readphoto")
 remotes::install_git("https://gitee.com/zhu_jie_dong/readphoto")
 ```
 
-函数的源代码其实很简单：
-
-```{r, eval=FALSE}
-function (path, start_row = 17, S = 6) 
-{
-    wb <- XLConnect::loadWorkbook(path)
-    group_name <- XLConnect::readWorksheet(wb, sheet = 1, startRow = start_row - 
-        3, endRow = start_row - 3, header = FALSE)
-    header_name <- XLConnect::readWorksheet(wb, sheet = 1, startRow = start_row - 
-        2, endRow = start_row - 2, header = FALSE)
-    new_name <- paste0(group_name, "_", header_name)
-    XLConnect::writeWorksheet(wb, data = S, sheet = 1, startRow = 17, 
-        startCol = which(new_name == "Const_S"), header = FALSE)
-    df <- XLConnect::readWorksheet(wb, sheet = 1, startRow = 17, 
-        header = FALSE)
-    names(df) <- new_name
-    df
-}
-```
-
 其中：
 
 - path 是 Excel 文件的路径；
 
 - start_row 是数据开始的行号；
 
-- S 为修改的叶面积，默认值为 6，如果叶面积无需更改，必须输入单个的值，也就是真正的叶面积，如果使用 aperture 更改了面积，且叶片能够充满叶室，比方说是 2 cm^2^，该值必须输入一个长度和测量值数量完全一致的向量，例如有 3 个测量值，我们输入 `S= rep(2,3)`，有的没有充满叶室，有的充满叶室，该值也必须输入一个长度和测量值数量完全一致的向量，例如，一共有三个测量值，只有第一个叶片没充满叶室，面积为 1.5，则输入方式为 `S = c(1.5, 2, 2)`。
+- S 为修改的叶面积，默认值为 6，如果叶面积无需更改，则使用默认的 NULL。如果使用 aperture 更改了面积，且叶片能够充满叶室，比方说是 2 cm^2^，该值必须输入一个长度和测量值数量完全一致的向量，例如有 3 个测量值，我们输入 `S= rep(2,3)`，有的没有充满叶室，有的充满叶室，该值也必须输入一个长度和测量值数量完全一致的向量，例如，一共有三个测量值，只有第一个叶片没充满叶室，面积为 1.5，则输入方式为 `S = c(1.5, 2, 2)`。
 
 
 我们直接使用下面的例子解释，导入的数据是 6 cm^2^ 的默认面积：
@@ -194,7 +174,5 @@ df6$A/df3$A
 df_random <- xlconnect_read("./data/aci-xlc.xlsx", S = rnorm(12, 3, 0.1))
 df6$A/df_random$A
 ```
-
-最近有点忙，暂时记录下来，用这个函数实现批量处理其实很简单了，后面有时间再补充。
 
 \cleardoublepage
