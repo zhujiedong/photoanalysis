@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2020-08-07" />
+<meta name="date" content="2020-08-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="stomotal-couple.html"/>
 <link rel="next" href="rhtovpd.html"/>
+<script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,28 +51,30 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -80,9 +83,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -135,100 +138,124 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="frontmatter.html"><a href="frontmatter.html"><i class="fa fa-check"></i>前言</a></li>
 <li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i>关于作者</a></li>
 <li class="chapter" data-level="" data-path="copyright.html"><a href="copyright.html"><i class="fa fa-check"></i>版权</a></li>
-<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> R 软件与 Rstudio</a><ul>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> R 软件与 Rstudio</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#rsoft"><i class="fa fa-check"></i><b>1.1</b> R 软件</a></li>
 <li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#rstudiosoft"><i class="fa fa-check"></i><b>1.2</b> Rstudio</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="batch-question.html"><a href="batch-question.html"><i class="fa fa-check"></i><b>2</b> 批量处理光合测定数据</a><ul>
+<li class="chapter" data-level="2" data-path="batch-question.html"><a href="batch-question.html"><i class="fa fa-check"></i><b>2</b> 批量处理光合测定数据</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="batch-question.html"><a href="batch-question.html#install_readphoto"><i class="fa fa-check"></i><b>2.1</b> 安装</a></li>
 <li class="chapter" data-level="2.2" data-path="batch-question.html"><a href="batch-question.html#batch64"><i class="fa fa-check"></i><b>2.2</b> 6400 数据整合</a></li>
 <li class="chapter" data-level="2.3" data-path="batch-question.html"><a href="batch-question.html#batch68"><i class="fa fa-check"></i><b>2.3</b> LI-6800 数据整合</a></li>
-<li class="chapter" data-level="2.4" data-path="batch-question.html"><a href="batch-question.html#recompute_raw"><i class="fa fa-check"></i><b>2.4</b> 重计算功能</a><ul>
+<li class="chapter" data-level="2.4" data-path="batch-question.html"><a href="batch-question.html#recompute_raw"><i class="fa fa-check"></i><b>2.4</b> 重计算功能</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="batch-question.html"><a href="batch-question.html#recompute6400"><i class="fa fa-check"></i><b>2.4.1</b> LI-6400 数据重计算</a></li>
 <li class="chapter" data-level="2.4.2" data-path="batch-question.html"><a href="batch-question.html#recompute6800"><i class="fa fa-check"></i><b>2.4.2</b> LI-6800 数据重计算</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="response-fit.html"><a href="response-fit.html"><i class="fa fa-check"></i><b>3</b> CO<sub>2</sub> 响应曲线的拟合</a><ul>
+<li class="chapter" data-level="3" data-path="response-fit.html"><a href="response-fit.html"><i class="fa fa-check"></i><b>3</b> CO<sub>2</sub> 响应曲线的拟合</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="response-fit.html"><a href="response-fit.html#fvcb_mod"><i class="fa fa-check"></i><b>3.1</b> FvCB 模型</a></li>
-<li class="chapter" data-level="3.2" data-path="response-fit.html"><a href="response-fit.html#co2_note"><i class="fa fa-check"></i><b>3.2</b> CO<sub>2</sub> 响应曲线测量的注意事项</a><ul>
+<li class="chapter" data-level="3.2" data-path="response-fit.html"><a href="response-fit.html#co2_note"><i class="fa fa-check"></i><b>3.2</b> CO<sub>2</sub> 响应曲线测量的注意事项</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="response-fit.html"><a href="response-fit.html#model_3"><i class="fa fa-check"></i><b>3.2.1</b> 分段性</a></li>
 <li class="chapter" data-level="3.2.2" data-path="response-fit.html"><a href="response-fit.html#note_detail"><i class="fa fa-check"></i><b>3.2.2</b> 测量注意事项</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="response-fit.html"><a href="response-fit.html#plantecophys"><i class="fa fa-check"></i><b>3.3</b> <code>plantecophys</code> 软件包</a></li>
-<li class="chapter" data-level="3.4" data-path="response-fit.html"><a href="response-fit.html#fit6400"><i class="fa fa-check"></i><b>3.4</b> LI-6400XT CO<sub>2</sub> 响应曲线的拟合</a><ul>
+<li class="chapter" data-level="3.4" data-path="response-fit.html"><a href="response-fit.html#fit6400"><i class="fa fa-check"></i><b>3.4</b> LI-6400XT CO<sub>2</sub> 响应曲线的拟合</a>
+<ul>
 <li class="chapter" data-level="3.4.1" data-path="response-fit.html"><a href="response-fit.html#fitaci_intro"><i class="fa fa-check"></i><b>3.4.1</b> fitaci 函数介绍</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="response-fit.html"><a href="response-fit.html#plantecophy_use"><i class="fa fa-check"></i><b>3.5</b> 使用 <code>plantecophys</code> 拟合 LI-6400XT CO<sub>2</sub> 响应曲线数据</a><ul>
+<li class="chapter" data-level="3.5" data-path="response-fit.html"><a href="response-fit.html#plantecophy_use"><i class="fa fa-check"></i><b>3.5</b> 使用 <code>plantecophys</code> 拟合 LI-6400XT CO<sub>2</sub> 响应曲线数据</a>
+<ul>
 <li class="chapter" data-level="3.5.1" data-path="response-fit.html"><a href="response-fit.html#data6400"><i class="fa fa-check"></i><b>3.5.1</b> 数据的前处理</a></li>
 <li class="chapter" data-level="3.5.2" data-path="response-fit.html"><a href="response-fit.html#fitaci-p"><i class="fa fa-check"></i><b>3.5.2</b> 使用示例</a></li>
 <li class="chapter" data-level="3.5.3" data-path="response-fit.html"><a href="response-fit.html#onpoint_fit"><i class="fa fa-check"></i><b>3.5.3</b> 使用 ‘onepoint’ 单独计算 V<sub>cmax</sub> 和 J<sub>max</sub></a></li>
 <li class="chapter" data-level="3.5.4" data-path="response-fit.html"><a href="response-fit.html#multi_curve"><i class="fa fa-check"></i><b>3.5.4</b> 多条 CO<sub>2</sub> 响应曲线的拟合</a></li>
 <li class="chapter" data-level="3.5.5" data-path="response-fit.html"><a href="response-fit.html#transition"><i class="fa fa-check"></i><b>3.5.5</b> <code>findCiTransition</code> 函数</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="response-fit.html"><a href="response-fit.html#c4"><i class="fa fa-check"></i><b>3.6</b> C4 植物光合</a><ul>
+<li class="chapter" data-level="3.6" data-path="response-fit.html"><a href="response-fit.html#c4"><i class="fa fa-check"></i><b>3.6</b> C4 植物光合</a>
+<ul>
 <li class="chapter" data-level="3.6.1" data-path="response-fit.html"><a href="response-fit.html#c4_sim"><i class="fa fa-check"></i><b>3.6.1</b> C4 植物光合速率的计算</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="stomotal-sim.html"><a href="stomotal-sim.html"><i class="fa fa-check"></i><b>4</b> 气孔导度模型的拟合</a><ul>
+<li class="chapter" data-level="4" data-path="stomotal-sim.html"><a href="stomotal-sim.html"><i class="fa fa-check"></i><b>4</b> 气孔导度模型的拟合</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="stomotal-sim.html"><a href="stomotal-sim.html#ballberry"><i class="fa fa-check"></i><b>4.1</b> BallBerry 模型</a></li>
 <li class="chapter" data-level="4.2" data-path="stomotal-sim.html"><a href="stomotal-sim.html#bbleuning"><i class="fa fa-check"></i><b>4.2</b> BBLeuning 模型</a></li>
 <li class="chapter" data-level="4.3" data-path="stomotal-sim.html"><a href="stomotal-sim.html#bboptifull"><i class="fa fa-check"></i><b>4.3</b> BBOptiFull 模型</a></li>
 <li class="chapter" data-level="4.4" data-path="stomotal-sim.html"><a href="stomotal-sim.html#fitbb-p"><i class="fa fa-check"></i><b>4.4</b> <code>fitBB</code> 函数</a></li>
 <li class="chapter" data-level="4.5" data-path="stomotal-sim.html"><a href="stomotal-sim.html#fitbbs"><i class="fa fa-check"></i><b>4.5</b> <code>fitBBs</code> 函数</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="stomotal-couple.html"><a href="stomotal-couple.html"><i class="fa fa-check"></i><b>5</b> 光合最优气孔导度耦合模型</a><ul>
+<li class="chapter" data-level="5" data-path="stomotal-couple.html"><a href="stomotal-couple.html"><i class="fa fa-check"></i><b>5</b> 光合最优气孔导度耦合模型</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="stomotal-couple.html"><a href="stomotal-couple.html#farao"><i class="fa fa-check"></i><b>5.1</b> <code>FARAO</code> 函数</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="photo-stomo.html"><a href="photo-stomo.html"><i class="fa fa-check"></i><b>6</b> 光合气孔导度耦合模型</a><ul>
-<li class="chapter" data-level="6.1" data-path="photo-stomo.html"><a href="photo-stomo.html#photosyn"><i class="fa fa-check"></i><b>6.1</b> <code>Photosyn</code> 函数</a><ul>
+<li class="chapter" data-level="6" data-path="photo-stomo.html"><a href="photo-stomo.html"><i class="fa fa-check"></i><b>6</b> 光合气孔导度耦合模型</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="photo-stomo.html"><a href="photo-stomo.html#photosyn"><i class="fa fa-check"></i><b>6.1</b> <code>Photosyn</code> 函数</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="photo-stomo.html"><a href="photo-stomo.html#photo_exam"><i class="fa fa-check"></i><b>6.1.1</b> <code>Photosyn</code> 使用举例</a></li>
 </ul></li>
 <li class="chapter" data-level="6.2" data-path="photo-stomo.html"><a href="photo-stomo.html#photsyneb"><i class="fa fa-check"></i><b>6.2</b> <code>PhotosynEB</code> 函数</a></li>
-<li class="chapter" data-level="6.3" data-path="photo-stomo.html"><a href="photo-stomo.html#photosyntuzet"><i class="fa fa-check"></i><b>6.3</b> <code>PhotosynTuzet</code> 函数</a><ul>
+<li class="chapter" data-level="6.3" data-path="photo-stomo.html"><a href="photo-stomo.html#photosyntuzet"><i class="fa fa-check"></i><b>6.3</b> <code>PhotosynTuzet</code> 函数</a>
+<ul>
 <li class="chapter" data-level="6.3.1" data-path="photo-stomo.html"><a href="photo-stomo.html#photosyntuzet_para"><i class="fa fa-check"></i><b>6.3.1</b> <code>PhotosynTuzet</code> 的参数</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="rhtovpd.html"><a href="rhtovpd.html"><i class="fa fa-check"></i><b>7</b> RHtoVPD 函数</a></li>
-<li class="chapter" data-level="8" data-path="lrc-fit.html"><a href="lrc-fit.html"><i class="fa fa-check"></i><b>8</b> 光响应曲线的拟合</a><ul>
-<li class="chapter" data-level="8.1" data-path="lrc-fit.html"><a href="lrc-fit.html#rec_mod"><i class="fa fa-check"></i><b>8.1</b> 直角双曲线模型</a><ul>
+<li class="chapter" data-level="8" data-path="lrc-fit.html"><a href="lrc-fit.html"><i class="fa fa-check"></i><b>8</b> 光响应曲线的拟合</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="lrc-fit.html"><a href="lrc-fit.html#rec_mod"><i class="fa fa-check"></i><b>8.1</b> 直角双曲线模型</a>
+<ul>
 <li class="chapter" data-level="8.1.1" data-path="lrc-fit.html"><a href="lrc-fit.html#rec_fit"><i class="fa fa-check"></i><b>8.1.1</b> 直角双曲线模型的实现</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="lrc-fit.html"><a href="lrc-fit.html#nonrec_mod"><i class="fa fa-check"></i><b>8.2</b> 非直角双曲线模型</a><ul>
+<li class="chapter" data-level="8.2" data-path="lrc-fit.html"><a href="lrc-fit.html#nonrec_mod"><i class="fa fa-check"></i><b>8.2</b> 非直角双曲线模型</a>
+<ul>
 <li class="chapter" data-level="8.2.1" data-path="lrc-fit.html"><a href="lrc-fit.html#nonrec_mode_exam"><i class="fa fa-check"></i><b>8.2.1</b> 非直角双曲线模型的实现</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="lrc-fit.html"><a href="lrc-fit.html#lrc_exp"><i class="fa fa-check"></i><b>8.3</b> 指数模型</a><ul>
+<li class="chapter" data-level="8.3" data-path="lrc-fit.html"><a href="lrc-fit.html#lrc_exp"><i class="fa fa-check"></i><b>8.3</b> 指数模型</a>
+<ul>
 <li class="chapter" data-level="8.3.1" data-path="lrc-fit.html"><a href="lrc-fit.html#lrc_exp_exam"><i class="fa fa-check"></i><b>8.3.1</b> 指数模型的实现</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="lrc-fit.html"><a href="lrc-fit.html#rev_rec"><i class="fa fa-check"></i><b>8.4</b> 直角双曲线的修正模型</a><ul>
+<li class="chapter" data-level="8.4" data-path="lrc-fit.html"><a href="lrc-fit.html#rev_rec"><i class="fa fa-check"></i><b>8.4</b> 直角双曲线的修正模型</a>
+<ul>
 <li class="chapter" data-level="8.4.1" data-path="lrc-fit.html"><a href="lrc-fit.html#rev_rec_exam"><i class="fa fa-check"></i><b>8.4.1</b> 直角双曲线修正模型的实现</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="start-con.html"><a href="start-con.html"><i class="fa fa-check"></i><b>9</b> 关于非线性拟合的初始值</a><ul>
+<li class="chapter" data-level="9" data-path="start-con.html"><a href="start-con.html"><i class="fa fa-check"></i><b>9</b> 关于非线性拟合的初始值</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="start-con.html"><a href="start-con.html#nlslm"><i class="fa fa-check"></i><b>9.1</b> nlsLM 解决方案</a></li>
-<li class="chapter" data-level="9.2" data-path="start-con.html"><a href="start-con.html#plot_comp"><i class="fa fa-check"></i><b>9.2</b> 作图比对法</a><ul>
+<li class="chapter" data-level="9.2" data-path="start-con.html"><a href="start-con.html#plot_comp"><i class="fa fa-check"></i><b>9.2</b> 作图比对法</a>
+<ul>
 <li class="chapter" data-level="9.2.1" data-path="start-con.html"><a href="start-con.html#plot_exam"><i class="fa fa-check"></i><b>9.2.1</b> 实现过程</a></li>
 <li class="chapter" data-level="9.2.2" data-path="start-con.html"><a href="start-con.html#show_demo"><i class="fa fa-check"></i><b>9.2.2</b> 直观展示</a></li>
 </ul></li>
 <li class="chapter" data-level="9.3" data-path="start-con.html"><a href="start-con.html#mult_try"><i class="fa fa-check"></i><b>9.3</b> 自动多次尝试法</a></li>
 <li class="chapter" data-level="9.4" data-path="start-con.html"><a href="start-con.html#sum_start"><i class="fa fa-check"></i><b>9.4</b> 小结</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="anay-6800.html"><a href="anay-6800.html"><i class="fa fa-check"></i><b>10</b> LI-6800 的数据分析</a><ul>
+<li class="chapter" data-level="10" data-path="anay-6800.html"><a href="anay-6800.html"><i class="fa fa-check"></i><b>10</b> LI-6800 的数据分析</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="anay-6800.html"><a href="anay-6800.html#data6800"><i class="fa fa-check"></i><b>10.1</b> 数据格式</a></li>
 <li class="chapter" data-level="10.2" data-path="anay-6800.html"><a href="anay-6800.html#dif"><i class="fa fa-check"></i><b>10.2</b> LI-6800 与 LI-6400 使用时的差别</a></li>
 <li class="chapter" data-level="10.3" data-path="anay-6800.html"><a href="anay-6800.html#notice"><i class="fa fa-check"></i><b>10.3</b> 光响应曲线注意事项</a></li>
 <li class="chapter" data-level="10.4" data-path="anay-6800.html"><a href="anay-6800.html#racir68"><i class="fa fa-check"></i><b>10.4</b> LI-6800 RACiR的测量与拟合</a></li>
-<li class="chapter" data-level="10.5" data-path="anay-6800.html"><a href="anay-6800.html#racir_pkg"><i class="fa fa-check"></i><b>10.5</b> racir 软件包实现 RACiR数据分析</a><ul>
+<li class="chapter" data-level="10.5" data-path="anay-6800.html"><a href="anay-6800.html#racir_pkg"><i class="fa fa-check"></i><b>10.5</b> racir 软件包实现 RACiR数据分析</a>
+<ul>
 <li class="chapter" data-level="10.5.1" data-path="anay-6800.html"><a href="anay-6800.html#racir_pkg_1"><i class="fa fa-check"></i><b>10.5.1</b> 实现方法 1</a></li>
 <li class="chapter" data-level="10.5.2" data-path="anay-6800.html"><a href="anay-6800.html#racir_pkg_2"><i class="fa fa-check"></i><b>10.5.2</b> 实现方法 2</a></li>
 <li class="chapter" data-level="10.5.3" data-path="anay-6800.html"><a href="anay-6800.html#racirbatch"><i class="fa fa-check"></i><b>10.5.3</b> 数据的批量处理</a></li>
 </ul></li>
 <li class="chapter" data-level="10.6" data-path="anay-6800.html"><a href="anay-6800.html#fitbatracir"><i class="fa fa-check"></i><b>10.6</b> 批量计算 <span class="math inline">\(V_{cmax}\)</span> 和 <span class="math inline">\(J_max\)</span></a></li>
-<li class="chapter" data-level="10.7" data-path="anay-6800.html"><a href="anay-6800.html#racir-conifer"><i class="fa fa-check"></i><b>10.7</b> LI-6800 RACiR簇状叶的测量与拟合</a><ul>
+<li class="chapter" data-level="10.7" data-path="anay-6800.html"><a href="anay-6800.html#racir-conifer"><i class="fa fa-check"></i><b>10.7</b> LI-6800 RACiR簇状叶的测量与拟合</a>
+<ul>
 <li class="chapter" data-level="10.7.1" data-path="anay-6800.html"><a href="anay-6800.html#conifer-fit-racir"><i class="fa fa-check"></i><b>10.7.1</b> 数据的拟合</a></li>
 <li class="chapter" data-level="10.7.2" data-path="anay-6800.html"><a href="anay-6800.html#conifer-racir-fit"><i class="fa fa-check"></i><b>10.7.2</b> 拟合过程</a></li>
 </ul></li>
 <li class="chapter" data-level="10.8" data-path="anay-6800.html"><a href="anay-6800.html#racir68_exam"><i class="fa fa-check"></i><b>10.8</b> RACiR分析的手动实现</a></li>
-<li class="chapter" data-level="10.9" data-path="anay-6800.html"><a href="anay-6800.html#multi1"><i class="fa fa-check"></i><b>10.9</b> 多个速率的 RACiR 曲线研究</a><ul>
+<li class="chapter" data-level="10.9" data-path="anay-6800.html"><a href="anay-6800.html#multi1"><i class="fa fa-check"></i><b>10.9</b> 多个速率的 RACiR 曲线研究</a>
+<ul>
 <li class="chapter" data-level="10.9.1" data-path="anay-6800.html"><a href="anay-6800.html#multi2"><i class="fa fa-check"></i><b>10.9.1</b> 光呼吸滞后模型</a></li>
 <li class="chapter" data-level="10.9.2" data-path="anay-6800.html"><a href="anay-6800.html#code-photoresp"><i class="fa fa-check"></i><b>10.9.2</b> 光呼吸滞后性代码</a></li>
 <li class="chapter" data-level="10.9.3" data-path="anay-6800.html"><a href="anay-6800.html#multi4"><i class="fa fa-check"></i><b>10.9.3</b> 数据的构造</a></li>
@@ -238,14 +265,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.9.7" data-path="anay-6800.html"><a href="anay-6800.html#multi9"><i class="fa fa-check"></i><b>10.9.7</b> 酶失活作图</a></li>
 <li class="chapter" data-level="10.9.8" data-path="anay-6800.html"><a href="anay-6800.html#multi10"><i class="fa fa-check"></i><b>10.9.8</b> 不同失活程度下补偿点计算</a></li>
 </ul></li>
-<li class="chapter" data-level="10.10" data-path="anay-6800.html"><a href="anay-6800.html#multi11"><i class="fa fa-check"></i><b>10.10</b> 时间延迟的扩散限制</a><ul>
+<li class="chapter" data-level="10.10" data-path="anay-6800.html"><a href="anay-6800.html#multi11"><i class="fa fa-check"></i><b>10.10</b> 时间延迟的扩散限制</a>
+<ul>
 <li class="chapter" data-level="10.10.1" data-path="anay-6800.html"><a href="anay-6800.html#multi12"><i class="fa fa-check"></i><b>10.10.1</b> 扩散限制滞后性</a></li>
 </ul></li>
-<li class="chapter" data-level="10.11" data-path="anay-6800.html"><a href="anay-6800.html#multi13"><i class="fa fa-check"></i><b>10.11</b> 扩散限制作图</a><ul>
+<li class="chapter" data-level="10.11" data-path="anay-6800.html"><a href="anay-6800.html#multi13"><i class="fa fa-check"></i><b>10.11</b> 扩散限制作图</a>
+<ul>
 <li class="chapter" data-level="10.11.1" data-path="anay-6800.html"><a href="anay-6800.html#multi14"><i class="fa fa-check"></i><b>10.11.1</b> 补偿点的计算</a></li>
 <li class="chapter" data-level="10.11.2" data-path="anay-6800.html"><a href="anay-6800.html#multi15"><i class="fa fa-check"></i><b>10.11.2</b> 所有图形代码</a></li>
 </ul></li>
-<li class="chapter" data-level="10.12" data-path="anay-6800.html"><a href="anay-6800.html#fluro68"><i class="fa fa-check"></i><b>10.12</b> LI-6800 荧光数据分析</a><ul>
+<li class="chapter" data-level="10.12" data-path="anay-6800.html"><a href="anay-6800.html#fluro68"><i class="fa fa-check"></i><b>10.12</b> LI-6800 荧光数据分析</a>
+<ul>
 <li class="chapter" data-level="10.12.1" data-path="anay-6800.html"><a href="anay-6800.html#jiptest"><i class="fa fa-check"></i><b>10.12.1</b> jip test 的实现</a></li>
 <li class="chapter" data-level="10.12.2" data-path="anay-6800.html"><a href="anay-6800.html#jiptest_pack"><i class="fa fa-check"></i><b>10.12.2</b> <code>jiptest</code> 软件包安装</a></li>
 <li class="chapter" data-level="10.12.3" data-path="anay-6800.html"><a href="anay-6800.html#readfluor"><i class="fa fa-check"></i><b>10.12.3</b> <code>read_files</code> 及 <code>read_dcfiles</code> 函数</a></li>
@@ -253,9 +283,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.12.5" data-path="anay-6800.html"><a href="anay-6800.html#plotfluor"><i class="fa fa-check"></i><b>10.12.5</b> <code>jip_plot</code> 及 <code>jip_dcplot</code> 函数</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="pca-anylysis.html"><a href="pca-anylysis.html"><i class="fa fa-check"></i><b>11</b> 大话 PCA</a><ul>
+<li class="chapter" data-level="11" data-path="pca-anylysis.html"><a href="pca-anylysis.html"><i class="fa fa-check"></i><b>11</b> 大话 PCA</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="pca-anylysis.html"><a href="pca-anylysis.html#geom-pca"><i class="fa fa-check"></i><b>11.1</b> 几何解释</a></li>
-<li class="chapter" data-level="11.2" data-path="pca-anylysis.html"><a href="pca-anylysis.html#alge-pca"><i class="fa fa-check"></i><b>11.2</b> 线性代数解释</a><ul>
+<li class="chapter" data-level="11.2" data-path="pca-anylysis.html"><a href="pca-anylysis.html#alge-pca"><i class="fa fa-check"></i><b>11.2</b> 线性代数解释</a>
+<ul>
 <li class="chapter" data-level="11.2.1" data-path="pca-anylysis.html"><a href="pca-anylysis.html#egi-pca"><i class="fa fa-check"></i><b>11.2.1</b> 特征向量与特征值</a></li>
 <li class="chapter" data-level="11.2.2" data-path="pca-anylysis.html"><a href="pca-anylysis.html#man_pca"><i class="fa fa-check"></i><b>11.2.2</b> 手动实现过程</a></li>
 <li class="chapter" data-level="11.2.3" data-path="pca-anylysis.html"><a href="pca-anylysis.html#prcom"><i class="fa fa-check"></i><b>11.2.3</b> <code>prcomp</code> 的实现</a></li>
@@ -283,7 +315,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="photo_stomo" class="section level1">
+<div id="photo_stomo" class="section level1" number="6">
 <h1><span class="header-section-number">第 6 章</span> 光合气孔导度耦合模型</h1>
 <p><span class="citation">Duursma (<a href="#ref-Duursma2015Plantecophys" role="doc-biblioref">2015</a>)</span> 对于气体交换耦合模型的简述如下<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a>：</p>
 <ul>
@@ -313,43 +345,43 @@ g_s = g_0 + g_1 \frac{A_n}{C_a} f(D)
 \tag{6.4}
 \end{equation}\]</span></p>
 <p>整合公式 <a href="photo-stomo.html#eq:minfvcb">(6.1)</a>, <a href="photo-stomo.html#eq:cgm">(6.2)</a>, <a href="photo-stomo.html#eq:ficker">(6.3)</a> 和 <a href="photo-stomo.html#eq:driver">(6.4)</a>，气体交换耦合模型有很多更大尺度上的应用，例如 <span class="citation">Duursma and Medlyn (<a href="#ref-Duursma2012MAESPA" role="doc-biblioref">2012</a>)</span> 和 wang1998a，可用于预测 An，gs 和蒸腾速率对主要环境驱动因子的响应（除土壤水分），并包含了主要的叶片性状（g1，V<sub>cmax</sub>, J<sub>max</sub>, R<sub>d</sub> 以及他们的温度依赖性）。</p>
-<div id="photosyn" class="section level2">
+<div id="photosyn" class="section level2" number="6.1">
 <h2><span class="header-section-number">6.1</span> <code>Photosyn</code> 函数</h2>
 <p>Photosyn 为耦合的光合–气孔导度模型，基于 Farquhar 光合模型和 Ball-Berry 气孔导度模型。</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" title="1"><span class="kw">Photosyn</span>(<span class="dt">VPD =</span> <span class="fl">1.5</span>, <span class="dt">Ca =</span> <span class="dv">400</span>, <span class="dt">PPFD =</span> <span class="dv">1500</span>,</a>
-<a class="sourceLine" id="cb103-2" title="2">         <span class="dt">Tleaf =</span> <span class="dv">25</span>, <span class="dt">Patm =</span> <span class="dv">100</span>,<span class="dt">RH =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb103-3" title="3">         <span class="dt">gsmodel =</span> <span class="kw">c</span>(<span class="st">&quot;BBOpti&quot;</span>, <span class="st">&quot;BBLeuning&quot;</span>, </a>
-<a class="sourceLine" id="cb103-4" title="4">                     <span class="st">&quot;BallBerry&quot;</span>, <span class="st">&quot;BBdefine&quot;</span>),</a>
-<a class="sourceLine" id="cb103-5" title="5">         <span class="dt">g1 =</span> <span class="dv">4</span>, <span class="dt">g0 =</span> <span class="dv">0</span>, <span class="dt">gk =</span> <span class="fl">0.5</span>, <span class="dt">vpdmin =</span> <span class="fl">0.5</span>,</a>
-<a class="sourceLine" id="cb103-6" title="6">         <span class="dt">D0 =</span> <span class="dv">5</span>, <span class="dt">GS =</span> <span class="ot">NULL</span>, <span class="dt">BBmult =</span> <span class="ot">NULL</span>, </a>
-<a class="sourceLine" id="cb103-7" title="7">         <span class="dt">alpha =</span> <span class="fl">0.24</span>, <span class="dt">theta =</span> <span class="fl">0.85</span>, <span class="dt">Jmax =</span> <span class="dv">100</span>,</a>
-<a class="sourceLine" id="cb103-8" title="8">         <span class="dt">Vcmax =</span> <span class="dv">50</span>, <span class="dt">gmeso =</span> <span class="ot">NULL</span>, <span class="dt">TPU =</span> <span class="dv">1000</span>, </a>
-<a class="sourceLine" id="cb103-9" title="9">         <span class="dt">alphag =</span> <span class="dv">0</span>, <span class="dt">Rd0 =</span> <span class="fl">0.92</span>, <span class="dt">Q10 =</span> <span class="fl">1.92</span>,</a>
-<a class="sourceLine" id="cb103-10" title="10">         <span class="dt">Rd =</span> <span class="ot">NULL</span>, <span class="dt">TrefR =</span> <span class="dv">25</span>, <span class="dt">Rdayfrac =</span> <span class="dv">1</span>, </a>
-<a class="sourceLine" id="cb103-11" title="11">         <span class="dt">EaV =</span> <span class="fl">82620.87</span>, <span class="dt">EdVC =</span> <span class="dv">0</span>, <span class="dt">delsC =</span> <span class="fl">645.1013</span>, </a>
-<a class="sourceLine" id="cb103-12" title="12">         <span class="dt">EaJ =</span> <span class="fl">39676.89</span>, <span class="dt">EdVJ =</span> <span class="fl">2e+05</span>, <span class="dt">delsJ =</span> <span class="fl">641.3615</span>,</a>
-<a class="sourceLine" id="cb103-13" title="13">         <span class="dt">GammaStar =</span> <span class="ot">NULL</span>, <span class="dt">Km =</span> <span class="ot">NULL</span>, <span class="dt">Ci =</span> <span class="ot">NULL</span>, </a>
-<a class="sourceLine" id="cb103-14" title="14">         <span class="dt">Tcorrect =</span> <span class="ot">TRUE</span>,<span class="dt">returnParsOnly =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb103-15" title="15">         <span class="dt">whichA =</span> <span class="kw">c</span>(<span class="st">&quot;Ah&quot;</span>, <span class="st">&quot;Amin&quot;</span>, <span class="st">&quot;Ac&quot;</span>, <span class="st">&quot;Aj&quot;</span>))</a>
-<a class="sourceLine" id="cb103-16" title="16"></a>
-<a class="sourceLine" id="cb103-17" title="17"><span class="kw">Aci</span>(Ci, ...)</a></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="photo-stomo.html#cb104-1"></a><span class="kw">Photosyn</span>(<span class="dt">VPD =</span> <span class="fl">1.5</span>, <span class="dt">Ca =</span> <span class="dv">400</span>, <span class="dt">PPFD =</span> <span class="dv">1500</span>,</span>
+<span id="cb104-2"><a href="photo-stomo.html#cb104-2"></a>         <span class="dt">Tleaf =</span> <span class="dv">25</span>, <span class="dt">Patm =</span> <span class="dv">100</span>,<span class="dt">RH =</span> <span class="ot">NULL</span>,</span>
+<span id="cb104-3"><a href="photo-stomo.html#cb104-3"></a>         <span class="dt">gsmodel =</span> <span class="kw">c</span>(<span class="st">&quot;BBOpti&quot;</span>, <span class="st">&quot;BBLeuning&quot;</span>, </span>
+<span id="cb104-4"><a href="photo-stomo.html#cb104-4"></a>                     <span class="st">&quot;BallBerry&quot;</span>, <span class="st">&quot;BBdefine&quot;</span>),</span>
+<span id="cb104-5"><a href="photo-stomo.html#cb104-5"></a>         <span class="dt">g1 =</span> <span class="dv">4</span>, <span class="dt">g0 =</span> <span class="dv">0</span>, <span class="dt">gk =</span> <span class="fl">0.5</span>, <span class="dt">vpdmin =</span> <span class="fl">0.5</span>,</span>
+<span id="cb104-6"><a href="photo-stomo.html#cb104-6"></a>         <span class="dt">D0 =</span> <span class="dv">5</span>, <span class="dt">GS =</span> <span class="ot">NULL</span>, <span class="dt">BBmult =</span> <span class="ot">NULL</span>, </span>
+<span id="cb104-7"><a href="photo-stomo.html#cb104-7"></a>         <span class="dt">alpha =</span> <span class="fl">0.24</span>, <span class="dt">theta =</span> <span class="fl">0.85</span>, <span class="dt">Jmax =</span> <span class="dv">100</span>,</span>
+<span id="cb104-8"><a href="photo-stomo.html#cb104-8"></a>         <span class="dt">Vcmax =</span> <span class="dv">50</span>, <span class="dt">gmeso =</span> <span class="ot">NULL</span>, <span class="dt">TPU =</span> <span class="dv">1000</span>, </span>
+<span id="cb104-9"><a href="photo-stomo.html#cb104-9"></a>         <span class="dt">alphag =</span> <span class="dv">0</span>, <span class="dt">Rd0 =</span> <span class="fl">0.92</span>, <span class="dt">Q10 =</span> <span class="fl">1.92</span>,</span>
+<span id="cb104-10"><a href="photo-stomo.html#cb104-10"></a>         <span class="dt">Rd =</span> <span class="ot">NULL</span>, <span class="dt">TrefR =</span> <span class="dv">25</span>, <span class="dt">Rdayfrac =</span> <span class="dv">1</span>, </span>
+<span id="cb104-11"><a href="photo-stomo.html#cb104-11"></a>         <span class="dt">EaV =</span> <span class="fl">82620.87</span>, <span class="dt">EdVC =</span> <span class="dv">0</span>, <span class="dt">delsC =</span> <span class="fl">645.1013</span>, </span>
+<span id="cb104-12"><a href="photo-stomo.html#cb104-12"></a>         <span class="dt">EaJ =</span> <span class="fl">39676.89</span>, <span class="dt">EdVJ =</span> <span class="fl">2e+05</span>, <span class="dt">delsJ =</span> <span class="fl">641.3615</span>,</span>
+<span id="cb104-13"><a href="photo-stomo.html#cb104-13"></a>         <span class="dt">GammaStar =</span> <span class="ot">NULL</span>, <span class="dt">Km =</span> <span class="ot">NULL</span>, <span class="dt">Ci =</span> <span class="ot">NULL</span>, </span>
+<span id="cb104-14"><a href="photo-stomo.html#cb104-14"></a>         <span class="dt">Tcorrect =</span> <span class="ot">TRUE</span>,<span class="dt">returnParsOnly =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb104-15"><a href="photo-stomo.html#cb104-15"></a>         <span class="dt">whichA =</span> <span class="kw">c</span>(<span class="st">&quot;Ah&quot;</span>, <span class="st">&quot;Amin&quot;</span>, <span class="st">&quot;Ac&quot;</span>, <span class="st">&quot;Aj&quot;</span>))</span>
+<span id="cb104-16"><a href="photo-stomo.html#cb104-16"></a></span>
+<span id="cb104-17"><a href="photo-stomo.html#cb104-17"></a><span class="kw">Aci</span>(Ci, ...)</span></code></pre></div>
 <p>因为是光合气孔导度模型的耦合，故而参数与之前的函数相同，参见 <a href="response-fit.html#fitaci-p">3.5.2</a> 和 <a href="stomotal-sim.html#fitbb-p">4.4</a> 部分的内容。</p>
-<div id="photo_exam" class="section level3">
+<div id="photo_exam" class="section level3" number="6.1.1">
 <h3><span class="header-section-number">6.1.1</span> <code>Photosyn</code> 使用举例</h3>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" title="1"><span class="kw">library</span>(plantecophys)</a>
-<a class="sourceLine" id="cb104-2" title="2"><span class="co"># 仅使用下面几个参数运行模型</span></a>
-<a class="sourceLine" id="cb104-3" title="3"><span class="co">#（其他参数使用默认值）</span></a>
-<a class="sourceLine" id="cb104-4" title="4"><span class="co"># 利用已测量或计算的参数</span></a>
-<a class="sourceLine" id="cb104-5" title="5"><span class="kw">Photosyn</span>(<span class="dt">VPD=</span><span class="dv">2</span>, <span class="dt">g1=</span><span class="dv">4</span>, <span class="dt">Ca=</span><span class="dv">500</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="photo-stomo.html#cb105-1"></a><span class="kw">library</span>(plantecophys)</span>
+<span id="cb105-2"><a href="photo-stomo.html#cb105-2"></a><span class="co"># 仅使用下面几个参数运行模型</span></span>
+<span id="cb105-3"><a href="photo-stomo.html#cb105-3"></a><span class="co">#（其他参数使用默认值）</span></span>
+<span id="cb105-4"><a href="photo-stomo.html#cb105-4"></a><span class="co"># 利用已测量或计算的参数</span></span>
+<span id="cb105-5"><a href="photo-stomo.html#cb105-5"></a><span class="kw">Photosyn</span>(<span class="dt">VPD=</span><span class="dv">2</span>, <span class="dt">g1=</span><span class="dv">4</span>, <span class="dt">Ca=</span><span class="dv">500</span>)</span></code></pre></div>
 <pre><code>##         Ci    ALEAF        GS    ELEAF       Ac       Aj   Ap   Rd VPD Tleaf
 ## 1 369.3981 14.19466 0.1706377 3.412753 15.12654 17.03685 1000 0.92   2    25
 ##    Ca       Cc PPFD Patm
 ## 1 500 369.3981 1500  100</code></pre>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" title="1"><span class="co"># 部分参数相同，而某一参数或某几个参数不同时，</span></a>
-<a class="sourceLine" id="cb106-2" title="2"><span class="co"># 可以将不同的参数设置为一个序列（vectors）</span></a>
-<a class="sourceLine" id="cb106-3" title="3">r &lt;-<span class="st"> </span><span class="kw">Photosyn</span>(<span class="dt">VPD=</span><span class="kw">seq</span>(<span class="fl">0.5</span>, <span class="dv">4</span>, <span class="dt">length=</span><span class="dv">25</span>), </a>
-<a class="sourceLine" id="cb106-4" title="4">              <span class="dt">Vcmax=</span><span class="dv">50</span>, <span class="dt">Jmax=</span><span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb106-5" title="5"><span class="kw">with</span>(r, <span class="kw">plot</span>(VPD, ALEAF, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="photo-stomo.html#cb107-1"></a><span class="co"># 部分参数相同，而某一参数或某几个参数不同时，</span></span>
+<span id="cb107-2"><a href="photo-stomo.html#cb107-2"></a><span class="co"># 可以将不同的参数设置为一个序列（vectors）</span></span>
+<span id="cb107-3"><a href="photo-stomo.html#cb107-3"></a>r &lt;-<span class="st"> </span><span class="kw">Photosyn</span>(<span class="dt">VPD=</span><span class="kw">seq</span>(<span class="fl">0.5</span>, <span class="dv">4</span>, <span class="dt">length=</span><span class="dv">25</span>), </span>
+<span id="cb107-4"><a href="photo-stomo.html#cb107-4"></a>              <span class="dt">Vcmax=</span><span class="dv">50</span>, <span class="dt">Jmax=</span><span class="dv">100</span>)</span>
+<span id="cb107-5"><a href="photo-stomo.html#cb107-5"></a><span class="kw">with</span>(r, <span class="kw">plot</span>(VPD, ALEAF, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>))</span></code></pre></div>
 <div class="figure"><span id="fig:vpd"></span>
 <img src="bookdown_files/figure-html/vpd-1.png" alt="VPD VS. An" width="672" />
 <p class="caption">
@@ -357,23 +389,23 @@ g_s = g_0 + g_1 \frac{A_n}{C_a} f(D)
 </p>
 </div>
 <p>不同 VPD 下的光合速率见 <a href="photo-stomo.html#fig:vpd">6.1</a>。</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" title="1"><span class="co"># 设定叶肉导度的拟合</span></a>
-<a class="sourceLine" id="cb107-2" title="2">run1 &lt;-<span class="st"> </span><span class="kw">Photosyn</span>(<span class="dt">PPFD=</span><span class="kw">seq</span>(<span class="dv">50</span>,<span class="dv">1000</span>,<span class="dt">length=</span><span class="dv">25</span>), </a>
-<a class="sourceLine" id="cb107-3" title="3">                 <span class="dt">gmeso=</span><span class="fl">0.15</span>, <span class="dt">Vcmax=</span><span class="dv">40</span>, <span class="dt">Jmax=</span><span class="dv">85</span>)</a>
-<a class="sourceLine" id="cb107-4" title="4"><span class="kw">with</span>(run1, <span class="kw">plot</span>(PPFD, GS, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="photo-stomo.html#cb108-1"></a><span class="co"># 设定叶肉导度的拟合</span></span>
+<span id="cb108-2"><a href="photo-stomo.html#cb108-2"></a>run1 &lt;-<span class="st"> </span><span class="kw">Photosyn</span>(<span class="dt">PPFD=</span><span class="kw">seq</span>(<span class="dv">50</span>,<span class="dv">1000</span>,<span class="dt">length=</span><span class="dv">25</span>), </span>
+<span id="cb108-3"><a href="photo-stomo.html#cb108-3"></a>                 <span class="dt">gmeso=</span><span class="fl">0.15</span>, <span class="dt">Vcmax=</span><span class="dv">40</span>, <span class="dt">Jmax=</span><span class="dv">85</span>)</span>
+<span id="cb108-4"><a href="photo-stomo.html#cb108-4"></a><span class="kw">with</span>(run1, <span class="kw">plot</span>(PPFD, GS, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>))</span></code></pre></div>
 <div class="figure"><span id="fig:ppfd-1"></span>
 <img src="bookdown_files/figure-html/ppfd-1.png" alt="PPFD VS. GS" width="672" />
 <p class="caption">
 图 6.2: PPFD VS. GS
 </p>
 </div>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" title="1"><span class="co"># 运行ACi曲线数据（提供Ci值而不是计算）</span></a>
-<a class="sourceLine" id="cb108-2" title="2">arun1 &lt;-<span class="st"> </span><span class="kw">Aci</span>(<span class="dt">Ci=</span><span class="kw">seq</span>(<span class="dv">50</span>, <span class="dv">1200</span>, <span class="dt">length=</span><span class="dv">101</span>), </a>
-<a class="sourceLine" id="cb108-3" title="3">             <span class="dt">Vcmax=</span><span class="dv">40</span>, <span class="dt">Jmax=</span><span class="dv">85</span>)</a>
-<a class="sourceLine" id="cb108-4" title="4">arun2 &lt;-<span class="st"> </span><span class="kw">Aci</span>(<span class="dt">Ci=</span><span class="kw">seq</span>(<span class="dv">50</span>, <span class="dv">1200</span>, <span class="dt">length=</span><span class="dv">101</span>), </a>
-<a class="sourceLine" id="cb108-5" title="5">             <span class="dt">Vcmax=</span><span class="dv">30</span>, <span class="dt">Jmax=</span><span class="dv">70</span>)</a>
-<a class="sourceLine" id="cb108-6" title="6"><span class="kw">with</span>(arun1, <span class="kw">plot</span>(Ci, ALEAF, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>))</a>
-<a class="sourceLine" id="cb108-7" title="7"><span class="kw">with</span>(arun2, <span class="kw">points</span>(Ci, ALEAF, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">lty=</span><span class="dv">5</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="photo-stomo.html#cb109-1"></a><span class="co"># 运行ACi曲线数据（提供Ci值而不是计算）</span></span>
+<span id="cb109-2"><a href="photo-stomo.html#cb109-2"></a>arun1 &lt;-<span class="st"> </span><span class="kw">Aci</span>(<span class="dt">Ci=</span><span class="kw">seq</span>(<span class="dv">50</span>, <span class="dv">1200</span>, <span class="dt">length=</span><span class="dv">101</span>), </span>
+<span id="cb109-3"><a href="photo-stomo.html#cb109-3"></a>             <span class="dt">Vcmax=</span><span class="dv">40</span>, <span class="dt">Jmax=</span><span class="dv">85</span>)</span>
+<span id="cb109-4"><a href="photo-stomo.html#cb109-4"></a>arun2 &lt;-<span class="st"> </span><span class="kw">Aci</span>(<span class="dt">Ci=</span><span class="kw">seq</span>(<span class="dv">50</span>, <span class="dv">1200</span>, <span class="dt">length=</span><span class="dv">101</span>), </span>
+<span id="cb109-5"><a href="photo-stomo.html#cb109-5"></a>             <span class="dt">Vcmax=</span><span class="dv">30</span>, <span class="dt">Jmax=</span><span class="dv">70</span>)</span>
+<span id="cb109-6"><a href="photo-stomo.html#cb109-6"></a><span class="kw">with</span>(arun1, <span class="kw">plot</span>(Ci, ALEAF, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>))</span>
+<span id="cb109-7"><a href="photo-stomo.html#cb109-7"></a><span class="kw">with</span>(arun2, <span class="kw">points</span>(Ci, ALEAF, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">lty=</span><span class="dv">5</span>))</span></code></pre></div>
 <div class="figure"><span id="fig:ppfd-2"></span>
 <img src="bookdown_files/figure-html/ppfd-2.png" alt="PPFD VS. GS" width="672" />
 <p class="caption">
@@ -381,29 +413,29 @@ g_s = g_0 + g_1 \frac{A_n}{C_a} f(D)
 </p>
 </div>
 <p>不同 ci 下的光合速率见 <a href="#fig:ppfd"><strong>??</strong></a>。</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" title="1"><span class="co"># 找出CO2需求和供给的交叉点</span></a>
-<a class="sourceLine" id="cb109-2" title="2"><span class="co"># 设定部分参数</span></a>
-<a class="sourceLine" id="cb109-3" title="3">gs &lt;-<span class="st"> </span><span class="fl">0.2</span> <span class="co"># 对水的气孔导度</span></a>
-<a class="sourceLine" id="cb109-4" title="4">Ca &lt;-<span class="st"> </span><span class="dv">400</span> <span class="co"># 外部CO2</span></a>
-<a class="sourceLine" id="cb109-5" title="5">gctogw &lt;-<span class="st"> </span><span class="fl">1.57</span> <span class="co"># 转换系数</span></a>
-<a class="sourceLine" id="cb109-6" title="6">gc &lt;-<span class="st"> </span>gs <span class="op">/</span><span class="st"> </span>gctogw <span class="co"># 对 CO2 的气孔导度</span></a>
-<a class="sourceLine" id="cb109-7" title="7"><span class="co"># 需求曲线</span></a>
-<a class="sourceLine" id="cb109-8" title="8">p &lt;-<span class="st"> </span><span class="kw">Aci</span>(<span class="kw">seq</span>(<span class="dv">60</span>,<span class="dv">500</span>,<span class="dt">length=</span><span class="dv">101</span>), <span class="dt">Ca=</span><span class="dv">400</span>)</a>
-<a class="sourceLine" id="cb109-9" title="9"><span class="co"># 提供气孔导度及交叉点</span></a>
-<a class="sourceLine" id="cb109-10" title="10">g &lt;-<span class="st"> </span><span class="kw">Photosyn</span>(<span class="dt">GS=</span>gs, <span class="dt">Ca=</span>Ca)</a>
-<a class="sourceLine" id="cb109-11" title="11"><span class="co"># 交叉点可视化</span></a>
-<a class="sourceLine" id="cb109-12" title="12"><span class="kw">par</span>(<span class="dt">yaxs=</span><span class="st">&quot;i&quot;</span>)</a>
-<a class="sourceLine" id="cb109-13" title="13"><span class="kw">with</span>(p, <span class="kw">plot</span>(Ci, ALEAF, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, </a>
-<a class="sourceLine" id="cb109-14" title="14">             <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="kw">max</span>(ALEAF))))</a>
-<a class="sourceLine" id="cb109-15" title="15"><span class="kw">with</span>(g, <span class="kw">points</span>(Ci, ALEAF, <span class="dt">pch=</span><span class="dv">19</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>))</a>
-<a class="sourceLine" id="cb109-16" title="16"><span class="kw">abline</span>(gc <span class="op">*</span><span class="st"> </span>Ca, <span class="op">-</span>gc, <span class="dt">lty=</span><span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb109-17" title="17"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="kw">c</span>(<span class="kw">expression</span>(</a>
-<a class="sourceLine" id="cb109-18" title="18">  <span class="st">&quot;Demand:&quot;</span><span class="op">~</span><span class="er">~</span>A<span class="op">==</span><span class="kw">f</span>(C[i])),</a>
-<a class="sourceLine" id="cb109-19" title="19">   <span class="kw">expression</span>(<span class="st">&quot;Supply:&quot;</span><span class="op">~</span><span class="er">~</span>A<span class="op">==</span>g[c]<span class="op">*</span>(C[a]<span class="op">-</span>C[i])),</a>
-<a class="sourceLine" id="cb109-20" title="20">              <span class="st">&quot;Operating point&quot;</span>),</a>
-<a class="sourceLine" id="cb109-21" title="21">   <span class="dt">lty=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="op">-</span><span class="dv">1</span>),<span class="dt">pch=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">19</span>),</a>
-<a class="sourceLine" id="cb109-22" title="22">   <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;black&quot;</span>,<span class="st">&quot;black&quot;</span>,<span class="st">&quot;red&quot;</span>),</a>
-<a class="sourceLine" id="cb109-23" title="23">   <span class="dt">bty=</span><span class="st">&#39;n&#39;</span>, <span class="dt">cex=</span><span class="fl">0.9</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="photo-stomo.html#cb110-1"></a><span class="co"># 找出CO2需求和供给的交叉点</span></span>
+<span id="cb110-2"><a href="photo-stomo.html#cb110-2"></a><span class="co"># 设定部分参数</span></span>
+<span id="cb110-3"><a href="photo-stomo.html#cb110-3"></a>gs &lt;-<span class="st"> </span><span class="fl">0.2</span> <span class="co"># 对水的气孔导度</span></span>
+<span id="cb110-4"><a href="photo-stomo.html#cb110-4"></a>Ca &lt;-<span class="st"> </span><span class="dv">400</span> <span class="co"># 外部CO2</span></span>
+<span id="cb110-5"><a href="photo-stomo.html#cb110-5"></a>gctogw &lt;-<span class="st"> </span><span class="fl">1.57</span> <span class="co"># 转换系数</span></span>
+<span id="cb110-6"><a href="photo-stomo.html#cb110-6"></a>gc &lt;-<span class="st"> </span>gs <span class="op">/</span><span class="st"> </span>gctogw <span class="co"># 对 CO2 的气孔导度</span></span>
+<span id="cb110-7"><a href="photo-stomo.html#cb110-7"></a><span class="co"># 需求曲线</span></span>
+<span id="cb110-8"><a href="photo-stomo.html#cb110-8"></a>p &lt;-<span class="st"> </span><span class="kw">Aci</span>(<span class="kw">seq</span>(<span class="dv">60</span>,<span class="dv">500</span>,<span class="dt">length=</span><span class="dv">101</span>), <span class="dt">Ca=</span><span class="dv">400</span>)</span>
+<span id="cb110-9"><a href="photo-stomo.html#cb110-9"></a><span class="co"># 提供气孔导度及交叉点</span></span>
+<span id="cb110-10"><a href="photo-stomo.html#cb110-10"></a>g &lt;-<span class="st"> </span><span class="kw">Photosyn</span>(<span class="dt">GS=</span>gs, <span class="dt">Ca=</span>Ca)</span>
+<span id="cb110-11"><a href="photo-stomo.html#cb110-11"></a><span class="co"># 交叉点可视化</span></span>
+<span id="cb110-12"><a href="photo-stomo.html#cb110-12"></a><span class="kw">par</span>(<span class="dt">yaxs=</span><span class="st">&quot;i&quot;</span>)</span>
+<span id="cb110-13"><a href="photo-stomo.html#cb110-13"></a><span class="kw">with</span>(p, <span class="kw">plot</span>(Ci, ALEAF, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, </span>
+<span id="cb110-14"><a href="photo-stomo.html#cb110-14"></a>             <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="kw">max</span>(ALEAF))))</span>
+<span id="cb110-15"><a href="photo-stomo.html#cb110-15"></a><span class="kw">with</span>(g, <span class="kw">points</span>(Ci, ALEAF, <span class="dt">pch=</span><span class="dv">19</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>))</span>
+<span id="cb110-16"><a href="photo-stomo.html#cb110-16"></a><span class="kw">abline</span>(gc <span class="op">*</span><span class="st"> </span>Ca, <span class="op">-</span>gc, <span class="dt">lty=</span><span class="dv">5</span>)</span>
+<span id="cb110-17"><a href="photo-stomo.html#cb110-17"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="kw">c</span>(<span class="kw">expression</span>(</span>
+<span id="cb110-18"><a href="photo-stomo.html#cb110-18"></a>  <span class="st">&quot;Demand:&quot;</span><span class="op">~</span><span class="er">~</span>A<span class="op">==</span><span class="kw">f</span>(C[i])),</span>
+<span id="cb110-19"><a href="photo-stomo.html#cb110-19"></a>   <span class="kw">expression</span>(<span class="st">&quot;Supply:&quot;</span><span class="op">~</span><span class="er">~</span>A<span class="op">==</span>g[c]<span class="op">*</span>(C[a]<span class="op">-</span>C[i])),</span>
+<span id="cb110-20"><a href="photo-stomo.html#cb110-20"></a>              <span class="st">&quot;Operating point&quot;</span>),</span>
+<span id="cb110-21"><a href="photo-stomo.html#cb110-21"></a>   <span class="dt">lty=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="op">-</span><span class="dv">1</span>),<span class="dt">pch=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">19</span>),</span>
+<span id="cb110-22"><a href="photo-stomo.html#cb110-22"></a>   <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;black&quot;</span>,<span class="st">&quot;black&quot;</span>,<span class="st">&quot;red&quot;</span>),</span>
+<span id="cb110-23"><a href="photo-stomo.html#cb110-23"></a>   <span class="dt">bty=</span><span class="st">&#39;n&#39;</span>, <span class="dt">cex=</span><span class="fl">0.9</span>)</span></code></pre></div>
 <div class="figure"><span id="fig:supply"></span>
 <img src="bookdown_files/figure-html/supply-1.png" alt="supply VS. demand" width="672" />
 <p class="caption">
@@ -413,12 +445,12 @@ g_s = g_0 + g_1 \frac{A_n}{C_a} f(D)
 <p>需求与供给的作图 <a href="photo-stomo.html#fig:supply">6.4</a>。</p>
 </div>
 </div>
-<div id="photsyneb" class="section level2">
+<div id="photsyneb" class="section level2" number="6.2">
 <h2><span class="header-section-number">6.2</span> <code>PhotosynEB</code> 函数</h2>
 <p>使用同 <code>Photosyn</code>，只不过使用能量平衡法来计算叶温。
 目前版本尚存在bug，不能直接提供 GS 来计算，否则会出现未知错误。</p>
 </div>
-<div id="photosyntuzet" class="section level2">
+<div id="photosyntuzet" class="section level2" number="6.3">
 <h2><span class="header-section-number">6.3</span> <code>PhotosynTuzet</code> 函数</h2>
 <p>同样为光合气孔导度耦合模型，只不过基于 <span class="citation">Tuzet, Perrier, and Leuning (<a href="#ref-tuzet2003a" role="doc-biblioref">2003</a>)</span> 的气孔导度模型，现将其描述如下：</p>
 <p><span class="math display" id="eq:tuzet">\[\begin{equation}
@@ -432,12 +464,12 @@ f_{\Psi v} = \frac{1 + exp(s_f \Psi_f)}{1 + exp(s_f(\Psi_f - \Psi_v))}
 \tag{6.6}
 \end{equation}\]</span></p>
 <p><span class="math inline">\(\Psi_v\)</span> 是指叶片水势，<span class="math inline">\(\Psi_f\)</span> 是参比势能， 该方程假设在水势接近于 0 时，气孔对叶片水势不敏感，并且气孔随着 <span class="math inline">\(\Psi_v\)</span> 的下降快速关闭。<span class="math inline">\(\Psi_f\)</span> 和 <span class="math inline">\(s_f\)</span> (曲线形状参数) 依赖于不同物种的形态学适应以及生长过程中所处的环境。</p>
-<div id="photosyntuzet_para" class="section level3">
+<div id="photosyntuzet_para" class="section level3" number="6.3.1">
 <h3><span class="header-section-number">6.3.1</span> <code>PhotosynTuzet</code> 的参数</h3>
 <p>除 <span class="citation">Tuzet, Perrier, and Leuning (<a href="#ref-tuzet2003a" role="doc-biblioref">2003</a>)</span> 模型中使用的参数外，其他参数都继承了 <code>Photosyn</code> 的参数</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" title="1"><span class="kw">PhotosynTuzet</span>(<span class="dt">g1 =</span> <span class="dv">8</span>, <span class="dt">Ca =</span> <span class="dv">400</span>, <span class="dt">psis =</span> <span class="dv">0</span>,</a>
-<a class="sourceLine" id="cb110-2" title="2">              <span class="dt">kl =</span> <span class="dv">2</span>, <span class="dt">sf =</span> <span class="dv">3</span>, <span class="dt">psif =</span> <span class="dv">-2</span>,</a>
-<a class="sourceLine" id="cb110-3" title="3">...)</a></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="photo-stomo.html#cb111-1"></a><span class="kw">PhotosynTuzet</span>(<span class="dt">g1 =</span> <span class="dv">8</span>, <span class="dt">Ca =</span> <span class="dv">400</span>, <span class="dt">psis =</span> <span class="dv">0</span>,</span>
+<span id="cb111-2"><a href="photo-stomo.html#cb111-2"></a>              <span class="dt">kl =</span> <span class="dv">2</span>, <span class="dt">sf =</span> <span class="dv">3</span>, <span class="dt">psif =</span> <span class="dv">-2</span>,</span>
+<span id="cb111-3"><a href="photo-stomo.html#cb111-3"></a>...)</span></code></pre></div>
 <ul>
 <li>g1：斜率参数，要远比 <code>fitBB</code> 中的大。</li>
 <li>Ca：外界大气 CO<sub>2</sub> 浓度</li>
@@ -446,7 +478,6 @@ f_{\Psi v} = \frac{1 + exp(s_f \Psi_f)}{1 + exp(s_f(\Psi_f - \Psi_v))}
 <li>sf：曲线形状参数。</li>
 <li>在气孔导度为最大值 50% 时的叶片水势。</li>
 </ul>
-
 
 </div>
 </div>
@@ -466,7 +497,7 @@ f_{\Psi v} = \frac{1 + exp(s_f \Psi_f)}{1 + exp(s_f(\Psi_f - \Psi_v))}
 <div class="footnotes">
 <hr />
 <ol start="11">
-<li id="fn11"><p>详细内容请参考原文<a href="photo-stomo.html#fnref11" class="footnote-back">↩</a></p></li>
+<li id="fn11"><p>详细内容请参考原文<a href="photo-stomo.html#fnref11" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

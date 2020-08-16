@@ -42,25 +42,27 @@ header_line 表示你数据表头所在行，data_start 表示你数据起始行
 
 ## LI-6800 数据整合{#batch68}
 
-相比 6400， 6800 参数要少，导入需要两行命令即可：
+此部分内容保留，但不建议再使用：
+
+~~相比 6400， 6800 参数要少，导入需要两行命令即可：~~
 
 ```{r}
 library(readphoto)
 df <- read_bat_6800("./data/6800", data_start = 56)
 ```
 
-其中就两个参数，第一个为 LI-6800 **原始数据**所在的文件夹，即文件夹内**包含且仅包含 LI-6800 的原始数据**，不要放其他文件，不要放 excel 数据。第二个参数即为你原始数据中测量数据的起始行，例如本例中使用数据测量值从 56 行开始。
+~~其中就两个参数，第一个为 LI-6800 **原始数据**所在的文件夹，即文件夹内**包含且仅包含 LI-6800 的原始数据**，不要放其他文件，不要放 excel 数据。第二个参数即为你原始数据中测量数据的起始行，例如本例中使用数据测量值从 56 行开始。~~
 
-数据输出如下所示(仅显示前8列数据)：
+~~数据输出如下所示(仅显示前8列数据)：~~
 
 ```{r,echo=FALSE}
 knitr::kable(df[1:15, 1:8], booktabs = TRUE,
 caption = 'LI-6800 批量整合数据')
 ```
 
-其他注意事项见 LI-6400 数据整合部分
+~~其他注意事项见 LI-6400 数据整合部分~~
 
-另外： 今天添加了使用 regex 读取 LI-6800 原始文件的方法，这个只需要路径即可（2020-3-18），简单测试，有名字重复的警告，是 TIME，不影响大局，我没时间改，过几天有时间了再改：
+~~另外： 今天添加了使用 regex 读取 LI-6800 原始文件的方法，这个只需要路径即可（2020-3-18），简单测试，有名字重复的警告，是 TIME，不影响大局，我没时间改，过几天有时间了再改：~~
 
 ```{r}
 library(readphoto)
@@ -106,7 +108,8 @@ y1$Photo/x1$Photo
 
 #### 原始数据的批量计算 {#raw-batch-68}
 
-参数的重计算函数为 `recomp_6800`, 其参数除了 `read_bat_6800` 所包含的参数外，还有叶面积 S, 以及叶片正反面的气孔比例，默认值分别为 6 和 0.5。
+此部分内容保留，但不建议继续使用
+~~参数的重计算函数为 `recomp_6800`, 其参数除了 `read_bat_6800` 所包含的参数外，还有叶面积 S, 以及叶片正反面的气孔比例，默认值分别为 6 和 0.5。~~
 
 ```{r, message=FALSE}
 library(readphoto)
@@ -127,7 +130,7 @@ y3 <- recomp_6800("./data/6800", S = area, K = 0.5)
 y3$A/x3$A
 ```
 
-测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。
+~~测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。~~
 
 #### Excel 格式的重计算 {#excel-recompute-68}
 
@@ -149,7 +152,7 @@ remotes::install_git("https://gitee.com/zhu_jie_dong/readphoto")
 
 - start_row 是数据开始的行号；
 
-- S 为修改的叶面积，默认值为 6，如果叶面积无需更改，则使用默认的 NULL。如果使用 aperture 更改了面积，且叶片能够充满叶室，比方说是 2 cm^2^，该值必须输入一个长度和测量值数量完全一致的向量，例如有 3 个测量值，我们输入 `S= rep(2,3)`，有的没有充满叶室，有的充满叶室，该值也必须输入一个长度和测量值数量完全一致的向量，例如，一共有三个测量值，只有第一个叶片没充满叶室，面积为 1.5，则输入方式为 `S = c(1.5, 2, 2)`。
+- S 为修改的叶面积，默认值为 6，如果叶面积无需更改，则使用默认的 NULL。如果使用 aperture 更改了面积，且叶片能够充满叶室，比方说是 2 cm^2^，该值必须输入一个长度和测量值数量完全一致的向量，例如有 3 个测量值，我们输入 S 的长度则为 3，例如，一共有三个测量值，只有第一个叶片没充满叶室，面积为 1.5，其他的为 2，则输入方式为 `S = c(1.5, 2, 2)`。
 
 
 我们直接使用下面的例子解释，导入的数据是 6 cm^2^ 的默认面积：
@@ -174,5 +177,99 @@ df6$A/df3$A
 df_random <- xlconnect_read("./data/aci-xlc.xlsx", S = rnorm(12, 3, 0.1))
 df6$A/df_random$A
 ```
+
+#### 批量处理 LI-6800 的数据 {#batch-6800-xlsx}
+
+为了避免麻烦，不再建议前面 \@ref(recompute6800)的方式进行处理，其实基本的代码处理也很简单，例如下面演示的一些方法，供参考：
+
+```{r, eval=FALSE}
+library(readphoto)
+file_names <-
+  list.files(path = "./data/extdata",
+             full.names = TRUE,
+             pattern = '*.xlsx')
+
+data_list <- lapply(file_names, xlconnect_read)
+
+## 整理好数据为正常格式并导出，例如导出 csv 文件
+
+# 根据需要，若文件夹不存在可创建
+#dir.create( "./data/extdata/csvdata")
+short_names <-
+  list.files(path = "./data/extdata", pattern = '*.xlsx')
+short_name <- gsub(".xlsx", "", short_names)
+csv_file <-
+  paste0("./data/extdata/csvdata", "/", short_name, ".csv")
+mapply(x = data_list, file = csv_file, write.csv)
+
+
+
+# 若需要修改叶面积，则可以将叶面积重新另存为只有叶面积数据的文件
+# 面积数据的文件仅包含S列，且文件名与待修改面积的文件名保持一致
+
+
+# 批量读取叶面积的数据
+# 为方便使用，我将面积存为了 csv 格式
+# 根据需要，若文件夹不存在可创建
+#dir.create( "./data/extdata/areacsv")
+file_area <-
+  list.files(path = "./data/extdata/area",
+             full.names = TRUE,
+             pattern = '*.csv')
+area_list <- lapply(file_area, read.csv)
+
+# mapply 使用多个list 读取数据，注意将list命名为参数的名字，
+# 以免出现使用位置的方式匹配参数，出现错误
+data_list_csv <-
+  mapply(
+    path = file_names,
+    S = area_list,
+    xlconnect_read,
+    start_row = 17,
+    SIMPLIFY = F
+  )
+short_names_csv <-
+  list.files(path = "./data/extdata", pattern = '*.xlsx')
+short_name_csv <- gsub(".xlsx", "", short_names_csv)
+csv_file_area <-
+  paste0("./data/extdata/areacsv", "/", short_name_csv, ".csv")
+mapply(x = data_list_csv, file = csv_file_area, write.csv)
+
+
+##如果要合并数据到一个文件内，可以在合并时，使用文件名作为
+# 单独的一列，例如列名都叫做 from_file
+# 例如使用我们刚刚修改叶面积的数据为例，使用刚刚导出的csv文件，节省代码
+
+
+add_col_name <- function(path, file_name){
+  df <- read.csv(path)
+  df$from_file <- file_name
+  df
+  }
+
+csv_data_path <-
+  list.files(path = "./data/extdata/areacsv",
+             full.names = TRUE,
+             pattern = '*.csv')
+
+data_combine <-
+  mapply(
+    path = csv_data_path,
+    file_name = short_name_csv,
+    add_col_name,
+    SIMPLIFY = F
+  )
+
+# 或者使用data.table::rbindlist(listOfDataFrames)
+# 或者使用 dplyr::bind_rows(listOfDataFrames)
+
+df_combined <- dplyr::bind_rows(data_combine)
+
+# 检验数据
+head(df_combined$from_file)
+tail(df_combined$from_file)
+
+```
+
 
 \cleardoublepage
