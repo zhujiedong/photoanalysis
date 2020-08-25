@@ -50,9 +50,13 @@ fitlrc_mrec <- summary(lrcnls)
 Isat <-  sqrt((fitlrc_mrec$coef[2,1] + fitlrc_mrec$coef[3,1])/
               fitlrc_mrec$coef[2,1]-1)/fitlrc_mrec$coef[3,1]
 # 补偿点计算
-Ic <- (fitlrc_mrec$coef[1,1] - fitlrc_mrec$coef[4,1])/
-  (fitlrc_mrec$coef[3,1]*fitlrc_mrec$coef[4,1]+
-   fitlrc_mrec$coef[1,1]*fitlrc_mrec$coef[2,1])
+Ic <- (
+  -(fitlrc_mrec$coef[3, 1] * fitlrc_mrec$coef[4, 1] - 
+  fitlrc_mrec$coef[1, 1]) - sqrt((fitlrc_mrec$coef[3, 1] * 
+  fitlrc_mrec$coef[4, 1] - fitlrc_mrec$coef[1, 1])^2- 
+  (4 * fitlrc_mrec$coef[1, 1] * fitlrc_mrec$coef[2, 1] * 
+  fitlrc_mrec$coef[4, 1])))/
+  (2*fitlrc_mrec$coef[1,1]*fitlrc_mrec$coef[2,1])
 
 ## 拟合图形
 library(ggplot2)

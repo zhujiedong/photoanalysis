@@ -177,7 +177,7 @@
 
 \title{使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据}
 \author{祝介东 北京力高泰科技有限公司}
-\date{2020-08-16}
+\date{2020-08-25}
 
 \begin{document}
 \maketitle
@@ -596,10 +596,10 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.771822 1.604245 1.217531 1.830958 1.700908 1.808018 1.272664 1.441131
-##  [9] 1.542231 1.893161 1.406523 1.444236 1.462720 1.243074 1.205237 1.329073
-## [17] 1.290756 1.689810 1.887512 1.233258 1.435048 1.400690 1.521649 1.561114
-## [25] 1.834029 1.820467 1.802302 1.760728 1.667171 1.397086 1.328605 1.521466
+##  [1] 1.603967 1.362701 1.769814 1.896648 1.565122 1.413552 1.776174 1.523575
+##  [9] 1.242037 1.708705 1.552673 1.640270 1.306283 1.457750 1.327312 1.229499
+## [17] 1.679250 1.399993 1.934897 1.980349 1.712762 1.211185 1.837312 1.205698
+## [25] 1.401408 1.283938 1.244775 1.548590 1.228869 1.677014 1.492469 1.802633
 \end{verbatim}
 
 我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.
@@ -793,10 +793,10 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.596365 1.505334 1.828568 1.219122 1.214411 1.200010 1.500547 1.848809
-##  [9] 1.667444 1.247526 1.791102 1.840154 1.326561 1.978647 1.358948 1.385388
-## [17] 1.423005 1.593856 1.359545 1.462955 1.437373 1.313948 1.574273 1.374879
-## [25] 1.579009 1.805010 1.696037 1.242840
+##  [1] 1.891221 1.944062 1.207075 1.385704 1.508084 1.850125 1.425707 1.385544
+##  [9] 1.285578 1.452647 1.854144 1.306363 1.469137 1.923747 1.569258 1.422250
+## [17] 1.851992 1.239126 1.819652 1.446527 1.476868 1.977574 1.983192 1.452939
+## [25] 1.935073 1.732502 1.846754 1.652083
 \end{verbatim}
 
 \sout{测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。}
@@ -870,8 +870,8 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 0.4933101 0.5228461 0.4938022 0.4934175 0.5218802 0.4717511 0.5169200
-##  [8] 0.5273303 0.5060874 0.4835332 0.4901826 0.5224489
+##  [1] 0.5411655 0.5051964 0.5163246 0.5035902 0.5086884 0.5083977 0.4877112
+##  [8] 0.4943185 0.5008627 0.5179441 0.5004603 0.5177557
 \end{verbatim}
 
 \hypertarget{batch-6800-xlsx}{%
@@ -2814,9 +2814,13 @@ P_{nmax} = \alpha\left(\frac{\sqrt{\beta+\gamma}-\sqrt{\beta}}{\gamma}\right)^{2
 \NormalTok{Isat \textless{}{-}}\StringTok{  }\KeywordTok{sqrt}\NormalTok{((fitlrc\_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OperatorTok{+}\StringTok{ }\NormalTok{fitlrc\_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{])}\OperatorTok{/}
 \StringTok{              }\NormalTok{fitlrc\_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{{-}}\DecValTok{1}\NormalTok{)}\OperatorTok{/}\NormalTok{fitlrc\_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{]}
 \CommentTok{\# 补偿点计算}
-\NormalTok{Ic \textless{}{-}}\StringTok{ }\NormalTok{(fitlrc\_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OperatorTok{{-}}\StringTok{ }\NormalTok{fitlrc\_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{])}\OperatorTok{/}
-\StringTok{  }\NormalTok{(fitlrc\_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{*}\NormalTok{fitlrc\_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{+}
-\StringTok{   }\NormalTok{fitlrc\_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{*}\NormalTok{fitlrc\_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{])}
+\NormalTok{Ic \textless{}{-}}\StringTok{ }\NormalTok{(}
+  \OperatorTok{{-}}\NormalTok{(fitlrc\_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{] }\OperatorTok{*}\StringTok{ }\NormalTok{fitlrc\_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{4}\NormalTok{, }\DecValTok{1}\NormalTok{] }\OperatorTok{{-}}\StringTok{ }
+\StringTok{  }\NormalTok{fitlrc\_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{]) }\OperatorTok{{-}}\StringTok{ }\KeywordTok{sqrt}\NormalTok{((fitlrc\_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{] }\OperatorTok{*}\StringTok{ }
+\StringTok{  }\NormalTok{fitlrc\_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{4}\NormalTok{, }\DecValTok{1}\NormalTok{] }\OperatorTok{{-}}\StringTok{ }\NormalTok{fitlrc\_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{])}\OperatorTok{\^{}}\DecValTok{2}\OperatorTok{{-}}\StringTok{ }
+\StringTok{  }\NormalTok{(}\DecValTok{4} \OperatorTok{*}\StringTok{ }\NormalTok{fitlrc\_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{] }\OperatorTok{*}\StringTok{ }\NormalTok{fitlrc\_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{] }\OperatorTok{*}\StringTok{ }
+\StringTok{  }\NormalTok{fitlrc\_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{4}\NormalTok{, }\DecValTok{1}\NormalTok{])))}\OperatorTok{/}
+\StringTok{  }\NormalTok{(}\DecValTok{2}\OperatorTok{*}\NormalTok{fitlrc\_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{*}\NormalTok{fitlrc\_mrec}\OperatorTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{])}
 
 \CommentTok{\#\# 拟合图形}
 \KeywordTok{library}\NormalTok{(ggplot2)}

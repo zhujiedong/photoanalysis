@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2020-08-16" />
+<meta name="date" content="2020-08-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -764,42 +764,46 @@ P_{nmax} = \alpha\left(\frac{\sqrt{\beta+\gamma}-\sqrt{\beta}}{\gamma}\right)^{2
 <span id="cb127-22"><a href="lrc-fit.html#cb127-22"></a>Isat &lt;-<span class="st">  </span><span class="kw">sqrt</span>((fitlrc_mrec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">3</span>,<span class="dv">1</span>])<span class="op">/</span></span>
 <span id="cb127-23"><a href="lrc-fit.html#cb127-23"></a><span class="st">              </span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">-</span><span class="dv">1</span>)<span class="op">/</span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">3</span>,<span class="dv">1</span>]</span>
 <span id="cb127-24"><a href="lrc-fit.html#cb127-24"></a><span class="co"># 补偿点计算</span></span>
-<span id="cb127-25"><a href="lrc-fit.html#cb127-25"></a>Ic &lt;-<span class="st"> </span>(fitlrc_mrec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">4</span>,<span class="dv">1</span>])<span class="op">/</span></span>
-<span id="cb127-26"><a href="lrc-fit.html#cb127-26"></a><span class="st">  </span>(fitlrc_mrec<span class="op">$</span>coef[<span class="dv">3</span>,<span class="dv">1</span>]<span class="op">*</span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">4</span>,<span class="dv">1</span>]<span class="op">+</span></span>
-<span id="cb127-27"><a href="lrc-fit.html#cb127-27"></a><span class="st">   </span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>]<span class="op">*</span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>])</span>
-<span id="cb127-28"><a href="lrc-fit.html#cb127-28"></a></span>
-<span id="cb127-29"><a href="lrc-fit.html#cb127-29"></a><span class="co">## 拟合图形</span></span>
-<span id="cb127-30"><a href="lrc-fit.html#cb127-30"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb127-31"><a href="lrc-fit.html#cb127-31"></a>light &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">lrc_Q =</span> lrc<span class="op">$</span>PARi, <span class="dt">lrc_A =</span> lrc<span class="op">$</span>Photo)</span>
+<span id="cb127-25"><a href="lrc-fit.html#cb127-25"></a>Ic &lt;-<span class="st"> </span>(</span>
+<span id="cb127-26"><a href="lrc-fit.html#cb127-26"></a>  <span class="op">-</span>(fitlrc_mrec<span class="op">$</span>coef[<span class="dv">3</span>, <span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">4</span>, <span class="dv">1</span>] <span class="op">-</span><span class="st"> </span></span>
+<span id="cb127-27"><a href="lrc-fit.html#cb127-27"></a><span class="st">  </span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">1</span>, <span class="dv">1</span>]) <span class="op">-</span><span class="st"> </span><span class="kw">sqrt</span>((fitlrc_mrec<span class="op">$</span>coef[<span class="dv">3</span>, <span class="dv">1</span>] <span class="op">*</span><span class="st"> </span></span>
+<span id="cb127-28"><a href="lrc-fit.html#cb127-28"></a><span class="st">  </span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">4</span>, <span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">1</span>, <span class="dv">1</span>])<span class="op">^</span><span class="dv">2</span><span class="op">-</span><span class="st"> </span></span>
+<span id="cb127-29"><a href="lrc-fit.html#cb127-29"></a><span class="st">  </span>(<span class="dv">4</span> <span class="op">*</span><span class="st"> </span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">1</span>, <span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">2</span>, <span class="dv">1</span>] <span class="op">*</span><span class="st"> </span></span>
+<span id="cb127-30"><a href="lrc-fit.html#cb127-30"></a><span class="st">  </span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">4</span>, <span class="dv">1</span>])))<span class="op">/</span></span>
+<span id="cb127-31"><a href="lrc-fit.html#cb127-31"></a><span class="st">  </span>(<span class="dv">2</span><span class="op">*</span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">1</span>,<span class="dv">1</span>]<span class="op">*</span>fitlrc_mrec<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>])</span>
 <span id="cb127-32"><a href="lrc-fit.html#cb127-32"></a></span>
-<span id="cb127-33"><a href="lrc-fit.html#cb127-33"></a>p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(light, <span class="kw">aes</span>(<span class="dt">x =</span> lrc_Q, <span class="dt">y =</span> lrc_A))</span>
-<span id="cb127-34"><a href="lrc-fit.html#cb127-34"></a></span>
-<span id="cb127-35"><a href="lrc-fit.html#cb127-35"></a>p1 &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span></span>
-<span id="cb127-36"><a href="lrc-fit.html#cb127-36"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">16</span>, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">color =</span> <span class="st">&quot;green&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb127-37"><a href="lrc-fit.html#cb127-37"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;nls&quot;</span>, <span class="dt">formula =</span> </span>
-<span id="cb127-38"><a href="lrc-fit.html#cb127-38"></a>   y <span class="op">~</span><span class="st"> </span>alpha <span class="op">*</span><span class="st"> </span>((<span class="dv">1</span> <span class="op">-</span><span class="st"> </span></span>
-<span id="cb127-39"><a href="lrc-fit.html#cb127-39"></a><span class="st">              </span>beta<span class="op">*</span>x)<span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>gamma <span class="op">*</span><span class="st"> </span>x)) <span class="op">*</span><span class="st"> </span>x <span class="op">-</span><span class="st"> </span>Rd, </span>
-<span id="cb127-40"><a href="lrc-fit.html#cb127-40"></a>    <span class="dt">se =</span> <span class="ot">FALSE</span>, <span class="dt">method.args =</span> <span class="kw">list</span>(</span>
-<span id="cb127-41"><a href="lrc-fit.html#cb127-41"></a>    <span class="dt">start =</span> <span class="kw">c</span>(<span class="dt">alpha =</span> <span class="fl">0.07</span>, <span class="dt">beta =</span> <span class="fl">0.00005</span>,</span>
-<span id="cb127-42"><a href="lrc-fit.html#cb127-42"></a>              <span class="dt">gamma=</span><span class="fl">0.004</span>, <span class="dt">Rd =</span> <span class="fl">0.2</span>), </span>
-<span id="cb127-43"><a href="lrc-fit.html#cb127-43"></a>    <span class="kw">aes</span>(<span class="dt">x =</span>lrc_Q, <span class="dt">y =</span> lrc_A, </span>
-<span id="cb127-44"><a href="lrc-fit.html#cb127-44"></a>    <span class="dt">color=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">size =</span> <span class="fl">1.2</span>))</span>
-<span id="cb127-45"><a href="lrc-fit.html#cb127-45"></a>  ) <span class="op">+</span></span>
-<span id="cb127-46"><a href="lrc-fit.html#cb127-46"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;photosynthetic rate  &quot;</span>, </span>
-<span id="cb127-47"><a href="lrc-fit.html#cb127-47"></a>          <span class="st">&quot;(&quot;</span>, mu, mol<span class="op">%.%</span>m<span class="op">^-</span><span class="dv">2</span><span class="op">%.%</span>s<span class="op">^-</span><span class="dv">1</span>, <span class="st">&quot;)&quot;</span>)), </span>
-<span id="cb127-48"><a href="lrc-fit.html#cb127-48"></a>       <span class="dt">x=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;PAR &quot;</span>, </span>
-<span id="cb127-49"><a href="lrc-fit.html#cb127-49"></a>           <span class="st">&quot;(&quot;</span>, mu, mol<span class="op">%.%</span>m<span class="op">^-</span><span class="dv">2</span><span class="op">%.%</span>s<span class="op">^-</span><span class="dv">1</span>, <span class="st">&quot;)&quot;</span>)))</span>
-<span id="cb127-50"><a href="lrc-fit.html#cb127-50"></a></span>
-<span id="cb127-51"><a href="lrc-fit.html#cb127-51"></a></span>
-<span id="cb127-52"><a href="lrc-fit.html#cb127-52"></a><span class="co"># 自定义坐标轴</span></span>
-<span id="cb127-53"><a href="lrc-fit.html#cb127-53"></a>p1 <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">2100</span>, <span class="dt">by =</span> <span class="dv">200</span>)) <span class="op">+</span><span class="st">  </span></span>
-<span id="cb127-54"><a href="lrc-fit.html#cb127-54"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span> <span class="kw">round</span>(light<span class="op">$</span>lrc_A)) <span class="op">+</span></span>
-<span id="cb127-55"><a href="lrc-fit.html#cb127-55"></a><span class="st">   </span><span class="kw">theme</span>(<span class="dt">axis.text.x  =</span> <span class="kw">element_text</span>(</span>
-<span id="cb127-56"><a href="lrc-fit.html#cb127-56"></a>    <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">angle=</span><span class="dv">30</span>, <span class="dt">vjust=</span><span class="fl">0.5</span>), </span>
-<span id="cb127-57"><a href="lrc-fit.html#cb127-57"></a>    <span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>),</span>
-<span id="cb127-58"><a href="lrc-fit.html#cb127-58"></a>    <span class="dt">axis.title.x =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&#39;bold&#39;</span>),</span>
-<span id="cb127-59"><a href="lrc-fit.html#cb127-59"></a>    <span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&#39;bold&#39;</span>)</span>
-<span id="cb127-60"><a href="lrc-fit.html#cb127-60"></a>  )</span></code></pre></div>
+<span id="cb127-33"><a href="lrc-fit.html#cb127-33"></a><span class="co">## 拟合图形</span></span>
+<span id="cb127-34"><a href="lrc-fit.html#cb127-34"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb127-35"><a href="lrc-fit.html#cb127-35"></a>light &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">lrc_Q =</span> lrc<span class="op">$</span>PARi, <span class="dt">lrc_A =</span> lrc<span class="op">$</span>Photo)</span>
+<span id="cb127-36"><a href="lrc-fit.html#cb127-36"></a></span>
+<span id="cb127-37"><a href="lrc-fit.html#cb127-37"></a>p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(light, <span class="kw">aes</span>(<span class="dt">x =</span> lrc_Q, <span class="dt">y =</span> lrc_A))</span>
+<span id="cb127-38"><a href="lrc-fit.html#cb127-38"></a></span>
+<span id="cb127-39"><a href="lrc-fit.html#cb127-39"></a>p1 &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span></span>
+<span id="cb127-40"><a href="lrc-fit.html#cb127-40"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">16</span>, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">color =</span> <span class="st">&quot;green&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb127-41"><a href="lrc-fit.html#cb127-41"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;nls&quot;</span>, <span class="dt">formula =</span> </span>
+<span id="cb127-42"><a href="lrc-fit.html#cb127-42"></a>   y <span class="op">~</span><span class="st"> </span>alpha <span class="op">*</span><span class="st"> </span>((<span class="dv">1</span> <span class="op">-</span><span class="st"> </span></span>
+<span id="cb127-43"><a href="lrc-fit.html#cb127-43"></a><span class="st">              </span>beta<span class="op">*</span>x)<span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>gamma <span class="op">*</span><span class="st"> </span>x)) <span class="op">*</span><span class="st"> </span>x <span class="op">-</span><span class="st"> </span>Rd, </span>
+<span id="cb127-44"><a href="lrc-fit.html#cb127-44"></a>    <span class="dt">se =</span> <span class="ot">FALSE</span>, <span class="dt">method.args =</span> <span class="kw">list</span>(</span>
+<span id="cb127-45"><a href="lrc-fit.html#cb127-45"></a>    <span class="dt">start =</span> <span class="kw">c</span>(<span class="dt">alpha =</span> <span class="fl">0.07</span>, <span class="dt">beta =</span> <span class="fl">0.00005</span>,</span>
+<span id="cb127-46"><a href="lrc-fit.html#cb127-46"></a>              <span class="dt">gamma=</span><span class="fl">0.004</span>, <span class="dt">Rd =</span> <span class="fl">0.2</span>), </span>
+<span id="cb127-47"><a href="lrc-fit.html#cb127-47"></a>    <span class="kw">aes</span>(<span class="dt">x =</span>lrc_Q, <span class="dt">y =</span> lrc_A, </span>
+<span id="cb127-48"><a href="lrc-fit.html#cb127-48"></a>    <span class="dt">color=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">size =</span> <span class="fl">1.2</span>))</span>
+<span id="cb127-49"><a href="lrc-fit.html#cb127-49"></a>  ) <span class="op">+</span></span>
+<span id="cb127-50"><a href="lrc-fit.html#cb127-50"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;photosynthetic rate  &quot;</span>, </span>
+<span id="cb127-51"><a href="lrc-fit.html#cb127-51"></a>          <span class="st">&quot;(&quot;</span>, mu, mol<span class="op">%.%</span>m<span class="op">^-</span><span class="dv">2</span><span class="op">%.%</span>s<span class="op">^-</span><span class="dv">1</span>, <span class="st">&quot;)&quot;</span>)), </span>
+<span id="cb127-52"><a href="lrc-fit.html#cb127-52"></a>       <span class="dt">x=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;PAR &quot;</span>, </span>
+<span id="cb127-53"><a href="lrc-fit.html#cb127-53"></a>           <span class="st">&quot;(&quot;</span>, mu, mol<span class="op">%.%</span>m<span class="op">^-</span><span class="dv">2</span><span class="op">%.%</span>s<span class="op">^-</span><span class="dv">1</span>, <span class="st">&quot;)&quot;</span>)))</span>
+<span id="cb127-54"><a href="lrc-fit.html#cb127-54"></a></span>
+<span id="cb127-55"><a href="lrc-fit.html#cb127-55"></a></span>
+<span id="cb127-56"><a href="lrc-fit.html#cb127-56"></a><span class="co"># 自定义坐标轴</span></span>
+<span id="cb127-57"><a href="lrc-fit.html#cb127-57"></a>p1 <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">2100</span>, <span class="dt">by =</span> <span class="dv">200</span>)) <span class="op">+</span><span class="st">  </span></span>
+<span id="cb127-58"><a href="lrc-fit.html#cb127-58"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span> <span class="kw">round</span>(light<span class="op">$</span>lrc_A)) <span class="op">+</span></span>
+<span id="cb127-59"><a href="lrc-fit.html#cb127-59"></a><span class="st">   </span><span class="kw">theme</span>(<span class="dt">axis.text.x  =</span> <span class="kw">element_text</span>(</span>
+<span id="cb127-60"><a href="lrc-fit.html#cb127-60"></a>    <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">angle=</span><span class="dv">30</span>, <span class="dt">vjust=</span><span class="fl">0.5</span>), </span>
+<span id="cb127-61"><a href="lrc-fit.html#cb127-61"></a>    <span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>),</span>
+<span id="cb127-62"><a href="lrc-fit.html#cb127-62"></a>    <span class="dt">axis.title.x =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&#39;bold&#39;</span>),</span>
+<span id="cb127-63"><a href="lrc-fit.html#cb127-63"></a>    <span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb127-64"><a href="lrc-fit.html#cb127-64"></a>  )</span></code></pre></div>
 <div class="figure"><span id="fig:mrecr"></span>
 <img src="bookdown_files/figure-html/mrecr-1.png" alt="直角双曲线修正模型拟合" width="672" />
 <p class="caption">
