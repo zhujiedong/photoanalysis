@@ -2,7 +2,9 @@
 
 ## 数据格式 {#data6800}
 
-LI-6800 的数据前处理同 LI-6400 相同，如表 \@ref(tab:head6800) 所示的样式。
+~~LI-6800 的数据前处理同 LI-6400 相同，如表 \@ref(tab:head6800) 所示的样式。~~
+
+并非此处格式无效，只是有更简洁的数据读取方式，见 \@ref(excel-recompute-68)。
 
 ```{r, head6800, echo=FALSE}
 style1 <- read.csv("./data/aci6800.csv")

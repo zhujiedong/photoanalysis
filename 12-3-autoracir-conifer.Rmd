@@ -48,7 +48,7 @@ pattern_dark        = "^(dark)+.xls",
 
 ### 拟合过程 {#conifer-racir-fit}
 
-作何给出了详细的代码和数据，此处不再重复和演示，请参考：
+作者给出了详细的代码和数据，此处不再重复和演示，请参考：
 
 [github 演示](https://github.com/ManuelLamothe/RapidACi)
 

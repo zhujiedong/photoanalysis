@@ -8,6 +8,10 @@
 library("plantecophys")
 
 #准备数据 ------------------------------------------------------------------
+
+#-----------------------------------------------------
+# 也可以使用上文中的 xls_read() 来直接读取 excel 数据
+#-----------------------------------------------------
 empty_uc <- read.csv("./data/racir-csv/uncorr_emp500.csv")
 leaf_uc <- read.csv("./data/racir-csv/uncorr_leaf500.csv")
 aci <- read.csv("./data/racir-csv/aci_ex.csv")

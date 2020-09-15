@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2020-08-25" />
+<meta name="date" content="2020-09-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -319,7 +319,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">第 10 章</span> LI-6800 的数据分析</h1>
 <div id="data6800" class="section level2" number="10.1">
 <h2><span class="header-section-number">10.1</span> 数据格式</h2>
-<p>LI-6800 的数据前处理同 LI-6400 相同，如表 <a href="anay-6800.html#tab:head6800">10.1</a> 所示的样式。</p>
+<p><del>LI-6800 的数据前处理同 LI-6400 相同，如表 <a href="anay-6800.html#tab:head6800">10.1</a> 所示的样式。</del></p>
+<p>并非此处格式无效，只是有更简洁的数据读取方式，见 <a href="batch-question.html#excel-recompute-68">2.4.2.2</a>。</p>
 <table>
 <caption><span id="tab:head6800">表 10.1: </span>推荐 LI-6800 整理后数据样式</caption>
 <thead>
@@ -643,7 +644,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 </div>
 <div id="conifer-racir-fit" class="section level3" number="10.7.2">
 <h3><span class="header-section-number">10.7.2</span> 拟合过程</h3>
-<p>作何给出了详细的代码和数据，此处不再重复和演示，请参考：</p>
+<p>作者给出了详细的代码和数据，此处不再重复和演示，请参考：</p>
 <p><a href="https://github.com/ManuelLamothe/RapidACi">github 演示</a></p>
 <p><a href="https://www.frontiersin.org/articles/10.3389/fpls.2019.01276/full#supplementary-material">发表文章的附加材料</a></p>
 <p><strong>注：今天测试了他附加材料的代码，有可能遇到问题，或者有一些注意事项，请参考下面的代码（本地已经有数据了，因此并未执行下载的代码，改为本地读取）。</strong></p>
@@ -727,98 +728,102 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <span id="cb166-3"><a href="anay-6800.html#cb166-3"></a><span class="kw">library</span>(<span class="st">&quot;plantecophys&quot;</span>)</span>
 <span id="cb166-4"><a href="anay-6800.html#cb166-4"></a></span>
 <span id="cb166-5"><a href="anay-6800.html#cb166-5"></a><span class="co">#准备数据 ------------------------------------------------------------------</span></span>
-<span id="cb166-6"><a href="anay-6800.html#cb166-6"></a>empty_uc &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/racir-csv/uncorr_emp500.csv&quot;</span>)</span>
-<span id="cb166-7"><a href="anay-6800.html#cb166-7"></a>leaf_uc &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/racir-csv/uncorr_leaf500.csv&quot;</span>)</span>
-<span id="cb166-8"><a href="anay-6800.html#cb166-8"></a>aci &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/racir-csv/aci_ex.csv&quot;</span>)</span>
-<span id="cb166-9"><a href="anay-6800.html#cb166-9"></a></span>
-<span id="cb166-10"><a href="anay-6800.html#cb166-10"></a><span class="co"># 防止读入空白行</span></span>
-<span id="cb166-11"><a href="anay-6800.html#cb166-11"></a>empty_uc &lt;-<span class="st"> </span><span class="kw">subset</span>(empty_uc, obs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span>
-<span id="cb166-12"><a href="anay-6800.html#cb166-12"></a>leaf_uc &lt;-<span class="st"> </span><span class="kw">subset</span>(leaf_uc , obs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span>
-<span id="cb166-13"><a href="anay-6800.html#cb166-13"></a>aci &lt;-<span class="st"> </span><span class="kw">subset</span>(aci, obs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span>
-<span id="cb166-14"><a href="anay-6800.html#cb166-14"></a></span>
-<span id="cb166-15"><a href="anay-6800.html#cb166-15"></a><span class="co"># 空叶室校准的系数计算 --------------------------------------------------------------</span></span>
-<span id="cb166-16"><a href="anay-6800.html#cb166-16"></a></span>
-<span id="cb166-17"><a href="anay-6800.html#cb166-17"></a><span class="co"># 观察空叶室未校准数据reference对A的图形</span></span>
-<span id="cb166-18"><a href="anay-6800.html#cb166-18"></a><span class="kw">plot</span>(empty_uc<span class="op">$</span>CO2_r, empty_uc<span class="op">$</span>A)</span>
-<span id="cb166-19"><a href="anay-6800.html#cb166-19"></a><span class="co"># 选取线性部分用于校准</span></span>
-<span id="cb166-20"><a href="anay-6800.html#cb166-20"></a><span class="kw">locator</span>()</span>
-<span id="cb166-21"><a href="anay-6800.html#cb166-21"></a></span>
-<span id="cb166-22"><a href="anay-6800.html#cb166-22"></a><span class="co"># 执行locator命令后，在上图中的目标位置选点，</span></span>
-<span id="cb166-23"><a href="anay-6800.html#cb166-23"></a><span class="co"># 选好后按 esc 可以返回所选点的坐标（选点即为在</span></span>
-<span id="cb166-24"><a href="anay-6800.html#cb166-24"></a><span class="co"># 预期位置鼠标单击）</span></span>
-<span id="cb166-25"><a href="anay-6800.html#cb166-25"></a><span class="co"># 根据上面的点，利用二氧化碳的值过滤掉不需要的数据</span></span>
-<span id="cb166-26"><a href="anay-6800.html#cb166-26"></a><span class="co"># 只要在线性范围内选点，拟合结果相差很小</span></span>
-<span id="cb166-27"><a href="anay-6800.html#cb166-27"></a></span>
-<span id="cb166-28"><a href="anay-6800.html#cb166-28"></a>empty_ct &lt;-<span class="st"> </span>empty_uc[<span class="kw">which</span>(empty_uc<span class="op">$</span>CO2_r <span class="op">&gt;</span></span>
-<span id="cb166-29"><a href="anay-6800.html#cb166-29"></a><span class="st">  </span><span class="fl">45.28</span> <span class="op">&amp;</span><span class="st"> </span>empty_uc<span class="op">$</span>CO2_r <span class="op">&lt;</span><span class="st"> </span><span class="fl">459.12</span>), ]</span>
-<span id="cb166-30"><a href="anay-6800.html#cb166-30"></a><span class="kw">plot</span>(empty_ct<span class="op">$</span>CO2_r, empty_ct<span class="op">$</span>A)</span>
+<span id="cb166-6"><a href="anay-6800.html#cb166-6"></a></span>
+<span id="cb166-7"><a href="anay-6800.html#cb166-7"></a><span class="co">#-----------------------------------------------------</span></span>
+<span id="cb166-8"><a href="anay-6800.html#cb166-8"></a><span class="co"># 也可以使用上文中的 xls_read() 来直接读取 excel 数据</span></span>
+<span id="cb166-9"><a href="anay-6800.html#cb166-9"></a><span class="co">#-----------------------------------------------------</span></span>
+<span id="cb166-10"><a href="anay-6800.html#cb166-10"></a>empty_uc &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/racir-csv/uncorr_emp500.csv&quot;</span>)</span>
+<span id="cb166-11"><a href="anay-6800.html#cb166-11"></a>leaf_uc &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/racir-csv/uncorr_leaf500.csv&quot;</span>)</span>
+<span id="cb166-12"><a href="anay-6800.html#cb166-12"></a>aci &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/racir-csv/aci_ex.csv&quot;</span>)</span>
+<span id="cb166-13"><a href="anay-6800.html#cb166-13"></a></span>
+<span id="cb166-14"><a href="anay-6800.html#cb166-14"></a><span class="co"># 防止读入空白行</span></span>
+<span id="cb166-15"><a href="anay-6800.html#cb166-15"></a>empty_uc &lt;-<span class="st"> </span><span class="kw">subset</span>(empty_uc, obs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span>
+<span id="cb166-16"><a href="anay-6800.html#cb166-16"></a>leaf_uc &lt;-<span class="st"> </span><span class="kw">subset</span>(leaf_uc , obs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span>
+<span id="cb166-17"><a href="anay-6800.html#cb166-17"></a>aci &lt;-<span class="st"> </span><span class="kw">subset</span>(aci, obs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span>
+<span id="cb166-18"><a href="anay-6800.html#cb166-18"></a></span>
+<span id="cb166-19"><a href="anay-6800.html#cb166-19"></a><span class="co"># 空叶室校准的系数计算 --------------------------------------------------------------</span></span>
+<span id="cb166-20"><a href="anay-6800.html#cb166-20"></a></span>
+<span id="cb166-21"><a href="anay-6800.html#cb166-21"></a><span class="co"># 观察空叶室未校准数据reference对A的图形</span></span>
+<span id="cb166-22"><a href="anay-6800.html#cb166-22"></a><span class="kw">plot</span>(empty_uc<span class="op">$</span>CO2_r, empty_uc<span class="op">$</span>A)</span>
+<span id="cb166-23"><a href="anay-6800.html#cb166-23"></a><span class="co"># 选取线性部分用于校准</span></span>
+<span id="cb166-24"><a href="anay-6800.html#cb166-24"></a><span class="kw">locator</span>()</span>
+<span id="cb166-25"><a href="anay-6800.html#cb166-25"></a></span>
+<span id="cb166-26"><a href="anay-6800.html#cb166-26"></a><span class="co"># 执行locator命令后，在上图中的目标位置选点，</span></span>
+<span id="cb166-27"><a href="anay-6800.html#cb166-27"></a><span class="co"># 选好后按 esc 可以返回所选点的坐标（选点即为在</span></span>
+<span id="cb166-28"><a href="anay-6800.html#cb166-28"></a><span class="co"># 预期位置鼠标单击）</span></span>
+<span id="cb166-29"><a href="anay-6800.html#cb166-29"></a><span class="co"># 根据上面的点，利用二氧化碳的值过滤掉不需要的数据</span></span>
+<span id="cb166-30"><a href="anay-6800.html#cb166-30"></a><span class="co"># 只要在线性范围内选点，拟合结果相差很小</span></span>
 <span id="cb166-31"><a href="anay-6800.html#cb166-31"></a></span>
-<span id="cb166-32"><a href="anay-6800.html#cb166-32"></a><span class="co"># 采用 1~5 次多项式分别拟合</span></span>
-<span id="cb166-33"><a href="anay-6800.html#cb166-33"></a>cal1st &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span>CO2_r, <span class="dt">data =</span> empty_ct)</span>
-<span id="cb166-34"><a href="anay-6800.html#cb166-34"></a>cal2nd &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(CO2_r, <span class="dv">2</span>), <span class="dt">data =</span> empty_ct)</span>
-<span id="cb166-35"><a href="anay-6800.html#cb166-35"></a>cal3rd &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(CO2_r, <span class="dv">3</span>), <span class="dt">data =</span> empty_ct)</span>
-<span id="cb166-36"><a href="anay-6800.html#cb166-36"></a>cal4th &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(CO2_r, <span class="dv">4</span>), <span class="dt">data =</span> empty_ct)</span>
-<span id="cb166-37"><a href="anay-6800.html#cb166-37"></a>cal5th &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(CO2_r, <span class="dv">5</span>), <span class="dt">data =</span> empty_ct)</span>
-<span id="cb166-38"><a href="anay-6800.html#cb166-38"></a><span class="co"># 利用 BIC 找出最合理的校准方程</span></span>
-<span id="cb166-39"><a href="anay-6800.html#cb166-39"></a>bics &lt;-<span class="st"> </span><span class="kw">BIC</span>(cal1st, cal2nd, cal3rd, cal4th, cal5th)</span>
-<span id="cb166-40"><a href="anay-6800.html#cb166-40"></a><span class="co"># noquote也就是没引号，成为名字</span></span>
-<span id="cb166-41"><a href="anay-6800.html#cb166-41"></a>best &lt;-<span class="st"> </span><span class="kw">noquote</span>(<span class="kw">rownames</span>(bics)[bics<span class="op">$</span>BIC <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(bics<span class="op">$</span>BIC)])</span>
-<span id="cb166-42"><a href="anay-6800.html#cb166-42"></a>best</span>
-<span id="cb166-43"><a href="anay-6800.html#cb166-43"></a></span>
-<span id="cb166-44"><a href="anay-6800.html#cb166-44"></a></span>
-<span id="cb166-45"><a href="anay-6800.html#cb166-45"></a><span class="co"># 校准带叶片测量的数据 --------------------------------------------------------------</span></span>
-<span id="cb166-46"><a href="anay-6800.html#cb166-46"></a></span>
-<span id="cb166-47"><a href="anay-6800.html#cb166-47"></a>leaf_uc<span class="op">$</span>A &lt;-<span class="st"> </span>leaf_uc<span class="op">$</span>A <span class="op">-</span><span class="st"> </span><span class="kw">predict</span>(cal4th, leaf_uc)</span>
-<span id="cb166-48"><a href="anay-6800.html#cb166-48"></a>leaf_uc<span class="op">$</span>Ci &lt;-<span class="st"> </span>((leaf_uc<span class="op">$</span>gtc <span class="op">-</span><span class="st"> </span>leaf_uc<span class="op">$</span>E <span class="op">/</span><span class="st"> </span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span>leaf_uc<span class="op">$</span>CO2_s <span class="op">-</span></span>
-<span id="cb166-49"><a href="anay-6800.html#cb166-49"></a><span class="st">                 </span>leaf_uc<span class="op">$</span>A) <span class="op">/</span><span class="st"> </span>(leaf_uc<span class="op">$</span>gtc <span class="op">+</span><span class="st"> </span>leaf_uc<span class="op">$</span>E <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</span>
+<span id="cb166-32"><a href="anay-6800.html#cb166-32"></a>empty_ct &lt;-<span class="st"> </span>empty_uc[<span class="kw">which</span>(empty_uc<span class="op">$</span>CO2_r <span class="op">&gt;</span></span>
+<span id="cb166-33"><a href="anay-6800.html#cb166-33"></a><span class="st">  </span><span class="fl">45.28</span> <span class="op">&amp;</span><span class="st"> </span>empty_uc<span class="op">$</span>CO2_r <span class="op">&lt;</span><span class="st"> </span><span class="fl">459.12</span>), ]</span>
+<span id="cb166-34"><a href="anay-6800.html#cb166-34"></a><span class="kw">plot</span>(empty_ct<span class="op">$</span>CO2_r, empty_ct<span class="op">$</span>A)</span>
+<span id="cb166-35"><a href="anay-6800.html#cb166-35"></a></span>
+<span id="cb166-36"><a href="anay-6800.html#cb166-36"></a><span class="co"># 采用 1~5 次多项式分别拟合</span></span>
+<span id="cb166-37"><a href="anay-6800.html#cb166-37"></a>cal1st &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span>CO2_r, <span class="dt">data =</span> empty_ct)</span>
+<span id="cb166-38"><a href="anay-6800.html#cb166-38"></a>cal2nd &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(CO2_r, <span class="dv">2</span>), <span class="dt">data =</span> empty_ct)</span>
+<span id="cb166-39"><a href="anay-6800.html#cb166-39"></a>cal3rd &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(CO2_r, <span class="dv">3</span>), <span class="dt">data =</span> empty_ct)</span>
+<span id="cb166-40"><a href="anay-6800.html#cb166-40"></a>cal4th &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(CO2_r, <span class="dv">4</span>), <span class="dt">data =</span> empty_ct)</span>
+<span id="cb166-41"><a href="anay-6800.html#cb166-41"></a>cal5th &lt;-<span class="st"> </span><span class="kw">lm</span>(A <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(CO2_r, <span class="dv">5</span>), <span class="dt">data =</span> empty_ct)</span>
+<span id="cb166-42"><a href="anay-6800.html#cb166-42"></a><span class="co"># 利用 BIC 找出最合理的校准方程</span></span>
+<span id="cb166-43"><a href="anay-6800.html#cb166-43"></a>bics &lt;-<span class="st"> </span><span class="kw">BIC</span>(cal1st, cal2nd, cal3rd, cal4th, cal5th)</span>
+<span id="cb166-44"><a href="anay-6800.html#cb166-44"></a><span class="co"># noquote也就是没引号，成为名字</span></span>
+<span id="cb166-45"><a href="anay-6800.html#cb166-45"></a>best &lt;-<span class="st"> </span><span class="kw">noquote</span>(<span class="kw">rownames</span>(bics)[bics<span class="op">$</span>BIC <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(bics<span class="op">$</span>BIC)])</span>
+<span id="cb166-46"><a href="anay-6800.html#cb166-46"></a>best</span>
+<span id="cb166-47"><a href="anay-6800.html#cb166-47"></a></span>
+<span id="cb166-48"><a href="anay-6800.html#cb166-48"></a></span>
+<span id="cb166-49"><a href="anay-6800.html#cb166-49"></a><span class="co"># 校准带叶片测量的数据 --------------------------------------------------------------</span></span>
 <span id="cb166-50"><a href="anay-6800.html#cb166-50"></a></span>
-<span id="cb166-51"><a href="anay-6800.html#cb166-51"></a><span class="co"># 对校准后的数据进行作图，查看校准效果</span></span>
-<span id="cb166-52"><a href="anay-6800.html#cb166-52"></a><span class="kw">plot</span>(leaf_uc<span class="op">$</span>CO2_r,</span>
-<span id="cb166-53"><a href="anay-6800.html#cb166-53"></a>     leaf_uc<span class="op">$</span>A,</span>
-<span id="cb166-54"><a href="anay-6800.html#cb166-54"></a>     <span class="dt">pch =</span> <span class="dv">2</span>,</span>
-<span id="cb166-55"><a href="anay-6800.html#cb166-55"></a>     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>, <span class="dv">40</span>))</span>
-<span id="cb166-56"><a href="anay-6800.html#cb166-56"></a></span>
-<span id="cb166-57"><a href="anay-6800.html#cb166-57"></a><span class="co"># 选取带叶片测量的有效数据的范围</span></span>
-<span id="cb166-58"><a href="anay-6800.html#cb166-58"></a><span class="kw">locator</span>()</span>
-<span id="cb166-59"><a href="anay-6800.html#cb166-59"></a></span>
-<span id="cb166-60"><a href="anay-6800.html#cb166-60"></a>leaf_ct &lt;-<span class="st"> </span>leaf_uc[<span class="kw">which</span>(leaf_uc<span class="op">$</span>CO2_r <span class="op">&gt;</span><span class="st"> </span><span class="fl">13.6</span> <span class="op">&amp;</span></span>
-<span id="cb166-61"><a href="anay-6800.html#cb166-61"></a><span class="st">   </span>leaf_uc<span class="op">$</span>CO2_r <span class="op">&lt;</span><span class="st"> </span><span class="dv">471</span>), ]</span>
-<span id="cb166-62"><a href="anay-6800.html#cb166-62"></a><span class="kw">plot</span>(leaf_uc<span class="op">$</span>CO2_r, leaf_uc<span class="op">$</span>A)</span>
+<span id="cb166-51"><a href="anay-6800.html#cb166-51"></a>leaf_uc<span class="op">$</span>A &lt;-<span class="st"> </span>leaf_uc<span class="op">$</span>A <span class="op">-</span><span class="st"> </span><span class="kw">predict</span>(cal4th, leaf_uc)</span>
+<span id="cb166-52"><a href="anay-6800.html#cb166-52"></a>leaf_uc<span class="op">$</span>Ci &lt;-<span class="st"> </span>((leaf_uc<span class="op">$</span>gtc <span class="op">-</span><span class="st"> </span>leaf_uc<span class="op">$</span>E <span class="op">/</span><span class="st"> </span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span>leaf_uc<span class="op">$</span>CO2_s <span class="op">-</span></span>
+<span id="cb166-53"><a href="anay-6800.html#cb166-53"></a><span class="st">                 </span>leaf_uc<span class="op">$</span>A) <span class="op">/</span><span class="st"> </span>(leaf_uc<span class="op">$</span>gtc <span class="op">+</span><span class="st"> </span>leaf_uc<span class="op">$</span>E <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</span>
+<span id="cb166-54"><a href="anay-6800.html#cb166-54"></a></span>
+<span id="cb166-55"><a href="anay-6800.html#cb166-55"></a><span class="co"># 对校准后的数据进行作图，查看校准效果</span></span>
+<span id="cb166-56"><a href="anay-6800.html#cb166-56"></a><span class="kw">plot</span>(leaf_uc<span class="op">$</span>CO2_r,</span>
+<span id="cb166-57"><a href="anay-6800.html#cb166-57"></a>     leaf_uc<span class="op">$</span>A,</span>
+<span id="cb166-58"><a href="anay-6800.html#cb166-58"></a>     <span class="dt">pch =</span> <span class="dv">2</span>,</span>
+<span id="cb166-59"><a href="anay-6800.html#cb166-59"></a>     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>, <span class="dv">40</span>))</span>
+<span id="cb166-60"><a href="anay-6800.html#cb166-60"></a></span>
+<span id="cb166-61"><a href="anay-6800.html#cb166-61"></a><span class="co"># 选取带叶片测量的有效数据的范围</span></span>
+<span id="cb166-62"><a href="anay-6800.html#cb166-62"></a><span class="kw">locator</span>()</span>
 <span id="cb166-63"><a href="anay-6800.html#cb166-63"></a></span>
-<span id="cb166-64"><a href="anay-6800.html#cb166-64"></a></span>
-<span id="cb166-65"><a href="anay-6800.html#cb166-65"></a><span class="co"># 拟合 ----------------------------------------------------------------------</span></span>
-<span id="cb166-66"><a href="anay-6800.html#cb166-66"></a>racir &lt;-<span class="st"> </span><span class="kw">fitaci</span>(</span>
-<span id="cb166-67"><a href="anay-6800.html#cb166-67"></a>  leaf_ct,</span>
-<span id="cb166-68"><a href="anay-6800.html#cb166-68"></a>  <span class="dt">varnames =</span></span>
-<span id="cb166-69"><a href="anay-6800.html#cb166-69"></a>    <span class="kw">list</span>(</span>
-<span id="cb166-70"><a href="anay-6800.html#cb166-70"></a>      <span class="dt">ALEAF =</span> <span class="st">&quot;A&quot;</span>,</span>
-<span id="cb166-71"><a href="anay-6800.html#cb166-71"></a>      <span class="dt">Tleaf =</span> <span class="st">&quot;Tleaf&quot;</span>,</span>
-<span id="cb166-72"><a href="anay-6800.html#cb166-72"></a>      <span class="dt">Ci =</span> <span class="st">&quot;Ci&quot;</span>,</span>
-<span id="cb166-73"><a href="anay-6800.html#cb166-73"></a>      <span class="dt">PPFD  =</span> <span class="st">&quot;Qin&quot;</span>,</span>
-<span id="cb166-74"><a href="anay-6800.html#cb166-74"></a>      <span class="dt">Rd =</span> <span class="st">&quot;Rd&quot;</span></span>
-<span id="cb166-75"><a href="anay-6800.html#cb166-75"></a>    ),</span>
-<span id="cb166-76"><a href="anay-6800.html#cb166-76"></a>  <span class="dt">Patm =</span> <span class="fl">84.09</span></span>
-<span id="cb166-77"><a href="anay-6800.html#cb166-77"></a>)</span>
-<span id="cb166-78"><a href="anay-6800.html#cb166-78"></a></span>
-<span id="cb166-79"><a href="anay-6800.html#cb166-79"></a>slow &lt;-<span class="st"> </span><span class="kw">fitaci</span>(</span>
-<span id="cb166-80"><a href="anay-6800.html#cb166-80"></a>  aci,</span>
-<span id="cb166-81"><a href="anay-6800.html#cb166-81"></a>  <span class="dt">varnames =</span></span>
-<span id="cb166-82"><a href="anay-6800.html#cb166-82"></a>    <span class="kw">list</span>(</span>
-<span id="cb166-83"><a href="anay-6800.html#cb166-83"></a>      <span class="dt">ALEAF =</span> <span class="st">&quot;A&quot;</span>,</span>
-<span id="cb166-84"><a href="anay-6800.html#cb166-84"></a>      <span class="dt">Tleaf =</span> <span class="st">&quot;Tleaf&quot;</span>,</span>
-<span id="cb166-85"><a href="anay-6800.html#cb166-85"></a>      <span class="dt">Ci =</span> <span class="st">&quot;Ci&quot;</span>,</span>
-<span id="cb166-86"><a href="anay-6800.html#cb166-86"></a>      <span class="dt">PPFD  =</span> <span class="st">&quot;Qin&quot;</span>,</span>
-<span id="cb166-87"><a href="anay-6800.html#cb166-87"></a>      <span class="dt">Rd =</span> <span class="st">&quot;Rd&quot;</span></span>
-<span id="cb166-88"><a href="anay-6800.html#cb166-88"></a>    ),</span>
-<span id="cb166-89"><a href="anay-6800.html#cb166-89"></a>  <span class="dt">Patm =</span> <span class="fl">84.09</span></span>
-<span id="cb166-90"><a href="anay-6800.html#cb166-90"></a>)</span>
-<span id="cb166-91"><a href="anay-6800.html#cb166-91"></a></span>
-<span id="cb166-92"><a href="anay-6800.html#cb166-92"></a><span class="co"># 查看拟合数据</span></span>
-<span id="cb166-93"><a href="anay-6800.html#cb166-93"></a>racir<span class="op">$</span>pars</span>
-<span id="cb166-94"><a href="anay-6800.html#cb166-94"></a>slow<span class="op">$</span>pars</span>
+<span id="cb166-64"><a href="anay-6800.html#cb166-64"></a>leaf_ct &lt;-<span class="st"> </span>leaf_uc[<span class="kw">which</span>(leaf_uc<span class="op">$</span>CO2_r <span class="op">&gt;</span><span class="st"> </span><span class="fl">13.6</span> <span class="op">&amp;</span></span>
+<span id="cb166-65"><a href="anay-6800.html#cb166-65"></a><span class="st">   </span>leaf_uc<span class="op">$</span>CO2_r <span class="op">&lt;</span><span class="st"> </span><span class="dv">471</span>), ]</span>
+<span id="cb166-66"><a href="anay-6800.html#cb166-66"></a><span class="kw">plot</span>(leaf_uc<span class="op">$</span>CO2_r, leaf_uc<span class="op">$</span>A)</span>
+<span id="cb166-67"><a href="anay-6800.html#cb166-67"></a></span>
+<span id="cb166-68"><a href="anay-6800.html#cb166-68"></a></span>
+<span id="cb166-69"><a href="anay-6800.html#cb166-69"></a><span class="co"># 拟合 ----------------------------------------------------------------------</span></span>
+<span id="cb166-70"><a href="anay-6800.html#cb166-70"></a>racir &lt;-<span class="st"> </span><span class="kw">fitaci</span>(</span>
+<span id="cb166-71"><a href="anay-6800.html#cb166-71"></a>  leaf_ct,</span>
+<span id="cb166-72"><a href="anay-6800.html#cb166-72"></a>  <span class="dt">varnames =</span></span>
+<span id="cb166-73"><a href="anay-6800.html#cb166-73"></a>    <span class="kw">list</span>(</span>
+<span id="cb166-74"><a href="anay-6800.html#cb166-74"></a>      <span class="dt">ALEAF =</span> <span class="st">&quot;A&quot;</span>,</span>
+<span id="cb166-75"><a href="anay-6800.html#cb166-75"></a>      <span class="dt">Tleaf =</span> <span class="st">&quot;Tleaf&quot;</span>,</span>
+<span id="cb166-76"><a href="anay-6800.html#cb166-76"></a>      <span class="dt">Ci =</span> <span class="st">&quot;Ci&quot;</span>,</span>
+<span id="cb166-77"><a href="anay-6800.html#cb166-77"></a>      <span class="dt">PPFD  =</span> <span class="st">&quot;Qin&quot;</span>,</span>
+<span id="cb166-78"><a href="anay-6800.html#cb166-78"></a>      <span class="dt">Rd =</span> <span class="st">&quot;Rd&quot;</span></span>
+<span id="cb166-79"><a href="anay-6800.html#cb166-79"></a>    ),</span>
+<span id="cb166-80"><a href="anay-6800.html#cb166-80"></a>  <span class="dt">Patm =</span> <span class="fl">84.09</span></span>
+<span id="cb166-81"><a href="anay-6800.html#cb166-81"></a>)</span>
+<span id="cb166-82"><a href="anay-6800.html#cb166-82"></a></span>
+<span id="cb166-83"><a href="anay-6800.html#cb166-83"></a>slow &lt;-<span class="st"> </span><span class="kw">fitaci</span>(</span>
+<span id="cb166-84"><a href="anay-6800.html#cb166-84"></a>  aci,</span>
+<span id="cb166-85"><a href="anay-6800.html#cb166-85"></a>  <span class="dt">varnames =</span></span>
+<span id="cb166-86"><a href="anay-6800.html#cb166-86"></a>    <span class="kw">list</span>(</span>
+<span id="cb166-87"><a href="anay-6800.html#cb166-87"></a>      <span class="dt">ALEAF =</span> <span class="st">&quot;A&quot;</span>,</span>
+<span id="cb166-88"><a href="anay-6800.html#cb166-88"></a>      <span class="dt">Tleaf =</span> <span class="st">&quot;Tleaf&quot;</span>,</span>
+<span id="cb166-89"><a href="anay-6800.html#cb166-89"></a>      <span class="dt">Ci =</span> <span class="st">&quot;Ci&quot;</span>,</span>
+<span id="cb166-90"><a href="anay-6800.html#cb166-90"></a>      <span class="dt">PPFD  =</span> <span class="st">&quot;Qin&quot;</span>,</span>
+<span id="cb166-91"><a href="anay-6800.html#cb166-91"></a>      <span class="dt">Rd =</span> <span class="st">&quot;Rd&quot;</span></span>
+<span id="cb166-92"><a href="anay-6800.html#cb166-92"></a>    ),</span>
+<span id="cb166-93"><a href="anay-6800.html#cb166-93"></a>  <span class="dt">Patm =</span> <span class="fl">84.09</span></span>
+<span id="cb166-94"><a href="anay-6800.html#cb166-94"></a>)</span>
 <span id="cb166-95"><a href="anay-6800.html#cb166-95"></a></span>
-<span id="cb166-96"><a href="anay-6800.html#cb166-96"></a><span class="co"># 对快速曲线作图拟合结果进行查看</span></span>
-<span id="cb166-97"><a href="anay-6800.html#cb166-97"></a><span class="kw">plot</span>(racir, <span class="dt">linecols =</span> <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>))</span></code></pre></div>
+<span id="cb166-96"><a href="anay-6800.html#cb166-96"></a><span class="co"># 查看拟合数据</span></span>
+<span id="cb166-97"><a href="anay-6800.html#cb166-97"></a>racir<span class="op">$</span>pars</span>
+<span id="cb166-98"><a href="anay-6800.html#cb166-98"></a>slow<span class="op">$</span>pars</span>
+<span id="cb166-99"><a href="anay-6800.html#cb166-99"></a></span>
+<span id="cb166-100"><a href="anay-6800.html#cb166-100"></a><span class="co"># 对快速曲线作图拟合结果进行查看</span></span>
+<span id="cb166-101"><a href="anay-6800.html#cb166-101"></a><span class="kw">plot</span>(racir, <span class="dt">linecols =</span> <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>))</span></code></pre></div>
 <p>注意，注意数据表头的大小写，此处代码中，为处理数据的方便，我更改了大小写，分析自己的数据时需要注意。</p>
 
 </div>
