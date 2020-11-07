@@ -72,27 +72,50 @@ plot(x$CO2_r, x$A)
 
 ### 实现方法 2 {#racir_pkg_2}
 
-以上的实现方法是基于肉眼判断，删除不需要的数据，自动化程度较低，同时不适合这样的方法，例如，在 400 ppm 的浓度下达到光合稳定状态后，直接开始 RACiR 从 5 到 1505 这样的变化，因为浓度先下降后上升，曲线会出现下面的形状：
+以上的实现方法是基于肉眼判断，删除不需要的数据，自动化程度较低，同时不适合 @Coursolle12019 这样的方法:
 
 ```{r, racir-steady-start, echo = FALSE, fig.cap="稳定后从低到高的 RACiR 实验数据"}
 rawleaf <- xls_read("data/Fast.xlsx")
-plot(A ~ CO2_r,
-     data = rawleaf,
-     xlab = "reference IRGA readings",
-     ylab = "uncorrected A",
-     pch = 21,
-     col = ifelse(rawleaf$CO2_r <420, "red", "blue"))
-abline(h = 13, col = "red", lwd = 0.8, lty = 3)
+plot(
+  A ~ CO2_r,
+  data = rawleaf,
+  xlab = "reference IRGA readings",
+  ylab = "uncorrected A",
+  pch = 21,
+  col = ifelse(rawleaf$CO2_r < 420, "red", "blue")
+)
+abline(h = 13,
+       col = "red",
+       lwd = 0.8,
+       lty = 3)
+polygon(
+  x = c(23, 420, 420, 23),
+  y = c(-23.54, 13.7, -23.54,  -23.54),
+  border = "red",
+  lwd = 3
+)
 ```
-直接批量删除是不可取的。容易出错或者残留无效数据，针对这个情况，今天花了点时间，专门写了几个新的函数，创意基于 [ManuelLamothe
-/RapidACi](https://github.com/ManuelLamothe/RapidACi) 的方法（数据同样来自于此），做了一些修改，并抛弃了 `tidyverse` 的方式，以减少依赖，以及可能的软件包升级导致的无法运行。主要的修改：
+直接批量删除是不可取的。容易出错或者残留无效数据，针对这个情况我进行的修改和测试为：使用 BP 进行测量，目前我已经完成 BP 相关的程序，本节的示例则是基于我实测的验证数据来进行（相关测试已经录好视频，可能后面公司公众号会推，如有 BP 自动测量 RACiR 的需要，请跟我们公司联系）。这个程序也是基于 @Coursolle12019 的方法，测量步骤和修改如下：
+
+
+1. 在接近外界的 $CO_2$ 浓度下进行诱导，控制 reference 的 $CO_2$ 420 ppm ，控制 $H_20$ 为 20 $mmol \cdot mol^{-1}$，**此处不做修改。**
+
+2. 使用自动控制，在 2 min 时间内，将  $CO_2$  的 reference 气路浓度，下降到 20，然后等待 10-15 s 的时间。**此处的修改为，不记录这些数据，减少数据处理的麻烦。** 例如 \@ref(fig: racir-steady-start) 中三角形区域的数据。
+
+3. 运行自动控制，将 $CO_2$ 的 reference 浓度由 20 上升到 1520 ppm （仅作为测试范围，并非绝对），**本步骤不做修改，记录数据，此为所需要数据。**
+
+**实际上主要的修改就是将这个步骤自动化，需要人为操作的步骤仅仅是点 start 按键启动整个测量。**
+
+对于软件包的修改：
+
+主要的修改：
 
 * 独立的 `xls_read` 函数用于读取 excel 格式数据并修改叶面积。
 * 独立的“清洗”空叶室数据的函数 `tidy_data_empty`。
 * 独立的“清洗"带叶片测量数据的函数 `tidy_data`。
-* 修正带叶片测量数据的函数还是使用上面的方法处理
+* 将数据的清洗使用 A 值的一个上限和一个下限来解决。
 
-使用的方法如下：
+使用的方法如下（有使用标准 ACi 测量数据的比较内容）：
 
 #### 查看相邻数据的差值设置 {#delta_max-check}
 
@@ -102,36 +125,42 @@ abline(h = 13, col = "red", lwd = 0.8, lty = 3)
 
 此函数本质上是 `xlconnect_read`，如无需修改叶面积，则使用默认值。如果需要修改叶面积，需要输入 S 参数，叶面积修改值必须和 A 的值一一对应，否则因为叶面积错误，则导致其他的错误，例如上面修改叶面积为原来的一半：
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(racir)
 library(plantecophys)
-empty <- xls_read("data/Empty.xlsx")
-leaf <- xls_read("data/Fast.xlsx")
-half_leaf <- xls_read("data/Fast.xlsx", S = leaf$S/2)
+
+empty <- xls_read("data/racir-empty.xlsx")
+leaf <- xls_read("data/racir-leaf.xlsx")
+
+#  标准的aci数据
+aci <- xls_read("data/aci-curve.xlsx")
+
+half_leaf <- xls_read("data/racir-leaf.xlsx", S = leaf$S/2)
 head(half_leaf$A/leaf$A)
 tail(half_leaf$A/leaf$A)
 ```
 
+修改面积仅作演示用，如无需修改，则不要输入面积选项。
 
 **2. 关于空叶室的数据过滤范围的选取:**
 
 ```{r, emtpy-delta-max, fig.cap="空叶室数据的查看"}
-check_delta_empty(empty, delta_max = 0.05)
+check_delta_empty(empty, delta_max = 0.5, lower_A = -1)
 ```
-这里首先不要被第二幅图的波动所迷惑，主要是坐标轴差异太小。然后第一幅图中，尽管在从外界稳定二氧化碳浓度下降过程中有一部分数据落在了一个比较小的范围（前后 A 值 差异小），但是我会使用其他的过滤规则（直接删掉光合速率为负值之前的所有数据）来修正数据，我们只需要看后面的范围是不是在设定的 delta_max 范围内即可（此处默认前后两个的差值在 0.05 时即为二氧化碳控制稳定后，逐步上升的数据）。显示所有的数据是方便我们查看数据的质量如何。
+这里首先不要被第二幅图的波动所迷惑，主要是坐标轴差异太小。然后第一幅图中，这里设定了一个最大最小光合速率的范围（阈值，upper_A 和 lower_A），默认最大值是 2 以及最小值是 -2，上面我使用了最小值为 -1，也就是删除小于 -1 的光合速率，最大值 2 并不是删除，二是寻找 -2 < A < 2 范围的数据，从这里面找一个最小值，保留这一行的数据到测量数据结束。 另一个阈值删除相邻两个A值过大差值的数据的阈值（`delta_max`），对于这个阈值，LI-6800 其实并不敏感，因为本身数据非常稳定。
 
 **3. 关于带叶片测量的数据过滤范围的选取:**
 
 ```{r, leaf-delta-max, fig.cap="带叶片测量数据的查看"}
-check_delta(leaf, delta_max = 0.2)
+check_delta(leaf, delta_max = 0.5, lower_A = -1)
 ```
-带叶片的数据同上，但因为叶片光合的存在，前后两个数据的差异不可能同空叶室那样小，因此此处的范围要设置大一些，实际上的波动也要远大于空叶室（取决于光合速率的大小，光合速率大，上升快，差值就大）。另外需要注意，观察右图的光合速率，有没有删除过多的点（delta_max 默认为 0.2，但设置稍小，看上去右图形状无问题，会缺少很少的点，但这些点可能都是初期二氧化碳浓度低的点，尽管对拟合影响不大，大时会缺少一部分数据，有可能影响Rubisco 限制阶段的数据解读）
+带叶片的数据同上，没有特殊的参数，从右图的数据来看，他在修正之前的光合速率，符合我们的预期。
 
 **4. 确定范围后数据的清洗:**
 
 ```{r}
-tidy_leaf <- tidy_data(leaf)
-tidy_empty <- tidy_data_empty(empty, delta_max = 0.2)
+tidy_leaf <- tidy_data(leaf, delta_max = 0.5, lower_A = -1)
+tidy_empty <- tidy_data_empty(empty, delta_max = 0.5, lower_A = -1)
 
 # 修正带叶片测量数据
 z <- correct_leaf(tidy_empty, tidy_leaf)
@@ -139,21 +168,88 @@ z <- correct_leaf(tidy_empty, tidy_leaf)
 **4. 拟合后的数据：**
 
 ```{r}
-fitz <- fitaci(z,
-       varnames =
-         list(
-           ALEAF = "A",
-           Tleaf = "Tleaf",
-           Ci = "Ci",
-           PPFD  = "Qin",
-           Rd = "Rd"
-         ))
-fitz$pars
+fit_racir <- fitaci(z,
+               varnames =
+                 list(
+                   ALEAF = "A",
+                   Tleaf = "Tleaf",
+                   Ci = "Ci",
+                   PPFD  = "Qin",
+                   Rd = "Rd"
+                ))
+fit_normal <- fitaci(aci,
+               varnames =
+                 list(
+                   ALEAF = "A",
+                   Tleaf = "Tleaf",
+                   Ci = "Ci",
+                   PPFD  = "Qin",
+                   Rd = "Rd"
+                 ))
 ```
 
-```{r, filter-fit-plot, echo = FALSE, fig.cap="拟合结果的图形"}
-plot(fitz)
+RACiR 的结果：
+
+```{r, filter-fit-plot1, echo = FALSE, fig.cap="ACi 拟合结果的图形"}
+plot(fit_normal)
 ```
+
+ACi 的结果：
+
+```{r, filter-fit-plot, echo = FALSE, fig.cap="RACiR拟合结果的图形"}
+plot(fit_racir)
+```
+
+结果的比较：
+
+```{r racirparsbp}
+knitr::kable(data.frame(fit_racir$pars))
+```
+
+```{r aicparsbp}
+knitr::kable(data.frame(fit_normal$pars))
+```
+此处的数据和视频里的数据以及函数的参数略有差别，因为我修改了一下 `racir` 软件包的过滤条件，使得筛选数据更符合要求。本身因为不是同一时间测量，测量 RACiR 时叶片的气孔导度略到，因此，其 $V_{cmax}$ 略大符合预期。
+
+数据的重合程度 （实际上 RACiR 数据点要浓密的多，我使用了透明度为 80%，这样看上去仍然颜色非常深，这是 RACiR 采集数据点达到几百个的原因。 ACi 测量点为 50-2000 ppm，RACiR 为 20-1520 ppm）：
+
+```{r, acivsracir_bp, fig.cap="RACiR 与 ACi 数据点的重合程度（BP 测量）"}
+library(RColorBrewer)
+library(latex2exp)
+
+line_col <- brewer.pal(2,"Set1")
+
+racir_col <- scales::alpha(line_col[1], 0.2)
+aci_col <- line_col[2]
+
+plot(
+  z$Ci,
+  z$A,
+  cex = 2.3,
+  col = racir_col,
+  pch = 20,
+  xlim = c(50, 1400),
+  ylim = c(-1, 38),
+  xlab = TeX('$C_i$ $(\\mu mol \\cdot mol^{-1})$'),
+  ylab = TeX('A $(\\mu mol \\cdot mol^{-1})$')
+)
+points(aci$Ci,
+       aci$A,
+       cex = 2.3,
+       col = aci_col,
+       pch = 20)
+
+legend(
+  10,
+  35,
+  legend = c("RACiR","ACi"),
+  col = c(racir_col, aci_col),
+  pch = 20,
+  bty = "n",
+  pt.cex = 2.3
+)
+```
+
 
 ### 数据的批量处理 {#racirbatch}
 

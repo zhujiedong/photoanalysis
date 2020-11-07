@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 7 章 RHtoVPD 函数 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
   <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 7 章 RHtoVPD 函数 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2020-09-15" />
+<meta name="date" content="2020-11-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="photo-stomo.html"/>
 <link rel="next" href="lrc-fit.html"/>
-<script src="libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,7 +51,8 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -118,7 +119,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<link rel="stylesheet" href="css\style.css" type="text/css" />
+<link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
 <body>
@@ -317,30 +318,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="rhtovpd" class="section level1" number="7">
 <h1><span class="header-section-number">第 7 章</span> RHtoVPD 函数</h1>
-<p>该函数为一系列的工具，用于温度、湿度不同单位之间的换算 <span class="citation">Jones (<a href="#ref-Jones1993Plants" role="doc-biblioref">1993</a>)</span> ：</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="rhtovpd.html#cb112-1"></a><span class="co"># RH 转为 VPD  </span></span>
-<span id="cb112-2"><a href="rhtovpd.html#cb112-2"></a><span class="kw">RHtoVPD</span>(RH, TdegC, <span class="dt">Pa =</span> <span class="dv">101</span>) </span>
-<span id="cb112-3"><a href="rhtovpd.html#cb112-3"></a> </span>
-<span id="cb112-4"><a href="rhtovpd.html#cb112-4"></a><span class="co"># VPD 转为 RH   </span></span>
-<span id="cb112-5"><a href="rhtovpd.html#cb112-5"></a><span class="kw">VPDtoRH</span>(VPD, TdegC, <span class="dt">Pa =</span> <span class="dv">101</span>) </span>
-<span id="cb112-6"><a href="rhtovpd.html#cb112-6"></a> </span>
-<span id="cb112-7"><a href="rhtovpd.html#cb112-7"></a><span class="co">#  饱和水气压计算 </span></span>
-<span id="cb112-8"><a href="rhtovpd.html#cb112-8"></a><span class="kw">esat</span>(TdegC, <span class="dt">Pa =</span> <span class="dv">101</span>) </span>
-<span id="cb112-9"><a href="rhtovpd.html#cb112-9"></a> </span>
-<span id="cb112-10"><a href="rhtovpd.html#cb112-10"></a><span class="co">#  露点温度转换为VPD </span></span>
-<span id="cb112-11"><a href="rhtovpd.html#cb112-11"></a><span class="kw">DewtoVPD</span>(Tdew, TdegC, <span class="dt">Pa =</span> <span class="dv">101</span>) </span>
-<span id="cb112-12"><a href="rhtovpd.html#cb112-12"></a> </span>
-<span id="cb112-13"><a href="rhtovpd.html#cb112-13"></a><span class="co">#  基于叶温的 VPD 转换为基于空气温度的 VPD</span></span>
-<span id="cb112-14"><a href="rhtovpd.html#cb112-14"></a><span class="kw">VPDleafToAir</span>(VPD, Tleaf, Tair, <span class="dt">Pa =</span> <span class="dv">101</span>) </span>
-<span id="cb112-15"><a href="rhtovpd.html#cb112-15"></a> </span>
-<span id="cb112-16"><a href="rhtovpd.html#cb112-16"></a><span class="co">#  基于空气温度的 VPD 转换为基于叶温的 VPD </span></span>
-<span id="cb112-17"><a href="rhtovpd.html#cb112-17"></a><span class="kw">VPDairToLeaf</span>(VPD, Tair, Tleaf, <span class="dt">Pa =</span> <span class="dv">101</span>) </span>
-<span id="cb112-18"><a href="rhtovpd.html#cb112-18"></a> </span>
-<span id="cb112-19"><a href="rhtovpd.html#cb112-19"></a><span class="co">#  基于叶温的相对湿度转换为基于空气温度的相对湿度  </span></span>
-<span id="cb112-20"><a href="rhtovpd.html#cb112-20"></a><span class="kw">RHleafToAir</span>(RH, Tleaf, Tair, <span class="dt">Pa =</span> <span class="dv">101</span>) </span>
-<span id="cb112-21"><a href="rhtovpd.html#cb112-21"></a> </span>
-<span id="cb112-22"><a href="rhtovpd.html#cb112-22"></a><span class="co">#  基于空气温度的相对湿度转换为基于叶温的相对湿度  </span></span>
-<span id="cb112-23"><a href="rhtovpd.html#cb112-23"></a><span class="kw">RHairToLeaf</span>(RH, Tair, Tleaf, <span class="dt">Pa =</span> <span class="dv">101</span>) </span></code></pre></div>
+<p>该函数为一系列的工具，用于温度、湿度不同单位之间的换算 <span class="citation"><a href="references.html#ref-Jones1993Plants" role="doc-biblioref">Jones</a> (<a href="references.html#ref-Jones1993Plants" role="doc-biblioref">1993</a>)</span> ：</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="rhtovpd.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RH 转为 VPD  </span></span>
+<span id="cb112-2"><a href="rhtovpd.html#cb112-2" aria-hidden="true" tabindex="-1"></a><span class="fu">RHtoVPD</span>(RH, TdegC, <span class="at">Pa =</span> <span class="dv">101</span>) </span>
+<span id="cb112-3"><a href="rhtovpd.html#cb112-3" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb112-4"><a href="rhtovpd.html#cb112-4" aria-hidden="true" tabindex="-1"></a><span class="co"># VPD 转为 RH   </span></span>
+<span id="cb112-5"><a href="rhtovpd.html#cb112-5" aria-hidden="true" tabindex="-1"></a><span class="fu">VPDtoRH</span>(VPD, TdegC, <span class="at">Pa =</span> <span class="dv">101</span>) </span>
+<span id="cb112-6"><a href="rhtovpd.html#cb112-6" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb112-7"><a href="rhtovpd.html#cb112-7" aria-hidden="true" tabindex="-1"></a><span class="co">#  饱和水气压计算 </span></span>
+<span id="cb112-8"><a href="rhtovpd.html#cb112-8" aria-hidden="true" tabindex="-1"></a><span class="fu">esat</span>(TdegC, <span class="at">Pa =</span> <span class="dv">101</span>) </span>
+<span id="cb112-9"><a href="rhtovpd.html#cb112-9" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb112-10"><a href="rhtovpd.html#cb112-10" aria-hidden="true" tabindex="-1"></a><span class="co">#  露点温度转换为VPD </span></span>
+<span id="cb112-11"><a href="rhtovpd.html#cb112-11" aria-hidden="true" tabindex="-1"></a><span class="fu">DewtoVPD</span>(Tdew, TdegC, <span class="at">Pa =</span> <span class="dv">101</span>) </span>
+<span id="cb112-12"><a href="rhtovpd.html#cb112-12" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb112-13"><a href="rhtovpd.html#cb112-13" aria-hidden="true" tabindex="-1"></a><span class="co">#  基于叶温的 VPD 转换为基于空气温度的 VPD</span></span>
+<span id="cb112-14"><a href="rhtovpd.html#cb112-14" aria-hidden="true" tabindex="-1"></a><span class="fu">VPDleafToAir</span>(VPD, Tleaf, Tair, <span class="at">Pa =</span> <span class="dv">101</span>) </span>
+<span id="cb112-15"><a href="rhtovpd.html#cb112-15" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb112-16"><a href="rhtovpd.html#cb112-16" aria-hidden="true" tabindex="-1"></a><span class="co">#  基于空气温度的 VPD 转换为基于叶温的 VPD </span></span>
+<span id="cb112-17"><a href="rhtovpd.html#cb112-17" aria-hidden="true" tabindex="-1"></a><span class="fu">VPDairToLeaf</span>(VPD, Tair, Tleaf, <span class="at">Pa =</span> <span class="dv">101</span>) </span>
+<span id="cb112-18"><a href="rhtovpd.html#cb112-18" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb112-19"><a href="rhtovpd.html#cb112-19" aria-hidden="true" tabindex="-1"></a><span class="co">#  基于叶温的相对湿度转换为基于空气温度的相对湿度  </span></span>
+<span id="cb112-20"><a href="rhtovpd.html#cb112-20" aria-hidden="true" tabindex="-1"></a><span class="fu">RHleafToAir</span>(RH, Tleaf, Tair, <span class="at">Pa =</span> <span class="dv">101</span>) </span>
+<span id="cb112-21"><a href="rhtovpd.html#cb112-21" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb112-22"><a href="rhtovpd.html#cb112-22" aria-hidden="true" tabindex="-1"></a><span class="co">#  基于空气温度的相对湿度转换为基于叶温的相对湿度  </span></span>
+<span id="cb112-23"><a href="rhtovpd.html#cb112-23" aria-hidden="true" tabindex="-1"></a><span class="fu">RHairToLeaf</span>(RH, Tair, Tleaf, <span class="at">Pa =</span> <span class="dv">101</span>) </span></code></pre></div>
 <p>注意事项及单位：</p>
 <p>部分参数的转换需要准确的大气压用于计算，因此，有大气压选项的参数必须填入实际值。</p>
 <p>RH：相对湿度 (%) 。</p>
@@ -351,12 +352,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Tleaf：叶温() 。</p>
 <p>Tair：空气温度() 。</p>
 
-</div>
-<h3>参考文献</h3>
-<div id="refs" class="references">
-<div id="ref-Jones1993Plants">
-<p>Jones, H. G. 1993. <em>Plants and Microclimate. A Quantitative Approach to Environmental Plant Physiology.</em> Cambridge University Press.</p>
-</div>
 </div>
             </section>
 

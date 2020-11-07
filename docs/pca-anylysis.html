@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 11 章 大话 PCA | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
   <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 11 章 大话 PCA | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2020-09-15" />
+<meta name="date" content="2020-11-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="anay-6800.html"/>
 <link rel="next" href="sessioninfo.html"/>
-<script src="libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,7 +51,8 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -118,7 +119,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<link rel="stylesheet" href="css\style.css" type="text/css" />
+<link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
 <body>
@@ -333,7 +334,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 图 11.1: 数据的中心化
 </p>
 </div>
-<p>如图 <a href="pca-anylysis.html#fig:pccenter">11.1</a>，假设有三维的数据，可以理解为 iris 数据中前三列的观测值，每个点分别代表了一个植株的前三个性状，PCA 第一步便是中心化，将坐标轴由左边转移到右边的中心点位置作为原点，这就是所谓的平均值中心化的过程，这样就消除了测量时的偏差<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a>，同时一般还要对数据进行缩放，以消除不同单位的影响<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a>，
+<p>如图 <a href="pca-anylysis.html#fig:pccenter">11.1</a>，假设有三维的数据，可以理解为 iris 数据中前三列的观测值，每个点分别代表了一个植株的前三个性状，PCA 第一步便是中心化，将坐标轴由左边转移到右边的中心点位置作为原点，这就是所谓的平均值中心化的过程，这样就消除了测量时的偏差，<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a>同时一般还要对数据进行缩放，以消除不同单位的影响，<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a>
 例如有光合速率，有叶片面积的数据，这样能够消除不同单位的影响，通常的缩放例如对数化。</p>
 <div class="figure"><span id="fig:pc2"></span>
 <img src="images/pc2.png" alt="PC1 的诞生" width="100%" />
@@ -363,13 +364,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>如果我们做一条通过中心点并与 PC1 垂直的线，并不断旋转这条线使其满足：所有投影于其上的点，他们的距离最大，也就是变异最大，这样就做出了第二个主成份，PC2，如图 <a href="pca-anylysis.html#fig:pc3">11.4</a>。<strong>就这样不断的变换，一般情况下，我们可以使用 2~3 个主成份来解释绝大部分数据所展示的信息（所有数据都尽可能少的损失信息投影于其上）</strong>。</p>
 <p>以上为基本变换，如果我们使用 R 计算 PCA (这里推荐两个包 <code>factoextra</code> 和 <code>FactoMineR</code>)，查看其结果：</p>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="pca-anylysis.html#cb318-1"></a><span class="kw">library</span>(<span class="st">&quot;FactoMineR&quot;</span>)</span>
-<span id="cb318-2"><a href="pca-anylysis.html#cb318-2"></a><span class="kw">library</span>(<span class="st">&quot;factoextra&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="pca-anylysis.html#cb320-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;FactoMineR&quot;</span>)</span>
+<span id="cb320-2"><a href="pca-anylysis.html#cb320-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;factoextra&quot;</span>)</span></code></pre></div>
 <pre><code>## Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa</code></pre>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="pca-anylysis.html#cb320-1"></a>ir &lt;-<span class="st"> </span>iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</span>
-<span id="cb320-2"><a href="pca-anylysis.html#cb320-2"></a>ir_pca &lt;-<span class="st"> </span><span class="kw">PCA</span>(ir, <span class="dt">graph =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb320-3"><a href="pca-anylysis.html#cb320-3"></a></span>
-<span id="cb320-4"><a href="pca-anylysis.html#cb320-4"></a><span class="kw">fviz_eig</span>(ir_pca, <span class="dt">addlabels =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="pca-anylysis.html#cb322-1" aria-hidden="true" tabindex="-1"></a>ir <span class="ot">&lt;-</span> iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span>
+<span id="cb322-2"><a href="pca-anylysis.html#cb322-2" aria-hidden="true" tabindex="-1"></a>ir_pca <span class="ot">&lt;-</span> <span class="fu">PCA</span>(ir, <span class="at">graph =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb322-3"><a href="pca-anylysis.html#cb322-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb322-4"><a href="pca-anylysis.html#cb322-4" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_eig</span>(ir_pca, <span class="at">addlabels =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <div class="figure"><span id="fig:scree"></span>
 <img src="bookdown_files/figure-html/scree-1.png" alt="iris 碎石图" width="672" />
 <p class="caption">
@@ -378,7 +379,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>我们可以看到，前两个成分可以解释数据 95% 以上的变异，所以我们可以只使用主成份 1 和主成份 2 对我们的结果进行解释。</p>
 <p>既然我们使用两个主成份解释整个数据，那么我们怎么把四个性状都放在这个图上呢？这就需要载荷图来展示了，如图 <a href="pca-anylysis.html#fig:loadingpca">11.6</a></p>
-<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="pca-anylysis.html#cb321-1"></a><span class="kw">fviz_pca_var</span>(ir_pca)</span></code></pre></div>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="pca-anylysis.html#cb323-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(ir_pca)</span></code></pre></div>
 <div class="figure"><span id="fig:loadingpca"></span>
 <img src="bookdown_files/figure-html/loadingpca-1.png" alt="iris 载荷图" width="672" />
 <p class="caption">
@@ -387,7 +388,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>怎么解释呢，因为原始的数据点相当于在坐标轴上，这几个性状分布的产生类似于原始的数据点在拉拽某个性状，影响强的偏向某一方向，换句话说，<strong>这些性状决定主成份时有不同的权重，也就是对主成份影响的权重大小。同时他们是有方向的，如果两个性状方向接近，也就是夹角非常小，说明他们有较强的正相关性，例如图中的花瓣的长宽，如果他们互相垂直，那说明他们无相关性，例如图中花萼的长宽，如果夹角非常大，例如他们几乎在一条直线上，说明具有显著的负相关</strong>。其本质还是所有的单位向量（本例有四个性状，各个性状中心化后形成的轴，也就是向量）在现在的这个二维平面的位置。</p>
 <p>而如果我想通过这些性状来对鸢尾分类，怎么看呢？那就需要得分图来展示了，如图 <a href="pca-anylysis.html#fig:scorepca">11.7</a> ，得分图本质是各个品种的每个观测值在各个轴上的长度，也就是得分，所以其值都是每个物种性状的加权，每个点代表了每个物种的观测值。</p>
-<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="pca-anylysis.html#cb322-1"></a><span class="kw">fviz_pca_ind</span>(ir_pca, <span class="dt">repel =</span> <span class="ot">TRUE</span>, <span class="dt">col.ind=</span> iris<span class="op">$</span>Species)</span></code></pre></div>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="pca-anylysis.html#cb324-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(ir_pca, <span class="at">repel =</span> <span class="cn">TRUE</span>, <span class="at">col.ind=</span> iris<span class="sc">$</span>Species)</span></code></pre></div>
 <div class="figure"><span id="fig:scorepca"></span>
 <img src="bookdown_files/figure-html/scorepca-1.png" alt="iris 得分图" width="672" />
 <p class="caption">
@@ -407,7 +408,7 @@ A \vec{x} = \lambda \vec{x}
 \end{equation}\]</span></p>
 <p>其中 A 为 n <span class="math inline">\(\times\)</span> n 的矩阵，<span class="math inline">\(\vec{x}\)</span> 为 非零 n <span class="math inline">\(\times\)</span> 1 列向量，<span class="math inline">\(\lambda\)</span> 是标量，那么 <span class="math inline">\(\vec{x}\)</span> 为 A 的特征向量，<span class="math inline">\(\lambda\)</span> 为 A 的特征值。</p>
 <p>如果仅从数学描述上看，是十分不适合我这样没基础的人来理解的，但我们可以这么理解：</p>
-<p>A 为我们观测值（也即我们生态学上测量的数据）组成的 <span class="math inline">\(n \times n\)</span> 矩阵，每行的数据代表了一个观测值，例如光合速率是其中的一行，我们有n 个， 那么 <span class="math inline">\(\vec{x}\)</span> 和 <span class="math inline">\(\lambda\)</span> 意味着什么呢？再看一眼上面的 <a href="pca-anylysis.html#eq:eign">(11.1)</a>，这是一个等式，而 <span class="math inline">\(\vec{x}\)</span> 是 n <span class="math inline">\(\times\)</span> 1 维度，原来的数据是 n <span class="math inline">\(\times\)</span> n 维度，这就是主轴分析是降维分析的意义了，一个一维的特征向量和特征值与我们多维的观测值之间有一个相等的关系。当然，也有很多人在描述时喜欢用坐标轴旋转或这投影来形容的，如果你觉得这样好理解也没问题，不过我脑袋不擅长想象这种多维的空间。这样描述并不十分准确，只是我觉得便于理解，更正确描述应为我们下面所述的例子 (<span class="citation">Smith (<a href="#ref-Smith2002" role="doc-biblioref">2002</a>)</span>) ，但降维的原理即来自此处：</p>
+<p>A 为我们观测值（也即我们生态学上测量的数据）组成的 <span class="math inline">\(n \times n\)</span> 矩阵，每行的数据代表了一个观测值，例如光合速率是其中的一行，我们有n 个， 那么 <span class="math inline">\(\vec{x}\)</span> 和 <span class="math inline">\(\lambda\)</span> 意味着什么呢？再看一眼上面的 <a href="pca-anylysis.html#eq:eign">(11.1)</a>，这是一个等式，而 <span class="math inline">\(\vec{x}\)</span> 是 n <span class="math inline">\(\times\)</span> 1 维度，原来的数据是 n <span class="math inline">\(\times\)</span> n 维度，这就是主轴分析是降维分析的意义了，一个一维的特征向量和特征值与我们多维的观测值之间有一个相等的关系。当然，也有很多人在描述时喜欢用坐标轴旋转或这投影来形容的，如果你觉得这样好理解也没问题，不过我脑袋不擅长想象这种多维的空间。这样描述并不十分准确，只是我觉得便于理解，更正确描述应为我们下面所述的例子 (<span class="citation"><a href="references.html#ref-Smith2002" role="doc-biblioref">Smith</a> (<a href="references.html#ref-Smith2002" role="doc-biblioref">2002</a>)</span>) ，但降维的原理即来自此处：</p>
 <p><span class="math display" id="eq:despca">\[\begin{equation}
 finaldata = rowfeaturevector \times rowdataajust
 \tag{11.2}
@@ -475,18 +476,18 @@ finaldata = rowfeaturevector \times rowdataajust
 <h3><span class="header-section-number">11.2.2</span> 手动实现过程</h3>
 <div id="av_val" class="section level4" number="11.2.2.1">
 <h4><span class="header-section-number">11.2.2.1</span> 均值的计算</h4>
-<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="pca-anylysis.html#cb323-1"></a>iris_mean &lt;-<span class="st"> </span><span class="kw">apply</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dv">2</span>, <span class="cf">function</span>(x) x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x))</span></code></pre></div>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="pca-anylysis.html#cb325-1" aria-hidden="true" tabindex="-1"></a>iris_mean <span class="ot">&lt;-</span> <span class="fu">apply</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="dv">2</span>, <span class="cf">function</span>(x) x <span class="sc">-</span> <span class="fu">mean</span>(x))</span></code></pre></div>
 <p>我只使用了前四列的性状数据，仅仅是方便结果的展示。</p>
 </div>
 <div id="cov_val" class="section level4" number="11.2.2.2">
 <h4><span class="header-section-number">11.2.2.2</span> 计算协方差矩阵</h4>
-<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="pca-anylysis.html#cb324-1"></a>iris_cov &lt;-<span class="st"> </span><span class="kw">cov</span>(iris_mean)</span></code></pre></div>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="pca-anylysis.html#cb326-1" aria-hidden="true" tabindex="-1"></a>iris_cov <span class="ot">&lt;-</span> <span class="fu">cov</span>(iris_mean)</span></code></pre></div>
 </div>
 <div id="eig_val" class="section level4" number="11.2.2.3">
 <h4><span class="header-section-number">11.2.2.3</span> 计算特征值和特征向量</h4>
-<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="pca-anylysis.html#cb325-1"></a>iris_eigen &lt;-<span class="st"> </span><span class="kw">eigen</span>(iris_cov)</span></code></pre></div>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="pca-anylysis.html#cb327-1" aria-hidden="true" tabindex="-1"></a>iris_eigen <span class="ot">&lt;-</span> <span class="fu">eigen</span>(iris_cov)</span></code></pre></div>
 <p>这里就可以看到之前提到的，特征值和特征向量是根据协方差矩阵计算的。我们选取特征值最大的两个，他们的特征值之和已经占所有的特征值之和相当大的比例：</p>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="pca-anylysis.html#cb326-1"></a><span class="kw">sum</span>(iris_eigen<span class="op">$</span>values[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])<span class="op">/</span><span class="kw">sum</span>(iris_eigen<span class="op">$</span>values)</span></code></pre></div>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="pca-anylysis.html#cb328-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(iris_eigen<span class="sc">$</span>values[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])<span class="sc">/</span><span class="fu">sum</span>(iris_eigen<span class="sc">$</span>values)</span></code></pre></div>
 <pre><code>## [1] 0.9776852</code></pre>
 <p>也就是说特征值对应的前两项是我们最终降维所需要的，即最终的两个主轴为 <span class="math inline">\(150 \times 2\)</span> 维矩阵，即我们原来的 <span class="math inline">\(150 \times 4\)</span> 的矩阵乘以我们选取的前两个特征值对应的 <span class="math inline">\(4 \times 2\)</span> 组成的矩阵。</p>
 <p>实际应用中我们不需要这么做了，因为太浪费时间了，我们直接用函数来得到结果即可。</p>
@@ -494,30 +495,21 @@ finaldata = rowfeaturevector \times rowdataajust
 </div>
 <div id="prcom" class="section level3" number="11.2.3">
 <h3><span class="header-section-number">11.2.3</span> <code>prcomp</code> 的实现</h3>
-<p>我们用 <code>prcomp</code> 来简化实现过程，注意，根据 <span class="citation">Kemp (<a href="#ref-kemp2003modern" role="doc-biblioref">2003</a>)</span>，我们把 iris 数据对数化一下，并提取所有物种名字：</p>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="pca-anylysis.html#cb328-1"></a><span class="kw">data</span>(<span class="st">&quot;iris&quot;</span>)</span>
-<span id="cb328-2"><a href="pca-anylysis.html#cb328-2"></a>iris_pca &lt;-<span class="st"> </span><span class="kw">log</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])</span>
-<span id="cb328-3"><a href="pca-anylysis.html#cb328-3"></a>iris_species &lt;-<span class="st"> </span>iris<span class="op">$</span>Species</span></code></pre></div>
+<p>我们用 <code>prcomp</code> 来简化实现过程，注意，根据 <span class="citation"><a href="references.html#ref-kemp2003modern" role="doc-biblioref">Kemp</a> (<a href="references.html#ref-kemp2003modern" role="doc-biblioref">2003</a>)</span>，我们把 iris 数据对数化一下，并提取所有物种名字：</p>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="pca-anylysis.html#cb330-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;iris&quot;</span>)</span>
+<span id="cb330-2"><a href="pca-anylysis.html#cb330-2" aria-hidden="true" tabindex="-1"></a>iris_pca <span class="ot">&lt;-</span> <span class="fu">log</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span>
+<span id="cb330-3"><a href="pca-anylysis.html#cb330-3" aria-hidden="true" tabindex="-1"></a>iris_species <span class="ot">&lt;-</span> iris<span class="sc">$</span>Species</span></code></pre></div>
 <p>需要注意，我们处理时使用特征中心化。即每一维的数据都减去该维的均值。这里的“维”指的就是一个特征（或属性），变换之后每一维的均值都变成了0 (参考 <a href="pca-anylysis.html#eq:despca">(11.2)</a> )。</p>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="pca-anylysis.html#cb329-1"></a>value_pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(iris_pca, <span class="dt">center =</span> <span class="ot">TRUE</span>, <span class="dt">scale. =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb329-2"><a href="pca-anylysis.html#cb329-2"></a><span class="co">## 查看结果</span></span>
-<span id="cb329-3"><a href="pca-anylysis.html#cb329-3"></a><span class="kw">summary</span>(value_pca)</span></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="pca-anylysis.html#cb331-1" aria-hidden="true" tabindex="-1"></a>value_pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(iris_pca, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb331-2"><a href="pca-anylysis.html#cb331-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 查看结果</span></span>
+<span id="cb331-3"><a href="pca-anylysis.html#cb331-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(value_pca)</span></code></pre></div>
 <pre><code>## Importance of components:
 ##                           PC1    PC2     PC3     PC4
 ## Standard deviation     1.7125 0.9524 0.36470 0.16568
 ## Proportion of Variance 0.7331 0.2268 0.03325 0.00686
 ## Cumulative Proportion  0.7331 0.9599 0.99314 1.00000</code></pre>
-<p>可以看到结果同我们最开始的计算相似，不同的是我们进行了对数化，而且根据 <span class="citation">Kemp (<a href="#ref-kemp2003modern" role="doc-biblioref">2003</a>)</span>， 这个结果更合适。</p>
+<p>可以看到结果同我们最开始的计算相似，不同的是我们进行了对数化，而且根据 <span class="citation"><a href="references.html#ref-kemp2003modern" role="doc-biblioref">Kemp</a> (<a href="references.html#ref-kemp2003modern" role="doc-biblioref">2003</a>)</span>， 这个结果更合适。</p>
 </div>
-</div>
-</div>
-<h3>参考文献</h3>
-<div id="refs" class="references">
-<div id="ref-kemp2003modern">
-<p>Kemp, Freda. 2003. “Modern Applied Statistics with S.” <em>Journal of the Royal Statistical Society Series D-the Statistician</em> 52 (4): 704–5.</p>
-</div>
-<div id="ref-Smith2002">
-<p>Smith, Lindsay I. 2002. “A Tutorial on Principal Component Analysis.”</p>
 </div>
 </div>
 <div class="footnotes">
