@@ -72,6 +72,8 @@ plot(x$CO2_r, x$A)
 
 ### 实现方法 2 {#racir_pkg_2}
 
+#### 从低到高的 $CO_2R$ 变化 {#low-to-high}
+
 以上的实现方法是基于肉眼判断，删除不需要的数据，自动化程度较低，同时不适合 @Coursolle12019 这样的方法:
 
 ```{r, racir-steady-start, echo = FALSE, fig.cap="稳定后从低到高的 RACiR 实验数据"}
@@ -117,7 +119,7 @@ polygon(
 
 使用的方法如下（有使用标准 ACi 测量数据的比较内容）：
 
-#### 查看相邻数据的差值设置 {#delta_max-check}
+##### 查看相邻数据的差值设置 {#delta_max-check}
 
 数据的清洗其实比较简单，主要利用相邻的两个测量 A 值的差值来进行，为方便确定差值，针对空叶室和带叶片测量的数据，单独设定了两个函数，来确定合理的过滤范围，这样说太抽象，我们导入数据后直接看图：
 
@@ -147,7 +149,7 @@ tail(half_leaf$A/leaf$A)
 ```{r, emtpy-delta-max, fig.cap="空叶室数据的查看"}
 check_delta_empty(empty, delta_max = 0.5, lower_A = -1)
 ```
-这里首先不要被第二幅图的波动所迷惑，主要是坐标轴差异太小。然后第一幅图中，这里设定了一个最大最小光合速率的范围（阈值，upper_A 和 lower_A），默认最大值是 2 以及最小值是 -2，上面我使用了最小值为 -1，也就是删除小于 -1 的光合速率，最大值 2 并不是删除，二是寻找 -2 < A < 2 范围的数据，从这里面找一个最小值，保留这一行的数据到测量数据结束。 另一个阈值删除相邻两个A值过大差值的数据的阈值（`delta_max`），对于这个阈值，LI-6800 其实并不敏感，因为本身数据非常稳定。
+这里首先不要被第二幅图的波动所迷惑，主要是坐标轴差异太小。然后第一幅图中，这里设定了一个最大最小光合速率的范围（阈值，upper_A 和 lower_A），默认最大值是 2 以及最小值是 -2，上面我使用了最小值为 -1，也就是删除小于 -1 的光合速率，最大值 2 并不是删除，二是寻找 -2 < A < 2 范围的数据（确定起始测量时 A 开始变为合理的范围），从这里面找一个最小值，保留这一行的数据到测量数据结束。 另一个阈值删除相邻两个A值过大差值的数据的阈值（`delta_max`），对于这个阈值，LI-6800 其实并不敏感，因为本身数据非常稳定。
 
 **3. 关于带叶片测量的数据过滤范围的选取:**
 
@@ -202,18 +204,18 @@ plot(fit_racir)
 
 结果的比较：
 
-```{r racirparsbp}
+```{r racirparsbp, echo=FALSE}
 knitr::kable(data.frame(fit_racir$pars))
 ```
 
-```{r aicparsbp}
+```{r aicparsbp, echo=FALSE}
 knitr::kable(data.frame(fit_normal$pars))
 ```
 此处的数据和视频里的数据以及函数的参数略有差别，因为我修改了一下 `racir` 软件包的过滤条件，使得筛选数据更符合要求。本身因为不是同一时间测量，测量 RACiR 时叶片的气孔导度略到，因此，其 $V_{cmax}$ 略大符合预期。
 
 数据的重合程度 （实际上 RACiR 数据点要浓密的多，我使用了透明度为 80%，这样看上去仍然颜色非常深，这是 RACiR 采集数据点达到几百个的原因。 ACi 测量点为 50-2000 ppm，RACiR 为 20-1520 ppm）：
 
-```{r, acivsracir_bp, fig.cap="RACiR 与 ACi 数据点的重合程度（BP 测量）"}
+```{r, acivsracirbp, fig.cap = "RACiR 与 ACi 数据点的重合程度（BP 测量）"}
 library(RColorBrewer)
 library(latex2exp)
 
@@ -249,7 +251,93 @@ legend(
   pt.cex = 2.3
 )
 ```
+#### 从高到低的 $CO_2R$ 变化 {#high-to-low}
 
+以上内容是按照 @Coursolle12019 的方式，从低浓度到高浓度的控制，就我个人而言，我感觉无需从高到底测试，但是就实验而言，可以仿照 @Coursolle12019 的方式，从高浓度到低浓度做一次测试，来检验哪种方式更合适。于是在测试完上面的数据的第二天又重新测试了反向的测试，为了数据处理的方便，在此将反向实验的数据处理方式写一下。
+
+```{r, message=FALSE, warning=FALSE}
+#导入数据
+empty <- xls_read("data/racir-empty-reverse.xlsx")
+leaf <- xls_read("data/racir-leaf-reverse.xlsx")
+```
+
+浓度从 420 上升至 1520 ppm 的时间应相对充分，否则会在测量刚开始时有一个剧烈的光合速率的变化，需要在两个 AUTOENV 控制之间增加等待的时长，也就是确保 $CO2_S$ 气路的气体冲刷时间足够。
+
+基本方式没有变化，显示利用图形检验过滤噪音的阈值（实际敏感度低，因为 LI-6800 不是一般的稳）
+
+**1.检验空叶室数据的测量**
+
+```{r, empty-delta-max-rev, fig.cap="反向空叶室测量数据的查看"}
+check_delta_empty(
+  empty,
+  delta_max = 0.5,
+  upper_A = -1.5,
+  lower_A = -5,
+  reverse = TRUE
+)
+```
+
+这里的设置与正向测量相似，只是需要指定反向 `reverse = TRUE`，对于反向测量的空叶室，数据在稳定后肯定是马上下降为负数，我们指定一个略宽的 A 值范围，然后取其最大值所在行到数据行的末尾，也就是 \@ref(fig:empty-delta-max-rev) 右侧的数据。对于相邻的两个 A 值的差值，从右图也可以看出来，LI-6800 真的不敏感，除非测量过程发生意外状况，不然这个数值完全可设置的略大。我使用 0.5 是因为想展示不过滤的数据点的情况，非常平稳。
+
+
+**2.检验带叶片测量数据的测量**
+
+```{r, leaf-delta-max-rev, fig.cap="反向带叶片测量测量数据的查看"}
+check_delta(
+  leaf,
+  delta_max = 0.5,
+  upper_A = 30,
+  lower_A = 29,
+  reverse = TRUE
+)
+```
+
+过滤方式相同空叶室，数据仍然是非常稳定。我们看一下最终结果：
+
+```{r}
+leaf_rev <- tidy_data(
+  leaf,
+  delta_max = 0.5,
+  upper_A = 30,
+  lower_A = 29,
+  reverse = TRUE
+)
+
+empty_rev <- tidy_data_empty(
+  empty,
+  delta_max = 0.5,
+  upper_A = -1.5,
+  lower_A = -5,
+  reverse = TRUE
+)
+
+zrev <- correct_leaf(empty_rev, leaf_rev)
+
+fit_racir <- fitaci(zrev,
+               varnames =
+                 list(
+                   ALEAF = "A",
+                   Tleaf = "Tleaf",
+                   Ci = "Ci",
+                   PPFD  = "Qin",
+                   Rd = "Rd"
+                ))
+```
+
+RACiR 的结果：
+
+```{r, filter-fit-plot1-rev, echo = FALSE, fig.cap="ACi 拟合结果的图形"}
+plot(fit_normal)
+```
+
+
+结果的比较：
+
+```{r racir-zrev, echo=FALSE}
+knitr::kable(data.frame(fit_racir$pars))
+```
+
+因为季节原因，测量相比正向测量更换了枝条（客观原因，11 月帝都的室外，实在不好找合适的植物，采取剪枝条测量的方式）。
 
 ### 数据的批量处理 {#racirbatch}
 
