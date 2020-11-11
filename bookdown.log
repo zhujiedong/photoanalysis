@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.9.25)  11 NOV 2020 13:42
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.9.25)  11 NOV 2020 13:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2250,26 +2250,26 @@ Overfull \hbox (100.62036pt too wide) in paragraph at lines 592--592
 
 
 Overfull \hbox (100.62036pt too wide) in paragraph at lines 608--608
-[]\TU/lmtt/m/n/10.53937 ##  [1] 1.747452 1.977619 1.218722 1.468375 1.556277 1.
-494955 1.355608 1.509656[] 
+[]\TU/lmtt/m/n/10.53937 ##  [1] 1.428284 1.754276 1.462149 1.825465 1.336504 1.
+392458 1.247317 1.353647[] 
  []
 
 
 Overfull \hbox (100.62036pt too wide) in paragraph at lines 608--608
-[]\TU/lmtt/m/n/10.53937 ##  [9] 1.968404 1.907756 1.272516 1.350288 1.484212 1.
-397537 1.257205 1.286764[] 
+[]\TU/lmtt/m/n/10.53937 ##  [9] 1.527175 1.285032 1.428325 1.589693 1.547155 1.
+814560 1.341627 1.466426[] 
  []
 
 
 Overfull \hbox (100.62036pt too wide) in paragraph at lines 608--608
-[]\TU/lmtt/m/n/10.53937 ## [17] 1.587561 1.309823 1.545216 1.976574 1.293712 1.
-223609 1.259794 1.877590[] 
+[]\TU/lmtt/m/n/10.53937 ## [17] 1.304539 1.785933 1.451452 1.419844 1.538068 1.
+481598 1.470792 1.228856[] 
  []
 
 [9]
 Overfull \hbox (100.62036pt too wide) in paragraph at lines 608--608
-[]\TU/lmtt/m/n/10.53937 ## [25] 1.331396 1.381603 1.370170 1.286255 1.668366 1.
-523481 1.849619 1.371364[] 
+[]\TU/lmtt/m/n/10.53937 ## [25] 1.515896 1.277178 1.398691 1.248462 1.777367 1.
+629017 1.663932 1.215976[] 
  []
 
 LaTeX Font Info:    Font shape `TU/SimSun(0)/b/n' will be
@@ -2419,20 +2419,20 @@ Overfull \hbox (67.42136pt too wide) in paragraph at lines 792--792
 
 
 Overfull \hbox (100.62036pt too wide) in paragraph at lines 805--805
-[]\TU/lmtt/m/n/10.53937 ##  [1] 1.446161 1.714890 1.626330 1.208842 1.487795 1.
-684520 1.615823 1.517548[] 
+[]\TU/lmtt/m/n/10.53937 ##  [1] 1.589467 1.389945 1.437679 1.847334 1.279751 1.
+787077 1.774791 1.253124[] 
  []
 
 
 Overfull \hbox (100.62036pt too wide) in paragraph at lines 805--805
-[]\TU/lmtt/m/n/10.53937 ##  [9] 1.557814 1.245436 1.311085 1.913532 1.300471 1.
-868196 1.277490 1.590979[] 
+[]\TU/lmtt/m/n/10.53937 ##  [9] 1.445536 1.999347 1.699198 1.987832 1.232481 1.
+865175 1.413117 1.729663[] 
  []
 
 
 Overfull \hbox (100.62036pt too wide) in paragraph at lines 805--805
-[]\TU/lmtt/m/n/10.53937 ## [17] 1.401192 1.299256 1.758817 1.794405 1.696450 1.
-324866 1.224785 1.991170[] 
+[]\TU/lmtt/m/n/10.53937 ## [17] 1.428693 1.788847 1.272077 1.257061 1.306036 1.
+582692 1.447612 1.711533[] 
  []
 
 
@@ -2454,8 +2454,8 @@ Overfull \hbox (67.4213pt too wide) in paragraph at lines 853--853
 
 [14]
 Overfull \hbox (89.55394pt too wide) in paragraph at lines 880--880
-[]\TU/lmtt/m/n/10.53937 ##  [1] 0.4800927 0.5012019 0.5009849 0.4756813 0.50041
-60 0.4884748 0.4883291[] 
+[]\TU/lmtt/m/n/10.53937 ##  [1] 0.5131283 0.4950136 0.5126601 0.4948987 0.50284
+91 0.5180155 0.4777649[] 
  []
 
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10.53937> not available
@@ -5713,7 +5713,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 8113.
 Here is how much of TeX's memory you used:
  23146 strings out of 481673
  467668 string characters out of 5931483
- 935409 words of memory out of 5000000
+ 935415 words of memory out of 5000000
  39790 multiletter control sequences out of 15000+600000
  546722 words of font info for 162 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
