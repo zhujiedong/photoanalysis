@@ -679,7 +679,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <span id="cb161-2"><a href="anay-6800.html#cb161-2" aria-hidden="true" tabindex="-1"></a>empty <span class="ot">&lt;-</span> <span class="fu">xls_read</span>(<span class="st">&quot;data/racir-empty-reverse.xlsx&quot;</span>)</span>
 <span id="cb161-3"><a href="anay-6800.html#cb161-3" aria-hidden="true" tabindex="-1"></a>leaf <span class="ot">&lt;-</span> <span class="fu">xls_read</span>(<span class="st">&quot;data/racir-leaf-reverse.xlsx&quot;</span>)</span></code></pre></div>
 <p>浓度从 420 上升至 1520 ppm 的时间应相对充分，否则会在测量刚开始时有一个剧烈的光合速率的变化，需要在两个 AUTOENV 控制之间增加等待的时长，也就是确保 <span class="math inline">\(CO2_S\)</span> 气路的气体冲刷时间足够。</p>
-<p>基本方式没有变化，显示利用图形检验过滤噪音的阈值（实际敏感度低，因为 LI-6800 不是一般的稳）</p>
+<p>基本方式没有变化，首先利用图形检验过滤噪音的阈值（实际敏感度低，因为 LI-6800 不是一般的稳）</p>
 <p><strong>1.检验空叶室数据的测量</strong></p>
 <div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="anay-6800.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_delta_empty</span>(</span>
 <span id="cb162-2"><a href="anay-6800.html#cb162-2" aria-hidden="true" tabindex="-1"></a>  empty,</span>
@@ -728,7 +728,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <span id="cb164-16"><a href="anay-6800.html#cb164-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb164-17"><a href="anay-6800.html#cb164-17" aria-hidden="true" tabindex="-1"></a>zrev <span class="ot">&lt;-</span> <span class="fu">correct_leaf</span>(empty_rev, leaf_rev)</span>
 <span id="cb164-18"><a href="anay-6800.html#cb164-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb164-19"><a href="anay-6800.html#cb164-19" aria-hidden="true" tabindex="-1"></a>fit_racir <span class="ot">&lt;-</span> <span class="fu">fitaci</span>(zrev,</span>
+<span id="cb164-19"><a href="anay-6800.html#cb164-19" aria-hidden="true" tabindex="-1"></a>fit_racir_rev <span class="ot">&lt;-</span> <span class="fu">fitaci</span>(zrev,</span>
 <span id="cb164-20"><a href="anay-6800.html#cb164-20" aria-hidden="true" tabindex="-1"></a>               <span class="at">varnames =</span></span>
 <span id="cb164-21"><a href="anay-6800.html#cb164-21" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">list</span>(</span>
 <span id="cb164-22"><a href="anay-6800.html#cb164-22" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ALEAF =</span> <span class="st">&quot;A&quot;</span>,</span>

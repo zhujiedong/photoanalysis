@@ -263,7 +263,7 @@ leaf <- xls_read("data/racir-leaf-reverse.xlsx")
 
 浓度从 420 上升至 1520 ppm 的时间应相对充分，否则会在测量刚开始时有一个剧烈的光合速率的变化，需要在两个 AUTOENV 控制之间增加等待的时长，也就是确保 $CO2_S$ 气路的气体冲刷时间足够。
 
-基本方式没有变化，显示利用图形检验过滤噪音的阈值（实际敏感度低，因为 LI-6800 不是一般的稳）
+基本方式没有变化，首先利用图形检验过滤噪音的阈值（实际敏感度低，因为 LI-6800 不是一般的稳）
 
 **1.检验空叶室数据的测量**
 
@@ -313,7 +313,7 @@ empty_rev <- tidy_data_empty(
 
 zrev <- correct_leaf(empty_rev, leaf_rev)
 
-fit_racir <- fitaci(zrev,
+fit_racir_rev <- fitaci(zrev,
                varnames =
                  list(
                    ALEAF = "A",
@@ -327,14 +327,14 @@ fit_racir <- fitaci(zrev,
 RACiR 的结果：
 
 ```{r, filter-fit-plot1-rev, echo = FALSE, fig.cap="ACi 拟合结果的图形"}
-plot(fit_normal)
+plot(fit_racir_rev)
 ```
 
 
 结果的比较：
 
 ```{r racir-zrev, echo=FALSE}
-knitr::kable(data.frame(fit_racir$pars))
+knitr::kable(data.frame(fit_racir_rev$pars))
 ```
 
 因为季节原因，测量相比正向测量更换了枝条（客观原因，11 月帝都的室外，实在不好找合适的植物，采取剪枝条测量的方式）。

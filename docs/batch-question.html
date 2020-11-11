@@ -927,10 +927,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb24-2"><a href="batch-question.html#cb24-2" aria-hidden="true" tabindex="-1"></a>area <span class="ot">&lt;-</span> <span class="dv">6</span> <span class="sc">-</span> <span class="fu">runif</span>(<span class="dv">32</span>, <span class="dv">1</span>, <span class="dv">3</span>)</span>
 <span id="cb24-3"><a href="batch-question.html#cb24-3" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> <span class="fu">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>,  <span class="at">header_line =</span> <span class="dv">17</span>, <span class="at">data_start =</span> <span class="dv">27</span>, <span class="at">S =</span> area, <span class="at">K =</span> <span class="fl">0.5</span>)</span>
 <span id="cb24-4"><a href="batch-question.html#cb24-4" aria-hidden="true" tabindex="-1"></a>y1<span class="sc">$</span>Photo<span class="sc">/</span>x1<span class="sc">$</span>Photo</span></code></pre></div>
-<pre><code>##  [1] 1.412996 1.224038 1.243807 1.743526 1.227570 1.748028 1.875877 1.528633
-##  [9] 1.644515 1.226945 1.789897 1.930234 1.976792 1.533738 1.248348 1.772239
-## [17] 1.646033 1.783489 1.909334 1.883073 1.239807 1.324699 1.901282 1.766211
-## [25] 1.678695 1.343581 1.239734 1.666538 1.301757 1.518967 1.404746 1.354444</code></pre>
+<pre><code>##  [1] 1.829209 1.964462 1.234664 1.528285 1.577140 1.906377 1.276045 1.519814
+##  [9] 1.662566 1.700056 1.994811 1.902741 1.266900 1.762724 1.583281 1.951978
+## [17] 1.976781 1.689691 1.591030 1.432992 1.242986 1.527959 1.930835 1.758482
+## [25] 1.227307 1.394276 1.221219 1.324722 1.436020 1.344138 1.228020 2.009893</code></pre>
 <p>我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.</p>
 </div>
 <div id="recompute6800" class="section level3" number="2.4.2">
@@ -992,10 +992,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## Warning: Missing column names filled in: &#39;X125&#39; [125]</code></pre>
 <pre><code>## Warning: Duplicated column names deduplicated: &#39;TIME&#39; =&gt; &#39;TIME_1&#39; [69]</code></pre>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="batch-question.html#cb61-1" aria-hidden="true" tabindex="-1"></a>y3<span class="sc">$</span>A<span class="sc">/</span>x3<span class="sc">$</span>A</span></code></pre></div>
-<pre><code>##  [1] 1.866152 1.214439 1.238637 1.247930 1.646046 1.609060 1.266790 1.355414
-##  [9] 1.217429 1.225879 1.705197 1.281848 1.503278 1.675568 1.739955 1.295516
-## [17] 1.529338 1.553731 1.861396 1.919418 1.567022 1.280282 1.878595 1.241099
-## [25] 1.419302 1.332601 1.313000 1.826451</code></pre>
+<pre><code>##  [1] 1.312442 1.409527 1.487012 1.447078 1.583428 1.990973 1.806383 1.526431
+##  [9] 1.705304 1.408754 1.260599 1.552532 1.533563 1.337865 1.768876 1.828929
+## [17] 1.247098 1.845728 1.935476 1.745784 1.737399 1.963229 1.202871 1.497486
+## [25] 1.254866 1.257710 1.353663 1.952090</code></pre>
 <p><del>测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。</del></p>
 </div>
 <div id="excel-recompute-68" class="section level4" number="2.4.2.2">
@@ -1024,8 +1024,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>模拟 12 个不同的叶面积，均值为 3，方差为 0.1</p>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="batch-question.html#cb69-1" aria-hidden="true" tabindex="-1"></a>df_random <span class="ot">&lt;-</span> <span class="fu">xlconnect_read</span>(<span class="st">&quot;./data/aci-xlc.xlsx&quot;</span>, <span class="at">S =</span> <span class="fu">rnorm</span>(<span class="dv">12</span>, <span class="dv">3</span>, <span class="fl">0.1</span>))</span>
 <span id="cb69-2"><a href="batch-question.html#cb69-2" aria-hidden="true" tabindex="-1"></a>df6<span class="sc">$</span>A<span class="sc">/</span>df_random<span class="sc">$</span>A</span></code></pre></div>
-<pre><code>##  [1] 0.5034731 0.4949576 0.4630709 0.5046059 0.4934468 0.4908699 0.5255233
-##  [8] 0.4930703 0.5000578 0.5142980 0.5241086 0.5423250</code></pre>
+<pre><code>##  [1] 0.4854481 0.5104124 0.4895164 0.5142564 0.5132141 0.4756247 0.5019321
+##  [8] 0.5094888 0.4862159 0.5214241 0.4785050 0.5053407</code></pre>
 </div>
 <div id="batch-6800-xlsx" class="section level4" number="2.4.2.3">
 <h4><span class="header-section-number">2.4.2.3</span> 批量处理 LI-6800 的数据</h4>
