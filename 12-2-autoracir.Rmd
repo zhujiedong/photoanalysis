@@ -326,7 +326,7 @@ fit_racir_rev <- fitaci(zrev,
 
 RACiR 的结果：
 
-```{r, filter-fit-plot1-rev, echo = FALSE, fig.cap="ACi 拟合结果的图形"}
+```{r, filter-fit-plot1-rev, echo = FALSE, fig.cap="RACiR 反向测量拟合结果的图形"}
 plot(fit_racir_rev)
 ```
 
