@@ -22,6 +22,15 @@ knitr::kable(head(style1[, 1:6]),  longtable = TRUE, booktabs = TRUE, caption = 
           PPFD  = "Qin", Rd = "Rd"))
 ```
 
+
+---
+
+> 注：我个人觉得这样使用对于 LI-6800 来讲十分不方便，修改了一下 `plantecophys`，专门给 LI-6800 使用，具体可参考:
+
+1.[使用示例](https://mp.weixin.qq.com/s?__biz=MzU4ODI3NjkzMg==&mid=2247484404&idx=1&sn=d239f828729afb6a3f6e99840f2ae580&chksm=fdde765fcaa9ff495d2bccaeafbdf7e2f277d049dc5c6adb6dda732acba29ab89cb166947084&mpshare=1&scene=1&srcid=1117xK7YP4teJLDvMqin9Sgf&sharer_sharetime=1605599821632&sharer_shareid=54a1abf54404775401f1afca5de45145&key=bf89f9a930e5471c34caab372884db37d25c335995749574e006f066cb416fb41ba01a2f69a3731482d05a92f7dc00398f5d8d1f847a524e226ab794caff8ea178345558686bb885d13916942d992b349b14905c8e7853860700ff1285c5a18a21dbf60af892e0ded188ed442d1d0168dd7c06de8f984d4ae2a98035b2592292&ascene=1&uin=MzMzODgyNDY5Mw%3D%3D&devicetype=Windows+10+x64&version=6300002f&lang=zh_CN&exportkey=A0TNUwEPJDhBuUPV1y9veGY%3D&pass_ticket=mdhrxAzIfs74t2CBHIkfTz7IvbpYSartOOH1ofi44h03G2TjZhlDYLS8QC1%2F0ynL&wx_header=0)
+
+2. [plantecophys2](https://github.com/zhujiedong/plantecophys2)
+
 ## 光响应曲线注意事项 {#notice}
 
 光响应曲线的拟合相对简单，仅需要光强和光合速率的值，其中需要修改的部分仅为光强的赋值部分，在文件名一致的前提下，修改如下代码即可：

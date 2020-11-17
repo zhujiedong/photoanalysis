@@ -155,11 +155,8 @@ ggplot(data = show, aes(x, y, group = a, color=a)) +
 
 该方法实际为使用 `nls2` 来实现，具体方法参考 @nls2 的文章，可简单概括为使用一系列的起始值梯度（例如下面的代码中， alpha 的取值在 0.01 到 0.08 之间 ），然后软件循序使用不同的起始值，即排列组合所有的起始值序列，最终找到合适的值，具体实现如下：
 
-```{r, echo=FALSE}
-options(warn = -1)
-```
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(nls2)
 
 grid.test <- expand.grid(list(

@@ -48,7 +48,7 @@ caption = 'jiptest DC 数据批量导入数据后的样式')
  `jiptest` 是 jiptest 的核心函数，用于所有数据的 jip test 分析，函数仅包一个参数，测量数据的保存文件夹路径。
  `jip_dctest` 与 `jip_test` 相似，用于连续光测量数据的分析。
  
-```{r, jiptest}
+```{r, jiptest, message=FALSE, warning=FALSE}
 jip_results <- jip_test("./data/ojip")
 ```
 
@@ -60,7 +60,7 @@ knitr::kable(head(jip_results),  longtable = TRUE, booktabs = TRUE,
              caption = 'jiptest 输出的计算参数')
 ```
 
-```{r, dcjiptest, message=FALSE}
+```{r, dcjiptest, message=FALSE, warning=FALSE}
 dcjip_results <- jip_dctest("./data/ojip")
 ```
 
@@ -81,17 +81,31 @@ write.csv(dcjip_results, "d:/data/dcjip_resluts.csv")
 ```
 
 
-### `jip_plot` 及 `jip_dcplot` 函数 {#plotfluor}
+### 图像查看 函数 {#plotfluor}
 
-`jip_plot` 和 `jip_dcplot` 基于 `ggplot2`，用于快速预览所有测量结果的 ojip 曲线。函数仅有一个参数，即保存数据文件夹的路径，使用如下：
+~~`jip_plot` 和 `jip_dcplot` 基于 `ggplot2`，用于快速预览所有测量结果的 ojip 曲线。函数仅有一个参数，即保存数据文件夹的路径，使用如下：~~
+
+因为遇到一些比较熟练使用 R 客户的需求，希望能够定制话的对结果进行作图，于 2020 年 11 月 17 日添加 `plot.jip` 方法，使用 R base plot 进行作图，同时为了减轻负担，将 `stringr` 的代码统统用 base R 替换掉，减少依赖，数据分析的时候用法不变，但是作图希望定制话图形的话可以使用：
 
 
-```{r, acplot, fig.cap="调制式测量的 ojip 曲线的快速预览", message=FALSE}
-jip_plot("./data/ojip")
+```{r, acplotjip, fig.cap="调制式测量的 ojip 曲线的快速预览(base R)", message=FALSE}
+plot(jipdata)
 ```
 
-```{r, dcplot, fig.cap="连续式测量的 ojip 曲线的快速预览", message=FALSE}
-jip_dcplot("./data/ojip")
+```{r, dcplotjip, fig.cap="连续式测量的 ojip 曲线的快速预览(base R)", message=FALSE}
+plot(dcjipdata)
+```
+
+实际上就是使用了 base R 的 `plot` 函数，那么一些定制化，如修改文字、大小等功能可以很方便的实现，具体参考 `?plot` 即可，默认使用了一部分定制化的参数，方便数据的快速查看。注意，目前使用同时查看的测量曲线，建议不超过 8 条，否则颜色会有重复，当然，太多了可能也看不清楚了。
+
+如果还是喜欢默认的 `ggplot2` 风格（我不建议用了）那么使用下面的方式来使用`jip_plot` 和 `jip_dcplot`。
+
+```{r, acplot, fig.cap="调制式测量的 ojip 曲线的快速预览", message=FALSE, warning=FALSE}
+jiptest:::jip_plot("./data/ojip")
+```
+
+```{r, dcplot, fig.cap="连续式测量的 ojip 曲线的快速预览", message=FALSE, warning=FALSE}
+jiptest:::jip_dcplot("./data/ojip")
 ```
 
 ojip 调制式测量光 ojip 曲线的快速预览如图 \@ref(fig:acplot)

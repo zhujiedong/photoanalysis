@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2020-11-11" />
+<meta name="date" content="2020-11-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -281,7 +281,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.12.2" data-path="anay-6800.html"><a href="anay-6800.html#jiptest_pack"><i class="fa fa-check"></i><b>10.12.2</b> <code>jiptest</code> 软件包安装</a></li>
 <li class="chapter" data-level="10.12.3" data-path="anay-6800.html"><a href="anay-6800.html#readfluor"><i class="fa fa-check"></i><b>10.12.3</b> <code>read_files</code> 及 <code>read_dcfiles</code> 函数</a></li>
 <li class="chapter" data-level="10.12.4" data-path="anay-6800.html"><a href="anay-6800.html#testfluor"><i class="fa fa-check"></i><b>10.12.4</b> <code>jip_test</code> 及 <code>jip_dctest</code> 函数</a></li>
-<li class="chapter" data-level="10.12.5" data-path="anay-6800.html"><a href="anay-6800.html#plotfluor"><i class="fa fa-check"></i><b>10.12.5</b> <code>jip_plot</code> 及 <code>jip_dcplot</code> 函数</a></li>
+<li class="chapter" data-level="10.12.5" data-path="anay-6800.html"><a href="anay-6800.html#plotfluor"><i class="fa fa-check"></i><b>10.12.5</b> 图像查看 函数</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="pca-anylysis.html"><a href="pca-anylysis.html"><i class="fa fa-check"></i><b>11</b> 大话 PCA</a>
@@ -493,20 +493,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="mult_try" class="section level2" number="9.3">
 <h2><span class="header-section-number">9.3</span> 自动多次尝试法</h2>
 <p>该方法实际为使用 <code>nls2</code> 来实现，具体方法参考 <span class="citation"><a href="references.html#ref-nls2" role="doc-biblioref">Bouvier and Huet</a> (<a href="references.html#ref-nls2" role="doc-biblioref">1994</a>)</span> 的文章，可简单概括为使用一系列的起始值梯度（例如下面的代码中， alpha 的取值在 0.01 到 0.08 之间 ），然后软件循序使用不同的起始值，即排列组合所有的起始值序列，最终找到合适的值，具体实现如下：</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="start-con.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nls2)</span></code></pre></div>
-<pre><code>## Loading required package: proto</code></pre>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="start-con.html#cb141-1" aria-hidden="true" tabindex="-1"></a>grid.test <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="fu">list</span>(</span>
-<span id="cb141-2"><a href="start-con.html#cb141-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Am=</span><span class="fu">c</span>(<span class="dv">12</span>),</span>
-<span id="cb141-3"><a href="start-con.html#cb141-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fu">seq</span>(<span class="fl">0.01</span>, <span class="fl">0.08</span>, <span class="at">by =</span><span class="fl">0.01</span>),</span>
-<span id="cb141-4"><a href="start-con.html#cb141-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Rd =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3</span>),</span>
-<span id="cb141-5"><a href="start-con.html#cb141-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">theta=</span><span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="dv">1</span>, <span class="at">by =</span> <span class="fl">0.1</span>)</span>
-<span id="cb141-6"><a href="start-con.html#cb141-6" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb141-7"><a href="start-con.html#cb141-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb141-8"><a href="start-con.html#cb141-8" aria-hidden="true" tabindex="-1"></a>lrcnls2 <span class="ot">&lt;-</span> <span class="fu">nls2</span>(lrc_A <span class="sc">~</span> </span>
-<span id="cb141-9"><a href="start-con.html#cb141-9" aria-hidden="true" tabindex="-1"></a>        (<span class="dv">1</span><span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>theta))<span class="sc">*</span></span>
-<span id="cb141-10"><a href="start-con.html#cb141-10" aria-hidden="true" tabindex="-1"></a>        (alpha<span class="sc">*</span>lrc_Q<span class="sc">+</span>Am<span class="sc">-</span><span class="fu">sqrt</span>((alpha<span class="sc">*</span>lrc_Q<span class="sc">+</span>Am)<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> </span>
-<span id="cb141-11"><a href="start-con.html#cb141-11" aria-hidden="true" tabindex="-1"></a>                               <span class="dv">4</span><span class="sc">*</span>alpha<span class="sc">*</span>theta<span class="sc">*</span>Am<span class="sc">*</span>lrc_Q))<span class="sc">-</span> </span>
-<span id="cb141-12"><a href="start-con.html#cb141-12" aria-hidden="true" tabindex="-1"></a>        Rd, <span class="at">start =</span> grid.test, <span class="at">algorithm =</span> <span class="st">&quot;brute-force&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="start-con.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nls2)</span>
+<span id="cb139-2"><a href="start-con.html#cb139-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb139-3"><a href="start-con.html#cb139-3" aria-hidden="true" tabindex="-1"></a>grid.test <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="fu">list</span>(</span>
+<span id="cb139-4"><a href="start-con.html#cb139-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Am=</span><span class="fu">c</span>(<span class="dv">12</span>),</span>
+<span id="cb139-5"><a href="start-con.html#cb139-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fu">seq</span>(<span class="fl">0.01</span>, <span class="fl">0.08</span>, <span class="at">by =</span><span class="fl">0.01</span>),</span>
+<span id="cb139-6"><a href="start-con.html#cb139-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Rd =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3</span>),</span>
+<span id="cb139-7"><a href="start-con.html#cb139-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">theta=</span><span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="dv">1</span>, <span class="at">by =</span> <span class="fl">0.1</span>)</span>
+<span id="cb139-8"><a href="start-con.html#cb139-8" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb139-9"><a href="start-con.html#cb139-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb139-10"><a href="start-con.html#cb139-10" aria-hidden="true" tabindex="-1"></a>lrcnls2 <span class="ot">&lt;-</span> <span class="fu">nls2</span>(lrc_A <span class="sc">~</span> </span>
+<span id="cb139-11"><a href="start-con.html#cb139-11" aria-hidden="true" tabindex="-1"></a>        (<span class="dv">1</span><span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>theta))<span class="sc">*</span></span>
+<span id="cb139-12"><a href="start-con.html#cb139-12" aria-hidden="true" tabindex="-1"></a>        (alpha<span class="sc">*</span>lrc_Q<span class="sc">+</span>Am<span class="sc">-</span><span class="fu">sqrt</span>((alpha<span class="sc">*</span>lrc_Q<span class="sc">+</span>Am)<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> </span>
+<span id="cb139-13"><a href="start-con.html#cb139-13" aria-hidden="true" tabindex="-1"></a>                               <span class="dv">4</span><span class="sc">*</span>alpha<span class="sc">*</span>theta<span class="sc">*</span>Am<span class="sc">*</span>lrc_Q))<span class="sc">-</span> </span>
+<span id="cb139-14"><a href="start-con.html#cb139-14" aria-hidden="true" tabindex="-1"></a>        Rd, <span class="at">start =</span> grid.test, <span class="at">algorithm =</span> <span class="st">&quot;brute-force&quot;</span>)</span></code></pre></div>
 <pre><code>## Error in numericDeriv(form[[3L]], names(ind), env) : 
 ##   Missing value or an infinity produced when evaluating the model
 ## Error in numericDeriv(form[[3L]], names(ind), env) : 
@@ -539,7 +539,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   Missing value or an infinity produced when evaluating the model
 ## Error in numericDeriv(form[[3L]], names(ind), env) : 
 ##   Missing value or an infinity produced when evaluating the model</code></pre>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="start-con.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lrcnls2)</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="start-con.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lrcnls2)</span></code></pre></div>
 <pre><code>## 
 ## Formula: lrc_A ~ (1/(2 * theta)) * (alpha * lrc_Q + Am - sqrt((alpha * 
 ##     lrc_Q + Am)^2 - 4 * alpha * theta * Am * lrc_Q)) - Rd
@@ -558,9 +558,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Number of iterations to convergence: 320 
 ## Achieved convergence tolerance: NA</code></pre>
 <p>通过结果可以看到，虽然和之前采用手动方法判定的结果比较接近，但是还是略有差异，可以看一下他们各自的结果同测量值的重合程度：</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="start-con.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lrc_Q, lrc_A)</span>
-<span id="cb145-2"><a href="start-con.html#cb145-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(lrc_Q,  <span class="fu">predict</span>(lrcnls2), <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span>
-<span id="cb145-3"><a href="start-con.html#cb145-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(lrc_Q,  <span class="fu">predict</span>(lrcnls_manual), <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="start-con.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lrc_Q, lrc_A)</span>
+<span id="cb143-2"><a href="start-con.html#cb143-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(lrc_Q,  <span class="fu">predict</span>(lrcnls2), <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb143-3"><a href="start-con.html#cb143-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(lrc_Q,  <span class="fu">predict</span>(lrcnls_manual), <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
 <div class="figure"><span id="fig:mcomp"></span>
 <img src="bookdown_files/figure-html/mcomp-1.png" alt="两种方法结果的对比展示" width="672" />
 <p class="caption">

@@ -51,7 +51,6 @@ library(racir)
 em1 <- read.csv("./data/racirem/em-1.csv")
 le1 <- read.csv("./data/racirle/le-1.csv")
 find_cut(em1)
-
 ```
 
 上述代码查看参比室 $CO_2$ 浓度在两者之间的数据，确定后面代码使用的 `mincut`, `maxcut` 范围。此处我选择的范围如下问代码：
@@ -178,7 +177,8 @@ fit_racir <- fitaci(z,
                    Ci = "Ci",
                    PPFD  = "Qin",
                    Rd = "Rd"
-                ))
+                ), alpha = 1,
+               theta = 1.2)
 fit_normal <- fitaci(aci,
                varnames =
                  list(
@@ -187,7 +187,8 @@ fit_normal <- fitaci(aci,
                    Ci = "Ci",
                    PPFD  = "Qin",
                    Rd = "Rd"
-                 ))
+                 ), alpha = 1,
+               theta = 1.2)
 ```
 
 RACiR 的结果：
@@ -321,7 +322,8 @@ fit_racir_rev <- fitaci(zrev,
                    Ci = "Ci",
                    PPFD  = "Qin",
                    Rd = "Rd"
-                ))
+                ), alpha = 1,
+               theta = 1.2)
 ```
 
 RACiR 的结果：
