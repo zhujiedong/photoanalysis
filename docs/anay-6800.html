@@ -4170,7 +4170,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <th align="right">data_file2</th>
 <th align="right">data_file3</th>
 <th align="right">data_file4</th>
-<th align="right">NA</th>
+<th align="right">data_file5</th>
 </tr>
 </thead>
 <tbody>
@@ -4234,7 +4234,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <th align="right">data_file2</th>
 <th align="right">data_file3</th>
 <th align="right">data_file4</th>
-<th align="right">NA</th>
+<th align="right">data_file5</th>
 </tr>
 </thead>
 <tbody>
@@ -4316,7 +4316,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 图 10.34: 调制式测量的 ojip 曲线的快速预览(base R)
 </p>
 </div>
-<p>下图使用默认的<strong>进行标准化</strong>荧光信号的图形，只是修改了图例的位置和纵坐标的标签：</p>
+<p>图 <a href="anay-6800.html#fig:dcplotjip">10.35</a> 使用默认的<strong>进行标准化</strong>荧光信号的图形，只是修改了图例的位置和纵坐标的标签：</p>
 <div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="anay-6800.html#cb333-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dcjipdata, <span class="at">legend_pos =</span> <span class="st">&quot;bottomright&quot;</span>, <span class="at">ylab =</span> <span class="st">&#39;Normalized fluorescence signals&#39;</span>,)</span></code></pre></div>
 <div class="figure"><span id="fig:dcplotjip"></span>
 <img src="bookdown_files/figure-html/dcplotjip-1.png" alt="连续式测量的 ojip 曲线的快速预览(base R)" width="672" />
@@ -4326,7 +4326,6 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 </div>
 <p>实际上就是使用了 base R 的 <code>plot</code> 函数，其他定制的作图功能，可参考 <code>?plot</code> 和 <a href="https://github.com/zhujiedong/jiptest">jiptest</a>。</p>
 <p>原来使用的 <del><code>jip_plot</code> 和 <code>jip_dcplot</code></del> 已经删除，不再使用。</p>
-<p>ojip 连续式测量光 ojip 曲线的快速预览如图 <a href="anay-6800.html#fig:dcplotjip">10.35</a></p>
 <p><strong>建议在开始分析数据前，使用如上方式作图查看数据质量，若使用调制光数据测量的荧光信号太弱，数据点太散，则可以使用连续光测量信号进行分析，对于归一化的荧光参数，二者几乎无差别，当然避免陷入被动的最好方式还是最开始测量时注意检查数据质量</strong></p>
 
 </div>
@@ -4382,7 +4381,7 @@ gitbook.start({
 },
 "download": ["bookdown.pdf"],
 "toc": {
-"collapse": "none"
+"collapse": "section"
 }
 });
 });

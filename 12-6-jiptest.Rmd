@@ -55,7 +55,7 @@ jip_results <- jip_test("./data/ojip")
 ```{r, jipres, echo=FALSE}
 names(jip_results) <- c("parameters", "data_file1", 
                         "data_file2", "data_file3",
-                        "data_file4")
+                        "data_file4", "data_file5")
 knitr::kable(head(jip_results),  longtable = TRUE, booktabs = TRUE, 
              caption = 'jiptest 输出的计算参数')
 ```
@@ -67,7 +67,7 @@ dcjip_results <- jip_dctest("./data/ojip")
 ```{r, dcjipres, echo=FALSE}
 names(dcjip_results) <- c("parameters", "data_file1", 
                         "data_file2", "data_file3",
-                        "data_file4")
+                        "data_file4","data_file5")
 knitr::kable(head(dcjip_results),  longtable = TRUE, booktabs = TRUE, 
              caption = 'jiptest DC 数据输出的计算参数')
 ```
