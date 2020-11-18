@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2020-11-17" />
+<meta name="date" content="2020-11-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -281,7 +281,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.12.2" data-path="anay-6800.html"><a href="anay-6800.html#jiptest_pack"><i class="fa fa-check"></i><b>10.12.2</b> <code>jiptest</code> 软件包安装</a></li>
 <li class="chapter" data-level="10.12.3" data-path="anay-6800.html"><a href="anay-6800.html#readfluor"><i class="fa fa-check"></i><b>10.12.3</b> <code>read_files</code> 及 <code>read_dcfiles</code> 函数</a></li>
 <li class="chapter" data-level="10.12.4" data-path="anay-6800.html"><a href="anay-6800.html#testfluor"><i class="fa fa-check"></i><b>10.12.4</b> <code>jip_test</code> 及 <code>jip_dctest</code> 函数</a></li>
-<li class="chapter" data-level="10.12.5" data-path="anay-6800.html"><a href="anay-6800.html#plotfluor"><i class="fa fa-check"></i><b>10.12.5</b> 图像查看 函数</a></li>
+<li class="chapter" data-level="10.12.5" data-path="anay-6800.html"><a href="anay-6800.html#plotfluor"><i class="fa fa-check"></i><b>10.12.5</b> 图像查看函数</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="pca-anylysis.html"><a href="pca-anylysis.html"><i class="fa fa-check"></i><b>11</b> 大话 PCA</a>
@@ -4294,41 +4294,39 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <span id="cb331-3"><a href="anay-6800.html#cb331-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(dcjip_results, <span class="st">&quot;d:/data/dcjip_resluts.csv&quot;</span>)</span></code></pre></div>
 </div>
 <div id="plotfluor" class="section level3" number="10.12.5">
-<h3><span class="header-section-number">10.12.5</span> 图像查看 函数</h3>
-<p><del><code>jip_plot</code> 和 <code>jip_dcplot</code> 基于 <code>ggplot2</code>，用于快速预览所有测量结果的 ojip 曲线。函数仅有一个参数，即保存数据文件夹的路径，使用如下：</del></p>
+<h3><span class="header-section-number">10.12.5</span> 图像查看函数</h3>
 <p>因为遇到一些比较熟练使用 R 客户的需求，希望能够定制话的对结果进行作图，于 2020 年 11 月 17 日添加 <code>plot.jip</code> 方法，使用 R base plot 进行作图，同时为了减轻负担，将 <code>stringr</code> 的代码统统用 base R 替换掉，减少依赖，数据分析的时候用法不变，但是作图希望定制话图形的话可以使用：</p>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="anay-6800.html#cb332-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(jipdata)</span></code></pre></div>
+<p>例如 <a href="anay-6800.html#fig:acplotjip">10.34</a> 使用原始信号值，定制化 legend 图形输出：</p>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="anay-6800.html#cb332-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(jipdata,</span>
+<span id="cb332-2"><a href="anay-6800.html#cb332-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">add_leg =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb332-3"><a href="anay-6800.html#cb332-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="fu">palette.colors</span>(<span class="at">n =</span> <span class="dv">5</span>,  <span class="st">&quot;set 1&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>),</span>
+<span id="cb332-4"><a href="anay-6800.html#cb332-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Demodulated signals&quot;</span>, <span class="at">pch =</span> <span class="dv">14</span>, <span class="at">normalized =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb332-5"><a href="anay-6800.html#cb332-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb332-6"><a href="anay-6800.html#cb332-6" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(</span>
+<span id="cb332-7"><a href="anay-6800.html#cb332-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;topleft&quot;</span>,</span>
+<span id="cb332-8"><a href="anay-6800.html#cb332-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>(jipdata<span class="sc">$</span>SOURCE),</span>
+<span id="cb332-9"><a href="anay-6800.html#cb332-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">palette.colors</span>(<span class="at">n =</span> <span class="dv">5</span>,  <span class="st">&quot;set 1&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>),</span>
+<span id="cb332-10"><a href="anay-6800.html#cb332-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">14</span>,</span>
+<span id="cb332-11"><a href="anay-6800.html#cb332-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb332-12"><a href="anay-6800.html#cb332-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">pt.cex =</span> <span class="fl">1.2</span>,</span>
+<span id="cb332-13"><a href="anay-6800.html#cb332-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
 <div class="figure"><span id="fig:acplotjip"></span>
 <img src="bookdown_files/figure-html/acplotjip-1.png" alt="调制式测量的 ojip 曲线的快速预览(base R)" width="672" />
 <p class="caption">
 图 10.34: 调制式测量的 ojip 曲线的快速预览(base R)
 </p>
 </div>
-<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="anay-6800.html#cb333-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dcjipdata)</span></code></pre></div>
+<p>下图使用默认的<strong>进行标准化</strong>荧光信号的图形，只是修改了图例的位置和纵坐标的标签：</p>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="anay-6800.html#cb333-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dcjipdata, <span class="at">legend_pos =</span> <span class="st">&quot;bottomright&quot;</span>, <span class="at">ylab =</span> <span class="st">&#39;Normalized fluorescence signals&#39;</span>,)</span></code></pre></div>
 <div class="figure"><span id="fig:dcplotjip"></span>
 <img src="bookdown_files/figure-html/dcplotjip-1.png" alt="连续式测量的 ojip 曲线的快速预览(base R)" width="672" />
 <p class="caption">
 图 10.35: 连续式测量的 ojip 曲线的快速预览(base R)
 </p>
 </div>
-<p>实际上就是使用了 base R 的 <code>plot</code> 函数，那么一些定制化，如修改文字、大小等功能可以很方便的实现，具体参考 <code>?plot</code> 即可，默认使用了一部分定制化的参数，方便数据的快速查看。注意，目前使用同时查看的测量曲线，建议不超过 8 条，否则颜色会有重复，当然，太多了可能也看不清楚了。</p>
-<p>如果还是喜欢默认的 <code>ggplot2</code> 风格（我不建议用了）那么使用下面的方式来使用<code>jip_plot</code> 和 <code>jip_dcplot</code>。</p>
-<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="anay-6800.html#cb334-1" aria-hidden="true" tabindex="-1"></a>jiptest<span class="sc">:::</span><span class="fu">jip_plot</span>(<span class="st">&quot;./data/ojip&quot;</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:acplot"></span>
-<img src="bookdown_files/figure-html/acplot-1.png" alt="调制式测量的 ojip 曲线的快速预览" width="672" />
-<p class="caption">
-图 10.36: 调制式测量的 ojip 曲线的快速预览
-</p>
-</div>
-<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="anay-6800.html#cb335-1" aria-hidden="true" tabindex="-1"></a>jiptest<span class="sc">:::</span><span class="fu">jip_dcplot</span>(<span class="st">&quot;./data/ojip&quot;</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:dcplot"></span>
-<img src="bookdown_files/figure-html/dcplot-1.png" alt="连续式测量的 ojip 曲线的快速预览" width="672" />
-<p class="caption">
-图 10.37: 连续式测量的 ojip 曲线的快速预览
-</p>
-</div>
-<p>ojip 调制式测量光 ojip 曲线的快速预览如图 <a href="anay-6800.html#fig:acplot">10.36</a></p>
-<p>ojip 连续式测量光 ojip 曲线的快速预览如图 <a href="anay-6800.html#fig:dcplot">10.37</a></p>
+<p>实际上就是使用了 base R 的 <code>plot</code> 函数，其他定制的作图功能，可参考 <code>?plot</code> 和 <a href="https://github.com/zhujiedong/jiptest">jiptest</a>。</p>
+<p>原来使用的 <del><code>jip_plot</code> 和 <code>jip_dcplot</code></del> 已经删除，不再使用。</p>
+<p>ojip 连续式测量光 ojip 曲线的快速预览如图 <a href="anay-6800.html#fig:dcplotjip">10.35</a></p>
 <p><strong>建议在开始分析数据前，使用如上方式作图查看数据质量，若使用调制光数据测量的荧光信号太弱，数据点太散，则可以使用连续光测量信号进行分析，对于归一化的荧光参数，二者几乎无差别，当然避免陷入被动的最好方式还是最开始测量时注意检查数据质量</strong></p>
 
 </div>

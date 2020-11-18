@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2020-11-17" />
+<meta name="date" content="2020-11-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -281,7 +281,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.12.2" data-path="anay-6800.html"><a href="anay-6800.html#jiptest_pack"><i class="fa fa-check"></i><b>10.12.2</b> <code>jiptest</code> 软件包安装</a></li>
 <li class="chapter" data-level="10.12.3" data-path="anay-6800.html"><a href="anay-6800.html#readfluor"><i class="fa fa-check"></i><b>10.12.3</b> <code>read_files</code> 及 <code>read_dcfiles</code> 函数</a></li>
 <li class="chapter" data-level="10.12.4" data-path="anay-6800.html"><a href="anay-6800.html#testfluor"><i class="fa fa-check"></i><b>10.12.4</b> <code>jip_test</code> 及 <code>jip_dctest</code> 函数</a></li>
-<li class="chapter" data-level="10.12.5" data-path="anay-6800.html"><a href="anay-6800.html#plotfluor"><i class="fa fa-check"></i><b>10.12.5</b> 图像查看 函数</a></li>
+<li class="chapter" data-level="10.12.5" data-path="anay-6800.html"><a href="anay-6800.html#plotfluor"><i class="fa fa-check"></i><b>10.12.5</b> 图像查看函数</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="pca-anylysis.html"><a href="pca-anylysis.html"><i class="fa fa-check"></i><b>11</b> 大话 PCA</a>
@@ -364,13 +364,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>如果我们做一条通过中心点并与 PC1 垂直的线，并不断旋转这条线使其满足：所有投影于其上的点，他们的距离最大，也就是变异最大，这样就做出了第二个主成份，PC2，如图 <a href="pca-anylysis.html#fig:pc3">11.4</a>。<strong>就这样不断的变换，一般情况下，我们可以使用 2~3 个主成份来解释绝大部分数据所展示的信息（所有数据都尽可能少的损失信息投影于其上）</strong>。</p>
 <p>以上为基本变换，如果我们使用 R 计算 PCA (这里推荐两个包 <code>factoextra</code> 和 <code>FactoMineR</code>)，查看其结果：</p>
-<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="pca-anylysis.html#cb336-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;FactoMineR&quot;</span>)</span>
-<span id="cb336-2"><a href="pca-anylysis.html#cb336-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;factoextra&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="pca-anylysis.html#cb334-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;FactoMineR&quot;</span>)</span>
+<span id="cb334-2"><a href="pca-anylysis.html#cb334-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;factoextra&quot;</span>)</span></code></pre></div>
 <pre><code>## Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa</code></pre>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="pca-anylysis.html#cb338-1" aria-hidden="true" tabindex="-1"></a>ir <span class="ot">&lt;-</span> iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span>
-<span id="cb338-2"><a href="pca-anylysis.html#cb338-2" aria-hidden="true" tabindex="-1"></a>ir_pca <span class="ot">&lt;-</span> <span class="fu">PCA</span>(ir, <span class="at">graph =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb338-3"><a href="pca-anylysis.html#cb338-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb338-4"><a href="pca-anylysis.html#cb338-4" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_eig</span>(ir_pca, <span class="at">addlabels =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="pca-anylysis.html#cb336-1" aria-hidden="true" tabindex="-1"></a>ir <span class="ot">&lt;-</span> iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span>
+<span id="cb336-2"><a href="pca-anylysis.html#cb336-2" aria-hidden="true" tabindex="-1"></a>ir_pca <span class="ot">&lt;-</span> <span class="fu">PCA</span>(ir, <span class="at">graph =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb336-3"><a href="pca-anylysis.html#cb336-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb336-4"><a href="pca-anylysis.html#cb336-4" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_eig</span>(ir_pca, <span class="at">addlabels =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <div class="figure"><span id="fig:scree"></span>
 <img src="bookdown_files/figure-html/scree-1.png" alt="iris 碎石图" width="672" />
 <p class="caption">
@@ -379,7 +379,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>我们可以看到，前两个成分可以解释数据 95% 以上的变异，所以我们可以只使用主成份 1 和主成份 2 对我们的结果进行解释。</p>
 <p>既然我们使用两个主成份解释整个数据，那么我们怎么把四个性状都放在这个图上呢？这就需要载荷图来展示了，如图 <a href="pca-anylysis.html#fig:loadingpca">11.6</a></p>
-<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="pca-anylysis.html#cb339-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(ir_pca)</span></code></pre></div>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="pca-anylysis.html#cb337-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(ir_pca)</span></code></pre></div>
 <div class="figure"><span id="fig:loadingpca"></span>
 <img src="bookdown_files/figure-html/loadingpca-1.png" alt="iris 载荷图" width="672" />
 <p class="caption">
@@ -388,7 +388,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>怎么解释呢，因为原始的数据点相当于在坐标轴上，这几个性状分布的产生类似于原始的数据点在拉拽某个性状，影响强的偏向某一方向，换句话说，<strong>这些性状决定主成份时有不同的权重，也就是对主成份影响的权重大小。同时他们是有方向的，如果两个性状方向接近，也就是夹角非常小，说明他们有较强的正相关性，例如图中的花瓣的长宽，如果他们互相垂直，那说明他们无相关性，例如图中花萼的长宽，如果夹角非常大，例如他们几乎在一条直线上，说明具有显著的负相关</strong>。其本质还是所有的单位向量（本例有四个性状，各个性状中心化后形成的轴，也就是向量）在现在的这个二维平面的位置。</p>
 <p>而如果我想通过这些性状来对鸢尾分类，怎么看呢？那就需要得分图来展示了，如图 <a href="pca-anylysis.html#fig:scorepca">11.7</a> ，得分图本质是各个品种的每个观测值在各个轴上的长度，也就是得分，所以其值都是每个物种性状的加权，每个点代表了每个物种的观测值。</p>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="pca-anylysis.html#cb340-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(ir_pca, <span class="at">repel =</span> <span class="cn">TRUE</span>, <span class="at">col.ind=</span> iris<span class="sc">$</span>Species)</span></code></pre></div>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="pca-anylysis.html#cb338-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(ir_pca, <span class="at">repel =</span> <span class="cn">TRUE</span>, <span class="at">col.ind=</span> iris<span class="sc">$</span>Species)</span></code></pre></div>
 <div class="figure"><span id="fig:scorepca"></span>
 <img src="bookdown_files/figure-html/scorepca-1.png" alt="iris 得分图" width="672" />
 <p class="caption">
@@ -476,18 +476,18 @@ finaldata = rowfeaturevector \times rowdataajust
 <h3><span class="header-section-number">11.2.2</span> 手动实现过程</h3>
 <div id="av_val" class="section level4" number="11.2.2.1">
 <h4><span class="header-section-number">11.2.2.1</span> 均值的计算</h4>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="pca-anylysis.html#cb341-1" aria-hidden="true" tabindex="-1"></a>iris_mean <span class="ot">&lt;-</span> <span class="fu">apply</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="dv">2</span>, <span class="cf">function</span>(x) x <span class="sc">-</span> <span class="fu">mean</span>(x))</span></code></pre></div>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="pca-anylysis.html#cb339-1" aria-hidden="true" tabindex="-1"></a>iris_mean <span class="ot">&lt;-</span> <span class="fu">apply</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="dv">2</span>, <span class="cf">function</span>(x) x <span class="sc">-</span> <span class="fu">mean</span>(x))</span></code></pre></div>
 <p>我只使用了前四列的性状数据，仅仅是方便结果的展示。</p>
 </div>
 <div id="cov_val" class="section level4" number="11.2.2.2">
 <h4><span class="header-section-number">11.2.2.2</span> 计算协方差矩阵</h4>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="pca-anylysis.html#cb342-1" aria-hidden="true" tabindex="-1"></a>iris_cov <span class="ot">&lt;-</span> <span class="fu">cov</span>(iris_mean)</span></code></pre></div>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="pca-anylysis.html#cb340-1" aria-hidden="true" tabindex="-1"></a>iris_cov <span class="ot">&lt;-</span> <span class="fu">cov</span>(iris_mean)</span></code></pre></div>
 </div>
 <div id="eig_val" class="section level4" number="11.2.2.3">
 <h4><span class="header-section-number">11.2.2.3</span> 计算特征值和特征向量</h4>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="pca-anylysis.html#cb343-1" aria-hidden="true" tabindex="-1"></a>iris_eigen <span class="ot">&lt;-</span> <span class="fu">eigen</span>(iris_cov)</span></code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="pca-anylysis.html#cb341-1" aria-hidden="true" tabindex="-1"></a>iris_eigen <span class="ot">&lt;-</span> <span class="fu">eigen</span>(iris_cov)</span></code></pre></div>
 <p>这里就可以看到之前提到的，特征值和特征向量是根据协方差矩阵计算的。我们选取特征值最大的两个，他们的特征值之和已经占所有的特征值之和相当大的比例：</p>
-<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="pca-anylysis.html#cb344-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(iris_eigen<span class="sc">$</span>values[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])<span class="sc">/</span><span class="fu">sum</span>(iris_eigen<span class="sc">$</span>values)</span></code></pre></div>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="pca-anylysis.html#cb342-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(iris_eigen<span class="sc">$</span>values[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])<span class="sc">/</span><span class="fu">sum</span>(iris_eigen<span class="sc">$</span>values)</span></code></pre></div>
 <pre><code>## [1] 0.9776852</code></pre>
 <p>也就是说特征值对应的前两项是我们最终降维所需要的，即最终的两个主轴为 <span class="math inline">\(150 \times 2\)</span> 维矩阵，即我们原来的 <span class="math inline">\(150 \times 4\)</span> 的矩阵乘以我们选取的前两个特征值对应的 <span class="math inline">\(4 \times 2\)</span> 组成的矩阵。</p>
 <p>实际应用中我们不需要这么做了，因为太浪费时间了，我们直接用函数来得到结果即可。</p>
@@ -496,13 +496,13 @@ finaldata = rowfeaturevector \times rowdataajust
 <div id="prcom" class="section level3" number="11.2.3">
 <h3><span class="header-section-number">11.2.3</span> <code>prcomp</code> 的实现</h3>
 <p>我们用 <code>prcomp</code> 来简化实现过程，注意，根据 <span class="citation"><a href="references.html#ref-kemp2003modern" role="doc-biblioref">Kemp</a> (<a href="references.html#ref-kemp2003modern" role="doc-biblioref">2003</a>)</span>，我们把 iris 数据对数化一下，并提取所有物种名字：</p>
-<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="pca-anylysis.html#cb346-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;iris&quot;</span>)</span>
-<span id="cb346-2"><a href="pca-anylysis.html#cb346-2" aria-hidden="true" tabindex="-1"></a>iris_pca <span class="ot">&lt;-</span> <span class="fu">log</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span>
-<span id="cb346-3"><a href="pca-anylysis.html#cb346-3" aria-hidden="true" tabindex="-1"></a>iris_species <span class="ot">&lt;-</span> iris<span class="sc">$</span>Species</span></code></pre></div>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="pca-anylysis.html#cb344-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;iris&quot;</span>)</span>
+<span id="cb344-2"><a href="pca-anylysis.html#cb344-2" aria-hidden="true" tabindex="-1"></a>iris_pca <span class="ot">&lt;-</span> <span class="fu">log</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span>
+<span id="cb344-3"><a href="pca-anylysis.html#cb344-3" aria-hidden="true" tabindex="-1"></a>iris_species <span class="ot">&lt;-</span> iris<span class="sc">$</span>Species</span></code></pre></div>
 <p>需要注意，我们处理时使用特征中心化。即每一维的数据都减去该维的均值。这里的“维”指的就是一个特征（或属性），变换之后每一维的均值都变成了0 (参考 <a href="pca-anylysis.html#eq:despca">(11.2)</a> )。</p>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="pca-anylysis.html#cb347-1" aria-hidden="true" tabindex="-1"></a>value_pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(iris_pca, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb347-2"><a href="pca-anylysis.html#cb347-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 查看结果</span></span>
-<span id="cb347-3"><a href="pca-anylysis.html#cb347-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(value_pca)</span></code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="pca-anylysis.html#cb345-1" aria-hidden="true" tabindex="-1"></a>value_pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(iris_pca, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb345-2"><a href="pca-anylysis.html#cb345-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 查看结果</span></span>
+<span id="cb345-3"><a href="pca-anylysis.html#cb345-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(value_pca)</span></code></pre></div>
 <pre><code>## Importance of components:
 ##                           PC1    PC2     PC3     PC4
 ## Standard deviation     1.7125 0.9524 0.36470 0.16568

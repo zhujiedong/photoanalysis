@@ -81,36 +81,38 @@ write.csv(dcjip_results, "d:/data/dcjip_resluts.csv")
 ```
 
 
-### 图像查看 函数 {#plotfluor}
-
-~~`jip_plot` 和 `jip_dcplot` 基于 `ggplot2`，用于快速预览所有测量结果的 ojip 曲线。函数仅有一个参数，即保存数据文件夹的路径，使用如下：~~
+### 图像查看函数 {#plotfluor}
 
 因为遇到一些比较熟练使用 R 客户的需求，希望能够定制话的对结果进行作图，于 2020 年 11 月 17 日添加 `plot.jip` 方法，使用 R base plot 进行作图，同时为了减轻负担，将 `stringr` 的代码统统用 base R 替换掉，减少依赖，数据分析的时候用法不变，但是作图希望定制话图形的话可以使用：
 
+例如 \@ref(fig:acplotjip) 使用原始信号值，定制化 legend 图形输出：
 
 ```{r, acplotjip, fig.cap="调制式测量的 ojip 曲线的快速预览(base R)", message=FALSE}
-plot(jipdata)
+plot(jipdata,
+     add_leg = FALSE,
+     col = palette.colors(n = 5,  "set 1", alpha = 0.8),
+     main = "Demodulated signals", pch = 14, normalized = FALSE)
+
+legend(
+  "topleft",
+  unique(jipdata$SOURCE),
+  col = palette.colors(n = 5,  "set 1", alpha = 0.8),
+  pch = 14,
+  cex = 0.6,
+  pt.cex = 1.2,
+  bty = "n")
 ```
+
+图  \@ref(fig:dcplotjip) 使用默认的**进行标准化**荧光信号的图形，只是修改了图例的位置和纵坐标的标签：
 
 ```{r, dcplotjip, fig.cap="连续式测量的 ojip 曲线的快速预览(base R)", message=FALSE}
-plot(dcjipdata)
+plot(dcjipdata, legend_pos = "bottomright", ylab = 'Normalized fluorescence signals',)
 ```
 
-实际上就是使用了 base R 的 `plot` 函数，那么一些定制化，如修改文字、大小等功能可以很方便的实现，具体参考 `?plot` 即可，默认使用了一部分定制化的参数，方便数据的快速查看。注意，目前使用同时查看的测量曲线，建议不超过 8 条，否则颜色会有重复，当然，太多了可能也看不清楚了。
+实际上就是使用了 base R 的 `plot` 函数，其他定制的作图功能，可参考 `?plot` 和 [jiptest](https://github.com/zhujiedong/jiptest)。
 
-如果还是喜欢默认的 `ggplot2` 风格（我不建议用了）那么使用下面的方式来使用`jip_plot` 和 `jip_dcplot`。
+原来使用的 ~~`jip_plot` 和 `jip_dcplot`~~ 已经删除，不再使用。
 
-```{r, acplot, fig.cap="调制式测量的 ojip 曲线的快速预览", message=FALSE, warning=FALSE}
-jiptest:::jip_plot("./data/ojip")
-```
-
-```{r, dcplot, fig.cap="连续式测量的 ojip 曲线的快速预览", message=FALSE, warning=FALSE}
-jiptest:::jip_dcplot("./data/ojip")
-```
-
-ojip 调制式测量光 ojip 曲线的快速预览如图 \@ref(fig:acplot)
-
-ojip 连续式测量光 ojip 曲线的快速预览如图 \@ref(fig:dcplot)
 
 **建议在开始分析数据前，使用如上方式作图查看数据质量，若使用调制光数据测量的荧光信号太弱，数据点太散，则可以使用连续光测量信号进行分析，对于归一化的荧光参数，二者几乎无差别，当然避免陷入被动的最好方式还是最开始测量时注意检查数据质量**
 

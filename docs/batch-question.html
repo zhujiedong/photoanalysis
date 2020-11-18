@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2020-11-17" />
+<meta name="date" content="2020-11-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -281,7 +281,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.12.2" data-path="anay-6800.html"><a href="anay-6800.html#jiptest_pack"><i class="fa fa-check"></i><b>10.12.2</b> <code>jiptest</code> 软件包安装</a></li>
 <li class="chapter" data-level="10.12.3" data-path="anay-6800.html"><a href="anay-6800.html#readfluor"><i class="fa fa-check"></i><b>10.12.3</b> <code>read_files</code> 及 <code>read_dcfiles</code> 函数</a></li>
 <li class="chapter" data-level="10.12.4" data-path="anay-6800.html"><a href="anay-6800.html#testfluor"><i class="fa fa-check"></i><b>10.12.4</b> <code>jip_test</code> 及 <code>jip_dctest</code> 函数</a></li>
-<li class="chapter" data-level="10.12.5" data-path="anay-6800.html"><a href="anay-6800.html#plotfluor"><i class="fa fa-check"></i><b>10.12.5</b> 图像查看 函数</a></li>
+<li class="chapter" data-level="10.12.5" data-path="anay-6800.html"><a href="anay-6800.html#plotfluor"><i class="fa fa-check"></i><b>10.12.5</b> 图像查看函数</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="pca-anylysis.html"><a href="pca-anylysis.html"><i class="fa fa-check"></i><b>11</b> 大话 PCA</a>
@@ -927,10 +927,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb24-2"><a href="batch-question.html#cb24-2" aria-hidden="true" tabindex="-1"></a>area <span class="ot">&lt;-</span> <span class="dv">6</span> <span class="sc">-</span> <span class="fu">runif</span>(<span class="dv">32</span>, <span class="dv">1</span>, <span class="dv">3</span>)</span>
 <span id="cb24-3"><a href="batch-question.html#cb24-3" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> <span class="fu">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>,  <span class="at">header_line =</span> <span class="dv">17</span>, <span class="at">data_start =</span> <span class="dv">27</span>, <span class="at">S =</span> area, <span class="at">K =</span> <span class="fl">0.5</span>)</span>
 <span id="cb24-4"><a href="batch-question.html#cb24-4" aria-hidden="true" tabindex="-1"></a>y1<span class="sc">$</span>Photo<span class="sc">/</span>x1<span class="sc">$</span>Photo</span></code></pre></div>
-<pre><code>##  [1] 1.711842 1.664493 1.450744 1.606173 1.749887 1.796569 1.547462 1.315017
-##  [9] 1.786708 1.520083 1.290210 1.276627 1.238820 1.453207 1.609321 1.234447
-## [17] 1.803274 1.276255 1.214152 1.911035 1.463504 1.383882 1.292481 1.891391
-## [25] 1.419878 1.264762 1.893751 1.993208 1.558681 1.296042 1.324062 1.378358</code></pre>
+<pre><code>##  [1] 1.279103 1.502414 1.278056 1.611592 1.381807 1.841333 1.222558 1.535021
+##  [9] 1.797930 1.543909 1.882258 1.652499 1.430591 1.323847 1.775926 1.419244
+## [17] 1.199113 1.283991 1.238563 1.583977 1.625008 1.401120 1.564482 1.202347
+## [25] 1.365124 1.271153 1.298017 1.487162 1.792579 1.275396 1.244872 1.629990</code></pre>
 <p>我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.</p>
 </div>
 <div id="recompute6800" class="section level3" number="2.4.2">
@@ -992,10 +992,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## Warning: Missing column names filled in: &#39;X125&#39; [125]</code></pre>
 <pre><code>## Warning: Duplicated column names deduplicated: &#39;TIME&#39; =&gt; &#39;TIME_1&#39; [69]</code></pre>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="batch-question.html#cb61-1" aria-hidden="true" tabindex="-1"></a>y3<span class="sc">$</span>A<span class="sc">/</span>x3<span class="sc">$</span>A</span></code></pre></div>
-<pre><code>##  [1] 1.294809 1.306112 1.309754 1.399905 1.936604 1.967990 1.777520 1.326672
-##  [9] 1.573867 1.293722 1.767682 1.416248 1.288064 1.448322 1.245900 1.481105
-## [17] 1.220536 1.648557 1.252046 1.543189 1.964582 1.924199 1.830768 1.300610
-## [25] 1.567579 1.212720 1.828676 1.768516</code></pre>
+<pre><code>##  [1] 1.931874 1.364717 1.600764 1.966672 1.819780 1.620720 1.399876 1.577530
+##  [9] 1.506908 1.796109 1.225624 1.682323 1.289105 1.544350 1.273939 1.435163
+## [17] 1.341867 1.207093 1.559521 1.497206 1.434816 1.496270 1.339996 1.627921
+## [25] 1.360051 1.252919 1.738767 1.824763</code></pre>
 <p><del>测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。</del></p>
 </div>
 <div id="excel-recompute-68" class="section level4" number="2.4.2.2">
@@ -1024,8 +1024,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>模拟 12 个不同的叶面积，均值为 3，方差为 0.1</p>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="batch-question.html#cb69-1" aria-hidden="true" tabindex="-1"></a>df_random <span class="ot">&lt;-</span> <span class="fu">xlconnect_read</span>(<span class="st">&quot;./data/aci-xlc.xlsx&quot;</span>, <span class="at">S =</span> <span class="fu">rnorm</span>(<span class="dv">12</span>, <span class="dv">3</span>, <span class="fl">0.1</span>))</span>
 <span id="cb69-2"><a href="batch-question.html#cb69-2" aria-hidden="true" tabindex="-1"></a>df6<span class="sc">$</span>A<span class="sc">/</span>df_random<span class="sc">$</span>A</span></code></pre></div>
-<pre><code>##  [1] 0.4933398 0.5185160 0.4900379 0.5010758 0.5042370 0.4876335 0.5328429
-##  [8] 0.4791091 0.5421968 0.4938906 0.4978446 0.5249230</code></pre>
+<pre><code>##  [1] 0.4903055 0.4928138 0.4910502 0.4985755 0.4920386 0.4942409 0.5044537
+##  [8] 0.5139546 0.5223215 0.4990999 0.5038589 0.4856844</code></pre>
 </div>
 <div id="batch-6800-xlsx" class="section level4" number="2.4.2.3">
 <h4><span class="header-section-number">2.4.2.3</span> 批量处理 LI-6800 的数据</h4>

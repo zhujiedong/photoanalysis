@@ -182,7 +182,7 @@
 
 \title{使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据}
 \author{祝介东 北京力高泰科技有限公司}
-\date{2020-11-17}
+\date{2020-11-18}
 
 \begin{document}
 \maketitle
@@ -601,10 +601,10 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.579073 1.501740 1.542176 1.528177 1.364331 1.439344 1.673660 1.201694
-##  [9] 1.819070 1.244356 1.393616 1.290223 1.884076 1.556310 1.402608 1.501840
-## [17] 1.328353 1.268127 1.422529 1.752215 1.719004 1.378980 1.402086 1.535250
-## [25] 1.363521 1.247785 1.488431 1.225667 1.294746 1.770865 1.605067 1.462061
+##  [1] 1.371910 1.769052 1.246493 1.316032 1.540800 1.711134 1.265882 1.318966
+##  [9] 1.517863 1.772444 1.772948 1.642021 1.812465 1.299188 1.589297 1.452774
+## [17] 1.367211 1.307469 1.754486 1.563403 1.501228 1.802148 1.428013 1.257174
+## [25] 1.969265 1.880303 1.752014 1.240448 1.521257 1.441897 1.212062 1.341332
 \end{verbatim}
 
 我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.
@@ -798,10 +798,10 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.534630 1.908637 1.385042 1.883238 1.842859 1.203654 1.259905 1.213358
-##  [9] 1.231914 1.770978 1.604164 1.260361 1.276029 1.593392 1.980809 1.394126
-## [17] 1.205658 1.329265 1.214801 1.555646 1.368850 1.938286 1.591491 1.647189
-## [25] 1.820577 1.315144 1.968053 1.780774
+##  [1] 1.382135 1.380416 1.308446 1.974878 1.924921 1.745458 1.317766 1.333090
+##  [9] 1.683451 1.274328 1.972720 1.435123 1.521032 1.316833 1.471370 1.750687
+## [17] 1.451007 1.262359 1.207457 1.897262 1.778712 1.532809 1.503191 1.414401
+## [25] 1.841135 1.481648 1.273588 1.238842
 \end{verbatim}
 
 \sout{测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。}
@@ -875,8 +875,8 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 0.5321714 0.5137896 0.5147278 0.4834552 0.5046826 0.4962697 0.4995047
-##  [8] 0.5362518 0.4924592 0.4901329 0.4976742 0.5362240
+##  [1] 0.5233025 0.5020360 0.5240882 0.5135303 0.5097947 0.4980680 0.4968160
+##  [8] 0.5240031 0.4956808 0.4833159 0.4931120 0.5219074
 \end{verbatim}
 
 \hypertarget{batch-6800-xlsx}{%
@@ -7808,15 +7808,27 @@ Tfmax & 171.998 & 276.016 & 300.016 & 288.016 & 212.016\\
 \end{Shaded}
 
 \hypertarget{plotfluor}{%
-\subsection{图像查看 函数}\label{plotfluor}}
-
-\sout{\mbox{\texttt{jip\_plot}} 和 \mbox{\texttt{jip\_dcplot}} 基于 \mbox{\texttt{ggplot2}}，用于快速预览所有测量结果的 ojip 曲线。函数仅有一个参数，即保存数据文件夹的路径，使用如下：}
+\subsection{图像查看函数}\label{plotfluor}}
 
 因为遇到一些比较熟练使用 R 客户的需求，希望能够定制话的对结果进行作图，于 2020 年 11 月 17 日添加 \texttt{plot.jip} 方法，使用 R base plot 进行作图，同时为了减轻负担，将 \texttt{stringr} 的代码统统用 base R 替换掉，减少依赖，数据分析的时候用法不变，但是作图希望定制话图形的话可以使用：
 
+例如 \ref{fig:acplotjip} 使用原始信号值，定制化 legend 图形输出：
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{plot}\NormalTok{(jipdata)}
+\FunctionTok{plot}\NormalTok{(jipdata,}
+     \AttributeTok{add\_leg =} \ConstantTok{FALSE}\NormalTok{,}
+     \AttributeTok{col =} \FunctionTok{palette.colors}\NormalTok{(}\AttributeTok{n =} \DecValTok{5}\NormalTok{,  }\StringTok{"set 1"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.8}\NormalTok{),}
+     \AttributeTok{main =} \StringTok{"Demodulated signals"}\NormalTok{, }\AttributeTok{pch =} \DecValTok{14}\NormalTok{, }\AttributeTok{normalized =} \ConstantTok{FALSE}\NormalTok{)}
+
+\FunctionTok{legend}\NormalTok{(}
+  \StringTok{"topleft"}\NormalTok{,}
+  \FunctionTok{unique}\NormalTok{(jipdata}\SpecialCharTok{$}\NormalTok{SOURCE),}
+  \AttributeTok{col =} \FunctionTok{palette.colors}\NormalTok{(}\AttributeTok{n =} \DecValTok{5}\NormalTok{,  }\StringTok{"set 1"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.8}\NormalTok{),}
+  \AttributeTok{pch =} \DecValTok{14}\NormalTok{,}
+  \AttributeTok{cex =} \FloatTok{0.6}\NormalTok{,}
+  \AttributeTok{pt.cex =} \FloatTok{1.2}\NormalTok{,}
+  \AttributeTok{bty =} \StringTok{"n"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -7826,9 +7838,11 @@ Tfmax & 171.998 & 276.016 & 300.016 & 288.016 & 212.016\\
 \caption{\label{fig:acplotjip}调制式测量的 ojip 曲线的快速预览(base R)}
 \end{figure}
 
+图 \ref{fig:dcplotjip} 使用默认的\textbf{进行标准化}荧光信号的图形，只是修改了图例的位置和纵坐标的标签：
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{plot}\NormalTok{(dcjipdata)}
+\FunctionTok{plot}\NormalTok{(dcjipdata, }\AttributeTok{legend\_pos =} \StringTok{"bottomright"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{\textquotesingle{}Normalized fluorescence signals\textquotesingle{}}\NormalTok{,)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -7838,37 +7852,9 @@ Tfmax & 171.998 & 276.016 & 300.016 & 288.016 & 212.016\\
 \caption{\label{fig:dcplotjip}连续式测量的 ojip 曲线的快速预览(base R)}
 \end{figure}
 
-实际上就是使用了 base R 的 \texttt{plot} 函数，那么一些定制化，如修改文字、大小等功能可以很方便的实现，具体参考 \texttt{?plot} 即可，默认使用了一部分定制化的参数，方便数据的快速查看。注意，目前使用同时查看的测量曲线，建议不超过 8 条，否则颜色会有重复，当然，太多了可能也看不清楚了。
+实际上就是使用了 base R 的 \texttt{plot} 函数，其他定制的作图功能，可参考 \texttt{?plot} 和 \href{https://github.com/zhujiedong/jiptest}{jiptest}。
 
-如果还是喜欢默认的 \texttt{ggplot2} 风格（我不建议用了）那么使用下面的方式来使用\texttt{jip\_plot} 和 \texttt{jip\_dcplot}。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{jiptest}\SpecialCharTok{:::}\FunctionTok{jip\_plot}\NormalTok{(}\StringTok{"./data/ojip"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}
-\centering
-\includegraphics{bookdown_files/figure-latex/acplot-1.pdf}
-\caption{\label{fig:acplot}调制式测量的 ojip 曲线的快速预览}
-\end{figure}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{jiptest}\SpecialCharTok{:::}\FunctionTok{jip\_dcplot}\NormalTok{(}\StringTok{"./data/ojip"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}
-\centering
-\includegraphics{bookdown_files/figure-latex/dcplot-1.pdf}
-\caption{\label{fig:dcplot}连续式测量的 ojip 曲线的快速预览}
-\end{figure}
-
-ojip 调制式测量光 ojip 曲线的快速预览如图 \ref{fig:acplot}
-
-ojip 连续式测量光 ojip 曲线的快速预览如图 \ref{fig:dcplot}
+原来使用的 \sout{\mbox{\texttt{jip\_plot}} 和 \mbox{\texttt{jip\_dcplot}}} 已经删除，不再使用。
 
 \textbf{建议在开始分析数据前，使用如上方式作图查看数据质量，若使用调制光数据测量的荧光信号太弱，数据点太散，则可以使用连续光测量信号进行分析，对于归一化的荧光参数，二者几乎无差别，当然避免陷入被动的最好方式还是最开始测量时注意检查数据质量}
 
@@ -8173,7 +8159,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 ## [28] geeM_0.10.1          highr_0.8            rlang_0.4.8         
 ## [31] readxl_1.3.1         rstudioapi_0.13      farver_2.0.3        
 ## [34] generics_0.1.0       zip_2.1.1            dplyr_1.0.2         
-## [37] car_3.0-10           magrittr_1.5         leaps_3.1           
+## [37] car_3.0-10           magrittr_2.0.1       leaps_3.1           
 ## [40] Matrix_1.2-18        Rcpp_1.0.5           munsell_0.5.0       
 ## [43] abind_1.4-5          geepack_1.3-1        lifecycle_0.2.0     
 ## [46] scatterplot3d_0.3-41 stringi_1.5.3        yaml_2.2.1          
@@ -8183,7 +8169,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 ## [58] splines_4.0.3        hms_0.5.3            knitr_1.30          
 ## [61] pillar_1.4.6         ggpubr_0.4.0         ggsignif_0.6.0      
 ## [64] glue_1.4.2           evaluate_0.14        data.table_1.13.2   
-## [67] png_0.1-7            vctrs_0.3.4          tweenr_1.0.1        
+## [67] png_0.1-7            vctrs_0.3.5          tweenr_1.0.1        
 ## [70] cellranger_1.1.0     gtable_0.3.0         polyclip_1.10-0     
 ## [73] tidyr_1.1.2          openxlsx_4.2.3       xfun_0.19           
 ## [76] ggforce_0.3.2        broom_0.7.2          rstatix_0.6.0       

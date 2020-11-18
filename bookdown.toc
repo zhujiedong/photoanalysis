@@ -108,15 +108,15 @@
 \contentsline {subsection}{\numberline {10.12.2}\texttt {jiptest} 软件包安装}{237}{subsection.10.12.2}%
 \contentsline {subsection}{\numberline {10.12.3}\texttt {read\_files} 及 \texttt {read\_dcfiles} 函数}{237}{subsection.10.12.3}%
 \contentsline {subsection}{\numberline {10.12.4}\texttt {jip\_test} 及 \texttt {jip\_dctest} 函数}{239}{subsection.10.12.4}%
-\contentsline {subsection}{\numberline {10.12.5}图像查看 函数}{240}{subsection.10.12.5}%
-\contentsline {chapter}{\numberline {11}大话 PCA}{245}{chapter.11}%
-\contentsline {section}{\numberline {11.1}几何解释}{245}{section.11.1}%
-\contentsline {section}{\numberline {11.2}线性代数解释}{252}{section.11.2}%
-\contentsline {subsection}{\numberline {11.2.1}特征向量与特征值}{252}{subsection.11.2.1}%
-\contentsline {subsection}{\numberline {11.2.2}手动实现过程}{253}{subsection.11.2.2}%
-\contentsline {subsubsection}{\numberline {11.2.2.1}均值的计算}{253}{subsubsection.11.2.2.1}%
-\contentsline {subsubsection}{\numberline {11.2.2.2}计算协方差矩阵}{253}{subsubsection.11.2.2.2}%
-\contentsline {subsubsection}{\numberline {11.2.2.3}计算特征值和特征向量}{253}{subsubsection.11.2.2.3}%
-\contentsline {subsection}{\numberline {11.2.3}\texttt {prcomp} 的实现}{254}{subsection.11.2.3}%
-\contentsline {chapter}{\numberline {12}环境与配置}{257}{chapter.12}%
-\contentsline {fm}{参考文献}{259}{chapter*.76}%
+\contentsline {subsection}{\numberline {10.12.5}图像查看函数}{240}{subsection.10.12.5}%
+\contentsline {chapter}{\numberline {11}大话 PCA}{243}{chapter.11}%
+\contentsline {section}{\numberline {11.1}几何解释}{243}{section.11.1}%
+\contentsline {section}{\numberline {11.2}线性代数解释}{250}{section.11.2}%
+\contentsline {subsection}{\numberline {11.2.1}特征向量与特征值}{250}{subsection.11.2.1}%
+\contentsline {subsection}{\numberline {11.2.2}手动实现过程}{251}{subsection.11.2.2}%
+\contentsline {subsubsection}{\numberline {11.2.2.1}均值的计算}{251}{subsubsection.11.2.2.1}%
+\contentsline {subsubsection}{\numberline {11.2.2.2}计算协方差矩阵}{251}{subsubsection.11.2.2.2}%
+\contentsline {subsubsection}{\numberline {11.2.2.3}计算特征值和特征向量}{251}{subsubsection.11.2.2.3}%
+\contentsline {subsection}{\numberline {11.2.3}\texttt {prcomp} 的实现}{252}{subsection.11.2.3}%
+\contentsline {chapter}{\numberline {12}环境与配置}{255}{chapter.12}%
+\contentsline {fm}{参考文献}{257}{chapter*.74}%
