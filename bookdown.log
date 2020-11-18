@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.9.25)  18 NOV 2020 12:59
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.9.25)  18 NOV 2020 18:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2250,26 +2250,26 @@ Overfull \hbox (100.62036pt too wide) in paragraph at lines 592--592
 
 
 Overfull \hbox (100.62036pt too wide) in paragraph at lines 608--608
-[]\TU/lmtt/m/n/10.53937 ##  [1] 1.371910 1.769052 1.246493 1.316032 1.540800 1.
-711134 1.265882 1.318966[] 
+[]\TU/lmtt/m/n/10.53937 ##  [1] 1.482481 1.653305 1.206235 1.559056 1.513893 1.
+623506 1.479394 1.798829[] 
  []
 
 
 Overfull \hbox (100.62036pt too wide) in paragraph at lines 608--608
-[]\TU/lmtt/m/n/10.53937 ##  [9] 1.517863 1.772444 1.772948 1.642021 1.812465 1.
-299188 1.589297 1.452774[] 
+[]\TU/lmtt/m/n/10.53937 ##  [9] 1.934000 1.394444 1.683142 1.799843 1.255601 1.
+658208 1.223881 1.534035[] 
  []
 
 
 Overfull \hbox (100.62036pt too wide) in paragraph at lines 608--608
-[]\TU/lmtt/m/n/10.53937 ## [17] 1.367211 1.307469 1.754486 1.563403 1.501228 1.
-802148 1.428013 1.257174[] 
+[]\TU/lmtt/m/n/10.53937 ## [17] 1.536302 1.335701 1.902342 1.505976 1.307244 1.
+455878 1.531215 1.783767[] 
  []
 
 [9]
 Overfull \hbox (100.62036pt too wide) in paragraph at lines 608--608
-[]\TU/lmtt/m/n/10.53937 ## [25] 1.969265 1.880303 1.752014 1.240448 1.521257 1.
-441897 1.212062 1.341332[] 
+[]\TU/lmtt/m/n/10.53937 ## [25] 1.233643 1.668215 1.275313 1.225583 1.513470 1.
+256764 1.264154 1.633432[] 
  []
 
 LaTeX Font Info:    Font shape `TU/SimSun(0)/b/n' will be
@@ -2419,20 +2419,20 @@ Overfull \hbox (67.42136pt too wide) in paragraph at lines 792--792
 
 
 Overfull \hbox (100.62036pt too wide) in paragraph at lines 805--805
-[]\TU/lmtt/m/n/10.53937 ##  [1] 1.382135 1.380416 1.308446 1.974878 1.924921 1.
-745458 1.317766 1.333090[] 
+[]\TU/lmtt/m/n/10.53937 ##  [1] 1.846631 1.596837 1.501391 1.318448 1.633193 1.
+543435 1.750833 1.371685[] 
  []
 
 
 Overfull \hbox (100.62036pt too wide) in paragraph at lines 805--805
-[]\TU/lmtt/m/n/10.53937 ##  [9] 1.683451 1.274328 1.972720 1.435123 1.521032 1.
-316833 1.471370 1.750687[] 
+[]\TU/lmtt/m/n/10.53937 ##  [9] 1.275043 1.334818 1.335498 1.389389 1.246141 1.
+601298 1.439951 1.668577[] 
  []
 
 
 Overfull \hbox (100.62036pt too wide) in paragraph at lines 805--805
-[]\TU/lmtt/m/n/10.53937 ## [17] 1.451007 1.262359 1.207457 1.897262 1.778712 1.
-532809 1.503191 1.414401[] 
+[]\TU/lmtt/m/n/10.53937 ## [17] 1.599520 1.569803 1.205467 1.409243 1.588737 1.
+527307 1.240066 1.406194[] 
  []
 
 
@@ -2454,8 +2454,8 @@ Overfull \hbox (67.4213pt too wide) in paragraph at lines 853--853
 
 [14]
 Overfull \hbox (89.55394pt too wide) in paragraph at lines 880--880
-[]\TU/lmtt/m/n/10.53937 ##  [1] 0.5233025 0.5020360 0.5240882 0.5135303 0.50979
-47 0.4980680 0.4968160[] 
+[]\TU/lmtt/m/n/10.53937 ##  [1] 0.4905420 0.5256413 0.5121775 0.5228624 0.50398
+35 0.4958748 0.5047968[] 
  []
 
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10.53937> not available
@@ -5490,7 +5490,7 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 [236
 
 ] [237] [238]
-Overfull \hbox (2.9409pt too wide) in alignment at lines 7764--7777
+Overfull \hbox (10.26576pt too wide) in alignment at lines 7764--7777
  [] [] [] [] [] [] 
  []
 
