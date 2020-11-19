@@ -55,14 +55,16 @@
 \contentsline {figure}{\numberline {10.26}{\ignorespaces 不同导度下的 A VS Ci\relax }}{230}{figure.caption.60}%
 \contentsline {figure}{\numberline {10.27}{\ignorespaces 不同总导度下的各个导度的变化\relax }}{232}{figure.caption.61}%
 \contentsline {figure}{\numberline {10.28}{\ignorespaces Rubisco不同失活程度下的下 A VS Ci\relax }}{235}{figure.caption.62}%
-\contentsline {figure}{\numberline {10.29}{\ignorespaces 调制式测量的 ojip 曲线的快速预览(base R)\relax }}{241}{figure.caption.65}%
-\contentsline {figure}{\numberline {10.30}{\ignorespaces 连续式测量的 ojip 曲线的快速预览(base R)\relax }}{242}{figure.caption.66}%
+\contentsline {figure}{\numberline {10.29}{\ignorespaces 默认调制光图形查看\relax }}{241}{figure.caption.65}%
+\contentsline {figure}{\numberline {10.30}{\ignorespaces 默认连续光图形查看\relax }}{241}{figure.caption.66}%
+\contentsline {figure}{\numberline {10.31}{\ignorespaces 定制调制光图形示例\relax }}{243}{figure.caption.67}%
+\contentsline {figure}{\numberline {10.32}{\ignorespaces 定制连续光图形示例\relax }}{244}{figure.caption.68}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {11.1}{\ignorespaces 数据的中心化\relax }}{245}{figure.caption.67}%
-\contentsline {figure}{\numberline {11.2}{\ignorespaces PC1 的诞生\relax }}{245}{figure.caption.68}%
-\contentsline {figure}{\numberline {11.3}{\ignorespaces 变异最大的极端情况\relax }}{246}{figure.caption.69}%
-\contentsline {figure}{\numberline {11.4}{\ignorespaces PC2 的诞生\relax }}{246}{figure.caption.70}%
-\contentsline {figure}{\numberline {11.5}{\ignorespaces iris 碎石图\relax }}{248}{figure.caption.71}%
-\contentsline {figure}{\numberline {11.6}{\ignorespaces iris 载荷图\relax }}{248}{figure.caption.72}%
-\contentsline {figure}{\numberline {11.7}{\ignorespaces iris 得分图\relax }}{249}{figure.caption.73}%
+\contentsline {figure}{\numberline {11.1}{\ignorespaces 数据的中心化\relax }}{247}{figure.caption.69}%
+\contentsline {figure}{\numberline {11.2}{\ignorespaces PC1 的诞生\relax }}{247}{figure.caption.70}%
+\contentsline {figure}{\numberline {11.3}{\ignorespaces 变异最大的极端情况\relax }}{248}{figure.caption.71}%
+\contentsline {figure}{\numberline {11.4}{\ignorespaces PC2 的诞生\relax }}{248}{figure.caption.72}%
+\contentsline {figure}{\numberline {11.5}{\ignorespaces iris 碎石图\relax }}{250}{figure.caption.73}%
+\contentsline {figure}{\numberline {11.6}{\ignorespaces iris 载荷图\relax }}{250}{figure.caption.74}%
+\contentsline {figure}{\numberline {11.7}{\ignorespaces iris 得分图\relax }}{251}{figure.caption.75}%
 \addvspace {10\p@ }

@@ -182,7 +182,7 @@
 
 \title{使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据}
 \author{祝介东 北京力高泰科技有限公司}
-\date{2020-11-18}
+\date{2020-11-19}
 
 \begin{document}
 \maketitle
@@ -601,10 +601,10 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.482481 1.653305 1.206235 1.559056 1.513893 1.623506 1.479394 1.798829
-##  [9] 1.934000 1.394444 1.683142 1.799843 1.255601 1.658208 1.223881 1.534035
-## [17] 1.536302 1.335701 1.902342 1.505976 1.307244 1.455878 1.531215 1.783767
-## [25] 1.233643 1.668215 1.275313 1.225583 1.513470 1.256764 1.264154 1.633432
+##  [1] 1.598753 1.250664 1.740365 1.400432 1.417064 1.284256 1.401428 1.746673
+##  [9] 1.783332 1.233558 1.623831 1.952146 1.539267 1.451276 1.529289 1.836500
+## [17] 1.503162 1.562977 1.655632 1.618727 1.519302 1.469034 1.238507 1.457476
+## [25] 1.291716 1.459273 1.645561 1.488569 1.279331 1.735687 1.774916 1.221280
 \end{verbatim}
 
 我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.
@@ -798,10 +798,10 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.846631 1.596837 1.501391 1.318448 1.633193 1.543435 1.750833 1.371685
-##  [9] 1.275043 1.334818 1.335498 1.389389 1.246141 1.601298 1.439951 1.668577
-## [17] 1.599520 1.569803 1.205467 1.409243 1.588737 1.527307 1.240066 1.406194
-## [25] 1.296005 1.368644 1.701469 1.572151
+##  [1] 1.425043 1.729016 1.205653 1.569172 1.557685 1.247158 1.330576 1.477572
+##  [9] 1.340462 1.302831 1.234009 1.708147 1.607457 1.422362 1.779894 1.319068
+## [17] 1.884380 1.804529 1.910055 1.387299 1.356805 1.726964 1.513873 1.392399
+## [25] 1.528121 1.664190 1.206062 1.447007
 \end{verbatim}
 
 \sout{测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。}
@@ -875,8 +875,8 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 0.4905420 0.5256413 0.5121775 0.5228624 0.5039835 0.4958748 0.5047968
-##  [8] 0.4753249 0.4879520 0.4793851 0.4896768 0.5148373
+##  [1] 0.4812408 0.5060493 0.4949648 0.4970402 0.4849473 0.5094292 0.4874245
+##  [8] 0.5256475 0.4849556 0.4966464 0.4961744 0.4929090
 \end{verbatim}
 
 \hypertarget{batch-6800-xlsx}{%
@@ -7680,13 +7680,27 @@ LI-6800 增加了 ojip 曲线测量功能，本功能主要是针对测量数据
 \hypertarget{jiptest_pack}{%
 \subsection{\texorpdfstring{\texttt{jiptest} 软件包安装}{jiptest 软件包安装}}\label{jiptest_pack}}
 
-目前 \texttt{jiptest} 暂时放在 github 我的软件仓库内，并没提交 CRAN，因此需要 \texttt{devtools} 的支持，然后才能从 github 安装 \texttt{jiptest}。
+请在 github 安装，有可能需要安装 \texttt{remotes}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
-\FunctionTok{library}\NormalTok{(devtools)}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"remotes"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+然后安装：
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \FunctionTok{install\_github}\NormalTok{(}\StringTok{"zhujiedong/jiptest"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+如果因为网络原因失败，可以转战 gitee:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install\_git}\NormalTok{(}\StringTok{\textquotesingle{}https://gitee.com/zhu\_jie\_dong/jiptest\textquotesingle{}}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -7694,20 +7708,28 @@ LI-6800 增加了 ojip 曲线测量功能，本功能主要是针对测量数据
 \subsection{\texorpdfstring{\texttt{read\_files} 及 \texttt{read\_dcfiles} 函数}{read\_files 及 read\_dcfiles 函数}}\label{readfluor}}
 
 \texttt{read\_files} 用于批量读取所有调制光测量数据，方便用于其他的数据分析。\textbf{函数要求所有数据必须是 \texttt{xlsx} 格式，并且所有测量数据都保存在同一文件夹内。}，如有其他文件或测量数据则会报错。
-\texttt{read\_dcfiles} 用于批量读取所有连续光测量数据，其他与 \texttt{read\_dcfiles} 相同。
+\texttt{read\_dcfiles} 用于批量读取所有连续光测量数据，其他与 \texttt{read\_dcfiles} 相同。例如我放在了 data文件夹下的 ojip 文件夹内，有五个数据文件。
 
 函数仅有一个参数，即保存数据文件夹的路径，使用如下：
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(jiptest)}
-\NormalTok{jipdata }\OtherTok{\textless{}{-}} \FunctionTok{read\_files}\NormalTok{(}\StringTok{"./data/ojip"}\NormalTok{)}
+\NormalTok{jip\_data}\OtherTok{\textless{}{-}} \FunctionTok{read\_files}\NormalTok{(}\StringTok{"data/ojip"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{jip\_dcdata }\OtherTok{\textless{}{-}} \FunctionTok{read\_dcfiles}\NormalTok{(}\StringTok{"./data/ojip"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+调制光的信号数据前 10 行如下：
+
 \begin{table}
 
-\caption{\label{tab:unnamed-chunk-65}jiptest 批量导入数据后的样式}
+\caption{\label{tab:unnamed-chunk-67}jiptest 批量导入数据后的样式}
 \centering
 \begin{tabular}[t]{rrl}
 \toprule
@@ -7724,15 +7746,11 @@ SECS & FLUOR & SOURCE\\
 \end{tabular}
 \end{table}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{dcjipdata }\OtherTok{\textless{}{-}} \FunctionTok{read\_dcfiles}\NormalTok{(}\StringTok{"./data/ojip"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+连续光的信号数据前 10 行如下：
 
 \begin{table}
 
-\caption{\label{tab:unnamed-chunk-66}jiptest DC 数据批量导入数据后的样式}
+\caption{\label{tab:unnamed-chunk-68}jiptest DC 数据批量导入数据后的样式}
 \centering
 \begin{tabular}[t]{rrl}
 \toprule
@@ -7752,48 +7770,54 @@ SECS & FLUOR & SOURCE\\
 \hypertarget{testfluor}{%
 \subsection{\texorpdfstring{\texttt{jip\_test} 及 \texttt{jip\_dctest} 函数}{jip\_test 及 jip\_dctest 函数}}\label{testfluor}}
 
-\texttt{jiptest} 是 jiptest 的核心函数，用于所有数据的 jip test 分析，函数仅包一个参数，测量数据的保存文件夹路径。
+\texttt{jiptest} 是 jiptest 的核心函数，用于所有数据的 \texttt{jiptest} 分析，函数仅包一个参数，测量数据的保存文件夹路径。
 \texttt{jip\_dctest} 与 \texttt{jip\_test} 相似，用于连续光测量数据的分析。
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{jip\_results }\OtherTok{\textless{}{-}} \FunctionTok{jip\_test}\NormalTok{(}\StringTok{"./data/ojip"}\NormalTok{)}
+\NormalTok{actest }\OtherTok{\textless{}{-}} \FunctionTok{jip\_test}\NormalTok{(}\StringTok{"./data/ojip"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{longtable}[t]{lrrrrr}
-\caption{\label{tab:jipres}jiptest 输出的计算参数}\\
-\toprule
-parameters & data\_file1 & data\_file2 & data\_file3 & data\_file4 & data\_file5\\
-\midrule
-Fo & 620.000 & 887.000 & 849.000 & 981.000 & 914.000\\
-Fm & 2609.280 & 4649.520 & 3714.270 & 4225.240 & 3754.270\\
-F300 & 1593.200 & 2181.400 & 1798.600 & 2067.800 & 2537.200\\
-FJ & 1722.900 & 2594.300 & 2104.600 & 2456.800 & 2569.000\\
-FI & 2268.950 & 4443.110 & 3547.110 & 4009.220 & 3556.530\\
-\addlinespace
-Tfmax & 159.998 & 256.016 & 316.016 & 272.016 & 200.016\\
-\bottomrule
-\end{longtable}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dcjip\_results }\OtherTok{\textless{}{-}} \FunctionTok{jip\_dctest}\NormalTok{(}\StringTok{"./data/ojip"}\NormalTok{)}
+\NormalTok{dctest }\OtherTok{\textless{}{-}} \FunctionTok{jip\_dctest}\NormalTok{(}\StringTok{"./data/ojip"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{longtable}[t]{lrrrrr}
+可以看出，对于标准化之后的参数，二者基本一致，原始信号则无法一致，因为连续光信号强度更高（所以数据的比较要在相同的测量光内进行）：
+
+调制光信号 15-24 行的数据：
+
+\begin{longtable}[t]{llrrrrr}
+\caption{\label{tab:jipres}jiptest 输出的计算参数}\\
+\toprule
+  & parameters & data\_file1 & data\_file2 & data\_file3 & data\_file4 & data\_file5\\
+\midrule
+15 & phi\_po & 0.7623866 & 0.8092276 & 0.7714221 & 0.7678238 & 0.7565439\\
+16 & phi\_ET2o & 0.3397029 & 0.4420284 & 0.4333745 & 0.4185419 & 0.3157125\\
+17 & phi\_RE1o & 0.1304306 & 0.0443938 & 0.0450048 & 0.0511261 & 0.0526707\\
+18 & psi\_ET2o & 0.4455783 & 0.5462350 & 0.5617865 & 0.5451015 & 0.4173089\\
+19 & psi\_RE1o & 0.1710820 & 0.0548595 & 0.0583401 & 0.0665857 & 0.0696201\\
+\addlinespace
+20 & delta\_RE1o & 0.3839550 & 0.1004321 & 0.1038474 & 0.1221529 & 0.1668312\\
+\bottomrule
+\end{longtable}
+
+连续光信号 15-24 行的数据：
+
+\begin{longtable}[t]{llrrrrr}
 \caption{\label{tab:dcjipres}jiptest DC 数据输出的计算参数}\\
 \toprule
-parameters & data\_file1 & data\_file2 & data\_file3 & data\_file4 & data\_file5\\
+  & parameters & data\_file1 & data\_file2 & data\_file3 & data\_file4 & data\_file5\\
 \midrule
-Fo & 98161.000 & 154000.000 & 133191.000 & 156664.000 & 153589.000\\
-Fm & 402308.000 & 713839.000 & 560610.000 & 647660.000 & 584839.000\\
-F300 & 246753.000 & 338091.000 & 275476.800 & 322859.200 & 388110.400\\
-FJ & 267827.000 & 400744.000 & 320245.000 & 376885.000 & 406671.000\\
-FI & 349985.000 & 681505.000 & 534314.000 & 614590.000 & 552253.000\\
+15 & phi\_po & 0.7560053 & 0.7842651 & 0.7624177 & 0.7581076 & 0.7373824\\
+16 & phi\_ET2o & 0.3342737 & 0.4386073 & 0.4287562 & 0.4180820 & 0.3046445\\
+17 & phi\_RE1o & 0.1300571 & 0.0452959 & 0.0469060 & 0.0510607 & 0.0557179\\
+18 & psi\_ET2o & 0.4421579 & 0.5592590 & 0.5623639 & 0.5514811 & 0.4131432\\
+19 & psi\_RE1o & 0.1720319 & 0.0577559 & 0.0615228 & 0.0673529 & 0.0755617\\
 \addlinespace
-Tfmax & 171.998 & 276.016 & 300.016 & 288.016 & 212.016\\
+20 & delta\_RE1o & 0.3890735 & 0.1032722 & 0.1094003 & 0.1221309 & 0.1828948\\
 \bottomrule
 \end{longtable}
 
@@ -7802,30 +7826,91 @@ Tfmax & 171.998 & 276.016 & 300.016 & 288.016 & 212.016\\
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# export the results of jiptest to a csv file}
-\FunctionTok{write.csv}\NormalTok{(jip\_results, }\StringTok{"d:/data/jip\_resluts.csv"}\NormalTok{)}
-\FunctionTok{write.csv}\NormalTok{(dcjip\_results, }\StringTok{"d:/data/dcjip\_resluts.csv"}\NormalTok{)}
+\FunctionTok{write.csv}\NormalTok{(actest, }\StringTok{"d:/data/jip\_resluts.csv"}\NormalTok{)}
+\FunctionTok{write.csv}\NormalTok{(dctest, }\StringTok{"d:/data/dcjip\_resluts.csv"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \hypertarget{plotfluor}{%
 \subsection{图像查看函数}\label{plotfluor}}
 
-因为遇到一些比较熟练使用 R 客户的需求，希望能够定制话的对结果进行作图，于 2020 年 11 月 17 日添加 \texttt{plot.jip} 方法，使用 R base plot 进行作图，同时为了减轻负担，将 \texttt{stringr} 的代码统统用 base R 替换掉，减少依赖，数据分析的时候用法不变，但是作图希望定制话图形的话可以使用：
+之前的预览方式已经彻底从代码中删除，不在提供。如果仅仅是简单查看结果，那么我们直接用默认参数就好，作图的数据是之前导入的数据文件：
 
-例如 \ref{fig:acplotjip} 使用原始信号值，定制化 legend 图形输出：
+默认使用标准化的荧光信号（也就是除以最大值，标准化到 0\textasciitilde1 之间，LI-6800 在 1.4 之后的版本也提供了仪器上查看的界面）。
+
+\hypertarget{default-plot-jiptest}{%
+\subsubsection{默认图形的方式}\label{default-plot-jiptest}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  默认调制光图形
+\end{enumerate}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{plot}\NormalTok{(jipdata,}
+\FunctionTok{plot}\NormalTok{(jip\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown_files/figure-latex/default-moulation-plot-ac-1.pdf}
+\caption{\label{fig:default-moulation-plot-ac}默认调制光图形查看}
+\end{figure}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  默认连续光图形
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(jip\_dcdata)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown_files/figure-latex/default-moulation-plot-dc-1.pdf}
+\caption{\label{fig:default-moulation-plot-dc}默认连续光图形查看}
+\end{figure}
+
+默认图形，仅仅查看结果是可以的，当然有些情况下需要进行调整才方便做展示用。
+
+\hypertarget{customized-plot-jiptest}{%
+\subsubsection{定制化图形的方式}\label{customized-plot-jiptest}}
+
+这个是这次改动的重点之一，例如都使用原始信号分别做上面两幅图：
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  定制调制光图形
+\end{enumerate}
+
+这里使用原始荧光信号，然后更改图例颜色等，主要是 \texttt{add\_leg\ =\ FALSE} 不增加默认的图例，以及 \texttt{normalized\ =\ FALSE} 不使用信号标准化。其他请参考帮助 \texttt{?plot.jip}。 我简单写了一下帮助文档，大家应该基本能看明白，我实在没时间。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cls }\OtherTok{\textless{}{-}} \FunctionTok{palette.colors}\NormalTok{(}\AttributeTok{n =} \DecValTok{5}\NormalTok{,  }\StringTok{"set 2"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.8}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(jip\_data,}
+     \AttributeTok{ylab =} \StringTok{\textquotesingle{}Normalized fluorescence signals\textquotesingle{}}\NormalTok{,}
      \AttributeTok{add\_leg =} \ConstantTok{FALSE}\NormalTok{,}
-     \AttributeTok{col =} \FunctionTok{palette.colors}\NormalTok{(}\AttributeTok{n =} \DecValTok{5}\NormalTok{,  }\StringTok{"set 1"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.8}\NormalTok{),}
+     \AttributeTok{def\_pch =} \DecValTok{14}\SpecialCharTok{:}\DecValTok{18}\NormalTok{,}
+     \AttributeTok{col =}\NormalTok{ cls,}
      \AttributeTok{main =} \StringTok{"Demodulated signals"}\NormalTok{, }\AttributeTok{pch =} \DecValTok{14}\NormalTok{, }\AttributeTok{normalized =} \ConstantTok{FALSE}\NormalTok{)}
 
 \FunctionTok{legend}\NormalTok{(}
   \StringTok{"topleft"}\NormalTok{,}
-  \FunctionTok{unique}\NormalTok{(jipdata}\SpecialCharTok{$}\NormalTok{SOURCE),}
-  \AttributeTok{col =} \FunctionTok{palette.colors}\NormalTok{(}\AttributeTok{n =} \DecValTok{5}\NormalTok{,  }\StringTok{"set 1"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.8}\NormalTok{),}
-  \AttributeTok{pch =} \DecValTok{14}\NormalTok{,}
+  \FunctionTok{unique}\NormalTok{(jip\_data}\SpecialCharTok{$}\NormalTok{SOURCE),}
+  \AttributeTok{col =}\NormalTok{ cls,}
+  \AttributeTok{pch =} \DecValTok{14}\SpecialCharTok{:}\DecValTok{18}\NormalTok{,}
   \AttributeTok{cex =} \FloatTok{0.6}\NormalTok{,}
   \AttributeTok{pt.cex =} \FloatTok{1.2}\NormalTok{,}
   \AttributeTok{bty =} \StringTok{"n"}\NormalTok{)}
@@ -7834,27 +7919,35 @@ Tfmax & 171.998 & 276.016 & 300.016 & 288.016 & 212.016\\
 
 \begin{figure}
 \centering
-\includegraphics{bookdown_files/figure-latex/acplotjip-1.pdf}
-\caption{\label{fig:acplotjip}调制式测量的 ojip 曲线的快速预览(base R)}
+\includegraphics{bookdown_files/figure-latex/cus-ac-plot-leg-cls-1.pdf}
+\caption{\label{fig:cus-ac-plot-leg-cls}定制调制光图形示例}
 \end{figure}
 
-图 \ref{fig:dcplotjip} 使用默认的\textbf{进行标准化}荧光信号的图形，只是修改了图例的位置和纵坐标的标签：
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  定制连续光图形
+\end{enumerate}
+
+连续光图形，只改了两个地方，图例的位置以及不显示标准化的数据。
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{plot}\NormalTok{(dcjipdata, }\AttributeTok{legend\_pos =} \StringTok{"bottomright"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{\textquotesingle{}Normalized fluorescence signals\textquotesingle{}}\NormalTok{,)}
+\FunctionTok{plot}\NormalTok{(jip\_dcdata, }\AttributeTok{legend\_pos =} \StringTok{"bottomright"}\NormalTok{, }\AttributeTok{normalized =} \ConstantTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{figure}
 \centering
-\includegraphics{bookdown_files/figure-latex/dcplotjip-1.pdf}
-\caption{\label{fig:dcplotjip}连续式测量的 ojip 曲线的快速预览(base R)}
+\includegraphics{bookdown_files/figure-latex/cus-dc-plot-leg-cls-1.pdf}
+\caption{\label{fig:cus-dc-plot-leg-cls}定制连续光图形示例}
 \end{figure}
 
-实际上就是使用了 base R 的 \texttt{plot} 函数，其他定制的作图功能，可参考 \texttt{?plot} 和 \href{https://github.com/zhujiedong/jiptest}{jiptest}。
+\textbf{关于标准化和非标准化图形差异大的问题，这个比较简单，原始信号比较低的那条线，是不同物种的不同叶片，所以不具备比较价值，我只是数据测试。}
 
-原来使用的 \sout{\mbox{\texttt{jip\_plot}} 和 \mbox{\texttt{jip\_dcplot}}} 已经删除，不再使用。
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \textbf{建议在开始分析数据前，使用如上方式作图查看数据质量，若使用调制光数据测量的荧光信号太弱，数据点太散，则可以使用连续光测量信号进行分析，对于归一化的荧光参数，二者几乎无差别，当然避免陷入被动的最好方式还是最开始测量时注意检查数据质量}
 

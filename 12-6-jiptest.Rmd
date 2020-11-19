@@ -8,67 +8,87 @@ LI-6800 增加了 ojip 曲线测量功能，本功能主要是针对测量数据
 
 ### `jiptest` 软件包安装 {#jiptest_pack}
 
-目前 `jiptest` 暂时放在 github 我的软件仓库内，并没提交 CRAN，因此需要 `devtools` 的支持，然后才能从 github 安装 `jiptest`。
+请在 github 安装，有可能需要安装 `remotes`
 
 ```{r, eval=FALSE}
+install.packages("remotes")
+```
 
-install.packages("devtools")
-library(devtools)
+然后安装：
+
+```{r, eval=FALSE}
 install_github("zhujiedong/jiptest")
 ```
+
+如果因为网络原因失败，可以转战 gitee:
+
+```{r, eval=FALSE}
+install_git('https://gitee.com/zhu_jie_dong/jiptest')
+```
+
 
 ### `read_files` 及 `read_dcfiles` 函数 {#readfluor}
 
 `read_files` 用于批量读取所有调制光测量数据，方便用于其他的数据分析。**函数要求所有数据必须是 `xlsx` 格式，并且所有测量数据都保存在同一文件夹内。**，如有其他文件或测量数据则会报错。
-`read_dcfiles` 用于批量读取所有连续光测量数据，其他与 `read_dcfiles` 相同。
+`read_dcfiles` 用于批量读取所有连续光测量数据，其他与 `read_dcfiles` 相同。例如我放在了 data文件夹下的 ojip 文件夹内，有五个数据文件。
 
 函数仅有一个参数，即保存数据文件夹的路径，使用如下：
 
 ```{r, jipdata, message=FALSE}
 library(jiptest)
-jipdata <- read_files("./data/ojip")
-```
-
-```{r, echo=FALSE, message=FALSE}
-knitr::kable(head(jipdata),  booktabs = TRUE,
-caption = 'jiptest 批量导入数据后的样式')
+jip_data<- read_files("data/ojip")
 ```
 
 ```{r, dcjipdata, message=FALSE}
-dcjipdata <- read_dcfiles("./data/ojip")
+jip_dcdata <- read_dcfiles("./data/ojip")
 ```
 
+调制光的信号数据前 10 行如下：
+
+```{r, echo=FALSE, message=FALSE}
+knitr::kable(head(jip_data),  booktabs = TRUE,
+caption = 'jiptest 批量导入数据后的样式')
+```
+
+连续光的信号数据前 10 行如下：
+
 ```{r, echo=FALSE}
-knitr::kable(head(dcjipdata),  booktabs = TRUE,
+knitr::kable(head(jip_dcdata),  booktabs = TRUE,
 caption = 'jiptest DC 数据批量导入数据后的样式')
 ```
 
 ### `jip_test` 及 `jip_dctest` 函数 {#testfluor}
 
- `jiptest` 是 jiptest 的核心函数，用于所有数据的 jip test 分析，函数仅包一个参数，测量数据的保存文件夹路径。
+ `jiptest` 是 jiptest 的核心函数，用于所有数据的 `jiptest` 分析，函数仅包一个参数，测量数据的保存文件夹路径。
  `jip_dctest` 与 `jip_test` 相似，用于连续光测量数据的分析。
  
 ```{r, jiptest, message=FALSE, warning=FALSE}
-jip_results <- jip_test("./data/ojip")
-```
-
-```{r, jipres, echo=FALSE}
-names(jip_results) <- c("parameters", "data_file1", 
-                        "data_file2", "data_file3",
-                        "data_file4", "data_file5")
-knitr::kable(head(jip_results),  longtable = TRUE, booktabs = TRUE, 
-             caption = 'jiptest 输出的计算参数')
+actest <- jip_test("./data/ojip")
 ```
 
 ```{r, dcjiptest, message=FALSE, warning=FALSE}
-dcjip_results <- jip_dctest("./data/ojip")
+dctest <- jip_dctest("./data/ojip")
 ```
 
+可以看出，对于标准化之后的参数，二者基本一致，原始信号则无法一致，因为连续光信号强度更高（所以数据的比较要在相同的测量光内进行）：
+
+调制光信号 15-24 行的数据：
+
+```{r, jipres, echo=FALSE}
+names(actest) <- c("parameters", "data_file1", 
+                        "data_file2", "data_file3",
+                        "data_file4", "data_file5")
+knitr::kable(head(actest[15:24, ], ),  longtable = TRUE, booktabs = TRUE, 
+             caption = 'jiptest 输出的计算参数')
+```
+
+连续光信号 15-24 行的数据：
+
 ```{r, dcjipres, echo=FALSE}
-names(dcjip_results) <- c("parameters", "data_file1", 
+names(dctest) <- c("parameters", "data_file1", 
                         "data_file2", "data_file3",
                         "data_file4","data_file5")
-knitr::kable(head(dcjip_results),  longtable = TRUE, booktabs = TRUE, 
+knitr::kable(head(dctest[15:24, ]),  longtable = TRUE, booktabs = TRUE, 
              caption = 'jiptest DC 数据输出的计算参数')
 ```
 
@@ -76,43 +96,71 @@ knitr::kable(head(dcjip_results),  longtable = TRUE, booktabs = TRUE,
 
 ```{r, eval=FALSE}
 # export the results of jiptest to a csv file
-write.csv(jip_results, "d:/data/jip_resluts.csv")
-write.csv(dcjip_results, "d:/data/dcjip_resluts.csv")
+write.csv(actest, "d:/data/jip_resluts.csv")
+write.csv(dctest, "d:/data/dcjip_resluts.csv")
 ```
 
 
 ### 图像查看函数 {#plotfluor}
 
-因为遇到一些比较熟练使用 R 客户的需求，希望能够定制话的对结果进行作图，于 2020 年 11 月 17 日添加 `plot.jip` 方法，使用 R base plot 进行作图，同时为了减轻负担，将 `stringr` 的代码统统用 base R 替换掉，减少依赖，数据分析的时候用法不变，但是作图希望定制话图形的话可以使用：
+之前的预览方式已经彻底从代码中删除，不在提供。如果仅仅是简单查看结果，那么我们直接用默认参数就好，作图的数据是之前导入的数据文件：
 
-例如 \@ref(fig:acplotjip) 使用原始信号值，定制化 legend 图形输出：
+默认使用标准化的荧光信号（也就是除以最大值，标准化到 0~1 之间，LI-6800 在 1.4 之后的版本也提供了仪器上查看的界面）。
 
-```{r, acplotjip, fig.cap="调制式测量的 ojip 曲线的快速预览(base R)", message=FALSE}
-plot(jipdata,
+#### 默认图形的方式 {#default-plot-jiptest}
+
+1. 默认调制光图形 
+
+```{r, default-moulation-plot-ac, fig.cap="默认调制光图形查看"}
+plot(jip_data)
+```
+
+2. 默认连续光图形 
+
+```{r, default-moulation-plot-dc, fig.cap="默认连续光图形查看"}
+plot(jip_dcdata)
+```
+
+默认图形，仅仅查看结果是可以的，当然有些情况下需要进行调整才方便做展示用。
+
+#### 定制化图形的方式 {#customized-plot-jiptest}
+
+这个是这次改动的重点之一，例如都使用原始信号分别做上面两幅图：
+
+1. 定制调制光图形
+
+这里使用原始荧光信号，然后更改图例颜色等，主要是 `add_leg = FALSE` 不增加默认的图例，以及 `normalized = FALSE` 不使用信号标准化。其他请参考帮助 `?plot.jip`。 我简单写了一下帮助文档，大家应该基本能看明白，我实在没时间。
+
+```{r, cus-ac-plot-leg-cls, fig.cap="定制调制光图形示例"}
+cls <- palette.colors(n = 5,  "set 2", alpha = 0.8)
+plot(jip_data,
+     ylab = 'Normalized fluorescence signals',
      add_leg = FALSE,
-     col = palette.colors(n = 5,  "set 1", alpha = 0.8),
+     def_pch = 14:18,
+     col = cls,
      main = "Demodulated signals", pch = 14, normalized = FALSE)
 
 legend(
   "topleft",
-  unique(jipdata$SOURCE),
-  col = palette.colors(n = 5,  "set 1", alpha = 0.8),
-  pch = 14,
+  unique(jip_data$SOURCE),
+  col = cls,
+  pch = 14:18,
   cex = 0.6,
   pt.cex = 1.2,
   bty = "n")
 ```
 
-图  \@ref(fig:dcplotjip) 使用默认的**进行标准化**荧光信号的图形，只是修改了图例的位置和纵坐标的标签：
+2. 定制连续光图形
 
-```{r, dcplotjip, fig.cap="连续式测量的 ojip 曲线的快速预览(base R)", message=FALSE}
-plot(dcjipdata, legend_pos = "bottomright", ylab = 'Normalized fluorescence signals',)
+连续光图形，只改了两个地方，图例的位置以及不显示标准化的数据。
+
+```{r, cus-dc-plot-leg-cls, fig.cap="定制连续光图形示例"}
+plot(jip_dcdata, legend_pos = "bottomright", normalized = FALSE)
 ```
 
-实际上就是使用了 base R 的 `plot` 函数，其他定制的作图功能，可参考 `?plot` 和 [jiptest](https://github.com/zhujiedong/jiptest)。
+**关于标准化和非标准化图形差异大的问题，这个比较简单，原始信号比较低的那条线，是不同物种的不同叶片，所以不具备比较价值，我只是数据测试。**
 
-原来使用的 ~~`jip_plot` 和 `jip_dcplot`~~ 已经删除，不再使用。
-
+---
 
 **建议在开始分析数据前，使用如上方式作图查看数据质量，若使用调制光数据测量的荧光信号太弱，数据点太散，则可以使用连续光测量信号进行分析，对于归一化的荧光参数，二者几乎无差别，当然避免陷入被动的最好方式还是最开始测量时注意检查数据质量**
 

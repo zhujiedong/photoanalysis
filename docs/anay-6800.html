@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2020-11-18" />
+<meta name="date" content="2020-11-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -4058,20 +4058,24 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 </div>
 <div id="jiptest_pack" class="section level3" number="10.12.2">
 <h3><span class="header-section-number">10.12.2</span> <code>jiptest</code> 软件包安装</h3>
-<p>目前 <code>jiptest</code> 暂时放在 github 我的软件仓库内，并没提交 CRAN，因此需要 <code>devtools</code> 的支持，然后才能从 github 安装 <code>jiptest</code>。</p>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="anay-6800.html#cb326-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
-<span id="cb326-2"><a href="anay-6800.html#cb326-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(devtools)</span>
-<span id="cb326-3"><a href="anay-6800.html#cb326-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install_github</span>(<span class="st">&quot;zhujiedong/jiptest&quot;</span>)</span></code></pre></div>
+<p>请在 github 安装，有可能需要安装 <code>remotes</code></p>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="anay-6800.html#cb326-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span></code></pre></div>
+<p>然后安装：</p>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="anay-6800.html#cb327-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install_github</span>(<span class="st">&quot;zhujiedong/jiptest&quot;</span>)</span></code></pre></div>
+<p>如果因为网络原因失败，可以转战 gitee:</p>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="anay-6800.html#cb328-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install_git</span>(<span class="st">&#39;https://gitee.com/zhu_jie_dong/jiptest&#39;</span>)</span></code></pre></div>
 </div>
 <div id="readfluor" class="section level3" number="10.12.3">
 <h3><span class="header-section-number">10.12.3</span> <code>read_files</code> 及 <code>read_dcfiles</code> 函数</h3>
 <p><code>read_files</code> 用于批量读取所有调制光测量数据，方便用于其他的数据分析。<strong>函数要求所有数据必须是 <code>xlsx</code> 格式，并且所有测量数据都保存在同一文件夹内。</strong>，如有其他文件或测量数据则会报错。
-<code>read_dcfiles</code> 用于批量读取所有连续光测量数据，其他与 <code>read_dcfiles</code> 相同。</p>
+<code>read_dcfiles</code> 用于批量读取所有连续光测量数据，其他与 <code>read_dcfiles</code> 相同。例如我放在了 data文件夹下的 ojip 文件夹内，有五个数据文件。</p>
 <p>函数仅有一个参数，即保存数据文件夹的路径，使用如下：</p>
-<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="anay-6800.html#cb327-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jiptest)</span>
-<span id="cb327-2"><a href="anay-6800.html#cb327-2" aria-hidden="true" tabindex="-1"></a>jipdata <span class="ot">&lt;-</span> <span class="fu">read_files</span>(<span class="st">&quot;./data/ojip&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="anay-6800.html#cb329-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jiptest)</span>
+<span id="cb329-2"><a href="anay-6800.html#cb329-2" aria-hidden="true" tabindex="-1"></a>jip_data<span class="ot">&lt;-</span> <span class="fu">read_files</span>(<span class="st">&quot;data/ojip&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="anay-6800.html#cb330-1" aria-hidden="true" tabindex="-1"></a>jip_dcdata <span class="ot">&lt;-</span> <span class="fu">read_dcfiles</span>(<span class="st">&quot;./data/ojip&quot;</span>)</span></code></pre></div>
+<p>调制光的信号数据前 10 行如下：</p>
 <table>
-<caption><span id="tab:unnamed-chunk-65">表 10.2: </span>jiptest 批量导入数据后的样式</caption>
+<caption><span id="tab:unnamed-chunk-67">表 10.2: </span>jiptest 批量导入数据后的样式</caption>
 <thead>
 <tr class="header">
 <th align="right">SECS</th>
@@ -4112,9 +4116,9 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="anay-6800.html#cb328-1" aria-hidden="true" tabindex="-1"></a>dcjipdata <span class="ot">&lt;-</span> <span class="fu">read_dcfiles</span>(<span class="st">&quot;./data/ojip&quot;</span>)</span></code></pre></div>
+<p>连续光的信号数据前 10 行如下：</p>
 <table>
-<caption><span id="tab:unnamed-chunk-66">表 10.3: </span>jiptest DC 数据批量导入数据后的样式</caption>
+<caption><span id="tab:unnamed-chunk-68">表 10.3: </span>jiptest DC 数据批量导入数据后的样式</caption>
 <thead>
 <tr class="header">
 <th align="right">SECS</th>
@@ -4158,13 +4162,17 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 </div>
 <div id="testfluor" class="section level3" number="10.12.4">
 <h3><span class="header-section-number">10.12.4</span> <code>jip_test</code> 及 <code>jip_dctest</code> 函数</h3>
-<p><code>jiptest</code> 是 jiptest 的核心函数，用于所有数据的 jip test 分析，函数仅包一个参数，测量数据的保存文件夹路径。
+<p><code>jiptest</code> 是 jiptest 的核心函数，用于所有数据的 <code>jiptest</code> 分析，函数仅包一个参数，测量数据的保存文件夹路径。
 <code>jip_dctest</code> 与 <code>jip_test</code> 相似，用于连续光测量数据的分析。</p>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="anay-6800.html#cb329-1" aria-hidden="true" tabindex="-1"></a>jip_results <span class="ot">&lt;-</span> <span class="fu">jip_test</span>(<span class="st">&quot;./data/ojip&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="anay-6800.html#cb331-1" aria-hidden="true" tabindex="-1"></a>actest <span class="ot">&lt;-</span> <span class="fu">jip_test</span>(<span class="st">&quot;./data/ojip&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="anay-6800.html#cb332-1" aria-hidden="true" tabindex="-1"></a>dctest <span class="ot">&lt;-</span> <span class="fu">jip_dctest</span>(<span class="st">&quot;./data/ojip&quot;</span>)</span></code></pre></div>
+<p>可以看出，对于标准化之后的参数，二者基本一致，原始信号则无法一致，因为连续光信号强度更高（所以数据的比较要在相同的测量光内进行）：</p>
+<p>调制光信号 15-24 行的数据：</p>
 <table>
 <caption><span id="tab:jipres">表 10.4: </span>jiptest 输出的计算参数</caption>
 <thead>
 <tr class="header">
+<th align="left"></th>
 <th align="left">parameters</th>
 <th align="right">data_file1</th>
 <th align="right">data_file2</th>
@@ -4175,60 +4183,67 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Fo</td>
-<td align="right">620.000</td>
-<td align="right">887.000</td>
-<td align="right">849.000</td>
-<td align="right">981.000</td>
-<td align="right">914.000</td>
+<td align="left">15</td>
+<td align="left">phi_po</td>
+<td align="right">0.7623866</td>
+<td align="right">0.8092276</td>
+<td align="right">0.7714221</td>
+<td align="right">0.7678238</td>
+<td align="right">0.7565439</td>
 </tr>
 <tr class="even">
-<td align="left">Fm</td>
-<td align="right">2609.280</td>
-<td align="right">4649.520</td>
-<td align="right">3714.270</td>
-<td align="right">4225.240</td>
-<td align="right">3754.270</td>
+<td align="left">16</td>
+<td align="left">phi_ET2o</td>
+<td align="right">0.3397029</td>
+<td align="right">0.4420284</td>
+<td align="right">0.4333745</td>
+<td align="right">0.4185419</td>
+<td align="right">0.3157125</td>
 </tr>
 <tr class="odd">
-<td align="left">F300</td>
-<td align="right">1593.200</td>
-<td align="right">2181.400</td>
-<td align="right">1798.600</td>
-<td align="right">2067.800</td>
-<td align="right">2537.200</td>
+<td align="left">17</td>
+<td align="left">phi_RE1o</td>
+<td align="right">0.1304306</td>
+<td align="right">0.0443938</td>
+<td align="right">0.0450048</td>
+<td align="right">0.0511261</td>
+<td align="right">0.0526707</td>
 </tr>
 <tr class="even">
-<td align="left">FJ</td>
-<td align="right">1722.900</td>
-<td align="right">2594.300</td>
-<td align="right">2104.600</td>
-<td align="right">2456.800</td>
-<td align="right">2569.000</td>
+<td align="left">18</td>
+<td align="left">psi_ET2o</td>
+<td align="right">0.4455783</td>
+<td align="right">0.5462350</td>
+<td align="right">0.5617865</td>
+<td align="right">0.5451015</td>
+<td align="right">0.4173089</td>
 </tr>
 <tr class="odd">
-<td align="left">FI</td>
-<td align="right">2268.950</td>
-<td align="right">4443.110</td>
-<td align="right">3547.110</td>
-<td align="right">4009.220</td>
-<td align="right">3556.530</td>
+<td align="left">19</td>
+<td align="left">psi_RE1o</td>
+<td align="right">0.1710820</td>
+<td align="right">0.0548595</td>
+<td align="right">0.0583401</td>
+<td align="right">0.0665857</td>
+<td align="right">0.0696201</td>
 </tr>
 <tr class="even">
-<td align="left">Tfmax</td>
-<td align="right">159.998</td>
-<td align="right">256.016</td>
-<td align="right">316.016</td>
-<td align="right">272.016</td>
-<td align="right">200.016</td>
+<td align="left">20</td>
+<td align="left">delta_RE1o</td>
+<td align="right">0.3839550</td>
+<td align="right">0.1004321</td>
+<td align="right">0.1038474</td>
+<td align="right">0.1221529</td>
+<td align="right">0.1668312</td>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="anay-6800.html#cb330-1" aria-hidden="true" tabindex="-1"></a>dcjip_results <span class="ot">&lt;-</span> <span class="fu">jip_dctest</span>(<span class="st">&quot;./data/ojip&quot;</span>)</span></code></pre></div>
+<p>连续光信号 15-24 行的数据：</p>
 <table>
 <caption><span id="tab:dcjipres">表 10.5: </span>jiptest DC 数据输出的计算参数</caption>
 <thead>
 <tr class="header">
+<th align="left"></th>
 <th align="left">parameters</th>
 <th align="right">data_file1</th>
 <th align="right">data_file2</th>
@@ -4239,95 +4254,139 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Fo</td>
-<td align="right">98161.000</td>
-<td align="right">154000.000</td>
-<td align="right">133191.000</td>
-<td align="right">156664.000</td>
-<td align="right">153589.000</td>
+<td align="left">15</td>
+<td align="left">phi_po</td>
+<td align="right">0.7560053</td>
+<td align="right">0.7842651</td>
+<td align="right">0.7624177</td>
+<td align="right">0.7581076</td>
+<td align="right">0.7373824</td>
 </tr>
 <tr class="even">
-<td align="left">Fm</td>
-<td align="right">402308.000</td>
-<td align="right">713839.000</td>
-<td align="right">560610.000</td>
-<td align="right">647660.000</td>
-<td align="right">584839.000</td>
+<td align="left">16</td>
+<td align="left">phi_ET2o</td>
+<td align="right">0.3342737</td>
+<td align="right">0.4386073</td>
+<td align="right">0.4287562</td>
+<td align="right">0.4180820</td>
+<td align="right">0.3046445</td>
 </tr>
 <tr class="odd">
-<td align="left">F300</td>
-<td align="right">246753.000</td>
-<td align="right">338091.000</td>
-<td align="right">275476.800</td>
-<td align="right">322859.200</td>
-<td align="right">388110.400</td>
+<td align="left">17</td>
+<td align="left">phi_RE1o</td>
+<td align="right">0.1300571</td>
+<td align="right">0.0452959</td>
+<td align="right">0.0469060</td>
+<td align="right">0.0510607</td>
+<td align="right">0.0557179</td>
 </tr>
 <tr class="even">
-<td align="left">FJ</td>
-<td align="right">267827.000</td>
-<td align="right">400744.000</td>
-<td align="right">320245.000</td>
-<td align="right">376885.000</td>
-<td align="right">406671.000</td>
+<td align="left">18</td>
+<td align="left">psi_ET2o</td>
+<td align="right">0.4421579</td>
+<td align="right">0.5592590</td>
+<td align="right">0.5623639</td>
+<td align="right">0.5514811</td>
+<td align="right">0.4131432</td>
 </tr>
 <tr class="odd">
-<td align="left">FI</td>
-<td align="right">349985.000</td>
-<td align="right">681505.000</td>
-<td align="right">534314.000</td>
-<td align="right">614590.000</td>
-<td align="right">552253.000</td>
+<td align="left">19</td>
+<td align="left">psi_RE1o</td>
+<td align="right">0.1720319</td>
+<td align="right">0.0577559</td>
+<td align="right">0.0615228</td>
+<td align="right">0.0673529</td>
+<td align="right">0.0755617</td>
 </tr>
 <tr class="even">
-<td align="left">Tfmax</td>
-<td align="right">171.998</td>
-<td align="right">276.016</td>
-<td align="right">300.016</td>
-<td align="right">288.016</td>
-<td align="right">212.016</td>
+<td align="left">20</td>
+<td align="left">delta_RE1o</td>
+<td align="right">0.3890735</td>
+<td align="right">0.1032722</td>
+<td align="right">0.1094003</td>
+<td align="right">0.1221309</td>
+<td align="right">0.1828948</td>
 </tr>
 </tbody>
 </table>
 <p>计算参数见表 <a href="anay-6800.html#tab:jipres">10.4</a> 及 <a href="anay-6800.html#tab:dcjipres">10.5</a>，考虑到排版，仅显示部分内容。若需要将数据导出，可以使用相关命令，如：</p>
-<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="anay-6800.html#cb331-1" aria-hidden="true" tabindex="-1"></a><span class="co"># export the results of jiptest to a csv file</span></span>
-<span id="cb331-2"><a href="anay-6800.html#cb331-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(jip_results, <span class="st">&quot;d:/data/jip_resluts.csv&quot;</span>)</span>
-<span id="cb331-3"><a href="anay-6800.html#cb331-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(dcjip_results, <span class="st">&quot;d:/data/dcjip_resluts.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="anay-6800.html#cb333-1" aria-hidden="true" tabindex="-1"></a><span class="co"># export the results of jiptest to a csv file</span></span>
+<span id="cb333-2"><a href="anay-6800.html#cb333-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(actest, <span class="st">&quot;d:/data/jip_resluts.csv&quot;</span>)</span>
+<span id="cb333-3"><a href="anay-6800.html#cb333-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(dctest, <span class="st">&quot;d:/data/dcjip_resluts.csv&quot;</span>)</span></code></pre></div>
 </div>
 <div id="plotfluor" class="section level3" number="10.12.5">
 <h3><span class="header-section-number">10.12.5</span> 图像查看函数</h3>
-<p>因为遇到一些比较熟练使用 R 客户的需求，希望能够定制话的对结果进行作图，于 2020 年 11 月 17 日添加 <code>plot.jip</code> 方法，使用 R base plot 进行作图，同时为了减轻负担，将 <code>stringr</code> 的代码统统用 base R 替换掉，减少依赖，数据分析的时候用法不变，但是作图希望定制话图形的话可以使用：</p>
-<p>例如 <a href="anay-6800.html#fig:acplotjip">10.34</a> 使用原始信号值，定制化 legend 图形输出：</p>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="anay-6800.html#cb332-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(jipdata,</span>
-<span id="cb332-2"><a href="anay-6800.html#cb332-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">add_leg =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb332-3"><a href="anay-6800.html#cb332-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="fu">palette.colors</span>(<span class="at">n =</span> <span class="dv">5</span>,  <span class="st">&quot;set 1&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>),</span>
-<span id="cb332-4"><a href="anay-6800.html#cb332-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Demodulated signals&quot;</span>, <span class="at">pch =</span> <span class="dv">14</span>, <span class="at">normalized =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb332-5"><a href="anay-6800.html#cb332-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb332-6"><a href="anay-6800.html#cb332-6" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(</span>
-<span id="cb332-7"><a href="anay-6800.html#cb332-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;topleft&quot;</span>,</span>
-<span id="cb332-8"><a href="anay-6800.html#cb332-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>(jipdata<span class="sc">$</span>SOURCE),</span>
-<span id="cb332-9"><a href="anay-6800.html#cb332-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">palette.colors</span>(<span class="at">n =</span> <span class="dv">5</span>,  <span class="st">&quot;set 1&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>),</span>
-<span id="cb332-10"><a href="anay-6800.html#cb332-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">14</span>,</span>
-<span id="cb332-11"><a href="anay-6800.html#cb332-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">0.6</span>,</span>
-<span id="cb332-12"><a href="anay-6800.html#cb332-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">pt.cex =</span> <span class="fl">1.2</span>,</span>
-<span id="cb332-13"><a href="anay-6800.html#cb332-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:acplotjip"></span>
-<img src="bookdown_files/figure-html/acplotjip-1.png" alt="调制式测量的 ojip 曲线的快速预览(base R)" width="672" />
+<p>之前的预览方式已经彻底从代码中删除，不在提供。如果仅仅是简单查看结果，那么我们直接用默认参数就好，作图的数据是之前导入的数据文件：</p>
+<p>默认使用标准化的荧光信号（也就是除以最大值，标准化到 0~1 之间，LI-6800 在 1.4 之后的版本也提供了仪器上查看的界面）。</p>
+<div id="default-plot-jiptest" class="section level4" number="10.12.5.1">
+<h4><span class="header-section-number">10.12.5.1</span> 默认图形的方式</h4>
+<ol style="list-style-type: decimal">
+<li>默认调制光图形</li>
+</ol>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="anay-6800.html#cb334-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(jip_data)</span></code></pre></div>
+<div class="figure"><span id="fig:default-moulation-plot-ac"></span>
+<img src="bookdown_files/figure-html/default-moulation-plot-ac-1.png" alt="默认调制光图形查看" width="672" />
 <p class="caption">
-图 10.34: 调制式测量的 ojip 曲线的快速预览(base R)
+图 10.34: 默认调制光图形查看
 </p>
 </div>
-<p>图 <a href="anay-6800.html#fig:dcplotjip">10.35</a> 使用默认的<strong>进行标准化</strong>荧光信号的图形，只是修改了图例的位置和纵坐标的标签：</p>
-<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="anay-6800.html#cb333-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dcjipdata, <span class="at">legend_pos =</span> <span class="st">&quot;bottomright&quot;</span>, <span class="at">ylab =</span> <span class="st">&#39;Normalized fluorescence signals&#39;</span>,)</span></code></pre></div>
-<div class="figure"><span id="fig:dcplotjip"></span>
-<img src="bookdown_files/figure-html/dcplotjip-1.png" alt="连续式测量的 ojip 曲线的快速预览(base R)" width="672" />
+<ol start="2" style="list-style-type: decimal">
+<li>默认连续光图形</li>
+</ol>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="anay-6800.html#cb335-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(jip_dcdata)</span></code></pre></div>
+<div class="figure"><span id="fig:default-moulation-plot-dc"></span>
+<img src="bookdown_files/figure-html/default-moulation-plot-dc-1.png" alt="默认连续光图形查看" width="672" />
 <p class="caption">
-图 10.35: 连续式测量的 ojip 曲线的快速预览(base R)
+图 10.35: 默认连续光图形查看
 </p>
 </div>
-<p>实际上就是使用了 base R 的 <code>plot</code> 函数，其他定制的作图功能，可参考 <code>?plot</code> 和 <a href="https://github.com/zhujiedong/jiptest">jiptest</a>。</p>
-<p>原来使用的 <del><code>jip_plot</code> 和 <code>jip_dcplot</code></del> 已经删除，不再使用。</p>
+<p>默认图形，仅仅查看结果是可以的，当然有些情况下需要进行调整才方便做展示用。</p>
+</div>
+<div id="customized-plot-jiptest" class="section level4" number="10.12.5.2">
+<h4><span class="header-section-number">10.12.5.2</span> 定制化图形的方式</h4>
+<p>这个是这次改动的重点之一，例如都使用原始信号分别做上面两幅图：</p>
+<ol style="list-style-type: decimal">
+<li>定制调制光图形</li>
+</ol>
+<p>这里使用原始荧光信号，然后更改图例颜色等，主要是 <code>add_leg = FALSE</code> 不增加默认的图例，以及 <code>normalized = FALSE</code> 不使用信号标准化。其他请参考帮助 <code>?plot.jip</code>。 我简单写了一下帮助文档，大家应该基本能看明白，我实在没时间。</p>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="anay-6800.html#cb336-1" aria-hidden="true" tabindex="-1"></a>cls <span class="ot">&lt;-</span> <span class="fu">palette.colors</span>(<span class="at">n =</span> <span class="dv">5</span>,  <span class="st">&quot;set 2&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>)</span>
+<span id="cb336-2"><a href="anay-6800.html#cb336-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(jip_data,</span>
+<span id="cb336-3"><a href="anay-6800.html#cb336-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&#39;Normalized fluorescence signals&#39;</span>,</span>
+<span id="cb336-4"><a href="anay-6800.html#cb336-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">add_leg =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb336-5"><a href="anay-6800.html#cb336-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">def_pch =</span> <span class="dv">14</span><span class="sc">:</span><span class="dv">18</span>,</span>
+<span id="cb336-6"><a href="anay-6800.html#cb336-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> cls,</span>
+<span id="cb336-7"><a href="anay-6800.html#cb336-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Demodulated signals&quot;</span>, <span class="at">pch =</span> <span class="dv">14</span>, <span class="at">normalized =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb336-8"><a href="anay-6800.html#cb336-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb336-9"><a href="anay-6800.html#cb336-9" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(</span>
+<span id="cb336-10"><a href="anay-6800.html#cb336-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;topleft&quot;</span>,</span>
+<span id="cb336-11"><a href="anay-6800.html#cb336-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>(jip_data<span class="sc">$</span>SOURCE),</span>
+<span id="cb336-12"><a href="anay-6800.html#cb336-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> cls,</span>
+<span id="cb336-13"><a href="anay-6800.html#cb336-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">14</span><span class="sc">:</span><span class="dv">18</span>,</span>
+<span id="cb336-14"><a href="anay-6800.html#cb336-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb336-15"><a href="anay-6800.html#cb336-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">pt.cex =</span> <span class="fl">1.2</span>,</span>
+<span id="cb336-16"><a href="anay-6800.html#cb336-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
+<div class="figure"><span id="fig:cus-ac-plot-leg-cls"></span>
+<img src="bookdown_files/figure-html/cus-ac-plot-leg-cls-1.png" alt="定制调制光图形示例" width="672" />
+<p class="caption">
+图 10.36: 定制调制光图形示例
+</p>
+</div>
+<ol start="2" style="list-style-type: decimal">
+<li>定制连续光图形</li>
+</ol>
+<p>连续光图形，只改了两个地方，图例的位置以及不显示标准化的数据。</p>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="anay-6800.html#cb337-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(jip_dcdata, <span class="at">legend_pos =</span> <span class="st">&quot;bottomright&quot;</span>, <span class="at">normalized =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="figure"><span id="fig:cus-dc-plot-leg-cls"></span>
+<img src="bookdown_files/figure-html/cus-dc-plot-leg-cls-1.png" alt="定制连续光图形示例" width="672" />
+<p class="caption">
+图 10.37: 定制连续光图形示例
+</p>
+</div>
+<p><strong>关于标准化和非标准化图形差异大的问题，这个比较简单，原始信号比较低的那条线，是不同物种的不同叶片，所以不具备比较价值，我只是数据测试。</strong></p>
+<hr />
 <p><strong>建议在开始分析数据前，使用如上方式作图查看数据质量，若使用调制光数据测量的荧光信号太弱，数据点太散，则可以使用连续光测量信号进行分析，对于归一化的荧光参数，二者几乎无差别，当然避免陷入被动的最好方式还是最开始测量时注意检查数据质量</strong></p>
 
+</div>
 </div>
 </div>
 </div>
