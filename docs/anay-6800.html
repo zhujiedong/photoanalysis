@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2020-11-19" />
+<meta name="date" content="2020-11-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -4073,13 +4073,14 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="anay-6800.html#cb329-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jiptest)</span>
 <span id="cb329-2"><a href="anay-6800.html#cb329-2" aria-hidden="true" tabindex="-1"></a>jip_data<span class="ot">&lt;-</span> <span class="fu">read_files</span>(<span class="st">&quot;data/ojip&quot;</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="anay-6800.html#cb330-1" aria-hidden="true" tabindex="-1"></a>jip_dcdata <span class="ot">&lt;-</span> <span class="fu">read_dcfiles</span>(<span class="st">&quot;./data/ojip&quot;</span>)</span></code></pre></div>
-<p>调制光的信号数据前 10 行如下：</p>
+<p>调制光的信号前 10 行数据：</p>
 <table>
 <caption><span id="tab:unnamed-chunk-67">表 10.2: </span>jiptest 批量导入数据后的样式</caption>
 <thead>
 <tr class="header">
 <th align="right">SECS</th>
 <th align="right">FLUOR</th>
+<th align="right">NORM_FLUOR</th>
 <th align="left">SOURCE</th>
 </tr>
 </thead>
@@ -4087,42 +4088,49 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <tr class="odd">
 <td align="right">6.10e-06</td>
 <td align="right">621</td>
+<td align="right">0.0005027</td>
 <td align="left">INDUCTION-4188-20201116-10_53_39</td>
 </tr>
 <tr class="even">
 <td align="right">1.01e-05</td>
 <td align="right">620</td>
+<td align="right">0.0000000</td>
 <td align="left">INDUCTION-4188-20201116-10_53_39</td>
 </tr>
 <tr class="odd">
 <td align="right">1.42e-05</td>
 <td align="right">649</td>
+<td align="right">0.0145781</td>
 <td align="left">INDUCTION-4188-20201116-10_53_39</td>
 </tr>
 <tr class="even">
 <td align="right">1.80e-05</td>
 <td align="right">629</td>
+<td align="right">0.0045242</td>
 <td align="left">INDUCTION-4188-20201116-10_53_39</td>
 </tr>
 <tr class="odd">
 <td align="right">2.21e-05</td>
 <td align="right">674</td>
+<td align="right">0.0271455</td>
 <td align="left">INDUCTION-4188-20201116-10_53_39</td>
 </tr>
 <tr class="even">
 <td align="right">2.61e-05</td>
 <td align="right">736</td>
+<td align="right">0.0583126</td>
 <td align="left">INDUCTION-4188-20201116-10_53_39</td>
 </tr>
 </tbody>
 </table>
-<p>连续光的信号数据前 10 行如下：</p>
+<p>连续光的信号前 10 行数据：</p>
 <table>
 <caption><span id="tab:unnamed-chunk-68">表 10.3: </span>jiptest DC 数据批量导入数据后的样式</caption>
 <thead>
 <tr class="header">
 <th align="right">SECS</th>
 <th align="right">FLUOR</th>
+<th align="right">NORM_FLUOR</th>
 <th align="left">SOURCE</th>
 </tr>
 </thead>
@@ -4130,35 +4138,44 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <tr class="odd">
 <td align="right">6.10e-06</td>
 <td align="right">98161</td>
+<td align="right">0.0000000</td>
 <td align="left">INDUCTION-4188-20201116-10_53_39</td>
 </tr>
 <tr class="even">
 <td align="right">1.01e-05</td>
 <td align="right">100331</td>
+<td align="right">0.0071347</td>
 <td align="left">INDUCTION-4188-20201116-10_53_39</td>
 </tr>
 <tr class="odd">
 <td align="right">1.42e-05</td>
 <td align="right">102577</td>
+<td align="right">0.0145193</td>
 <td align="left">INDUCTION-4188-20201116-10_53_39</td>
 </tr>
 <tr class="even">
 <td align="right">1.80e-05</td>
 <td align="right">104849</td>
+<td align="right">0.0219894</td>
 <td align="left">INDUCTION-4188-20201116-10_53_39</td>
 </tr>
 <tr class="odd">
 <td align="right">2.21e-05</td>
 <td align="right">107214</td>
+<td align="right">0.0297652</td>
 <td align="left">INDUCTION-4188-20201116-10_53_39</td>
 </tr>
 <tr class="even">
 <td align="right">2.61e-05</td>
 <td align="right">109624</td>
+<td align="right">0.0376890</td>
 <td align="left">INDUCTION-4188-20201116-10_53_39</td>
 </tr>
 </tbody>
 </table>
+<blockquote>
+<p>注：NORM_FLUOR 是标准化后的荧光信号数据，其中标准化采用的方式是 <span class="citation"><a href="references.html#ref-stirbetChlorophyllFluorescenceInduction2012" role="doc-biblioref">Stirbet and Govindjee</a> (<a href="references.html#ref-stirbetChlorophyllFluorescenceInduction2012" role="doc-biblioref">2012</a>)</span> 所采用的：<span class="math inline">\(F = \frac{F_t - F_o}{F_m - F_o}\)</span>，而曲线上部的面积则采用 <span class="citation"><a href="references.html#ref-stirbetRelationKautskyEffect2011" role="doc-biblioref">Stirbet and Govindjee</a> (<a href="references.html#ref-stirbetRelationKautskyEffect2011" role="doc-biblioref">2011</a>)</span> 的方式进行标准化，以方便不同叶片之间的比较，具体为 <span class="math inline">\(area = \frac{area}{F_m - F_o}\)</span></p>
+</blockquote>
 </div>
 <div id="testfluor" class="section level3" number="10.12.4">
 <h3><span class="header-section-number">10.12.4</span> <code>jip_test</code> 及 <code>jip_dctest</code> 函数</h3>
@@ -4167,12 +4184,11 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="anay-6800.html#cb331-1" aria-hidden="true" tabindex="-1"></a>actest <span class="ot">&lt;-</span> <span class="fu">jip_test</span>(<span class="st">&quot;./data/ojip&quot;</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="anay-6800.html#cb332-1" aria-hidden="true" tabindex="-1"></a>dctest <span class="ot">&lt;-</span> <span class="fu">jip_dctest</span>(<span class="st">&quot;./data/ojip&quot;</span>)</span></code></pre></div>
 <p>可以看出，对于标准化之后的参数，二者基本一致，原始信号则无法一致，因为连续光信号强度更高（所以数据的比较要在相同的测量光内进行）：</p>
-<p>调制光信号 15-24 行的数据：</p>
+<p>调制光信号的计算参数：</p>
 <table>
 <caption><span id="tab:jipres">表 10.4: </span>jiptest 输出的计算参数</caption>
 <thead>
 <tr class="header">
-<th align="left"></th>
 <th align="left">parameters</th>
 <th align="right">data_file1</th>
 <th align="right">data_file2</th>
@@ -4183,67 +4199,60 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">15</td>
-<td align="left">phi_po</td>
-<td align="right">0.7623866</td>
-<td align="right">0.8092276</td>
-<td align="right">0.7714221</td>
-<td align="right">0.7678238</td>
-<td align="right">0.7565439</td>
+<td align="left">Fo</td>
+<td align="right">620.000</td>
+<td align="right">887.000</td>
+<td align="right">849.000</td>
+<td align="right">981.000</td>
+<td align="right">914.000</td>
 </tr>
 <tr class="even">
-<td align="left">16</td>
-<td align="left">phi_ET2o</td>
-<td align="right">0.3397029</td>
-<td align="right">0.4420284</td>
-<td align="right">0.4333745</td>
-<td align="right">0.4185419</td>
-<td align="right">0.3157125</td>
+<td align="left">Fm</td>
+<td align="right">2609.280</td>
+<td align="right">4649.520</td>
+<td align="right">3714.270</td>
+<td align="right">4225.240</td>
+<td align="right">3754.270</td>
 </tr>
 <tr class="odd">
-<td align="left">17</td>
-<td align="left">phi_RE1o</td>
-<td align="right">0.1304306</td>
-<td align="right">0.0443938</td>
-<td align="right">0.0450048</td>
-<td align="right">0.0511261</td>
-<td align="right">0.0526707</td>
+<td align="left">F300</td>
+<td align="right">1593.200</td>
+<td align="right">2181.400</td>
+<td align="right">1798.600</td>
+<td align="right">2067.800</td>
+<td align="right">2537.200</td>
 </tr>
 <tr class="even">
-<td align="left">18</td>
-<td align="left">psi_ET2o</td>
-<td align="right">0.4455783</td>
-<td align="right">0.5462350</td>
-<td align="right">0.5617865</td>
-<td align="right">0.5451015</td>
-<td align="right">0.4173089</td>
+<td align="left">FJ</td>
+<td align="right">1722.900</td>
+<td align="right">2594.300</td>
+<td align="right">2104.600</td>
+<td align="right">2456.800</td>
+<td align="right">2569.000</td>
 </tr>
 <tr class="odd">
-<td align="left">19</td>
-<td align="left">psi_RE1o</td>
-<td align="right">0.1710820</td>
-<td align="right">0.0548595</td>
-<td align="right">0.0583401</td>
-<td align="right">0.0665857</td>
-<td align="right">0.0696201</td>
+<td align="left">FI</td>
+<td align="right">2268.950</td>
+<td align="right">4443.110</td>
+<td align="right">3547.110</td>
+<td align="right">4009.220</td>
+<td align="right">3556.530</td>
 </tr>
 <tr class="even">
-<td align="left">20</td>
-<td align="left">delta_RE1o</td>
-<td align="right">0.3839550</td>
-<td align="right">0.1004321</td>
-<td align="right">0.1038474</td>
-<td align="right">0.1221529</td>
-<td align="right">0.1668312</td>
+<td align="left">Tfmax</td>
+<td align="right">159.998</td>
+<td align="right">256.016</td>
+<td align="right">316.016</td>
+<td align="right">272.016</td>
+<td align="right">200.016</td>
 </tr>
 </tbody>
 </table>
-<p>连续光信号 15-24 行的数据：</p>
+<p>连续光信号计算参数：</p>
 <table>
 <caption><span id="tab:dcjipres">表 10.5: </span>jiptest DC 数据输出的计算参数</caption>
 <thead>
 <tr class="header">
-<th align="left"></th>
 <th align="left">parameters</th>
 <th align="right">data_file1</th>
 <th align="right">data_file2</th>
@@ -4254,58 +4263,52 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">15</td>
-<td align="left">phi_po</td>
-<td align="right">0.7560053</td>
-<td align="right">0.7842651</td>
-<td align="right">0.7624177</td>
-<td align="right">0.7581076</td>
-<td align="right">0.7373824</td>
+<td align="left">Fo</td>
+<td align="right">98161.000</td>
+<td align="right">154000.000</td>
+<td align="right">133191.000</td>
+<td align="right">156664.000</td>
+<td align="right">153589.000</td>
 </tr>
 <tr class="even">
-<td align="left">16</td>
-<td align="left">phi_ET2o</td>
-<td align="right">0.3342737</td>
-<td align="right">0.4386073</td>
-<td align="right">0.4287562</td>
-<td align="right">0.4180820</td>
-<td align="right">0.3046445</td>
+<td align="left">Fm</td>
+<td align="right">402308.000</td>
+<td align="right">713839.000</td>
+<td align="right">560610.000</td>
+<td align="right">647660.000</td>
+<td align="right">584839.000</td>
 </tr>
 <tr class="odd">
-<td align="left">17</td>
-<td align="left">phi_RE1o</td>
-<td align="right">0.1300571</td>
-<td align="right">0.0452959</td>
-<td align="right">0.0469060</td>
-<td align="right">0.0510607</td>
-<td align="right">0.0557179</td>
+<td align="left">F300</td>
+<td align="right">246753.000</td>
+<td align="right">338091.000</td>
+<td align="right">275476.800</td>
+<td align="right">322859.200</td>
+<td align="right">388110.400</td>
 </tr>
 <tr class="even">
-<td align="left">18</td>
-<td align="left">psi_ET2o</td>
-<td align="right">0.4421579</td>
-<td align="right">0.5592590</td>
-<td align="right">0.5623639</td>
-<td align="right">0.5514811</td>
-<td align="right">0.4131432</td>
+<td align="left">FJ</td>
+<td align="right">267827.000</td>
+<td align="right">400744.000</td>
+<td align="right">320245.000</td>
+<td align="right">376885.000</td>
+<td align="right">406671.000</td>
 </tr>
 <tr class="odd">
-<td align="left">19</td>
-<td align="left">psi_RE1o</td>
-<td align="right">0.1720319</td>
-<td align="right">0.0577559</td>
-<td align="right">0.0615228</td>
-<td align="right">0.0673529</td>
-<td align="right">0.0755617</td>
+<td align="left">FI</td>
+<td align="right">349985.000</td>
+<td align="right">681505.000</td>
+<td align="right">534314.000</td>
+<td align="right">614590.000</td>
+<td align="right">552253.000</td>
 </tr>
 <tr class="even">
-<td align="left">20</td>
-<td align="left">delta_RE1o</td>
-<td align="right">0.3890735</td>
-<td align="right">0.1032722</td>
-<td align="right">0.1094003</td>
-<td align="right">0.1221309</td>
-<td align="right">0.1828948</td>
+<td align="left">Tfmax</td>
+<td align="right">171.998</td>
+<td align="right">276.016</td>
+<td align="right">300.016</td>
+<td align="right">288.016</td>
+<td align="right">212.016</td>
 </tr>
 </tbody>
 </table>
@@ -4355,7 +4358,7 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 <span id="cb336-4"><a href="anay-6800.html#cb336-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">add_leg =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb336-5"><a href="anay-6800.html#cb336-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">def_pch =</span> <span class="dv">14</span><span class="sc">:</span><span class="dv">18</span>,</span>
 <span id="cb336-6"><a href="anay-6800.html#cb336-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> cls,</span>
-<span id="cb336-7"><a href="anay-6800.html#cb336-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Demodulated signals&quot;</span>, <span class="at">pch =</span> <span class="dv">14</span>, <span class="at">normalized =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb336-7"><a href="anay-6800.html#cb336-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Demodulated signals&quot;</span>, <span class="at">normalized =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb336-8"><a href="anay-6800.html#cb336-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb336-9"><a href="anay-6800.html#cb336-9" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(</span>
 <span id="cb336-10"><a href="anay-6800.html#cb336-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;topleft&quot;</span>,</span>

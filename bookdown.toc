@@ -107,9 +107,9 @@
 \contentsline {subsection}{\numberline {10.12.1}jip test 的实现}{237}{subsection.10.12.1}%
 \contentsline {subsection}{\numberline {10.12.2}\texttt {jiptest} 软件包安装}{237}{subsection.10.12.2}%
 \contentsline {subsection}{\numberline {10.12.3}\texttt {read\_files} 及 \texttt {read\_dcfiles} 函数}{237}{subsection.10.12.3}%
-\contentsline {subsection}{\numberline {10.12.4}\texttt {jip\_test} 及 \texttt {jip\_dctest} 函数}{238}{subsection.10.12.4}%
+\contentsline {subsection}{\numberline {10.12.4}\texttt {jip\_test} 及 \texttt {jip\_dctest} 函数}{239}{subsection.10.12.4}%
 \contentsline {subsection}{\numberline {10.12.5}图像查看函数}{240}{subsection.10.12.5}%
-\contentsline {subsubsection}{\numberline {10.12.5.1}默认图形的方式}{240}{subsubsection.10.12.5.1}%
+\contentsline {subsubsection}{\numberline {10.12.5.1}默认图形的方式}{241}{subsubsection.10.12.5.1}%
 \contentsline {subsubsection}{\numberline {10.12.5.2}定制化图形的方式}{242}{subsubsection.10.12.5.2}%
 \contentsline {chapter}{\numberline {11}大话 PCA}{245}{chapter.11}%
 \contentsline {section}{\numberline {11.1}几何解释}{245}{section.11.1}%

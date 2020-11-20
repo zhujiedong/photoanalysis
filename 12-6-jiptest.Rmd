@@ -43,19 +43,21 @@ jip_data<- read_files("data/ojip")
 jip_dcdata <- read_dcfiles("./data/ojip")
 ```
 
-调制光的信号数据前 10 行如下：
+调制光的信号前 10 行数据：
 
 ```{r, echo=FALSE, message=FALSE}
 knitr::kable(head(jip_data),  booktabs = TRUE,
 caption = 'jiptest 批量导入数据后的样式')
 ```
 
-连续光的信号数据前 10 行如下：
+连续光的信号前 10 行数据：
 
 ```{r, echo=FALSE}
 knitr::kable(head(jip_dcdata),  booktabs = TRUE,
 caption = 'jiptest DC 数据批量导入数据后的样式')
 ```
+
+> 注：NORM_FLUOR 是标准化后的荧光信号数据，其中标准化采用的方式是 @stirbetChlorophyllFluorescenceInduction2012 所采用的：$F = \frac{F_t - F_o}{F_m - F_o}$，而曲线上部的面积则采用 @stirbetRelationKautskyEffect2011 的方式进行标准化，以方便不同叶片之间的比较，具体为 $area = \frac{area}{F_m - F_o}$
 
 ### `jip_test` 及 `jip_dctest` 函数 {#testfluor}
 
@@ -72,23 +74,23 @@ dctest <- jip_dctest("./data/ojip")
 
 可以看出，对于标准化之后的参数，二者基本一致，原始信号则无法一致，因为连续光信号强度更高（所以数据的比较要在相同的测量光内进行）：
 
-调制光信号 15-24 行的数据：
+调制光信号的计算参数：
 
 ```{r, jipres, echo=FALSE}
 names(actest) <- c("parameters", "data_file1", 
                         "data_file2", "data_file3",
                         "data_file4", "data_file5")
-knitr::kable(head(actest[15:24, ], ),  longtable = TRUE, booktabs = TRUE, 
+knitr::kable(head(actest),  longtable = TRUE, booktabs = TRUE, 
              caption = 'jiptest 输出的计算参数')
 ```
 
-连续光信号 15-24 行的数据：
+连续光信号计算参数：
 
 ```{r, dcjipres, echo=FALSE}
 names(dctest) <- c("parameters", "data_file1", 
                         "data_file2", "data_file3",
                         "data_file4","data_file5")
-knitr::kable(head(dctest[15:24, ]),  longtable = TRUE, booktabs = TRUE, 
+knitr::kable(head(dctest),  longtable = TRUE, booktabs = TRUE, 
              caption = 'jiptest DC 数据输出的计算参数')
 ```
 
@@ -138,7 +140,7 @@ plot(jip_data,
      add_leg = FALSE,
      def_pch = 14:18,
      col = cls,
-     main = "Demodulated signals", pch = 14, normalized = FALSE)
+     main = "Demodulated signals", normalized = FALSE)
 
 legend(
   "topleft",
