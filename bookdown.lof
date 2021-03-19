@@ -60,11 +60,14 @@
 \contentsline {figure}{\numberline {10.31}{\ignorespaces 定制调制光图形示例\relax }}{243}{figure.caption.67}%
 \contentsline {figure}{\numberline {10.32}{\ignorespaces 定制连续光图形示例\relax }}{244}{figure.caption.68}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {11.1}{\ignorespaces 数据的中心化\relax }}{247}{figure.caption.69}%
-\contentsline {figure}{\numberline {11.2}{\ignorespaces PC1 的诞生\relax }}{247}{figure.caption.70}%
-\contentsline {figure}{\numberline {11.3}{\ignorespaces 变异最大的极端情况\relax }}{248}{figure.caption.71}%
-\contentsline {figure}{\numberline {11.4}{\ignorespaces PC2 的诞生\relax }}{248}{figure.caption.72}%
-\contentsline {figure}{\numberline {11.5}{\ignorespaces iris 碎石图\relax }}{250}{figure.caption.73}%
-\contentsline {figure}{\numberline {11.6}{\ignorespaces iris 载荷图\relax }}{250}{figure.caption.74}%
-\contentsline {figure}{\numberline {11.7}{\ignorespaces iris 得分图\relax }}{251}{figure.caption.75}%
+\contentsline {figure}{\numberline {11.1}{\ignorespaces 根据 LAI 权重求和来计算大叶模型的参数\relax }}{246}{figure.caption.69}%
+\contentsline {figure}{\numberline {11.2}{\ignorespaces 假定不同物种组成下的模型结果\relax }}{247}{figure.caption.70}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {12.1}{\ignorespaces 数据的中心化\relax }}{251}{figure.caption.71}%
+\contentsline {figure}{\numberline {12.2}{\ignorespaces PC1 的诞生\relax }}{251}{figure.caption.72}%
+\contentsline {figure}{\numberline {12.3}{\ignorespaces 变异最大的极端情况\relax }}{252}{figure.caption.73}%
+\contentsline {figure}{\numberline {12.4}{\ignorespaces PC2 的诞生\relax }}{252}{figure.caption.74}%
+\contentsline {figure}{\numberline {12.5}{\ignorespaces iris 碎石图\relax }}{254}{figure.caption.75}%
+\contentsline {figure}{\numberline {12.6}{\ignorespaces iris 载荷图\relax }}{254}{figure.caption.76}%
+\contentsline {figure}{\numberline {12.7}{\ignorespaces iris 得分图\relax }}{255}{figure.caption.77}%
 \addvspace {10\p@ }

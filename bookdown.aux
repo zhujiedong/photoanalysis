@@ -262,7 +262,7 @@
 \newlabel{tab:rectable}{{8.1}{70}{直角双曲线计算参数\relax }{table.caption.23}{}}
 \citation{Thornley1976}
 \@writefile{toc}{\contentsline {section}{\numberline {8.2}非直角双曲线模型}{71}{section.8.2}\protected@file@percent }
-\newlabel{nonrec_mod}{{8.2}{71}{非直角双曲线模型}{section.8.2}{}}
+\newlabel{nonrec-mod}{{8.2}{71}{非直角双曲线模型}{section.8.2}{}}
 \newlabel{eq:nrec}{{8.3}{71}{非直角双曲线模型}{equation.8.2.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {8.2.1}非直角双曲线模型的实现}{71}{subsection.8.2.1}\protected@file@percent }
 \newlabel{nonrec_mode_exam}{{8.2.1}{71}{非直角双曲线模型的实现}{subsection.8.2.1}{}}
@@ -518,49 +518,67 @@
 \newlabel{fig:cus-ac-plot-leg-cls}{{10.31}{243}{定制调制光图形示例\relax }{figure.caption.67}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {10.32}{\ignorespaces 定制连续光图形示例\relax }}{244}{figure.caption.68}\protected@file@percent }
 \newlabel{fig:cus-dc-plot-leg-cls}{{10.32}{244}{定制连续光图形示例\relax }{figure.caption.68}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {11}大话 PCA}{245}{chapter.11}\protected@file@percent }
+\citation{knauerBigleafPackageCalculation2018}
+\citation{mejdovaPhotosyntheticParametersSedgegrass2021}
+\@writefile{toc}{\contentsline {chapter}{\numberline {11}大叶模型}{245}{chapter.11}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{pca-anylysis}{{11}{245}{大话 PCA}{chapter.11}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {11.1}几何解释}{245}{section.11.1}\protected@file@percent }
-\newlabel{geom-pca}{{11.1}{245}{几何解释}{section.11.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11.1}{\ignorespaces 数据的中心化\relax }}{247}{figure.caption.69}\protected@file@percent }
-\newlabel{fig:pccenter}{{11.1}{247}{数据的中心化\relax }{figure.caption.69}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11.2}{\ignorespaces PC1 的诞生\relax }}{247}{figure.caption.70}\protected@file@percent }
-\newlabel{fig:pc2}{{11.2}{247}{PC1 的诞生\relax }{figure.caption.70}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11.3}{\ignorespaces 变异最大的极端情况\relax }}{248}{figure.caption.71}\protected@file@percent }
-\newlabel{fig:maxvar}{{11.3}{248}{变异最大的极端情况\relax }{figure.caption.71}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11.4}{\ignorespaces PC2 的诞生\relax }}{248}{figure.caption.72}\protected@file@percent }
-\newlabel{fig:pc3}{{11.4}{248}{PC2 的诞生\relax }{figure.caption.72}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11.5}{\ignorespaces iris 碎石图\relax }}{250}{figure.caption.73}\protected@file@percent }
-\newlabel{fig:scree}{{11.5}{250}{iris 碎石图\relax }{figure.caption.73}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11.6}{\ignorespaces iris 载荷图\relax }}{250}{figure.caption.74}\protected@file@percent }
-\newlabel{fig:loadingpca}{{11.6}{250}{iris 载荷图\relax }{figure.caption.74}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11.7}{\ignorespaces iris 得分图\relax }}{251}{figure.caption.75}\protected@file@percent }
-\newlabel{fig:scorepca}{{11.7}{251}{iris 得分图\relax }{figure.caption.75}{}}
+\newlabel{big-leaf}{{11}{245}{大叶模型}{chapter.11}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11.1}叶片尺度测量}{245}{section.11.1}\protected@file@percent }
+\newlabel{leaf-scale-meas}{{11.1}{245}{叶片尺度测量}{section.11.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11.2}数据的处理}{246}{section.11.2}\protected@file@percent }
+\newlabel{big-leaf-data}{{11.2}{246}{数据的处理}{section.11.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.2.1}单个测量数据的处理}{246}{subsection.11.2.1}\protected@file@percent }
+\newlabel{single-data-big-leaf}{{11.2.1}{246}{单个测量数据的处理}{subsection.11.2.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.2.2}大叶模型的数据处理}{246}{subsection.11.2.2}\protected@file@percent }
+\newlabel{big-leaf-data-MODEL}{{11.2.2}{246}{大叶模型的数据处理}{subsection.11.2.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11.1}{\ignorespaces 根据 LAI 权重求和来计算大叶模型的参数\relax }}{246}{figure.caption.69}\protected@file@percent }
+\newlabel{fig:lai-big-leaf}{{11.1}{246}{根据 LAI 权重求和来计算大叶模型的参数\relax }{figure.caption.69}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11.2}{\ignorespaces 假定不同物种组成下的模型结果\relax }}{247}{figure.caption.70}\protected@file@percent }
+\newlabel{fig:lai-big-leaf-model}{{11.2}{247}{假定不同物种组成下的模型结果\relax }{figure.caption.70}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {12}大话 PCA}{249}{chapter.12}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{pca-anylysis}{{12}{249}{大话 PCA}{chapter.12}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {12.1}几何解释}{249}{section.12.1}\protected@file@percent }
+\newlabel{geom-pca}{{12.1}{249}{几何解释}{section.12.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12.1}{\ignorespaces 数据的中心化\relax }}{251}{figure.caption.71}\protected@file@percent }
+\newlabel{fig:pccenter}{{12.1}{251}{数据的中心化\relax }{figure.caption.71}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12.2}{\ignorespaces PC1 的诞生\relax }}{251}{figure.caption.72}\protected@file@percent }
+\newlabel{fig:pc2}{{12.2}{251}{PC1 的诞生\relax }{figure.caption.72}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12.3}{\ignorespaces 变异最大的极端情况\relax }}{252}{figure.caption.73}\protected@file@percent }
+\newlabel{fig:maxvar}{{12.3}{252}{变异最大的极端情况\relax }{figure.caption.73}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12.4}{\ignorespaces PC2 的诞生\relax }}{252}{figure.caption.74}\protected@file@percent }
+\newlabel{fig:pc3}{{12.4}{252}{PC2 的诞生\relax }{figure.caption.74}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12.5}{\ignorespaces iris 碎石图\relax }}{254}{figure.caption.75}\protected@file@percent }
+\newlabel{fig:scree}{{12.5}{254}{iris 碎石图\relax }{figure.caption.75}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12.6}{\ignorespaces iris 载荷图\relax }}{254}{figure.caption.76}\protected@file@percent }
+\newlabel{fig:loadingpca}{{12.6}{254}{iris 载荷图\relax }{figure.caption.76}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12.7}{\ignorespaces iris 得分图\relax }}{255}{figure.caption.77}\protected@file@percent }
+\newlabel{fig:scorepca}{{12.7}{255}{iris 得分图\relax }{figure.caption.77}{}}
 \citation{Smith2002}
-\@writefile{toc}{\contentsline {section}{\numberline {11.2}线性代数解释}{252}{section.11.2}\protected@file@percent }
-\newlabel{alge-pca}{{11.2}{252}{线性代数解释}{section.11.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.2.1}特征向量与特征值}{252}{subsection.11.2.1}\protected@file@percent }
-\newlabel{egi-pca}{{11.2.1}{252}{特征向量与特征值}{subsection.11.2.1}{}}
-\newlabel{eq:eign}{{11.1}{252}{特征向量与特征值}{equation.11.2.1}{}}
-\newlabel{eq:despca}{{11.2}{252}{特征向量与特征值}{equation.11.2.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.2.2}手动实现过程}{253}{subsection.11.2.2}\protected@file@percent }
-\newlabel{man_pca}{{11.2.2}{253}{手动实现过程}{subsection.11.2.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {11.2.2.1}均值的计算}{253}{subsubsection.11.2.2.1}\protected@file@percent }
-\newlabel{av_val}{{11.2.2.1}{253}{均值的计算}{subsubsection.11.2.2.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {11.2.2.2}计算协方差矩阵}{253}{subsubsection.11.2.2.2}\protected@file@percent }
-\newlabel{cov_val}{{11.2.2.2}{253}{计算协方差矩阵}{subsubsection.11.2.2.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {11.2.2.3}计算特征值和特征向量}{253}{subsubsection.11.2.2.3}\protected@file@percent }
-\newlabel{eig_val}{{11.2.2.3}{253}{计算特征值和特征向量}{subsubsection.11.2.2.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {12.2}线性代数解释}{256}{section.12.2}\protected@file@percent }
+\newlabel{alge-pca}{{12.2}{256}{线性代数解释}{section.12.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.2.1}特征向量与特征值}{256}{subsection.12.2.1}\protected@file@percent }
+\newlabel{egi-pca}{{12.2.1}{256}{特征向量与特征值}{subsection.12.2.1}{}}
+\newlabel{eq:eign}{{12.1}{256}{特征向量与特征值}{equation.12.2.1}{}}
+\newlabel{eq:despca}{{12.2}{256}{特征向量与特征值}{equation.12.2.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.2.2}手动实现过程}{257}{subsection.12.2.2}\protected@file@percent }
+\newlabel{man_pca}{{12.2.2}{257}{手动实现过程}{subsection.12.2.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {12.2.2.1}均值的计算}{257}{subsubsection.12.2.2.1}\protected@file@percent }
+\newlabel{av_val}{{12.2.2.1}{257}{均值的计算}{subsubsection.12.2.2.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {12.2.2.2}计算协方差矩阵}{257}{subsubsection.12.2.2.2}\protected@file@percent }
+\newlabel{cov_val}{{12.2.2.2}{257}{计算协方差矩阵}{subsubsection.12.2.2.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {12.2.2.3}计算特征值和特征向量}{257}{subsubsection.12.2.2.3}\protected@file@percent }
+\newlabel{eig_val}{{12.2.2.3}{257}{计算特征值和特征向量}{subsubsection.12.2.2.3}{}}
 \citation{kemp2003modern}
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.2.3}\texttt  {prcomp} 的实现}{254}{subsection.11.2.3}\protected@file@percent }
-\newlabel{prcom}{{11.2.3}{254}{\texorpdfstring {\texttt {prcomp} 的实现}{prcomp 的实现}}{subsection.11.2.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.2.3}\texttt  {prcomp} 的实现}{258}{subsection.12.2.3}\protected@file@percent }
+\newlabel{prcom}{{12.2.3}{258}{\texorpdfstring {\texttt {prcomp} 的实现}{prcomp 的实现}}{subsection.12.2.3}{}}
 \citation{kemp2003modern}
-\@writefile{toc}{\contentsline {chapter}{\numberline {12}环境与配置}{257}{chapter.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {13}环境与配置}{261}{chapter.13}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{sessioninfo}{{12}{257}{环境与配置}{chapter.12}{}}
+\newlabel{sessioninfo}{{13}{261}{环境与配置}{chapter.13}{}}
 \bibdata{photoR.bib}
 \bibcite{Aganchich2009}{{1}{2009}{{Aganchich et~al.}}{{}}}
 \bibcite{Ball1987A}{{2}{1987}{{Ball et~al.}}{{}}}
@@ -570,7 +588,7 @@
 \bibcite{Caemmerer2000Biochemical}{{6}{2000}{{Caemmerer}}{{}}}
 \bibcite{centritto2003}{{7}{2003}{{Centritto et~al.}}{{}}}
 \bibcite{Coursolle12019}{{8}{2019}{{Coursolle et~al.}}{{}}}
-\@writefile{toc}{\contentsline {fm}{参考文献}{259}{chapter*.76}\protected@file@percent }
+\@writefile{toc}{\contentsline {fm}{参考文献}{263}{chapter*.78}\protected@file@percent }
 \bibcite{Cowan1977Stomatal}{{9}{1977}{{Cowan and Farquhar}}{{}}}
 \bibcite{De2016A}{{10}{2016}{{De~Kauwe et~al.}}{{}}}
 \bibcite{Duursma2015Plantecophys}{{11}{2015}{{Duursma}}{{}}}
@@ -589,22 +607,24 @@
 \bibcite{Jones1993Plants}{{24}{1993}{{Jones}}{{}}}
 \bibcite{stinziano2019}{{25}{2019}{{Joseph~R. et~al.}}{{}}}
 \bibcite{kemp2003modern}{{26}{2003}{{Kemp}}{{}}}
-\bibcite{lauteri2014}{{27}{2014}{{Lauteri et~al.}}{{}}}
-\bibcite{leuning1995a}{{28}{1995}{{Leuning}}{{}}}
-\bibcite{Lobo2013Fitting}{{29}{2013}{{Lobo et~al.}}{{}}}
-\bibcite{Long2003Gas}{{30}{2003}{{Long and Bernacchi}}{{}}}
-\bibcite{marshall1980a}{{31}{1980}{{Marshall and Biscoe}}{{}}}
-\bibcite{Medlyn2002Temperature}{{32}{2002}{{Medlyn et~al.}}{{}}}
-\bibcite{Medlyn2011Reconciling}{{33}{2011}{{Medlyn et~al.}}{{}}}
-\bibcite{Prado1997Photosynthetic}{{34}{1997}{{Prado and Moraes}}{{}}}
-\bibcite{Smith2002}{{35}{2002}{{Smith}}{{}}}
-\bibcite{stinziano2018}{{36}{2018}{{Stinziano et~al.}}{{}}}
-\bibcite{stinziano2017}{{37}{2017}{{Stinziano et~al.}}{{}}}
-\bibcite{stirbetRelationKautskyEffect2011}{{38}{2011}{{Stirbet and {Govindjee}}}{{}}}
-\bibcite{stirbetChlorophyllFluorescenceInduction2012}{{39}{2012}{{Stirbet and Govindjee}}{{}}}
-\bibcite{Thornley1976}{{40}{1976}{{Thornley}}{{}}}
-\bibcite{tuzet2003a}{{41}{2003}{{Tuzet et~al.}}{{}}}
-\bibcite{Wullschleger1993Biochemical}{{42}{1993}{{Wullschleger}}{{}}}
-\bibcite{yin2009using}{{43}{2009}{{Yin et~al.}}{{}}}
-\bibcite{ZhangXS2009}{{44}{2009}{{Zhang et~al.}}{{}}}
-\bibcite{YEZiPiao2010}{{45}{2010}{{ZiPiao}}{{}}}
+\bibcite{knauerBigleafPackageCalculation2018}{{27}{2018}{{Knauer et~al.}}{{}}}
+\bibcite{lauteri2014}{{28}{2014}{{Lauteri et~al.}}{{}}}
+\bibcite{leuning1995a}{{29}{1995}{{Leuning}}{{}}}
+\bibcite{Lobo2013Fitting}{{30}{2013}{{Lobo et~al.}}{{}}}
+\bibcite{Long2003Gas}{{31}{2003}{{Long and Bernacchi}}{{}}}
+\bibcite{marshall1980a}{{32}{1980}{{Marshall and Biscoe}}{{}}}
+\bibcite{Medlyn2002Temperature}{{33}{2002}{{Medlyn et~al.}}{{}}}
+\bibcite{Medlyn2011Reconciling}{{34}{2011}{{Medlyn et~al.}}{{}}}
+\bibcite{mejdovaPhotosyntheticParametersSedgegrass2021}{{35}{2021}{{Mejdová et~al.}}{{}}}
+\bibcite{Prado1997Photosynthetic}{{36}{1997}{{Prado and Moraes}}{{}}}
+\bibcite{Smith2002}{{37}{2002}{{Smith}}{{}}}
+\bibcite{stinziano2018}{{38}{2018}{{Stinziano et~al.}}{{}}}
+\bibcite{stinziano2017}{{39}{2017}{{Stinziano et~al.}}{{}}}
+\bibcite{stirbetRelationKautskyEffect2011}{{40}{2011}{{Stirbet and {Govindjee}}}{{}}}
+\bibcite{stirbetChlorophyllFluorescenceInduction2012}{{41}{2012}{{Stirbet and Govindjee}}{{}}}
+\bibcite{Thornley1976}{{42}{1976}{{Thornley}}{{}}}
+\bibcite{tuzet2003a}{{43}{2003}{{Tuzet et~al.}}{{}}}
+\bibcite{Wullschleger1993Biochemical}{{44}{1993}{{Wullschleger}}{{}}}
+\bibcite{yin2009using}{{45}{2009}{{Yin et~al.}}{{}}}
+\bibcite{ZhangXS2009}{{46}{2009}{{Zhang et~al.}}{{}}}
+\bibcite{YEZiPiao2010}{{47}{2010}{{ZiPiao}}{{}}}

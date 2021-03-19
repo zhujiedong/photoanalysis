@@ -5,14 +5,13 @@
 %
 \documentclass[
 ]{krantz}
+\usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{amsmath}
 \usepackage{ifxetex,ifluatex}
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
-  \usepackage{amssymb}
 \else % if luatex or xetex
   \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
@@ -87,7 +86,7 @@
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\usepackage{longtable,booktabs}
+\usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
@@ -182,7 +181,7 @@
 
 \title{使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据}
 \author{祝介东 北京力高泰科技有限公司}
-\date{2020-11-20}
+\date{2021-03-19}
 
 \begin{document}
 \maketitle
@@ -601,10 +600,10 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.259360 1.214473 1.280915 1.347631 1.254723 1.271250 1.643419 1.441147
-##  [9] 1.574310 1.636921 1.205302 1.718634 1.978076 1.936299 1.493428 1.648752
-## [17] 1.266238 1.217156 1.432258 1.703343 1.283078 1.320980 1.540710 1.883655
-## [25] 1.210902 1.261052 1.308067 1.535278 1.909004 1.616644 1.803028 1.840852
+##  [1] 1.462501 1.479436 1.368525 1.336757 1.447204 1.724706 1.385296 1.231612
+##  [9] 1.344096 1.419704 1.987735 1.520781 1.538684 1.635072 1.373932 1.358236
+## [17] 1.550978 1.569261 1.936980 1.255556 1.552147 1.854834 1.745920 1.335720
+## [25] 1.948371 1.575462 1.726168 1.214999 1.777296 1.552378 1.341825 1.443525
 \end{verbatim}
 
 我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.
@@ -798,10 +797,10 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.717993 1.876776 1.608703 1.459334 1.315568 1.289807 1.813889 1.741747
-##  [9] 1.725556 1.453158 1.395083 1.600895 1.432486 1.379507 1.287266 1.363051
-## [17] 1.348222 1.877412 1.254160 1.692863 1.914502 1.426030 1.522606 1.662176
-## [25] 1.701958 1.647864 1.387737 1.802293
+##  [1] 1.792463 1.366629 1.786226 1.775950 1.210682 1.843239 1.250131 1.202770
+##  [9] 1.807180 1.511265 1.442743 1.457814 1.428001 1.666531 1.293014 1.613310
+## [17] 1.379014 1.743396 1.564122 1.363180 1.747225 1.286817 1.736520 1.484778
+## [25] 1.782392 1.540452 1.264672 1.744219
 \end{verbatim}
 
 \sout{测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。}
@@ -875,8 +874,8 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 0.5000835 0.5219657 0.5141728 0.4769903 0.5125699 0.4828589 0.4876530
-##  [8] 0.5337765 0.4721799 0.4921796 0.5026300 0.4798414
+##  [1] 0.4937756 0.4941173 0.4899289 0.4963379 0.4843766 0.4884186 0.5129342
+##  [8] 0.4803380 0.4863492 0.4866303 0.4654388 0.5113595
 \end{verbatim}
 
 \hypertarget{batch-6800-xlsx}{%
@@ -2520,8 +2519,8 @@ Rd & 0.2810926 & 0.0789338 & 3.561117 & 0.0051716\\
 
 \cleardoublepage
 
-\hypertarget{nonrec_mod}{%
-\section{非直角双曲线模型}\label{nonrec_mod}}
+\hypertarget{nonrec-mod}{%
+\section{非直角双曲线模型}\label{nonrec-mod}}
 
 \citet{Thornley1976} 提出了非直角双曲线模型，它的表达式为：
 
@@ -7957,6 +7956,79 @@ Tfmax & 171.998 & 276.016 & 300.016 & 288.016 & 212.016\\
 
 \cleardoublepage
 
+\hypertarget{big-leaf}{%
+\chapter{大叶模型}\label{big-leaf}}
+
+题目中所提到的大叶模型，并非指用涡动数据来进行大尺度的直接测量后的大叶模型 \citep{knauerBigleafPackageCalculation2018}，是指 \citet{mejdovaPhotosyntheticParametersSedgegrass2021} 使用 LI-6400 和 LI-3000C 的方式进行的个体叶片尺度的光合测量，外推到整个群落尺度的大叶模型，这也是一个比较新的测量方法，发表在 Scientific Reports。这里对其方法进行概述，因为所用方法是之前早都提过的基本方式。
+
+\hypertarget{leaf-scale-meas}{%
+\section{叶片尺度测量}\label{leaf-scale-meas}}
+
+文章中所使用的是 LI-6400，但毫无疑问，LI-6800 可以更好的胜任该工作，具体测量方法为：
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  从 4 月中旬到 10 月，除 6 月因为洪水有中断外，每周进行一次光响应曲线的测量。
+\item
+  为最小化几个优势种测量时样本之间的变异性，考虑了枝条的差异、枝条不同叶片之间的年龄、以及环境的随机效应的影响。测量选取的是一系列相邻的枝条或草丛。在特定的日期，每个植株选择两个枝条上的，在完全展开的成熟叶片中选择最 2-4 最年轻的叶片进行测量（2片或4片，由物种而定）。
+\item
+  测量的不为距离叶片顶端约 3/4，选择的都是冠层顶部的叶片。
+\item
+  测量过程是标准的光响应曲线的测量流程，不同的是在光强设置为 0 时，额外等待 4 min，用于测量暗呼吸速率。
+\item
+  该实验测量的时间是欧洲中部时间的 7-11 点。
+\end{enumerate}
+
+\hypertarget{big-leaf-data}{%
+\section{数据的处理}\label{big-leaf-data}}
+
+\hypertarget{single-data-big-leaf}{%
+\subsection{单个测量数据的处理}\label{single-data-big-leaf}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  单个测量的数据使用的是非线性拟合，选取的为非直角双曲线模型，使用了 \texttt{nls2} 作为非线性拟合的工具。
+\item
+  暗呼吸速率的值是拟合模型曲线与纵坐标的交点。
+  3.不同物种、不同测量日期和不同生育期的参数各自拟合。
+\end{enumerate}
+
+\hypertarget{big-leaf-data-MODEL}{%
+\subsection{大叶模型的数据处理}\label{big-leaf-data-MODEL}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  在不同季节，使用 LI-3100C 测量了不同物种的叶面积指数。
+\item
+  计算单个植株的 LAI 占不同时期以及整个生长季 LAI 的比例，以此作为该植株拟合参数的权重。而整个大叶模型的参数则是对这些权重数据进行求和。然后将这些参数带入所用的非直角双曲线模型。
+\end{enumerate}
+
+\begin{figure}
+
+{\centering \includegraphics[width=15.68in]{./images/weighted-parameter} 
+
+}
+
+\caption{根据 LAI 权重求和来计算大叶模型的参数}\label{fig:lai-big-leaf}
+\end{figure}
+
+光响应曲线的拟合可以参考 \ref{nonrec-mod}。部分实验结果如下：
+
+\begin{figure}
+
+{\centering \includegraphics[width=8.94in]{./images/big-leaf-model} 
+
+}
+
+\caption{假定不同物种组成下的模型结果}\label{fig:lai-big-leaf-model}
+\end{figure}
+
 \hypertarget{pca-anylysis}{%
 \chapter{大话 PCA}\label{pca-anylysis}}
 
@@ -8071,6 +8143,11 @@ PCA 通常能够反映我们复杂数据集的一些分布特征，例如典型�
 \FunctionTok{fviz\_pca\_ind}\NormalTok{(ir\_pca, }\AttributeTok{repel =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{col.ind=}\NormalTok{ iris}\SpecialCharTok{$}\NormalTok{Species)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## Warning: ggrepel: 85 unlabeled data points (too many overlaps). Consider
+## increasing max.overlaps
+\end{verbatim}
 
 \begin{figure}
 \centering
@@ -8223,7 +8300,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 \begin{verbatim}
 ## R version 4.0.3 (2020-10-10)
 ## Platform: x86_64-w64-mingw32/x64 (64-bit)
-## Running under: Windows 10 x64 (build 19041)
+## Running under: Windows 10 x64 (build 19042)
 ## 
 ## Matrix products: default
 ## 
@@ -8238,40 +8315,42 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] factoextra_1.0.7   FactoMineR_2.3     jiptest_0.1.3      gridExtra_2.3     
+##  [1] factoextra_1.0.7   FactoMineR_2.4     jiptest_0.1.3      gridExtra_2.3     
 ##  [5] plyr_1.8.6         latex2exp_0.4.0    RColorBrewer_1.1-2 racir_1.0.0       
-##  [9] nls2_0.2           proto_1.0.0        purrr_0.3.4        ggplot2_3.3.2     
+##  [9] nls2_0.2           proto_1.0.0        purrr_0.3.4        ggplot2_3.3.3     
 ## [13] minpack.lm_1.2-1   plantecophys_1.4-4 readphoto_0.0.1   
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] nlme_3.1-150         tools_4.0.3          backports_1.2.0     
-##  [4] R6_2.5.0             mgcv_1.8-33          colorspace_2.0-0    
-##  [7] MESS_0.5.7           withr_2.3.0          tidyselect_1.1.0    
-## [10] rematch_1.0.1        curl_4.3             compiler_4.0.3      
-## [13] XLConnect_1.0.1      flashClust_1.01-2    labeling_0.4.2      
-## [16] bookdown_0.21        mosaicCore_0.8.0     scales_1.1.1        
-## [19] readr_1.4.0          stringr_1.4.0        digest_0.6.27       
-## [22] ggformula_0.9.4      foreign_0.8-80       rmarkdown_2.5       
-## [25] rio_0.5.16           pkgconfig_2.0.3      htmltools_0.5.0     
-## [28] geeM_0.10.1          highr_0.8            rlang_0.4.8         
-## [31] readxl_1.3.1         rstudioapi_0.13      farver_2.0.3        
-## [34] generics_0.1.0       zip_2.1.1            dplyr_1.0.2         
-## [37] car_3.0-10           magrittr_2.0.1       leaps_3.1           
-## [40] Matrix_1.2-18        Rcpp_1.0.5           munsell_0.5.0       
-## [43] abind_1.4-5          geepack_1.3-1        lifecycle_0.2.0     
-## [46] scatterplot3d_0.3-41 stringi_1.5.3        yaml_2.2.1          
-## [49] carData_3.0-4        MASS_7.3-53          ggstance_0.3.4      
-## [52] grid_4.0.3           ggrepel_0.8.2        forcats_0.5.0       
-## [55] crayon_1.3.4         lattice_0.20-41      haven_2.3.1         
-## [58] splines_4.0.3        hms_0.5.3            knitr_1.30          
-## [61] pillar_1.4.6         ggpubr_0.4.0         ggsignif_0.6.0      
-## [64] glue_1.4.2           evaluate_0.14        data.table_1.13.2   
-## [67] png_0.1-7            vctrs_0.3.5          tweenr_1.0.1        
-## [70] cellranger_1.1.0     gtable_0.3.0         polyclip_1.10-0     
-## [73] tidyr_1.1.2          openxlsx_4.2.3       xfun_0.19           
-## [76] ggforce_0.3.2        broom_0.7.2          rstatix_0.6.0       
-## [79] tibble_3.0.4         rJava_0.9-13         cluster_2.1.0       
-## [82] ellipsis_0.3.1
+##  [1] nlme_3.1-152         tools_4.0.3          backports_1.2.1     
+##  [4] utf8_1.1.4           R6_2.5.0             DT_0.17             
+##  [7] DBI_1.1.1            mgcv_1.8-34          colorspace_2.0-0    
+## [10] MESS_0.5.7           withr_2.4.1          tidyselect_1.1.0    
+## [13] rematch_1.0.1        curl_4.3             compiler_4.0.3      
+## [16] XLConnect_1.0.2      flashClust_1.01-2    labeling_0.4.2      
+## [19] bookdown_0.21        mosaicCore_0.9.0     scales_1.1.1        
+## [22] readr_1.4.0          ggridges_0.5.3       stringr_1.4.0       
+## [25] digest_0.6.27        foreign_0.8-81       ggformula_0.10.1    
+## [28] rmarkdown_2.7        rio_0.5.26           pkgconfig_2.0.3     
+## [31] htmltools_0.5.1.1    geeM_0.10.1          labelled_2.7.0      
+## [34] highr_0.8            htmlwidgets_1.5.3    rlang_0.4.10        
+## [37] readxl_1.3.1         rstudioapi_0.13      farver_2.1.0        
+## [40] generics_0.1.0       zip_2.1.1            car_3.0-10          
+## [43] dplyr_1.0.4          magrittr_2.0.1       leaps_3.1           
+## [46] Matrix_1.3-2         Rcpp_1.0.6           munsell_0.5.0       
+## [49] fansi_0.4.2          abind_1.4-5          geepack_1.3-2       
+## [52] lifecycle_1.0.0      scatterplot3d_0.3-41 stringi_1.5.3       
+## [55] yaml_2.2.1           carData_3.0-4        MASS_7.3-53.1       
+## [58] ggstance_0.3.5       grid_4.0.3           ggrepel_0.9.1       
+## [61] forcats_0.5.1        crayon_1.4.1         lattice_0.20-41     
+## [64] haven_2.3.1          splines_4.0.3        hms_1.0.0           
+## [67] knitr_1.31           pillar_1.5.0         ggpubr_0.4.0        
+## [70] ggsignif_0.6.1       glue_1.4.2           evaluate_0.14       
+## [73] data.table_1.14.0    png_0.1-7            vctrs_0.3.6         
+## [76] tweenr_1.0.1         cellranger_1.1.0     gtable_0.3.0        
+## [79] polyclip_1.10-0      tidyr_1.1.2          assertthat_0.2.1    
+## [82] openxlsx_4.2.3       xfun_0.21            ggforce_0.3.2       
+## [85] broom_0.7.5          rstatix_0.7.0        tibble_3.0.4        
+## [88] rJava_0.9-13         cluster_2.1.1        ellipsis_0.3.1
 \end{verbatim}
 
 \cleardoublepage

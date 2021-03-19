@@ -111,14 +111,19 @@
 \contentsline {subsection}{\numberline {10.12.5}图像查看函数}{240}{subsection.10.12.5}%
 \contentsline {subsubsection}{\numberline {10.12.5.1}默认图形的方式}{241}{subsubsection.10.12.5.1}%
 \contentsline {subsubsection}{\numberline {10.12.5.2}定制化图形的方式}{242}{subsubsection.10.12.5.2}%
-\contentsline {chapter}{\numberline {11}大话 PCA}{245}{chapter.11}%
-\contentsline {section}{\numberline {11.1}几何解释}{245}{section.11.1}%
-\contentsline {section}{\numberline {11.2}线性代数解释}{252}{section.11.2}%
-\contentsline {subsection}{\numberline {11.2.1}特征向量与特征值}{252}{subsection.11.2.1}%
-\contentsline {subsection}{\numberline {11.2.2}手动实现过程}{253}{subsection.11.2.2}%
-\contentsline {subsubsection}{\numberline {11.2.2.1}均值的计算}{253}{subsubsection.11.2.2.1}%
-\contentsline {subsubsection}{\numberline {11.2.2.2}计算协方差矩阵}{253}{subsubsection.11.2.2.2}%
-\contentsline {subsubsection}{\numberline {11.2.2.3}计算特征值和特征向量}{253}{subsubsection.11.2.2.3}%
-\contentsline {subsection}{\numberline {11.2.3}\texttt {prcomp} 的实现}{254}{subsection.11.2.3}%
-\contentsline {chapter}{\numberline {12}环境与配置}{257}{chapter.12}%
-\contentsline {fm}{参考文献}{259}{chapter*.76}%
+\contentsline {chapter}{\numberline {11}大叶模型}{245}{chapter.11}%
+\contentsline {section}{\numberline {11.1}叶片尺度测量}{245}{section.11.1}%
+\contentsline {section}{\numberline {11.2}数据的处理}{246}{section.11.2}%
+\contentsline {subsection}{\numberline {11.2.1}单个测量数据的处理}{246}{subsection.11.2.1}%
+\contentsline {subsection}{\numberline {11.2.2}大叶模型的数据处理}{246}{subsection.11.2.2}%
+\contentsline {chapter}{\numberline {12}大话 PCA}{249}{chapter.12}%
+\contentsline {section}{\numberline {12.1}几何解释}{249}{section.12.1}%
+\contentsline {section}{\numberline {12.2}线性代数解释}{256}{section.12.2}%
+\contentsline {subsection}{\numberline {12.2.1}特征向量与特征值}{256}{subsection.12.2.1}%
+\contentsline {subsection}{\numberline {12.2.2}手动实现过程}{257}{subsection.12.2.2}%
+\contentsline {subsubsection}{\numberline {12.2.2.1}均值的计算}{257}{subsubsection.12.2.2.1}%
+\contentsline {subsubsection}{\numberline {12.2.2.2}计算协方差矩阵}{257}{subsubsection.12.2.2.2}%
+\contentsline {subsubsection}{\numberline {12.2.2.3}计算特征值和特征向量}{257}{subsubsection.12.2.2.3}%
+\contentsline {subsection}{\numberline {12.2.3}\texttt {prcomp} 的实现}{258}{subsection.12.2.3}%
+\contentsline {chapter}{\numberline {13}环境与配置}{261}{chapter.13}%
+\contentsline {fm}{参考文献}{263}{chapter*.78}%
