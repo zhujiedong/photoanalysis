@@ -181,7 +181,7 @@
 
 \title{使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据}
 \author{祝介东 北京力高泰科技有限公司}
-\date{2021-03-19}
+\date{2021-04-14}
 
 \begin{document}
 \maketitle
@@ -600,10 +600,10 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.462501 1.479436 1.368525 1.336757 1.447204 1.724706 1.385296 1.231612
-##  [9] 1.344096 1.419704 1.987735 1.520781 1.538684 1.635072 1.373932 1.358236
-## [17] 1.550978 1.569261 1.936980 1.255556 1.552147 1.854834 1.745920 1.335720
-## [25] 1.948371 1.575462 1.726168 1.214999 1.777296 1.552378 1.341825 1.443525
+##  [1] 1.310363 1.465870 1.596270 1.301821 1.313859 1.292328 1.346671 1.937384
+##  [9] 1.463774 1.790133 1.524129 1.884822 1.630018 1.492887 1.602232 1.765823
+## [17] 1.276987 1.390995 1.728911 1.446206 1.785317 1.451117 1.313887 1.471222
+## [25] 1.756980 1.248908 1.732871 1.714000 1.792523 1.225100 1.881881 1.237339
 \end{verbatim}
 
 我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.
@@ -797,10 +797,10 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.792463 1.366629 1.786226 1.775950 1.210682 1.843239 1.250131 1.202770
-##  [9] 1.807180 1.511265 1.442743 1.457814 1.428001 1.666531 1.293014 1.613310
-## [17] 1.379014 1.743396 1.564122 1.363180 1.747225 1.286817 1.736520 1.484778
-## [25] 1.782392 1.540452 1.264672 1.744219
+##  [1] 1.653744 1.393328 1.212316 1.748715 1.210766 1.654202 1.692906 1.432961
+##  [9] 1.711539 1.344147 1.760025 1.821645 1.585154 1.210719 1.676389 1.716885
+## [17] 1.519537 1.775663 1.965810 1.271631 1.246458 1.633164 1.236179 1.769838
+## [25] 1.391056 1.595605 1.957422 1.510520
 \end{verbatim}
 
 \sout{测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。}
@@ -874,8 +874,8 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 0.4937756 0.4941173 0.4899289 0.4963379 0.4843766 0.4884186 0.5129342
-##  [8] 0.4803380 0.4863492 0.4866303 0.4654388 0.5113595
+##  [1] 0.4933270 0.5290922 0.4890087 0.4950632 0.5109570 0.5060883 0.4799917
+##  [8] 0.5060143 0.5262263 0.5049393 0.4956403 0.4857695
 \end{verbatim}
 
 \hypertarget{batch-6800-xlsx}{%
@@ -8298,7 +8298,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 \end{Shaded}
 
 \begin{verbatim}
-## R version 4.0.3 (2020-10-10)
+## R version 4.0.5 (2021-03-31)
 ## Platform: x86_64-w64-mingw32/x64 (64-bit)
 ## Running under: Windows 10 x64 (build 19042)
 ## 
@@ -8316,40 +8316,40 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 ## 
 ## other attached packages:
 ##  [1] factoextra_1.0.7   FactoMineR_2.4     jiptest_0.1.3      gridExtra_2.3     
-##  [5] plyr_1.8.6         latex2exp_0.4.0    RColorBrewer_1.1-2 racir_1.0.0       
+##  [5] plyr_1.8.6         latex2exp_0.5.0    RColorBrewer_1.1-2 racir_1.0.0       
 ##  [9] nls2_0.2           proto_1.0.0        purrr_0.3.4        ggplot2_3.3.3     
-## [13] minpack.lm_1.2-1   plantecophys_1.4-4 readphoto_0.0.1   
+## [13] minpack.lm_1.2-1   plantecophys_1.4-6 readphoto_0.0.1   
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] nlme_3.1-152         tools_4.0.3          backports_1.2.1     
-##  [4] utf8_1.1.4           R6_2.5.0             DT_0.17             
+##  [1] nlme_3.1-152         tools_4.0.5          backports_1.2.1     
+##  [4] utf8_1.2.1           R6_2.5.0             DT_0.17             
 ##  [7] DBI_1.1.1            mgcv_1.8-34          colorspace_2.0-0    
 ## [10] MESS_0.5.7           withr_2.4.1          tidyselect_1.1.0    
-## [13] rematch_1.0.1        curl_4.3             compiler_4.0.3      
+## [13] rematch_1.0.1        curl_4.3             compiler_4.0.5      
 ## [16] XLConnect_1.0.2      flashClust_1.01-2    labeling_0.4.2      
 ## [19] bookdown_0.21        mosaicCore_0.9.0     scales_1.1.1        
 ## [22] readr_1.4.0          ggridges_0.5.3       stringr_1.4.0       
 ## [25] digest_0.6.27        foreign_0.8-81       ggformula_0.10.1    
 ## [28] rmarkdown_2.7        rio_0.5.26           pkgconfig_2.0.3     
-## [31] htmltools_0.5.1.1    geeM_0.10.1          labelled_2.7.0      
+## [31] htmltools_0.5.1.1    geeM_0.10.1          labelled_2.8.0      
 ## [34] highr_0.8            htmlwidgets_1.5.3    rlang_0.4.10        
 ## [37] readxl_1.3.1         rstudioapi_0.13      farver_2.1.0        
 ## [40] generics_0.1.0       zip_2.1.1            car_3.0-10          
-## [43] dplyr_1.0.4          magrittr_2.0.1       leaps_3.1           
+## [43] dplyr_1.0.5          magrittr_2.0.1       leaps_3.1           
 ## [46] Matrix_1.3-2         Rcpp_1.0.6           munsell_0.5.0       
 ## [49] fansi_0.4.2          abind_1.4-5          geepack_1.3-2       
 ## [52] lifecycle_1.0.0      scatterplot3d_0.3-41 stringi_1.5.3       
 ## [55] yaml_2.2.1           carData_3.0-4        MASS_7.3-53.1       
-## [58] ggstance_0.3.5       grid_4.0.3           ggrepel_0.9.1       
+## [58] ggstance_0.3.5       grid_4.0.5           ggrepel_0.9.1       
 ## [61] forcats_0.5.1        crayon_1.4.1         lattice_0.20-41     
-## [64] haven_2.3.1          splines_4.0.3        hms_1.0.0           
-## [67] knitr_1.31           pillar_1.5.0         ggpubr_0.4.0        
+## [64] haven_2.3.1          splines_4.0.5        hms_1.0.0           
+## [67] knitr_1.31           pillar_1.6.0         ggpubr_0.4.0        
 ## [70] ggsignif_0.6.1       glue_1.4.2           evaluate_0.14       
-## [73] data.table_1.14.0    png_0.1-7            vctrs_0.3.6         
-## [76] tweenr_1.0.1         cellranger_1.1.0     gtable_0.3.0        
-## [79] polyclip_1.10-0      tidyr_1.1.2          assertthat_0.2.1    
-## [82] openxlsx_4.2.3       xfun_0.21            ggforce_0.3.2       
-## [85] broom_0.7.5          rstatix_0.7.0        tibble_3.0.4        
+## [73] data.table_1.14.0    png_0.1-7            vctrs_0.3.7         
+## [76] tweenr_1.0.2         cellranger_1.1.0     gtable_0.3.0        
+## [79] polyclip_1.10-0      tidyr_1.1.3          assertthat_0.2.1    
+## [82] openxlsx_4.2.3       xfun_0.22            ggforce_0.3.3       
+## [85] broom_0.7.6          rstatix_0.7.0        tibble_3.1.0        
 ## [88] rJava_0.9-13         cluster_2.1.1        ellipsis_0.3.1
 \end{verbatim}
 
