@@ -161,6 +161,7 @@ div.csl-indent {
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>欢迎</a></li>
 <li class="chapter" data-level="" data-path="frontmatter.html"><a href="frontmatter.html"><i class="fa fa-check"></i>前言</a></li>
+<li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i>关于作者</a></li>
 <li class="chapter" data-level="" data-path="copyright.html"><a href="copyright.html"><i class="fa fa-check"></i>版权</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> R 软件与 Rstudio</a>
 <ul>
@@ -961,10 +962,10 @@ div.csl-indent {
 <span id="cb24-2"><a href="batch-question.html#cb24-2" aria-hidden="true" tabindex="-1"></a>area <span class="ot">&lt;-</span> <span class="dv">6</span> <span class="sc">-</span> <span class="fu">runif</span>(<span class="dv">32</span>, <span class="dv">1</span>, <span class="dv">3</span>)</span>
 <span id="cb24-3"><a href="batch-question.html#cb24-3" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> <span class="fu">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>,  <span class="at">header_line =</span> <span class="dv">17</span>, <span class="at">data_start =</span> <span class="dv">27</span>, <span class="at">S =</span> area, <span class="at">K =</span> <span class="fl">0.5</span>)</span>
 <span id="cb24-4"><a href="batch-question.html#cb24-4" aria-hidden="true" tabindex="-1"></a>y1<span class="sc">$</span>Photo<span class="sc">/</span>x1<span class="sc">$</span>Photo</span></code></pre></div>
-<pre><code>##  [1] 1.358178 1.385658 1.386873 1.839105 1.984908 1.681593 1.841810 1.293790
-##  [9] 1.325142 1.224011 1.571072 1.745332 1.722253 1.489166 1.249271 1.302472
-## [17] 1.286321 1.564489 1.801553 1.465934 1.667092 1.212285 1.204891 1.238602
-## [25] 1.591836 1.853909 1.524665 1.495310 1.295700 1.314720 1.485373 1.865722</code></pre>
+<pre><code>##  [1] 1.393993 1.837589 1.946341 1.453518 1.531909 1.376534 1.880935 1.562380
+##  [9] 1.683913 1.428797 1.383509 1.574451 1.506400 1.344168 1.707026 1.437658
+## [17] 1.340248 1.650706 1.383950 1.201493 1.345673 1.300398 1.472845 1.275868
+## [25] 1.799380 1.313306 1.284463 1.622012 1.362652 1.202349 1.384208 1.680436</code></pre>
 <p>我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.</p>
 </div>
 <div id="recompute6800" class="section level3" number="2.4.2">
@@ -1026,10 +1027,10 @@ div.csl-indent {
 <pre><code>## Warning: Missing column names filled in: &#39;X125&#39; [125]</code></pre>
 <pre><code>## Warning: Duplicated column names deduplicated: &#39;TIME&#39; =&gt; &#39;TIME_1&#39; [69]</code></pre>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="batch-question.html#cb61-1" aria-hidden="true" tabindex="-1"></a>y3<span class="sc">$</span>A<span class="sc">/</span>x3<span class="sc">$</span>A</span></code></pre></div>
-<pre><code>##  [1] 1.370504 1.742061 1.269056 1.542521 1.458579 1.245511 1.469221 1.733443
-##  [9] 1.753282 1.765449 1.676073 1.368268 1.444332 1.751704 1.890050 1.300168
-## [17] 1.736039 1.396793 1.210113 1.260655 1.351398 1.374979 1.582912 1.477505
-## [25] 1.484088 1.338609 1.282816 1.458038</code></pre>
+<pre><code>##  [1] 1.892502 1.432741 1.378302 1.427070 1.350333 1.708268 1.234560 1.350577
+##  [9] 1.939134 1.651782 1.884497 1.419384 1.405563 1.438466 1.277025 1.292442
+## [17] 1.684854 1.868740 1.249163 1.708557 1.809597 1.343877 1.522135 1.313465
+## [25] 1.491541 1.616345 1.874552 1.782407</code></pre>
 <p><del>测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。</del></p>
 </div>
 <div id="excel-recompute-68" class="section level4" number="2.4.2.2">
