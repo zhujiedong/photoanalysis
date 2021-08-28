@@ -42,7 +42,11 @@ header_line 表示你数据表头所在行，data_start 表示你数据起始行
 
 ## LI-6800 数据整合{#batch68}
 
-此部分内容保留，但不建议再使用：
+此部分内容保留，但不建议再使用，如果不介意软件包比较大，可以参考：
+
+[图形界面整理数据](https://mp.weixin.qq.com/s?__biz=MzU4ODI3NjkzMg==&mid=2247485449&idx=1&sn=914778c6bc1e288c7cb093da403d920e&chksm=fdde7da2caa9f4b449de6bd4ead60913444c6a6b429e59d6ad80ab5bea10c74e1e0c5da1105d&token=1056052514&lang=zh_CN#rd)
+
+转换为 tidy csv 数据后，可以直接通过简单的代码进行批量处理操作。
 
 ~~相比 6400， 6800 参数要少，导入需要两行命令即可：~~
 
@@ -157,25 +161,33 @@ remotes::install_git("https://gitee.com/zhu_jie_dong/readphoto")
 
 我们直接使用下面的例子解释，导入的数据是 6 cm^2^ 的默认面积：
 
-```{r}
+```{r, eval=FALSE}
 library(readphoto)
 
 df6 <- xlconnect_read("./data/aci-xlc.xlsx")
 df6$A
+
+##  [1] 24.7381184 18.1379358 10.8055345  3.0239340 -0.9144044 26.9519572
+##  [7] 27.5088717 40.9101889 50.1393342 55.3865984 58.0662751 59.3556428
 ```
 
 将面积改为 3 cm^2^
 
-```{r}
+```{r, eval=FALSE}
 df3 <- xlconnect_read("./data/aci-xlc.xlsx", S = rep(3, 12))
 df6$A/df3$A
+
+##  [1] 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5
 ```
 
 模拟 12 个不同的叶面积，均值为 3，方差为 0.1
 
-```{r}
+```{r, eval=FALSE}
 df_random <- xlconnect_read("./data/aci-xlc.xlsx", S = rnorm(12, 3, 0.1))
 df6$A/df_random$A
+
+##  [1] 0.5404604 0.4946930 0.5055978 0.5131122 0.5091636 0.5010179 0.5118623
+##  [8] 0.4928284 0.4838221 0.5126210 0.4926683 0.4925639
 ```
 
 #### 批量处理 LI-6800 的数据 {#batch-6800-xlsx}

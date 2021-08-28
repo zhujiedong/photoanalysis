@@ -12,7 +12,7 @@ $m^{2}\cdot s\cdot\mu mol^{-1}$，其他参数与上文相同，因为该式 \@r
 存在极值，因此，必然存在饱和光强和最大净光合速率，分别用式 \@ref(eq:isat) 和式 \@ref(eq:ic) 求得。
 
 \begin{equation}
-I_{sat} = \frac{\sqrt{\frac{(\beta+\gamma)}{\beta}-1}}{\gamma}
+I_{sat} = \frac{\sqrt{\frac{(\beta+\gamma)}{\beta}} - 1}{\gamma}
 (\#eq:isat)
 \end{equation}
 
@@ -47,8 +47,8 @@ lrcnls <- nlsLM(lrc_A ~ alpha * ((1 -
 fitlrc_mrec <- summary(lrcnls)
 
 # 饱和点计算
-Isat <-  sqrt((fitlrc_mrec$coef[2,1] + fitlrc_mrec$coef[3,1])/
-              fitlrc_mrec$coef[2,1]-1)/fitlrc_mrec$coef[3,1]
+Isat <-  (sqrt((fitlrc_mrec$coef[2,1] + fitlrc_mrec$coef[3,1])/
+              fitlrc_mrec$coef[2,1]) -1)/fitlrc_mrec$coef[3,1]
 # 补偿点计算
 Ic <- (
   -(fitlrc_mrec$coef[3, 1] * fitlrc_mrec$coef[4, 1] - 

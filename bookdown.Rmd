@@ -152,7 +152,11 @@ header_line 表示你数据表头所在行，data_start 表示你数据起始行
 
 ## LI-6800 数据整合{#batch68}
 
-此部分内容保留，但不建议再使用：
+此部分内容保留，但不建议再使用，如果不介意软件包比较大，可以参考：
+
+[图形界面整理数据](https://mp.weixin.qq.com/s?__biz=MzU4ODI3NjkzMg==&mid=2247485449&idx=1&sn=914778c6bc1e288c7cb093da403d920e&chksm=fdde7da2caa9f4b449de6bd4ead60913444c6a6b429e59d6ad80ab5bea10c74e1e0c5da1105d&token=1056052514&lang=zh_CN#rd)
+
+转换为 tidy csv 数据后，可以直接通过简单的代码进行批量处理操作。
 
 ~~相比 6400， 6800 参数要少，导入需要两行命令即可：~~
 
@@ -267,25 +271,33 @@ remotes::install_git("https://gitee.com/zhu_jie_dong/readphoto")
 
 我们直接使用下面的例子解释，导入的数据是 6 cm^2^ 的默认面积：
 
-```{r}
+```{r, eval=FALSE}
 library(readphoto)
 
 df6 <- xlconnect_read("./data/aci-xlc.xlsx")
 df6$A
+
+##  [1] 24.7381184 18.1379358 10.8055345  3.0239340 -0.9144044 26.9519572
+##  [7] 27.5088717 40.9101889 50.1393342 55.3865984 58.0662751 59.3556428
 ```
 
 将面积改为 3 cm^2^
 
-```{r}
+```{r, eval=FALSE}
 df3 <- xlconnect_read("./data/aci-xlc.xlsx", S = rep(3, 12))
 df6$A/df3$A
+
+##  [1] 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5
 ```
 
 模拟 12 个不同的叶面积，均值为 3，方差为 0.1
 
-```{r}
+```{r, eval=FALSE}
 df_random <- xlconnect_read("./data/aci-xlc.xlsx", S = rnorm(12, 3, 0.1))
 df6$A/df_random$A
+
+##  [1] 0.5404604 0.4946930 0.5055978 0.5131122 0.5091636 0.5010179 0.5118623
+##  [8] 0.4928284 0.4838221 0.5126210 0.4926683 0.4925639
 ```
 
 #### 批量处理 LI-6800 的数据 {#batch-6800-xlsx}
@@ -1585,7 +1597,7 @@ $m^{2}\cdot s\cdot\mu mol^{-1}$，其他参数与上文相同，因为该式 \@r
 存在极值，因此，必然存在饱和光强和最大净光合速率，分别用式 \@ref(eq:isat) 和式 \@ref(eq:ic) 求得。
 
 \begin{equation}
-I_{sat} = \frac{\sqrt{\frac{(\beta+\gamma)}{\beta}-1}}{\gamma}
+I_{sat} = \frac{\sqrt{\frac{(\beta+\gamma)}{\beta}} - 1}{\gamma}
 (\#eq:isat)
 \end{equation}
 
@@ -1620,8 +1632,8 @@ lrcnls <- nlsLM(lrc_A ~ alpha * ((1 -
 fitlrc_mrec <- summary(lrcnls)
 
 # 饱和点计算
-Isat <-  sqrt((fitlrc_mrec$coef[2,1] + fitlrc_mrec$coef[3,1])/
-              fitlrc_mrec$coef[2,1]-1)/fitlrc_mrec$coef[3,1]
+Isat <-  (sqrt((fitlrc_mrec$coef[2,1] + fitlrc_mrec$coef[3,1])/
+              fitlrc_mrec$coef[2,1]) -1)/fitlrc_mrec$coef[3,1]
 # 补偿点计算
 Ic <- (
   -(fitlrc_mrec$coef[3, 1] * fitlrc_mrec$coef[4, 1] - 
@@ -1946,9 +1958,32 @@ IRGAs 极快的响应频率，使得短时间内的 A–Ci 的测量成为现实
 * 最小化校准和测量值之间的水分摩尔分数差异。甚至有可能需要控制 reference 或 sample 的水的摩尔分数而不是 Vpdleaf。
 通过预实验来确定最合适的 $CO_2$ 变化范围和随时间的斜率。
 
+**本文之后关于racir 的空叶室校正部分全部不再支持，因为LI-6800 1.5之后的系统版本，关于两个分析器在快速变化环境条件下的校正均由仪器完成，分析工作直接使用 `plantecophys` 等软件拟合即可。**
+
+例如下面的数据采用了 1.5.02 的 BP 程序 `DAT_CO2_Continuous.py`，直接测量的 RACiR 数据，结果如下：
+
+```{r, eval=FALSE}
+remotes::install_github("zhujiedong/plantecophys2")
+```
+
+
+```{r}
+adyn <- read.csv("data/racir_adyn.csv")
+
+adyn_fit <- plantecophys2::fitaci(adyn)
+
+
+```
+```{r, adyn_plot, fig.cap="使用 Adyn 来进行RACiR 的直接测量数据"}
+plot(adyn_fit)
+```
+
+ \@ref(fig: dyn_plot) 展示的使用 LI-6800 自带程序测量的数据，无需修正，测量作物为早春温室的水稻。
+
+
 ## racir 软件包实现 RACiR\texttrademark 数据分析  {#racir_pkg}
 
-**可能软件包作者没有更改叶面积的需求，他的软件包只支持原始数据的处理，但这对有更改需求的客户来讲没那么友好，而且这样导致了大量代码的重复，我根据作者原来的代码，结合我自己数据分析的习惯，重新制作了一份软件包，下面代码实现是基于我的软件包实现的，如有需求，也可使用作者原来的代码实现**
+~~可能软件包作者没有更改叶面积的需求，他的软件包只支持原始数据的处理，但这对有更改需求的客户来讲没那么友好，而且这样导致了大量代码的重复，我根据作者原来的代码，结合我自己数据分析的习惯，重新制作了一份软件包，下面代码实现是基于我的软件包实现的，如有需求，也可使用作者原来的代码实现~~
 
 ```{r, racir_install, eval=FALSE}
 devtools::install_github("zhujiedong/racir")
@@ -1969,7 +2004,7 @@ library(racir)
 
 首先检查空叶室校准：
 
-```{r, racircheck, fig.cap="找出最合理的校准曲线数据范围"}
+```{r, racircheck, fig.cap="找出最合理的校准曲线数据范围", eval=FALSE}
 library(racir)
 # only check the empty chamber data here
 em1 <- read.csv("./data/racirem/em-1.csv")
@@ -1979,13 +2014,13 @@ find_cut(em1)
 
 上述代码查看参比室 $CO_2$ 浓度在两者之间的数据，确定后面代码使用的 `mincut`, `maxcut` 范围。此处我选择的范围如下问代码：
 
-```{r, racircorpkg, fig.cap="校准曲线查看"}
+```{r, racircorpkg, fig.cap="校准曲线查看", eval=FALSE}
 racircheck(em1, mincut = 21 , maxcut = 463 )
 ```
 
 没有问题可直接进行校准
 
-```{r, racircor, fig.cap="校准后数据查看"}
+```{r, racircor, fig.cap="校准后数据查看", eval=FALSE}
 x <- racircal(em1, le1, mincut = 21, maxcut = 463)
 plot(x$CO2_r, x$A)
 ```
@@ -1999,7 +2034,7 @@ plot(x$CO2_r, x$A)
 
 以上的实现方法是基于肉眼判断，删除不需要的数据，自动化程度较低，同时不适合 @Coursolle12019 这样的方法:
 
-```{r, racir-steady-start, echo = FALSE, fig.cap="稳定后从低到高的 RACiR 实验数据"}
+```{r, racir-steady-start, echo = FALSE, fig.cap="稳定后从低到高的 RACiR 实验数据", eval=FALSE}
 rawleaf <- xls_read("data/Fast.xlsx")
 plot(
   A ~ CO2_r,
@@ -2050,7 +2085,7 @@ polygon(
 
 此函数本质上是 `xlconnect_read`，如无需修改叶面积，则使用默认值。如果需要修改叶面积，需要输入 S 参数，叶面积修改值必须和 A 的值一一对应，否则因为叶面积错误，则导致其他的错误，例如上面修改叶面积为原来的一半：
 
-```{r, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
 library(racir)
 library(plantecophys)
 
@@ -2069,21 +2104,21 @@ tail(half_leaf$A/leaf$A)
 
 **2. 关于空叶室的数据过滤范围的选取:**
 
-```{r, emtpy-delta-max, fig.cap="空叶室数据的查看"}
+```{r, emtpy-delta-max, fig.cap="空叶室数据的查看", eval=FALSE}
 check_delta_empty(empty, delta_max = 0.5, lower_A = -1)
 ```
 这里首先不要被第二幅图的波动所迷惑，主要是坐标轴差异太小。然后第一幅图中，这里设定了一个最大最小光合速率的范围（阈值，upper_A 和 lower_A），默认最大值是 2 以及最小值是 -2，上面我使用了最小值为 -1，也就是删除小于 -1 的光合速率，最大值 2 并不是删除，二是寻找 -2 < A < 2 范围的数据（确定起始测量时 A 开始变为合理的范围），从这里面找一个最小值，保留这一行的数据到测量数据结束。 另一个阈值删除相邻两个A值过大差值的数据的阈值（`delta_max`），对于这个阈值，LI-6800 其实并不敏感，因为本身数据非常稳定。
 
 **3. 关于带叶片测量的数据过滤范围的选取:**
 
-```{r, leaf-delta-max, fig.cap="带叶片测量数据的查看"}
+```{r, leaf-delta-max, fig.cap="带叶片测量数据的查看", eval=FALSE}
 check_delta(leaf, delta_max = 0.5, lower_A = -1)
 ```
 带叶片的数据同上，没有特殊的参数，从右图的数据来看，他在修正之前的光合速率，符合我们的预期。
 
 **4. 确定范围后数据的清洗:**
 
-```{r}
+```{r, eval=FALSE}
 tidy_leaf <- tidy_data(leaf, delta_max = 0.5, lower_A = -1)
 tidy_empty <- tidy_data_empty(empty, delta_max = 0.5, lower_A = -1)
 
@@ -2092,7 +2127,7 @@ z <- correct_leaf(tidy_empty, tidy_leaf)
 ```
 **4. 拟合后的数据：**
 
-```{r}
+```{r, eval=FALSE}
 fit_racir <- fitaci(z,
                varnames =
                  list(
@@ -2117,30 +2152,30 @@ fit_normal <- fitaci(aci,
 
 RACiR 的结果：
 
-```{r, filter-fit-plot1, echo = FALSE, fig.cap="ACi 拟合结果的图形"}
+```{r, filter-fit-plot1, echo = FALSE, fig.cap="ACi 拟合结果的图形", eval=FALSE}
 plot(fit_normal)
 ```
 
 ACi 的结果：
 
-```{r, filter-fit-plot, echo = FALSE, fig.cap="RACiR拟合结果的图形"}
+```{r, filter-fit-plot, echo = FALSE, fig.cap="RACiR拟合结果的图形", eval=FALSE}
 plot(fit_racir)
 ```
 
 结果的比较：
 
-```{r racirparsbp, echo=FALSE}
+```{r racirparsbp, echo=FALSE, eval=FALSE}
 knitr::kable(data.frame(fit_racir$pars))
 ```
 
-```{r aicparsbp, echo=FALSE}
+```{r aicparsbp, echo=FALSE, eval=FALSE}
 knitr::kable(data.frame(fit_normal$pars))
 ```
 此处的数据和视频里的数据以及函数的参数略有差别，因为我修改了一下 `racir` 软件包的过滤条件，使得筛选数据更符合要求。本身因为不是同一时间测量，测量 RACiR 时叶片的气孔导度略到，因此，其 $V_{cmax}$ 略大符合预期。
 
 数据的重合程度 （实际上 RACiR 数据点要浓密的多，我使用了透明度为 80%，这样看上去仍然颜色非常深，这是 RACiR 采集数据点达到几百个的原因。 ACi 测量点为 50-2000 ppm，RACiR 为 20-1520 ppm）：
 
-```{r, acivsracirbp, fig.cap = "RACiR 与 ACi 数据点的重合程度（BP 测量）"}
+```{r, acivsracirbp, fig.cap = "RACiR 与 ACi 数据点的重合程度（BP 测量）", eval=FALSE}
 library(RColorBrewer)
 library(latex2exp)
 
@@ -2180,7 +2215,7 @@ legend(
 
 以上内容是按照 @Coursolle12019 的方式，从低浓度到高浓度的控制，就我个人而言，我感觉无需从高到底测试，但是就实验而言，可以仿照 @Coursolle12019 的方式，从高浓度到低浓度做一次测试，来检验哪种方式更合适。于是在测试完上面的数据的第二天又重新测试了反向的测试，为了数据处理的方便，在此将反向实验的数据处理方式写一下。
 
-```{r, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
 #导入数据
 empty <- xls_read("data/racir-empty-reverse.xlsx")
 leaf <- xls_read("data/racir-leaf-reverse.xlsx")
@@ -2192,7 +2227,7 @@ leaf <- xls_read("data/racir-leaf-reverse.xlsx")
 
 **1.检验空叶室数据的测量**
 
-```{r, empty-delta-max-rev, fig.cap="反向空叶室测量数据的查看"}
+```{r, empty-delta-max-rev, fig.cap="反向空叶室测量数据的查看", eval=FALSE}
 check_delta_empty(
   empty,
   delta_max = 0.5,
@@ -2207,7 +2242,7 @@ check_delta_empty(
 
 **2.检验带叶片测量数据的测量**
 
-```{r, leaf-delta-max-rev, fig.cap="反向带叶片测量测量数据的查看"}
+```{r, leaf-delta-max-rev, fig.cap="反向带叶片测量测量数据的查看", eval=FALSE}
 check_delta(
   leaf,
   delta_max = 0.5,
@@ -2219,7 +2254,7 @@ check_delta(
 
 过滤方式相同空叶室，数据仍然是非常稳定。我们看一下最终结果：
 
-```{r}
+```{r, eval=FALSE}
 leaf_rev <- tidy_data(
   leaf,
   delta_max = 0.5,
@@ -2252,14 +2287,14 @@ fit_racir_rev <- fitaci(zrev,
 
 RACiR 的结果：
 
-```{r, filter-fit-plot1-rev, echo = FALSE, fig.cap="RACiR 反向测量拟合结果的图形"}
+```{r, filter-fit-plot1-rev, echo = FALSE, fig.cap="RACiR 反向测量拟合结果的图形", eval=FALSE}
 plot(fit_racir_rev)
 ```
 
 
 结果的比较：
 
-```{r racir-zrev, echo=FALSE}
+```{r racir-zrev, echo=FALSE, eval=FALSE}
 knitr::kable(data.frame(fit_racir_rev$pars))
 ```
 

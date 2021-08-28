@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 4 章 气孔导度模型的拟合 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
   <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 4 章 气孔导度模型的拟合 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:image" content="images/coverpage.png" />
+  <meta property="og:image" content="/images/coverpage.png" />
   <meta property="og:description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
   <meta name="github-repo" content="zhujiedong/photoanalysis" />
 
@@ -19,12 +19,12 @@
   <meta name="twitter:title" content="第 4 章 气孔导度模型的拟合 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   
   <meta name="twitter:description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
-  <meta name="twitter:image" content="images/coverpage.png" />
+  <meta name="twitter:image" content="/images/coverpage.png" />
 
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2021-04-14" />
+<meta name="date" content="2021-08-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="response-fit.html"/>
 <link rel="next" href="stomotal-couple.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -116,6 +118,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
@@ -336,7 +361,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>其三个模型的简介如下：</p>
 <div id="ballberry" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> BallBerry 模型</h2>
-<p><span class="citation"><a href="references.html#ref-Ball1987A" role="doc-biblioref">Ball, Woodrow, and Berry</a> (<a href="references.html#ref-Ball1987A" role="doc-biblioref">1987</a>)</span> 发表的文章中的模型：</p>
+<p><span class="citation">Ball, Woodrow, and Berry (<a href="#ref-Ball1987A" role="doc-biblioref">1987</a>)</span> 发表的文章中的模型：</p>
 <p><span class="math display" id="eq:ballberry">\[\begin{equation}
 g_s = g0 + g1(\frac{A h_r}{C_a})
 \tag{4.1}
@@ -345,7 +370,7 @@ g_s = g0 + g1(\frac{A h_r}{C_a})
 </div>
 <div id="bbleuning" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> BBLeuning 模型</h2>
-<p><span class="citation"><a href="references.html#ref-leuning1995a" role="doc-biblioref">Leuning</a> (<a href="references.html#ref-leuning1995a" role="doc-biblioref">1995</a>)</span> 发表的文章中的模型：</p>
+<p><span class="citation">Leuning (<a href="#ref-leuning1995a" role="doc-biblioref">1995</a>)</span> 发表的文章中的模型：</p>
 <p><span class="math display" id="eq:BBLeuning">\[\begin{equation}
 g_s = g_0 + g_1(\frac{A}{(C_a - \Gamma)(1 + \frac{D}{D_0})})
 \tag{4.2}
@@ -354,12 +379,12 @@ g_s = g_0 + g_1(\frac{A}{(C_a - \Gamma)(1 + \frac{D}{D_0})})
 </div>
 <div id="bboptifull" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> BBOptiFull 模型</h2>
-<p><span class="citation"><a href="references.html#ref-Medlyn2011Reconciling" role="doc-biblioref">Belinda E. Medlyn et al.</a> (<a href="references.html#ref-Medlyn2011Reconciling" role="doc-biblioref">2011</a>)</span> 发表的文章中的模型：</p>
+<p><span class="citation">Belinda E. Medlyn et al. (<a href="#ref-Medlyn2011Reconciling" role="doc-biblioref">2011</a>)</span> 发表的文章中的模型：</p>
 <p><span class="math display" id="eq:BBOptiFull">\[\begin{equation}
 g_s^* \approx g_0 + g_1(1 + \frac{g_1}{D}) \frac{A}{C_a}
 \tag{4.3}
 \end{equation}\]</span></p>
-<p>额外的参数 g<sub>k</sub> 来自于 <span class="citation"><a href="references.html#ref-Duursma2013Near" role="doc-biblioref">Remko A. Duursma et al.</a> (<a href="references.html#ref-Duursma2013Near" role="doc-biblioref">2013</a>)</span>
+<p>额外的参数 g<sub>k</sub> 来自于 <span class="citation">Remko A. Duursma et al. (<a href="#ref-Duursma2013Near" role="doc-biblioref">2013</a>)</span>
 <span class="math display" id="eq:Duursm">\[\begin{equation}
 g_s = g_0 + 1.6(1 + \frac{g_1}{D}(1-g_k)) \frac{A}{C_a}
 \tag{4.4}
@@ -367,11 +392,11 @@ g_s = g_0 + 1.6(1 + \frac{g_1}{D}(1-g_k)) \frac{A}{C_a}
 </div>
 <div id="fitbb-p" class="section level2" number="4.4">
 <h2><span class="header-section-number">4.4</span> <code>fitBB</code> 函数</h2>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="stomotal-sim.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fitBB</span>(data, <span class="at">varnames =</span> <span class="fu">list</span>(</span>
-<span id="cb96-2"><a href="stomotal-sim.html#cb96-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">ALEAF =</span> <span class="st">&quot;A&quot;</span>, <span class="at">GS =</span> <span class="st">&quot;gsw&quot;</span>, <span class="at">VPD =</span> <span class="st">&quot;VPDleaf&quot;</span>,</span>
-<span id="cb96-3"><a href="stomotal-sim.html#cb96-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Ca =</span><span class="st">&quot;CO2_s&quot;</span>, <span class="at">RH =</span> <span class="st">&quot;RHcham&quot;</span>), </span>
-<span id="cb96-4"><a href="stomotal-sim.html#cb96-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">gsmodel =</span> <span class="fu">c</span>(<span class="st">&quot;BBOpti&quot;</span>, <span class="st">&quot;BBLeuning&quot;</span>, <span class="st">&quot;BallBerry&quot;</span>,</span>
-<span id="cb96-5"><a href="stomotal-sim.html#cb96-5" aria-hidden="true" tabindex="-1"></a>              <span class="st">&quot;BBOptiFull&quot;</span>), <span class="at">fitg0 =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="stomotal-sim.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fitBB</span>(data, <span class="at">varnames =</span> <span class="fu">list</span>(</span>
+<span id="cb93-2"><a href="stomotal-sim.html#cb93-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">ALEAF =</span> <span class="st">&quot;A&quot;</span>, <span class="at">GS =</span> <span class="st">&quot;gsw&quot;</span>, <span class="at">VPD =</span> <span class="st">&quot;VPDleaf&quot;</span>,</span>
+<span id="cb93-3"><a href="stomotal-sim.html#cb93-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Ca =</span><span class="st">&quot;CO2_s&quot;</span>, <span class="at">RH =</span> <span class="st">&quot;RHcham&quot;</span>), </span>
+<span id="cb93-4"><a href="stomotal-sim.html#cb93-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">gsmodel =</span> <span class="fu">c</span>(<span class="st">&quot;BBOpti&quot;</span>, <span class="st">&quot;BBLeuning&quot;</span>, <span class="st">&quot;BallBerry&quot;</span>,</span>
+<span id="cb93-5"><a href="stomotal-sim.html#cb93-5" aria-hidden="true" tabindex="-1"></a>              <span class="st">&quot;BBOptiFull&quot;</span>), <span class="at">fitg0 =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p><strong>参数的意义:</strong></p>
 <ul>
 <li>data：待分析的数据文件。</li>
@@ -380,12 +405,12 @@ g_s = g_0 + 1.6(1 + \frac{g_1}{D}(1-g_k)) \frac{A}{C_a}
 <li>fitg0：默认不计算g0，若需要，改为TRUE。</li>
 </ul>
 <p><strong>代码示例：</strong></p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="stomotal-sim.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plantecophys)</span>
-<span id="cb97-2"><a href="stomotal-sim.html#cb97-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-3"><a href="stomotal-sim.html#cb97-3" aria-hidden="true" tabindex="-1"></a>aci <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./data/aci.csv&quot;</span>)</span>
-<span id="cb97-4"><a href="stomotal-sim.html#cb97-4" aria-hidden="true" tabindex="-1"></a>aci <span class="ot">&lt;-</span> <span class="fu">subset</span>(aci, Obs <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
-<span id="cb97-5"><a href="stomotal-sim.html#cb97-5" aria-hidden="true" tabindex="-1"></a><span class="fu">fitBB</span>(aci, <span class="at">varnames =</span> <span class="fu">list</span>(<span class="at">ALEAF =</span> <span class="st">&quot;Photo&quot;</span>, <span class="at">GS =</span> <span class="st">&quot;Cond&quot;</span>, <span class="at">VPD =</span> <span class="st">&quot;VpdL&quot;</span>,</span>
-<span id="cb97-6"><a href="stomotal-sim.html#cb97-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Ca =</span> <span class="st">&quot;CO2S&quot;</span>, <span class="at">RH =</span> <span class="st">&quot;RH_S&quot;</span>), <span class="at">gsmodel =</span> <span class="st">&quot;BBOpti&quot;</span>, <span class="at">fitg0 =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="stomotal-sim.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plantecophys)</span>
+<span id="cb94-2"><a href="stomotal-sim.html#cb94-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-3"><a href="stomotal-sim.html#cb94-3" aria-hidden="true" tabindex="-1"></a>aci <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./data/aci.csv&quot;</span>)</span>
+<span id="cb94-4"><a href="stomotal-sim.html#cb94-4" aria-hidden="true" tabindex="-1"></a>aci <span class="ot">&lt;-</span> <span class="fu">subset</span>(aci, Obs <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb94-5"><a href="stomotal-sim.html#cb94-5" aria-hidden="true" tabindex="-1"></a><span class="fu">fitBB</span>(aci, <span class="at">varnames =</span> <span class="fu">list</span>(<span class="at">ALEAF =</span> <span class="st">&quot;Photo&quot;</span>, <span class="at">GS =</span> <span class="st">&quot;Cond&quot;</span>, <span class="at">VPD =</span> <span class="st">&quot;VpdL&quot;</span>,</span>
+<span id="cb94-6"><a href="stomotal-sim.html#cb94-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Ca =</span> <span class="st">&quot;CO2S&quot;</span>, <span class="at">RH =</span> <span class="st">&quot;RH_S&quot;</span>), <span class="at">gsmodel =</span> <span class="st">&quot;BBOpti&quot;</span>, <span class="at">fitg0 =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## Result of fitBB.
 ## Model :  BBOpti 
 ## Both g0 and g1 were estimated.
@@ -401,30 +426,45 @@ g_s = g_0 + 1.6(1 + \frac{g_1}{D}(1-g_k)) \frac{A}{C_a}
 <div id="fitbbs" class="section level2" number="4.5">
 <h2><span class="header-section-number">4.5</span> <code>fitBBs</code> 函数</h2>
 <p>如果我们有多个物种的数据，那么使用 <code>fitBBs</code> 则可以快速拟合多条曲线的数据。我们先整合两次的数据，然后再查看运行结果：</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="stomotal-sim.html#cb99-1" aria-hidden="true" tabindex="-1"></a>aci01 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./data/aci01.csv&quot;</span>)</span>
-<span id="cb99-2"><a href="stomotal-sim.html#cb99-2" aria-hidden="true" tabindex="-1"></a>aci01 <span class="ot">&lt;-</span> <span class="fu">subset</span>(aci01, Obs <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
-<span id="cb99-3"><a href="stomotal-sim.html#cb99-3" aria-hidden="true" tabindex="-1"></a>multiBB <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb99-4"><a href="stomotal-sim.html#cb99-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">A =</span> <span class="fu">c</span>(aci<span class="sc">$</span>Photo, aci01<span class="sc">$</span>Photo),</span>
-<span id="cb99-5"><a href="stomotal-sim.html#cb99-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">GS =</span> <span class="fu">c</span>(aci<span class="sc">$</span>Cond, aci01<span class="sc">$</span>Cond),</span>
-<span id="cb99-6"><a href="stomotal-sim.html#cb99-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">CO2S =</span> <span class="fu">c</span>(aci<span class="sc">$</span>CO2S, aci01<span class="sc">$</span>CO2S),</span>
-<span id="cb99-7"><a href="stomotal-sim.html#cb99-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">VPD =</span> <span class="fu">c</span>(aci<span class="sc">$</span>VpdL, aci01<span class="sc">$</span>VpdL),</span>
-<span id="cb99-8"><a href="stomotal-sim.html#cb99-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">RH =</span> <span class="fu">c</span>(aci<span class="sc">$</span>RH_S, aci01<span class="sc">$</span>RH_S),</span>
-<span id="cb99-9"><a href="stomotal-sim.html#cb99-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">species =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;species1&quot;</span>, <span class="fu">length</span>(aci<span class="sc">$</span>Photo)),</span>
-<span id="cb99-10"><a href="stomotal-sim.html#cb99-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep</span>(<span class="st">&quot;species2&quot;</span>, <span class="fu">length</span>(aci01<span class="sc">$</span>Photo)))</span>
-<span id="cb99-11"><a href="stomotal-sim.html#cb99-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb99-12"><a href="stomotal-sim.html#cb99-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-13"><a href="stomotal-sim.html#cb99-13" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">fitBBs</span>(multiBB, <span class="at">group =</span> <span class="st">&quot;species&quot;</span>,  </span>
-<span id="cb99-14"><a href="stomotal-sim.html#cb99-14" aria-hidden="true" tabindex="-1"></a>               <span class="at">varnames =</span> <span class="fu">list</span>(</span>
-<span id="cb99-15"><a href="stomotal-sim.html#cb99-15" aria-hidden="true" tabindex="-1"></a>               <span class="at">ALEAF =</span> <span class="st">&quot;A&quot;</span>, <span class="at">GS =</span> <span class="st">&quot;GS&quot;</span>, <span class="at">VPD =</span> <span class="st">&quot;VPD&quot;</span>,</span>
-<span id="cb99-16"><a href="stomotal-sim.html#cb99-16" aria-hidden="true" tabindex="-1"></a>               <span class="at">Ca =</span><span class="st">&quot;CO2S&quot;</span>, <span class="at">RH =</span> <span class="st">&quot;RH&quot;</span>), </span>
-<span id="cb99-17"><a href="stomotal-sim.html#cb99-17" aria-hidden="true" tabindex="-1"></a>               <span class="at">gsmodel =</span> <span class="st">&quot;BallBerry&quot;</span>, <span class="at">fitg0 =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="stomotal-sim.html#cb96-1" aria-hidden="true" tabindex="-1"></a>aci01 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./data/aci01.csv&quot;</span>)</span>
+<span id="cb96-2"><a href="stomotal-sim.html#cb96-2" aria-hidden="true" tabindex="-1"></a>aci01 <span class="ot">&lt;-</span> <span class="fu">subset</span>(aci01, Obs <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb96-3"><a href="stomotal-sim.html#cb96-3" aria-hidden="true" tabindex="-1"></a>multiBB <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb96-4"><a href="stomotal-sim.html#cb96-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">A =</span> <span class="fu">c</span>(aci<span class="sc">$</span>Photo, aci01<span class="sc">$</span>Photo),</span>
+<span id="cb96-5"><a href="stomotal-sim.html#cb96-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">GS =</span> <span class="fu">c</span>(aci<span class="sc">$</span>Cond, aci01<span class="sc">$</span>Cond),</span>
+<span id="cb96-6"><a href="stomotal-sim.html#cb96-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">CO2S =</span> <span class="fu">c</span>(aci<span class="sc">$</span>CO2S, aci01<span class="sc">$</span>CO2S),</span>
+<span id="cb96-7"><a href="stomotal-sim.html#cb96-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">VPD =</span> <span class="fu">c</span>(aci<span class="sc">$</span>VpdL, aci01<span class="sc">$</span>VpdL),</span>
+<span id="cb96-8"><a href="stomotal-sim.html#cb96-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">RH =</span> <span class="fu">c</span>(aci<span class="sc">$</span>RH_S, aci01<span class="sc">$</span>RH_S),</span>
+<span id="cb96-9"><a href="stomotal-sim.html#cb96-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">species =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;species1&quot;</span>, <span class="fu">length</span>(aci<span class="sc">$</span>Photo)),</span>
+<span id="cb96-10"><a href="stomotal-sim.html#cb96-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep</span>(<span class="st">&quot;species2&quot;</span>, <span class="fu">length</span>(aci01<span class="sc">$</span>Photo)))</span>
+<span id="cb96-11"><a href="stomotal-sim.html#cb96-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb96-12"><a href="stomotal-sim.html#cb96-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-13"><a href="stomotal-sim.html#cb96-13" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">fitBBs</span>(multiBB, <span class="at">group =</span> <span class="st">&quot;species&quot;</span>,  </span>
+<span id="cb96-14"><a href="stomotal-sim.html#cb96-14" aria-hidden="true" tabindex="-1"></a>               <span class="at">varnames =</span> <span class="fu">list</span>(</span>
+<span id="cb96-15"><a href="stomotal-sim.html#cb96-15" aria-hidden="true" tabindex="-1"></a>               <span class="at">ALEAF =</span> <span class="st">&quot;A&quot;</span>, <span class="at">GS =</span> <span class="st">&quot;GS&quot;</span>, <span class="at">VPD =</span> <span class="st">&quot;VPD&quot;</span>,</span>
+<span id="cb96-16"><a href="stomotal-sim.html#cb96-16" aria-hidden="true" tabindex="-1"></a>               <span class="at">Ca =</span><span class="st">&quot;CO2S&quot;</span>, <span class="at">RH =</span> <span class="st">&quot;RH&quot;</span>), </span>
+<span id="cb96-17"><a href="stomotal-sim.html#cb96-17" aria-hidden="true" tabindex="-1"></a>               <span class="at">gsmodel =</span> <span class="st">&quot;BallBerry&quot;</span>, <span class="at">fitg0 =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## RH provided in % converted to relative units.
 ## RH provided in % converted to relative units.</code></pre>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="stomotal-sim.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="stomotal-sim.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod2)</span></code></pre></div>
 <pre><code>##      group         g0         g1
 ## 1 species1 0.32638852 -0.1734554
 ## 2 species2 0.05158725 -0.0218842</code></pre>
 
+</div>
+</div>
+<h3>参考文献</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Ball1987A" class="csl-entry">
+Ball, J. Timothy, Ian E. Woodrow, and Joseph A. Berry. 1987. <em>A Model Predicting Stomatal Conductance and Its Contribution to the Control of Photosynthesis Under Different Environmental Conditions</em>. Springer Netherlands.
+</div>
+<div id="ref-Duursma2013Near" class="csl-entry">
+Duursma, Remko A., Paxton Payton, Michael P. Bange, Katrina J. Broughton, Renee A. Smith, Belinda E. Medlyn, and David T. Tissue. 2013. <span>“Near-Optimal Response of Instantaneous Transpiration Efficiency to Vapour Pressure Deficit, Temperature and CO<span class="math inline">\(_2\)</span> in Cotton (Gossypium Hirsutum l.).”</span> <em>Agricultural &amp; Forest Meteorology</em> 168 (1): 168–76.
+</div>
+<div id="ref-leuning1995a" class="csl-entry">
+Leuning, R. 1995. <span>“A Critical Appraisal of a Combined Stomatal‐photosynthesis Model for C3 Plants.”</span> <em>Plant Cell and Environment</em> 18 (4): 339–55.
+</div>
+<div id="ref-Medlyn2011Reconciling" class="csl-entry">
+Medlyn, Belinda E., Remko A. Duursma, Derek Eamus, David S. Ellsworth, I. Colin Prentice, Craig V. M. Barton, Kristine Y. Crous, Paolo De Angelis, Michael Freeman, and Lisa Wingate. 2011. <span>“Reconciling the Optimal and Empirical Approaches to Modelling Stomatal Conductance.”</span> <em>Global Change Biology</em> 17 (6): 2134–44.
 </div>
 </div>
             </section>
@@ -456,6 +496,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
