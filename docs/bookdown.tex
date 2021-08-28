@@ -1,14 +1,14 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
-\PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
 %
 \documentclass[
 ]{krantz}
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{ifxetex,ifluatex}
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+\usepackage{iftex}
+\ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
@@ -40,10 +40,10 @@
   pdftitle={使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据},
   pdfauthor={祝介东    北京力高泰科技有限公司},
   colorlinks=true,
-  linkcolor=Maroon,
-  filecolor=Maroon,
-  citecolor=Blue,
-  urlcolor=Blue,
+  linkcolor={Maroon},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
 \usepackage{color}
@@ -173,7 +173,7 @@
 \makeatother
 
 \frontmatter
-\ifluatex
+\ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
 \usepackage[]{natbib}
@@ -181,7 +181,7 @@
 
 \title{使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据}
 \author{祝介东 北京力高泰科技有限公司}
-\date{2021-04-14}
+\date{2021-08-28}
 
 \begin{document}
 \maketitle
@@ -209,8 +209,8 @@
 \setcounter{tocdepth}{2}
 \tableofcontents
 }
-\listoftables
 \listoffigures
+\listoftables
 \hypertarget{welcome}{%
 \chapter*{欢迎}\label{welcome}}
 
@@ -372,7 +372,7 @@ R 软件和 Rstudio 的安装十分方便，我们按照各自系统的安装方
 \end{Highlighting}
 \end{Shaded}
 
-header\_line 表示你数据表头所在行，data\_start 表示你数据起始行，Obs = 1 时所在行，不含表头。这个也要确认好了，不同的测量不能放在一起（当然一般不会出现这种情况，同一台仪器，处理数据当然是希望 aci 和 aci 在一起，lrc 和 lrc 在一起，调查测量和调查测量在一起），不同的测量可能起始行不同，这样就会报错，特别需要注意的是，目前路径写法仅支持 ``/'' 分隔，不能使用 ``\textbackslash`` 作为分隔。例如在数据放在 D 盘的 6400 文件夹下，那么写法应为''d:/6400", 不能为 \textbf{``d:\textbackslash6400''}, 尽管后者对 R 是合法的，主要是因为我要区分你不同数据来源的文件是哪个，也即下文提到的 \texttt{df\$files} 列。
+header\_line 表示你数据表头所在行，data\_start 表示你数据起始行，Obs = 1 时所在行，不含表头。这个也要确认好了，不同的测量不能放在一起（当然一般不会出现这种情况，同一台仪器，处理数据当然是希望 aci 和 aci 在一起，lrc 和 lrc 在一起，调查测量和调查测量在一起），不同的测量可能起始行不同，这样就会报错，特别需要注意的是，目前路径写法仅支持 ``/'' 分隔，不能使用 ``\textbackslash`` 作为分隔。例如在数据放在 D 盘的 6400 文件夹下，那么写法应为''d:/6400'', 不能为 \textbf{``d:\textbackslash6400''}, 尽管后者对 R 是合法的，主要是因为我要区分你不同数据来源的文件是哪个，也即下文提到的 \texttt{df\$files} 列。
 
 其中，数据的来源在表格中第一列，叫做 files，是数据来源的文件名（即你起的名字）,例如本例中你看到的 aci 是我之前数据里面 aci 响应曲线的数据。
 
@@ -381,7 +381,11 @@ header\_line 表示你数据表头所在行，data\_start 表示你数据起始�
 \hypertarget{batch68}{%
 \section{LI-6800 数据整合}\label{batch68}}
 
-此部分内容保留，但不建议再使用：
+此部分内容保留，但不建议再使用，如果不介意软件包比较大，可以参考：
+
+\href{https://mp.weixin.qq.com/s?__biz=MzU4ODI3NjkzMg==\&mid=2247485449\&idx=1\&sn=914778c6bc1e288c7cb093da403d920e\&chksm=fdde7da2caa9f4b449de6bd4ead60913444c6a6b429e59d6ad80ab5bea10c74e1e0c5da1105d\&token=1056052514\&lang=zh_CN\#rd}{图形界面整理数据}
+
+转换为 tidy csv 数据后，可以直接通过简单的代码进行批量处理操作。
 
 \sout{相比 6400， 6800 参数要少，导入需要两行命令即可：}
 
@@ -600,10 +604,10 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.310363 1.465870 1.596270 1.301821 1.313859 1.292328 1.346671 1.937384
-##  [9] 1.463774 1.790133 1.524129 1.884822 1.630018 1.492887 1.602232 1.765823
-## [17] 1.276987 1.390995 1.728911 1.446206 1.785317 1.451117 1.313887 1.471222
-## [25] 1.756980 1.248908 1.732871 1.714000 1.792523 1.225100 1.881881 1.237339
+##  [1] 1.271913 1.957425 1.267156 1.345532 1.953322 1.247812 1.675577 1.286947
+##  [9] 1.752611 1.376964 1.917707 1.350001 1.735321 1.731820 1.668727 1.286193
+## [17] 1.320945 1.257551 1.561785 1.407394 1.478888 1.719351 1.824288 1.314796
+## [25] 1.648506 1.354219 1.558566 1.277686 1.354582 1.745864 1.620695 1.789893
 \end{verbatim}
 
 我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.
@@ -797,10 +801,10 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.653744 1.393328 1.212316 1.748715 1.210766 1.654202 1.692906 1.432961
-##  [9] 1.711539 1.344147 1.760025 1.821645 1.585154 1.210719 1.676389 1.716885
-## [17] 1.519537 1.775663 1.965810 1.271631 1.246458 1.633164 1.236179 1.769838
-## [25] 1.391056 1.595605 1.957422 1.510520
+##  [1] 1.234725 1.386181 1.734084 1.401400 1.387123 1.897486 1.301125 1.568791
+##  [9] 1.418195 1.766689 1.328404 1.424649 1.260445 1.307652 1.348474 1.845582
+## [17] 1.509451 1.610886 1.303266 1.822998 1.374819 1.670735 1.696006 1.262896
+## [25] 1.774859 1.616441 1.217518 1.854937
 \end{verbatim}
 
 \sout{测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。}
@@ -843,13 +847,11 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 
 \NormalTok{df6 }\OtherTok{\textless{}{-}} \FunctionTok{xlconnect\_read}\NormalTok{(}\StringTok{"./data/aci{-}xlc.xlsx"}\NormalTok{)}
 \NormalTok{df6}\SpecialCharTok{$}\NormalTok{A}
+
+\DocumentationTok{\#\#  [1] 24.7381184 18.1379358 10.8055345  3.0239340 {-}0.9144044 26.9519572}
+\DocumentationTok{\#\#  [7] 27.5088717 40.9101889 50.1393342 55.3865984 58.0662751 59.3556428}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-##  [1] 24.7381184 18.1379358 10.8055345  3.0239340 -0.9144044 26.9519572
-##  [7] 27.5088717 40.9101889 50.1393342 55.3865984 58.0662751 59.3556428
-\end{verbatim}
 
 将面积改为 3 cm\textsuperscript{2}
 
@@ -857,12 +859,10 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \begin{Highlighting}[]
 \NormalTok{df3 }\OtherTok{\textless{}{-}} \FunctionTok{xlconnect\_read}\NormalTok{(}\StringTok{"./data/aci{-}xlc.xlsx"}\NormalTok{, }\AttributeTok{S =} \FunctionTok{rep}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{12}\NormalTok{))}
 \NormalTok{df6}\SpecialCharTok{$}\NormalTok{A}\SpecialCharTok{/}\NormalTok{df3}\SpecialCharTok{$}\NormalTok{A}
+
+\DocumentationTok{\#\#  [1] 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-##  [1] 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5
-\end{verbatim}
 
 模拟 12 个不同的叶面积，均值为 3，方差为 0.1
 
@@ -870,13 +870,11 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \begin{Highlighting}[]
 \NormalTok{df\_random }\OtherTok{\textless{}{-}} \FunctionTok{xlconnect\_read}\NormalTok{(}\StringTok{"./data/aci{-}xlc.xlsx"}\NormalTok{, }\AttributeTok{S =} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{12}\NormalTok{, }\DecValTok{3}\NormalTok{, }\FloatTok{0.1}\NormalTok{))}
 \NormalTok{df6}\SpecialCharTok{$}\NormalTok{A}\SpecialCharTok{/}\NormalTok{df\_random}\SpecialCharTok{$}\NormalTok{A}
+
+\DocumentationTok{\#\#  [1] 0.5404604 0.4946930 0.5055978 0.5131122 0.5091636 0.5010179 0.5118623}
+\DocumentationTok{\#\#  [8] 0.4928284 0.4838221 0.5126210 0.4926683 0.4925639}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-##  [1] 0.4933270 0.5290922 0.4890087 0.4950632 0.5109570 0.5060883 0.4799917
-##  [8] 0.5060143 0.5262263 0.5049393 0.4956403 0.4857695
-\end{verbatim}
 
 \hypertarget{batch-6800-xlsx}{%
 \subsubsection{批量处理 LI-6800 的数据}\label{batch-6800-xlsx}}
@@ -2778,7 +2776,7 @@ P_{n} = \alpha \frac{1-\beta I}{1+\gamma I} I - R_{d}
 存在极值，因此，必然存在饱和光强和最大净光合速率，分别用式 \eqref{eq:isat} 和式 \eqref{eq:ic} 求得。
 
 \begin{equation}
-I_{sat} = \frac{\sqrt{\frac{(\beta+\gamma)}{\beta}-1}}{\gamma}
+I_{sat} = \frac{\sqrt{\frac{(\beta+\gamma)}{\beta}} - 1}{\gamma}
 \label{eq:isat}
 \end{equation}
 
@@ -2815,8 +2813,8 @@ P_{nmax} = \alpha\left(\frac{\sqrt{\beta+\gamma}-\sqrt{\beta}}{\gamma}\right)^{2
 \NormalTok{fitlrc\_mrec }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(lrcnls)}
 
 \CommentTok{\# 饱和点计算}
-\NormalTok{Isat }\OtherTok{\textless{}{-}}  \FunctionTok{sqrt}\NormalTok{((fitlrc\_mrec}\SpecialCharTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{] }\SpecialCharTok{+}\NormalTok{ fitlrc\_mrec}\SpecialCharTok{$}\NormalTok{coef[}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{])}\SpecialCharTok{/}
-\NormalTok{              fitlrc\_mrec}\SpecialCharTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)}\SpecialCharTok{/}\NormalTok{fitlrc\_mrec}\SpecialCharTok{$}\NormalTok{coef[}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{]}
+\NormalTok{Isat }\OtherTok{\textless{}{-}}\NormalTok{  (}\FunctionTok{sqrt}\NormalTok{((fitlrc\_mrec}\SpecialCharTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{] }\SpecialCharTok{+}\NormalTok{ fitlrc\_mrec}\SpecialCharTok{$}\NormalTok{coef[}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{])}\SpecialCharTok{/}
+\NormalTok{              fitlrc\_mrec}\SpecialCharTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]) }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)}\SpecialCharTok{/}\NormalTok{fitlrc\_mrec}\SpecialCharTok{$}\NormalTok{coef[}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{]}
 \CommentTok{\# 补偿点计算}
 \NormalTok{Ic }\OtherTok{\textless{}{-}}\NormalTok{ (}
   \SpecialCharTok{{-}}\NormalTok{(fitlrc\_mrec}\SpecialCharTok{$}\NormalTok{coef[}\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{] }\SpecialCharTok{*}\NormalTok{ fitlrc\_mrec}\SpecialCharTok{$}\NormalTok{coef[}\DecValTok{4}\NormalTok{, }\DecValTok{1}\NormalTok{] }\SpecialCharTok{{-}} 
@@ -3161,37 +3159,37 @@ singular gradient matrix at initial parameter estimates
 \end{Shaded}
 
 \begin{verbatim}
-## Error in numericDeriv(form[[3L]], names(ind), env) : 
+## Error in numericDeriv(form[[3L]], names(ind), env, central = nDcentral) : 
 ##   Missing value or an infinity produced when evaluating the model
-## Error in numericDeriv(form[[3L]], names(ind), env) : 
+## Error in numericDeriv(form[[3L]], names(ind), env, central = nDcentral) : 
 ##   Missing value or an infinity produced when evaluating the model
-## Error in numericDeriv(form[[3L]], names(ind), env) : 
+## Error in numericDeriv(form[[3L]], names(ind), env, central = nDcentral) : 
 ##   Missing value or an infinity produced when evaluating the model
-## Error in numericDeriv(form[[3L]], names(ind), env) : 
+## Error in numericDeriv(form[[3L]], names(ind), env, central = nDcentral) : 
 ##   Missing value or an infinity produced when evaluating the model
-## Error in numericDeriv(form[[3L]], names(ind), env) : 
+## Error in numericDeriv(form[[3L]], names(ind), env, central = nDcentral) : 
 ##   Missing value or an infinity produced when evaluating the model
-## Error in numericDeriv(form[[3L]], names(ind), env) : 
+## Error in numericDeriv(form[[3L]], names(ind), env, central = nDcentral) : 
 ##   Missing value or an infinity produced when evaluating the model
-## Error in numericDeriv(form[[3L]], names(ind), env) : 
+## Error in numericDeriv(form[[3L]], names(ind), env, central = nDcentral) : 
 ##   Missing value or an infinity produced when evaluating the model
-## Error in numericDeriv(form[[3L]], names(ind), env) : 
+## Error in numericDeriv(form[[3L]], names(ind), env, central = nDcentral) : 
 ##   Missing value or an infinity produced when evaluating the model
-## Error in numericDeriv(form[[3L]], names(ind), env) : 
+## Error in numericDeriv(form[[3L]], names(ind), env, central = nDcentral) : 
 ##   Missing value or an infinity produced when evaluating the model
-## Error in numericDeriv(form[[3L]], names(ind), env) : 
+## Error in numericDeriv(form[[3L]], names(ind), env, central = nDcentral) : 
 ##   Missing value or an infinity produced when evaluating the model
-## Error in numericDeriv(form[[3L]], names(ind), env) : 
+## Error in numericDeriv(form[[3L]], names(ind), env, central = nDcentral) : 
 ##   Missing value or an infinity produced when evaluating the model
-## Error in numericDeriv(form[[3L]], names(ind), env) : 
+## Error in numericDeriv(form[[3L]], names(ind), env, central = nDcentral) : 
 ##   Missing value or an infinity produced when evaluating the model
-## Error in numericDeriv(form[[3L]], names(ind), env) : 
+## Error in numericDeriv(form[[3L]], names(ind), env, central = nDcentral) : 
 ##   Missing value or an infinity produced when evaluating the model
-## Error in numericDeriv(form[[3L]], names(ind), env) : 
+## Error in numericDeriv(form[[3L]], names(ind), env, central = nDcentral) : 
 ##   Missing value or an infinity produced when evaluating the model
-## Error in numericDeriv(form[[3L]], names(ind), env) : 
+## Error in numericDeriv(form[[3L]], names(ind), env, central = nDcentral) : 
 ##   Missing value or an infinity produced when evaluating the model
-## Error in numericDeriv(form[[3L]], names(ind), env) : 
+## Error in numericDeriv(form[[3L]], names(ind), env, central = nDcentral) : 
 ##   Missing value or an infinity produced when evaluating the model
 \end{verbatim}
 
@@ -3356,10 +3354,81 @@ IRGAs 极快的响应频率，使得短时间内的 A--Ci 的测量成为现实�
   通过预实验来确定最合适的 \(CO_2\) 变化范围和随时间的斜率。
 \end{itemize}
 
+\textbf{本文之后关于racir 的空叶室校正部分全部不再支持，因为LI-6800 1.5之后的系统版本，关于两个分析器在快速变化环境条件下的校正均由仪器完成，分析工作直接使用 \texttt{plantecophys} 等软件拟合即可。}
+
+例如下面的数据采用了 1.5.02 的 BP 程序 \texttt{DAT\_CO2\_Continuous.py}，直接测量的 RACiR 数据，结果如下：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{remotes}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{"zhujiedong/plantecophys2"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{adyn }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"data/racir\_adyn.csv"}\NormalTok{)}
+
+\NormalTok{adyn\_fit }\OtherTok{\textless{}{-}}\NormalTok{ plantecophys2}\SpecialCharTok{::}\FunctionTok{fitaci}\NormalTok{(adyn)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Registered S3 methods overwritten by 'plantecophys2':
+##   method         from        
+##   coef.BBfit     plantecophys
+##   coef.BBfits    plantecophys
+##   coef.acifit    plantecophys
+##   coef.acifits   plantecophys
+##   fitted.acifit  plantecophys
+##   plot.acifit    plantecophys
+##   plot.acifits   plantecophys
+##   print.BBfit    plantecophys
+##   print.BBfits   plantecophys
+##   print.acifit   plantecophys
+##   print.acifits  plantecophys
+##   summary.acifit plantecophys
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Formula: ALEAF ~ acifun_wrap(Ci, PPFD = PPFD, Vcmax = Vcmax, Jmax = Jmax, 
+##     Rd = Rd, Tleaf = Tleaf, Patm = Patm, TcorrectVJ = Tcorrect, 
+##     alpha = alpha, theta = theta, gmeso = gmeso, EaV = EaV, EdVC = EdVC, 
+##     delsC = delsC, EaJ = EaJ, EdVJ = EdVJ, delsJ = delsJ, Km = Km, 
+##     GammaStar = GammaStar)
+## 
+## Parameters:
+##       Estimate Std. Error t value Pr(>|t|)    
+## Vcmax 26.99477    0.11547  233.79   <2e-16 ***
+## Jmax  46.99725    0.11780  398.96   <2e-16 ***
+## Rd     1.38036    0.02146   64.31   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.1347 on 295 degrees of freedom
+## 
+## Number of iterations to convergence: 7 
+## Achieved convergence tolerance: 5.627e-06
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(adyn\_fit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown_files/figure-latex/adyn_plot-1.pdf}
+\caption{(\#fig:adyn\_plot)使用 Adyn 来进行RACiR 的直接测量数据}
+\end{figure}
+
+@ref(fig: dyn\_plot) 展示的使用 LI-6800 自带程序测量的数据，无需修正，测量作物为早春温室的水稻。
+
 \hypertarget{racir_pkg}{%
 \section{\texorpdfstring{racir 软件包实现 RACiR\texttrademark 数据分析}{racir 软件包实现 RACiR数据分析}}\label{racir_pkg}}
 
-\textbf{可能软件包作者没有更改叶面积的需求，他的软件包只支持原始数据的处理，但这对有更改需求的客户来讲没那么友好，而且这样导致了大量代码的重复，我根据作者原来的代码，结合我自己数据分析的习惯，重新制作了一份软件包，下面代码实现是基于我的软件包实现的，如有需求，也可使用作者原来的代码实现}
+\sout{可能软件包作者没有更改叶面积的需求，他的软件包只支持原始数据的处理，但这对有更改需求的客户来讲没那么友好，而且这样导致了大量代码的重复，我根据作者原来的代码，结合我自己数据分析的习惯，重新制作了一份软件包，下面代码实现是基于我的软件包实现的，如有需求，也可使用作者原来的代码实现}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3396,12 +3465,6 @@ IRGAs 极快的响应频率，使得短时间内的 A--Ci 的测量成为现实�
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}
-\centering
-\includegraphics{bookdown_files/figure-latex/racircheck-1.pdf}
-\caption{\label{fig:racircheck}找出最合理的校准曲线数据范围}
-\end{figure}
-
 上述代码查看参比室 \(CO_2\) 浓度在两者之间的数据，确定后面代码使用的 \texttt{mincut}, \texttt{maxcut} 范围。此处我选择的范围如下问代码：
 
 \begin{Shaded}
@@ -3409,12 +3472,6 @@ IRGAs 极快的响应频率，使得短时间内的 A--Ci 的测量成为现实�
 \FunctionTok{racircheck}\NormalTok{(em1, }\AttributeTok{mincut =} \DecValTok{21}\NormalTok{ , }\AttributeTok{maxcut =} \DecValTok{463}\NormalTok{ )}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{figure}
-\centering
-\includegraphics{bookdown_files/figure-latex/racircorpkg-1.pdf}
-\caption{\label{fig:racircorpkg}校准曲线查看}
-\end{figure}
 
 没有问题可直接进行校准
 
@@ -3425,7 +3482,6 @@ IRGAs 极快的响应频率，使得短时间内的 A--Ci 的测量成为现实�
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/racircor-1.pdf}
 前两个参数分别为空叶室数据，带叶片测量数据，后面的最大最小值为 \texttt{racircheck} 确定，剩余工作就是使用 \texttt{plantecophys} 进行分析，在此不再重复这个过程。
 
 \textbf{注意：RACiR 的本意是表型研究中求 Vcmax 和 Jmax，因而，请忽略 Rd 等参数的计算结果}
@@ -3438,7 +3494,6 @@ IRGAs 极快的响应频率，使得短时间内的 A--Ci 的测量成为现实�
 
 以上的实现方法是基于肉眼判断，删除不需要的数据，自动化程度较低，同时不适合 \citet{Coursolle12019} 这样的方法:
 
-\includegraphics{bookdown_files/figure-latex/racir-steady-start-1.pdf}
 直接批量删除是不可取的。容易出错或者残留无效数据，针对这个情况我进行的修改和测试为：使用 BP 进行测量，目前我已经完成 BP 相关的程序，本节的示例则是基于我实测的验证数据来进行（相关测试已经录好视频，可能后面公司公众号会推，如有 BP 自动测量 RACiR 的需要，请跟我们公司联系）。这个程序也是基于 \citet{Coursolle12019} 的方法，测量步骤和修改如下：
 
 \begin{enumerate}
@@ -3493,22 +3548,9 @@ IRGAs 极快的响应频率，使得短时间内的 A--Ci 的测量成为现实�
 
 \NormalTok{half\_leaf }\OtherTok{\textless{}{-}} \FunctionTok{xls\_read}\NormalTok{(}\StringTok{"data/racir{-}leaf.xlsx"}\NormalTok{, }\AttributeTok{S =}\NormalTok{ leaf}\SpecialCharTok{$}\NormalTok{S}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)}
 \FunctionTok{head}\NormalTok{(half\_leaf}\SpecialCharTok{$}\NormalTok{A}\SpecialCharTok{/}\NormalTok{leaf}\SpecialCharTok{$}\NormalTok{A)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 2 2 2 2 2 2
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{tail}\NormalTok{(half\_leaf}\SpecialCharTok{$}\NormalTok{A}\SpecialCharTok{/}\NormalTok{leaf}\SpecialCharTok{$}\NormalTok{A)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## [1] 2 2 2 2 2 2
-\end{verbatim}
 
 修改面积仅作演示用，如无需修改，则不要输入面积选项。
 
@@ -3520,7 +3562,6 @@ IRGAs 极快的响应频率，使得短时间内的 A--Ci 的测量成为现实�
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/emtpy-delta-max-1.pdf}
 这里首先不要被第二幅图的波动所迷惑，主要是坐标轴差异太小。然后第一幅图中，这里设定了一个最大最小光合速率的范围（阈值，upper\_A 和 lower\_A），默认最大值是 2 以及最小值是 -2，上面我使用了最小值为 -1，也就是删除小于 -1 的光合速率，最大值 2 并不是删除，二是寻找 -2 \textless{} A \textless{} 2 范围的数据（确定起始测量时 A 开始变为合理的范围），从这里面找一个最小值，保留这一行的数据到测量数据结束。 另一个阈值删除相邻两个A值过大差值的数据的阈值（\texttt{delta\_max}），对于这个阈值，LI-6800 其实并不敏感，因为本身数据非常稳定。
 
 \textbf{3. 关于带叶片测量的数据过滤范围的选取:}
@@ -3531,7 +3572,6 @@ IRGAs 极快的响应频率，使得短时间内的 A--Ci 的测量成为现实�
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/leaf-delta-max-1.pdf}
 带叶片的数据同上，没有特殊的参数，从右图的数据来看，他在修正之前的光合速率，符合我们的预期。
 
 \textbf{4. 确定范围后数据的清洗:}
@@ -3575,45 +3615,9 @@ IRGAs 极快的响应频率，使得短时间内的 A--Ci 的测量成为现实�
 
 RACiR 的结果：
 
-\begin{figure}
-\centering
-\includegraphics{bookdown_files/figure-latex/filter-fit-plot1-1.pdf}
-\caption{\label{fig:filter-fit-plot1}ACi 拟合结果的图形}
-\end{figure}
-
 ACi 的结果：
 
-\begin{figure}
-\centering
-\includegraphics{bookdown_files/figure-latex/filter-fit-plot-1.pdf}
-\caption{\label{fig:filter-fit-plot}RACiR拟合结果的图形}
-\end{figure}
-
 结果的比较：
-
-\begin{tabular}{l|r|r}
-\hline
-  & Estimate & Std..Error\\
-\hline
-Vcmax & 78.245757 & 0.2479228\\
-\hline
-Jmax & 161.613851 & 0.3367579\\
-\hline
-Rd & 2.252858 & 0.0670844\\
-\hline
-\end{tabular}
-
-\begin{tabular}{l|r|r}
-\hline
-  & Estimate & Std..Error\\
-\hline
-Vcmax & 71.548232 & 1.5231674\\
-\hline
-Jmax & 160.910310 & 2.1519939\\
-\hline
-Rd & 1.348421 & 0.3870946\\
-\hline
-\end{tabular}
 
 此处的数据和视频里的数据以及函数的参数略有差别，因为我修改了一下 \texttt{racir} 软件包的过滤条件，使得筛选数据更符合要求。本身因为不是同一时间测量，测量 RACiR 时叶片的气孔导度略到，因此，其 \(V_{cmax}\) 略大符合预期。
 
@@ -3625,15 +3629,7 @@ Rd & 1.348421 & 0.3870946\\
 \FunctionTok{library}\NormalTok{(latex2exp)}
 
 \NormalTok{line\_col }\OtherTok{\textless{}{-}} \FunctionTok{brewer.pal}\NormalTok{(}\DecValTok{2}\NormalTok{,}\StringTok{"Set1"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{verbatim}
-## Warning in brewer.pal(2, "Set1"): minimal value for n is 3, returning requested palette with 3 different levels
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{racir\_col }\OtherTok{\textless{}{-}}\NormalTok{ scales}\SpecialCharTok{::}\FunctionTok{alpha}\NormalTok{(line\_col[}\DecValTok{1}\NormalTok{], }\FloatTok{0.2}\NormalTok{)}
 \NormalTok{aci\_col }\OtherTok{\textless{}{-}}\NormalTok{ line\_col[}\DecValTok{2}\NormalTok{]}
 
@@ -3666,8 +3662,8 @@ Rd & 1.348421 & 0.3870946\\
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/acivsracirbp-1.pdf}
-\#\#\#\# 从高到低的 \(CO_2R\) 变化 \{\#high-to-low\}
+\hypertarget{high-to-low}{%
+\subsubsection{\texorpdfstring{从高到低的 \(CO_2R\) 变化}{从高到低的 CO\_2R 变化}}\label{high-to-low}}
 
 以上内容是按照 \citet{Coursolle12019} 的方式，从低浓度到高浓度的控制，就我个人而言，我感觉无需从高到底测试，但是就实验而言，可以仿照 \citet{Coursolle12019} 的方式，从高浓度到低浓度做一次测试，来检验哪种方式更合适。于是在测试完上面的数据的第二天又重新测试了反向的测试，为了数据处理的方便，在此将反向实验的数据处理方式写一下。
 
@@ -3697,12 +3693,6 @@ Rd & 1.348421 & 0.3870946\\
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}
-\centering
-\includegraphics{bookdown_files/figure-latex/empty-delta-max-rev-1.pdf}
-\caption{\label{fig:empty-delta-max-rev}反向空叶室测量数据的查看}
-\end{figure}
-
 这里的设置与正向测量相似，只是需要指定反向 \texttt{reverse\ =\ TRUE}，对于反向测量的空叶室，数据在稳定后肯定是马上下降为负数，我们指定一个略宽的 A 值范围，然后取其最大值所在行到数据行的末尾，也就是 \ref{fig:empty-delta-max-rev} 右侧的数据。对于相邻的两个 A 值的差值，从右图也可以看出来，LI-6800 真的不敏感，除非测量过程发生意外状况，不然这个数值完全可设置的略大。我使用 0.5 是因为想展示不过滤的数据点的情况，非常平稳。
 
 \textbf{2.检验带叶片测量数据的测量}
@@ -3718,12 +3708,6 @@ Rd & 1.348421 & 0.3870946\\
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{figure}
-\centering
-\includegraphics{bookdown_files/figure-latex/leaf-delta-max-rev-1.pdf}
-\caption{\label{fig:leaf-delta-max-rev}反向带叶片测量测量数据的查看}
-\end{figure}
 
 过滤方式相同空叶室，数据仍然是非常稳定。我们看一下最终结果：
 
@@ -3762,25 +3746,7 @@ Rd & 1.348421 & 0.3870946\\
 
 RACiR 的结果：
 
-\begin{figure}
-\centering
-\includegraphics{bookdown_files/figure-latex/filter-fit-plot1-rev-1.pdf}
-\caption{\label{fig:filter-fit-plot1-rev}RACiR 反向测量拟合结果的图形}
-\end{figure}
-
 结果的比较：
-
-\begin{tabular}{l|r|r}
-\hline
-  & Estimate & Std..Error\\
-\hline
-Vcmax & 100.2488890 & 0.4285672\\
-\hline
-Jmax & 178.8501686 & 0.4956801\\
-\hline
-Rd & -0.1014184 & 0.0888276\\
-\hline
-\end{tabular}
 
 因为季节原因，测量相比正向测量更换了枝条（客观原因，11 月帝都的室外，实在不好找合适的植物，采取剪枝条测量的方式）。
 
@@ -7728,7 +7694,7 @@ LI-6800 增加了 ojip 曲线测量功能，本功能主要是针对测量数据
 
 \begin{table}
 
-\caption{\label{tab:unnamed-chunk-67}jiptest 批量导入数据后的样式}
+\caption{\label{tab:unnamed-chunk-69}jiptest 批量导入数据后的样式}
 \centering
 \begin{tabular}[t]{rrrl}
 \toprule
@@ -7749,7 +7715,7 @@ SECS & FLUOR & NORM\_FLUOR & SOURCE\\
 
 \begin{table}
 
-\caption{\label{tab:unnamed-chunk-68}jiptest DC 数据批量导入数据后的样式}
+\caption{\label{tab:unnamed-chunk-70}jiptest DC 数据批量导入数据后的样式}
 \centering
 \begin{tabular}[t]{rrrl}
 \toprule
@@ -8298,7 +8264,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 \end{Shaded}
 
 \begin{verbatim}
-## R version 4.0.5 (2021-03-31)
+## R version 4.1.0 (2021-05-18)
 ## Platform: x86_64-w64-mingw32/x64 (64-bit)
 ## Running under: Windows 10 x64 (build 19042)
 ## 
@@ -8316,41 +8282,40 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 ## 
 ## other attached packages:
 ##  [1] factoextra_1.0.7   FactoMineR_2.4     jiptest_0.1.3      gridExtra_2.3     
-##  [5] plyr_1.8.6         latex2exp_0.5.0    RColorBrewer_1.1-2 racir_1.0.0       
-##  [9] nls2_0.2           proto_1.0.0        purrr_0.3.4        ggplot2_3.3.3     
-## [13] minpack.lm_1.2-1   plantecophys_1.4-6 readphoto_0.0.1   
+##  [5] plyr_1.8.6         nls2_0.2           proto_1.0.0        purrr_0.3.4       
+##  [9] ggplot2_3.3.5      minpack.lm_1.2-1   plantecophys_1.4-6 readphoto_0.0.1   
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] nlme_3.1-152         tools_4.0.5          backports_1.2.1     
-##  [4] utf8_1.2.1           R6_2.5.0             DT_0.17             
-##  [7] DBI_1.1.1            mgcv_1.8-34          colorspace_2.0-0    
-## [10] MESS_0.5.7           withr_2.4.1          tidyselect_1.1.0    
-## [13] rematch_1.0.1        curl_4.3             compiler_4.0.5      
-## [16] XLConnect_1.0.2      flashClust_1.01-2    labeling_0.4.2      
-## [19] bookdown_0.21        mosaicCore_0.9.0     scales_1.1.1        
+##  [1] nlme_3.1-152         RColorBrewer_1.1-2   tools_4.1.0         
+##  [4] backports_1.2.1      utf8_1.2.1           R6_2.5.0            
+##  [7] DT_0.18              DBI_1.1.1            mgcv_1.8-36         
+## [10] colorspace_2.0-2     MESS_0.5.7           withr_2.4.2         
+## [13] tidyselect_1.1.1     rematch_1.0.1        curl_4.3.2          
+## [16] compiler_4.1.0       flashClust_1.01-2    labeling_0.4.2      
+## [19] bookdown_0.22        mosaicCore_0.9.0     scales_1.1.1        
 ## [22] readr_1.4.0          ggridges_0.5.3       stringr_1.4.0       
 ## [25] digest_0.6.27        foreign_0.8-81       ggformula_0.10.1    
-## [28] rmarkdown_2.7        rio_0.5.26           pkgconfig_2.0.3     
+## [28] rmarkdown_2.9.7      rio_0.5.27           pkgconfig_2.0.3     
 ## [31] htmltools_0.5.1.1    geeM_0.10.1          labelled_2.8.0      
-## [34] highr_0.8            htmlwidgets_1.5.3    rlang_0.4.10        
+## [34] highr_0.9            htmlwidgets_1.5.3    rlang_0.4.11        
 ## [37] readxl_1.3.1         rstudioapi_0.13      farver_2.1.0        
-## [40] generics_0.1.0       zip_2.1.1            car_3.0-10          
-## [43] dplyr_1.0.5          magrittr_2.0.1       leaps_3.1           
-## [46] Matrix_1.3-2         Rcpp_1.0.6           munsell_0.5.0       
-## [49] fansi_0.4.2          abind_1.4-5          geepack_1.3-2       
-## [52] lifecycle_1.0.0      scatterplot3d_0.3-41 stringi_1.5.3       
-## [55] yaml_2.2.1           carData_3.0-4        MASS_7.3-53.1       
-## [58] ggstance_0.3.5       grid_4.0.5           ggrepel_0.9.1       
-## [61] forcats_0.5.1        crayon_1.4.1         lattice_0.20-41     
-## [64] haven_2.3.1          splines_4.0.5        hms_1.0.0           
-## [67] knitr_1.31           pillar_1.6.0         ggpubr_0.4.0        
-## [70] ggsignif_0.6.1       glue_1.4.2           evaluate_0.14       
-## [73] data.table_1.14.0    png_0.1-7            vctrs_0.3.7         
-## [76] tweenr_1.0.2         cellranger_1.1.0     gtable_0.3.0        
-## [79] polyclip_1.10-0      tidyr_1.1.3          assertthat_0.2.1    
-## [82] openxlsx_4.2.3       xfun_0.22            ggforce_0.3.3       
-## [85] broom_0.7.6          rstatix_0.7.0        tibble_3.1.0        
-## [88] rJava_0.9-13         cluster_2.1.1        ellipsis_0.3.1
+## [40] generics_0.1.0       zip_2.2.0            car_3.0-11          
+## [43] dplyr_1.0.7          plantecophys2_0.1.0  magrittr_2.0.1      
+## [46] leaps_3.1            Matrix_1.3-4         Rcpp_1.0.6          
+## [49] munsell_0.5.0        fansi_0.5.0          abind_1.4-5         
+## [52] geepack_1.3-2        lifecycle_1.0.0      scatterplot3d_0.3-41
+## [55] stringi_1.6.2        yaml_2.2.1           carData_3.0-4       
+## [58] MASS_7.3-54          ggstance_0.3.5       grid_4.1.0          
+## [61] ggrepel_0.9.1        forcats_0.5.1        crayon_1.4.1        
+## [64] lattice_0.20-44      haven_2.4.1          splines_4.1.0       
+## [67] hms_1.1.0            knitr_1.33           pillar_1.6.1        
+## [70] ggpubr_0.4.0         ggsignif_0.6.2       glue_1.4.2          
+## [73] evaluate_0.14        data.table_1.14.0    png_0.1-7           
+## [76] vctrs_0.3.8          tweenr_1.0.2         cellranger_1.1.0    
+## [79] gtable_0.3.0         polyclip_1.10-0      tidyr_1.1.3         
+## [82] assertthat_0.2.1     openxlsx_4.2.4       xfun_0.24           
+## [85] ggforce_0.3.3        broom_0.7.8          rstatix_0.7.0       
+## [88] tibble_3.1.2         cluster_2.1.2        ellipsis_0.3.2
 \end{verbatim}
 
 \cleardoublepage

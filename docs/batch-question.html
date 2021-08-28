@@ -962,10 +962,10 @@ div.csl-indent {
 <span id="cb24-2"><a href="batch-question.html#cb24-2" aria-hidden="true" tabindex="-1"></a>area <span class="ot">&lt;-</span> <span class="dv">6</span> <span class="sc">-</span> <span class="fu">runif</span>(<span class="dv">32</span>, <span class="dv">1</span>, <span class="dv">3</span>)</span>
 <span id="cb24-3"><a href="batch-question.html#cb24-3" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> <span class="fu">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>,  <span class="at">header_line =</span> <span class="dv">17</span>, <span class="at">data_start =</span> <span class="dv">27</span>, <span class="at">S =</span> area, <span class="at">K =</span> <span class="fl">0.5</span>)</span>
 <span id="cb24-4"><a href="batch-question.html#cb24-4" aria-hidden="true" tabindex="-1"></a>y1<span class="sc">$</span>Photo<span class="sc">/</span>x1<span class="sc">$</span>Photo</span></code></pre></div>
-<pre><code>##  [1] 1.241410 1.843375 1.931218 1.273491 1.755261 1.702718 1.297931 1.201883
-##  [9] 1.271653 1.472383 1.815983 1.358301 1.442455 1.237982 1.410152 1.853221
-## [17] 1.754804 1.431504 1.624378 1.730724 1.901208 1.234910 1.980951 1.438032
-## [25] 1.943454 1.531219 1.291120 1.816232 1.236542 1.491863 1.746371 1.497920</code></pre>
+<pre><code>##  [1] 1.294804 1.850044 1.677989 1.785865 1.926167 1.224592 1.301375 1.441156
+##  [9] 1.947706 1.276764 1.211125 1.592002 1.917888 1.348066 1.722912 1.285074
+## [17] 1.209457 1.488059 1.259370 1.732810 1.279909 1.718324 1.394781 1.493097
+## [25] 1.767456 1.271372 1.633667 1.408196 1.581520 1.946228 1.386922 1.627492</code></pre>
 <p>我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.</p>
 </div>
 <div id="recompute6800" class="section level3" number="2.4.2">
@@ -1027,10 +1027,10 @@ div.csl-indent {
 <pre><code>## Warning: Missing column names filled in: &#39;X125&#39; [125]</code></pre>
 <pre><code>## Warning: Duplicated column names deduplicated: &#39;TIME&#39; =&gt; &#39;TIME_1&#39; [69]</code></pre>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="batch-question.html#cb61-1" aria-hidden="true" tabindex="-1"></a>y3<span class="sc">$</span>A<span class="sc">/</span>x3<span class="sc">$</span>A</span></code></pre></div>
-<pre><code>##  [1] 1.492833 1.950795 1.862385 1.403822 1.880592 1.282583 1.369177 1.540583
-##  [9] 1.984082 1.237318 1.950437 1.281276 1.799642 1.302740 1.757739 1.237319
-## [17] 1.434706 1.495380 1.728414 1.317981 1.281168 1.612684 1.284470 1.268748
-## [25] 1.884712 1.505106 1.258588 1.928871</code></pre>
+<pre><code>##  [1] 1.692628 1.323742 1.214572 1.521695 1.569810 1.836028 1.654989 1.629598
+##  [9] 1.930761 1.827221 1.750456 1.611417 1.515592 1.751569 1.298720 1.476570
+## [17] 1.643778 1.925778 1.492664 1.416175 1.505787 1.447425 1.623285 1.282091
+## [25] 1.800374 1.948834 1.552405 1.898872</code></pre>
 <p><del>测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。</del></p>
 </div>
 <div id="excel-recompute-68" class="section level4" number="2.4.2.2">

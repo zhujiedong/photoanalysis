@@ -27,47 +27,41 @@
 \contentsline {figure}{\numberline {9.4}{\ignorespaces 多个 alpha 取值的差异\relax }}{91}{figure.caption.33}%
 \contentsline {figure}{\numberline {9.5}{\ignorespaces 两种方法结果的对比展示\relax }}{95}{figure.caption.34}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {10.1}{\ignorespaces 找出最合理的校准曲线数据范围\relax }}{103}{figure.caption.35}%
-\contentsline {figure}{\numberline {10.2}{\ignorespaces 校准曲线查看\relax }}{104}{figure.caption.36}%
-\contentsline {figure}{\numberline {10.3}{\ignorespaces ACi 拟合结果的图形\relax }}{111}{figure.caption.37}%
-\contentsline {figure}{\numberline {10.4}{\ignorespaces RACiR拟合结果的图形\relax }}{111}{figure.caption.38}%
-\contentsline {figure}{\numberline {10.5}{\ignorespaces 反向空叶室测量数据的查看\relax }}{115}{figure.caption.39}%
-\contentsline {figure}{\numberline {10.6}{\ignorespaces 反向带叶片测量测量数据的查看\relax }}{116}{figure.caption.40}%
-\contentsline {figure}{\numberline {10.7}{\ignorespaces RACiR 反向测量拟合结果的图形\relax }}{118}{figure.caption.41}%
-\contentsline {figure}{\numberline {10.8}{\ignorespaces Anet VS. Cc\relax }}{138}{figure.caption.42}%
-\contentsline {figure}{\numberline {10.9}{\ignorespaces Anet VS. Ci\relax }}{139}{figure.caption.43}%
-\contentsline {figure}{\numberline {10.10}{\ignorespaces Aapparent VS. Cc\relax }}{141}{figure.caption.44}%
-\contentsline {figure}{\numberline {10.11}{\ignorespaces Aapparent VS. Ci\relax }}{142}{figure.caption.45}%
-\contentsline {figure}{\numberline {10.12}{\ignorespaces 基于 Ci 的不同延时下的截距\relax }}{149}{figure.caption.46}%
-\contentsline {figure}{\numberline {10.13}{\ignorespaces 基于 Ci 的不同延时下的斜率变化\relax }}{150}{figure.caption.47}%
-\contentsline {figure}{\numberline {10.14}{\ignorespaces 基于 Cc 的不同延时下的时间\relax }}{157}{figure.caption.48}%
-\contentsline {figure}{\numberline {10.15}{\ignorespaces 基于 Cc 的不同延时下的截距\relax }}{169}{figure.caption.49}%
-\contentsline {figure}{\numberline {10.16}{\ignorespaces Rubisco 不同失活程度时 Anet VS Cc\relax }}{174}{figure.caption.50}%
-\contentsline {figure}{\numberline {10.17}{\ignorespaces Rubisco 不同失活程度时 Anet VS Ci\relax }}{175}{figure.caption.51}%
-\contentsline {figure}{\numberline {10.18}{\ignorespaces Rubisco 不同失活程度时 Aapp VS Cc\relax }}{177}{figure.caption.52}%
-\contentsline {figure}{\numberline {10.19}{\ignorespaces Rubisco 不同失活程度时 Aapp VS Ci\relax }}{178}{figure.caption.53}%
-\contentsline {figure}{\numberline {10.20}{\ignorespaces 不同 Ci 扩散限制下的差异\relax }}{211}{figure.caption.54}%
-\contentsline {figure}{\numberline {10.21}{\ignorespaces 不同 Ci 扩散限制下的差异（resistance = 11）\relax }}{213}{figure.caption.55}%
-\contentsline {figure}{\numberline {10.22}{\ignorespaces 不同总导度下的各个导度的速率变化\relax }}{214}{figure.caption.56}%
-\contentsline {figure}{\numberline {10.23}{\ignorespaces 不同阻力下的各个导度的速率变化预测值\relax }}{215}{figure.caption.57}%
-\contentsline {figure}{\numberline {10.24}{\ignorespaces 不同时间滞后性的 Anet VS Ci\relax }}{223}{figure.caption.58}%
-\contentsline {figure}{\numberline {10.25}{\ignorespaces 不同总阻力下的 Anet VS Ci\relax }}{227}{figure.caption.59}%
-\contentsline {figure}{\numberline {10.26}{\ignorespaces 不同导度下的 A VS Ci\relax }}{230}{figure.caption.60}%
-\contentsline {figure}{\numberline {10.27}{\ignorespaces 不同总导度下的各个导度的变化\relax }}{232}{figure.caption.61}%
-\contentsline {figure}{\numberline {10.28}{\ignorespaces Rubisco不同失活程度下的下 A VS Ci\relax }}{235}{figure.caption.62}%
-\contentsline {figure}{\numberline {10.29}{\ignorespaces 默认调制光图形查看\relax }}{241}{figure.caption.65}%
-\contentsline {figure}{\numberline {10.30}{\ignorespaces 默认连续光图形查看\relax }}{242}{figure.caption.66}%
-\contentsline {figure}{\numberline {10.31}{\ignorespaces 定制调制光图形示例\relax }}{243}{figure.caption.67}%
-\contentsline {figure}{\numberline {10.32}{\ignorespaces 定制连续光图形示例\relax }}{244}{figure.caption.68}%
+\contentsline {figure}{\numberline {10.1}{\ignorespaces (\#fig:adyn\_plot)使用 Adyn 来进行RACiR 的直接测量数据\relax }}{104}{figure.caption.35}%
+\contentsline {figure}{\numberline {10.2}{\ignorespaces Anet VS. Cc\relax }}{134}{figure.caption.36}%
+\contentsline {figure}{\numberline {10.3}{\ignorespaces Anet VS. Ci\relax }}{135}{figure.caption.37}%
+\contentsline {figure}{\numberline {10.4}{\ignorespaces Aapparent VS. Cc\relax }}{137}{figure.caption.38}%
+\contentsline {figure}{\numberline {10.5}{\ignorespaces Aapparent VS. Ci\relax }}{138}{figure.caption.39}%
+\contentsline {figure}{\numberline {10.6}{\ignorespaces 基于 Ci 的不同延时下的截距\relax }}{145}{figure.caption.40}%
+\contentsline {figure}{\numberline {10.7}{\ignorespaces 基于 Ci 的不同延时下的斜率变化\relax }}{146}{figure.caption.41}%
+\contentsline {figure}{\numberline {10.8}{\ignorespaces 基于 Cc 的不同延时下的时间\relax }}{153}{figure.caption.42}%
+\contentsline {figure}{\numberline {10.9}{\ignorespaces 基于 Cc 的不同延时下的截距\relax }}{165}{figure.caption.43}%
+\contentsline {figure}{\numberline {10.10}{\ignorespaces Rubisco 不同失活程度时 Anet VS Cc\relax }}{170}{figure.caption.44}%
+\contentsline {figure}{\numberline {10.11}{\ignorespaces Rubisco 不同失活程度时 Anet VS Ci\relax }}{171}{figure.caption.45}%
+\contentsline {figure}{\numberline {10.12}{\ignorespaces Rubisco 不同失活程度时 Aapp VS Cc\relax }}{173}{figure.caption.46}%
+\contentsline {figure}{\numberline {10.13}{\ignorespaces Rubisco 不同失活程度时 Aapp VS Ci\relax }}{174}{figure.caption.47}%
+\contentsline {figure}{\numberline {10.14}{\ignorespaces 不同 Ci 扩散限制下的差异\relax }}{207}{figure.caption.48}%
+\contentsline {figure}{\numberline {10.15}{\ignorespaces 不同 Ci 扩散限制下的差异（resistance = 11）\relax }}{209}{figure.caption.49}%
+\contentsline {figure}{\numberline {10.16}{\ignorespaces 不同总导度下的各个导度的速率变化\relax }}{210}{figure.caption.50}%
+\contentsline {figure}{\numberline {10.17}{\ignorespaces 不同阻力下的各个导度的速率变化预测值\relax }}{211}{figure.caption.51}%
+\contentsline {figure}{\numberline {10.18}{\ignorespaces 不同时间滞后性的 Anet VS Ci\relax }}{219}{figure.caption.52}%
+\contentsline {figure}{\numberline {10.19}{\ignorespaces 不同总阻力下的 Anet VS Ci\relax }}{223}{figure.caption.53}%
+\contentsline {figure}{\numberline {10.20}{\ignorespaces 不同导度下的 A VS Ci\relax }}{226}{figure.caption.54}%
+\contentsline {figure}{\numberline {10.21}{\ignorespaces 不同总导度下的各个导度的变化\relax }}{228}{figure.caption.55}%
+\contentsline {figure}{\numberline {10.22}{\ignorespaces Rubisco不同失活程度下的下 A VS Ci\relax }}{231}{figure.caption.56}%
+\contentsline {figure}{\numberline {10.23}{\ignorespaces 默认调制光图形查看\relax }}{237}{figure.caption.59}%
+\contentsline {figure}{\numberline {10.24}{\ignorespaces 默认连续光图形查看\relax }}{238}{figure.caption.60}%
+\contentsline {figure}{\numberline {10.25}{\ignorespaces 定制调制光图形示例\relax }}{239}{figure.caption.61}%
+\contentsline {figure}{\numberline {10.26}{\ignorespaces 定制连续光图形示例\relax }}{240}{figure.caption.62}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {11.1}{\ignorespaces 根据 LAI 权重求和来计算大叶模型的参数\relax }}{246}{figure.caption.69}%
-\contentsline {figure}{\numberline {11.2}{\ignorespaces 假定不同物种组成下的模型结果\relax }}{247}{figure.caption.70}%
+\contentsline {figure}{\numberline {11.1}{\ignorespaces 根据 LAI 权重求和来计算大叶模型的参数\relax }}{242}{figure.caption.63}%
+\contentsline {figure}{\numberline {11.2}{\ignorespaces 假定不同物种组成下的模型结果\relax }}{243}{figure.caption.64}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {12.1}{\ignorespaces 数据的中心化\relax }}{251}{figure.caption.71}%
-\contentsline {figure}{\numberline {12.2}{\ignorespaces PC1 的诞生\relax }}{251}{figure.caption.72}%
-\contentsline {figure}{\numberline {12.3}{\ignorespaces 变异最大的极端情况\relax }}{252}{figure.caption.73}%
-\contentsline {figure}{\numberline {12.4}{\ignorespaces PC2 的诞生\relax }}{252}{figure.caption.74}%
-\contentsline {figure}{\numberline {12.5}{\ignorespaces iris 碎石图\relax }}{254}{figure.caption.75}%
-\contentsline {figure}{\numberline {12.6}{\ignorespaces iris 载荷图\relax }}{254}{figure.caption.76}%
-\contentsline {figure}{\numberline {12.7}{\ignorespaces iris 得分图\relax }}{255}{figure.caption.77}%
+\contentsline {figure}{\numberline {12.1}{\ignorespaces 数据的中心化\relax }}{247}{figure.caption.65}%
+\contentsline {figure}{\numberline {12.2}{\ignorespaces PC1 的诞生\relax }}{247}{figure.caption.66}%
+\contentsline {figure}{\numberline {12.3}{\ignorespaces 变异最大的极端情况\relax }}{248}{figure.caption.67}%
+\contentsline {figure}{\numberline {12.4}{\ignorespaces PC2 的诞生\relax }}{248}{figure.caption.68}%
+\contentsline {figure}{\numberline {12.5}{\ignorespaces iris 碎石图\relax }}{250}{figure.caption.69}%
+\contentsline {figure}{\numberline {12.6}{\ignorespaces iris 载荷图\relax }}{250}{figure.caption.70}%
+\contentsline {figure}{\numberline {12.7}{\ignorespaces iris 得分图\relax }}{251}{figure.caption.71}%
 \addvspace {10\p@ }

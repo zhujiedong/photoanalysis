@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021/W32TeX) (preloaded format=xelatex 2021.8.27)  28 AUG 2021 10:27
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021/W32TeX) (preloaded format=xelatex 2021.8.27)  28 AUG 2021 10:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -230,4 +230,6129 @@ File: l3backend-xetex.def 2021-08-04 L3 backend support: XeTeX
 (|extractbb --version)
 \c__kernel_sys_dvipdfmx_version_int=\count267
 \l__color_backend_stack_int=\count268
-\g__color_backend_stack_int=\cou
+\g__color_backend_stack_int=\count269
+\g__graphics_track_int=\count270
+\l__pdf_internal_box=\box77
+\g__pdf_backend_object_int=\count271
+\g__pdf_backend_annotation_int=\count272
+\g__pdf_backend_link_int=\count273
+))
+Package: unicode-math 2020/01/31 v0.8q Unicode maths in XeLaTeX and LuaLaTeX
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/unicode-ma
+th/unicode-math-xetex.sty
+Package: unicode-math-xetex 2020/01/31 v0.8q Unicode maths in XeLaTeX and LuaLa
+TeX
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3packages
+/xparse/xparse.sty
+Package: xparse 2021-08-04 L3 Experimental document command parser
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3packages
+/l3keys2e/l3keys2e.sty
+Package: l3keys2e 2021-08-04 LaTeX2e option processing using LaTeX3 keys
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fontspec/f
+ontspec.sty
+Package: fontspec 2020/02/21 v2.7i Font selection for XeLaTeX and LuaLaTeX
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fontspec/f
+ontspec-xetex.sty
+Package: fontspec-xetex 2020/02/21 v2.7i Font selection for XeLaTeX and LuaLaTe
+X
+\l__fontspec_script_int=\count274
+\l__fontspec_language_int=\count275
+\l__fontspec_strnum_int=\count276
+\l__fontspec_tmp_int=\count277
+\l__fontspec_tmpa_int=\count278
+\l__fontspec_tmpb_int=\count279
+\l__fontspec_tmpc_int=\count280
+\l__fontspec_em_int=\count281
+\l__fontspec_emdef_int=\count282
+\l__fontspec_strong_int=\count283
+\l__fontspec_strongdef_int=\count284
+\l__fontspec_tmpa_dim=\dimen170
+\l__fontspec_tmpb_dim=\dimen171
+\l__fontspec_tmpc_dim=\dimen172
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/fonte
+nc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fontspec/f
+ontspec.cfg)))
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/fix-c
+m.sty
+Package: fix-cm 2020/11/24 v1.1t fixes to LaTeX
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/ts1en
+c.def
+File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding TS1 on input line 47.
+))
+\g__um_fam_int=\count285
+\g__um_fonts_used_int=\count286
+\l__um_primecount_int=\count287
+\g__um_primekern_muskip=\muskip17
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/unicode-ma
+th/unicode-math-table.tex)))
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xcolor/xco
+lor.sty
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-c
+fg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: xetex.def on input line 225.
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-d
+ef/xetex.def
+File: xetex.def 2021/03/18 v5.0k Graphics/color driver for xetex
+)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/d
+vipsnam.def
+File: dvipsnam.def 2016/06/17 v3.0m Driver-dependent file (DPC,SPQR)
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xcolor/svg
+nam.def
+File: svgnam.def 2016/05/11 v2.12 Predefined colors according to SVG 1.1 (UK)
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xcolor/x11
+nam.def
+File: x11nam.def 2016/05/11 v2.12 Predefined colors according to Unix/X11 (UK)
+))
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/h
+yperref.sty
+Package: hyperref 2021-06-07 v7.00m Hypertext links for LaTeX
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ltxcmds/
+ltxcmds.sty
+Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdftexcm
+ds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/infwarer
+r/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode not found.
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/k
+eyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks21
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvsetkey
+s/kvsetkeys.sty
+Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvdefine
+keys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdfescap
+e/pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hycolor/hy
+color.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/letltxmacr
+o/letltxmacro.sty
+Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/auxhook/au
+xhook.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvoptions/
+kvoptions.sty
+Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
+)
+\@linkdim=\dimen173
+\Hy@linkcounter=\count288
+\Hy@pagecounter=\count289
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/p
+d1enc.def
+File: pd1enc.def 2021-06-07 v7.00m Hyperref: PDFDocEncoding definition (HO)
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/h
+yperref-langpatches.def
+File: hyperref-langpatches.def 2021-06-07 v7.00m Hyperref: patches for babel la
+nguages
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/intcalc/
+intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/etexcmds
+/etexcmds.sty
+Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
+)
+\Hy@SavedSpaceFactor=\count290
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/p
+uenc.def
+File: puenc.def 2021-06-07 v7.00m Hyperref: PDF Unicode definition (HO)
+)
+Package hyperref Info: Option `unicode' set `true' on input line 4073.
+Package hyperref Info: Hyper figures OFF on input line 4192.
+Package hyperref Info: Link nesting OFF on input line 4197.
+Package hyperref Info: Hyper index ON on input line 4200.
+Package hyperref Info: Plain pages OFF on input line 4207.
+Package hyperref Info: Backreferencing OFF on input line 4212.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4445.
+\c@Hy@tempcnt=\count291
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.st
+y
+\Urlmuskip=\muskip18
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4804.
+\XeTeXLinkMargin=\dimen174
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bitset/b
+itset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bigintca
+lc/bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+\Fld@menulength=\count292
+\Field@Width=\dimen175
+\Fld@charsize=\dimen176
+Package hyperref Info: Hyper figures OFF on input line 6076.
+Package hyperref Info: Link nesting OFF on input line 6081.
+Package hyperref Info: Hyper index ON on input line 6084.
+Package hyperref Info: backreferencing OFF on input line 6091.
+Package hyperref Info: Link coloring OFF on input line 6096.
+Package hyperref Info: Link coloring with OCG OFF on input line 6101.
+Package hyperref Info: PDF/A mode OFF on input line 6106.
+LaTeX Info: Redefining \ref on input line 6146.
+LaTeX Info: Redefining \pageref on input line 6150.
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/atbeg
+shi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+)
+\Hy@abspage=\count293
+\c@Item=\count294
+\c@Hfootnote=\count295
+)
+Package hyperref Info: Driver (autodetected): hxetex.
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/h
+xetex.def
+File: hxetex.def 2021-06-07 v7.00m Hyperref driver for XeTeX
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/stringen
+c/stringenc.sty
+Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
+)
+)
+\pdfm@box=\box78
+\c@Hy@AnnotLevel=\count296
+\HyField@AnnotCount=\count297
+\Fld@listcount=\count298
+\c@bookmark@seq@number=\count299
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/rerunfilec
+heck/rerunfilecheck.sty
+Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/atver
+yend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atvery packag
+e
+with kernel methods
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/uniqueco
+unter/uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+86.
+)
+\Hy@SectionHShift=\skip80
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 47.
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fancyvrb/f
+ancyvrb.sty
+Package: fancyvrb 2021/08/12 v3.8 verbatim text (tvz,hv)
+\FV@CodeLineNo=\count300
+\FV@InFile=\read2
+\FV@TabBox=\box79
+\c@FancyVerbLine=\count301
+\FV@StepNumber=\count302
+\FV@OutFile=\write3
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/framed/fra
+med.sty
+Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
+\OuterFrameSep=\skip81
+\fb@frw=\dimen177
+\fb@frh=\dimen178
+\FrameRule=\dimen179
+\FrameSep=\dimen180
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/long
+table.sty
+Package: longtable 2021-05-07 v4.16 Multi-page Table package (DPC)
+\LTleft=\skip82
+\LTright=\skip83
+\LTpre=\skip84
+\LTpost=\skip85
+\LTchunksize=\count303
+\LTcapwidth=\dimen181
+\LT@head=\box80
+\LT@firsthead=\box81
+\LT@foot=\box82
+\LT@lastfoot=\box83
+\LT@gbox=\box84
+\LT@cols=\count304
+\LT@rows=\count305
+\c@LT@tables=\count306
+\c@LT@chunks=\count307
+\LT@p@ftn=\toks22
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/booktabs/b
+ooktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen182
+\lightrulewidth=\dimen183
+\cmidrulewidth=\dimen184
+\belowrulesep=\dimen185
+\belowbottomsep=\dimen186
+\aboverulesep=\dimen187
+\abovetopsep=\dimen188
+\cmidrulesep=\dimen189
+\cmidrulekern=\dimen190
+\defaultaddspace=\dimen191
+\@cmidla=\count308
+\@cmidlb=\count309
+\@aboverulesep=\dimen192
+\@belowrulesep=\dimen193
+\@thisruleclass=\count310
+\@lastruleclass=\count311
+\@thisrulewidth=\dimen194
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/arra
+y.sty
+Package: array 2021/04/20 v2.5e Tabular extension package (FMi)
+\col@sep=\dimen195
+\ar@mcellbox=\box85
+\extrarowheight=\dimen196
+\NC@list=\toks23
+\extratabsurround=\skip86
+\backup@length=\skip87
+\ar@cellbox=\box86
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/calc
+.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count312
+\calc@Bcount=\count313
+\calc@Adimen=\dimen197
+\calc@Bdimen=\dimen198
+\calc@Askip=\skip88
+\calc@Bskip=\skip89
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count314
+\calc@Cskip=\skip90
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/etoolbox/e
+toolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count315
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/mdwtools/f
+ootnote.sty
+Package: footnote 1997/01/28 1.13 Save footnotes around boxes
+\fn@notes=\box87
+\fn@width=\dimen199
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/g
+raphicx.sty
+Package: graphicx 2020/12/05 v1.2c Enhanced LaTeX Graphics (DPC,SPQR)
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/g
+raphics.sty
+Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/t
+rig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-c
+fg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: xetex.def on input line 107.
+)
+\Gin@req@height=\dimen256
+\Gin@req@width=\dimen257
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ulem/ule
+m.sty
+\UL@box=\box88
+\UL@hyphenbox=\box89
+\UL@skip=\skip91
+\UL@hook=\toks24
+\UL@height=\dimen258
+\UL@pe=\count316
+\UL@pixel=\dimen259
+\ULC@box=\box90
+Package: ulem 2019/11/18
+\ULdepth=\dimen260
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/ctex/ctex.
+sty
+Package: ctex 2021/06/20 v2.5.7 Chinese adapter in LaTeX (CTEX)
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/ctex/ctexh
+ook.sty
+Package: ctexhook 2021/06/20 v2.5.7 Document and package hooks (CTEX)
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/ctex/ctexp
+atch.sty
+Package: ctexpatch 2021/06/20 v2.5.7 Patching commands (CTEX)
+)
+\l__ctex_tmp_int=\count317
+\l__ctex_tmp_box=\box91
+\l__ctex_tmp_dim=\dimen261
+\g__ctex_section_depth_int=\count318
+\g__ctex_font_size_int=\count319
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/ctex/confi
+g/ctexopts.cfg
+File: ctexopts.cfg 2021/06/20 v2.5.7 Option configuration file (CTEX)
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/ctex/engin
+e/ctex-engine-xetex.def
+File: ctex-engine-xetex.def 2021/06/20 v2.5.7 XeLaTeX adapter (CTEX)
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/xelatex/xecjk/xe
+CJK.sty
+Package: xeCJK 2021/06/20 v3.8.7 Typesetting CJK scripts with XeLaTeX
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3packages
+/xtemplate/xtemplate.sty
+Package: xtemplate 2021-08-04 L3 Experimental prototype document functions
+\l__xtemplate_tmp_dim=\dimen262
+\l__xtemplate_tmp_int=\count320
+\l__xtemplate_tmp_muskip=\muskip19
+\l__xtemplate_tmp_skip=\skip92
+)
+\l__xeCJK_tmp_int=\count321
+\l__xeCJK_tmp_box=\box92
+\l__xeCJK_tmp_dim=\dimen263
+\l__xeCJK_tmp_skip=\skip93
+\g__xeCJK_space_factor_int=\count322
+\l__xeCJK_begin_int=\count323
+\l__xeCJK_end_int=\count324
+\c__xeCJK_CJK_class_int=\XeTeXcharclass1
+\c__xeCJK_FullLeft_class_int=\XeTeXcharclass2
+\c__xeCJK_FullRight_class_int=\XeTeXcharclass3
+\c__xeCJK_HalfLeft_class_int=\XeTeXcharclass4
+\c__xeCJK_HalfRight_class_int=\XeTeXcharclass5
+\c__xeCJK_NormalSpace_class_int=\XeTeXcharclass6
+\c__xeCJK_CM_class_int=\XeTeXcharclass7
+\c__xeCJK_HangulJamo_class_int=\XeTeXcharclass8
+\l__xeCJK_last_skip=\skip94
+\g__xeCJK_node_int=\count325
+\c__xeCJK_CJK_node_dim=\dimen264
+\c__xeCJK_CJK-space_node_dim=\dimen265
+\c__xeCJK_default_node_dim=\dimen266
+\c__xeCJK_default-space_node_dim=\dimen267
+\c__xeCJK_CJK-widow_node_dim=\dimen268
+\c__xeCJK_normalspace_node_dim=\dimen269
+\l__xeCJK_ccglue_skip=\skip95
+\l__xeCJK_ecglue_skip=\skip96
+\l__xeCJK_punct_kern_skip=\skip97
+\l__xeCJK_last_penalty_int=\count326
+\l__xeCJK_last_bound_dim=\dimen270
+\l__xeCJK_last_kern_dim=\dimen271
+\l__xeCJK_widow_penalty_int=\count327
+
+Package xtemplate Info: Declaring object type 'xeCJK/punctuation' taking 0
+(xtemplate)             argument(s) on line 2335.
+
+\l__xeCJK_fixed_punct_width_dim=\dimen272
+\l__xeCJK_mixed_punct_width_dim=\dimen273
+\l__xeCJK_middle_punct_width_dim=\dimen274
+\l__xeCJK_fixed_margin_width_dim=\dimen275
+\l__xeCJK_mixed_margin_width_dim=\dimen276
+\l__xeCJK_middle_margin_width_dim=\dimen277
+\l__xeCJK_bound_punct_width_dim=\dimen278
+\l__xeCJK_bound_margin_width_dim=\dimen279
+\l__xeCJK_margin_minimum_dim=\dimen280
+\l__xeCJK_kerning_total_width_dim=\dimen281
+\l__xeCJK_same_align_margin_dim=\dimen282
+\l__xeCJK_different_align_margin_dim=\dimen283
+\l__xeCJK_kerning_margin_width_dim=\dimen284
+\l__xeCJK_kerning_margin_minimum_dim=\dimen285
+\l__xeCJK_bound_dim=\dimen286
+\l__xeCJK_reverse_bound_dim=\dimen287
+\l__xeCJK_margin_dim=\dimen288
+\l__xeCJK_minimum_bound_dim=\dimen289
+\l__xeCJK_kerning_margin_dim=\dimen290
+\g__xeCJK_family_int=\count328
+\l__xeCJK_fam_int=\count329
+\g__xeCJK_fam_allocation_int=\count330
+\l__xeCJK_verb_case_int=\count331
+\l__xeCJK_verb_exspace_skip=\skip98
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/xelatex/xecjk/xe
+CJK.cfg
+File: xeCJK.cfg 2021/06/20 v3.8.7 Configuration file for xeCJK package
+))
+\ccwd=\dimen291
+\l__ctex_ccglue_skip=\skip99
+)
+\l__ctex_ziju_dim=\dimen292
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/zhnumber/z
+hnumber.sty
+Package: zhnumber 2020/05/01 v2.8 Typesetting numbers with Chinese glyphs
+\l__zhnum_scale_int=\count332
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/zhnumber/z
+hnumber-utf8.cfg
+File: zhnumber-utf8.cfg 2020/05/01 v2.8 Chinese numerals with UTF8 encoding
+))
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/ctex/schem
+e/ctex-scheme-chinese.def
+File: ctex-scheme-chinese.def 2021/06/20 v2.5.7 Chinese scheme for generic (CTE
+X)
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/ctex/confi
+g/ctex-name-utf8.cfg
+File: ctex-name-utf8.cfg 2021/06/20 v2.5.7 Caption with encoding UTF-8 (CTEX)
+))
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/ctex/ctex-
+c5size.clo
+File: ctex-c5size.clo 2021/06/20 v2.5.7 c5size option (CTEX)
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/ctex/fonts
+et/ctex-fontset-windows.def
+File: ctex-fontset-windows.def 2021/06/20 v2.5.7 Windows fonts definition (CTEX
+)
+
+Package fontspec Info: SimSun scale = 0.9511690917572482.
+
+
+Package fontspec Info: Could not resolve font "KaiTi/B" (it probably doesn't
+(fontspec)             exist).
+
+
+Package fontspec Info: Could not resolve font "SimHei/I" (it probably doesn't
+(fontspec)             exist).
+
+
+Package fontspec Info: Could not resolve font "SimSun/BI" (it probably doesn't
+(fontspec)             exist).
+
+
+Package fontspec Info: SimSun scale = 0.9511690917572482.
+
+
+Package fontspec Info: SimHei scale = 0.9430396989318163.
+
+
+Package fontspec Info: KaiTi scale = 0.9350480880976463.
+
+
+Package fontspec Info: Font family 'SimSun(0)' created for font 'SimSun' with
+(fontspec)             options
+(fontspec)             [Scale=MatchLowercase,Script={CJK},BoldFont={SimHei},Ita
+licFont={KaiTi}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->s*[0.9511690917572482]"SimSun/OT:script=hani;language
+=dflt;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[0.9430396989318163]"SimHei/OT:script=hani;language
+=dflt;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
+(fontspec)             - 'italic' (m/it) with NFSS spec.:
+(fontspec)             <->s*[0.9350480880976463]"KaiTi/OT:script=hani;language=
+dflt;"
+(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.: 
+
+))
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/ctex/confi
+g/ctex.cfg
+File: ctex.cfg 2021/06/20 v2.5.7 Configuration file (CTEX)
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/ca
+ption.sty
+Package: caption 2020/10/26 v3.5g Customizing captions (AR)
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/ca
+ption3.sty
+Package: caption3 2020/10/21 v2.2e caption3 kernel (AR)
+\captionmargin=\dimen293
+\captionmargin@=\dimen294
+\captionwidth=\dimen295
+\caption@tempdima=\dimen296
+\caption@indent=\dimen297
+\caption@parindent=\dimen298
+\caption@hangindent=\dimen299
+Package caption Info: Unknown document class (or package),
+(caption)             standard defaults will be used.
+Package caption Info: \@makecaption = \long macro:#1#2->\vskip \abovecaptionski
+p \sbox \@tempboxa {#1: #2}\ifdim \wd \@tempboxa >\hsize {\FigCapFont #1} #2\pa
+r \else \global \@minipagefalse {\FigCapFont #1} #2\par \fi \vskip \belowcaptio
+nskip  on input line 1139.
+)
+
+Package caption Warning: Unknown document class (or package),
+(caption)                standard defaults will be used.
+See the caption package documentation for explanation.
+
+\c@caption@flags=\count333
+\c@continuedfloat=\count334
+Package caption Info: hyperref package is loaded.
+Package caption Info: longtable package is loaded.
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/lt
+caption.sty
+Package: ltcaption 2020/05/30 v1.4b longtable captions (AR)
+))
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/makei
+dx.sty
+Package: makeidx 2014/09/29 v1.0m Standard LaTeX package
+)
+\@indexfile=\write4
+\openout4 = `bookdown.idx'.
+
+Writing index file bookdown.idx
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amscls/ams
+thm.sty
+Package: amsthm 2020/05/29 v2.20.6
+\thm@style=\toks25
+\thm@bodyfont=\toks26
+\thm@headfont=\toks27
+\thm@notefont=\toks28
+\thm@headpunct=\toks29
+\thm@preskip=\skip100
+\thm@postskip=\skip101
+\thm@headsep=\skip102
+\dth@everypar=\toks30
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/natbib/nat
+bib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip103
+\bibsep=\skip104
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count335
+) (./bookdown.aux)
+\openout1 = `bookdown.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 186.
+LaTeX Font Info:    ... okay on input line 186.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 186.
+LaTeX Font Info:    ... okay on input line 186.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 186.
+LaTeX Font Info:    ... okay on input line 186.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 186.
+LaTeX Font Info:    ... okay on input line 186.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 186.
+LaTeX Font Info:    ... okay on input line 186.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 186.
+LaTeX Font Info:    ... okay on input line 186.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 186.
+LaTeX Font Info:    ... okay on input line 186.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 186.
+LaTeX Font Info:    ... okay on input line 186.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 186.
+LaTeX Font Info:    ... okay on input line 186.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 186.
+LaTeX Font Info:    ... okay on input line 186.
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
+(Font)                  OT1/lmr/m/n --> TU/lmr/m/n on input line 186.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/lmr/m/it --> TU/lmr/m/it on input line 186.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/lmr/bx/n --> TU/lmr/bx/n on input line 186.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 186.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/lmss/bx/n --> TU/lmss/bx/n on input line 186.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 186.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/bx/n on input line 186.
+
+Package fontspec Info: latinmodern-math scale = 0.9999966408685371.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999966408685371.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999966408685371.
+
+
+Package fontspec Info: Font family 'latinmodern-math.otf(0)' created for font
+(fontspec)             'latinmodern-math.otf' with options
+(fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},Sm
+allCapsFont={},Script=Math,BoldFont={latinmodern-math.otf}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->s*[0.9999966408685371]"[latinmodern-math.otf]/OT:scri
+pt=math;language=dflt;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[0.9999966408685371]"[latinmodern-math.otf]/OT:scri
+pt=math;language=dflt;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
+
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(0)/m/n' will be
+(Font)              scaled to size 10.53937pt on input line 186.
+
+Package fontspec Info: latinmodern-math scale = 0.9999966408685371.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999966408685371.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999966408685371.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999966408685371.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999966408685371.
+
+
+Package fontspec Info: Font family 'latinmodern-math.otf(1)' created for font
+(fontspec)             'latinmodern-math.otf' with options
+(fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},Sm
+allCapsFont={},Script=Math,SizeFeatures={{Size=8.9584645-},{Size=6.323622-8.958
+4645,Font=latinmodern-math.otf,Style=MathScript},{Size=-6.323622,Font=latinmode
+rn-math.otf,Style=MathScriptScript}},BoldFont={latinmodern-math.otf}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <8.9584645->s*[0.9999966408685371]"[latinmodern-math.otf
+]/OT:script=math;language=dflt;"<6.323622-8.9584645>s*[0.9999966408685371]"[lat
+inmodern-math.otf]/OT:script=math;language=dflt;+ssty=0;"<-6.323622>s*[0.999996
+6408685371]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=1;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[0.9999966408685371]"[latinmodern-math.otf]/OT:scri
+pt=math;language=dflt;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
+
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 10.53937pt on input line 186.
+LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
+(Font)              `operators' in the math version `normal' on input line 186.
+
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/lmr/m/n --> TU/latinmodern-math.otf(1)/m/n on input
+ line 186.
+LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
+(Font)              `operators' in the math version `bold' on input line 186.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/lmr/bx/n --> TU/latinmodern-math.otf(1)/b/n on inpu
+t line 186.
+
+Package fontspec Info: latinmodern-math scale = 0.9999966408685371.
+
+
+Package fontspec Info: latinmodern-math scale = 1.000096640532624.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999966408685371.
+
+
+Package fontspec Info: latinmodern-math scale = 1.000096640532624.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999966408685371.
+
+
+Package fontspec Info: latinmodern-math scale = 1.000096640532624.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999966408685371.
+
+
+Package fontspec Info: latinmodern-math scale = 1.000096640532624.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999966408685371.
+
+
+Package fontspec Info: latinmodern-math scale = 1.000096640532624.
+
+
+Package fontspec Info: Font family 'latinmodern-math.otf(2)' created for font
+(fontspec)             'latinmodern-math.otf' with options
+(fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},Sm
+allCapsFont={},Script=Math,SizeFeatures={{Size=8.9584645-},{Size=6.323622-8.958
+4645,Font=latinmodern-math.otf,Style=MathScript},{Size=-6.323622,Font=latinmode
+rn-math.otf,Style=MathScriptScript}},BoldFont={latinmodern-math.otf},ScaleAgain
+=1.0001,FontAdjustment={\fontdimen
+(fontspec)             8\font =7.13515pt\relax \fontdimen 9\font
+(fontspec)             =4.15251pt\relax \fontdimen 10\font =4.67947pt\relax
+(fontspec)             \fontdimen 11\font =7.23001pt\relax \fontdimen 12\font
+(fontspec)             =3.63608pt\relax \fontdimen 13\font =3.82579pt\relax
+(fontspec)             \fontdimen 14\font =3.82579pt\relax \fontdimen 15\font
+(fontspec)             =3.04588pt\relax \fontdimen 16\font =2.60323pt\relax
+(fontspec)             \fontdimen 17\font =2.60323pt\relax \fontdimen 18\font
+(fontspec)             =2.63484pt\relax \fontdimen 19\font =2.10788pt\relax
+(fontspec)             \fontdimen 22\font =2.63484pt\relax \fontdimen 20\font
+(fontspec)             =0pt\relax \fontdimen 21\font =0pt\relax }].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <8.9584645->s*[1.000096640532624]"[latinmodern-math.otf]
+/OT:script=math;language=dflt;"<6.323622-8.9584645>s*[1.000096640532624]"[latin
+modern-math.otf]/OT:script=math;language=dflt;+ssty=0;"<-6.323622>s*[1.00009664
+0532624]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=1;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
+(fontspec)             and font adjustment code:
+(fontspec)             \fontdimen 8\font =7.13515pt\relax \fontdimen 9\font
+(fontspec)             =4.15251pt\relax \fontdimen 10\font =4.67947pt\relax
+(fontspec)             \fontdimen 11\font =7.23001pt\relax \fontdimen 12\font
+(fontspec)             =3.63608pt\relax \fontdimen 13\font =3.82579pt\relax
+(fontspec)             \fontdimen 14\font =3.82579pt\relax \fontdimen 15\font
+(fontspec)             =3.04588pt\relax \fontdimen 16\font =2.60323pt\relax
+(fontspec)             \fontdimen 17\font =2.60323pt\relax \fontdimen 18\font
+(fontspec)             =2.63484pt\relax \fontdimen 19\font =2.10788pt\relax
+(fontspec)             \fontdimen 22\font =2.63484pt\relax \fontdimen 20\font
+(fontspec)             =0pt\relax \fontdimen 21\font =0pt\relax 
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[1.000096640532624]"[latinmodern-math.otf]/OT:scrip
+t=math;language=dflt;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
+(fontspec)             and font adjustment code:
+(fontspec)             \fontdimen 8\font =7.13515pt\relax \fontdimen 9\font
+(fontspec)             =4.15251pt\relax \fontdimen 10\font =4.67947pt\relax
+(fontspec)             \fontdimen 11\font =7.23001pt\relax \fontdimen 12\font
+(fontspec)             =3.63608pt\relax \fontdimen 13\font =3.82579pt\relax
+(fontspec)             \fontdimen 14\font =3.82579pt\relax \fontdimen 15\font
+(fontspec)             =3.04588pt\relax \fontdimen 16\font =2.60323pt\relax
+(fontspec)             \fontdimen 17\font =2.60323pt\relax \fontdimen 18\font
+(fontspec)             =2.63484pt\relax \fontdimen 19\font =2.10788pt\relax
+(fontspec)             \fontdimen 22\font =2.63484pt\relax \fontdimen 20\font
+(fontspec)             =0pt\relax \fontdimen 21\font =0pt\relax 
+
+LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
+(Font)              `symbols' in the math version `normal' on input line 186.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/lmsy/m/n --> TU/latinmodern-math.otf(2)/m/n on inpu
+t line 186.
+LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
+(Font)              `symbols' in the math version `bold' on input line 186.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/lmsy/b/n --> TU/latinmodern-math.otf(2)/b/n on inpu
+t line 186.
+
+Package fontspec Info: latinmodern-math scale = 0.9999966408685371.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9998966412044502.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999966408685371.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9998966412044502.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999966408685371.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9998966412044502.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999966408685371.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9998966412044502.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999966408685371.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9998966412044502.
+
+
+Package fontspec Info: Font family 'latinmodern-math.otf(3)' created for font
+(fontspec)             'latinmodern-math.otf' with options
+(fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},Sm
+allCapsFont={},Script=Math,SizeFeatures={{Size=8.9584645-},{Size=6.323622-8.958
+4645,Font=latinmodern-math.otf,Style=MathScript},{Size=-6.323622,Font=latinmode
+rn-math.otf,Style=MathScriptScript}},BoldFont={latinmodern-math.otf},ScaleAgain
+=0.9999,FontAdjustment={\fontdimen
+(fontspec)             8\font =0.42157pt\relax \fontdimen 9\font
+(fontspec)             =2.10788pt\relax \fontdimen 10\font =1.76007pt\relax
+(fontspec)             \fontdimen 11\font =1.16988pt\relax \fontdimen 12\font
+(fontspec)             =6.32362pt\relax \fontdimen 13\font =0pt\relax }].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <8.9584645->s*[0.9998966412044502]"[latinmodern-math.otf
+]/OT:script=math;language=dflt;"<6.323622-8.9584645>s*[0.9998966412044502]"[lat
+inmodern-math.otf]/OT:script=math;language=dflt;+ssty=0;"<-6.323622>s*[0.999896
+6412044502]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=1;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
+(fontspec)             and font adjustment code:
+(fontspec)             \fontdimen 8\font =0.42157pt\relax \fontdimen 9\font
+(fontspec)             =2.10788pt\relax \fontdimen 10\font =1.76007pt\relax
+(fontspec)             \fontdimen 11\font =1.16988pt\relax \fontdimen 12\font
+(fontspec)             =6.32362pt\relax \fontdimen 13\font =0pt\relax 
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[0.9998966412044502]"[latinmodern-math.otf]/OT:scri
+pt=math;language=dflt;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
+(fontspec)             and font adjustment code:
+(fontspec)             \fontdimen 8\font =0.42157pt\relax \fontdimen 9\font
+(fontspec)             =2.10788pt\relax \fontdimen 10\font =1.76007pt\relax
+(fontspec)             \fontdimen 11\font =1.16988pt\relax \fontdimen 12\font
+(fontspec)             =6.32362pt\relax \fontdimen 13\font =0pt\relax 
+
+LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
+(Font)              `largesymbols' in the math version `normal' on input line 1
+86.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/m/n on inpu
+t line 186.
+LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
+(Font)              `largesymbols' in the math version `bold' on input line 186
+.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/b/n on inpu
+t line 186.
+Package hyperref Info: Link coloring ON on input line 186.
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/n
+ameref.sty
+Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/refcount/r
+efcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/gettitle
+string/gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+)
+\c@section@level=\count336
+)
+LaTeX Info: Redefining \ref on input line 186.
+LaTeX Info: Redefining \pageref on input line 186.
+LaTeX Info: Redefining \nameref on input line 186.
+(./bookdown.out) (./bookdown.out)
+\@outlinefile=\write5
+\openout5 = `bookdown.out'.
+
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+LaTeX Font Info:    Font shape `TU/SimSun(0)/m/it' will be
+(Font)              scaled to size 9.35043pt on input line 188.
+
+LaTeX Font Warning: Font shape `TU/SimSun(0)/b/sl' undefined
+(Font)              using `TU/SimSun(0)/b/n' instead on input line 188.
+
+LaTeX Font Info:    Font shape `TU/SimSun(0)/b/n' will be
+(Font)              scaled to size 22.63293pt on input line 188.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[1
+
+
+
+]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[2
+
+]
+Underfull \vbox (badness 10000) detected at line 210
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 210
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 210
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 210
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 210
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 210
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 210
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 210
+[]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 210
+[]
+ []
+
+LaTeX Font Info:    Font shape `TU/SimSun(0)/b/sl' will be
+(Font)              scaled to size 16.9747pt on input line 210.
+(./bookdown.toc
+LaTeX Font Info:    Font shape `TU/SimSun(0)/b/n' will be
+(Font)              scaled to size 9.93903pt on input line 2.
+LaTeX Font Info:    Font shape `TU/SimSun(0)/m/n' will be
+(Font)              scaled to size 10.02475pt on input line 9.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 7.37756pt on input line 9.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 5.26968pt on input line 9.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 9
+.
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omllmm.
+fd
+File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 10.54033pt on input line 9.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 7.37823pt on input line 9.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 5.27016pt on input line 9.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 10.53824pt on input line 9.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 7.37677pt on input line 9.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 5.26912pt on input line 9.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 9.
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/u
+msa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 9.
+
+(c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/u
+msb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[3]
+
+Package fontspec Info: FangSong scale = 0.976420540271054.
+
+
+Package fontspec Info: Could not resolve font "FangSong/BI" (it probably
+(fontspec)             doesn't exist).
+
+
+Package fontspec Info: Could not resolve font "FangSong/B" (it probably
+(fontspec)             doesn't exist).
+
+
+Package fontspec Info: Could not resolve font "FangSong/I" (it probably
+(fontspec)             doesn't exist).
+
+
+Package fontspec Info: FangSong scale = 0.976420540271054.
+
+
+Package fontspec Info: Font family 'FangSong(0)' created for font 'FangSong'
+(fontspec)             with options [Scale=MatchLowercase,Script={CJK}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->s*[0.976420540271054]"FangSong/OT:script=hani;languag
+e=dflt;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
+
+[4] [5]
+Overfull \hbox (1.00865pt too wide) detected at line 103
+\TU/lmr/m/n/10.53937 10.10 
+ []
+
+
+Overfull \hbox (0.20834pt too wide) detected at line 104
+\TU/lmr/m/n/10.53937 10.10.1 
+ []
+
+
+Overfull \hbox (1.00865pt too wide) detected at line 105
+\TU/lmr/m/n/10.53937 10.11 
+ []
+
+[6]
+Overfull \hbox (0.20834pt too wide) detected at line 106
+\TU/lmr/m/n/10.53937 10.11.1 
+ []
+
+
+Overfull \hbox (0.20834pt too wide) detected at line 107
+\TU/lmr/m/n/10.53937 10.11.2 
+ []
+
+
+Overfull \hbox (1.00865pt too wide) detected at line 108
+\TU/lmr/m/n/10.53937 10.12 
+ []
+
+
+Overfull \hbox (0.20834pt too wide) detected at line 109
+\TU/lmr/m/n/10.53937 10.12.1 
+ []
+
+
+Overfull \hbox (0.20834pt too wide) detected at line 110
+\TU/lmr/m/n/10.53937 10.12.2 
+ []
+
+
+Overfull \hbox (0.20834pt too wide) detected at line 111
+\TU/lmr/m/n/10.53937 10.12.3 
+ []
+
+
+Overfull \hbox (0.20834pt too wide) detected at line 112
+\TU/lmr/m/n/10.53937 10.12.4 
+ []
+
+
+Overfull \hbox (0.20834pt too wide) detected at line 113
+\TU/lmr/m/n/10.53937 10.12.5 
+ []
+
+)
+\tf@toc=\write6
+\openout6 = `bookdown.toc'.
+
+[7]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[8
+
+]
+Underfull \vbox (badness 10000) detected at line 212
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 212
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 212
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 212
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 212
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 212
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 212
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 212
+[]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 212
+[]
+ []
+
+
+Package hyperref Warning: bookmark level for unknown fm defaults to 0.
+
+(./bookdown.lof
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[9
+
+] [10])
+\tf@lof=\write7
+\openout7 = `bookdown.lof'.
+
+[11]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[12
+
+]
+Underfull \vbox (badness 10000) detected at line 213
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 213
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 213
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 213
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 213
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 213
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 213
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 213
+[]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 213
+[]
+ []
+
+(./bookdown.lot)
+\tf@lot=\write8
+\openout8 = `bookdown.lot'.
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[13
+
+]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[14
+
+]
+Underfull \vbox (badness 10000) detected at line 215
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 215
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 215
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 215
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 215
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 215
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 215
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 215
+[]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 215
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[15
+
+]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[16
+
+]
+Underfull \vbox (badness 10000) detected at line 225
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 225
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 225
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 225
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 225
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 225
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 225
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 225
+[]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 225
+[]
+ []
+
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 7.52812pt on input line 242.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 5.0pt on input line 242.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 7.52881pt on input line 242.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 5.00046pt on input line 242.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 7.52731pt on input line 242.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 4.99947pt on input line 242.
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[1
+
+
+] [2]
+Underfull \vbox (badness 10000) detected at line 264
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 264
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 264
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 264
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 264
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 264
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 264
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 264
+[]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 264
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[3
+
+
+]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[4
+
+]
+Underfull \vbox (badness 10000) detected at line 272
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 272
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 272
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 272
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 272
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 272
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 272
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 272
+[]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 272
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[5
+
+]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[6
+
+]
+Underfull \vbox (badness 10000) detected at line 282
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 282
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 282
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 282
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 282
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 282
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 282
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 282
+[]
+ []
+
+Chapter 1.
+LaTeX Font Info:    Font shape `TU/SimSun(0)/m/sl' in size <18> not available
+(Font)              Font shape `TU/SimSun(0)/m/it' tried instead on input line 
+282.
+LaTeX Font Info:    Font shape `TU/SimSun(0)/m/it' will be
+(Font)              scaled to size 16.83078pt on input line 282.
+LaTeX Font Info:    Font shape `TU/SimSun(0)/b/n' will be
+(Font)              scaled to size 11.31647pt on input line 285.
+LaTeX Font Info:    Font shape `TU/SimSun(0)/m/n' will be
+(Font)              scaled to size 7.16054pt on input line 292.
+File: images/rstudio.png Graphic file (type bmp)
+<images/rstudio.png>
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[1
+
+
+
+]
+LaTeX Font Info:    Font shape `TU/SimSun(0)/m/n' will be
+(Font)              scaled to size 9.51172pt on input line 303.
+
+Overfull \hbox (30.0pt too wide) in paragraph at lines 304--304
+|  
+ []
+
+[2]
+Underfull \vbox (badness 10000) detected at line 309
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 309
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 309
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 309
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 309
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 309
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 309
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 309
+[]
+ []
+
+Chapter 2.
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[3
+
+
+
+] [4]
+Underfull \hbox (badness 10000) in paragraph at lines 386--386
+[][][][][]$[][][][][] [] [] [] [][] [] [][][][][][] [] [][] [] [][][] [] [] [] 
+[] [] [][][] [] [][][][][][][][][][][][][][] [] [][][][][] [] [][][][][][][][][
+][][][][][] [] [][][][] []
+ []
+
+
+Overfull \hbox (151.18726pt too wide) in paragraph at lines 386--386
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] []
+ [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][] []
+ []
+
+
+Overfull \hbox (288.58737pt too wide) in paragraph at lines 399--400
+[]|   []   |   []
+ []
+
+
+Overfull \hbox (58.48947pt too wide) in paragraph at lines 399--400
+|   []
+ []
+
+
+Overfull \hbox (40.25713pt too wide) in paragraph at lines 407--430
+ [][] 
+ []
+
+
+Overfull \hbox (500.82686pt too wide) in paragraph at lines 434--435
+[]|   []   |   []   |   []   |   [] 
+ []
+
+[5]
+LaTeX Font Info:    Font shape `TU/FangSong(0)/m/n' will be
+(Font)              scaled to size 10.2909pt on input line 443.
+
+Overfull \hbox (67.42136pt too wide) in paragraph at lines 449--449
+[]\TU/lmtt/m/n/10.53937 ## Warning: Duplicated column names deduplicated: 'TIME
+' => 'TIME_1' [69][] 
+ []
+
+
+Overfull \hbox (67.42136pt too wide) in paragraph at lines 457--457
+[]\TU/lmtt/m/n/10.53937 ## Warning: Duplicated column names deduplicated: 'TIME
+' => 'TIME_1' [69][] 
+ []
+
+
+Overfull \hbox (67.42136pt too wide) in paragraph at lines 465--465
+[]\TU/lmtt/m/n/10.53937 ## Warning: Duplicated column names deduplicated: 'TIME
+' => 'TIME_1' [69][] 
+ []
+
+[6]
+Overfull \hbox (67.42136pt too wide) in paragraph at lines 473--473
+[]\TU/lmtt/m/n/10.53937 ## Warning: Duplicated column names deduplicated: 'TIME
+' => 'TIME_1' [69][] 
+ []
+
+
+Overfull \hbox (74.74194pt too wide) in paragraph at lines 479--502
+ [][] 
+ []
+
+[7]
+LaTeX Font Info:    Font shape `TU/SimSun(0)/b/n' will be
+(Font)              scaled to size 10.37343pt on input line 510.
+
+Overfull \hbox (89.55403pt too wide) in paragraph at lines 532--532
+[]\TU/lmtt/m/n/10.53937 ##  [1] -0.0008873753  0.0026900500 -0.0012036469  0.00
+03483414  0.0006122641[] 
+ []
+
+
+Overfull \hbox (89.55403pt too wide) in paragraph at lines 532--532
+[]\TU/lmtt/m/n/10.53937 ##  [6] -0.0113872639 -0.0020986076  0.0004962787  0.01
+88727482 -0.0294595908[] 
+ []
+
+
+Overfull \hbox (89.55403pt too wide) in paragraph at lines 532--532
+[]\TU/lmtt/m/n/10.53937 ## [11] -0.0436611445 -0.0339083408  0.0046772165  0.00
+36653298  0.0030397988[] 
+ []
+
+
+Overfull \hbox (89.55403pt too wide) in paragraph at lines 532--532
+[]\TU/lmtt/m/n/10.53937 ## [16] -0.0105901673  0.0040624956  0.0017317049 -0.00
+73252290  0.0054977377[] 
+ []
+
+
+Overfull \hbox (89.55403pt too wide) in paragraph at lines 532--532
+[]\TU/lmtt/m/n/10.53937 ## [21]  0.0039736503  0.0021704065  0.0046772165  0.00
+36653298  0.0030397988[] 
+ []
+
+
+Overfull \hbox (89.55403pt too wide) in paragraph at lines 532--532
+[]\TU/lmtt/m/n/10.53937 ## [26] -0.0105901673  0.0040624956  0.0017317049 -0.00
+73252290  0.0054977377[] 
+ []
+
+
+Overfull \hbox (89.55396pt too wide) in paragraph at lines 548--548
+[]\TU/lmtt/m/n/10.53937 ##  [1] -2.998596e-04  1.407338e-04  3.189451e-05 -4.58
+6467e-04 -3.836822e-04[] 
+ []
+
+
+Overfull \hbox (89.55396pt too wide) in paragraph at lines 548--548
+[]\TU/lmtt/m/n/10.53937 ##  [6]  5.402725e-04 -2.344852e-04 -7.684772e-05  5.97
+9599e-04 -6.534341e-04[] 
+ []
+
+
+Overfull \hbox (89.55396pt too wide) in paragraph at lines 548--548
+[]\TU/lmtt/m/n/10.53937 ## [11] -6.779145e-04  2.469749e-04  3.812201e-04  2.31
+3957e-04  3.508312e-04[] 
+ []
+
+[8]
+Overfull \hbox (89.55396pt too wide) in paragraph at lines 548--548
+[]\TU/lmtt/m/n/10.53937 ## [16] -2.794358e-04 -5.406530e-04  5.230606e-04 -9.18
+3370e-04  7.638850e-04[] 
+ []
+
+
+Overfull \hbox (89.55396pt too wide) in paragraph at lines 548--548
+[]\TU/lmtt/m/n/10.53937 ## [21] -2.578893e-04  2.203045e-04  3.812201e-04  2.31
+3957e-04  3.508312e-04[] 
+ []
+
+
+Overfull \hbox (89.55396pt too wide) in paragraph at lines 548--548
+[]\TU/lmtt/m/n/10.53937 ## [26] -2.794358e-04 -5.406530e-04  5.230606e-04 -9.18
+3370e-04  7.638850e-04[] 
+ []
+
+
+Overfull \hbox (89.55396pt too wide) in paragraph at lines 564--564
+[]\TU/lmtt/m/n/10.53937 ##  [1] -1.974217e-04 -3.594216e-04 -3.779119e-04 -3.80
+6675e-04 -3.201411e-04[] 
+ []
+
+
+Overfull \hbox (89.55396pt too wide) in paragraph at lines 564--564
+[]\TU/lmtt/m/n/10.53937 ##  [6] -1.483324e-04 -7.803345e-04 -2.671018e-04  1.02
+8977e-04 -3.966192e-04[] 
+ []
+
+
+Overfull \hbox (89.55396pt too wide) in paragraph at lines 564--564
+[]\TU/lmtt/m/n/10.53937 ## [11] -3.190769e-04 -2.314266e-04 -2.746300e-04  1.09
+4050e-05 -4.584791e-05[] 
+ []
+
+
+Overfull \hbox (89.55396pt too wide) in paragraph at lines 564--564
+[]\TU/lmtt/m/n/10.53937 ## [16] -1.084094e-04 -1.827768e-04 -1.344969e-04 -1.71
+4096e-04 -8.180257e-05[] 
+ []
+
+
+Overfull \hbox (89.55396pt too wide) in paragraph at lines 564--564
+[]\TU/lmtt/m/n/10.53937 ## [21] -4.687906e-05 -1.000424e-04 -2.746300e-04  1.09
+4050e-05 -4.584791e-05[] 
+ []
+
+
+Overfull \hbox (89.55396pt too wide) in paragraph at lines 564--564
+[]\TU/lmtt/m/n/10.53937 ## [26] -1.084094e-04 -1.827768e-04 -1.344969e-04 -1.71
+4096e-04 -8.180257e-05[] 
+ []
+
+
+Overfull \hbox (61.88817pt too wide) in paragraph at lines 580--580
+[]\TU/lmtt/m/n/10.53937 ##  [1]  0.434643936 -0.297820404 -0.308200950 -0.00784
+7373 -0.035490198[] 
+ []
+
+
+Overfull \hbox (61.88817pt too wide) in paragraph at lines 580--580
+[]\TU/lmtt/m/n/10.53937 ##  [6]  0.433706824 -0.416734067 -0.052089770  0.14765
+5545 -0.315797917[] 
+ []
+
+
+Overfull \hbox (61.88817pt too wide) in paragraph at lines 580--580
+[]\TU/lmtt/m/n/10.53937 ## [11] -0.271335987 -0.228968795  0.356519198  0.31148
+7646  0.052196075[] 
+ []
+
+
+Overfull \hbox (61.88817pt too wide) in paragraph at lines 580--580
+[]\TU/lmtt/m/n/10.53937 ## [16]  0.557128947  0.058563406  0.300198435  0.05260
+7786  0.339000061[] 
+ []
+
+
+Overfull \hbox (61.88817pt too wide) in paragraph at lines 580--580
+[]\TU/lmtt/m/n/10.53937 ## [21] -0.252622980 -0.494554616  0.356519198  0.31148
+7646  0.052196075[] 
+ []
+
+
+Overfull \hbox (61.88817pt too wide) in paragraph at lines 580--580
+[]\TU/lmtt/m/n/10.53937 ## [26]  0.557128947  0.058563406  0.300198435  0.05260
+7786  0.339000061[] 
+ []
+
+[9]
+Overfull \hbox (100.62036pt too wide) in paragraph at lines 595--595
+[]\TU/lmtt/m/n/10.53937 ##  [1] 2.000254 1.998957 2.000767 1.999234 2.007333 2.
+004346 2.000635 1.999893[] 
+ []
+
+
+Overfull \hbox (100.62036pt too wide) in paragraph at lines 595--595
+[]\TU/lmtt/m/n/10.53937 ##  [9] 1.996299 2.005611 2.008161 2.006110 1.998550 1.
+998863 1.998980 2.003671[] 
+ []
+
+
+Overfull \hbox (100.62036pt too wide) in paragraph at lines 595--595
+[]\TU/lmtt/m/n/10.53937 ## [17] 1.998391 1.999240 2.003866 1.995584 1.994199 2.
+010360 1.998550 1.998863[] 
+ []
+
+
+Overfull \hbox (100.62036pt too wide) in paragraph at lines 595--595
+[]\TU/lmtt/m/n/10.53937 ## [25] 1.998980 2.003671 1.998391 1.999240 2.003866 1.
+995584 1.994199 2.010360[] 
+ []
+
+
+Overfull \hbox (100.62036pt too wide) in paragraph at lines 611--611
+[]\TU/lmtt/m/n/10.53937 ##  [1] 1.271913 1.957425 1.267156 1.345532 1.953322 1.
+247812 1.675577 1.286947[] 
+ []
+
+
+Overfull \hbox (100.62036pt too wide) in paragraph at lines 611--611
+[]\TU/lmtt/m/n/10.53937 ##  [9] 1.752611 1.376964 1.917707 1.350001 1.735321 1.
+731820 1.668727 1.286193[] 
+ []
+
+
+Overfull \hbox (100.62036pt too wide) in paragraph at lines 611--611
+[]\TU/lmtt/m/n/10.53937 ## [17] 1.320945 1.257551 1.561785 1.407394 1.478888 1.
+719351 1.824288 1.314796[] 
+ []
+
+
+Overfull \hbox (100.62036pt too wide) in paragraph at lines 611--611
+[]\TU/lmtt/m/n/10.53937 ## [25] 1.648506 1.354219 1.558566 1.277686 1.354582 1.
+745864 1.620695 1.789893[] 
+ []
+
+LaTeX Font Info:    Font shape `TU/SimSun(0)/b/n' will be
+(Font)              scaled to size 9.43039pt on input line 619.
+
+Underfull \hbox (badness 10000) in paragraph at lines 621--623
+|   []   |   []
+ []
+
+[10]
+Overfull \hbox (67.42136pt too wide) in paragraph at lines 638--638
+[]\TU/lmtt/m/n/10.53937 ## Warning: Duplicated column names deduplicated: 'TIME
+' => 'TIME_1' [69][] 
+ []
+
+
+Overfull \hbox (67.42136pt too wide) in paragraph at lines 646--646
+[]\TU/lmtt/m/n/10.53937 ## Warning: Duplicated column names deduplicated: 'TIME
+' => 'TIME_1' [69][] 
+ []
+
+
+Overfull \hbox (67.42136pt too wide) in paragraph at lines 654--654
+[]\TU/lmtt/m/n/10.53937 ## Warning: Duplicated column names deduplicated: 'TIME
+' => 'TIME_1' [69][] 
+ []
+
+
+Overfull \hbox (67.42136pt too wide) in paragraph at lines 662--662
+[]\TU/lmtt/m/n/10.53937 ## Warning: Duplicated column names deduplicated: 'TIME
+' => 'TIME_1' [69][] 
+ []
+
+
+Overfull \hbox (12.08984pt too wide) in paragraph at lines 672--672
+[]\TU/lmtt/m/n/10.53937 ##  [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0[] 
+ []
+
+
+Overfull \hbox (12.08984pt too wide) in paragraph at lines 682--682
+[]\TU/lmtt/m/n/10.53937 ##  [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0[] 
+ []
+
+[11]
+Overfull \hbox (100.62033pt too wide) in paragraph at lines 696--696
+[]\TU/lmtt/m/n/10.53937 ##  [1] -0.01231889 -0.01271539 -0.01330812 -0.01416506
+ -0.01491902 -0.01586479[] 
+ []
+
+
+Overfull \hbox (100.62033pt too wide) in paragraph at lines 696--696
+[]\TU/lmtt/m/n/10.53937 ##  [7] -0.01566857 -0.01545520 -0.01563183 -0.01537453
+ -0.01494554 -0.01433677[] 
+ []
+
+
+Overfull \hbox (100.62033pt too wide) in paragraph at lines 696--696
+[]\TU/lmtt/m/n/10.53937 ## [13] -0.02284560 -0.02291318 -0.02268118 -0.02266862
+ -0.02250392 -0.02213352[] 
+ []
+
+
+Overfull \hbox (100.62033pt too wide) in paragraph at lines 696--696
+[]\TU/lmtt/m/n/10.53937 ## [19] -0.02061493 -0.02006006 -0.01856400 -0.01678649
+ -0.01591079 -0.01457109[] 
+ []
+
+
+Overfull \hbox (100.62033pt too wide) in paragraph at lines 710--710
+[]\TU/lmtt/m/n/10.53937 ##  [1]  4.43187567  3.13678828  1.78620310  0.49515242
+ -0.08437000  3.51420195[] 
+ []
+
+
+Overfull \hbox (100.62033pt too wide) in paragraph at lines 710--710
+[]\TU/lmtt/m/n/10.53937 ##  [7]  3.66611259  5.56360761  6.76351008  7.70784028
+  8.45263315  9.25926640[] 
+ []
+
+
+Overfull \hbox (100.62033pt too wide) in paragraph at lines 710--710
+[]\TU/lmtt/m/n/10.53937 ## [13]  2.58978666  2.52629775  2.49784796  2.38619050
+  2.23225682  1.92200639[] 
+ []
+
+
+Overfull \hbox (100.62033pt too wide) in paragraph at lines 710--710
+[]\TU/lmtt/m/n/10.53937 ## [19]  1.29213044  0.92018214  0.76352452  0.55412066
+  0.20248257 -0.08219604[] 
+ []
+
+
+Overfull \hbox (67.42136pt too wide) in paragraph at lines 723--723
+[]\TU/lmtt/m/n/10.53937 ## Warning: Duplicated column names deduplicated: 'TIME
+' => 'TIME_1' [69][] 
+ []
+
+
+Overfull \hbox (67.42136pt too wide) in paragraph at lines 731--731
+[]\TU/lmtt/m/n/10.53937 ## Warning: Duplicated column names deduplicated: 'TIME
+' => 'TIME_1' [69][] 
+ []
+
+
+Overfull \hbox (67.42136pt too wide) in paragraph at lines 739--739
+[]\TU/lmtt/m/n/10.53937 ## Warning: Duplicated column names deduplicated: 'TIME
+' => 'TIME_1' [69][] 
+ []
+
+
+Overfull \hbox (67.42136pt too wide) in paragraph at lines 747--747
+[]\TU/lmtt/m/n/10.53937 ## Warning: Duplicated column names deduplicated: 'TIME
+' => 'TIME_1' [69][] 
+ []
+
+[12]
+Overfull \hbox (12.08984pt too wide) in paragraph at lines 757--757
+[]\TU/lmtt/m/n/10.53937 ##  [1] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+ 2 2 2 2[] 
+ []
+
+
+Overfull \hbox (67.42136pt too wide) in paragraph at lines 771--771
+[]\TU/lmtt/m/n/10.53937 ## Warning: Duplicated column names deduplicated: 'TIME
+' => 'TIME_1' [69][] 
+ []
+
+
+Overfull \hbox (67.42136pt too wide) in paragraph at lines 779--779
+[]\TU/lmtt/m/n/10.53937 ## Warning: Duplicated column names deduplicated: 'TIME
+' => 'TIME_1' [69][] 
+ []
+
+
+Overfull \hbox (67.42136pt too wide) in paragraph at lines 787--787
+[]\TU/lmtt/m/n/10.53937 ## Warning: Duplicated column names deduplicated: 'TIME
+' => 'TIME_1' [69][] 
+ []
+
+
+Overfull \hbox (67.42136pt too wide) in paragraph at lines 795--795
+[]\TU/lmtt/m/n/10.53937 ## Warning: Duplicated column names deduplicated: 'TIME
+' => 'TIME_1' [69][] 
+ []
+
+[13]
+Overfull \hbox (100.62036pt too wide) in paragraph at lines 808--808
+[]\TU/lmtt/m/n/10.53937 ##  [1] 1.234725 1.386181 1.734084 1.401400 1.387123 1.
+897486 1.301125 1.568791[] 
+ []
+
+
+Overfull \hbox (100.62036pt too wide) in paragraph at lines 808--808
+[]\TU/lmtt/m/n/10.53937 ##  [9] 1.418195 1.766689 1.328404 1.424649 1.260445 1.
+307652 1.348474 1.845582[] 
+ []
+
+
+Overfull \hbox (100.62036pt too wide) in paragraph at lines 808--808
+[]\TU/lmtt/m/n/10.53937 ## [17] 1.509451 1.610886 1.303266 1.822998 1.374819 1.
+670735 1.696006 1.262896[] 
+ []
+
+
+Overfull \hbox (375.13045pt too wide) in paragraph at lines 810--811
+[]|   []   |   []
+ []
+
+[14]
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10.53937> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 851.
+
+LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10.53937> not available
+
+(Font)              Font shape `TU/lmtt/b/sl' tried instead on input line 851.
+
+[15]
+
+LaTeX Font Warning: Font shape `TU/FangSong(0)/b/it' undefined
+(Font)              using `TU/FangSong(0)/m/n' instead on input line 894.
+
+
+LaTeX Font Warning: Font shape `TU/FangSong(0)/m/it' undefined
+(Font)              using `TU/FangSong(0)/m/n' instead on input line 896.
+
+
+Underfull \vbox (badness 10000) detected at line 972
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 972
+ []
+
+[16]
+Underfull \vbox (badness 10000) detected at line 972
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 972
+ []
+
+[17] [18]
+Underfull \vbox (badness 10000) detected at line 977
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 977
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 977
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 977
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 977
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 977
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 977
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 977
+[]
+ []
+
+Chapter 3.
+LaTeX Font Info:    Calculating math sizes for size <18> on input line 977.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 18.0pt on input line 977.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 12.59995pt on input line 977.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 9.0pt on input line 977.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 18.00165pt on input line 977.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 12.60109pt on input line 977.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 9.00082pt on input line 977.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 17.99808pt on input line 977.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 12.59859pt on input line 977.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 8.99904pt on input line 977.
+File: images/fvcb.png Graphic file (type bmp)
+<images/fvcb.png>
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[19
+
+
+
+]
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 10.0pt on input line 1034.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 7.0pt on input line 1034.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 10.00092pt on input line 1034.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 7.00064pt on input line 1034.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 9.99893pt on input line 1034.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 6.99925pt on input line 1034.
+[20] [21]
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 12.0pt on input line 1091.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 8.0pt on input line 1091.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 6.0pt on input line 1091.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 12.0011pt on input line 1091.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 8.00073pt on input line 1091.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 6.00055pt on input line 1091.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 11.99872pt on input line 1091.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 7.99915pt on input line 1091.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 5.99936pt on input line 1091.
+[22] [23] [24]
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1129.
+
+Underfull \hbox (badness 1540) in paragraph at lines 1131--1132
+\TU/lmr/m/n/10.53937 Remko A. Duursma \TU/SimSun(0)/m/n/10.53937 在 \TU/lmr/m/n/
+10.53937 2015 \TU/SimSun(0)/m/n/10.53937 年 发 表 了 一 篇 文 章 [][]\TU/lmr/m/n/10.539
+37 Duursma[][] ([][]2015[][])\TU/SimSun(0)/m/n/10.53937 ，|
+ []
+
+[25
+
+]
+LaTeX Font Info:    Font shape `TU/SimSun(0)/m/it' will be
+(Font)              scaled to size 9.85475pt on input line 1191.
+[26] [27]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[28
+
+]
+Overfull \hbox (45.56895pt too wide) in alignment at lines 1252--1265
+ [] [] [] [] [] [] [] [] 
+ []
+
+[29]
+Overfull \hbox (45.28876pt too wide) in paragraph at lines 1307--1307
+[]\TU/lmtt/m/n/10.53937 ##  [1] "df"             "pars"           "nlsfit"     
+    "Tcorrect"[] 
+ []
+
+
+Overfull \hbox (78.48772pt too wide) in paragraph at lines 1307--1307
+[]\TU/lmtt/m/n/10.53937 ##  [5] "Photosyn"       "Ci"             "Ci_transitio
+n"  "Ci_transition2"[] 
+ []
+
+
+Overfull \hbox (39.75555pt too wide) in paragraph at lines 1307--1307
+[]\TU/lmtt/m/n/10.53937 ##  [9] "Rd_measured"    "GammaStar"      "Km"         
+    "kminput"[] 
+ []
+
+
+Overfull \hbox (28.68918pt too wide) in paragraph at lines 1307--1307
+[]\TU/lmtt/m/n/10.53937 ## [13] "gstarinput"     "fitmethod"      "citransition
+"   "gmeso"[] 
+ []
+
+
+Overfull \hbox (45.28874pt too wide) in paragraph at lines 1307--1307
+[]\TU/lmtt/m/n/10.53937 ## [17] "fitTPU"         "alphag"         "RMSE"       
+    "runorder"[] 
+ []
+
+
+Overfull \hbox (89.55414pt too wide) in paragraph at lines 1372--1372
+[]\TU/lmtt/m/n/10.53937 ##            Ci      Ameas     Amodel         Ac      
+  Aj   Ap       Rd VPD[] 
+ []
+
+[30]
+Overfull \hbox (89.55402pt too wide) in paragraph at lines 1372--1372
+[]\TU/lmtt/m/n/10.53937 ## 5    53.47985 -0.6575974 -0.5146882 -0.3552036  0.00
+0000 1000 0.159449 1.5[] 
+ []
+
+
+Overfull \hbox (89.55402pt too wide) in paragraph at lines 1372--1372
+[]\TU/lmtt/m/n/10.53937 ## 4    85.82530  1.7971569  1.9292621  2.0888575  5.06
+8534 1000 0.159449 1.5[] 
+ []
+
+
+Overfull \hbox (89.55399pt too wide) in paragraph at lines 1372--1372
+[]\TU/lmtt/m/n/10.53937 ## 3   150.67623  6.4525814  6.4176037  6.5777528 12.75
+5502 1000 0.159449 1.5[] 
+ []
+
+
+Overfull \hbox (89.55399pt too wide) in paragraph at lines 1372--1372
+[]\TU/lmtt/m/n/10.53937 ## 2   217.32002 10.6562220 10.5354626 10.6965875 17.51
+9644 1000 0.159449 1.5[] 
+ []
+
+
+Overfull \hbox (89.55399pt too wide) in paragraph at lines 1372--1372
+[]\TU/lmtt/m/n/10.53937 ## 1   286.39751 14.2848912 14.3365887 14.4993980 20.74
+9310 1000 0.159449 1.5[] 
+ []
+
+
+Overfull \hbox (89.55399pt too wide) in paragraph at lines 1372--1372
+[]\TU/lmtt/m/n/10.53937 ## 6   292.56161 15.4296572 14.9749157 15.1383702 20.85
+2616 1000 0.159449 1.5[] 
+ []
+
+
+Overfull \hbox (89.55399pt too wide) in paragraph at lines 1372--1372
+[]\TU/lmtt/m/n/10.53937 ## 7   292.96456 15.7134791 15.0564801 15.2200522 20.83
+1098 1000 0.159449 1.5[] 
+ []
+
+
+Overfull \hbox (89.55399pt too wide) in paragraph at lines 1372--1372
+[]\TU/lmtt/m/n/10.53937 ## 8   450.64285 22.2659015 23.0115187 23.1975997 25.18
+6939 3000 0.159449 1.5[] 
+ []
+
+
+Overfull \hbox (89.55399pt too wide) in paragraph at lines 1372--1372
+[]\TU/lmtt/m/n/10.53937 ## 9   622.03873 26.5135040 27.6485003 30.4281393 27.83
+7462 3000 0.159449 1.5[] 
+ []
+
+
+Overfull \hbox (89.55397pt too wide) in paragraph at lines 1372--1372
+[]\TU/lmtt/m/n/10.53937 ## 10  992.08737 30.3898585 30.6300461 42.3998173 30.79
+7660 3000 0.159449 1.5[] 
+ []
+
+
+Overfull \hbox (89.55397pt too wide) in paragraph at lines 1372--1372
+[]\TU/lmtt/m/n/10.53937 ## 11 1558.96968 33.6267056 32.6638021 54.9948264 32.82
+8110 3000 0.159449 1.5[] 
+ []
+
+
+Overfull \hbox (89.55397pt too wide) in paragraph at lines 1372--1372
+[]\TU/lmtt/m/n/10.53937 ## 12 1756.16396 33.3152783 33.0981490 58.5844507 33.26
+1965 3000 0.159449 1.5[] 
+ []
+
+[31]
+Overfull \hbox (95.08731pt too wide) in paragraph at lines 1437--1437
+[]\TU/lmtt/m/n/10.53937 ##            Ci      Ameas     Amodel         Ac      
+  Aj   Ap        Rd VPD[] 
+ []
+
+
+Overfull \hbox (95.08717pt too wide) in paragraph at lines 1437--1437
+[]\TU/lmtt/m/n/10.53937 ## 5    53.47985 -0.6575974 -0.7389447 -0.3560483  0.00
+0000 1000 0.3828608 1.5[] 
+ []
+
+
+Overfull \hbox (95.08717pt too wide) in paragraph at lines 1437--1437
+[]\TU/lmtt/m/n/10.53937 ## 4    85.82530  1.7971569  1.7108198  2.0938246  5.13
+8366 1000 0.3828608 1.5[] 
+ []
+
+
+Overfull \hbox (95.08714pt too wide) in paragraph at lines 1437--1437
+[]\TU/lmtt/m/n/10.53937 ## 3   150.67623  6.4525814  6.2098476  6.5933940 12.93
+1333 1000 0.3828608 1.5[] 
+ []
+
+
+Overfull \hbox (95.08714pt too wide) in paragraph at lines 1437--1437
+[]\TU/lmtt/m/n/10.53937 ## 2   217.32002 10.6562220 10.3375299 10.7220229 17.76
+1317 1000 0.3828608 1.5[] 
+ []
+
+
+Overfull \hbox (95.08714pt too wide) in paragraph at lines 1437--1437
+[]\TU/lmtt/m/n/10.53937 ## 1   286.39751 14.2848912 14.1477696 14.5338762 21.03
+5722 1000 0.3828608 1.5[] 
+ []
+
+
+Overfull \hbox (95.08714pt too wide) in paragraph at lines 1437--1437
+[]\TU/lmtt/m/n/10.53937 ## 6   292.56161 15.4296572 14.7876514 15.1743678 21.13
+9657 1000 0.3828608 1.5[] 
+ []
+
+[32]
+Overfull \hbox (95.08714pt too wide) in paragraph at lines 1437--1437
+[]\TU/lmtt/m/n/10.53937 ## 7   292.96456 15.7134791 14.8694171 15.2562440 21.11
+7718 1000 0.3828608 1.5[] 
+ []
+
+
+Overfull \hbox (95.08714pt too wide) in paragraph at lines 1437--1437
+[]\TU/lmtt/m/n/10.53937 ## 8   450.64285 22.2659015 22.8464806 23.2527613 25.53
+3374 3000 0.3828608 1.5[] 
+ []
+
+
+Overfull \hbox (95.08714pt too wide) in paragraph at lines 1437--1437
+[]\TU/lmtt/m/n/10.53937 ## 9   622.03873 26.5135040 27.8030690 30.5004944 28.22
+0254 3000 0.3828608 1.5[] 
+ []
+
+
+Overfull \hbox (95.08713pt too wide) in paragraph at lines 1437--1437
+[]\TU/lmtt/m/n/10.53937 ## 10  992.08737 30.3898585 30.8295808 42.5006398 31.22
+1072 3000 0.3828608 1.5[] 
+ []
+
+
+Overfull \hbox (95.08713pt too wide) in paragraph at lines 1437--1437
+[]\TU/lmtt/m/n/10.53937 ## 11 1558.96968 33.6267056 32.8913778 55.1255986 33.27
+9305 3000 0.3828608 1.5[] 
+ []
+
+
+Overfull \hbox (95.08713pt too wide) in paragraph at lines 1437--1437
+[]\TU/lmtt/m/n/10.53937 ## 12 1756.16396 33.3152783 33.3316070 58.7237587 33.71
+9013 3000 0.3828608 1.5[] 
+ []
+
+[33] [34]
+File: bookdown_files/figure-latex/fitaci6400-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/fitaci6400-1.pdf>
+[35]
+Overfull \hbox (30.0pt too wide) in paragraph at lines 1510--1510
+|  
+ []
+
+[36]
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 1541.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 11.0pt on input line 1541.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 7.69997pt on input line 1541.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 5.5pt on input line 1541.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 11.001pt on input line 1541.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 7.70067pt on input line 1541.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 5.5005pt on input line 1541.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 10.99883pt on input line 1541.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 7.69914pt on input line 1541.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 5.4994pt on input line 1541.
+
+Overfull \hbox (2662.7881pt too wide) in paragraph at lines 1557--1570
+ [][] 
+ []
+
+[37] [38] [39]
+Overfull \hbox (95.08731pt too wide) in paragraph at lines 1711--1711
+[]\TU/lmtt/m/n/10.53937 ##            Ci      Ameas     Amodel         Ac      
+  Aj   Ap        Rd VPD[] 
+ []
+
+
+Overfull \hbox (95.08717pt too wide) in paragraph at lines 1711--1711
+[]\TU/lmtt/m/n/10.53937 ## 2    53.23129 -0.4401082  0.1014381  0.9601119  2.54
+8123 1000 0.8586158 1.5[] 
+ []
+
+
+Overfull \hbox (95.08717pt too wide) in paragraph at lines 1711--1711
+[]\TU/lmtt/m/n/10.53937 ## 3    79.47367  2.4824630  2.1937702  3.0526198  7.03
+6734 1000 0.8586158 1.5[] 
+ []
+
+
+Overfull \hbox (95.08714pt too wide) in paragraph at lines 1711--1711
+[]\TU/lmtt/m/n/10.53937 ## 4   116.74688  5.4531712  4.9419337  5.8011511 11.39
+2394 1000 0.8586158 1.5[] 
+ []
+
+
+Overfull \hbox (95.08714pt too wide) in paragraph at lines 1711--1711
+[]\TU/lmtt/m/n/10.53937 ## 5   188.00801  9.7099879  9.5705964 10.4310194 16.44
+7715 1000 0.8586158 1.5[] 
+ []
+
+
+Overfull \hbox (95.08714pt too wide) in paragraph at lines 1711--1711
+[]\TU/lmtt/m/n/10.53937 ## 6   278.44662 14.8225766 14.4261545 15.2897486 19.97
+7583 1000 0.8586158 1.5[] 
+ []
+
+
+Overfull \hbox (95.08714pt too wide) in paragraph at lines 1711--1711
+[]\TU/lmtt/m/n/10.53937 ## 7   343.03259 17.7982155 17.4602014 18.3289218 21.63
+9847 1000 0.8586158 1.5[] 
+ []
+
+
+Overfull \hbox (95.08714pt too wide) in paragraph at lines 1711--1711
+[]\TU/lmtt/m/n/10.53937 ## 1   344.72152 17.9244012 17.3165146 18.1849643 21.53
+4276 1000 0.8586158 1.5[] 
+ []
+
+
+Overfull \hbox (95.08713pt too wide) in paragraph at lines 1711--1711
+[]\TU/lmtt/m/n/10.53937 ## 14  344.74839 16.7933747 17.6853306 18.5545917 21.77
+4261 1000 0.8586158 1.5[] 
+ []
+
+
+Overfull \hbox (95.08714pt too wide) in paragraph at lines 1711--1711
+[]\TU/lmtt/m/n/10.53937 ## 8   588.08078 23.8925326 24.1309683 27.0327638 25.02
+0148 3000 0.8586158 1.5[] 
+ []
+
+
+Overfull \hbox (95.08714pt too wide) in paragraph at lines 1711--1711
+[]\TU/lmtt/m/n/10.53937 ## 9   833.25547 26.5674409 25.7783026 33.0856065 26.64
+7921 3000 0.8586158 1.5[] 
+ []
+
+
+Overfull \hbox (95.08713pt too wide) in paragraph at lines 1711--1711
+[]\TU/lmtt/m/n/10.53937 ## 10 1136.99222 25.9787890 26.8108335 38.1296944 27.67
+6768 3000 0.8586158 1.5[] 
+ []
+
+
+Overfull \hbox (95.08713pt too wide) in paragraph at lines 1711--1711
+[]\TU/lmtt/m/n/10.53937 ## 11 1436.86370 26.6110657 27.5409345 42.0628463 28.40
+5453 3000 0.8586158 1.5[] 
+ []
+
+
+Overfull \hbox (95.08713pt too wide) in paragraph at lines 1711--1711
+[]\TU/lmtt/m/n/10.53937 ## 12 1536.46772 27.4018784 27.7965881 43.3773689 28.66
+0781 3000 0.8586158 1.5[] 
+ []
+
+
+Overfull \hbox (95.08713pt too wide) in paragraph at lines 1711--1711
+[]\TU/lmtt/m/n/10.53937 ## 13 1731.76400 28.6752069 28.0952804 45.2475932 28.95
+9041 3000 0.8586158 1.5[] 
+ []
+
+[40] [41]
+File: bookdown_files/figure-latex/fitacisr-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/fitacisr-1.pdf>
+File: bookdown_files/figure-latex/fitacisr-2.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/fitacisr-2.pdf>
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <11> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1743.
+[42] [43]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[44
+
+] [45]
+File: bookdown_files/figure-latex/unnamed-chunk-26-1.pdf Graphic file (type pdf
+)
+<use bookdown_files/figure-latex/unnamed-chunk-26-1.pdf>
+[46]
+Underfull \vbox (badness 10000) detected at line 1842
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 1842
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1842
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 1842
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1842
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 1842
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1842
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 1842
+[]
+ []
+
+Chapter 4.
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[47
+
+
+
+] [48] [49] [50] [51]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[52
+
+]
+Underfull \vbox (badness 10000) detected at line 2001
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 2001
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2001
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 2001
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2001
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 2001
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2001
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 2001
+[]
+ []
+
+Chapter 5.
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[53
+
+
+] [54]
+Underfull \vbox (badness 10000) detected at line 2036
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 2036
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2036
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 2036
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2036
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 2036
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2036
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 2036
+[]
+ []
+
+Chapter 6.
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[55
+
+
+
+] [56]
+Overfull \hbox (100.62047pt too wide) in paragraph at lines 2129--2129
+[]\TU/lmtt/m/n/10.53937 ##         Ci    ALEAF        GS    ELEAF       Ac     
+  Aj   Ap   Rd VPD Tleaf[] 
+ []
+
+
+Overfull \hbox (100.62038pt too wide) in paragraph at lines 2129--2129
+[]\TU/lmtt/m/n/10.53937 ## 1 369.3981 14.19466 0.1706377 3.412753 15.12654 17.0
+3685 1000 0.92   2    25[] 
+ []
+
+File: bookdown_files/figure-latex/vpd-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/vpd-1.pdf>
+File: bookdown_files/figure-latex/ppfd-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/ppfd-1.pdf>
+[57] [58]
+File: bookdown_files/figure-latex/ppfd-2.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/ppfd-2.pdf>
+
+LaTeX Warning: Reference `fig:ppfd' on page 59 undefined on input line 2182.
+
+[59]
+File: bookdown_files/figure-latex/supply-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/supply-1.pdf>
+[60] [61] [62]
+Underfull \vbox (badness 10000) detected at line 2279
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 2279
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2279
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 2279
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2279
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 2279
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2279
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 2279
+[]
+ []
+
+Chapter 7.
+
+Underfull \vbox (badness 1924) detected at line 2309
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[63
+
+
+
+] [64]
+Underfull \vbox (badness 10000) detected at line 2332
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 2332
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2332
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 2332
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2332
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 2332
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2332
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 2332
+[]
+ []
+
+Chapter 8.
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[65
+
+
+
+] [66] [67]
+File: bookdown_files/figure-latex/recr-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/recr-1.pdf>
+[68]
+
+LaTeX Warning: Reference `fitaci' on page 69 undefined on input line 2493.
+
+[69] [70] [71
+
+] [72]
+File: bookdown_files/figure-latex/nrecr-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/nrecr-1.pdf>
+[73] [74] [75
+
+] [76]
+File: bookdown_files/figure-latex/nexpr-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/nexpr-1.pdf>
+[77] [78] [79
+
+]
+Underfull \vbox (badness 10000) detected at line 2860
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2860
+ []
+
+[80]
+File: bookdown_files/figure-latex/mrecr-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/mrecr-1.pdf>
+[81] [82]
+Underfull \vbox (badness 10000) detected at line 2889
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 2889
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2889
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 2889
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2889
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 2889
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2889
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 2889
+[]
+ []
+
+Chapter 9.
+
+Overfull \hbox (30.0pt too wide) in paragraph at lines 2895--2895
+|  
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[83
+
+
+
+]
+Overfull \hbox (30.0pt too wide) in paragraph at lines 2919--2919
+|  
+ []
+
+[84]
+Overfull \hbox (67.42139pt too wide) in paragraph at lines 2963--2963
+[]\TU/lmtt/m/n/10.53937 ## Formula: lrc_A ~ (1/(2 * theta)) * (alpha * lrc_Q + 
+Am - sqrt((alpha *[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 2963--2963
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+[85]
+File: bookdown_files/figure-latex/pomp-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/pomp-1.pdf>
+[86]
+File: bookdown_files/figure-latex/alpp-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/alpp-1.pdf>
+[87]
+Overfull \hbox (67.42139pt too wide) in paragraph at lines 3068--3068
+[]\TU/lmtt/m/n/10.53937 ## Formula: lrc_A ~ (1/(2 * theta)) * (alpha * lrc_Q + 
+Am - sqrt((alpha *[] 
+ []
+
+[88]
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 3068--3068
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+File: bookdown_files/figure-latex/alpf-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/alpf-1.pdf>
+[89]
+Underfull \vbox (badness 10000) detected at line 3127
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 3127
+ []
+
+[90]
+File: bookdown_files/figure-latex/malp-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/malp-1.pdf>
+[91]
+Overfull \hbox (84.02084pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ## Error in numericDeriv(form[[3L]], names(ind), env, c
+entral = nDcentral) :[] 
+ []
+
+
+Overfull \hbox (39.7555pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ##   Missing value or an infinity produced when evaluat
+ing the model[] 
+ []
+
+
+Overfull \hbox (84.02084pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ## Error in numericDeriv(form[[3L]], names(ind), env, c
+entral = nDcentral) :[] 
+ []
+
+
+Overfull \hbox (39.7555pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ##   Missing value or an infinity produced when evaluat
+ing the model[] 
+ []
+
+
+Overfull \hbox (84.02084pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ## Error in numericDeriv(form[[3L]], names(ind), env, c
+entral = nDcentral) :[] 
+ []
+
+
+Overfull \hbox (39.7555pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ##   Missing value or an infinity produced when evaluat
+ing the model[] 
+ []
+
+[92]
+Overfull \hbox (84.02084pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ## Error in numericDeriv(form[[3L]], names(ind), env, c
+entral = nDcentral) :[] 
+ []
+
+
+Overfull \hbox (39.7555pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ##   Missing value or an infinity produced when evaluat
+ing the model[] 
+ []
+
+
+Overfull \hbox (84.02084pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ## Error in numericDeriv(form[[3L]], names(ind), env, c
+entral = nDcentral) :[] 
+ []
+
+
+Overfull \hbox (39.7555pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ##   Missing value or an infinity produced when evaluat
+ing the model[] 
+ []
+
+
+Overfull \hbox (84.02084pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ## Error in numericDeriv(form[[3L]], names(ind), env, c
+entral = nDcentral) :[] 
+ []
+
+
+Overfull \hbox (39.7555pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ##   Missing value or an infinity produced when evaluat
+ing the model[] 
+ []
+
+
+Overfull \hbox (84.02084pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ## Error in numericDeriv(form[[3L]], names(ind), env, c
+entral = nDcentral) :[] 
+ []
+
+
+Overfull \hbox (39.7555pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ##   Missing value or an infinity produced when evaluat
+ing the model[] 
+ []
+
+
+Overfull \hbox (84.02084pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ## Error in numericDeriv(form[[3L]], names(ind), env, c
+entral = nDcentral) :[] 
+ []
+
+
+Overfull \hbox (39.7555pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ##   Missing value or an infinity produced when evaluat
+ing the model[] 
+ []
+
+
+Overfull \hbox (84.02084pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ## Error in numericDeriv(form[[3L]], names(ind), env, c
+entral = nDcentral) :[] 
+ []
+
+
+Overfull \hbox (39.7555pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ##   Missing value or an infinity produced when evaluat
+ing the model[] 
+ []
+
+
+Overfull \hbox (84.02084pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ## Error in numericDeriv(form[[3L]], names(ind), env, c
+entral = nDcentral) :[] 
+ []
+
+
+Overfull \hbox (39.7555pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ##   Missing value or an infinity produced when evaluat
+ing the model[] 
+ []
+
+
+Overfull \hbox (84.02084pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ## Error in numericDeriv(form[[3L]], names(ind), env, c
+entral = nDcentral) :[] 
+ []
+
+
+Overfull \hbox (39.7555pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ##   Missing value or an infinity produced when evaluat
+ing the model[] 
+ []
+
+
+Overfull \hbox (84.02084pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ## Error in numericDeriv(form[[3L]], names(ind), env, c
+entral = nDcentral) :[] 
+ []
+
+
+Overfull \hbox (39.7555pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ##   Missing value or an infinity produced when evaluat
+ing the model[] 
+ []
+
+
+Overfull \hbox (84.02084pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ## Error in numericDeriv(form[[3L]], names(ind), env, c
+entral = nDcentral) :[] 
+ []
+
+
+Overfull \hbox (39.7555pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ##   Missing value or an infinity produced when evaluat
+ing the model[] 
+ []
+
+
+Overfull \hbox (84.02084pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ## Error in numericDeriv(form[[3L]], names(ind), env, c
+entral = nDcentral) :[] 
+ []
+
+
+Overfull \hbox (39.7555pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ##   Missing value or an infinity produced when evaluat
+ing the model[] 
+ []
+
+
+Overfull \hbox (84.02084pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ## Error in numericDeriv(form[[3L]], names(ind), env, c
+entral = nDcentral) :[] 
+ []
+
+
+Overfull \hbox (39.7555pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ##   Missing value or an infinity produced when evaluat
+ing the model[] 
+ []
+
+
+Overfull \hbox (84.02084pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ## Error in numericDeriv(form[[3L]], names(ind), env, c
+entral = nDcentral) :[] 
+ []
+
+
+Overfull \hbox (39.7555pt too wide) in paragraph at lines 3194--3194
+[]\TU/lmtt/m/n/10.53937 ##   Missing value or an infinity produced when evaluat
+ing the model[] 
+ []
+
+
+Overfull \hbox (67.42139pt too wide) in paragraph at lines 3220--3220
+[]\TU/lmtt/m/n/10.53937 ## Formula: lrc_A ~ (1/(2 * theta)) * (alpha * lrc_Q + 
+Am - sqrt((alpha *[] 
+ []
+
+[93]
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 3220--3220
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+File: bookdown_files/figure-latex/mcomp-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/mcomp-1.pdf>
+[94] [95]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[96
+
+]
+Underfull \vbox (badness 10000) detected at line 3250
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 3250
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 3250
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 3250
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 3250
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 3250
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 3250
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 3250
+[]
+ []
+
+Chapter 10.
+
+Overfull \hbox (5.83923pt too wide) in alignment at lines 3259--3272
+ [] [] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[97
+
+
+]
+Overfull \hbox (30.0pt too wide) in paragraph at lines 3292--3292
+|  
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3294--3294
+[][][][][]$[][][][][] [] [] [] [][] [] [][][][][][] [] [][] [] [][][] [] [] [] 
+[] [] [][][] [] [][][][][][][][][][][][][][] [] [][][][][] [] [][][][][][][][][
+][][][][][] [] [][][][] []
+ []
+
+
+Overfull \hbox (159.18213pt too wide) in paragraph at lines 3294--3294
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] []
+ [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][] []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3294--3294
+[][][][][][][] [] [][][][][][][] [] [][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][] [] [][][][][][][][][] [] [][][][][][][][][][][][][][][][][]
+[][][] []
+ []
+
+
+Overfull \hbox (898.70789pt too wide) in paragraph at lines 3294--3294
+[][][][][][][] [] [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][] [] [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3294--3294
+[][][][][] [] [][][][][][][][][][][][][][] [] [][] [] [][][][][][][][][][][][][
+] [] [][][][][][][] [] [][] [] [][][][][][][][][][][] []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3294--3294
+[][][][][][][][][][][][][] [] [][] [] [][][][][][][][][][][][] [] [][][][][][][
+][][][][][][][][][][][][][][][][] [] [][][][][][][] [] [][][][][][] []
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 3301
+ [][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 3301
+[][][]
+ []
+
+[98] [99]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[100
+
+] [101]
+Overfull \hbox (84.0209pt too wide) in paragraph at lines 3412--3412
+[]\TU/lmtt/m/n/10.53937 ## Formula: ALEAF ~ acifun_wrap(Ci, PPFD = PPFD, Vcmax 
+= Vcmax, Jmax = Jmax,[] 
+ []
+
+[102]
+Overfull \hbox (28.68921pt too wide) in paragraph at lines 3412--3412
+[]\TU/lmtt/m/n/10.53937 ##     Rd = Rd, Tleaf = Tleaf, Patm = Patm, TcorrectVJ 
+= Tcorrect,[] 
+ []
+
+
+Overfull \hbox (78.48778pt too wide) in paragraph at lines 3412--3412
+[]\TU/lmtt/m/n/10.53937 ##     alpha = alpha, theta = theta, gmeso = gmeso, EaV
+ = EaV, EdVC = EdVC,[] 
+ []
+
+
+Overfull \hbox (45.28874pt too wide) in paragraph at lines 3412--3412
+[]\TU/lmtt/m/n/10.53937 ##     delsC = delsC, EaJ = EaJ, EdVJ = EdVJ, delsJ = d
+elsJ, Km = Km,[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 3412--3412
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+File: bookdown_files/figure-latex/adyn_plot-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/adyn_plot-1.pdf>
+
+Overfull \hbox (1056.94022pt too wide) in paragraph at lines 3431--3432
+|   [] 
+ []
+
+[103] [104] [105]
+Underfull \hbox (badness 10000) detected at line 3502
+ [][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 3502
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 3504
+ [][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 3504
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 3506
+ [][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 3506
+[][][]
+ []
+
+[106] [107] [108] [109] [110]
+
+LaTeX Warning: Reference `fig:empty-delta-max-rev' on page 111 undefined on inp
+ut line 3696.
+
+[111]
+Overfull \vbox (0.92711pt too high) detected at line 3745
+ []
+
+[112] [113] [114]
+
+LaTeX Warning: Reference `(' on page 115 undefined on input line 3823.
+
+[115]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[116
+
+] [117] [118]
+Underfull \hbox (badness 10000) in paragraph at lines 3898--3898
+[][][][][]$[][][][][] [] [] [] [][][] [] [][][][][][][][][][][] [] [][][] [] []
+[][][][][][][] [] [][] [] [][][][] [] [][][][] [] [][][][] [] [][][][][] [] [][
+][][] [] [][][][][][][][][][][][][] [][]
+ []
+
+[119]
+Underfull \vbox (badness 10000) detected at line 3974
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 3974
+ []
+
+[120] [121]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[122
+
+] [123]
+Underfull \vbox (badness 10000) detected at line 4087
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 4087
+ []
+
+[124]
+Underfull \vbox (badness 10000) detected at line 4087
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 4087
+ []
+
+[125] [126] [127
+
+] [128]
+Underfull \vbox (badness 10000) detected at line 4215
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 4215
+ []
+
+[129] [130] [131] [132]
+Overfull \hbox (45.28865pt too wide) in paragraph at lines 4327--4327
+[]\TU/lmtt/m/n/10.53937 ## Warning: Removed 1848 rows containing missing values
+ (geom_point).[] 
+ []
+
+File: bookdown_files/figure-latex/anetcc-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/anetcc-1.pdf>
+[133]
+Underfull \vbox (badness 10000) detected at line 4359
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 4359
+ []
+
+[134]
+Overfull \hbox (45.28865pt too wide) in paragraph at lines 4363--4363
+[]\TU/lmtt/m/n/10.53937 ## Warning: Removed 1878 rows containing missing values
+ (geom_point).[] 
+ []
+
+File: bookdown_files/figure-latex/anetci-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/anetci-1.pdf>
+[135]
+Overfull \hbox (45.28865pt too wide) in paragraph at lines 4399--4399
+[]\TU/lmtt/m/n/10.53937 ## Warning: Removed 1959 rows containing missing values
+ (geom_point).[] 
+ []
+
+File: bookdown_files/figure-latex/aappcc-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/aappcc-1.pdf>
+[136]
+Overfull \hbox (45.28865pt too wide) in paragraph at lines 4435--4435
+[]\TU/lmtt/m/n/10.53937 ## Warning: Removed 2003 rows containing missing values
+ (geom_point).[] 
+ []
+
+File: bookdown_files/figure-latex/aappci-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/aappci-1.pdf>
+[137] [138]
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 4484--4484
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4484--4484
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.582e+05 on 1 and 69 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+[139]
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4516--4516
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)     -7.0873326  0.0198665  -356.7   <2e-
+16 ***[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4516--4516
+[]\TU/lmtt/m/n/10.53937 ## dataCi15$Cifull  0.1225900  0.0003078   398.3   <2e-
+16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 4516--4516
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4516--4516
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.586e+05 on 1 and 69 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4547--4547
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)     -6.9553180  0.0198028  -351.2   <2e-
+16 ***[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4547--4547
+[]\TU/lmtt/m/n/10.53937 ## dataCi30$Cifull  0.1223321  0.0003068   398.7   <2e-
+16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 4547--4547
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+[140]
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 4578--4578
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4578--4578
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.596e+05 on 1 and 69 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+[141]
+Overfull \hbox (6.55647pt too wide) in paragraph at lines 4609--4609
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)      -6.2616980  0.0195062  -321.0   <2e
+-16 ***[] 
+ []
+
+
+Overfull \hbox (6.55646pt too wide) in paragraph at lines 4609--4609
+[]\TU/lmtt/m/n/10.53937 ## dataCi120$Cifull  0.1210486  0.0003022   400.5   <2e
+-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 4609--4609
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4609--4609
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.604e+05 on 1 and 69 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+[142]
+Overfull \hbox (6.55647pt too wide) in paragraph at lines 4640--4640
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)      -6.2616980  0.0195062  -321.0   <2e
+-16 ***[] 
+ []
+
+
+Overfull \hbox (6.55646pt too wide) in paragraph at lines 4640--4640
+[]\TU/lmtt/m/n/10.53937 ## dataCi300$Cifull  0.1210486  0.0003022   400.5   <2e
+-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 4640--4640
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4640--4640
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.604e+05 on 1 and 69 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+[143]
+Overfull \hbox (61.88818pt too wide) in paragraph at lines 4698--4698
+[]\TU/lmtt/m/n/10.53937 ##   (Intercept) (Intercept).1 (Intercept).2 (Intercept
+).3 (Intercept).4[] 
+ []
+
+
+Overfull \hbox (61.88826pt too wide) in paragraph at lines 4698--4698
+[]\TU/lmtt/m/n/10.53937 ##      -0.20351      -0.11262      -0.02719       0.12
+853       0.38691[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 4698--4698
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+[144]
+File: bookdown_files/figure-latex/intdelay-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/intdelay-1.pdf>
+File: bookdown_files/figure-latex/intslps-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/intslps-1.pdf>
+[145]
+Overfull \hbox (50.82188pt too wide) in paragraph at lines 4750--4750
+[]\TU/lmtt/m/n/10.53937 ##                   dataCi15$Cifull  dataCi30$Cifull  
+dataCi60$Cifull[] 
+ []
+
+
+Overfull \hbox (50.82188pt too wide) in paragraph at lines 4750--4750
+[]\TU/lmtt/m/n/10.53937 ##       -2.711e-19       -1.574e-04       -2.995e-04  
+     -5.424e-04[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 4750--4750
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.02328pt too wide) in paragraph at lines 4750--4750
+[]\TU/lmtt/m/n/10.53937 ## Residual standard error: 0.0005383 on 5 degrees of f
+reedom[] 
+ []
+
+[146]
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 4790--4790
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+[147]
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4790--4790
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.664e+05 on 1 and 48 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4821--4821
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)     -8.2659145  0.0181243  -456.1   <2e-
+16 ***[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4821--4821
+[]\TU/lmtt/m/n/10.53937 ## dataCc15$Ccfull  0.1435470  0.0003515   408.4   <2e-
+16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 4821--4821
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4821--4821
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.668e+05 on 1 and 48 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+[148]
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4852--4852
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)     -8.1312578  0.0180681  -450.0   <2e-
+16 ***[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4852--4852
+[]\TU/lmtt/m/n/10.53937 ## dataCc30$Ccfull  0.1432414  0.0003504   408.8   <2e-
+16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 4852--4852
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4852--4852
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.671e+05 on 1 and 48 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+[149]
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4883--4883
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)     -7.8775340  0.0179675  -438.4   <2e-
+16 ***[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4883--4883
+[]\TU/lmtt/m/n/10.53937 ## dataCc60$Ccfull  0.1426797  0.0003485   409.4   <2e-
+16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 4883--4883
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4883--4883
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.676e+05 on 1 and 48 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+[150]
+Overfull \hbox (6.55647pt too wide) in paragraph at lines 4914--4914
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)      -7.4246412  0.0178052  -417.0   <2e
+-16 ***[] 
+ []
+
+
+Overfull \hbox (6.55646pt too wide) in paragraph at lines 4914--4914
+[]\TU/lmtt/m/n/10.53937 ## dataCc120$Ccfull  0.1417238  0.0003453   410.4   <2e
+-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 4914--4914
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4914--4914
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.684e+05 on 1 and 48 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+
+Overfull \hbox (6.55647pt too wide) in paragraph at lines 4945--4945
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)      -7.4246412  0.0178052  -417.0   <2e
+-16 ***[] 
+ []
+
+
+Overfull \hbox (6.55646pt too wide) in paragraph at lines 4945--4945
+[]\TU/lmtt/m/n/10.53937 ## dataCc300$Ccfull  0.1417238  0.0003453   410.4   <2e
+-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 4945--4945
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+[151]
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 4945--4945
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.684e+05 on 1 and 48 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+File: bookdown_files/figure-latex/intdelaycc-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/intdelaycc-1.pdf>
+
+Overfull \hbox (61.88818pt too wide) in paragraph at lines 5004--5004
+[]\TU/lmtt/m/n/10.53937 ##   (Intercept) (Intercept).1 (Intercept).2 (Intercept
+).3 (Intercept).4[] 
+ []
+
+
+Overfull \hbox (61.88826pt too wide) in paragraph at lines 5004--5004
+[]\TU/lmtt/m/n/10.53937 ##      -0.20760      -0.11478      -0.02759       0.13
+119       0.39421[] 
+ []
+
+[152]
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 5004--5004
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+[153]
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 5041--5041
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5041--5041
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.582e+05 on 1 and 69 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+[154]
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5070--5070
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)     -5.0873326  0.0198665  -256.1   <2e-
+16 ***[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5070--5070
+[]\TU/lmtt/m/n/10.53937 ## dataCi15$Cifull  0.1225900  0.0003078   398.3   <2e-
+16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 5070--5070
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5070--5070
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.586e+05 on 1 and 69 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+[155]
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5099--5099
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)     -4.9553180  0.0198028  -250.2   <2e-
+16 ***[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5099--5099
+[]\TU/lmtt/m/n/10.53937 ## dataCi30$Cifull  0.1223321  0.0003068   398.7   <2e-
+16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 5099--5099
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 5128--5128
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+[156]
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5128--5128
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.596e+05 on 1 and 69 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+
+Overfull \hbox (6.55647pt too wide) in paragraph at lines 5157--5157
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)      -4.2616980  0.0195062  -218.5   <2e
+-16 ***[] 
+ []
+
+
+Overfull \hbox (6.55646pt too wide) in paragraph at lines 5157--5157
+[]\TU/lmtt/m/n/10.53937 ## dataCi120$Cifull  0.1210486  0.0003022   400.5   <2e
+-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 5157--5157
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5157--5157
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.604e+05 on 1 and 69 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+[157]
+Overfull \hbox (6.55647pt too wide) in paragraph at lines 5186--5186
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)      -3.2402030  0.0191773  -169.0   <2e
+-16 ***[] 
+ []
+
+
+Overfull \hbox (6.55646pt too wide) in paragraph at lines 5186--5186
+[]\TU/lmtt/m/n/10.53937 ## dataCi300$Cifull  0.1193852  0.0002971   401.8   <2e
+-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 5186--5186
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5186--5186
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.615e+05 on 1 and 69 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+[158]
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 5227--5227
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5227--5227
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.664e+05 on 1 and 48 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+[159]
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5256--5256
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)     -6.2659145  0.0181243  -345.7   <2e-
+16 ***[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5256--5256
+[]\TU/lmtt/m/n/10.53937 ## dataCc15$Ccfull  0.1435470  0.0003515   408.4   <2e-
+16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 5256--5256
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5256--5256
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.668e+05 on 1 and 48 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+[160]
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5285--5285
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)     -6.1312578  0.0180681  -339.3   <2e-
+16 ***[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5285--5285
+[]\TU/lmtt/m/n/10.53937 ## dataCc30$Ccfull  0.1432414  0.0003504   408.8   <2e-
+16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 5285--5285
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5285--5285
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.671e+05 on 1 and 48 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5314--5314
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)     -5.8775340  0.0179675  -327.1   <2e-
+16 ***[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5314--5314
+[]\TU/lmtt/m/n/10.53937 ## dataCc60$Ccfull  0.1426797  0.0003485   409.4   <2e-
+16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 5314--5314
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5314--5314
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.676e+05 on 1 and 48 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+[161]
+Overfull \hbox (6.55647pt too wide) in paragraph at lines 5343--5343
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)      -5.4246412  0.0178052  -304.7   <2e
+-16 ***[] 
+ []
+
+
+Overfull \hbox (6.55646pt too wide) in paragraph at lines 5343--5343
+[]\TU/lmtt/m/n/10.53937 ## dataCc120$Ccfull  0.1417238  0.0003453   410.4   <2e
+-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 5343--5343
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5343--5343
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.684e+05 on 1 and 48 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+[162]
+Overfull \hbox (6.55647pt too wide) in paragraph at lines 5372--5372
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)      -4.3867121  0.0175110  -250.5   <2e
+-16 ***[] 
+ []
+
+
+Overfull \hbox (6.55646pt too wide) in paragraph at lines 5372--5372
+[]\TU/lmtt/m/n/10.53937 ## dataCc300$Ccfull  0.1397661  0.0003396   411.5   <2e
+-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 5372--5372
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5372--5372
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.694e+05 on 1 and 48 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+[163]
+Overfull \hbox (61.88818pt too wide) in paragraph at lines 5421--5421
+[]\TU/lmtt/m/n/10.53937 ##   (Intercept) (Intercept).1 (Intercept).2 (Intercept
+).3 (Intercept).4[] 
+ []
+
+
+Overfull \hbox (61.88818pt too wide) in paragraph at lines 5421--5421
+[]\TU/lmtt/m/n/10.53937 ##    -0.0751633    -0.0347043     0.0001247     0.0541
+933     0.1077758[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 5421--5421
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+File: bookdown_files/figure-latex/slpdelaycc-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/slpdelaycc-1.pdf>
+[164] [165]
+Underfull \vbox (badness 10000) detected at line 5544
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 5544
+ []
+
+[166]
+Underfull \vbox (badness 10000) detected at line 5544
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 5544
+ []
+
+[167] [168]
+Overfull \hbox (45.28865pt too wide) in paragraph at lines 5581--5581
+[]\TU/lmtt/m/n/10.53937 ## Warning: Removed 1205 rows containing missing values
+ (geom_point).[] 
+ []
+
+File: bookdown_files/figure-latex/anetdeccc-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/anetdeccc-1.pdf>
+[169]
+Underfull \vbox (badness 10000) detected at line 5613
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 5613
+ []
+
+[170]
+Overfull \hbox (45.28865pt too wide) in paragraph at lines 5617--5617
+[]\TU/lmtt/m/n/10.53937 ## Warning: Removed 1230 rows containing missing values
+ (geom_point).[] 
+ []
+
+File: bookdown_files/figure-latex/anetdecci-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/anetdecci-1.pdf>
+[171]
+Overfull \hbox (45.28865pt too wide) in paragraph at lines 5653--5653
+[]\TU/lmtt/m/n/10.53937 ## Warning: Removed 1300 rows containing missing values
+ (geom_point).[] 
+ []
+
+File: bookdown_files/figure-latex/aappdeccc-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/aappdeccc-1.pdf>
+[172]
+Overfull \hbox (45.28865pt too wide) in paragraph at lines 5689--5689
+[]\TU/lmtt/m/n/10.53937 ## Warning: Removed 1321 rows containing missing values
+ (geom_point).[] 
+ []
+
+File: bookdown_files/figure-latex/aappdecci-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/aappdecci-1.pdf>
+
+LaTeX Warning: Reference `gammastar' on page 173 undefined on input line 5700.
+
+[173] [174]
+Overfull \hbox (12.08965pt too wide) in paragraph at lines 5735--5735
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)       -7.2248105  0.0199353  -362.4   <2
+e-16 ***[] 
+ []
+
+
+Overfull \hbox (12.08963pt too wide) in paragraph at lines 5735--5735
+[]\TU/lmtt/m/n/10.53937 ## dataCinone$Cifull  0.1228632  0.0003089   397.8   <2
+e-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 5735--5735
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5735--5735
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.582e+05 on 1 and 69 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+
+Overfull \hbox (6.55649pt too wide) in paragraph at lines 5764--5764
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)      -6.444e+00  5.343e-03   -1206   <2e
+-16 ***[] 
+ []
+
+
+Overfull \hbox (6.55646pt too wide) in paragraph at lines 5764--5764
+[]\TU/lmtt/m/n/10.53937 ## dataCilow$Cifull  1.049e-01  8.341e-05    1258   <2e
+-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 5764--5764
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+[175]
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5764--5764
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.582e+06 on 1 and 69 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+
+Overfull \hbox (1.0234pt too wide) in paragraph at lines 5793--5793
+[]\TU/lmtt/m/n/10.53937 ##                       Estimate Std. Error t value Pr
+(>|t|)[] 
+ []
+
+
+Overfull \hbox (23.15599pt too wide) in paragraph at lines 5793--5793
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)         -4.8015337  0.0277371  -173.1   
+<2e-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15598pt too wide) in paragraph at lines 5793--5793
+[]\TU/lmtt/m/n/10.53937 ## dataCimedium$Cifull  0.0671064  0.0004311   155.7   
+<2e-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 5793--5793
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5793--5793
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 2.423e+04 on 1 and 71 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+[176]
+Overfull \hbox (12.08965pt too wide) in paragraph at lines 5822--5822
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)       -3.9450658  0.0467537  -84.38   <2
+e-16 ***[] 
+ []
+
+
+Overfull \hbox (12.08963pt too wide) in paragraph at lines 5822--5822
+[]\TU/lmtt/m/n/10.53937 ## dataCihigh$Cifull  0.0473551  0.0007255   65.27   <2
+e-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 5822--5822
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+[177]
+Overfull \hbox (12.08965pt too wide) in paragraph at lines 5860--5860
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)       -8.4062011  0.0181852  -462.3   <2
+e-16 ***[] 
+ []
+
+
+Overfull \hbox (12.08963pt too wide) in paragraph at lines 5860--5860
+[]\TU/lmtt/m/n/10.53937 ## dataCcnone$Ccfull  0.1438710  0.0003527   407.9   <2
+e-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 5860--5860
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5860--5860
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.664e+05 on 1 and 48 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+[178]
+Overfull \hbox (6.55649pt too wide) in paragraph at lines 5889--5889
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)      -7.243e+00  4.716e-03   -1536   <2e
+-16 ***[] 
+ []
+
+
+Overfull \hbox (6.55646pt too wide) in paragraph at lines 5889--5889
+[]\TU/lmtt/m/n/10.53937 ## dataCclow$Ccfull  1.182e-01  9.146e-05    1292   <2e
+-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 5889--5889
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.02328pt too wide) in paragraph at lines 5889--5889
+[]\TU/lmtt/m/n/10.53937 ## Residual standard error: 0.009333 on 48 degrees of f
+reedom[] 
+ []
+
+
+Overfull \hbox (17.62283pt too wide) in paragraph at lines 5918--5918
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)         -4.917283   0.022223  -221.3   <
+2e-16 ***[] 
+ []
+
+
+Overfull \hbox (17.62283pt too wide) in paragraph at lines 5918--5918
+[]\TU/lmtt/m/n/10.53937 ## dataCcmedium$Ccfull  0.066832   0.000431   155.1   <
+2e-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 5918--5918
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5918--5918
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 2.404e+04 on 1 and 48 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+[179]
+Overfull \hbox (12.08965pt too wide) in paragraph at lines 5947--5947
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)       -3.7543099  0.0356922 -105.19   <2
+e-16 ***[] 
+ []
+
+
+Overfull \hbox (12.08963pt too wide) in paragraph at lines 5947--5947
+[]\TU/lmtt/m/n/10.53937 ## dataCchigh$Ccfull  0.0411528  0.0006922   59.45   <2
+e-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 5947--5947
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+[180]
+Overfull \hbox (12.08965pt too wide) in paragraph at lines 5986--5986
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)       -5.2248105  0.0199353  -262.1   <2
+e-16 ***[] 
+ []
+
+
+Overfull \hbox (12.08963pt too wide) in paragraph at lines 5986--5986
+[]\TU/lmtt/m/n/10.53937 ## dataCinone$Cifull  0.1228632  0.0003089   397.8   <2
+e-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 5986--5986
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 5986--5986
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.582e+05 on 1 and 69 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+[181]
+Overfull \hbox (6.55647pt too wide) in paragraph at lines 6015--6015
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)      -4.444e+00  5.343e-03  -831.7   <2e
+-16 ***[] 
+ []
+
+
+Overfull \hbox (6.55644pt too wide) in paragraph at lines 6015--6015
+[]\TU/lmtt/m/n/10.53937 ## dataCilow$Cifull  1.049e-01  8.341e-05  1257.8   <2e
+-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 6015--6015
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 6015--6015
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.582e+06 on 1 and 69 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+
+Overfull \hbox (1.0234pt too wide) in paragraph at lines 6044--6044
+[]\TU/lmtt/m/n/10.53937 ##                       Estimate Std. Error t value Pr
+(>|t|)[] 
+ []
+
+
+Overfull \hbox (23.15599pt too wide) in paragraph at lines 6044--6044
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)         -2.8015337  0.0277371  -101.0   
+<2e-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15598pt too wide) in paragraph at lines 6044--6044
+[]\TU/lmtt/m/n/10.53937 ## dataCimedium$Cifull  0.0671064  0.0004311   155.7   
+<2e-16 ***[] 
+ []
+
+[182]
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 6044--6044
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 6044--6044
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 2.423e+04 on 1 and 71 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+
+Overfull \hbox (12.08965pt too wide) in paragraph at lines 6073--6073
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)       -1.9450658  0.0467537  -41.60   <2
+e-16 ***[] 
+ []
+
+
+Overfull \hbox (12.08963pt too wide) in paragraph at lines 6073--6073
+[]\TU/lmtt/m/n/10.53937 ## dataCihigh$Cifull  0.0473551  0.0007255   65.27   <2
+e-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 6073--6073
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+[183]
+Overfull \hbox (12.08965pt too wide) in paragraph at lines 6112--6112
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)       -6.4062011  0.0181852  -352.3   <2
+e-16 ***[] 
+ []
+
+
+Overfull \hbox (12.08963pt too wide) in paragraph at lines 6112--6112
+[]\TU/lmtt/m/n/10.53937 ## dataCcnone$Ccfull  0.1438710  0.0003527   407.9   <2
+e-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 6112--6112
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 6112--6112
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.664e+05 on 1 and 48 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+[184]
+Overfull \hbox (6.55649pt too wide) in paragraph at lines 6141--6141
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)      -5.243e+00  4.716e-03   -1112   <2e
+-16 ***[] 
+ []
+
+
+Overfull \hbox (6.55646pt too wide) in paragraph at lines 6141--6141
+[]\TU/lmtt/m/n/10.53937 ## dataCclow$Ccfull  1.182e-01  9.146e-05    1292   <2e
+-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 6141--6141
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.02328pt too wide) in paragraph at lines 6141--6141
+[]\TU/lmtt/m/n/10.53937 ## Residual standard error: 0.009333 on 48 degrees of f
+reedom[] 
+ []
+
+[185]
+Overfull \hbox (17.62283pt too wide) in paragraph at lines 6170--6170
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)         -2.917283   0.022223  -131.3   <
+2e-16 ***[] 
+ []
+
+
+Overfull \hbox (17.62283pt too wide) in paragraph at lines 6170--6170
+[]\TU/lmtt/m/n/10.53937 ## dataCcmedium$Ccfull  0.066832   0.000431   155.1   <
+2e-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 6170--6170
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 6170--6170
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 2.404e+04 on 1 and 48 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+
+Overfull \hbox (12.08965pt too wide) in paragraph at lines 6199--6199
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)       -1.7543099  0.0356922  -49.15   <2
+e-16 ***[] 
+ []
+
+
+Overfull \hbox (12.08963pt too wide) in paragraph at lines 6199--6199
+[]\TU/lmtt/m/n/10.53937 ## dataCchigh$Ccfull  0.0411528  0.0006922   59.45   <2
+e-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 6199--6199
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+[186] [187] [188] [189]
+Underfull \vbox (badness 10000) detected at line 6627
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 6627
+ []
+
+[190]
+Underfull \vbox (badness 10000) detected at line 6627
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 6627
+ []
+
+[191]
+Underfull \vbox (badness 10000) detected at line 6627
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 6627
+ []
+
+[192]
+Underfull \vbox (badness 10000) detected at line 6627
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 6627
+ []
+
+[193]
+Underfull \vbox (badness 10000) detected at line 6627
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 6627
+ []
+
+[194]
+Underfull \vbox (badness 10000) detected at line 6627
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 6627
+ []
+
+[195]
+Underfull \vbox (badness 10000) detected at line 6627
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 6627
+ []
+
+[196]
+Underfull \vbox (badness 10000) detected at line 6627
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 6627
+ []
+
+[197]
+Underfull \vbox (badness 10000) detected at line 6627
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 6627
+ []
+
+[198]
+Underfull \vbox (badness 10000) detected at line 6627
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 6627
+ []
+
+[199]
+Overfull \hbox (85.3265pt too wide) in paragraph at lines 6635--6652
+[][] 
+ []
+
+[200]
+Underfull \vbox (badness 10000) detected at line 6826
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 6826
+ []
+
+[201]
+Underfull \vbox (badness 10000) detected at line 6826
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 6826
+ []
+
+[202]
+Underfull \vbox (badness 10000) detected at line 6826
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 6826
+ []
+
+[203]
+Underfull \vbox (badness 10000) detected at line 6826
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 6826
+ []
+
+[204]
+Underfull \vbox (badness 10000) detected at line 6826
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 6826
+ []
+
+[205]
+Overfull \hbox (481.69177pt too wide) in paragraph at lines 6836--6853
+[][] 
+ []
+
+[206]
+Overfull \hbox (45.28865pt too wide) in paragraph at lines 6882--6882
+[]\TU/lmtt/m/n/10.53937 ## Warning: Removed 1863 rows containing missing values
+ (geom_point).[] 
+ []
+
+File: bookdown_files/figure-latex/difuci-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/difuci-1.pdf>
+[207]
+Overfull \hbox (39.75548pt too wide) in paragraph at lines 6920--6920
+[]\TU/lmtt/m/n/10.53937 ## Warning: Removed 340 rows containing missing values 
+(geom_point).[] 
+ []
+
+
+Overfull \hbox (39.75548pt too wide) in paragraph at lines 6920--6920
+[]\TU/lmtt/m/n/10.53937 ## Warning: Removed 340 rows containing missing values 
+(geom_point).[] 
+ []
+
+
+Overfull \hbox (39.75548pt too wide) in paragraph at lines 6920--6920
+[]\TU/lmtt/m/n/10.53937 ## Warning: Removed 340 rows containing missing values 
+(geom_point).[] 
+ []
+
+File: bookdown_files/figure-latex/difuci11-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/difuci11-1.pdf>
+[208]
+File: bookdown_files/figure-latex/tolresis-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/tolresis-1.pdf>
+
+Overfull \hbox (61.88818pt too wide) in paragraph at lines 6978--6978
+[]\TU/lmtt/m/n/10.53937 ## lm(formula = Rates ~ I(1/TotalRes) + I((1/TotalRes)^
+2), data = data2)[] 
+ []
+
+[209]
+Overfull \hbox (1.02336pt too wide) in paragraph at lines 6978--6978
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)         13.042      1.684   7.745 3.18e-
+06 ***[] 
+ []
+
+
+Overfull \hbox (1.02333pt too wide) in paragraph at lines 6978--6978
+[]\TU/lmtt/m/n/10.53937 ## I(1/TotalRes)      421.928     22.487  18.763 8.49e-
+11 ***[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 6978--6978
+[]\TU/lmtt/m/n/10.53937 ## I((1/TotalRes)^2) -737.690     65.500 -11.262 4.46e-
+08 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 6978--6978
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+[210]
+File: bookdown_files/figure-latex/tolre-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/tolre-1.pdf>
+[211]
+Overfull \hbox (17.62292pt too wide) in paragraph at lines 7035--7035
+[]\TU/lmtt/m/n/10.53937 ##                          Estimate Std. Error t value
+ Pr(>|t|)[] 
+ []
+
+
+Overfull \hbox (39.75551pt too wide) in paragraph at lines 7035--7035
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)            -3.836e+00  4.318e-03  -888.5
+   <2e-16 ***[] 
+ []
+
+
+Overfull \hbox (39.75548pt too wide) in paragraph at lines 7035--7035
+[]\TU/lmtt/m/n/10.53937 ## dataCi0125$Cidiffusion  6.665e-02  7.873e-05   846.6
+   <2e-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 7035--7035
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 7035--7035
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 7.167e+05 on 1 and 52 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+[212]
+Overfull \hbox (12.08975pt too wide) in paragraph at lines 7064--7064
+[]\TU/lmtt/m/n/10.53937 ##                         Estimate Std. Error t value 
+Pr(>|t|)[] 
+ []
+
+
+Overfull \hbox (34.22234pt too wide) in paragraph at lines 7064--7064
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)           -5.2507346  0.0092187  -569.6 
+  <2e-16 ***[] 
+ []
+
+
+Overfull \hbox (34.2223pt too wide) in paragraph at lines 7064--7064
+[]\TU/lmtt/m/n/10.53937 ## dataCi025$Cidiffusion  0.0904227  0.0001544   585.5 
+  <2e-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 7064--7064
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 7064--7064
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 3.428e+05 on 1 and 59 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+
+Overfull \hbox (6.55658pt too wide) in paragraph at lines 7093--7093
+[]\TU/lmtt/m/n/10.53937 ##                        Estimate Std. Error t value P
+r(>|t|)[] 
+ []
+
+
+Overfull \hbox (28.68918pt too wide) in paragraph at lines 7093--7093
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)          -6.4051036  0.0150363    -426  
+ <2e-16 ***[] 
+ []
+
+[213]
+Overfull \hbox (28.68913pt too wide) in paragraph at lines 7093--7093
+[]\TU/lmtt/m/n/10.53937 ## dataCi05$Cidiffusion  0.1097686  0.0002391     459  
+ <2e-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 7093--7093
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 7093--7093
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 2.107e+05 on 1 and 65 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+
+Overfull \hbox (1.0234pt too wide) in paragraph at lines 7122--7122
+[]\TU/lmtt/m/n/10.53937 ##                       Estimate Std. Error t value Pr
+(>|t|)[] 
+ []
+
+
+Overfull \hbox (23.15599pt too wide) in paragraph at lines 7122--7122
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)         -7.1817472  0.0199135  -360.6   
+<2e-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15598pt too wide) in paragraph at lines 7122--7122
+[]\TU/lmtt/m/n/10.53937 ## dataCi1$Cidiffusion  0.1227771  0.0003085   398.0   
+<2e-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 7122--7122
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 7122--7122
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.584e+05 on 1 and 69 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+[214]
+Overfull \hbox (1.0234pt too wide) in paragraph at lines 7151--7151
+[]\TU/lmtt/m/n/10.53937 ##                       Estimate Std. Error t value Pr
+(>|t|)[] 
+ []
+
+
+Overfull \hbox (23.15599pt too wide) in paragraph at lines 7151--7151
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)         -7.6427727  0.0230595  -331.4   
+<2e-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15598pt too wide) in paragraph at lines 7151--7151
+[]\TU/lmtt/m/n/10.53937 ## dataCi2$Cidiffusion  0.1305083  0.0003538   368.9   
+<2e-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 7151--7151
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 7151--7151
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.361e+05 on 1 and 71 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+[215]
+Overfull \hbox (1.0234pt too wide) in paragraph at lines 7180--7180
+[]\TU/lmtt/m/n/10.53937 ##                       Estimate Std. Error t value Pr
+(>|t|)[] 
+ []
+
+
+Overfull \hbox (23.15599pt too wide) in paragraph at lines 7180--7180
+[]\TU/lmtt/m/n/10.53937 ## (Intercept)         -7.8955772  0.0248634  -317.6   
+<2e-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15598pt too wide) in paragraph at lines 7180--7180
+[]\TU/lmtt/m/n/10.53937 ## dataCi4$Cidiffusion  0.1347503  0.0003799   354.7   
+<2e-16 ***[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 7180--7180
+[]\TU/lmtt/m/n/10.53937 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.'
+ 0.1 ' ' 1[] 
+ []
+
+
+Overfull \hbox (1.0233pt too wide) in paragraph at lines 7180--7180
+[]\TU/lmtt/m/n/10.53937 ## F-statistic: 1.258e+05 on 1 and 72 DF,  p-value: < 2
+.2e-16[] 
+ []
+
+[216]
+Underfull \vbox (badness 10000) detected at line 7261
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 7261
+ []
+
+[217]
+Overfull \hbox (67.42131pt too wide) in paragraph at lines 7265--7265
+[]\TU/lmtt/m/n/10.53937 ## Warning: Removed 1029 rows containing non-finite val
+ues (stat_smooth).[] 
+ []
+
+File: bookdown_files/figure-latex/prdataplot-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/prdataplot-1.pdf>
+[218]
+Underfull \vbox (badness 10000) detected at line 7389
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 7389
+ []
+
+[219]
+Underfull \vbox (badness 10000) detected at line 7389
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 7389
+ []
+
+[220]
+Underfull \vbox (badness 10000) detected at line 7389
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 7389
+ []
+
+[221]
+Overfull \hbox (67.42131pt too wide) in paragraph at lines 7393--7393
+[]\TU/lmtt/m/n/10.53937 ## Warning: Removed 1159 rows containing non-finite val
+ues (stat_smooth).[] 
+ []
+
+File: bookdown_files/figure-latex/resistplot-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/resistplot-1.pdf>
+[222]
+Underfull \vbox (badness 10000) detected at line 7473
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 7473
+ []
+
+[223]
+Underfull \vbox (badness 10000) detected at line 7473
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 7473
+ []
+
+[224]
+Overfull \hbox (67.42131pt too wide) in paragraph at lines 7477--7477
+[]\TU/lmtt/m/n/10.53937 ## Warning: Removed 1101 rows containing non-finite val
+ues (stat_smooth).[] 
+ []
+
+File: bookdown_files/figure-latex/high3tplot-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/high3tplot-1.pdf>
+[225]
+Underfull \vbox (badness 10000) detected at line 7546
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 7546
+ []
+
+[226]
+Underfull \vbox (badness 10000) detected at line 7546
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 7546
+ []
+
+[227]
+File: bookdown_files/figure-latex/toresratetplot-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/toresratetplot-1.pdf>
+[228]
+Underfull \vbox (badness 10000) detected at line 7621
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 7621
+ []
+
+[229]
+Overfull \hbox (67.42131pt too wide) in paragraph at lines 7625--7625
+[]\TU/lmtt/m/n/10.53937 ## Warning: Removed 1230 rows containing non-finite val
+ues (stat_smooth).[] 
+ []
+
+File: bookdown_files/figure-latex/deasratetplot-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/deasratetplot-1.pdf>
+[230] [231]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[232
+
+] [233]
+Overfull \hbox (41.04439pt too wide) in paragraph at lines 7699--7712
+ [][] 
+ []
+
+
+Overfull \hbox (41.04439pt too wide) in paragraph at lines 7720--7733
+ [][] 
+ []
+
+
+Overfull \hbox (30.0pt too wide) in paragraph at lines 7737--7737
+|  
+ []
+
+[234]
+Overfull \hbox (10.26576pt too wide) in alignment at lines 7761--7774
+ [] [] [] [] [] [] 
+ []
+
+[235]
+Overfull \hbox (26.3383pt too wide) in alignment at lines 7778--7791
+ [] [] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 7817
+ [][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 7817
+[][][]
+ []
+
+[236]
+File: bookdown_files/figure-latex/default-moulation-plot-ac-1.pdf Graphic file 
+(type pdf)
+<use bookdown_files/figure-latex/default-moulation-plot-ac-1.pdf>
+
+Underfull \hbox (badness 10000) detected at line 7837
+ [][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 7837
+[][][]
+ []
+
+File: bookdown_files/figure-latex/default-moulation-plot-dc-1.pdf Graphic file 
+(type pdf)
+<use bookdown_files/figure-latex/default-moulation-plot-dc-1.pdf>
+[237]
+Underfull \hbox (badness 10000) detected at line 7863
+ [][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 7863
+[][][]
+ []
+
+[238]
+File: bookdown_files/figure-latex/cus-ac-plot-leg-cls-1.pdf Graphic file (type 
+pdf)
+<use bookdown_files/figure-latex/cus-ac-plot-leg-cls-1.pdf>
+
+Underfull \hbox (badness 10000) detected at line 7900
+ [][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 7900
+[][][]
+ []
+
+[239]
+File: bookdown_files/figure-latex/cus-dc-plot-leg-cls-1.pdf Graphic file (type 
+pdf)
+<use bookdown_files/figure-latex/cus-dc-plot-leg-cls-1.pdf>
+[240]
+Underfull \vbox (badness 10000) detected at line 7926
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 7926
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 7926
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 7926
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 7926
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 7926
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 7926
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 7926
+[]
+ []
+
+Chapter 11.
+
+Underfull \hbox (badness 10000) detected at line 7939
+ [][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 7939
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 7941
+ [][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 7941
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 7943
+ [][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 7943
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 7945
+ [][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 7945
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 7947
+ [][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 7947
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 7960
+ [][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 7960
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[241
+
+
+
+]
+Underfull \hbox (badness 10000) detected at line 7962
+ [][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 7962
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 7973
+ [][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 7973
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 7975
+ [][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 7975
+[][][]
+ []
+
+File: ./images/weighted-parameter.png Graphic file (type bmp)
+<./images/weighted-parameter.png>
+
+Overfull \hbox (513.32997pt too wide) in paragraph at lines 7980--7981
+ [][] 
+ []
+
+File: ./images/big-leaf-model.png Graphic file (type bmp)
+<./images/big-leaf-model.png>
+
+Overfull \hbox (148.27905pt too wide) in paragraph at lines 7991--7992
+ [][] 
+ []
+
+[242] [243]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[244
+
+]
+Underfull \vbox (badness 10000) detected at line 7999
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 7999
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 7999
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 7999
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 7999
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 7999
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 7999
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 7999
+[]
+ []
+
+Chapter 12.
+
+Underfull \hbox (badness 10000) in paragraph at lines 8005--8005
+[][][][][]$[][][][][] [] [] [] [][][][] [] [][][][][][][][][] [] [][][] [] [][]
+[][] [] [][] [] [][] [] [][][][][][][][][] [][] [][][][][][][][][] [][] [][][][
+][][][][] [][] [][][][][][][][][] [][]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[245
+
+]
+File: bookdown_files/figure-latex/2dim-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/2dim-1.pdf>
+File: images/pc1.png Graphic file (type bmp)
+<images/pc1.png>
+File: images/pc2.png Graphic file (type bmp)
+<images/pc2.png>
+[246]
+File: bookdown_files/figure-latex/maxvar-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/maxvar-1.pdf>
+File: images/pc3.png Graphic file (type bmp)
+<images/pc3.png>
+[247] [248]
+Overfull \hbox (155.95203pt too wide) in paragraph at lines 8070--8070
+[]\TU/lmtt/m/n/10.53937 ## Welcome! Want to learn more? See two factoextra-rela
+ted books at https://goo.gl/ve3WBa[] 
+ []
+
+File: bookdown_files/figure-latex/scree-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/scree-1.pdf>
+File: bookdown_files/figure-latex/loadingpca-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/loadingpca-1.pdf>
+[249] [250]
+Overfull \hbox (78.48766pt too wide) in paragraph at lines 8116--8116
+[]\TU/lmtt/m/n/10.53937 ## Warning: ggrepel: 85 unlabeled data points (too many
+ overlaps). Consider[] 
+ []
+
+File: bookdown_files/figure-latex/scorepca-1.pdf Graphic file (type pdf)
+<use bookdown_files/figure-latex/scorepca-1.pdf>
+[251] [252] [253] [254] [255]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (336.25pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[256
+
+]
+Underfull \vbox (badness 10000) detected at line 8256
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 8256
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 8256
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 8256
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 8256
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 8256
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 8256
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 8256
+[]
+ []
+
+Chapter 13.
+
+Overfull \hbox (56.35504pt too wide) in paragraph at lines 8319--8319
+[]\TU/lmtt/m/n/10.53937 ## [1] stats     graphics  grDevices utils     datasets
+  methods   base[] 
+ []
+
+
+Overfull \hbox (95.0872pt too wide) in paragraph at lines 8319--8319
+[]\TU/lmtt/m/n/10.53937 ##  [1] factoextra_1.0.7   FactoMineR_2.4     jiptest_0
+.1.3      gridExtra_2.3[] 
+ []
+
+
+Overfull \hbox (84.02092pt too wide) in paragraph at lines 8319--8319
+[]\TU/lmtt/m/n/10.53937 ##  [5] plyr_1.8.6         nls2_0.2           proto_1.0
+.0        purrr_0.3.4[] 
+ []
+
+
+Overfull \hbox (106.1535pt too wide) in paragraph at lines 8319--8319
+[]\TU/lmtt/m/n/10.53937 ##  [9] ggplot2_3.3.5      minpack.lm_1.2-1   plantecop
+hys_1.4-6 readphoto_0.0.1[] 
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[257
+
+]
+Overfull \hbox (1.02332pt too wide) in paragraph at lines 8319--8319
+[]\TU/lmtt/m/n/10.53937 ##  [1] nlme_3.1-152         RColorBrewer_1.1-2   tools
+_4.1.0[] 
+ []
+
+
+Overfull \hbox (1.02338pt too wide) in paragraph at lines 8319--8319
+[]\TU/lmtt/m/n/10.53937 ##  [7] DT_0.18              DBI_1.1.1            mgcv_
+1.8-36[] 
+ []
+
+
+Overfull \hbox (1.02333pt too wide) in paragraph at lines 8319--8319
+[]\TU/lmtt/m/n/10.53937 ## [10] colorspace_2.0-2     MESS_0.5.7           withr
+_2.4.2[] 
+ []
+
+
+Overfull \hbox (17.62282pt too wide) in paragraph at lines 8319--8319
+[]\TU/lmtt/m/n/10.53937 ## [16] compiler_4.1.0       flashClust_1.01-2    label
+ing_0.4.2[] 
+ []
+
+
+Overfull \hbox (6.5565pt too wide) in paragraph at lines 8319--8319
+[]\TU/lmtt/m/n/10.53937 ## [19] bookdown_0.22        mosaicCore_0.9.0     scale
+s_1.1.1[] 
+ []
+
+
+Overfull \hbox (12.08969pt too wide) in paragraph at lines 8319--8319
+[]\TU/lmtt/m/n/10.53937 ## [22] readr_1.4.0          ggridges_0.5.3       strin
+gr_1.4.0[] 
+ []
+
+
+Overfull \hbox (28.68918pt too wide) in paragraph at lines 8319--8319
+[]\TU/lmtt/m/n/10.53937 ## [25] digest_0.6.27        foreign_0.8-81       ggfor
+mula_0.10.1[] 
+ []
+
+
+Overfull \hbox (23.15602pt too wide) in paragraph at lines 8319--8319
+[]\TU/lmtt/m/n/10.53937 ## [28] rmarkdown_2.9.7      rio_0.5.27           pkgco
+nfig_2.0.3[] 
+ []
+
+
+Overfull \hbox (17.62283pt too wide) in paragraph at lines 8319--8319
+[]\TU/lmtt/m/n/10.53937 ## [31] htmltools_0.5.1.1    geeM_0.10.1          label
+led_2.8.0[] 
+ []
+
+
+Overfull \hbox (6.5565pt too wide) in paragraph at lines 8319--8319
+[]\TU/lmtt/m/n/10.53937 ## [34] highr_0.9            htmlwidgets_1.5.3    rlang
+_0.4.11[] 
+ []
+
+
+Overfull \hbox (6.55652pt too wide) in paragraph at lines 8319--8319
+[]\TU/lmtt/m/n/10.53937 ## [37] readxl_1.3.1         rstudioapi_0.13      farve
+r_2.1.0[] 
+ []
+
+
+Overfull \hbox (17.62283pt too wide) in paragraph at lines 8319--8319
+[]\TU/lmtt/m/n/10.53937 ## [43] dplyr_1.0.7          plantecophys2_0.1.0  magri
+ttr_2.0.1[] 
+ []
+
+
+Overfull \hbox (1.02335pt too wide) in paragraph at lines 8319--8319
+[]\TU/lmtt/m/n/10.53937 ## [49] munsell_0.5.0        fansi_0.5.0          abind
+_1.4-5[] 
+ []
+
+
+Overfull \hbox (50.82184pt too wide) in paragraph at lines 8319--8319
+[]\TU/lmtt/m/n/10.53937 ## [52] geepack_1.3-2        lifecycle_1.0.0      scatt
+erplot3d_0.3-41[] 
+ []
+
+
+Overfull \hbox (12.08969pt too wide) in paragraph at lines 8319--8319
+[]\TU/lmtt/m/n/10.53937 ## [55] stringi_1.6.2        yaml_2.2.1           carDa
+ta_3.0-4[] 
+ []
+
+
+Overfull \hbox (6.55653pt too wide) in paragraph at lines 8319--8319
+[]\TU/lmtt/m/n/10.53937 ## [61] ggrepel_0.9.1        forcats_0.5.1        crayo
+n_1.4.1[] 
+ []
+
+
+Overfull \hbox (12.08969pt too wide) in paragraph at lines 8319--8319
+[]\TU/lmtt/m/n/10.53937 ## [64] lattice_0.20-44      haven_2.4.1          splin
+es_4.1.0[] 
+ []
+
+
+Overfull \hbox (6.55653pt too wide) in paragraph at lines 8319--8319
+[]\TU/lmtt/m/n/10.53937 ## [67] hms_1.1.0            knitr_1.33           pilla
+r_1.6.1[] 
+ []
+
+
+Overfull \hbox (28.6892pt too wide) in paragraph at lines 8319--8319
+[]\TU/lmtt/m/n/10.53937 ## [76] vctrs_0.3.8          tweenr_1.0.2         cellr
+anger_1.1.0[] 
+ []
+
+
+Overfull \hbox (1.02335pt too wide) in paragraph at lines 8319--8319
+[]\TU/lmtt/m/n/10.53937 ## [79] gtable_0.3.0         polyclip_1.10-0      tidyr
+_1.1.3[] 
+ []
+
+
+Overfull \hbox (12.0897pt too wide) in paragraph at lines 8319--8319
+[]\TU/lmtt/m/n/10.53937 ## [85] ggforce_0.3.3        broom_0.7.8          rstat
+ix_0.7.0[] 
+ []
+
+
+Overfull \hbox (17.62286pt too wide) in paragraph at lines 8319--8319
+[]\TU/lmtt/m/n/10.53937 ## [88] tibble_3.1.2         cluster_2.1.2        ellip
+sis_0.3.2[] 
+ []
+
+[258] (./bookdown.bbl
+Underfull \vbox (badness 10000) detected at line 1
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 1
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 1
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 1
+[]
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1
+ []
+
+
+Overfull \hbox (336.25pt too wide) detected at line 1
+[]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 1
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ [][][][] 
+ []
+
+[259
+
+
+
+] [260] [261]
+Underfull \hbox (badness 2512) in paragraph at lines 177--181
+[]\TU/lmr/m/n/10.53937 Leuning, R. (1995).  A critical appraisal of a combined 
+stom-
+ []
+
+Invalid UTF-8 byte or sequence at line 183 replaced by U+FFFD.
+Missing character: There is no � (U+FFFD) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Invalid UTF-8 byte or sequence at line 184 replaced by U+FFFD.
+Missing character: There is no � (U+FFFD) in font [lmroman10-regular]:mapping=t
+ex-text;!
+[262] [263]) [264] (./bookdown.ind) (./bookdown.aux)
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+
+LaTeX Warning: There were undefined references.
+
+Package rerunfilecheck Info: File `bookdown.out' has not changed.
+(rerunfilecheck)             Checksum: 1C2658936BE60480760B1D2EB7FFB18A;13695.
+ ) 
+Here is how much of TeX's memory you used:
+ 23466 strings out of 478475
+ 477313 string characters out of 5857362
+ 997150 words of memory out of 5000000
+ 43292 multiletter control sequences out of 15000+600000
+ 421677 words of font info for 192 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 87i,17n,137p,886b,932s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on bookdown.pdf (286 pages).
