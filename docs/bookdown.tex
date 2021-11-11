@@ -181,7 +181,7 @@
 
 \title{使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据}
 \author{祝介东 北京力高泰科技有限公司}
-\date{2021-08-28}
+\date{2021-11-11}
 
 \begin{document}
 \maketitle
@@ -260,19 +260,13 @@ gitee 也有同步版本
   地址：北京市西城区西直门南大街2号成铭大厦A座22F
 \end{itemize}
 
-\hypertarget{author}{%
-\chapter*{关于作者}\label{author}}
-
-
-祝介东，\href{http://www.ecotek.com.cn/}{北京力高泰科技有限公司} 工程师，本文内容为我在售后服务时所住的酒店所作（遍布国内大多数省份），本为我打发出差住酒店漫漫长夜的业余爱好，\textbf{此部分内容并非公司对我的职位所要求的内容，也并非我公司提供的服务内容，因此属于个人作品，仅供参考，我所在公司对此文内容不负任何责任}。文中代码得到了公司技术部同事： 刘美玲、徐粒、焦阳、王昭、张启尧、张云飞等的测试，其中焦阳贡献了 \texttt{jiptest} 包中基础荧光参数计算的代码，在此一并感谢。
-
-文中内容如对您有帮助，我很欣慰。但本人水平有限，错误与疏漏之处还请谅解，欢迎讨论，欢迎提出宝贵意见及建议。本人或单位其他售后人员仅有提供相关仪器操作或故障解决的义务，处理数据和分析数据并非我们的本职工作，如有相关需还请多参考本文内容或网上相关资料，不足之处还请谅解。
-
 \hypertarget{copyright}{%
 \chapter*{版权}\label{copyright}}
 
 
 \textbf{本文旨在对广大 LI-6400XT 和 LI-6800 光合仪的用户提供一个数据分析的参考，本人或所在公司并未从中获取任何利益，内容错误疏漏之处，欢迎指正。本人保留一切权利，禁止一切将本文内容用于商业用途的行为，禁止商业公司使用。}
+
+\textbf{文中内容如对您有帮助，我很欣慰。但本人水平有限，错误与疏漏之处还请谅解，欢迎讨论，欢迎提出宝贵意见及建议。本人或单位其他售后人员仅有提供相关仪器操作或故障解决的义务，处理数据和分析数据并非我们的本职工作，如有相关需还请多参考本文内容或网上相关资料，不足之处还请谅解。}
 
 \cleardoublepage
 
@@ -307,6 +301,10 @@ R 软件和 Rstudio 的安装十分方便，我们按照各自系统的安装方
 
 \hypertarget{batch_question}{%
 \chapter{批量处理光合测定数据}\label{batch_question}}
+
+\begin{quote}
+该部分内容不建议继续使用，尤其是读取原始数据文件部分。目前代码报错，可能是某个依赖软件包升级导致，但我没时间处理。对于 excel 文件格式的处理，我目前找到了一个自认为比较好的批量转 csv 格式的方案，但是需要 \texttt{python} 的 \texttt{xlwings} 支持，该库比较成熟，不存在依赖地狱的问题，而且我也打包了一个图形界面，批量处理为 csv 后用常规方法导入就行，如果我有时间，会将该部分内容彻底修改。\texttt{python} 方案见链接：\href{https://github.com/zhujiedong/LI6800_excel2csv}{github} 或微信 \href{https://mp.weixin.qq.com/s?__biz=MzU4ODI3NjkzMg==\&mid=2247485489\&idx=2\&sn=9aed981d7624c8e289cb9173c269373a\&chksm=fdde7d9acaa9f48c3dc0d09324d0461b18b4edd4ff56207de54b5152cbfe4a97fdc482b31b82\&token=101697346\&lang=zh_CN\#rd}{微信版}
+\end{quote}
 
 对于多数人来讲，一个季节用光合仪测量的数据文件至少是两位数的，处理起来非常不方便，针对这个问题，简单写了一个批量读取 LI-6400 和 LI-6800 原始数据的包(因为现有的容易实现的读取 excel 格式的包还不支持 6800 和 6400 这种形式的公式计算)\footnote{特别注意，原始数据可以用文本编辑器打开，但为了方便使用这个软件包，准确输入与行号相关的参数，建议您使用带行号显示的软件，例如 windows 下的 notepad++}，使用非常简单，同时也适合处理未关闭数据文件而导致的无法生成 excel 格式的数据时的问题。
 
@@ -433,6 +431,8 @@ lrc & 3 & 1513612941 & 220.0 & 20171218 10:02:20 & 1 & 1 & 1513612941\\
 
 \sout{另外： 今天添加了使用 regex 读取 LI-6800 原始文件的方法，这个只需要路径即可（2020-3-18），简单测试，有名字重复的警告，是 TIME，不影响大局，我没时间改，过几天有时间了再改：}
 
+\textbf{当前版本有问题，可能时依赖的 \texttt{stringi} 升级导致，现在没有时间处理。}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(readphoto)}
@@ -440,66 +440,12 @@ lrc & 3 & 1513612941 & 220.0 & 20171218 10:02:20 & 1 & 1 & 1513612941\\
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## Warning: Missing column names filled in: 'X125' [125]
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Duplicated column names deduplicated: 'TIME' => 'TIME_1' [69]
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Missing column names filled in: 'X125' [125]
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Duplicated column names deduplicated: 'TIME' => 'TIME_1' [69]
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Missing column names filled in: 'X125' [125]
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Duplicated column names deduplicated: 'TIME' => 'TIME_1' [69]
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Missing column names filled in: 'X125' [125]
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Duplicated column names deduplicated: 'TIME' => 'TIME_1' [69]
-\end{verbatim}
-
-\begin{table}
-
-\caption{\label{tab:unnamed-chunk-10}LI-6800 regex 方式批量整合数据}
-\centering
-\begin{tabular}[t]{rrrlrrrr}
-\toprule
-obs & time & elapsed & date & plot & plant & TIME & E\\
-\midrule
-1 & 1513614617 & 0.0 & 2017-12-18 10:30:16 & 1 & 1 & 1513614617 & 0.0045726\\
-2 & 1513614731 & 114.0 & 2017-12-18 10:32:10 & 1 & 1 & 1513614731 & 0.0047162\\
-3 & 1513614886 & 269.0 & 2017-12-18 10:34:45 & 1 & 1 & 1513614886 & 0.0049729\\
-4 & 1513615008 & 391.0 & 2017-12-18 10:36:47 & 1 & 1 & 1513615008 & 0.0052632\\
-5 & 1513615127 & 510.0 & 2017-12-18 10:38:46 & 1 & 1 & 1513615127 & 0.0053619\\
-\addlinespace
-6 & 1513615287 & 670.5 & 2017-12-18 10:41:27 & 1 & 1 & 1513615287 & 0.0053909\\
-7 & 1513615410 & 793.0 & 2017-12-18 10:43:29 & 1 & 1 & 1513615410 & 0.0052242\\
-8 & 1513615566 & 949.0 & 2017-12-18 10:46:05 & 1 & 1 & 1513615566 & 0.0052158\\
-9 & 1513615701 & 1084.0 & 2017-12-18 10:48:20 & 1 & 1 & 1513615701 & 0.0053947\\
-10 & 1513615831 & 1214.0 & 2017-12-18 10:50:30 & 1 & 1 & 1513615831 & 0.0054908\\
-\addlinespace
-11 & 1513615940 & 1323.0 & 2017-12-18 10:52:19 & 1 & 1 & 1513615940 & 0.0053860\\
-12 & 1513616064 & 1447.4 & 2017-12-18 10:54:24 & 1 & 1 & 1513616064 & 0.0052159\\
-1 & 1513612721 & 0.0 & 2017-12-18 09:58:40 & 1 & 1 & 1513612721 & 0.0067439\\
-2 & 1513612832 & 111.0 & 2017-12-18 10:00:31 & 1 & 1 & 1513612832 & 0.0065955\\
-3 & 1513612941 & 220.0 & 2017-12-18 10:02:20 & 1 & 1 & 1513612941 & 0.0064493\\
-\bottomrule
-\end{tabular}
-\end{table}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(df2[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{15}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{8}\NormalTok{], }\AttributeTok{booktabs =} \ConstantTok{TRUE}\NormalTok{,}
+\AttributeTok{caption =} \StringTok{\textquotesingle{}LI{-}6800 regex 方式批量整合数据\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{recompute_raw}{%
 \section{重计算功能}\label{recompute_raw}}
@@ -604,10 +550,10 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.271913 1.957425 1.267156 1.345532 1.953322 1.247812 1.675577 1.286947
-##  [9] 1.752611 1.376964 1.917707 1.350001 1.735321 1.731820 1.668727 1.286193
-## [17] 1.320945 1.257551 1.561785 1.407394 1.478888 1.719351 1.824288 1.314796
-## [25] 1.648506 1.354219 1.558566 1.277686 1.354582 1.745864 1.620695 1.789893
+##  [1] 1.229600 1.768842 1.401876 1.417621 1.385116 1.439096 1.354177 1.467500
+##  [9] 1.606849 1.701497 1.406623 1.415589 1.301780 1.281671 1.435706 1.996638
+## [17] 1.361774 1.289560 1.401353 1.553608 1.532133 1.662846 1.684584 1.464212
+## [25] 1.510672 1.214832 1.381348 1.472921 1.528652 1.561157 1.577983 1.219234
 \end{verbatim}
 
 我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.
@@ -618,7 +564,7 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \hypertarget{raw-batch-68}{%
 \subsubsection{原始数据的批量计算}\label{raw-batch-68}}
 
-此部分内容保留，但不建议继续使用
+\textbf{此部分内容保留，但不建议继续使用}
 \sout{参数的重计算函数为 \mbox{\texttt{recomp\_6800}}, 其参数除了 \mbox{\texttt{read\_bat\_6800}} 所包含的参数外，还有叶面积 S, 以及叶片正反面的气孔比例，默认值分别为 6 和 0.5。}
 
 \begin{Shaded}
@@ -626,186 +572,21 @@ obs & time & elapsed & date & plot & plant & TIME & E\\
 \FunctionTok{library}\NormalTok{(readphoto)}
 \NormalTok{x3 }\OtherTok{\textless{}{-}} \FunctionTok{read\_bat\_6800}\NormalTok{(}\StringTok{"./data/6800"}\NormalTok{)}
 \NormalTok{y3 }\OtherTok{\textless{}{-}} \FunctionTok{recomp\_6800}\NormalTok{(}\StringTok{"./data/6800"}\NormalTok{, }\AttributeTok{S =} \DecValTok{6}\NormalTok{, }\AttributeTok{K =} \FloatTok{0.5}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{verbatim}
-## Warning: Missing column names filled in: 'X125' [125]
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Duplicated column names deduplicated: 'TIME' => 'TIME_1' [69]
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Missing column names filled in: 'X125' [125]
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Duplicated column names deduplicated: 'TIME' => 'TIME_1' [69]
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Missing column names filled in: 'X125' [125]
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Duplicated column names deduplicated: 'TIME' => 'TIME_1' [69]
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Missing column names filled in: 'X125' [125]
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Duplicated column names deduplicated: 'TIME' => 'TIME_1' [69]
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{x3}\SpecialCharTok{$}\NormalTok{A }\SpecialCharTok{{-}}\NormalTok{ y3}\SpecialCharTok{$}\NormalTok{A}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##  [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{x3}\SpecialCharTok{$}\NormalTok{E }\SpecialCharTok{{-}}\NormalTok{ y3}\SpecialCharTok{$}\NormalTok{E}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##  [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{x3}\SpecialCharTok{$}\NormalTok{gsw }\SpecialCharTok{{-}}\NormalTok{ y3}\SpecialCharTok{$}\NormalTok{gsw}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##  [1] -0.01231889 -0.01271539 -0.01330812 -0.01416506 -0.01491902 -0.01586479
-##  [7] -0.01566857 -0.01545520 -0.01563183 -0.01537453 -0.01494554 -0.01433677
-## [13] -0.02284560 -0.02291318 -0.02268118 -0.02266862 -0.02250392 -0.02213352
-## [19] -0.02061493 -0.02006006 -0.01856400 -0.01678649 -0.01591079 -0.01457109
-## [25] -0.01322393 -0.02345109 -0.02312573 -0.02227497
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{x3}\SpecialCharTok{$}\NormalTok{Ci}\SpecialCharTok{{-}}\NormalTok{y3}\SpecialCharTok{$}\NormalTok{Ci}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{verbatim}
-##  [1]  4.43187567  3.13678828  1.78620310  0.49515242 -0.08437000  3.51420195
-##  [7]  3.66611259  5.56360761  6.76351008  7.70784028  8.45263315  9.25926640
-## [13]  2.58978666  2.52629775  2.49784796  2.38619050  2.23225682  1.92200639
-## [19]  1.29213044  0.92018214  0.76352452  0.55412066  0.20248257 -0.08219604
-## [25] -0.26216626  2.36039345  2.40636618  2.54353742
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \CommentTok{\# half of original the area}
 \NormalTok{y3 }\OtherTok{\textless{}{-}} \FunctionTok{recomp\_6800}\NormalTok{(}\StringTok{"./data/6800"}\NormalTok{, }\AttributeTok{S =} \DecValTok{3}\NormalTok{, }\AttributeTok{K =} \FloatTok{0.5}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Warning: Missing column names filled in: 'X125' [125]
-
-## Warning: Duplicated column names deduplicated: 'TIME' => 'TIME_1' [69]
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Missing column names filled in: 'X125' [125]
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Duplicated column names deduplicated: 'TIME' => 'TIME_1' [69]
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Missing column names filled in: 'X125' [125]
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Duplicated column names deduplicated: 'TIME' => 'TIME_1' [69]
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Missing column names filled in: 'X125' [125]
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Duplicated column names deduplicated: 'TIME' => 'TIME_1' [69]
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{y3}\SpecialCharTok{$}\NormalTok{A}\SpecialCharTok{/}\NormalTok{x3}\SpecialCharTok{$}\NormalTok{A}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##  [1] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \CommentTok{\# test with random area less than six}
 \NormalTok{area }\OtherTok{\textless{}{-}} \DecValTok{6} \SpecialCharTok{{-}} \FunctionTok{runif}\NormalTok{(}\DecValTok{28}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{)}
 \NormalTok{y3 }\OtherTok{\textless{}{-}} \FunctionTok{recomp\_6800}\NormalTok{(}\StringTok{"./data/6800"}\NormalTok{, }\AttributeTok{S =}\NormalTok{ area, }\AttributeTok{K =} \FloatTok{0.5}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Warning: Missing column names filled in: 'X125' [125]
-
-## Warning: Duplicated column names deduplicated: 'TIME' => 'TIME_1' [69]
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Missing column names filled in: 'X125' [125]
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Duplicated column names deduplicated: 'TIME' => 'TIME_1' [69]
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Missing column names filled in: 'X125' [125]
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Duplicated column names deduplicated: 'TIME' => 'TIME_1' [69]
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Missing column names filled in: 'X125' [125]
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Duplicated column names deduplicated: 'TIME' => 'TIME_1' [69]
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{y3}\SpecialCharTok{$}\NormalTok{A}\SpecialCharTok{/}\NormalTok{x3}\SpecialCharTok{$}\NormalTok{A}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-##  [1] 1.234725 1.386181 1.734084 1.401400 1.387123 1.897486 1.301125 1.568791
-##  [9] 1.418195 1.766689 1.328404 1.424649 1.260445 1.307652 1.348474 1.845582
-## [17] 1.509451 1.610886 1.303266 1.822998 1.374819 1.670735 1.696006 1.262896
-## [25] 1.774859 1.616441 1.217518 1.854937
-\end{verbatim}
 
 \sout{测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。}
 
@@ -8264,7 +8045,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 \end{Shaded}
 
 \begin{verbatim}
-## R version 4.1.0 (2021-05-18)
+## R version 4.1.1 (2021-08-10)
 ## Platform: x86_64-w64-mingw32/x64 (64-bit)
 ## Running under: Windows 10 x64 (build 19042)
 ## 
@@ -8286,36 +8067,34 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 ##  [9] ggplot2_3.3.5      minpack.lm_1.2-1   plantecophys_1.4-6 readphoto_0.0.1   
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] nlme_3.1-152         RColorBrewer_1.1-2   tools_4.1.0         
-##  [4] backports_1.2.1      utf8_1.2.1           R6_2.5.0            
-##  [7] DT_0.18              DBI_1.1.1            mgcv_1.8-36         
+##  [1] nlme_3.1-153         RColorBrewer_1.1-2   tools_4.1.1         
+##  [4] backports_1.3.0      utf8_1.2.2           R6_2.5.1            
+##  [7] DT_0.19              DBI_1.1.1            mgcv_1.8-38         
 ## [10] colorspace_2.0-2     MESS_0.5.7           withr_2.4.2         
-## [13] tidyselect_1.1.1     rematch_1.0.1        curl_4.3.2          
-## [16] compiler_4.1.0       flashClust_1.01-2    labeling_0.4.2      
-## [19] bookdown_0.22        mosaicCore_0.9.0     scales_1.1.1        
-## [22] readr_1.4.0          ggridges_0.5.3       stringr_1.4.0       
-## [25] digest_0.6.27        foreign_0.8-81       ggformula_0.10.1    
-## [28] rmarkdown_2.9.7      rio_0.5.27           pkgconfig_2.0.3     
-## [31] htmltools_0.5.1.1    geeM_0.10.1          labelled_2.8.0      
-## [34] highr_0.9            htmlwidgets_1.5.3    rlang_0.4.11        
-## [37] readxl_1.3.1         rstudioapi_0.13      farver_2.1.0        
-## [40] generics_0.1.0       zip_2.2.0            car_3.0-11          
-## [43] dplyr_1.0.7          plantecophys2_0.1.0  magrittr_2.0.1      
-## [46] leaps_3.1            Matrix_1.3-4         Rcpp_1.0.6          
-## [49] munsell_0.5.0        fansi_0.5.0          abind_1.4-5         
-## [52] geepack_1.3-2        lifecycle_1.0.0      scatterplot3d_0.3-41
-## [55] stringi_1.6.2        yaml_2.2.1           carData_3.0-4       
-## [58] MASS_7.3-54          ggstance_0.3.5       grid_4.1.0          
-## [61] ggrepel_0.9.1        forcats_0.5.1        crayon_1.4.1        
-## [64] lattice_0.20-44      haven_2.4.1          splines_4.1.0       
-## [67] hms_1.1.0            knitr_1.33           pillar_1.6.1        
-## [70] ggpubr_0.4.0         ggsignif_0.6.2       glue_1.4.2          
-## [73] evaluate_0.14        data.table_1.14.0    png_0.1-7           
-## [76] vctrs_0.3.8          tweenr_1.0.2         cellranger_1.1.0    
-## [79] gtable_0.3.0         polyclip_1.10-0      tidyr_1.1.3         
-## [82] assertthat_0.2.1     openxlsx_4.2.4       xfun_0.24           
-## [85] ggforce_0.3.3        broom_0.7.8          rstatix_0.7.0       
-## [88] tibble_3.1.2         cluster_2.1.2        ellipsis_0.3.2
+## [13] tidyselect_1.1.1     rematch_1.0.1        compiler_4.1.1      
+## [16] flashClust_1.01-2    labeling_0.4.2       bookdown_0.24       
+## [19] mosaicCore_0.9.0     scales_1.1.1         ggridges_0.5.3      
+## [22] stringr_1.4.0        digest_0.6.28        ggformula_0.10.1    
+## [25] rmarkdown_2.11       pkgconfig_2.0.3      htmltools_0.5.2     
+## [28] geeM_0.10.1          labelled_2.9.0       fastmap_1.1.0       
+## [31] highr_0.9            htmlwidgets_1.5.4    rlang_0.4.12        
+## [34] readxl_1.3.1         rstudioapi_0.13      farver_2.1.0        
+## [37] generics_0.1.1       car_3.0-12           dplyr_1.0.7         
+## [40] plantecophys2_0.1.0  magrittr_2.0.1       leaps_3.1           
+## [43] Matrix_1.3-4         Rcpp_1.0.7           munsell_0.5.0       
+## [46] fansi_0.5.0          abind_1.4-5          geepack_1.3-2       
+## [49] lifecycle_1.0.1      scatterplot3d_0.3-41 stringi_1.7.5       
+## [52] yaml_2.2.1           carData_3.0-4        MASS_7.3-54         
+## [55] ggstance_0.3.5       grid_4.1.1           ggrepel_0.9.1       
+## [58] forcats_0.5.1        crayon_1.4.2         lattice_0.20-45     
+## [61] haven_2.4.3          splines_4.1.1        hms_1.1.1           
+## [64] knitr_1.36           pillar_1.6.4         ggpubr_0.4.0        
+## [67] ggsignif_0.6.3       glue_1.4.2           evaluate_0.14       
+## [70] png_0.1-7            vctrs_0.3.8          tweenr_1.0.2        
+## [73] cellranger_1.1.0     gtable_0.3.0         polyclip_1.10-0     
+## [76] tidyr_1.1.4          assertthat_0.2.1     xfun_0.27           
+## [79] ggforce_0.3.3        broom_0.7.10         rstatix_0.7.0       
+## [82] tibble_3.1.5         cluster_2.1.2        ellipsis_0.3.2
 \end{verbatim}
 
 \cleardoublepage

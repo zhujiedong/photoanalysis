@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 1 章 R 软件与 Rstudio | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
   <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 1 章 R 软件与 Rstudio | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2021-08-28" />
+<meta name="date" content="2021-11-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,9 +32,10 @@
   
   
 <link rel="prev" href="copyright.html"/>
-<link rel="next" href="batch-question.html"/>
-<script src="libs/header-attrs-2.9.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link rel="next" href="batch_question.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -42,7 +43,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -167,144 +167,144 @@ div.csl-indent {
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#rsoft"><i class="fa fa-check"></i><b>1.1</b> R 软件</a></li>
 <li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#rstudiosoft"><i class="fa fa-check"></i><b>1.2</b> Rstudio</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="batch-question.html"><a href="batch-question.html"><i class="fa fa-check"></i><b>2</b> 批量处理光合测定数据</a>
+<li class="chapter" data-level="2" data-path="batch_question.html"><a href="batch_question.html"><i class="fa fa-check"></i><b>2</b> 批量处理光合测定数据</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="batch-question.html"><a href="batch-question.html#install_readphoto"><i class="fa fa-check"></i><b>2.1</b> 安装</a></li>
-<li class="chapter" data-level="2.2" data-path="batch-question.html"><a href="batch-question.html#batch64"><i class="fa fa-check"></i><b>2.2</b> 6400 数据整合</a></li>
-<li class="chapter" data-level="2.3" data-path="batch-question.html"><a href="batch-question.html#batch68"><i class="fa fa-check"></i><b>2.3</b> LI-6800 数据整合</a></li>
-<li class="chapter" data-level="2.4" data-path="batch-question.html"><a href="batch-question.html#recompute_raw"><i class="fa fa-check"></i><b>2.4</b> 重计算功能</a>
+<li class="chapter" data-level="2.1" data-path="batch_question.html"><a href="batch_question.html#install_readphoto"><i class="fa fa-check"></i><b>2.1</b> 安装</a></li>
+<li class="chapter" data-level="2.2" data-path="batch_question.html"><a href="batch_question.html#batch64"><i class="fa fa-check"></i><b>2.2</b> 6400 数据整合</a></li>
+<li class="chapter" data-level="2.3" data-path="batch_question.html"><a href="batch_question.html#batch68"><i class="fa fa-check"></i><b>2.3</b> LI-6800 数据整合</a></li>
+<li class="chapter" data-level="2.4" data-path="batch_question.html"><a href="batch_question.html#recompute_raw"><i class="fa fa-check"></i><b>2.4</b> 重计算功能</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="batch-question.html"><a href="batch-question.html#recompute6400"><i class="fa fa-check"></i><b>2.4.1</b> LI-6400 数据重计算</a></li>
-<li class="chapter" data-level="2.4.2" data-path="batch-question.html"><a href="batch-question.html#recompute6800"><i class="fa fa-check"></i><b>2.4.2</b> LI-6800 数据重计算</a></li>
+<li class="chapter" data-level="2.4.1" data-path="batch_question.html"><a href="batch_question.html#recompute6400"><i class="fa fa-check"></i><b>2.4.1</b> LI-6400 数据重计算</a></li>
+<li class="chapter" data-level="2.4.2" data-path="batch_question.html"><a href="batch_question.html#recompute6800"><i class="fa fa-check"></i><b>2.4.2</b> LI-6800 数据重计算</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="response-fit.html"><a href="response-fit.html"><i class="fa fa-check"></i><b>3</b> CO<sub>2</sub> 响应曲线的拟合</a>
+<li class="chapter" data-level="3" data-path="response_fit.html"><a href="response_fit.html"><i class="fa fa-check"></i><b>3</b> CO<sub>2</sub> 响应曲线的拟合</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="response-fit.html"><a href="response-fit.html#fvcb_mod"><i class="fa fa-check"></i><b>3.1</b> FvCB 模型</a></li>
-<li class="chapter" data-level="3.2" data-path="response-fit.html"><a href="response-fit.html#co2_note"><i class="fa fa-check"></i><b>3.2</b> CO<sub>2</sub> 响应曲线测量的注意事项</a>
+<li class="chapter" data-level="3.1" data-path="response_fit.html"><a href="response_fit.html#fvcb_mod"><i class="fa fa-check"></i><b>3.1</b> FvCB 模型</a></li>
+<li class="chapter" data-level="3.2" data-path="response_fit.html"><a href="response_fit.html#co2_note"><i class="fa fa-check"></i><b>3.2</b> CO<sub>2</sub> 响应曲线测量的注意事项</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="response-fit.html"><a href="response-fit.html#model_3"><i class="fa fa-check"></i><b>3.2.1</b> 分段性</a></li>
-<li class="chapter" data-level="3.2.2" data-path="response-fit.html"><a href="response-fit.html#note_detail"><i class="fa fa-check"></i><b>3.2.2</b> 测量注意事项</a></li>
+<li class="chapter" data-level="3.2.1" data-path="response_fit.html"><a href="response_fit.html#model_3"><i class="fa fa-check"></i><b>3.2.1</b> 分段性</a></li>
+<li class="chapter" data-level="3.2.2" data-path="response_fit.html"><a href="response_fit.html#note_detail"><i class="fa fa-check"></i><b>3.2.2</b> 测量注意事项</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="response-fit.html"><a href="response-fit.html#plantecophys"><i class="fa fa-check"></i><b>3.3</b> <code>plantecophys</code> 软件包</a></li>
-<li class="chapter" data-level="3.4" data-path="response-fit.html"><a href="response-fit.html#fit6400"><i class="fa fa-check"></i><b>3.4</b> LI-6400XT CO<sub>2</sub> 响应曲线的拟合</a>
+<li class="chapter" data-level="3.3" data-path="response_fit.html"><a href="response_fit.html#plantecophys"><i class="fa fa-check"></i><b>3.3</b> <code>plantecophys</code> 软件包</a></li>
+<li class="chapter" data-level="3.4" data-path="response_fit.html"><a href="response_fit.html#fit6400"><i class="fa fa-check"></i><b>3.4</b> LI-6400XT CO<sub>2</sub> 响应曲线的拟合</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="response-fit.html"><a href="response-fit.html#fitaci_intro"><i class="fa fa-check"></i><b>3.4.1</b> fitaci 函数介绍</a></li>
+<li class="chapter" data-level="3.4.1" data-path="response_fit.html"><a href="response_fit.html#fitaci_intro"><i class="fa fa-check"></i><b>3.4.1</b> fitaci 函数介绍</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="response-fit.html"><a href="response-fit.html#plantecophy_use"><i class="fa fa-check"></i><b>3.5</b> 使用 <code>plantecophys</code> 拟合 LI-6400XT CO<sub>2</sub> 响应曲线数据</a>
+<li class="chapter" data-level="3.5" data-path="response_fit.html"><a href="response_fit.html#plantecophy_use"><i class="fa fa-check"></i><b>3.5</b> 使用 <code>plantecophys</code> 拟合 LI-6400XT CO<sub>2</sub> 响应曲线数据</a>
 <ul>
-<li class="chapter" data-level="3.5.1" data-path="response-fit.html"><a href="response-fit.html#data6400"><i class="fa fa-check"></i><b>3.5.1</b> 数据的前处理</a></li>
-<li class="chapter" data-level="3.5.2" data-path="response-fit.html"><a href="response-fit.html#fitaci-p"><i class="fa fa-check"></i><b>3.5.2</b> 使用示例</a></li>
-<li class="chapter" data-level="3.5.3" data-path="response-fit.html"><a href="response-fit.html#onpoint_fit"><i class="fa fa-check"></i><b>3.5.3</b> 使用 ‘onepoint’ 单独计算 V<sub>cmax</sub> 和 J<sub>max</sub></a></li>
-<li class="chapter" data-level="3.5.4" data-path="response-fit.html"><a href="response-fit.html#multi_curve"><i class="fa fa-check"></i><b>3.5.4</b> 多条 CO<sub>2</sub> 响应曲线的拟合</a></li>
-<li class="chapter" data-level="3.5.5" data-path="response-fit.html"><a href="response-fit.html#transition"><i class="fa fa-check"></i><b>3.5.5</b> <code>findCiTransition</code> 函数</a></li>
+<li class="chapter" data-level="3.5.1" data-path="response_fit.html"><a href="response_fit.html#data6400"><i class="fa fa-check"></i><b>3.5.1</b> 数据的前处理</a></li>
+<li class="chapter" data-level="3.5.2" data-path="response_fit.html"><a href="response_fit.html#fitaci-p"><i class="fa fa-check"></i><b>3.5.2</b> 使用示例</a></li>
+<li class="chapter" data-level="3.5.3" data-path="response_fit.html"><a href="response_fit.html#onpoint_fit"><i class="fa fa-check"></i><b>3.5.3</b> 使用 ‘onepoint’ 单独计算 V<sub>cmax</sub> 和 J<sub>max</sub></a></li>
+<li class="chapter" data-level="3.5.4" data-path="response_fit.html"><a href="response_fit.html#multi_curve"><i class="fa fa-check"></i><b>3.5.4</b> 多条 CO<sub>2</sub> 响应曲线的拟合</a></li>
+<li class="chapter" data-level="3.5.5" data-path="response_fit.html"><a href="response_fit.html#transition"><i class="fa fa-check"></i><b>3.5.5</b> <code>findCiTransition</code> 函数</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="response-fit.html"><a href="response-fit.html#c4"><i class="fa fa-check"></i><b>3.6</b> C4 植物光合</a>
+<li class="chapter" data-level="3.6" data-path="response_fit.html"><a href="response_fit.html#c4"><i class="fa fa-check"></i><b>3.6</b> C4 植物光合</a>
 <ul>
-<li class="chapter" data-level="3.6.1" data-path="response-fit.html"><a href="response-fit.html#c4_sim"><i class="fa fa-check"></i><b>3.6.1</b> C4 植物光合速率的计算</a></li>
+<li class="chapter" data-level="3.6.1" data-path="response_fit.html"><a href="response_fit.html#c4_sim"><i class="fa fa-check"></i><b>3.6.1</b> C4 植物光合速率的计算</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="stomotal-sim.html"><a href="stomotal-sim.html"><i class="fa fa-check"></i><b>4</b> 气孔导度模型的拟合</a>
+<li class="chapter" data-level="4" data-path="stomotal_sim.html"><a href="stomotal_sim.html"><i class="fa fa-check"></i><b>4</b> 气孔导度模型的拟合</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="stomotal-sim.html"><a href="stomotal-sim.html#ballberry"><i class="fa fa-check"></i><b>4.1</b> BallBerry 模型</a></li>
-<li class="chapter" data-level="4.2" data-path="stomotal-sim.html"><a href="stomotal-sim.html#bbleuning"><i class="fa fa-check"></i><b>4.2</b> BBLeuning 模型</a></li>
-<li class="chapter" data-level="4.3" data-path="stomotal-sim.html"><a href="stomotal-sim.html#bboptifull"><i class="fa fa-check"></i><b>4.3</b> BBOptiFull 模型</a></li>
-<li class="chapter" data-level="4.4" data-path="stomotal-sim.html"><a href="stomotal-sim.html#fitbb-p"><i class="fa fa-check"></i><b>4.4</b> <code>fitBB</code> 函数</a></li>
-<li class="chapter" data-level="4.5" data-path="stomotal-sim.html"><a href="stomotal-sim.html#fitbbs"><i class="fa fa-check"></i><b>4.5</b> <code>fitBBs</code> 函数</a></li>
+<li class="chapter" data-level="4.1" data-path="stomotal_sim.html"><a href="stomotal_sim.html#ballberry"><i class="fa fa-check"></i><b>4.1</b> BallBerry 模型</a></li>
+<li class="chapter" data-level="4.2" data-path="stomotal_sim.html"><a href="stomotal_sim.html#bbleuning"><i class="fa fa-check"></i><b>4.2</b> BBLeuning 模型</a></li>
+<li class="chapter" data-level="4.3" data-path="stomotal_sim.html"><a href="stomotal_sim.html#bboptifull"><i class="fa fa-check"></i><b>4.3</b> BBOptiFull 模型</a></li>
+<li class="chapter" data-level="4.4" data-path="stomotal_sim.html"><a href="stomotal_sim.html#fitbb-p"><i class="fa fa-check"></i><b>4.4</b> <code>fitBB</code> 函数</a></li>
+<li class="chapter" data-level="4.5" data-path="stomotal_sim.html"><a href="stomotal_sim.html#fitbbs"><i class="fa fa-check"></i><b>4.5</b> <code>fitBBs</code> 函数</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="stomotal-couple.html"><a href="stomotal-couple.html"><i class="fa fa-check"></i><b>5</b> 光合最优气孔导度耦合模型</a>
+<li class="chapter" data-level="5" data-path="stomotal_couple.html"><a href="stomotal_couple.html"><i class="fa fa-check"></i><b>5</b> 光合最优气孔导度耦合模型</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="stomotal-couple.html"><a href="stomotal-couple.html#farao"><i class="fa fa-check"></i><b>5.1</b> <code>FARAO</code> 函数</a></li>
+<li class="chapter" data-level="5.1" data-path="stomotal_couple.html"><a href="stomotal_couple.html#farao"><i class="fa fa-check"></i><b>5.1</b> <code>FARAO</code> 函数</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="photo-stomo.html"><a href="photo-stomo.html"><i class="fa fa-check"></i><b>6</b> 光合气孔导度耦合模型</a>
+<li class="chapter" data-level="6" data-path="photo_stomo.html"><a href="photo_stomo.html"><i class="fa fa-check"></i><b>6</b> 光合气孔导度耦合模型</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="photo-stomo.html"><a href="photo-stomo.html#photosyn"><i class="fa fa-check"></i><b>6.1</b> <code>Photosyn</code> 函数</a>
+<li class="chapter" data-level="6.1" data-path="photo_stomo.html"><a href="photo_stomo.html#photosyn"><i class="fa fa-check"></i><b>6.1</b> <code>Photosyn</code> 函数</a>
 <ul>
-<li class="chapter" data-level="6.1.1" data-path="photo-stomo.html"><a href="photo-stomo.html#photo_exam"><i class="fa fa-check"></i><b>6.1.1</b> <code>Photosyn</code> 使用举例</a></li>
+<li class="chapter" data-level="6.1.1" data-path="photo_stomo.html"><a href="photo_stomo.html#photo_exam"><i class="fa fa-check"></i><b>6.1.1</b> <code>Photosyn</code> 使用举例</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="photo-stomo.html"><a href="photo-stomo.html#photsyneb"><i class="fa fa-check"></i><b>6.2</b> <code>PhotosynEB</code> 函数</a></li>
-<li class="chapter" data-level="6.3" data-path="photo-stomo.html"><a href="photo-stomo.html#photosyntuzet"><i class="fa fa-check"></i><b>6.3</b> <code>PhotosynTuzet</code> 函数</a>
+<li class="chapter" data-level="6.2" data-path="photo_stomo.html"><a href="photo_stomo.html#photsyneb"><i class="fa fa-check"></i><b>6.2</b> <code>PhotosynEB</code> 函数</a></li>
+<li class="chapter" data-level="6.3" data-path="photo_stomo.html"><a href="photo_stomo.html#photosyntuzet"><i class="fa fa-check"></i><b>6.3</b> <code>PhotosynTuzet</code> 函数</a>
 <ul>
-<li class="chapter" data-level="6.3.1" data-path="photo-stomo.html"><a href="photo-stomo.html#photosyntuzet_para"><i class="fa fa-check"></i><b>6.3.1</b> <code>PhotosynTuzet</code> 的参数</a></li>
+<li class="chapter" data-level="6.3.1" data-path="photo_stomo.html"><a href="photo_stomo.html#photosyntuzet_para"><i class="fa fa-check"></i><b>6.3.1</b> <code>PhotosynTuzet</code> 的参数</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="rhtovpd.html"><a href="rhtovpd.html"><i class="fa fa-check"></i><b>7</b> RHtoVPD 函数</a></li>
-<li class="chapter" data-level="8" data-path="lrc-fit.html"><a href="lrc-fit.html"><i class="fa fa-check"></i><b>8</b> 光响应曲线的拟合</a>
+<li class="chapter" data-level="8" data-path="lrc_fit.html"><a href="lrc_fit.html"><i class="fa fa-check"></i><b>8</b> 光响应曲线的拟合</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="lrc-fit.html"><a href="lrc-fit.html#rec_mod"><i class="fa fa-check"></i><b>8.1</b> 直角双曲线模型</a>
+<li class="chapter" data-level="8.1" data-path="lrc_fit.html"><a href="lrc_fit.html#rec_mod"><i class="fa fa-check"></i><b>8.1</b> 直角双曲线模型</a>
 <ul>
-<li class="chapter" data-level="8.1.1" data-path="lrc-fit.html"><a href="lrc-fit.html#rec_fit"><i class="fa fa-check"></i><b>8.1.1</b> 直角双曲线模型的实现</a></li>
+<li class="chapter" data-level="8.1.1" data-path="lrc_fit.html"><a href="lrc_fit.html#rec_fit"><i class="fa fa-check"></i><b>8.1.1</b> 直角双曲线模型的实现</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="lrc-fit.html"><a href="lrc-fit.html#nonrec-mod"><i class="fa fa-check"></i><b>8.2</b> 非直角双曲线模型</a>
+<li class="chapter" data-level="8.2" data-path="lrc_fit.html"><a href="lrc_fit.html#nonrec-mod"><i class="fa fa-check"></i><b>8.2</b> 非直角双曲线模型</a>
 <ul>
-<li class="chapter" data-level="8.2.1" data-path="lrc-fit.html"><a href="lrc-fit.html#nonrec_mode_exam"><i class="fa fa-check"></i><b>8.2.1</b> 非直角双曲线模型的实现</a></li>
+<li class="chapter" data-level="8.2.1" data-path="lrc_fit.html"><a href="lrc_fit.html#nonrec_mode_exam"><i class="fa fa-check"></i><b>8.2.1</b> 非直角双曲线模型的实现</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="lrc-fit.html"><a href="lrc-fit.html#lrc_exp"><i class="fa fa-check"></i><b>8.3</b> 指数模型</a>
+<li class="chapter" data-level="8.3" data-path="lrc_fit.html"><a href="lrc_fit.html#lrc_exp"><i class="fa fa-check"></i><b>8.3</b> 指数模型</a>
 <ul>
-<li class="chapter" data-level="8.3.1" data-path="lrc-fit.html"><a href="lrc-fit.html#lrc_exp_exam"><i class="fa fa-check"></i><b>8.3.1</b> 指数模型的实现</a></li>
+<li class="chapter" data-level="8.3.1" data-path="lrc_fit.html"><a href="lrc_fit.html#lrc_exp_exam"><i class="fa fa-check"></i><b>8.3.1</b> 指数模型的实现</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="lrc-fit.html"><a href="lrc-fit.html#rev_rec"><i class="fa fa-check"></i><b>8.4</b> 直角双曲线的修正模型</a>
+<li class="chapter" data-level="8.4" data-path="lrc_fit.html"><a href="lrc_fit.html#rev_rec"><i class="fa fa-check"></i><b>8.4</b> 直角双曲线的修正模型</a>
 <ul>
-<li class="chapter" data-level="8.4.1" data-path="lrc-fit.html"><a href="lrc-fit.html#rev_rec_exam"><i class="fa fa-check"></i><b>8.4.1</b> 直角双曲线修正模型的实现</a></li>
+<li class="chapter" data-level="8.4.1" data-path="lrc_fit.html"><a href="lrc_fit.html#rev_rec_exam"><i class="fa fa-check"></i><b>8.4.1</b> 直角双曲线修正模型的实现</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="start-con.html"><a href="start-con.html"><i class="fa fa-check"></i><b>9</b> 关于非线性拟合的初始值</a>
+<li class="chapter" data-level="9" data-path="start_con.html"><a href="start_con.html"><i class="fa fa-check"></i><b>9</b> 关于非线性拟合的初始值</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="start-con.html"><a href="start-con.html#nlslm"><i class="fa fa-check"></i><b>9.1</b> nlsLM 解决方案</a></li>
-<li class="chapter" data-level="9.2" data-path="start-con.html"><a href="start-con.html#plot_comp"><i class="fa fa-check"></i><b>9.2</b> 作图比对法</a>
+<li class="chapter" data-level="9.1" data-path="start_con.html"><a href="start_con.html#nlslm"><i class="fa fa-check"></i><b>9.1</b> nlsLM 解决方案</a></li>
+<li class="chapter" data-level="9.2" data-path="start_con.html"><a href="start_con.html#plot_comp"><i class="fa fa-check"></i><b>9.2</b> 作图比对法</a>
 <ul>
-<li class="chapter" data-level="9.2.1" data-path="start-con.html"><a href="start-con.html#plot_exam"><i class="fa fa-check"></i><b>9.2.1</b> 实现过程</a></li>
-<li class="chapter" data-level="9.2.2" data-path="start-con.html"><a href="start-con.html#show_demo"><i class="fa fa-check"></i><b>9.2.2</b> 直观展示</a></li>
+<li class="chapter" data-level="9.2.1" data-path="start_con.html"><a href="start_con.html#plot_exam"><i class="fa fa-check"></i><b>9.2.1</b> 实现过程</a></li>
+<li class="chapter" data-level="9.2.2" data-path="start_con.html"><a href="start_con.html#show_demo"><i class="fa fa-check"></i><b>9.2.2</b> 直观展示</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="start-con.html"><a href="start-con.html#mult_try"><i class="fa fa-check"></i><b>9.3</b> 自动多次尝试法</a></li>
-<li class="chapter" data-level="9.4" data-path="start-con.html"><a href="start-con.html#sum_start"><i class="fa fa-check"></i><b>9.4</b> 小结</a></li>
+<li class="chapter" data-level="9.3" data-path="start_con.html"><a href="start_con.html#mult_try"><i class="fa fa-check"></i><b>9.3</b> 自动多次尝试法</a></li>
+<li class="chapter" data-level="9.4" data-path="start_con.html"><a href="start_con.html#sum_start"><i class="fa fa-check"></i><b>9.4</b> 小结</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="anay-6800.html"><a href="anay-6800.html"><i class="fa fa-check"></i><b>10</b> LI-6800 的数据分析</a>
+<li class="chapter" data-level="10" data-path="anay_6800.html"><a href="anay_6800.html"><i class="fa fa-check"></i><b>10</b> LI-6800 的数据分析</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="anay-6800.html"><a href="anay-6800.html#data6800"><i class="fa fa-check"></i><b>10.1</b> 数据格式</a></li>
-<li class="chapter" data-level="10.2" data-path="anay-6800.html"><a href="anay-6800.html#dif"><i class="fa fa-check"></i><b>10.2</b> LI-6800 与 LI-6400 使用时的差别</a></li>
-<li class="chapter" data-level="10.3" data-path="anay-6800.html"><a href="anay-6800.html#notice"><i class="fa fa-check"></i><b>10.3</b> 光响应曲线注意事项</a></li>
-<li class="chapter" data-level="10.4" data-path="anay-6800.html"><a href="anay-6800.html#racir68"><i class="fa fa-check"></i><b>10.4</b> LI-6800 RACiR的测量与拟合</a></li>
-<li class="chapter" data-level="10.5" data-path="anay-6800.html"><a href="anay-6800.html#racir_pkg"><i class="fa fa-check"></i><b>10.5</b> racir 软件包实现 RACiR数据分析</a>
+<li class="chapter" data-level="10.1" data-path="anay_6800.html"><a href="anay_6800.html#data6800"><i class="fa fa-check"></i><b>10.1</b> 数据格式</a></li>
+<li class="chapter" data-level="10.2" data-path="anay_6800.html"><a href="anay_6800.html#dif"><i class="fa fa-check"></i><b>10.2</b> LI-6800 与 LI-6400 使用时的差别</a></li>
+<li class="chapter" data-level="10.3" data-path="anay_6800.html"><a href="anay_6800.html#notice"><i class="fa fa-check"></i><b>10.3</b> 光响应曲线注意事项</a></li>
+<li class="chapter" data-level="10.4" data-path="anay_6800.html"><a href="anay_6800.html#racir68"><i class="fa fa-check"></i><b>10.4</b> LI-6800 RACiR的测量与拟合</a></li>
+<li class="chapter" data-level="10.5" data-path="anay_6800.html"><a href="anay_6800.html#racir_pkg"><i class="fa fa-check"></i><b>10.5</b> racir 软件包实现 RACiR数据分析</a>
 <ul>
-<li class="chapter" data-level="10.5.1" data-path="anay-6800.html"><a href="anay-6800.html#racir_pkg_1"><i class="fa fa-check"></i><b>10.5.1</b> 实现方法 1</a></li>
-<li class="chapter" data-level="10.5.2" data-path="anay-6800.html"><a href="anay-6800.html#racir_pkg_2"><i class="fa fa-check"></i><b>10.5.2</b> 实现方法 2</a></li>
-<li class="chapter" data-level="10.5.3" data-path="anay-6800.html"><a href="anay-6800.html#racirbatch"><i class="fa fa-check"></i><b>10.5.3</b> 数据的批量处理</a></li>
+<li class="chapter" data-level="10.5.1" data-path="anay_6800.html"><a href="anay_6800.html#racir_pkg_1"><i class="fa fa-check"></i><b>10.5.1</b> 实现方法 1</a></li>
+<li class="chapter" data-level="10.5.2" data-path="anay_6800.html"><a href="anay_6800.html#racir_pkg_2"><i class="fa fa-check"></i><b>10.5.2</b> 实现方法 2</a></li>
+<li class="chapter" data-level="10.5.3" data-path="anay_6800.html"><a href="anay_6800.html#racirbatch"><i class="fa fa-check"></i><b>10.5.3</b> 数据的批量处理</a></li>
 </ul></li>
-<li class="chapter" data-level="10.6" data-path="anay-6800.html"><a href="anay-6800.html#fitbatracir"><i class="fa fa-check"></i><b>10.6</b> 批量计算 <span class="math inline">\(V_{cmax}\)</span> 和 <span class="math inline">\(J_max\)</span></a></li>
-<li class="chapter" data-level="10.7" data-path="anay-6800.html"><a href="anay-6800.html#racir-conifer"><i class="fa fa-check"></i><b>10.7</b> LI-6800 RACiR簇状叶的测量与拟合</a>
+<li class="chapter" data-level="10.6" data-path="anay_6800.html"><a href="anay_6800.html#fitbatracir"><i class="fa fa-check"></i><b>10.6</b> 批量计算 <span class="math inline">\(V_{cmax}\)</span> 和 <span class="math inline">\(J_max\)</span></a></li>
+<li class="chapter" data-level="10.7" data-path="anay_6800.html"><a href="anay_6800.html#racir-conifer"><i class="fa fa-check"></i><b>10.7</b> LI-6800 RACiR簇状叶的测量与拟合</a>
 <ul>
-<li class="chapter" data-level="10.7.1" data-path="anay-6800.html"><a href="anay-6800.html#conifer-fit-racir"><i class="fa fa-check"></i><b>10.7.1</b> 数据的拟合</a></li>
-<li class="chapter" data-level="10.7.2" data-path="anay-6800.html"><a href="anay-6800.html#conifer-racir-fit"><i class="fa fa-check"></i><b>10.7.2</b> 拟合过程</a></li>
+<li class="chapter" data-level="10.7.1" data-path="anay_6800.html"><a href="anay_6800.html#conifer-fit-racir"><i class="fa fa-check"></i><b>10.7.1</b> 数据的拟合</a></li>
+<li class="chapter" data-level="10.7.2" data-path="anay_6800.html"><a href="anay_6800.html#conifer-racir-fit"><i class="fa fa-check"></i><b>10.7.2</b> 拟合过程</a></li>
 </ul></li>
-<li class="chapter" data-level="10.8" data-path="anay-6800.html"><a href="anay-6800.html#racir68_exam"><i class="fa fa-check"></i><b>10.8</b> RACiR分析的手动实现</a></li>
-<li class="chapter" data-level="10.9" data-path="anay-6800.html"><a href="anay-6800.html#multi1"><i class="fa fa-check"></i><b>10.9</b> 多个速率的 RACiR 曲线研究</a>
+<li class="chapter" data-level="10.8" data-path="anay_6800.html"><a href="anay_6800.html#racir68_exam"><i class="fa fa-check"></i><b>10.8</b> RACiR分析的手动实现</a></li>
+<li class="chapter" data-level="10.9" data-path="anay_6800.html"><a href="anay_6800.html#multi1"><i class="fa fa-check"></i><b>10.9</b> 多个速率的 RACiR 曲线研究</a>
 <ul>
-<li class="chapter" data-level="10.9.1" data-path="anay-6800.html"><a href="anay-6800.html#multi2"><i class="fa fa-check"></i><b>10.9.1</b> 光呼吸滞后模型</a></li>
-<li class="chapter" data-level="10.9.2" data-path="anay-6800.html"><a href="anay-6800.html#code-photoresp"><i class="fa fa-check"></i><b>10.9.2</b> 光呼吸滞后性代码</a></li>
-<li class="chapter" data-level="10.9.3" data-path="anay-6800.html"><a href="anay-6800.html#multi4"><i class="fa fa-check"></i><b>10.9.3</b> 数据的构造</a></li>
-<li class="chapter" data-level="10.9.4" data-path="anay-6800.html"><a href="anay-6800.html#multi5"><i class="fa fa-check"></i><b>10.9.4</b> 光呼吸滞后性作图</a></li>
-<li class="chapter" data-level="10.9.5" data-path="anay-6800.html"><a href="anay-6800.html#multi6"><i class="fa fa-check"></i><b>10.9.5</b> 补偿点计算</a></li>
-<li class="chapter" data-level="10.9.6" data-path="anay-6800.html"><a href="anay-6800.html#multi7"><i class="fa fa-check"></i><b>10.9.6</b> 无光呼吸酶失活模块</a></li>
-<li class="chapter" data-level="10.9.7" data-path="anay-6800.html"><a href="anay-6800.html#multi9"><i class="fa fa-check"></i><b>10.9.7</b> 酶失活作图</a></li>
-<li class="chapter" data-level="10.9.8" data-path="anay-6800.html"><a href="anay-6800.html#multi10"><i class="fa fa-check"></i><b>10.9.8</b> 不同失活程度下补偿点计算</a></li>
+<li class="chapter" data-level="10.9.1" data-path="anay_6800.html"><a href="anay_6800.html#multi2"><i class="fa fa-check"></i><b>10.9.1</b> 光呼吸滞后模型</a></li>
+<li class="chapter" data-level="10.9.2" data-path="anay_6800.html"><a href="anay_6800.html#code-photoresp"><i class="fa fa-check"></i><b>10.9.2</b> 光呼吸滞后性代码</a></li>
+<li class="chapter" data-level="10.9.3" data-path="anay_6800.html"><a href="anay_6800.html#multi4"><i class="fa fa-check"></i><b>10.9.3</b> 数据的构造</a></li>
+<li class="chapter" data-level="10.9.4" data-path="anay_6800.html"><a href="anay_6800.html#multi5"><i class="fa fa-check"></i><b>10.9.4</b> 光呼吸滞后性作图</a></li>
+<li class="chapter" data-level="10.9.5" data-path="anay_6800.html"><a href="anay_6800.html#multi6"><i class="fa fa-check"></i><b>10.9.5</b> 补偿点计算</a></li>
+<li class="chapter" data-level="10.9.6" data-path="anay_6800.html"><a href="anay_6800.html#multi7"><i class="fa fa-check"></i><b>10.9.6</b> 无光呼吸酶失活模块</a></li>
+<li class="chapter" data-level="10.9.7" data-path="anay_6800.html"><a href="anay_6800.html#multi9"><i class="fa fa-check"></i><b>10.9.7</b> 酶失活作图</a></li>
+<li class="chapter" data-level="10.9.8" data-path="anay_6800.html"><a href="anay_6800.html#multi10"><i class="fa fa-check"></i><b>10.9.8</b> 不同失活程度下补偿点计算</a></li>
 </ul></li>
-<li class="chapter" data-level="10.10" data-path="anay-6800.html"><a href="anay-6800.html#multi11"><i class="fa fa-check"></i><b>10.10</b> 时间延迟的扩散限制</a>
+<li class="chapter" data-level="10.10" data-path="anay_6800.html"><a href="anay_6800.html#multi11"><i class="fa fa-check"></i><b>10.10</b> 时间延迟的扩散限制</a>
 <ul>
-<li class="chapter" data-level="10.10.1" data-path="anay-6800.html"><a href="anay-6800.html#multi12"><i class="fa fa-check"></i><b>10.10.1</b> 扩散限制滞后性</a></li>
+<li class="chapter" data-level="10.10.1" data-path="anay_6800.html"><a href="anay_6800.html#multi12"><i class="fa fa-check"></i><b>10.10.1</b> 扩散限制滞后性</a></li>
 </ul></li>
-<li class="chapter" data-level="10.11" data-path="anay-6800.html"><a href="anay-6800.html#multi13"><i class="fa fa-check"></i><b>10.11</b> 扩散限制作图</a>
+<li class="chapter" data-level="10.11" data-path="anay_6800.html"><a href="anay_6800.html#multi13"><i class="fa fa-check"></i><b>10.11</b> 扩散限制作图</a>
 <ul>
-<li class="chapter" data-level="10.11.1" data-path="anay-6800.html"><a href="anay-6800.html#multi14"><i class="fa fa-check"></i><b>10.11.1</b> 补偿点的计算</a></li>
-<li class="chapter" data-level="10.11.2" data-path="anay-6800.html"><a href="anay-6800.html#multi15"><i class="fa fa-check"></i><b>10.11.2</b> 所有图形代码</a></li>
+<li class="chapter" data-level="10.11.1" data-path="anay_6800.html"><a href="anay_6800.html#multi14"><i class="fa fa-check"></i><b>10.11.1</b> 补偿点的计算</a></li>
+<li class="chapter" data-level="10.11.2" data-path="anay_6800.html"><a href="anay_6800.html#multi15"><i class="fa fa-check"></i><b>10.11.2</b> 所有图形代码</a></li>
 </ul></li>
-<li class="chapter" data-level="10.12" data-path="anay-6800.html"><a href="anay-6800.html#fluro68"><i class="fa fa-check"></i><b>10.12</b> LI-6800 荧光数据分析</a>
+<li class="chapter" data-level="10.12" data-path="anay_6800.html"><a href="anay_6800.html#fluro68"><i class="fa fa-check"></i><b>10.12</b> LI-6800 荧光数据分析</a>
 <ul>
-<li class="chapter" data-level="10.12.1" data-path="anay-6800.html"><a href="anay-6800.html#jiptest"><i class="fa fa-check"></i><b>10.12.1</b> jip test 的实现</a></li>
-<li class="chapter" data-level="10.12.2" data-path="anay-6800.html"><a href="anay-6800.html#jiptest_pack"><i class="fa fa-check"></i><b>10.12.2</b> <code>jiptest</code> 软件包安装</a></li>
-<li class="chapter" data-level="10.12.3" data-path="anay-6800.html"><a href="anay-6800.html#readfluor"><i class="fa fa-check"></i><b>10.12.3</b> <code>read_files</code> 及 <code>read_dcfiles</code> 函数</a></li>
-<li class="chapter" data-level="10.12.4" data-path="anay-6800.html"><a href="anay-6800.html#testfluor"><i class="fa fa-check"></i><b>10.12.4</b> <code>jip_test</code> 及 <code>jip_dctest</code> 函数</a></li>
-<li class="chapter" data-level="10.12.5" data-path="anay-6800.html"><a href="anay-6800.html#plotfluor"><i class="fa fa-check"></i><b>10.12.5</b> 图像查看函数</a></li>
+<li class="chapter" data-level="10.12.1" data-path="anay_6800.html"><a href="anay_6800.html#jiptest"><i class="fa fa-check"></i><b>10.12.1</b> jip test 的实现</a></li>
+<li class="chapter" data-level="10.12.2" data-path="anay_6800.html"><a href="anay_6800.html#jiptest_pack"><i class="fa fa-check"></i><b>10.12.2</b> <code>jiptest</code> 软件包安装</a></li>
+<li class="chapter" data-level="10.12.3" data-path="anay_6800.html"><a href="anay_6800.html#readfluor"><i class="fa fa-check"></i><b>10.12.3</b> <code>read_files</code> 及 <code>read_dcfiles</code> 函数</a></li>
+<li class="chapter" data-level="10.12.4" data-path="anay_6800.html"><a href="anay_6800.html#testfluor"><i class="fa fa-check"></i><b>10.12.4</b> <code>jip_test</code> 及 <code>jip_dctest</code> 函数</a></li>
+<li class="chapter" data-level="10.12.5" data-path="anay_6800.html"><a href="anay_6800.html#plotfluor"><i class="fa fa-check"></i><b>10.12.5</b> 图像查看函数</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="big-leaf.html"><a href="big-leaf.html"><i class="fa fa-check"></i><b>11</b> 大叶模型</a>
@@ -356,9 +356,9 @@ div.csl-indent {
 </div>
 <div id="rstudiosoft" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Rstudio</h2>
-<p>尽管R的功能十分强大，但是其作为一个命令行工具 <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>，在实际使用中尤为不便，因此，一款集成的开发环境十分有必要。<a href="https://www.rstudio.com/products/RStudio/">Rstudio</a>是一款专门针对R开发的一个集成环境，同时也支持其他多种语言，用户界面十分友好，支持代码高亮，拼写提示，作图展示等功能，因此我们推荐使用Rstudio对我们的数据进行分析。</p>
+<p>尽管R的功能十分强大，但是其作为一个命令行工具 <a href="references.html#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>，在实际使用中尤为不便，因此，一款集成的开发环境十分有必要。<a href="https://www.rstudio.com/products/RStudio/">Rstudio</a>是一款专门针对R开发的一个集成环境，同时也支持其他多种语言，用户界面十分友好，支持代码高亮，拼写提示，作图展示等功能，因此我们推荐使用Rstudio对我们的数据进行分析。</p>
 <p>R 软件和 Rstudio 的安装十分方便，我们按照各自系统的安装方式安装即可，安装后界面及各区功能如下：</p>
-<div class="figure"><span id="fig:unnamed-chunk-2"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
 <img src="images/rstudio.png" alt="Rstudio 界面及功能" width="218" />
 <p class="caption">
 图 1.1: Rstudio 界面及功能
@@ -371,23 +371,16 @@ div.csl-indent {
 
 </div>
 </div>
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>实际上在Windows系统下安装的时候提供一个十分简陋的GUI。<a href="intro.html#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
-</div>
             </section>
 
           </div>
         </div>
       </div>
 <a href="copyright.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="batch-question.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="batch_question.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -427,6 +420,10 @@ gitbook.start({
 "text": null
 },
 "download": ["bookdown.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 }

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 12 章 大话 PCA | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
   <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 12 章 大话 PCA | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司" />
 
 
-<meta name="date" content="2021-08-28" />
+<meta name="date" content="2021-11-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="big-leaf.html"/>
 <link rel="next" href="sessioninfo.html"/>
-<script src="libs/header-attrs-2.9.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -42,7 +43,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -167,144 +167,144 @@ div.csl-indent {
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#rsoft"><i class="fa fa-check"></i><b>1.1</b> R 软件</a></li>
 <li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#rstudiosoft"><i class="fa fa-check"></i><b>1.2</b> Rstudio</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="batch-question.html"><a href="batch-question.html"><i class="fa fa-check"></i><b>2</b> 批量处理光合测定数据</a>
+<li class="chapter" data-level="2" data-path="batch_question.html"><a href="batch_question.html"><i class="fa fa-check"></i><b>2</b> 批量处理光合测定数据</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="batch-question.html"><a href="batch-question.html#install_readphoto"><i class="fa fa-check"></i><b>2.1</b> 安装</a></li>
-<li class="chapter" data-level="2.2" data-path="batch-question.html"><a href="batch-question.html#batch64"><i class="fa fa-check"></i><b>2.2</b> 6400 数据整合</a></li>
-<li class="chapter" data-level="2.3" data-path="batch-question.html"><a href="batch-question.html#batch68"><i class="fa fa-check"></i><b>2.3</b> LI-6800 数据整合</a></li>
-<li class="chapter" data-level="2.4" data-path="batch-question.html"><a href="batch-question.html#recompute_raw"><i class="fa fa-check"></i><b>2.4</b> 重计算功能</a>
+<li class="chapter" data-level="2.1" data-path="batch_question.html"><a href="batch_question.html#install_readphoto"><i class="fa fa-check"></i><b>2.1</b> 安装</a></li>
+<li class="chapter" data-level="2.2" data-path="batch_question.html"><a href="batch_question.html#batch64"><i class="fa fa-check"></i><b>2.2</b> 6400 数据整合</a></li>
+<li class="chapter" data-level="2.3" data-path="batch_question.html"><a href="batch_question.html#batch68"><i class="fa fa-check"></i><b>2.3</b> LI-6800 数据整合</a></li>
+<li class="chapter" data-level="2.4" data-path="batch_question.html"><a href="batch_question.html#recompute_raw"><i class="fa fa-check"></i><b>2.4</b> 重计算功能</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="batch-question.html"><a href="batch-question.html#recompute6400"><i class="fa fa-check"></i><b>2.4.1</b> LI-6400 数据重计算</a></li>
-<li class="chapter" data-level="2.4.2" data-path="batch-question.html"><a href="batch-question.html#recompute6800"><i class="fa fa-check"></i><b>2.4.2</b> LI-6800 数据重计算</a></li>
+<li class="chapter" data-level="2.4.1" data-path="batch_question.html"><a href="batch_question.html#recompute6400"><i class="fa fa-check"></i><b>2.4.1</b> LI-6400 数据重计算</a></li>
+<li class="chapter" data-level="2.4.2" data-path="batch_question.html"><a href="batch_question.html#recompute6800"><i class="fa fa-check"></i><b>2.4.2</b> LI-6800 数据重计算</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="response-fit.html"><a href="response-fit.html"><i class="fa fa-check"></i><b>3</b> CO<sub>2</sub> 响应曲线的拟合</a>
+<li class="chapter" data-level="3" data-path="response_fit.html"><a href="response_fit.html"><i class="fa fa-check"></i><b>3</b> CO<sub>2</sub> 响应曲线的拟合</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="response-fit.html"><a href="response-fit.html#fvcb_mod"><i class="fa fa-check"></i><b>3.1</b> FvCB 模型</a></li>
-<li class="chapter" data-level="3.2" data-path="response-fit.html"><a href="response-fit.html#co2_note"><i class="fa fa-check"></i><b>3.2</b> CO<sub>2</sub> 响应曲线测量的注意事项</a>
+<li class="chapter" data-level="3.1" data-path="response_fit.html"><a href="response_fit.html#fvcb_mod"><i class="fa fa-check"></i><b>3.1</b> FvCB 模型</a></li>
+<li class="chapter" data-level="3.2" data-path="response_fit.html"><a href="response_fit.html#co2_note"><i class="fa fa-check"></i><b>3.2</b> CO<sub>2</sub> 响应曲线测量的注意事项</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="response-fit.html"><a href="response-fit.html#model_3"><i class="fa fa-check"></i><b>3.2.1</b> 分段性</a></li>
-<li class="chapter" data-level="3.2.2" data-path="response-fit.html"><a href="response-fit.html#note_detail"><i class="fa fa-check"></i><b>3.2.2</b> 测量注意事项</a></li>
+<li class="chapter" data-level="3.2.1" data-path="response_fit.html"><a href="response_fit.html#model_3"><i class="fa fa-check"></i><b>3.2.1</b> 分段性</a></li>
+<li class="chapter" data-level="3.2.2" data-path="response_fit.html"><a href="response_fit.html#note_detail"><i class="fa fa-check"></i><b>3.2.2</b> 测量注意事项</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="response-fit.html"><a href="response-fit.html#plantecophys"><i class="fa fa-check"></i><b>3.3</b> <code>plantecophys</code> 软件包</a></li>
-<li class="chapter" data-level="3.4" data-path="response-fit.html"><a href="response-fit.html#fit6400"><i class="fa fa-check"></i><b>3.4</b> LI-6400XT CO<sub>2</sub> 响应曲线的拟合</a>
+<li class="chapter" data-level="3.3" data-path="response_fit.html"><a href="response_fit.html#plantecophys"><i class="fa fa-check"></i><b>3.3</b> <code>plantecophys</code> 软件包</a></li>
+<li class="chapter" data-level="3.4" data-path="response_fit.html"><a href="response_fit.html#fit6400"><i class="fa fa-check"></i><b>3.4</b> LI-6400XT CO<sub>2</sub> 响应曲线的拟合</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="response-fit.html"><a href="response-fit.html#fitaci_intro"><i class="fa fa-check"></i><b>3.4.1</b> fitaci 函数介绍</a></li>
+<li class="chapter" data-level="3.4.1" data-path="response_fit.html"><a href="response_fit.html#fitaci_intro"><i class="fa fa-check"></i><b>3.4.1</b> fitaci 函数介绍</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="response-fit.html"><a href="response-fit.html#plantecophy_use"><i class="fa fa-check"></i><b>3.5</b> 使用 <code>plantecophys</code> 拟合 LI-6400XT CO<sub>2</sub> 响应曲线数据</a>
+<li class="chapter" data-level="3.5" data-path="response_fit.html"><a href="response_fit.html#plantecophy_use"><i class="fa fa-check"></i><b>3.5</b> 使用 <code>plantecophys</code> 拟合 LI-6400XT CO<sub>2</sub> 响应曲线数据</a>
 <ul>
-<li class="chapter" data-level="3.5.1" data-path="response-fit.html"><a href="response-fit.html#data6400"><i class="fa fa-check"></i><b>3.5.1</b> 数据的前处理</a></li>
-<li class="chapter" data-level="3.5.2" data-path="response-fit.html"><a href="response-fit.html#fitaci-p"><i class="fa fa-check"></i><b>3.5.2</b> 使用示例</a></li>
-<li class="chapter" data-level="3.5.3" data-path="response-fit.html"><a href="response-fit.html#onpoint_fit"><i class="fa fa-check"></i><b>3.5.3</b> 使用 ‘onepoint’ 单独计算 V<sub>cmax</sub> 和 J<sub>max</sub></a></li>
-<li class="chapter" data-level="3.5.4" data-path="response-fit.html"><a href="response-fit.html#multi_curve"><i class="fa fa-check"></i><b>3.5.4</b> 多条 CO<sub>2</sub> 响应曲线的拟合</a></li>
-<li class="chapter" data-level="3.5.5" data-path="response-fit.html"><a href="response-fit.html#transition"><i class="fa fa-check"></i><b>3.5.5</b> <code>findCiTransition</code> 函数</a></li>
+<li class="chapter" data-level="3.5.1" data-path="response_fit.html"><a href="response_fit.html#data6400"><i class="fa fa-check"></i><b>3.5.1</b> 数据的前处理</a></li>
+<li class="chapter" data-level="3.5.2" data-path="response_fit.html"><a href="response_fit.html#fitaci-p"><i class="fa fa-check"></i><b>3.5.2</b> 使用示例</a></li>
+<li class="chapter" data-level="3.5.3" data-path="response_fit.html"><a href="response_fit.html#onpoint_fit"><i class="fa fa-check"></i><b>3.5.3</b> 使用 ‘onepoint’ 单独计算 V<sub>cmax</sub> 和 J<sub>max</sub></a></li>
+<li class="chapter" data-level="3.5.4" data-path="response_fit.html"><a href="response_fit.html#multi_curve"><i class="fa fa-check"></i><b>3.5.4</b> 多条 CO<sub>2</sub> 响应曲线的拟合</a></li>
+<li class="chapter" data-level="3.5.5" data-path="response_fit.html"><a href="response_fit.html#transition"><i class="fa fa-check"></i><b>3.5.5</b> <code>findCiTransition</code> 函数</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="response-fit.html"><a href="response-fit.html#c4"><i class="fa fa-check"></i><b>3.6</b> C4 植物光合</a>
+<li class="chapter" data-level="3.6" data-path="response_fit.html"><a href="response_fit.html#c4"><i class="fa fa-check"></i><b>3.6</b> C4 植物光合</a>
 <ul>
-<li class="chapter" data-level="3.6.1" data-path="response-fit.html"><a href="response-fit.html#c4_sim"><i class="fa fa-check"></i><b>3.6.1</b> C4 植物光合速率的计算</a></li>
+<li class="chapter" data-level="3.6.1" data-path="response_fit.html"><a href="response_fit.html#c4_sim"><i class="fa fa-check"></i><b>3.6.1</b> C4 植物光合速率的计算</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="stomotal-sim.html"><a href="stomotal-sim.html"><i class="fa fa-check"></i><b>4</b> 气孔导度模型的拟合</a>
+<li class="chapter" data-level="4" data-path="stomotal_sim.html"><a href="stomotal_sim.html"><i class="fa fa-check"></i><b>4</b> 气孔导度模型的拟合</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="stomotal-sim.html"><a href="stomotal-sim.html#ballberry"><i class="fa fa-check"></i><b>4.1</b> BallBerry 模型</a></li>
-<li class="chapter" data-level="4.2" data-path="stomotal-sim.html"><a href="stomotal-sim.html#bbleuning"><i class="fa fa-check"></i><b>4.2</b> BBLeuning 模型</a></li>
-<li class="chapter" data-level="4.3" data-path="stomotal-sim.html"><a href="stomotal-sim.html#bboptifull"><i class="fa fa-check"></i><b>4.3</b> BBOptiFull 模型</a></li>
-<li class="chapter" data-level="4.4" data-path="stomotal-sim.html"><a href="stomotal-sim.html#fitbb-p"><i class="fa fa-check"></i><b>4.4</b> <code>fitBB</code> 函数</a></li>
-<li class="chapter" data-level="4.5" data-path="stomotal-sim.html"><a href="stomotal-sim.html#fitbbs"><i class="fa fa-check"></i><b>4.5</b> <code>fitBBs</code> 函数</a></li>
+<li class="chapter" data-level="4.1" data-path="stomotal_sim.html"><a href="stomotal_sim.html#ballberry"><i class="fa fa-check"></i><b>4.1</b> BallBerry 模型</a></li>
+<li class="chapter" data-level="4.2" data-path="stomotal_sim.html"><a href="stomotal_sim.html#bbleuning"><i class="fa fa-check"></i><b>4.2</b> BBLeuning 模型</a></li>
+<li class="chapter" data-level="4.3" data-path="stomotal_sim.html"><a href="stomotal_sim.html#bboptifull"><i class="fa fa-check"></i><b>4.3</b> BBOptiFull 模型</a></li>
+<li class="chapter" data-level="4.4" data-path="stomotal_sim.html"><a href="stomotal_sim.html#fitbb-p"><i class="fa fa-check"></i><b>4.4</b> <code>fitBB</code> 函数</a></li>
+<li class="chapter" data-level="4.5" data-path="stomotal_sim.html"><a href="stomotal_sim.html#fitbbs"><i class="fa fa-check"></i><b>4.5</b> <code>fitBBs</code> 函数</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="stomotal-couple.html"><a href="stomotal-couple.html"><i class="fa fa-check"></i><b>5</b> 光合最优气孔导度耦合模型</a>
+<li class="chapter" data-level="5" data-path="stomotal_couple.html"><a href="stomotal_couple.html"><i class="fa fa-check"></i><b>5</b> 光合最优气孔导度耦合模型</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="stomotal-couple.html"><a href="stomotal-couple.html#farao"><i class="fa fa-check"></i><b>5.1</b> <code>FARAO</code> 函数</a></li>
+<li class="chapter" data-level="5.1" data-path="stomotal_couple.html"><a href="stomotal_couple.html#farao"><i class="fa fa-check"></i><b>5.1</b> <code>FARAO</code> 函数</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="photo-stomo.html"><a href="photo-stomo.html"><i class="fa fa-check"></i><b>6</b> 光合气孔导度耦合模型</a>
+<li class="chapter" data-level="6" data-path="photo_stomo.html"><a href="photo_stomo.html"><i class="fa fa-check"></i><b>6</b> 光合气孔导度耦合模型</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="photo-stomo.html"><a href="photo-stomo.html#photosyn"><i class="fa fa-check"></i><b>6.1</b> <code>Photosyn</code> 函数</a>
+<li class="chapter" data-level="6.1" data-path="photo_stomo.html"><a href="photo_stomo.html#photosyn"><i class="fa fa-check"></i><b>6.1</b> <code>Photosyn</code> 函数</a>
 <ul>
-<li class="chapter" data-level="6.1.1" data-path="photo-stomo.html"><a href="photo-stomo.html#photo_exam"><i class="fa fa-check"></i><b>6.1.1</b> <code>Photosyn</code> 使用举例</a></li>
+<li class="chapter" data-level="6.1.1" data-path="photo_stomo.html"><a href="photo_stomo.html#photo_exam"><i class="fa fa-check"></i><b>6.1.1</b> <code>Photosyn</code> 使用举例</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="photo-stomo.html"><a href="photo-stomo.html#photsyneb"><i class="fa fa-check"></i><b>6.2</b> <code>PhotosynEB</code> 函数</a></li>
-<li class="chapter" data-level="6.3" data-path="photo-stomo.html"><a href="photo-stomo.html#photosyntuzet"><i class="fa fa-check"></i><b>6.3</b> <code>PhotosynTuzet</code> 函数</a>
+<li class="chapter" data-level="6.2" data-path="photo_stomo.html"><a href="photo_stomo.html#photsyneb"><i class="fa fa-check"></i><b>6.2</b> <code>PhotosynEB</code> 函数</a></li>
+<li class="chapter" data-level="6.3" data-path="photo_stomo.html"><a href="photo_stomo.html#photosyntuzet"><i class="fa fa-check"></i><b>6.3</b> <code>PhotosynTuzet</code> 函数</a>
 <ul>
-<li class="chapter" data-level="6.3.1" data-path="photo-stomo.html"><a href="photo-stomo.html#photosyntuzet_para"><i class="fa fa-check"></i><b>6.3.1</b> <code>PhotosynTuzet</code> 的参数</a></li>
+<li class="chapter" data-level="6.3.1" data-path="photo_stomo.html"><a href="photo_stomo.html#photosyntuzet_para"><i class="fa fa-check"></i><b>6.3.1</b> <code>PhotosynTuzet</code> 的参数</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="rhtovpd.html"><a href="rhtovpd.html"><i class="fa fa-check"></i><b>7</b> RHtoVPD 函数</a></li>
-<li class="chapter" data-level="8" data-path="lrc-fit.html"><a href="lrc-fit.html"><i class="fa fa-check"></i><b>8</b> 光响应曲线的拟合</a>
+<li class="chapter" data-level="8" data-path="lrc_fit.html"><a href="lrc_fit.html"><i class="fa fa-check"></i><b>8</b> 光响应曲线的拟合</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="lrc-fit.html"><a href="lrc-fit.html#rec_mod"><i class="fa fa-check"></i><b>8.1</b> 直角双曲线模型</a>
+<li class="chapter" data-level="8.1" data-path="lrc_fit.html"><a href="lrc_fit.html#rec_mod"><i class="fa fa-check"></i><b>8.1</b> 直角双曲线模型</a>
 <ul>
-<li class="chapter" data-level="8.1.1" data-path="lrc-fit.html"><a href="lrc-fit.html#rec_fit"><i class="fa fa-check"></i><b>8.1.1</b> 直角双曲线模型的实现</a></li>
+<li class="chapter" data-level="8.1.1" data-path="lrc_fit.html"><a href="lrc_fit.html#rec_fit"><i class="fa fa-check"></i><b>8.1.1</b> 直角双曲线模型的实现</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="lrc-fit.html"><a href="lrc-fit.html#nonrec-mod"><i class="fa fa-check"></i><b>8.2</b> 非直角双曲线模型</a>
+<li class="chapter" data-level="8.2" data-path="lrc_fit.html"><a href="lrc_fit.html#nonrec-mod"><i class="fa fa-check"></i><b>8.2</b> 非直角双曲线模型</a>
 <ul>
-<li class="chapter" data-level="8.2.1" data-path="lrc-fit.html"><a href="lrc-fit.html#nonrec_mode_exam"><i class="fa fa-check"></i><b>8.2.1</b> 非直角双曲线模型的实现</a></li>
+<li class="chapter" data-level="8.2.1" data-path="lrc_fit.html"><a href="lrc_fit.html#nonrec_mode_exam"><i class="fa fa-check"></i><b>8.2.1</b> 非直角双曲线模型的实现</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="lrc-fit.html"><a href="lrc-fit.html#lrc_exp"><i class="fa fa-check"></i><b>8.3</b> 指数模型</a>
+<li class="chapter" data-level="8.3" data-path="lrc_fit.html"><a href="lrc_fit.html#lrc_exp"><i class="fa fa-check"></i><b>8.3</b> 指数模型</a>
 <ul>
-<li class="chapter" data-level="8.3.1" data-path="lrc-fit.html"><a href="lrc-fit.html#lrc_exp_exam"><i class="fa fa-check"></i><b>8.3.1</b> 指数模型的实现</a></li>
+<li class="chapter" data-level="8.3.1" data-path="lrc_fit.html"><a href="lrc_fit.html#lrc_exp_exam"><i class="fa fa-check"></i><b>8.3.1</b> 指数模型的实现</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="lrc-fit.html"><a href="lrc-fit.html#rev_rec"><i class="fa fa-check"></i><b>8.4</b> 直角双曲线的修正模型</a>
+<li class="chapter" data-level="8.4" data-path="lrc_fit.html"><a href="lrc_fit.html#rev_rec"><i class="fa fa-check"></i><b>8.4</b> 直角双曲线的修正模型</a>
 <ul>
-<li class="chapter" data-level="8.4.1" data-path="lrc-fit.html"><a href="lrc-fit.html#rev_rec_exam"><i class="fa fa-check"></i><b>8.4.1</b> 直角双曲线修正模型的实现</a></li>
+<li class="chapter" data-level="8.4.1" data-path="lrc_fit.html"><a href="lrc_fit.html#rev_rec_exam"><i class="fa fa-check"></i><b>8.4.1</b> 直角双曲线修正模型的实现</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="start-con.html"><a href="start-con.html"><i class="fa fa-check"></i><b>9</b> 关于非线性拟合的初始值</a>
+<li class="chapter" data-level="9" data-path="start_con.html"><a href="start_con.html"><i class="fa fa-check"></i><b>9</b> 关于非线性拟合的初始值</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="start-con.html"><a href="start-con.html#nlslm"><i class="fa fa-check"></i><b>9.1</b> nlsLM 解决方案</a></li>
-<li class="chapter" data-level="9.2" data-path="start-con.html"><a href="start-con.html#plot_comp"><i class="fa fa-check"></i><b>9.2</b> 作图比对法</a>
+<li class="chapter" data-level="9.1" data-path="start_con.html"><a href="start_con.html#nlslm"><i class="fa fa-check"></i><b>9.1</b> nlsLM 解决方案</a></li>
+<li class="chapter" data-level="9.2" data-path="start_con.html"><a href="start_con.html#plot_comp"><i class="fa fa-check"></i><b>9.2</b> 作图比对法</a>
 <ul>
-<li class="chapter" data-level="9.2.1" data-path="start-con.html"><a href="start-con.html#plot_exam"><i class="fa fa-check"></i><b>9.2.1</b> 实现过程</a></li>
-<li class="chapter" data-level="9.2.2" data-path="start-con.html"><a href="start-con.html#show_demo"><i class="fa fa-check"></i><b>9.2.2</b> 直观展示</a></li>
+<li class="chapter" data-level="9.2.1" data-path="start_con.html"><a href="start_con.html#plot_exam"><i class="fa fa-check"></i><b>9.2.1</b> 实现过程</a></li>
+<li class="chapter" data-level="9.2.2" data-path="start_con.html"><a href="start_con.html#show_demo"><i class="fa fa-check"></i><b>9.2.2</b> 直观展示</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="start-con.html"><a href="start-con.html#mult_try"><i class="fa fa-check"></i><b>9.3</b> 自动多次尝试法</a></li>
-<li class="chapter" data-level="9.4" data-path="start-con.html"><a href="start-con.html#sum_start"><i class="fa fa-check"></i><b>9.4</b> 小结</a></li>
+<li class="chapter" data-level="9.3" data-path="start_con.html"><a href="start_con.html#mult_try"><i class="fa fa-check"></i><b>9.3</b> 自动多次尝试法</a></li>
+<li class="chapter" data-level="9.4" data-path="start_con.html"><a href="start_con.html#sum_start"><i class="fa fa-check"></i><b>9.4</b> 小结</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="anay-6800.html"><a href="anay-6800.html"><i class="fa fa-check"></i><b>10</b> LI-6800 的数据分析</a>
+<li class="chapter" data-level="10" data-path="anay_6800.html"><a href="anay_6800.html"><i class="fa fa-check"></i><b>10</b> LI-6800 的数据分析</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="anay-6800.html"><a href="anay-6800.html#data6800"><i class="fa fa-check"></i><b>10.1</b> 数据格式</a></li>
-<li class="chapter" data-level="10.2" data-path="anay-6800.html"><a href="anay-6800.html#dif"><i class="fa fa-check"></i><b>10.2</b> LI-6800 与 LI-6400 使用时的差别</a></li>
-<li class="chapter" data-level="10.3" data-path="anay-6800.html"><a href="anay-6800.html#notice"><i class="fa fa-check"></i><b>10.3</b> 光响应曲线注意事项</a></li>
-<li class="chapter" data-level="10.4" data-path="anay-6800.html"><a href="anay-6800.html#racir68"><i class="fa fa-check"></i><b>10.4</b> LI-6800 RACiR的测量与拟合</a></li>
-<li class="chapter" data-level="10.5" data-path="anay-6800.html"><a href="anay-6800.html#racir_pkg"><i class="fa fa-check"></i><b>10.5</b> racir 软件包实现 RACiR数据分析</a>
+<li class="chapter" data-level="10.1" data-path="anay_6800.html"><a href="anay_6800.html#data6800"><i class="fa fa-check"></i><b>10.1</b> 数据格式</a></li>
+<li class="chapter" data-level="10.2" data-path="anay_6800.html"><a href="anay_6800.html#dif"><i class="fa fa-check"></i><b>10.2</b> LI-6800 与 LI-6400 使用时的差别</a></li>
+<li class="chapter" data-level="10.3" data-path="anay_6800.html"><a href="anay_6800.html#notice"><i class="fa fa-check"></i><b>10.3</b> 光响应曲线注意事项</a></li>
+<li class="chapter" data-level="10.4" data-path="anay_6800.html"><a href="anay_6800.html#racir68"><i class="fa fa-check"></i><b>10.4</b> LI-6800 RACiR的测量与拟合</a></li>
+<li class="chapter" data-level="10.5" data-path="anay_6800.html"><a href="anay_6800.html#racir_pkg"><i class="fa fa-check"></i><b>10.5</b> racir 软件包实现 RACiR数据分析</a>
 <ul>
-<li class="chapter" data-level="10.5.1" data-path="anay-6800.html"><a href="anay-6800.html#racir_pkg_1"><i class="fa fa-check"></i><b>10.5.1</b> 实现方法 1</a></li>
-<li class="chapter" data-level="10.5.2" data-path="anay-6800.html"><a href="anay-6800.html#racir_pkg_2"><i class="fa fa-check"></i><b>10.5.2</b> 实现方法 2</a></li>
-<li class="chapter" data-level="10.5.3" data-path="anay-6800.html"><a href="anay-6800.html#racirbatch"><i class="fa fa-check"></i><b>10.5.3</b> 数据的批量处理</a></li>
+<li class="chapter" data-level="10.5.1" data-path="anay_6800.html"><a href="anay_6800.html#racir_pkg_1"><i class="fa fa-check"></i><b>10.5.1</b> 实现方法 1</a></li>
+<li class="chapter" data-level="10.5.2" data-path="anay_6800.html"><a href="anay_6800.html#racir_pkg_2"><i class="fa fa-check"></i><b>10.5.2</b> 实现方法 2</a></li>
+<li class="chapter" data-level="10.5.3" data-path="anay_6800.html"><a href="anay_6800.html#racirbatch"><i class="fa fa-check"></i><b>10.5.3</b> 数据的批量处理</a></li>
 </ul></li>
-<li class="chapter" data-level="10.6" data-path="anay-6800.html"><a href="anay-6800.html#fitbatracir"><i class="fa fa-check"></i><b>10.6</b> 批量计算 <span class="math inline">\(V_{cmax}\)</span> 和 <span class="math inline">\(J_max\)</span></a></li>
-<li class="chapter" data-level="10.7" data-path="anay-6800.html"><a href="anay-6800.html#racir-conifer"><i class="fa fa-check"></i><b>10.7</b> LI-6800 RACiR簇状叶的测量与拟合</a>
+<li class="chapter" data-level="10.6" data-path="anay_6800.html"><a href="anay_6800.html#fitbatracir"><i class="fa fa-check"></i><b>10.6</b> 批量计算 <span class="math inline">\(V_{cmax}\)</span> 和 <span class="math inline">\(J_max\)</span></a></li>
+<li class="chapter" data-level="10.7" data-path="anay_6800.html"><a href="anay_6800.html#racir-conifer"><i class="fa fa-check"></i><b>10.7</b> LI-6800 RACiR簇状叶的测量与拟合</a>
 <ul>
-<li class="chapter" data-level="10.7.1" data-path="anay-6800.html"><a href="anay-6800.html#conifer-fit-racir"><i class="fa fa-check"></i><b>10.7.1</b> 数据的拟合</a></li>
-<li class="chapter" data-level="10.7.2" data-path="anay-6800.html"><a href="anay-6800.html#conifer-racir-fit"><i class="fa fa-check"></i><b>10.7.2</b> 拟合过程</a></li>
+<li class="chapter" data-level="10.7.1" data-path="anay_6800.html"><a href="anay_6800.html#conifer-fit-racir"><i class="fa fa-check"></i><b>10.7.1</b> 数据的拟合</a></li>
+<li class="chapter" data-level="10.7.2" data-path="anay_6800.html"><a href="anay_6800.html#conifer-racir-fit"><i class="fa fa-check"></i><b>10.7.2</b> 拟合过程</a></li>
 </ul></li>
-<li class="chapter" data-level="10.8" data-path="anay-6800.html"><a href="anay-6800.html#racir68_exam"><i class="fa fa-check"></i><b>10.8</b> RACiR分析的手动实现</a></li>
-<li class="chapter" data-level="10.9" data-path="anay-6800.html"><a href="anay-6800.html#multi1"><i class="fa fa-check"></i><b>10.9</b> 多个速率的 RACiR 曲线研究</a>
+<li class="chapter" data-level="10.8" data-path="anay_6800.html"><a href="anay_6800.html#racir68_exam"><i class="fa fa-check"></i><b>10.8</b> RACiR分析的手动实现</a></li>
+<li class="chapter" data-level="10.9" data-path="anay_6800.html"><a href="anay_6800.html#multi1"><i class="fa fa-check"></i><b>10.9</b> 多个速率的 RACiR 曲线研究</a>
 <ul>
-<li class="chapter" data-level="10.9.1" data-path="anay-6800.html"><a href="anay-6800.html#multi2"><i class="fa fa-check"></i><b>10.9.1</b> 光呼吸滞后模型</a></li>
-<li class="chapter" data-level="10.9.2" data-path="anay-6800.html"><a href="anay-6800.html#code-photoresp"><i class="fa fa-check"></i><b>10.9.2</b> 光呼吸滞后性代码</a></li>
-<li class="chapter" data-level="10.9.3" data-path="anay-6800.html"><a href="anay-6800.html#multi4"><i class="fa fa-check"></i><b>10.9.3</b> 数据的构造</a></li>
-<li class="chapter" data-level="10.9.4" data-path="anay-6800.html"><a href="anay-6800.html#multi5"><i class="fa fa-check"></i><b>10.9.4</b> 光呼吸滞后性作图</a></li>
-<li class="chapter" data-level="10.9.5" data-path="anay-6800.html"><a href="anay-6800.html#multi6"><i class="fa fa-check"></i><b>10.9.5</b> 补偿点计算</a></li>
-<li class="chapter" data-level="10.9.6" data-path="anay-6800.html"><a href="anay-6800.html#multi7"><i class="fa fa-check"></i><b>10.9.6</b> 无光呼吸酶失活模块</a></li>
-<li class="chapter" data-level="10.9.7" data-path="anay-6800.html"><a href="anay-6800.html#multi9"><i class="fa fa-check"></i><b>10.9.7</b> 酶失活作图</a></li>
-<li class="chapter" data-level="10.9.8" data-path="anay-6800.html"><a href="anay-6800.html#multi10"><i class="fa fa-check"></i><b>10.9.8</b> 不同失活程度下补偿点计算</a></li>
+<li class="chapter" data-level="10.9.1" data-path="anay_6800.html"><a href="anay_6800.html#multi2"><i class="fa fa-check"></i><b>10.9.1</b> 光呼吸滞后模型</a></li>
+<li class="chapter" data-level="10.9.2" data-path="anay_6800.html"><a href="anay_6800.html#code-photoresp"><i class="fa fa-check"></i><b>10.9.2</b> 光呼吸滞后性代码</a></li>
+<li class="chapter" data-level="10.9.3" data-path="anay_6800.html"><a href="anay_6800.html#multi4"><i class="fa fa-check"></i><b>10.9.3</b> 数据的构造</a></li>
+<li class="chapter" data-level="10.9.4" data-path="anay_6800.html"><a href="anay_6800.html#multi5"><i class="fa fa-check"></i><b>10.9.4</b> 光呼吸滞后性作图</a></li>
+<li class="chapter" data-level="10.9.5" data-path="anay_6800.html"><a href="anay_6800.html#multi6"><i class="fa fa-check"></i><b>10.9.5</b> 补偿点计算</a></li>
+<li class="chapter" data-level="10.9.6" data-path="anay_6800.html"><a href="anay_6800.html#multi7"><i class="fa fa-check"></i><b>10.9.6</b> 无光呼吸酶失活模块</a></li>
+<li class="chapter" data-level="10.9.7" data-path="anay_6800.html"><a href="anay_6800.html#multi9"><i class="fa fa-check"></i><b>10.9.7</b> 酶失活作图</a></li>
+<li class="chapter" data-level="10.9.8" data-path="anay_6800.html"><a href="anay_6800.html#multi10"><i class="fa fa-check"></i><b>10.9.8</b> 不同失活程度下补偿点计算</a></li>
 </ul></li>
-<li class="chapter" data-level="10.10" data-path="anay-6800.html"><a href="anay-6800.html#multi11"><i class="fa fa-check"></i><b>10.10</b> 时间延迟的扩散限制</a>
+<li class="chapter" data-level="10.10" data-path="anay_6800.html"><a href="anay_6800.html#multi11"><i class="fa fa-check"></i><b>10.10</b> 时间延迟的扩散限制</a>
 <ul>
-<li class="chapter" data-level="10.10.1" data-path="anay-6800.html"><a href="anay-6800.html#multi12"><i class="fa fa-check"></i><b>10.10.1</b> 扩散限制滞后性</a></li>
+<li class="chapter" data-level="10.10.1" data-path="anay_6800.html"><a href="anay_6800.html#multi12"><i class="fa fa-check"></i><b>10.10.1</b> 扩散限制滞后性</a></li>
 </ul></li>
-<li class="chapter" data-level="10.11" data-path="anay-6800.html"><a href="anay-6800.html#multi13"><i class="fa fa-check"></i><b>10.11</b> 扩散限制作图</a>
+<li class="chapter" data-level="10.11" data-path="anay_6800.html"><a href="anay_6800.html#multi13"><i class="fa fa-check"></i><b>10.11</b> 扩散限制作图</a>
 <ul>
-<li class="chapter" data-level="10.11.1" data-path="anay-6800.html"><a href="anay-6800.html#multi14"><i class="fa fa-check"></i><b>10.11.1</b> 补偿点的计算</a></li>
-<li class="chapter" data-level="10.11.2" data-path="anay-6800.html"><a href="anay-6800.html#multi15"><i class="fa fa-check"></i><b>10.11.2</b> 所有图形代码</a></li>
+<li class="chapter" data-level="10.11.1" data-path="anay_6800.html"><a href="anay_6800.html#multi14"><i class="fa fa-check"></i><b>10.11.1</b> 补偿点的计算</a></li>
+<li class="chapter" data-level="10.11.2" data-path="anay_6800.html"><a href="anay_6800.html#multi15"><i class="fa fa-check"></i><b>10.11.2</b> 所有图形代码</a></li>
 </ul></li>
-<li class="chapter" data-level="10.12" data-path="anay-6800.html"><a href="anay-6800.html#fluro68"><i class="fa fa-check"></i><b>10.12</b> LI-6800 荧光数据分析</a>
+<li class="chapter" data-level="10.12" data-path="anay_6800.html"><a href="anay_6800.html#fluro68"><i class="fa fa-check"></i><b>10.12</b> LI-6800 荧光数据分析</a>
 <ul>
-<li class="chapter" data-level="10.12.1" data-path="anay-6800.html"><a href="anay-6800.html#jiptest"><i class="fa fa-check"></i><b>10.12.1</b> jip test 的实现</a></li>
-<li class="chapter" data-level="10.12.2" data-path="anay-6800.html"><a href="anay-6800.html#jiptest_pack"><i class="fa fa-check"></i><b>10.12.2</b> <code>jiptest</code> 软件包安装</a></li>
-<li class="chapter" data-level="10.12.3" data-path="anay-6800.html"><a href="anay-6800.html#readfluor"><i class="fa fa-check"></i><b>10.12.3</b> <code>read_files</code> 及 <code>read_dcfiles</code> 函数</a></li>
-<li class="chapter" data-level="10.12.4" data-path="anay-6800.html"><a href="anay-6800.html#testfluor"><i class="fa fa-check"></i><b>10.12.4</b> <code>jip_test</code> 及 <code>jip_dctest</code> 函数</a></li>
-<li class="chapter" data-level="10.12.5" data-path="anay-6800.html"><a href="anay-6800.html#plotfluor"><i class="fa fa-check"></i><b>10.12.5</b> 图像查看函数</a></li>
+<li class="chapter" data-level="10.12.1" data-path="anay_6800.html"><a href="anay_6800.html#jiptest"><i class="fa fa-check"></i><b>10.12.1</b> jip test 的实现</a></li>
+<li class="chapter" data-level="10.12.2" data-path="anay_6800.html"><a href="anay_6800.html#jiptest_pack"><i class="fa fa-check"></i><b>10.12.2</b> <code>jiptest</code> 软件包安装</a></li>
+<li class="chapter" data-level="10.12.3" data-path="anay_6800.html"><a href="anay_6800.html#readfluor"><i class="fa fa-check"></i><b>10.12.3</b> <code>read_files</code> 及 <code>read_dcfiles</code> 函数</a></li>
+<li class="chapter" data-level="10.12.4" data-path="anay_6800.html"><a href="anay_6800.html#testfluor"><i class="fa fa-check"></i><b>10.12.4</b> <code>jip_test</code> 及 <code>jip_dctest</code> 函数</a></li>
+<li class="chapter" data-level="10.12.5" data-path="anay_6800.html"><a href="anay_6800.html#plotfluor"><i class="fa fa-check"></i><b>10.12.5</b> 图像查看函数</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="big-leaf.html"><a href="big-leaf.html"><i class="fa fa-check"></i><b>11</b> 大叶模型</a>
@@ -360,15 +360,15 @@ div.csl-indent {
 <p><img src="bookdown_files/figure-html/2dim-1.png" width="672" /></p>
 <p>看上去一言难尽，此时的缺点非常明显，图中的每个点均代表了某个植株的两个性状，这个性状类似于我们说的电子云，杂乱而无规律。这还只是二维数据，如果我们将所有四个轴的数据都显示也就是四维的数据，那么对于我等肉眼凡胎来讲，还是不看为妙。</p>
 <p>我在看到上面留的两个网址之前，对主成份分析的疑惑一直没断过，什么是主成份，一直说是主轴旋转，到底是怎么旋转的，我们看一下主成份的 PC1 是怎么来做的:</p>
-<div class="figure"><span id="fig:pccenter"></span>
+<div class="figure"><span style="display:block;" id="fig:pccenter"></span>
 <img src="images/pc1.png" alt="数据的中心化" width="100%" />
 <p class="caption">
 图 12.1: 数据的中心化
 </p>
 </div>
-<p>如图 <a href="pca-anylysis.html#fig:pccenter">12.1</a>，假设有三维的数据，可以理解为 iris 数据中前三列的观测值，每个点分别代表了一个植株的前三个性状，PCA 第一步便是中心化，将坐标轴由左边转移到右边的中心点位置作为原点，这就是所谓的平均值中心化的过程，这样就消除了测量时的偏差 <a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a>，同时一般还要对数据进行缩放，以消除不同单位的影响 <a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a>，
+<p>如图 <a href="pca-anylysis.html#fig:pccenter">12.1</a>，假设有三维的数据，可以理解为 iris 数据中前三列的观测值，每个点分别代表了一个植株的前三个性状，PCA 第一步便是中心化，将坐标轴由左边转移到右边的中心点位置作为原点，这就是所谓的平均值中心化的过程，这样就消除了测量时的偏差 <a href="references.html#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a>，同时一般还要对数据进行缩放，以消除不同单位的影响 <a href="references.html#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a>，
 例如有光合速率，有叶片面积的数据，这样能够消除不同单位的影响，通常的缩放例如对数化。</p>
-<div class="figure"><span id="fig:pc2"></span>
+<div class="figure"><span style="display:block;" id="fig:pc2"></span>
 <img src="images/pc2.png" alt="PC1 的诞生" width="100%" />
 <p class="caption">
 图 12.2: PC1 的诞生
@@ -378,7 +378,7 @@ div.csl-indent {
 <ul>
 <li>所有的点投影到这条拟合线上，投影后的点之间的距离是最大的，该方向代表了所有变异最大，也就是最大化的区分所有的数据点，因为我们的目的就是要区分数据点之间的差异。如果在读的各位有跟我一样空间想象力有限的，可以根据图 <a href="pca-anylysis.html#fig:maxvar">12.3</a> 的极端情况来理解，蓝色线为最佳拟合线，红色的数据点投影到其上的距离之和当然大于投影到蓝色的拟合线上。</li>
 </ul>
-<div class="figure"><span id="fig:maxvar"></span>
+<div class="figure"><span style="display:block;" id="fig:maxvar"></span>
 <img src="bookdown_files/figure-html/maxvar-1.png" alt="变异最大的极端情况" width="672" />
 <p class="caption">
 图 12.3: 变异最大的极端情况
@@ -388,7 +388,7 @@ div.csl-indent {
 <li>所有点和他们相对应的点之间的距离是最小的（也就是残差最小，最佳拟合当然是残差最小），这保证了这些投影的点和原来的数据点尽可能接近，也就是变化后损失的信息最少。</li>
 </ul>
 <p>以上变化的最终结果为将变异放到最大而误差降低到最小，我们研究的最终目的无非就是这样。这个最佳拟合的线我们将其称之为 PC1，主成份1。</p>
-<div class="figure"><span id="fig:pc3"></span>
+<div class="figure"><span style="display:block;" id="fig:pc3"></span>
 <img src="images/pc3.png" alt="PC2 的诞生" width="100%" />
 <p class="caption">
 图 12.4: PC2 的诞生
@@ -396,14 +396,14 @@ div.csl-indent {
 </div>
 <p>如果我们做一条通过中心点并与 PC1 垂直的线，并不断旋转这条线使其满足：所有投影于其上的点，他们的距离最大，也就是变异最大，这样就做出了第二个主成份，PC2，如图 <a href="pca-anylysis.html#fig:pc3">12.4</a>。<strong>就这样不断的变换，一般情况下，我们可以使用 2~3 个主成份来解释绝大部分数据所展示的信息（所有数据都尽可能少的损失信息投影于其上）</strong>。</p>
 <p>以上为基本变换，如果我们使用 R 计算 PCA (这里推荐两个包 <code>factoextra</code> 和 <code>FactoMineR</code>)，查看其结果：</p>
-<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="pca-anylysis.html#cb335-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;FactoMineR&quot;</span>)</span>
-<span id="cb335-2"><a href="pca-anylysis.html#cb335-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;factoextra&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="pca-anylysis.html#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;FactoMineR&quot;</span>)</span>
+<span id="cb292-2"><a href="pca-anylysis.html#cb292-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;factoextra&quot;</span>)</span></code></pre></div>
 <pre><code>## Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa</code></pre>
-<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="pca-anylysis.html#cb337-1" aria-hidden="true" tabindex="-1"></a>ir <span class="ot">&lt;-</span> iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span>
-<span id="cb337-2"><a href="pca-anylysis.html#cb337-2" aria-hidden="true" tabindex="-1"></a>ir_pca <span class="ot">&lt;-</span> <span class="fu">PCA</span>(ir, <span class="at">graph =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb337-3"><a href="pca-anylysis.html#cb337-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb337-4"><a href="pca-anylysis.html#cb337-4" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_eig</span>(ir_pca, <span class="at">addlabels =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:scree"></span>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="pca-anylysis.html#cb294-1" aria-hidden="true" tabindex="-1"></a>ir <span class="ot">&lt;-</span> iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span>
+<span id="cb294-2"><a href="pca-anylysis.html#cb294-2" aria-hidden="true" tabindex="-1"></a>ir_pca <span class="ot">&lt;-</span> <span class="fu">PCA</span>(ir, <span class="at">graph =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb294-3"><a href="pca-anylysis.html#cb294-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb294-4"><a href="pca-anylysis.html#cb294-4" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_eig</span>(ir_pca, <span class="at">addlabels =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:scree"></span>
 <img src="bookdown_files/figure-html/scree-1.png" alt="iris 碎石图" width="672" />
 <p class="caption">
 图 12.5: iris 碎石图
@@ -411,8 +411,8 @@ div.csl-indent {
 </div>
 <p>我们可以看到，前两个成分可以解释数据 95% 以上的变异，所以我们可以只使用主成份 1 和主成份 2 对我们的结果进行解释。</p>
 <p>既然我们使用两个主成份解释整个数据，那么我们怎么把四个性状都放在这个图上呢？这就需要载荷图来展示了，如图 <a href="pca-anylysis.html#fig:loadingpca">12.6</a></p>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="pca-anylysis.html#cb338-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(ir_pca)</span></code></pre></div>
-<div class="figure"><span id="fig:loadingpca"></span>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="pca-anylysis.html#cb295-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(ir_pca)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:loadingpca"></span>
 <img src="bookdown_files/figure-html/loadingpca-1.png" alt="iris 载荷图" width="672" />
 <p class="caption">
 图 12.6: iris 载荷图
@@ -420,10 +420,10 @@ div.csl-indent {
 </div>
 <p>怎么解释呢，因为原始的数据点相当于在坐标轴上，这几个性状分布的产生类似于原始的数据点在拉拽某个性状，影响强的偏向某一方向，换句话说，<strong>这些性状决定主成份时有不同的权重，也就是对主成份影响的权重大小。同时他们是有方向的，如果两个性状方向接近，也就是夹角非常小，说明他们有较强的正相关性，例如图中的花瓣的长宽，如果他们互相垂直，那说明他们无相关性，例如图中花萼的长宽，如果夹角非常大，例如他们几乎在一条直线上，说明具有显著的负相关</strong>。其本质还是所有的单位向量（本例有四个性状，各个性状中心化后形成的轴，也就是向量）在现在的这个二维平面的位置。</p>
 <p>而如果我想通过这些性状来对鸢尾分类，怎么看呢？那就需要得分图来展示了，如图 <a href="pca-anylysis.html#fig:scorepca">12.7</a> ，得分图本质是各个品种的每个观测值在各个轴上的长度，也就是得分，所以其值都是每个物种性状的加权，每个点代表了每个物种的观测值。</p>
-<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="pca-anylysis.html#cb339-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(ir_pca, <span class="at">repel =</span> <span class="cn">TRUE</span>, <span class="at">col.ind=</span> iris<span class="sc">$</span>Species)</span></code></pre></div>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="pca-anylysis.html#cb296-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(ir_pca, <span class="at">repel =</span> <span class="cn">TRUE</span>, <span class="at">col.ind=</span> iris<span class="sc">$</span>Species)</span></code></pre></div>
 <pre><code>## Warning: ggrepel: 69 unlabeled data points (too many overlaps). Consider
 ## increasing max.overlaps</code></pre>
-<div class="figure"><span id="fig:scorepca"></span>
+<div class="figure"><span style="display:block;" id="fig:scorepca"></span>
 <img src="bookdown_files/figure-html/scorepca-1.png" alt="iris 得分图" width="672" />
 <p class="caption">
 图 12.7: iris 得分图
@@ -510,18 +510,18 @@ finaldata = rowfeaturevector \times rowdataajust
 <h3><span class="header-section-number">12.2.2</span> 手动实现过程</h3>
 <div id="av_val" class="section level4" number="12.2.2.1">
 <h4><span class="header-section-number">12.2.2.1</span> 均值的计算</h4>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="pca-anylysis.html#cb341-1" aria-hidden="true" tabindex="-1"></a>iris_mean <span class="ot">&lt;-</span> <span class="fu">apply</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="dv">2</span>, <span class="cf">function</span>(x) x <span class="sc">-</span> <span class="fu">mean</span>(x))</span></code></pre></div>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="pca-anylysis.html#cb298-1" aria-hidden="true" tabindex="-1"></a>iris_mean <span class="ot">&lt;-</span> <span class="fu">apply</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="dv">2</span>, <span class="cf">function</span>(x) x <span class="sc">-</span> <span class="fu">mean</span>(x))</span></code></pre></div>
 <p>我只使用了前四列的性状数据，仅仅是方便结果的展示。</p>
 </div>
 <div id="cov_val" class="section level4" number="12.2.2.2">
 <h4><span class="header-section-number">12.2.2.2</span> 计算协方差矩阵</h4>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="pca-anylysis.html#cb342-1" aria-hidden="true" tabindex="-1"></a>iris_cov <span class="ot">&lt;-</span> <span class="fu">cov</span>(iris_mean)</span></code></pre></div>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="pca-anylysis.html#cb299-1" aria-hidden="true" tabindex="-1"></a>iris_cov <span class="ot">&lt;-</span> <span class="fu">cov</span>(iris_mean)</span></code></pre></div>
 </div>
 <div id="eig_val" class="section level4" number="12.2.2.3">
 <h4><span class="header-section-number">12.2.2.3</span> 计算特征值和特征向量</h4>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="pca-anylysis.html#cb343-1" aria-hidden="true" tabindex="-1"></a>iris_eigen <span class="ot">&lt;-</span> <span class="fu">eigen</span>(iris_cov)</span></code></pre></div>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="pca-anylysis.html#cb300-1" aria-hidden="true" tabindex="-1"></a>iris_eigen <span class="ot">&lt;-</span> <span class="fu">eigen</span>(iris_cov)</span></code></pre></div>
 <p>这里就可以看到之前提到的，特征值和特征向量是根据协方差矩阵计算的。我们选取特征值最大的两个，他们的特征值之和已经占所有的特征值之和相当大的比例：</p>
-<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="pca-anylysis.html#cb344-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(iris_eigen<span class="sc">$</span>values[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])<span class="sc">/</span><span class="fu">sum</span>(iris_eigen<span class="sc">$</span>values)</span></code></pre></div>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="pca-anylysis.html#cb301-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(iris_eigen<span class="sc">$</span>values[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])<span class="sc">/</span><span class="fu">sum</span>(iris_eigen<span class="sc">$</span>values)</span></code></pre></div>
 <pre><code>## [1] 0.9776852</code></pre>
 <p>也就是说特征值对应的前两项是我们最终降维所需要的，即最终的两个主轴为 <span class="math inline">\(150 \times 2\)</span> 维矩阵，即我们原来的 <span class="math inline">\(150 \times 4\)</span> 的矩阵乘以我们选取的前两个特征值对应的 <span class="math inline">\(4 \times 2\)</span> 组成的矩阵。</p>
 <p>实际应用中我们不需要这么做了，因为太浪费时间了，我们直接用函数来得到结果即可。</p>
@@ -530,13 +530,13 @@ finaldata = rowfeaturevector \times rowdataajust
 <div id="prcom" class="section level3" number="12.2.3">
 <h3><span class="header-section-number">12.2.3</span> <code>prcomp</code> 的实现</h3>
 <p>我们用 <code>prcomp</code> 来简化实现过程，注意，根据 <span class="citation">Kemp (<a href="#ref-kemp2003modern" role="doc-biblioref">2003</a>)</span>，我们把 iris 数据对数化一下，并提取所有物种名字：</p>
-<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="pca-anylysis.html#cb346-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;iris&quot;</span>)</span>
-<span id="cb346-2"><a href="pca-anylysis.html#cb346-2" aria-hidden="true" tabindex="-1"></a>iris_pca <span class="ot">&lt;-</span> <span class="fu">log</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span>
-<span id="cb346-3"><a href="pca-anylysis.html#cb346-3" aria-hidden="true" tabindex="-1"></a>iris_species <span class="ot">&lt;-</span> iris<span class="sc">$</span>Species</span></code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="pca-anylysis.html#cb303-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;iris&quot;</span>)</span>
+<span id="cb303-2"><a href="pca-anylysis.html#cb303-2" aria-hidden="true" tabindex="-1"></a>iris_pca <span class="ot">&lt;-</span> <span class="fu">log</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span>
+<span id="cb303-3"><a href="pca-anylysis.html#cb303-3" aria-hidden="true" tabindex="-1"></a>iris_species <span class="ot">&lt;-</span> iris<span class="sc">$</span>Species</span></code></pre></div>
 <p>需要注意，我们处理时使用特征中心化。即每一维的数据都减去该维的均值。这里的“维”指的就是一个特征（或属性），变换之后每一维的均值都变成了0 (参考 <a href="pca-anylysis.html#eq:despca">(12.2)</a> )。</p>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="pca-anylysis.html#cb347-1" aria-hidden="true" tabindex="-1"></a>value_pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(iris_pca, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb347-2"><a href="pca-anylysis.html#cb347-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 查看结果</span></span>
-<span id="cb347-3"><a href="pca-anylysis.html#cb347-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(value_pca)</span></code></pre></div>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="pca-anylysis.html#cb304-1" aria-hidden="true" tabindex="-1"></a>value_pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(iris_pca, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb304-2"><a href="pca-anylysis.html#cb304-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 查看结果</span></span>
+<span id="cb304-3"><a href="pca-anylysis.html#cb304-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(value_pca)</span></code></pre></div>
 <pre><code>## Importance of components:
 ##                           PC1    PC2     PC3     PC4
 ## Standard deviation     1.7125 0.9524 0.36470 0.16568
@@ -555,13 +555,6 @@ Kemp, Freda. 2003. <span>“Modern Applied Statistics with s.”</span> <em>Jour
 Smith, Lindsay I. 2002. <span>“A Tutorial on Principal Component Analysis.”</span>
 </div>
 </div>
-<div class="footnotes">
-<hr />
-<ol start="15">
-<li id="fn15"><p><a href="https://www.mathsisfun.com/definitions/bias.html" class="uri">https://www.mathsisfun.com/definitions/bias.html</a><a href="pca-anylysis.html#fnref15" class="footnote-back">↩︎</a></p></li>
-<li id="fn16"><p><a href="https://en.wikipedia.org/wiki/Scaling_(geometry)" class="uri">https://en.wikipedia.org/wiki/Scaling_(geometry)</a><a href="pca-anylysis.html#fnref16" class="footnote-back">↩︎</a></p></li>
-</ol>
-</div>
             </section>
 
           </div>
@@ -572,7 +565,6 @@ Smith, Lindsay I. 2002. <span>“A Tutorial on Principal Component Analysis.”<
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -612,6 +604,10 @@ gitbook.start({
 "text": null
 },
 "download": ["bookdown.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 }

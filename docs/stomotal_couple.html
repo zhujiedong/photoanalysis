@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
+  <title>第 5 章 光合最优气孔导度耦合模型 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
   <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
+  <meta property="og:title" content="第 5 章 光合最优气孔导度耦合模型 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/coverpage.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="zhujiedong/photoanalysis" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
+  <meta name="twitter:title" content="第 5 章 光合最优气孔导度耦合模型 | 使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
   
   <meta name="twitter:description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
   <meta name="twitter:image" content="/images/coverpage.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="frontmatter.html"/>
+<link rel="prev" href="stomotal_sim.html"/>
+<link rel="next" href="photo_stomo.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -348,28 +348,46 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据</h1>
-<p class="author"><em>祝介东<br /> <br /> 北京力高泰科技有限公司</em></p>
-<p class="date"><em>2021-11-11</em></p>
-</div>
-<div id="welcome" class="section level1 unnumbered">
-<h1>欢迎</h1>
-<hr />
-<p><strong>Note</strong>: 本文内容仅为我 github 中相关repo (photoanalysis) 的在线预览版本，并不保证及时更新。</p>
-<p style="text-align: center;">
-<img src="images/coverpage.png" />
-</p>
-<p>本文纯属个人打发出差漫漫长夜的作品，并非正式资料，并未经过校对等流程，但所用代码皆经过本人和同事的验证，所引文献均真实存在。希望对不熟悉相关知识的童鞋们有所帮助。</p>
+<div id="stomotal_couple" class="section level1" number="5">
+<h1><span class="header-section-number">第 5 章</span> 光合最优气孔导度耦合模型</h1>
+<p><span class="citation">Cowan and Farquhar (<a href="#ref-Cowan1977Stomatal" role="doc-biblioref">1977</a>)</span> 关于最优气孔导度的描述概括如下：
+最优气孔行为理论认为气孔的最优化行为就是在某一时间段内， 最大化光合碳固定的同时最小化蒸腾作用，也就是说，对于一定的水分消耗，最大化光合碳固定。即使得：</p>
+<p><span class="math display" id="eq:weff">\[\begin{equation}
+A - \lambda E
+\tag{5.1}
+\end{equation}\]</span></p>
+<p>有最大化，其中 <span class="math inline">\(\lambda\)</span> 是临界水分利用效率，也即植物损耗单位水分的 C 生产量，单位一般为 <span class="math inline">\(mol \: CO_2 \cdot mol^{-1} H_2O\)</span>，可通过光合速率和蒸腾速率计算。</p>
+<div id="farao" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> <code>FARAO</code> 函数</h2>
+<p><code>FARAO</code> 函数用于找到最大化 <span class="math inline">\(A - \lambda E\)</span> 的** Ci **值。</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="stomotal_couple.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">FARAO</span>(<span class="at">lambda =</span> <span class="fl">0.002</span>, <span class="at">Ca =</span> <span class="dv">400</span>, <span class="at">VPD =</span> <span class="dv">1</span>,</span>
+<span id="cb57-2"><a href="stomotal_couple.html#cb57-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">photo =</span> <span class="fu">c</span>(<span class="st">&quot;BOTH&quot;</span>, <span class="st">&quot;VCMAX&quot;</span>,<span class="st">&quot;JMAX&quot;</span>), </span>
+<span id="cb57-3"><a href="stomotal_couple.html#cb57-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">energybalance =</span> <span class="cn">FALSE</span>, <span class="at">C4 =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb57-4"><a href="stomotal_couple.html#cb57-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">Tair =</span> <span class="dv">25</span>, <span class="at">Wind =</span> <span class="dv">2</span>, <span class="at">Wleaf =</span> <span class="fl">0.02</span>,</span>
+<span id="cb57-5"><a href="stomotal_couple.html#cb57-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">StomatalRatio =</span> <span class="dv">1</span>, <span class="at">LeafAbs =</span> <span class="fl">0.86</span>, ...)</span>
+<span id="cb57-6"><a href="stomotal_couple.html#cb57-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-7"><a href="stomotal_couple.html#cb57-7" aria-hidden="true" tabindex="-1"></a><span class="fu">FARAO2</span>(<span class="at">lambda =</span> <span class="fl">0.002</span>, <span class="at">Ca =</span> <span class="dv">400</span>, </span>
+<span id="cb57-8"><a href="stomotal_couple.html#cb57-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">energybalance =</span> <span class="cn">FALSE</span>, ...)</span></code></pre></div>
+<p>其参数同 <code>fitaci</code> 和 <code>Photosyn</code>，在此不多做介绍，可参考<span class="citation">Belinda E. Medlyn et al. (<a href="#ref-Medlyn2011Reconciling" role="doc-biblioref">2011</a>)</span>。</p>
 
+</div>
+</div>
+<h3>参考文献</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Cowan1977Stomatal" class="csl-entry">
+Cowan, I. R., and G. D. Farquhar. 1977. <span>“Stomatal Function in Relation to Leaf Metabolism and Environment.”</span> <em>Symposia of the Society for Experimental Biology</em> 31 (23): 471.
+</div>
+<div id="ref-Medlyn2011Reconciling" class="csl-entry">
+Medlyn, Belinda E., Remko A. Duursma, Derek Eamus, David S. Ellsworth, I. Colin Prentice, Craig V. M. Barton, Kristine Y. Crous, Paolo De Angelis, Michael Freeman, and Lisa Wingate. 2011. <span>“Reconciling the Optimal and Empirical Approaches to Modelling Stomatal Conductance.”</span> <em>Global Change Biology</em> 17 (6): 2134–44.
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="frontmatter.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="stomotal_sim.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="photo_stomo.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -400,7 +418,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/zhujiedong/photoanalysis/blob/master/index.Rmd",
+"link": "https://github.com/zhujiedong/photoanalysis/blob/master/04-optimize.Rmd",
 "text": "编辑"
 },
 "history": {

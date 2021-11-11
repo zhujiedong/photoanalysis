@@ -1,5 +1,10 @@
 # 批量处理光合测定数据 {#batch_question}
 
+> 该部分内容不建议继续使用，尤其是读取原始数据文件部分。目前代码报错，可能是某个依赖软件包升级导致，但我没时间处理。对于 excel 文件格式的处理，我目前找到了一个自认为比较好的批量转 csv 格式的方案，但是需要 `python` 的 `xlwings` 支持，该库比较成熟，不存在依赖地狱的问题，而且我也打包了一个图形界面，批量处理为 csv 后用常规方法导入就行，如果我有时间，会将该部分内容彻底修改。`python` 方案见链接：[github](https://github.com/zhujiedong/LI6800_excel2csv) 或微信 [微信版](https://mp.weixin.qq.com/s?__biz=MzU4ODI3NjkzMg==&mid=2247485489&idx=2&sn=9aed981d7624c8e289cb9173c269373a&chksm=fdde7d9acaa9f48c3dc0d09324d0461b18b4edd4ff56207de54b5152cbfe4a97fdc482b31b82&token=101697346&lang=zh_CN#rd)
+
+
+
+
 对于多数人来讲，一个季节用光合仪测量的数据文件至少是两位数的，处理起来非常不方便，针对这个问题，简单写了一个批量读取 LI-6400 和 LI-6800 原始数据的包(因为现有的容易实现的读取 excel 格式的包还不支持 6800 和 6400 这种形式的公式计算)^[特别注意，原始数据可以用文本编辑器打开，但为了方便使用这个软件包，准确输入与行号相关的参数，建议您使用带行号显示的软件，例如 windows 下的 notepad++]，使用非常简单，同时也适合处理未关闭数据文件而导致的无法生成 excel 格式的数据时的问题。
 
 ## 安装 {#install_readphoto}
@@ -68,12 +73,14 @@ caption = 'LI-6800 批量整合数据')
 
 ~~另外： 今天添加了使用 regex 读取 LI-6800 原始文件的方法，这个只需要路径即可（2020-3-18），简单测试，有名字重复的警告，是 TIME，不影响大局，我没时间改，过几天有时间了再改：~~
 
-```{r}
+**当前版本有问题，可能时依赖的 `stringi` 升级导致，现在没有时间处理。**
+
+```{r, eval=FALSE}
 library(readphoto)
 df2 <- read_regex68("./data/6800")
 ```
 
-```{r,echo=FALSE}
+```{r,eval=FALSE}
 knitr::kable(df2[1:15, 1:8], booktabs = TRUE,
 caption = 'LI-6800 regex 方式批量整合数据')
 ```
@@ -112,10 +119,10 @@ y1$Photo/x1$Photo
 
 #### 原始数据的批量计算 {#raw-batch-68}
 
-此部分内容保留，但不建议继续使用
+**此部分内容保留，但不建议继续使用**
 ~~参数的重计算函数为 `recomp_6800`, 其参数除了 `read_bat_6800` 所包含的参数外，还有叶面积 S, 以及叶片正反面的气孔比例，默认值分别为 6 和 0.5。~~
 
-```{r, message=FALSE}
+```{r, eval=FALSE}
 library(readphoto)
 x3 <- read_bat_6800("./data/6800")
 y3 <- recomp_6800("./data/6800", S = 6, K = 0.5)
