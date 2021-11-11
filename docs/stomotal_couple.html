@@ -170,12 +170,16 @@ div.csl-indent {
 <li class="chapter" data-level="2" data-path="batch_question.html"><a href="batch_question.html"><i class="fa fa-check"></i><b>2</b> 批量处理光合测定数据</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="batch_question.html"><a href="batch_question.html#install_readphoto"><i class="fa fa-check"></i><b>2.1</b> 安装</a></li>
-<li class="chapter" data-level="2.2" data-path="batch_question.html"><a href="batch_question.html#batch64"><i class="fa fa-check"></i><b>2.2</b> 6400 数据整合</a></li>
-<li class="chapter" data-level="2.3" data-path="batch_question.html"><a href="batch_question.html#batch68"><i class="fa fa-check"></i><b>2.3</b> LI-6800 数据整合</a></li>
-<li class="chapter" data-level="2.4" data-path="batch_question.html"><a href="batch_question.html#recompute_raw"><i class="fa fa-check"></i><b>2.4</b> 重计算功能</a>
+<li class="chapter" data-level="2.2" data-path="batch_question.html"><a href="batch_question.html#batch64"><i class="fa fa-check"></i><b>2.2</b> LI-6400 数据处理</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="batch_question.html"><a href="batch_question.html#recompute6400"><i class="fa fa-check"></i><b>2.4.1</b> LI-6400 数据重计算</a></li>
-<li class="chapter" data-level="2.4.2" data-path="batch_question.html"><a href="batch_question.html#recompute6800"><i class="fa fa-check"></i><b>2.4.2</b> LI-6800 数据重计算</a></li>
+<li class="chapter" data-level="2.2.1" data-path="batch_question.html"><a href="batch_question.html#li-6400-数据的整合6400combine"><i class="fa fa-check"></i><b>2.2.1</b> LI-6400 数据的整合{#6400combine}</a></li>
+<li class="chapter" data-level="2.2.2" data-path="batch_question.html"><a href="batch_question.html#recompute6400"><i class="fa fa-check"></i><b>2.2.2</b> LI-6400 数据重计算</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="batch_question.html"><a href="batch_question.html#li-6800-数据的处理-6800data"><i class="fa fa-check"></i><b>2.3</b> LI-6800 数据的处理 {#6800data}</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="batch_question.html"><a href="batch_question.html#r-下-excel-格式读取的重计算-6800xlconnect"><i class="fa fa-check"></i><b>2.3.1</b> R 下 Excel 格式读取的重计算 {##6800xlconnect}</a></li>
+<li class="chapter" data-level="2.3.2" data-path="batch_question.html"><a href="batch_question.html#python"><i class="fa fa-check"></i><b>2.3.2</b> 使用 Python 来处理</a></li>
+<li class="chapter" data-level="2.3.3" data-path="batch_question.html"><a href="batch_question.html#python-r-batch"><i class="fa fa-check"></i><b>2.3.3</b> 批量处理 csv 文件</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="response_fit.html"><a href="response_fit.html"><i class="fa fa-check"></i><b>3</b> CO<sub>2</sub> 响应曲线的拟合</a>
@@ -360,14 +364,14 @@ A - \lambda E
 <div id="farao" class="section level2" number="5.1">
 <h2><span class="header-section-number">5.1</span> <code>FARAO</code> 函数</h2>
 <p><code>FARAO</code> 函数用于找到最大化 <span class="math inline">\(A - \lambda E\)</span> 的** Ci **值。</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="stomotal_couple.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">FARAO</span>(<span class="at">lambda =</span> <span class="fl">0.002</span>, <span class="at">Ca =</span> <span class="dv">400</span>, <span class="at">VPD =</span> <span class="dv">1</span>,</span>
-<span id="cb57-2"><a href="stomotal_couple.html#cb57-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">photo =</span> <span class="fu">c</span>(<span class="st">&quot;BOTH&quot;</span>, <span class="st">&quot;VCMAX&quot;</span>,<span class="st">&quot;JMAX&quot;</span>), </span>
-<span id="cb57-3"><a href="stomotal_couple.html#cb57-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">energybalance =</span> <span class="cn">FALSE</span>, <span class="at">C4 =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb57-4"><a href="stomotal_couple.html#cb57-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">Tair =</span> <span class="dv">25</span>, <span class="at">Wind =</span> <span class="dv">2</span>, <span class="at">Wleaf =</span> <span class="fl">0.02</span>,</span>
-<span id="cb57-5"><a href="stomotal_couple.html#cb57-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">StomatalRatio =</span> <span class="dv">1</span>, <span class="at">LeafAbs =</span> <span class="fl">0.86</span>, ...)</span>
-<span id="cb57-6"><a href="stomotal_couple.html#cb57-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-7"><a href="stomotal_couple.html#cb57-7" aria-hidden="true" tabindex="-1"></a><span class="fu">FARAO2</span>(<span class="at">lambda =</span> <span class="fl">0.002</span>, <span class="at">Ca =</span> <span class="dv">400</span>, </span>
-<span id="cb57-8"><a href="stomotal_couple.html#cb57-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">energybalance =</span> <span class="cn">FALSE</span>, ...)</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="stomotal_couple.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">FARAO</span>(<span class="at">lambda =</span> <span class="fl">0.002</span>, <span class="at">Ca =</span> <span class="dv">400</span>, <span class="at">VPD =</span> <span class="dv">1</span>,</span>
+<span id="cb61-2"><a href="stomotal_couple.html#cb61-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">photo =</span> <span class="fu">c</span>(<span class="st">&quot;BOTH&quot;</span>, <span class="st">&quot;VCMAX&quot;</span>,<span class="st">&quot;JMAX&quot;</span>), </span>
+<span id="cb61-3"><a href="stomotal_couple.html#cb61-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">energybalance =</span> <span class="cn">FALSE</span>, <span class="at">C4 =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb61-4"><a href="stomotal_couple.html#cb61-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">Tair =</span> <span class="dv">25</span>, <span class="at">Wind =</span> <span class="dv">2</span>, <span class="at">Wleaf =</span> <span class="fl">0.02</span>,</span>
+<span id="cb61-5"><a href="stomotal_couple.html#cb61-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">StomatalRatio =</span> <span class="dv">1</span>, <span class="at">LeafAbs =</span> <span class="fl">0.86</span>, ...)</span>
+<span id="cb61-6"><a href="stomotal_couple.html#cb61-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-7"><a href="stomotal_couple.html#cb61-7" aria-hidden="true" tabindex="-1"></a><span class="fu">FARAO2</span>(<span class="at">lambda =</span> <span class="fl">0.002</span>, <span class="at">Ca =</span> <span class="dv">400</span>, </span>
+<span id="cb61-8"><a href="stomotal_couple.html#cb61-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">energybalance =</span> <span class="cn">FALSE</span>, ...)</span></code></pre></div>
 <p>其参数同 <code>fitaci</code> 和 <code>Photosyn</code>，在此不多做介绍，可参考<span class="citation">Belinda E. Medlyn et al. (<a href="#ref-Medlyn2011Reconciling" role="doc-biblioref">2011</a>)</span>。</p>
 
 </div>

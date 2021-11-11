@@ -170,12 +170,16 @@ div.csl-indent {
 <li class="chapter" data-level="2" data-path="batch_question.html"><a href="batch_question.html"><i class="fa fa-check"></i><b>2</b> 批量处理光合测定数据</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="batch_question.html"><a href="batch_question.html#install_readphoto"><i class="fa fa-check"></i><b>2.1</b> 安装</a></li>
-<li class="chapter" data-level="2.2" data-path="batch_question.html"><a href="batch_question.html#batch64"><i class="fa fa-check"></i><b>2.2</b> 6400 数据整合</a></li>
-<li class="chapter" data-level="2.3" data-path="batch_question.html"><a href="batch_question.html#batch68"><i class="fa fa-check"></i><b>2.3</b> LI-6800 数据整合</a></li>
-<li class="chapter" data-level="2.4" data-path="batch_question.html"><a href="batch_question.html#recompute_raw"><i class="fa fa-check"></i><b>2.4</b> 重计算功能</a>
+<li class="chapter" data-level="2.2" data-path="batch_question.html"><a href="batch_question.html#batch64"><i class="fa fa-check"></i><b>2.2</b> LI-6400 数据处理</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="batch_question.html"><a href="batch_question.html#recompute6400"><i class="fa fa-check"></i><b>2.4.1</b> LI-6400 数据重计算</a></li>
-<li class="chapter" data-level="2.4.2" data-path="batch_question.html"><a href="batch_question.html#recompute6800"><i class="fa fa-check"></i><b>2.4.2</b> LI-6800 数据重计算</a></li>
+<li class="chapter" data-level="2.2.1" data-path="batch_question.html"><a href="batch_question.html#li-6400-数据的整合6400combine"><i class="fa fa-check"></i><b>2.2.1</b> LI-6400 数据的整合{#6400combine}</a></li>
+<li class="chapter" data-level="2.2.2" data-path="batch_question.html"><a href="batch_question.html#recompute6400"><i class="fa fa-check"></i><b>2.2.2</b> LI-6400 数据重计算</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="batch_question.html"><a href="batch_question.html#li-6800-数据的处理-6800data"><i class="fa fa-check"></i><b>2.3</b> LI-6800 数据的处理 {#6800data}</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="batch_question.html"><a href="batch_question.html#r-下-excel-格式读取的重计算-6800xlconnect"><i class="fa fa-check"></i><b>2.3.1</b> R 下 Excel 格式读取的重计算 {##6800xlconnect}</a></li>
+<li class="chapter" data-level="2.3.2" data-path="batch_question.html"><a href="batch_question.html#python"><i class="fa fa-check"></i><b>2.3.2</b> 使用 Python 来处理</a></li>
+<li class="chapter" data-level="2.3.3" data-path="batch_question.html"><a href="batch_question.html#python-r-batch"><i class="fa fa-check"></i><b>2.3.3</b> 批量处理 csv 文件</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="response_fit.html"><a href="response_fit.html"><i class="fa fa-check"></i><b>3</b> CO<sub>2</sub> 响应曲线的拟合</a>
@@ -351,7 +355,7 @@ div.csl-indent {
 <div id="sessioninfo" class="section level1" number="13">
 <h1><span class="header-section-number">第 13 章</span> 环境与配置</h1>
 <p>本文的内容所完成的 sessioninfo 如下：</p>
-<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="sessioninfo.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="sessioninfo.html#cb310-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
 <pre><code>## R version 4.1.1 (2021-08-10)
 ## Platform: x86_64-w64-mingw32/x64 (64-bit)
 ## Running under: Windows 10 x64 (build 19042)
@@ -375,35 +379,35 @@ div.csl-indent {
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] nlme_3.1-153         RColorBrewer_1.1-2   tools_4.1.1         
-##  [4] backports_1.3.0      bslib_0.3.1          utf8_1.2.2          
-##  [7] R6_2.5.1             DT_0.19              DBI_1.1.1           
+##  [4] backports_1.3.0      bslib_0.3.1          DT_0.19             
+##  [7] utf8_1.2.2           R6_2.5.1             DBI_1.1.1           
 ## [10] mgcv_1.8-38          colorspace_2.0-2     MESS_0.5.7          
 ## [13] withr_2.4.2          tidyselect_1.1.1     rematch_1.0.1       
-## [16] compiler_4.1.1       flashClust_1.01-2    labeling_0.4.2      
-## [19] bookdown_0.24        sass_0.4.0           mosaicCore_0.9.0    
-## [22] scales_1.1.1         ggridges_0.5.3       stringr_1.4.0       
-## [25] digest_0.6.28        ggformula_0.10.1     rmarkdown_2.11      
-## [28] pkgconfig_2.0.3      htmltools_0.5.2      geeM_0.10.1         
-## [31] labelled_2.9.0       fastmap_1.1.0        highr_0.9           
-## [34] htmlwidgets_1.5.4    rlang_0.4.12         readxl_1.3.1        
-## [37] rstudioapi_0.13      jquerylib_0.1.4      farver_2.1.0        
-## [40] generics_0.1.1       jsonlite_1.7.2       car_3.0-12          
-## [43] dplyr_1.0.7          plantecophys2_0.1.0  magrittr_2.0.1      
-## [46] leaps_3.1            Matrix_1.3-4         Rcpp_1.0.7          
-## [49] munsell_0.5.0        fansi_0.5.0          abind_1.4-5         
-## [52] geepack_1.3-2        lifecycle_1.0.1      scatterplot3d_0.3-41
-## [55] stringi_1.7.5        yaml_2.2.1           carData_3.0-4       
-## [58] MASS_7.3-54          ggstance_0.3.5       grid_4.1.1          
-## [61] ggrepel_0.9.1        forcats_0.5.1        crayon_1.4.2        
-## [64] lattice_0.20-45      haven_2.4.3          splines_4.1.1       
-## [67] hms_1.1.1            knitr_1.36           pillar_1.6.4        
-## [70] ggpubr_0.4.0         ggsignif_0.6.3       glue_1.4.2          
-## [73] evaluate_0.14        png_0.1-7            vctrs_0.3.8         
-## [76] tweenr_1.0.2         cellranger_1.1.0     gtable_0.3.0        
-## [79] polyclip_1.10-0      tidyr_1.1.4          assertthat_0.2.1    
-## [82] xfun_0.27            ggforce_0.3.3        broom_0.7.10        
-## [85] rstatix_0.7.0        tibble_3.1.5         cluster_2.1.2       
-## [88] ellipsis_0.3.2</code></pre>
+## [16] compiler_4.1.1       XLConnect_1.0.5      flashClust_1.01-2   
+## [19] labeling_0.4.2       bookdown_0.24        sass_0.4.0          
+## [22] mosaicCore_0.9.0     scales_1.1.1         ggridges_0.5.3      
+## [25] stringr_1.4.0        digest_0.6.28        ggformula_0.10.1    
+## [28] rmarkdown_2.11       pkgconfig_2.0.3      htmltools_0.5.2     
+## [31] geeM_0.10.1          labelled_2.9.0       fastmap_1.1.0       
+## [34] highr_0.9            htmlwidgets_1.5.4    rlang_0.4.12        
+## [37] readxl_1.3.1         rstudioapi_0.13      jquerylib_0.1.4     
+## [40] farver_2.1.0         generics_0.1.1       jsonlite_1.7.2      
+## [43] car_3.0-12           dplyr_1.0.7          plantecophys2_0.1.0 
+## [46] magrittr_2.0.1       leaps_3.1            Matrix_1.3-4        
+## [49] Rcpp_1.0.7           munsell_0.5.0        fansi_0.5.0         
+## [52] abind_1.4-5          geepack_1.3-2        lifecycle_1.0.1     
+## [55] scatterplot3d_0.3-41 stringi_1.7.5        yaml_2.2.1          
+## [58] carData_3.0-4        MASS_7.3-54          ggstance_0.3.5      
+## [61] grid_4.1.1           ggrepel_0.9.1        forcats_0.5.1       
+## [64] crayon_1.4.2         lattice_0.20-45      haven_2.4.3         
+## [67] splines_4.1.1        hms_1.1.1            knitr_1.36          
+## [70] pillar_1.6.4         ggpubr_0.4.0         ggsignif_0.6.3      
+## [73] glue_1.4.2           evaluate_0.14        png_0.1-7           
+## [76] vctrs_0.3.8          tweenr_1.0.2         cellranger_1.1.0    
+## [79] gtable_0.3.0         polyclip_1.10-0      tidyr_1.1.4         
+## [82] assertthat_0.2.1     xfun_0.27            ggforce_0.3.3       
+## [85] broom_0.7.10         rstatix_0.7.0        tibble_3.1.5        
+## [88] rJava_1.0-5          cluster_2.1.2        ellipsis_0.3.2</code></pre>
 
 </div>
             </section>

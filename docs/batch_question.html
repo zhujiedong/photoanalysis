@@ -170,12 +170,16 @@ div.csl-indent {
 <li class="chapter" data-level="2" data-path="batch_question.html"><a href="batch_question.html"><i class="fa fa-check"></i><b>2</b> 批量处理光合测定数据</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="batch_question.html"><a href="batch_question.html#install_readphoto"><i class="fa fa-check"></i><b>2.1</b> 安装</a></li>
-<li class="chapter" data-level="2.2" data-path="batch_question.html"><a href="batch_question.html#batch64"><i class="fa fa-check"></i><b>2.2</b> 6400 数据整合</a></li>
-<li class="chapter" data-level="2.3" data-path="batch_question.html"><a href="batch_question.html#batch68"><i class="fa fa-check"></i><b>2.3</b> LI-6800 数据整合</a></li>
-<li class="chapter" data-level="2.4" data-path="batch_question.html"><a href="batch_question.html#recompute_raw"><i class="fa fa-check"></i><b>2.4</b> 重计算功能</a>
+<li class="chapter" data-level="2.2" data-path="batch_question.html"><a href="batch_question.html#batch64"><i class="fa fa-check"></i><b>2.2</b> LI-6400 数据处理</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="batch_question.html"><a href="batch_question.html#recompute6400"><i class="fa fa-check"></i><b>2.4.1</b> LI-6400 数据重计算</a></li>
-<li class="chapter" data-level="2.4.2" data-path="batch_question.html"><a href="batch_question.html#recompute6800"><i class="fa fa-check"></i><b>2.4.2</b> LI-6800 数据重计算</a></li>
+<li class="chapter" data-level="2.2.1" data-path="batch_question.html"><a href="batch_question.html#li-6400-数据的整合6400combine"><i class="fa fa-check"></i><b>2.2.1</b> LI-6400 数据的整合{#6400combine}</a></li>
+<li class="chapter" data-level="2.2.2" data-path="batch_question.html"><a href="batch_question.html#recompute6400"><i class="fa fa-check"></i><b>2.2.2</b> LI-6400 数据重计算</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="batch_question.html"><a href="batch_question.html#li-6800-数据的处理-6800data"><i class="fa fa-check"></i><b>2.3</b> LI-6800 数据的处理 {#6800data}</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="batch_question.html"><a href="batch_question.html#r-下-excel-格式读取的重计算-6800xlconnect"><i class="fa fa-check"></i><b>2.3.1</b> R 下 Excel 格式读取的重计算 {##6800xlconnect}</a></li>
+<li class="chapter" data-level="2.3.2" data-path="batch_question.html"><a href="batch_question.html#python"><i class="fa fa-check"></i><b>2.3.2</b> 使用 Python 来处理</a></li>
+<li class="chapter" data-level="2.3.3" data-path="batch_question.html"><a href="batch_question.html#python-r-batch"><i class="fa fa-check"></i><b>2.3.3</b> 批量处理 csv 文件</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="response_fit.html"><a href="response_fit.html"><i class="fa fa-check"></i><b>3</b> CO<sub>2</sub> 响应曲线的拟合</a>
@@ -350,9 +354,6 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="batch_question" class="section level1" number="2">
 <h1><span class="header-section-number">第 2 章</span> 批量处理光合测定数据</h1>
-<blockquote>
-<p>该部分内容不建议继续使用，尤其是读取原始数据文件部分。目前代码报错，可能是某个依赖软件包升级导致，但我没时间处理。对于 excel 文件格式的处理，我目前找到了一个自认为比较好的批量转 csv 格式的方案，但是需要 <code>python</code> 的 <code>xlwings</code> 支持，该库比较成熟，不存在依赖地狱的问题，而且我也打包了一个图形界面，批量处理为 csv 后用常规方法导入就行，如果我有时间，会将该部分内容彻底修改。<code>python</code> 方案见链接：<a href="https://github.com/zhujiedong/LI6800_excel2csv">github</a> 或微信 <a href="https://mp.weixin.qq.com/s?__biz=MzU4ODI3NjkzMg==&amp;mid=2247485489&amp;idx=2&amp;sn=9aed981d7624c8e289cb9173c269373a&amp;chksm=fdde7d9acaa9f48c3dc0d09324d0461b18b4edd4ff56207de54b5152cbfe4a97fdc482b31b82&amp;token=101697346&amp;lang=zh_CN#rd">微信版</a></p>
-</blockquote>
 <p>对于多数人来讲，一个季节用光合仪测量的数据文件至少是两位数的，处理起来非常不方便，针对这个问题，简单写了一个批量读取 LI-6400 和 LI-6800 原始数据的包(因为现有的容易实现的读取 excel 格式的包还不支持 6800 和 6400 这种形式的公式计算)<a href="references.html#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>，使用非常简单，同时也适合处理未关闭数据文件而导致的无法生成 excel 格式的数据时的问题。</p>
 <div id="install_readphoto" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> 安装</h2>
@@ -360,7 +361,9 @@ div.csl-indent {
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="batch_question.html#cb1-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;zhujiedong/readphoto&quot;</span>)</span></code></pre></div>
 </div>
 <div id="batch64" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> 6400 数据整合</h2>
+<h2><span class="header-section-number">2.2</span> LI-6400 数据处理</h2>
+<div id="li-6400-数据的整合6400combine" class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> LI-6400 数据的整合{#6400combine}</h3>
 <p>基本参数如下：</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="batch_question.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readphoto)</span>
 <span id="cb2-2"><a href="batch_question.html#cb2-2" aria-hidden="true" tabindex="-1"></a>df64  <span class="ot">&lt;-</span> <span class="fu">read_bat_6400</span>(<span class="st">&quot;./data/6400&quot;</span>, <span class="at">header_line =</span> <span class="dv">17</span>, <span class="at">data_start =</span> <span class="dv">27</span>)</span></code></pre></div>
@@ -554,202 +557,14 @@ div.csl-indent {
 <p>其中，数据的来源在表格中第一列，叫做 files，是数据来源的文件名（即你起的名字）,例如本例中你看到的 aci 是我之前数据里面 aci 响应曲线的数据。</p>
 <p>这些数据可以用于后文相关的分析中，尤其是像 <code>fitacis</code> 这样的函数，因为本质上他们都是符合 <code>tidyverse</code> 样式的数据。</p>
 </div>
-<div id="batch68" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> LI-6800 数据整合</h2>
-<p>此部分内容保留，但不建议再使用，如果不介意软件包比较大，可以参考：</p>
-<p><a href="https://mp.weixin.qq.com/s?__biz=MzU4ODI3NjkzMg==&amp;mid=2247485449&amp;idx=1&amp;sn=914778c6bc1e288c7cb093da403d920e&amp;chksm=fdde7da2caa9f4b449de6bd4ead60913444c6a6b429e59d6ad80ab5bea10c74e1e0c5da1105d&amp;token=1056052514&amp;lang=zh_CN#rd">图形界面整理数据</a></p>
-<p>转换为 tidy csv 数据后，可以直接通过简单的代码进行批量处理操作。</p>
-<p><del>相比 6400， 6800 参数要少，导入需要两行命令即可：</del></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="batch_question.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readphoto)</span>
-<span id="cb4-2"><a href="batch_question.html#cb4-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_bat_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="at">data_start =</span> <span class="dv">56</span>)</span></code></pre></div>
-<p><del>其中就两个参数，第一个为 LI-6800 <strong>原始数据</strong>所在的文件夹，即文件夹内<strong>包含且仅包含 LI-6800 的原始数据</strong>，不要放其他文件，不要放 excel 数据。第二个参数即为你原始数据中测量数据的起始行，例如本例中使用数据测量值从 56 行开始。</del></p>
-<p><del>数据输出如下所示(仅显示前8列数据)：</del></p>
-<table>
-<caption><span id="tab:unnamed-chunk-8">表 2.2: </span>LI-6800 批量整合数据</caption>
-<thead>
-<tr class="header">
-<th align="left">files</th>
-<th align="right">obs</th>
-<th align="right">time</th>
-<th align="right">elapsed</th>
-<th align="left">date</th>
-<th align="right">plot</th>
-<th align="right">plant</th>
-<th align="right">TIME</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">aci</td>
-<td align="right">1</td>
-<td align="right">1513614617</td>
-<td align="right">0.0</td>
-<td align="left">20171218 10:30:16</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">1513614617</td>
-</tr>
-<tr class="even">
-<td align="left">aci</td>
-<td align="right">2</td>
-<td align="right">1513614731</td>
-<td align="right">114.0</td>
-<td align="left">20171218 10:32:10</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">1513614731</td>
-</tr>
-<tr class="odd">
-<td align="left">aci</td>
-<td align="right">3</td>
-<td align="right">1513614886</td>
-<td align="right">269.0</td>
-<td align="left">20171218 10:34:45</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">1513614886</td>
-</tr>
-<tr class="even">
-<td align="left">aci</td>
-<td align="right">4</td>
-<td align="right">1513615008</td>
-<td align="right">391.0</td>
-<td align="left">20171218 10:36:47</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">1513615008</td>
-</tr>
-<tr class="odd">
-<td align="left">aci</td>
-<td align="right">5</td>
-<td align="right">1513615127</td>
-<td align="right">510.0</td>
-<td align="left">20171218 10:38:46</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">1513615127</td>
-</tr>
-<tr class="even">
-<td align="left">aci</td>
-<td align="right">6</td>
-<td align="right">1513615287</td>
-<td align="right">670.5</td>
-<td align="left">20171218 10:41:27</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">1513615287</td>
-</tr>
-<tr class="odd">
-<td align="left">aci</td>
-<td align="right">7</td>
-<td align="right">1513615410</td>
-<td align="right">793.0</td>
-<td align="left">20171218 10:43:29</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">1513615410</td>
-</tr>
-<tr class="even">
-<td align="left">aci</td>
-<td align="right">8</td>
-<td align="right">1513615566</td>
-<td align="right">949.0</td>
-<td align="left">20171218 10:46:05</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">1513615566</td>
-</tr>
-<tr class="odd">
-<td align="left">aci</td>
-<td align="right">9</td>
-<td align="right">1513615701</td>
-<td align="right">1084.0</td>
-<td align="left">20171218 10:48:20</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">1513615701</td>
-</tr>
-<tr class="even">
-<td align="left">aci</td>
-<td align="right">10</td>
-<td align="right">1513615831</td>
-<td align="right">1214.0</td>
-<td align="left">20171218 10:50:30</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">1513615831</td>
-</tr>
-<tr class="odd">
-<td align="left">aci</td>
-<td align="right">11</td>
-<td align="right">1513615940</td>
-<td align="right">1323.0</td>
-<td align="left">20171218 10:52:19</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">1513615940</td>
-</tr>
-<tr class="even">
-<td align="left">aci</td>
-<td align="right">12</td>
-<td align="right">1513616064</td>
-<td align="right">1447.4</td>
-<td align="left">20171218 10:54:24</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">1513616064</td>
-</tr>
-<tr class="odd">
-<td align="left">lrc</td>
-<td align="right">1</td>
-<td align="right">1513612721</td>
-<td align="right">0.0</td>
-<td align="left">20171218 09:58:40</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">1513612721</td>
-</tr>
-<tr class="even">
-<td align="left">lrc</td>
-<td align="right">2</td>
-<td align="right">1513612832</td>
-<td align="right">111.0</td>
-<td align="left">20171218 10:00:31</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">1513612832</td>
-</tr>
-<tr class="odd">
-<td align="left">lrc</td>
-<td align="right">3</td>
-<td align="right">1513612941</td>
-<td align="right">220.0</td>
-<td align="left">20171218 10:02:20</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">1513612941</td>
-</tr>
-</tbody>
-</table>
-<p><del>其他注意事项见 LI-6400 数据整合部分</del></p>
-<p><del>另外： 今天添加了使用 regex 读取 LI-6800 原始文件的方法，这个只需要路径即可（2020-3-18），简单测试，有名字重复的警告，是 TIME，不影响大局，我没时间改，过几天有时间了再改：</del></p>
-<p><strong>当前版本有问题，可能时依赖的 <code>stringi</code> 升级导致，现在没有时间处理。</strong></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="batch_question.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readphoto)</span>
-<span id="cb5-2"><a href="batch_question.html#cb5-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">read_regex68</span>(<span class="st">&quot;./data/6800&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="batch_question.html#cb6-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(df2[<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>], <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb6-2"><a href="batch_question.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="at">caption =</span> <span class="st">&#39;LI-6800 regex 方式批量整合数据&#39;</span>)</span></code></pre></div>
-</div>
-<div id="recompute_raw" class="section level2" number="2.4">
-<h2><span class="header-section-number">2.4</span> 重计算功能</h2>
-<p>如果只是将原始数据批量处理，那么在遇到叶片不能充满叶室的情况时会很麻烦，这里我们提供了重新计算功能，重新计算的参数包括光合速率，蒸腾速率，对水的气孔导度以及胞间二氧化碳浓度，当然计算他们所需要的一些中间数值也做了重计算，只不过多数时候我们用不到，我们仅看这四项。</p>
-<div id="recompute6400" class="section level3" number="2.4.1">
-<h3><span class="header-section-number">2.4.1</span> LI-6400 数据重计算</h3>
+<div id="recompute6400" class="section level3" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> LI-6400 数据重计算</h3>
 <p>参数的重计算函数为 <code>recomp_6400</code>, 其参数除了 <code>read_bat_6400</code> 所包含的参数外，还有叶面积 S, 以及叶片正反面的气孔比例，默认值分别为 6 和 0.5。</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="batch_question.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readphoto)</span>
-<span id="cb7-2"><a href="batch_question.html#cb7-2" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">read_bat_6400</span>(<span class="st">&quot;./data/6400&quot;</span>)</span>
-<span id="cb7-3"><a href="batch_question.html#cb7-3" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> <span class="fu">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>, <span class="at">header_line =</span> <span class="dv">17</span>, <span class="at">data_start =</span> <span class="dv">27</span>, <span class="at">S =</span> <span class="dv">6</span>, <span class="at">K =</span> <span class="fl">0.5</span>)</span>
-<span id="cb7-4"><a href="batch_question.html#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="batch_question.html#cb7-5" aria-hidden="true" tabindex="-1"></a>x1<span class="sc">$</span>Photo <span class="sc">-</span> y1<span class="sc">$</span>Photo</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="batch_question.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readphoto)</span>
+<span id="cb4-2"><a href="batch_question.html#cb4-2" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">read_bat_6400</span>(<span class="st">&quot;./data/6400&quot;</span>)</span>
+<span id="cb4-3"><a href="batch_question.html#cb4-3" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> <span class="fu">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>, <span class="at">header_line =</span> <span class="dv">17</span>, <span class="at">data_start =</span> <span class="dv">27</span>, <span class="at">S =</span> <span class="dv">6</span>, <span class="at">K =</span> <span class="fl">0.5</span>)</span>
+<span id="cb4-4"><a href="batch_question.html#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="batch_question.html#cb4-5" aria-hidden="true" tabindex="-1"></a>x1<span class="sc">$</span>Photo <span class="sc">-</span> y1<span class="sc">$</span>Photo</span></code></pre></div>
 <pre><code>##  [1] -0.0008873753  0.0026900500 -0.0012036469  0.0003483414  0.0006122641
 ##  [6] -0.0113872639 -0.0020986076  0.0004962787  0.0188727482 -0.0294595908
 ## [11] -0.0436611445 -0.0339083408  0.0046772165  0.0036653298  0.0030397988
@@ -757,7 +572,7 @@ div.csl-indent {
 ## [21]  0.0039736503  0.0021704065  0.0046772165  0.0036653298  0.0030397988
 ## [26] -0.0105901673  0.0040624956  0.0017317049 -0.0073252290  0.0054977377
 ## [31]  0.0039736503  0.0021704065</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="batch_question.html#cb9-1" aria-hidden="true" tabindex="-1"></a>x1<span class="sc">$</span>Trmmol <span class="sc">-</span> y1<span class="sc">$</span>Trmmol</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="batch_question.html#cb6-1" aria-hidden="true" tabindex="-1"></a>x1<span class="sc">$</span>Trmmol <span class="sc">-</span> y1<span class="sc">$</span>Trmmol</span></code></pre></div>
 <pre><code>##  [1] -2.998596e-04  1.407338e-04  3.189451e-05 -4.586467e-04 -3.836822e-04
 ##  [6]  5.402725e-04 -2.344852e-04 -7.684772e-05  5.979599e-04 -6.534341e-04
 ## [11] -6.779145e-04  2.469749e-04  3.812201e-04  2.313957e-04  3.508312e-04
@@ -765,7 +580,7 @@ div.csl-indent {
 ## [21] -2.578893e-04  2.203045e-04  3.812201e-04  2.313957e-04  3.508312e-04
 ## [26] -2.794358e-04 -5.406530e-04  5.230606e-04 -9.183370e-04  7.638850e-04
 ## [31] -2.578893e-04  2.203045e-04</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="batch_question.html#cb11-1" aria-hidden="true" tabindex="-1"></a>x1<span class="sc">$</span>Cond <span class="sc">-</span> y1<span class="sc">$</span>Cond</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="batch_question.html#cb8-1" aria-hidden="true" tabindex="-1"></a>x1<span class="sc">$</span>Cond <span class="sc">-</span> y1<span class="sc">$</span>Cond</span></code></pre></div>
 <pre><code>##  [1] -1.974217e-04 -3.594216e-04 -3.779119e-04 -3.806675e-04 -3.201411e-04
 ##  [6] -1.483324e-04 -7.803345e-04 -2.671018e-04  1.028977e-04 -3.966192e-04
 ## [11] -3.190769e-04 -2.314266e-04 -2.746300e-04  1.094050e-05 -4.584791e-05
@@ -773,7 +588,7 @@ div.csl-indent {
 ## [21] -4.687906e-05 -1.000424e-04 -2.746300e-04  1.094050e-05 -4.584791e-05
 ## [26] -1.084094e-04 -1.827768e-04 -1.344969e-04 -1.714096e-04 -8.180257e-05
 ## [31] -4.687906e-05 -1.000424e-04</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="batch_question.html#cb13-1" aria-hidden="true" tabindex="-1"></a>x1<span class="sc">$</span>Ci<span class="sc">-</span>y1<span class="sc">$</span>Ci</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="batch_question.html#cb10-1" aria-hidden="true" tabindex="-1"></a>x1<span class="sc">$</span>Ci<span class="sc">-</span>y1<span class="sc">$</span>Ci</span></code></pre></div>
 <pre><code>##  [1]  0.434643936 -0.297820404 -0.308200950 -0.007847373 -0.035490198
 ##  [6]  0.433706824 -0.416734067 -0.052089770  0.147655545 -0.315797917
 ## [11] -0.271335987 -0.228968795  0.356519198  0.311487646  0.052196075
@@ -781,169 +596,96 @@ div.csl-indent {
 ## [21] -0.252622980 -0.494554616  0.356519198  0.311487646  0.052196075
 ## [26]  0.557128947  0.058563406  0.300198435  0.052607786  0.339000061
 ## [31] -0.252622980 -0.494554616</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="batch_question.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># half of original the area</span></span>
-<span id="cb15-2"><a href="batch_question.html#cb15-2" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> <span class="fu">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>,  <span class="at">header_line =</span> <span class="dv">17</span>, <span class="at">data_start =</span> <span class="dv">27</span>, <span class="at">S =</span> <span class="dv">3</span>, <span class="at">K =</span> <span class="fl">0.5</span>)</span>
-<span id="cb15-3"><a href="batch_question.html#cb15-3" aria-hidden="true" tabindex="-1"></a>y1<span class="sc">$</span>Photo<span class="sc">/</span>x1<span class="sc">$</span>Photo</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="batch_question.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># half of original the area</span></span>
+<span id="cb12-2"><a href="batch_question.html#cb12-2" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> <span class="fu">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>,  <span class="at">header_line =</span> <span class="dv">17</span>, <span class="at">data_start =</span> <span class="dv">27</span>, <span class="at">S =</span> <span class="dv">3</span>, <span class="at">K =</span> <span class="fl">0.5</span>)</span>
+<span id="cb12-3"><a href="batch_question.html#cb12-3" aria-hidden="true" tabindex="-1"></a>y1<span class="sc">$</span>Photo<span class="sc">/</span>x1<span class="sc">$</span>Photo</span></code></pre></div>
 <pre><code>##  [1] 2.000254 1.998957 2.000767 1.999234 2.007333 2.004346 2.000635 1.999893
 ##  [9] 1.996299 2.005611 2.008161 2.006110 1.998550 1.998863 1.998980 2.003671
 ## [17] 1.998391 1.999240 2.003866 1.995584 1.994199 2.010360 1.998550 1.998863
 ## [25] 1.998980 2.003671 1.998391 1.999240 2.003866 1.995584 1.994199 2.010360</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="batch_question.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># test with random area less than six</span></span>
-<span id="cb17-2"><a href="batch_question.html#cb17-2" aria-hidden="true" tabindex="-1"></a>area <span class="ot">&lt;-</span> <span class="dv">6</span> <span class="sc">-</span> <span class="fu">runif</span>(<span class="dv">32</span>, <span class="dv">1</span>, <span class="dv">3</span>)</span>
-<span id="cb17-3"><a href="batch_question.html#cb17-3" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> <span class="fu">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>,  <span class="at">header_line =</span> <span class="dv">17</span>, <span class="at">data_start =</span> <span class="dv">27</span>, <span class="at">S =</span> area, <span class="at">K =</span> <span class="fl">0.5</span>)</span>
-<span id="cb17-4"><a href="batch_question.html#cb17-4" aria-hidden="true" tabindex="-1"></a>y1<span class="sc">$</span>Photo<span class="sc">/</span>x1<span class="sc">$</span>Photo</span></code></pre></div>
-<pre><code>##  [1] 1.584358 1.256580 1.703026 1.245177 1.300455 1.999073 1.274269 1.219170
-##  [9] 1.337527 1.927874 1.242582 1.355269 1.288690 1.829881 1.402834 1.297630
-## [17] 1.364737 1.307258 1.643233 1.934468 1.266822 1.772512 1.732987 1.307620
-## [25] 1.592471 1.382934 1.783013 1.513171 1.218673 1.572203 1.573836 1.325328</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="batch_question.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># test with random area less than six</span></span>
+<span id="cb14-2"><a href="batch_question.html#cb14-2" aria-hidden="true" tabindex="-1"></a>area <span class="ot">&lt;-</span> <span class="dv">6</span> <span class="sc">-</span> <span class="fu">runif</span>(<span class="dv">32</span>, <span class="dv">1</span>, <span class="dv">3</span>)</span>
+<span id="cb14-3"><a href="batch_question.html#cb14-3" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> <span class="fu">recomp_6400</span>(<span class="st">&quot;./data/6400&quot;</span>,  <span class="at">header_line =</span> <span class="dv">17</span>, <span class="at">data_start =</span> <span class="dv">27</span>, <span class="at">S =</span> area, <span class="at">K =</span> <span class="fl">0.5</span>)</span>
+<span id="cb14-4"><a href="batch_question.html#cb14-4" aria-hidden="true" tabindex="-1"></a>y1<span class="sc">$</span>Photo<span class="sc">/</span>x1<span class="sc">$</span>Photo</span></code></pre></div>
+<pre><code>##  [1] 1.512027 1.432977 1.461165 1.953332 1.905152 1.277518 1.205894 1.549557
+##  [9] 1.722226 1.347046 1.620328 1.732465 1.406059 1.620834 1.688767 1.318215
+## [17] 1.333120 1.357101 1.620087 1.583238 1.822974 1.942790 1.521576 1.643007
+## [25] 1.237121 1.249381 1.236260 1.371186 1.566981 1.619464 1.334416 2.000374</code></pre>
 <p>我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.</p>
 </div>
-<div id="recompute6800" class="section level3" number="2.4.2">
-<h3><span class="header-section-number">2.4.2</span> LI-6800 数据重计算</h3>
-<div id="raw-batch-68" class="section level4" number="2.4.2.1">
-<h4><span class="header-section-number">2.4.2.1</span> 原始数据的批量计算</h4>
-<p><strong>此部分内容保留，但不建议继续使用</strong>
-<del>参数的重计算函数为 <code>recomp_6800</code>, 其参数除了 <code>read_bat_6800</code> 所包含的参数外，还有叶面积 S, 以及叶片正反面的气孔比例，默认值分别为 6 和 0.5。</del></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="batch_question.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readphoto)</span>
-<span id="cb19-2"><a href="batch_question.html#cb19-2" aria-hidden="true" tabindex="-1"></a>x3 <span class="ot">&lt;-</span> <span class="fu">read_bat_6800</span>(<span class="st">&quot;./data/6800&quot;</span>)</span>
-<span id="cb19-3"><a href="batch_question.html#cb19-3" aria-hidden="true" tabindex="-1"></a>y3 <span class="ot">&lt;-</span> <span class="fu">recomp_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="at">S =</span> <span class="dv">6</span>, <span class="at">K =</span> <span class="fl">0.5</span>)</span>
-<span id="cb19-4"><a href="batch_question.html#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="batch_question.html#cb19-5" aria-hidden="true" tabindex="-1"></a>x3<span class="sc">$</span>A <span class="sc">-</span> y3<span class="sc">$</span>A</span>
-<span id="cb19-6"><a href="batch_question.html#cb19-6" aria-hidden="true" tabindex="-1"></a>x3<span class="sc">$</span>E <span class="sc">-</span> y3<span class="sc">$</span>E</span>
-<span id="cb19-7"><a href="batch_question.html#cb19-7" aria-hidden="true" tabindex="-1"></a>x3<span class="sc">$</span>gsw <span class="sc">-</span> y3<span class="sc">$</span>gsw</span>
-<span id="cb19-8"><a href="batch_question.html#cb19-8" aria-hidden="true" tabindex="-1"></a>x3<span class="sc">$</span>Ci<span class="sc">-</span>y3<span class="sc">$</span>Ci</span>
-<span id="cb19-9"><a href="batch_question.html#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-10"><a href="batch_question.html#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co"># half of original the area</span></span>
-<span id="cb19-11"><a href="batch_question.html#cb19-11" aria-hidden="true" tabindex="-1"></a>y3 <span class="ot">&lt;-</span> <span class="fu">recomp_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="at">S =</span> <span class="dv">3</span>, <span class="at">K =</span> <span class="fl">0.5</span>)</span>
-<span id="cb19-12"><a href="batch_question.html#cb19-12" aria-hidden="true" tabindex="-1"></a>y3<span class="sc">$</span>A<span class="sc">/</span>x3<span class="sc">$</span>A</span>
-<span id="cb19-13"><a href="batch_question.html#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="co"># test with random area less than six</span></span>
-<span id="cb19-14"><a href="batch_question.html#cb19-14" aria-hidden="true" tabindex="-1"></a>area <span class="ot">&lt;-</span> <span class="dv">6</span> <span class="sc">-</span> <span class="fu">runif</span>(<span class="dv">28</span>, <span class="dv">1</span>, <span class="dv">3</span>)</span>
-<span id="cb19-15"><a href="batch_question.html#cb19-15" aria-hidden="true" tabindex="-1"></a>y3 <span class="ot">&lt;-</span> <span class="fu">recomp_6800</span>(<span class="st">&quot;./data/6800&quot;</span>, <span class="at">S =</span> area, <span class="at">K =</span> <span class="fl">0.5</span>)</span>
-<span id="cb19-16"><a href="batch_question.html#cb19-16" aria-hidden="true" tabindex="-1"></a>y3<span class="sc">$</span>A<span class="sc">/</span>x3<span class="sc">$</span>A</span></code></pre></div>
-<p><del>测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。</del></p>
 </div>
-<div id="excel-recompute-68" class="section level4" number="2.4.2.2">
-<h4><span class="header-section-number">2.4.2.2</span> Excel 格式的重计算</h4>
-<p>偶然发现了 <code>XLConnect</code> 软件包的一个功能（以前知道这个软件包，但忽视了），那就是直接读取 LI-6800 Excel 格式的数据并重计算，我将其写成了函数，放在了我的 <code>readphoto</code> 软件包里，软件包的安装：</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="batch_question.html#cb20-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;zhujiedong/readphoto&quot;</span>)</span></code></pre></div>
+<div id="li-6800-数据的处理-6800data" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> LI-6800 数据的处理 {#6800data}</h2>
+<p>LI-6800 的数据我们可以直接处理 Excel 即可，读取我这里有两种方案，一种是 <code>R</code> 读取方案，一种是 <code>python</code> 读取方案，之所以这么复杂，是因为 LI-6800 的 Excel 格式较为复杂，不被常用的软件包所支持。我们分开来看两种方式：</p>
+<div id="r-下-excel-格式读取的重计算-6800xlconnect" class="section level3" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> R 下 Excel 格式读取的重计算 {##6800xlconnect}</h3>
+<p>偶然发现了 <code>XLConnect</code> 软件包的一个功能（以前知道这个软件包，但忽视了），那就是直接读取 LI-6800 Excel 格式的数据并重计算，我将其写成了函数，放在了我的 readphoto 软件包里，软件包的安装：</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="batch_question.html#cb16-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;zhujiedong/readphoto&quot;</span>)</span></code></pre></div>
 <p>当然，最近连我自己安装 github 的软件包都经常出问题，如果大家同样遇到问题，可以按照下面的方式安装：</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="batch_question.html#cb21-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_git</span>(<span class="st">&quot;https://gitee.com/zhu_jie_dong/readphoto&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="batch_question.html#cb17-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_git</span>(<span class="st">&quot;https://gitee.com/zhu_jie_dong/readphoto&quot;</span>)</span></code></pre></div>
 <p>其中：</p>
 <ul>
 <li><p>path 是 Excel 文件的路径；</p></li>
 <li><p>start_row 是数据开始的行号；</p></li>
-<li><p>S 为修改的叶面积，默认值为 6，如果叶面积无需更改，则使用默认的 NULL。如果使用 aperture 更改了面积，且叶片能够充满叶室，比方说是 2 cm<sup>2</sup>，该值必须输入一个长度和测量值数量完全一致的向量，例如有 3 个测量值，我们输入 S 的长度则为 3，例如，一共有三个测量值，只有第一个叶片没充满叶室，面积为 1.5，其他的为 2，则输入方式为 <code>S = c(1.5, 2, 2)</code>。</p></li>
+<li><p>S 为修改的叶面积，默认值为 6，如果叶面积无需更改，则使用默认的 NULL。如果使用 aperture 更改了面积，且叶片能够充满叶室，比方说是 2 <span class="math inline">\(cm^2\)</span>，该值必须输入一个长度和测量值数量完全一致的向量，例如有 3 个测量值，我们输入 S 的长度则为 3，例如，一共有三个测量值，只有第一个叶片没充满叶室，面积为 1.5，其他的为 2，则输入方式为 S = c(1.5, 2, 2)。</p></li>
 </ul>
-<p>我们直接使用下面的例子解释，导入的数据是 6 cm<sup>2</sup> 的默认面积：</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="batch_question.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readphoto)</span>
-<span id="cb22-2"><a href="batch_question.html#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="batch_question.html#cb22-3" aria-hidden="true" tabindex="-1"></a>df6 <span class="ot">&lt;-</span> <span class="fu">xlconnect_read</span>(<span class="st">&quot;./data/aci-xlc.xlsx&quot;</span>)</span>
-<span id="cb22-4"><a href="batch_question.html#cb22-4" aria-hidden="true" tabindex="-1"></a>df6<span class="sc">$</span>A</span>
-<span id="cb22-5"><a href="batch_question.html#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-6"><a href="batch_question.html#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] 24.7381184 18.1379358 10.8055345  3.0239340 -0.9144044 26.9519572</span></span>
-<span id="cb22-7"><a href="batch_question.html#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  [7] 27.5088717 40.9101889 50.1393342 55.3865984 58.0662751 59.3556428</span></span></code></pre></div>
-<p>将面积改为 3 cm<sup>2</sup></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="batch_question.html#cb23-1" aria-hidden="true" tabindex="-1"></a>df3 <span class="ot">&lt;-</span> <span class="fu">xlconnect_read</span>(<span class="st">&quot;./data/aci-xlc.xlsx&quot;</span>, <span class="at">S =</span> <span class="fu">rep</span>(<span class="dv">3</span>, <span class="dv">12</span>))</span>
-<span id="cb23-2"><a href="batch_question.html#cb23-2" aria-hidden="true" tabindex="-1"></a>df6<span class="sc">$</span>A<span class="sc">/</span>df3<span class="sc">$</span>A</span>
-<span id="cb23-3"><a href="batch_question.html#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="batch_question.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</span></span></code></pre></div>
-<p>模拟 12 个不同的叶面积，均值为 3，方差为 0.1</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="batch_question.html#cb24-1" aria-hidden="true" tabindex="-1"></a>df_random <span class="ot">&lt;-</span> <span class="fu">xlconnect_read</span>(<span class="st">&quot;./data/aci-xlc.xlsx&quot;</span>, <span class="at">S =</span> <span class="fu">rnorm</span>(<span class="dv">12</span>, <span class="dv">3</span>, <span class="fl">0.1</span>))</span>
-<span id="cb24-2"><a href="batch_question.html#cb24-2" aria-hidden="true" tabindex="-1"></a>df6<span class="sc">$</span>A<span class="sc">/</span>df_random<span class="sc">$</span>A</span>
-<span id="cb24-3"><a href="batch_question.html#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="batch_question.html#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] 0.5404604 0.4946930 0.5055978 0.5131122 0.5091636 0.5010179 0.5118623</span></span>
-<span id="cb24-5"><a href="batch_question.html#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  [8] 0.4928284 0.4838221 0.5126210 0.4926683 0.4925639</span></span></code></pre></div>
+<p>我们直接使用下面的例子解释，导入的数据是 6 cm2 的默认面积：</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="batch_question.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readphoto)</span>
+<span id="cb18-2"><a href="batch_question.html#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="batch_question.html#cb18-3" aria-hidden="true" tabindex="-1"></a>df6 <span class="ot">&lt;-</span> <span class="fu">xlconnect_read</span>(<span class="st">&quot;./data/aci-xlc.xlsx&quot;</span>)</span>
+<span id="cb18-4"><a href="batch_question.html#cb18-4" aria-hidden="true" tabindex="-1"></a>df6<span class="sc">$</span>A</span></code></pre></div>
+<pre><code>##  [1] 24.7381184 18.1379358 10.8055345  3.0239340 -0.9144044 26.9519572
+##  [7] 27.5088717 40.9101889 50.1393342 55.3865984 58.0662751 59.3556428</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="batch_question.html#cb20-1" aria-hidden="true" tabindex="-1"></a>df3 <span class="ot">&lt;-</span> <span class="fu">xlconnect_read</span>(<span class="st">&quot;./data/aci-xlc.xlsx&quot;</span>, <span class="at">S =</span> <span class="fu">rep</span>(<span class="dv">3</span>, <span class="dv">12</span>))</span>
+<span id="cb20-2"><a href="batch_question.html#cb20-2" aria-hidden="true" tabindex="-1"></a>df6<span class="sc">$</span>A<span class="sc">/</span>df3<span class="sc">$</span>A</span></code></pre></div>
+<pre><code>##  [1] 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="batch_question.html#cb22-1" aria-hidden="true" tabindex="-1"></a>df_random <span class="ot">&lt;-</span> <span class="fu">xlconnect_read</span>(<span class="st">&quot;./data/aci-xlc.xlsx&quot;</span>, <span class="at">S =</span> <span class="fu">rnorm</span>(<span class="dv">12</span>, <span class="dv">3</span>, <span class="fl">0.1</span>))</span>
+<span id="cb22-2"><a href="batch_question.html#cb22-2" aria-hidden="true" tabindex="-1"></a>df6<span class="sc">$</span>A<span class="sc">/</span>df_random<span class="sc">$</span>A</span></code></pre></div>
+<pre><code>##  [1] 0.4789243 0.4966905 0.5405095 0.4949581 0.4821164 0.5182414 0.4901363
+##  [8] 0.5133343 0.4697795 0.4998671 0.4748173 0.5222116</code></pre>
+<p>光合速率的倍数的变化在预期之内。</p>
 </div>
-<div id="batch-6800-xlsx" class="section level4" number="2.4.2.3">
-<h4><span class="header-section-number">2.4.2.3</span> 批量处理 LI-6800 的数据</h4>
-<p>为了避免麻烦，不再建议前面 <a href="batch_question.html#recompute6800">2.4.2</a>的方式进行处理，其实基本的代码处理也很简单，例如下面演示的一些方法，供参考：</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="batch_question.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readphoto)</span>
-<span id="cb25-2"><a href="batch_question.html#cb25-2" aria-hidden="true" tabindex="-1"></a>file_names <span class="ot">&lt;-</span></span>
-<span id="cb25-3"><a href="batch_question.html#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;./data/extdata&quot;</span>,</span>
-<span id="cb25-4"><a href="batch_question.html#cb25-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">full.names =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb25-5"><a href="batch_question.html#cb25-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">pattern =</span> <span class="st">&#39;*.xlsx&#39;</span>)</span>
-<span id="cb25-6"><a href="batch_question.html#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-7"><a href="batch_question.html#cb25-7" aria-hidden="true" tabindex="-1"></a>data_list <span class="ot">&lt;-</span> <span class="fu">lapply</span>(file_names, xlconnect_read)</span>
-<span id="cb25-8"><a href="batch_question.html#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-9"><a href="batch_question.html#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 整理好数据为正常格式并导出，例如导出 csv 文件</span></span>
-<span id="cb25-10"><a href="batch_question.html#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-11"><a href="batch_question.html#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 根据需要，若文件夹不存在可创建</span></span>
-<span id="cb25-12"><a href="batch_question.html#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="co">#dir.create( &quot;./data/extdata/csvdata&quot;)</span></span>
-<span id="cb25-13"><a href="batch_question.html#cb25-13" aria-hidden="true" tabindex="-1"></a>short_names <span class="ot">&lt;-</span></span>
-<span id="cb25-14"><a href="batch_question.html#cb25-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;./data/extdata&quot;</span>, <span class="at">pattern =</span> <span class="st">&#39;*.xlsx&#39;</span>)</span>
-<span id="cb25-15"><a href="batch_question.html#cb25-15" aria-hidden="true" tabindex="-1"></a>short_name <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;.xlsx&quot;</span>, <span class="st">&quot;&quot;</span>, short_names)</span>
-<span id="cb25-16"><a href="batch_question.html#cb25-16" aria-hidden="true" tabindex="-1"></a>csv_file <span class="ot">&lt;-</span></span>
-<span id="cb25-17"><a href="batch_question.html#cb25-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&quot;./data/extdata/csvdata&quot;</span>, <span class="st">&quot;/&quot;</span>, short_name, <span class="st">&quot;.csv&quot;</span>)</span>
-<span id="cb25-18"><a href="batch_question.html#cb25-18" aria-hidden="true" tabindex="-1"></a><span class="fu">mapply</span>(<span class="at">x =</span> data_list, <span class="at">file =</span> csv_file, write.csv)</span>
-<span id="cb25-19"><a href="batch_question.html#cb25-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-20"><a href="batch_question.html#cb25-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-21"><a href="batch_question.html#cb25-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-22"><a href="batch_question.html#cb25-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 若需要修改叶面积，则可以将叶面积重新另存为只有叶面积数据的文件</span></span>
-<span id="cb25-23"><a href="batch_question.html#cb25-23" aria-hidden="true" tabindex="-1"></a><span class="co"># 面积数据的文件仅包含S列，且文件名与待修改面积的文件名保持一致</span></span>
-<span id="cb25-24"><a href="batch_question.html#cb25-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-25"><a href="batch_question.html#cb25-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-26"><a href="batch_question.html#cb25-26" aria-hidden="true" tabindex="-1"></a><span class="co"># 批量读取叶面积的数据</span></span>
-<span id="cb25-27"><a href="batch_question.html#cb25-27" aria-hidden="true" tabindex="-1"></a><span class="co"># 为方便使用，我将面积存为了 csv 格式</span></span>
-<span id="cb25-28"><a href="batch_question.html#cb25-28" aria-hidden="true" tabindex="-1"></a><span class="co"># 根据需要，若文件夹不存在可创建</span></span>
-<span id="cb25-29"><a href="batch_question.html#cb25-29" aria-hidden="true" tabindex="-1"></a><span class="co">#dir.create( &quot;./data/extdata/areacsv&quot;)</span></span>
-<span id="cb25-30"><a href="batch_question.html#cb25-30" aria-hidden="true" tabindex="-1"></a>file_area <span class="ot">&lt;-</span></span>
-<span id="cb25-31"><a href="batch_question.html#cb25-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;./data/extdata/area&quot;</span>,</span>
-<span id="cb25-32"><a href="batch_question.html#cb25-32" aria-hidden="true" tabindex="-1"></a>             <span class="at">full.names =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb25-33"><a href="batch_question.html#cb25-33" aria-hidden="true" tabindex="-1"></a>             <span class="at">pattern =</span> <span class="st">&#39;*.csv&#39;</span>)</span>
-<span id="cb25-34"><a href="batch_question.html#cb25-34" aria-hidden="true" tabindex="-1"></a>area_list <span class="ot">&lt;-</span> <span class="fu">lapply</span>(file_area, read.csv)</span>
-<span id="cb25-35"><a href="batch_question.html#cb25-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-36"><a href="batch_question.html#cb25-36" aria-hidden="true" tabindex="-1"></a><span class="co"># mapply 使用多个list 读取数据，注意将list命名为参数的名字，</span></span>
-<span id="cb25-37"><a href="batch_question.html#cb25-37" aria-hidden="true" tabindex="-1"></a><span class="co"># 以免出现使用位置的方式匹配参数，出现错误</span></span>
-<span id="cb25-38"><a href="batch_question.html#cb25-38" aria-hidden="true" tabindex="-1"></a>data_list_csv <span class="ot">&lt;-</span></span>
-<span id="cb25-39"><a href="batch_question.html#cb25-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mapply</span>(</span>
-<span id="cb25-40"><a href="batch_question.html#cb25-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">path =</span> file_names,</span>
-<span id="cb25-41"><a href="batch_question.html#cb25-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">S =</span> area_list,</span>
-<span id="cb25-42"><a href="batch_question.html#cb25-42" aria-hidden="true" tabindex="-1"></a>    xlconnect_read,</span>
-<span id="cb25-43"><a href="batch_question.html#cb25-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">start_row =</span> <span class="dv">17</span>,</span>
-<span id="cb25-44"><a href="batch_question.html#cb25-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">SIMPLIFY =</span> F</span>
-<span id="cb25-45"><a href="batch_question.html#cb25-45" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb25-46"><a href="batch_question.html#cb25-46" aria-hidden="true" tabindex="-1"></a>short_names_csv <span class="ot">&lt;-</span></span>
-<span id="cb25-47"><a href="batch_question.html#cb25-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;./data/extdata&quot;</span>, <span class="at">pattern =</span> <span class="st">&#39;*.xlsx&#39;</span>)</span>
-<span id="cb25-48"><a href="batch_question.html#cb25-48" aria-hidden="true" tabindex="-1"></a>short_name_csv <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;.xlsx&quot;</span>, <span class="st">&quot;&quot;</span>, short_names_csv)</span>
-<span id="cb25-49"><a href="batch_question.html#cb25-49" aria-hidden="true" tabindex="-1"></a>csv_file_area <span class="ot">&lt;-</span></span>
-<span id="cb25-50"><a href="batch_question.html#cb25-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&quot;./data/extdata/areacsv&quot;</span>, <span class="st">&quot;/&quot;</span>, short_name_csv, <span class="st">&quot;.csv&quot;</span>)</span>
-<span id="cb25-51"><a href="batch_question.html#cb25-51" aria-hidden="true" tabindex="-1"></a><span class="fu">mapply</span>(<span class="at">x =</span> data_list_csv, <span class="at">file =</span> csv_file_area, write.csv)</span>
-<span id="cb25-52"><a href="batch_question.html#cb25-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-53"><a href="batch_question.html#cb25-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-54"><a href="batch_question.html#cb25-54" aria-hidden="true" tabindex="-1"></a><span class="do">##如果要合并数据到一个文件内，可以在合并时，使用文件名作为</span></span>
-<span id="cb25-55"><a href="batch_question.html#cb25-55" aria-hidden="true" tabindex="-1"></a><span class="co"># 单独的一列，例如列名都叫做 from_file</span></span>
-<span id="cb25-56"><a href="batch_question.html#cb25-56" aria-hidden="true" tabindex="-1"></a><span class="co"># 例如使用我们刚刚修改叶面积的数据为例，使用刚刚导出的csv文件，节省代码</span></span>
-<span id="cb25-57"><a href="batch_question.html#cb25-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-58"><a href="batch_question.html#cb25-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-59"><a href="batch_question.html#cb25-59" aria-hidden="true" tabindex="-1"></a>add_col_name <span class="ot">&lt;-</span> <span class="cf">function</span>(path, file_name){</span>
-<span id="cb25-60"><a href="batch_question.html#cb25-60" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(path)</span>
-<span id="cb25-61"><a href="batch_question.html#cb25-61" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>from_file <span class="ot">&lt;-</span> file_name</span>
-<span id="cb25-62"><a href="batch_question.html#cb25-62" aria-hidden="true" tabindex="-1"></a>  df</span>
-<span id="cb25-63"><a href="batch_question.html#cb25-63" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb25-64"><a href="batch_question.html#cb25-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-65"><a href="batch_question.html#cb25-65" aria-hidden="true" tabindex="-1"></a>csv_data_path <span class="ot">&lt;-</span></span>
-<span id="cb25-66"><a href="batch_question.html#cb25-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;./data/extdata/areacsv&quot;</span>,</span>
-<span id="cb25-67"><a href="batch_question.html#cb25-67" aria-hidden="true" tabindex="-1"></a>             <span class="at">full.names =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb25-68"><a href="batch_question.html#cb25-68" aria-hidden="true" tabindex="-1"></a>             <span class="at">pattern =</span> <span class="st">&#39;*.csv&#39;</span>)</span>
-<span id="cb25-69"><a href="batch_question.html#cb25-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-70"><a href="batch_question.html#cb25-70" aria-hidden="true" tabindex="-1"></a>data_combine <span class="ot">&lt;-</span></span>
-<span id="cb25-71"><a href="batch_question.html#cb25-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mapply</span>(</span>
-<span id="cb25-72"><a href="batch_question.html#cb25-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">path =</span> csv_data_path,</span>
-<span id="cb25-73"><a href="batch_question.html#cb25-73" aria-hidden="true" tabindex="-1"></a>    <span class="at">file_name =</span> short_name_csv,</span>
-<span id="cb25-74"><a href="batch_question.html#cb25-74" aria-hidden="true" tabindex="-1"></a>    add_col_name,</span>
-<span id="cb25-75"><a href="batch_question.html#cb25-75" aria-hidden="true" tabindex="-1"></a>    <span class="at">SIMPLIFY =</span> F</span>
-<span id="cb25-76"><a href="batch_question.html#cb25-76" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb25-77"><a href="batch_question.html#cb25-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-78"><a href="batch_question.html#cb25-78" aria-hidden="true" tabindex="-1"></a><span class="co"># 或者使用data.table::rbindlist(listOfDataFrames)</span></span>
-<span id="cb25-79"><a href="batch_question.html#cb25-79" aria-hidden="true" tabindex="-1"></a><span class="co"># 或者使用 dplyr::bind_rows(listOfDataFrames)</span></span>
-<span id="cb25-80"><a href="batch_question.html#cb25-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-81"><a href="batch_question.html#cb25-81" aria-hidden="true" tabindex="-1"></a>df_combined <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(data_combine)</span>
-<span id="cb25-82"><a href="batch_question.html#cb25-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-83"><a href="batch_question.html#cb25-83" aria-hidden="true" tabindex="-1"></a><span class="co"># 检验数据</span></span>
-<span id="cb25-84"><a href="batch_question.html#cb25-84" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_combined<span class="sc">$</span>from_file)</span>
-<span id="cb25-85"><a href="batch_question.html#cb25-85" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(df_combined<span class="sc">$</span>from_file)</span></code></pre></div>
+<div id="python" class="section level3" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> 使用 Python 来处理</h3>
+<p>本节内容与题目不符，不过大家也不用担心，我提供了一个图形界面来操作，可以将所有文件批量处理为 <code>csv</code> 格式。</p>
+<p>python 方案见链接：<a href="https://github.com/zhujiedong/LI6800_excel2csv">github</a> 或 <a href="https://mp.weixin.qq.com/s?__biz=MzU4ODI3NjkzMg==&amp;mid=2247485489&amp;idx=2&amp;sn=9aed981d7624c8e289cb9173c269373a&amp;chksm=fdde7d9acaa9f48c3dc0d09324d0461b18b4edd4ff56207de54b5152cbfe4a97fdc482b31b82&amp;token=101697346&amp;lang=zh_CN#rd">微信</a></p>
+</div>
+<div id="python-r-batch" class="section level3" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> 批量处理 csv 文件</h3>
+<p>如果还是比习惯用 <code>R</code>，我们来处理上面的 <code>csv</code> 文件即可。其实没什么特别的，就是需要批量导入后添加一个分组标签即可。以下为示例：</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="batch_question.html#cb24-1" aria-hidden="true" tabindex="-1"></a>files_csv <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">&quot;./data/csvdata&quot;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb24-2"><a href="batch_question.html#cb24-2" aria-hidden="true" tabindex="-1"></a>files_csv</span></code></pre></div>
+<pre><code>## [1] &quot;./data/csvdata/racirtest1.csv&quot; &quot;./data/csvdata/rcirtest3.csv&quot;</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="batch_question.html#cb26-1" aria-hidden="true" tabindex="-1"></a>add_remark <span class="ot">&lt;-</span> <span class="cf">function</span>(path){</span>
+<span id="cb26-2"><a href="batch_question.html#cb26-2" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(path)</span>
+<span id="cb26-3"><a href="batch_question.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>remarks <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;.csv&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="fu">basename</span>(path))</span>
+<span id="cb26-4"><a href="batch_question.html#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(df)</span>
+<span id="cb26-5"><a href="batch_question.html#cb26-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-6"><a href="batch_question.html#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="batch_question.html#cb26-7" aria-hidden="true" tabindex="-1"></a>list_csv <span class="ot">&lt;-</span> <span class="fu">lapply</span>(files_csv, add_remark)</span>
+<span id="cb26-8"><a href="batch_question.html#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="batch_question.html#cb26-9" aria-hidden="true" tabindex="-1"></a>df_remark <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, list_csv)</span>
+<span id="cb26-10"><a href="batch_question.html#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-11"><a href="batch_question.html#cb26-11" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">ncol</span>(df_remark)</span>
+<span id="cb26-12"><a href="batch_question.html#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_remark[,(n<span class="dv">-3</span>)<span class="sc">:</span>n])</span></code></pre></div>
+<pre><code>##   H2O_r_sp    SS_s    SS_r    remarks
+## 1       20 96.8399 99.4131 racirtest1
+## 2       20 96.8405 99.4111 racirtest1
+## 3       20 96.8409 99.4112 racirtest1
+## 4       20 96.8411 99.4125 racirtest1
+## 5       20 96.8413 99.4125 racirtest1
+## 6       20 96.8411 99.4118 racirtest1</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="batch_question.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(df_remark[,(n<span class="dv">-3</span>)<span class="sc">:</span>n])</span></code></pre></div>
+<pre><code>##     H2O_r_sp    SS_s    SS_r   remarks
+## 443       20 97.0539 99.6148 rcirtest3
+## 444       20 97.0531 99.6159 rcirtest3
+## 445       20 97.0533 99.6146 rcirtest3
+## 446       20 97.0527 99.6133 rcirtest3
+## 447       20 97.0534 99.6146 rcirtest3
+## 448       20 97.0527 99.6146 rcirtest3</code></pre>
+<p>到此为止已经整理为所谓的 <code>tidy data</code> 了，用 <code>tidyverse</code> 也好，用 <code>base</code> 语法也好，总之是比较容易处理的数据了，例如上面其实是 <code>RACiR</code> 数据了，有两个，那么当然可以使用 <code>plantecophys::fitacis</code> 来一条命令搞定所有数据的拟合了。</p>
+<p>这里需要注意的是使用 <code>xlconnect_read</code> 也可以使用类似的操作，但我觉得不如这种方法省事，故而只列出来这一种，有需要的也可以按照类似方法处理即可。</p>
 
-</div>
 </div>
 </div>
 </div>

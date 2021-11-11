@@ -1,10 +1,5 @@
 # 批量处理光合测定数据 {#batch_question}
 
-> 该部分内容不建议继续使用，尤其是读取原始数据文件部分。目前代码报错，可能是某个依赖软件包升级导致，但我没时间处理。对于 excel 文件格式的处理，我目前找到了一个自认为比较好的批量转 csv 格式的方案，但是需要 `python` 的 `xlwings` 支持，该库比较成熟，不存在依赖地狱的问题，而且我也打包了一个图形界面，批量处理为 csv 后用常规方法导入就行，如果我有时间，会将该部分内容彻底修改。`python` 方案见链接：[github](https://github.com/zhujiedong/LI6800_excel2csv) 或微信 [微信版](https://mp.weixin.qq.com/s?__biz=MzU4ODI3NjkzMg==&mid=2247485489&idx=2&sn=9aed981d7624c8e289cb9173c269373a&chksm=fdde7d9acaa9f48c3dc0d09324d0461b18b4edd4ff56207de54b5152cbfe4a97fdc482b31b82&token=101697346&lang=zh_CN#rd)
-
-
-
-
 对于多数人来讲，一个季节用光合仪测量的数据文件至少是两位数的，处理起来非常不方便，针对这个问题，简单写了一个批量读取 LI-6400 和 LI-6800 原始数据的包(因为现有的容易实现的读取 excel 格式的包还不支持 6800 和 6400 这种形式的公式计算)^[特别注意，原始数据可以用文本编辑器打开，但为了方便使用这个软件包，准确输入与行号相关的参数，建议您使用带行号显示的软件，例如 windows 下的 notepad++]，使用非常简单，同时也适合处理未关闭数据文件而导致的无法生成 excel 格式的数据时的问题。
 
 ## 安装 {#install_readphoto}
@@ -15,7 +10,9 @@
 devtools::install_github("zhujiedong/readphoto")
 ```
 
-## 6400 数据整合{#batch64}
+## LI-6400 数据处理{#batch64}
+
+### LI-6400 数据的整合{#6400combine}
 
 基本参数如下：
 
@@ -45,50 +42,6 @@ header_line 表示你数据表头所在行，data_start 表示你数据起始行
 这些数据可以用于后文相关的分析中，尤其是像 `fitacis` 这样的函数，因为本质上他们都是符合 `tidyverse` 样式的数据。 
 
 
-## LI-6800 数据整合{#batch68}
-
-此部分内容保留，但不建议再使用，如果不介意软件包比较大，可以参考：
-
-[图形界面整理数据](https://mp.weixin.qq.com/s?__biz=MzU4ODI3NjkzMg==&mid=2247485449&idx=1&sn=914778c6bc1e288c7cb093da403d920e&chksm=fdde7da2caa9f4b449de6bd4ead60913444c6a6b429e59d6ad80ab5bea10c74e1e0c5da1105d&token=1056052514&lang=zh_CN#rd)
-
-转换为 tidy csv 数据后，可以直接通过简单的代码进行批量处理操作。
-
-~~相比 6400， 6800 参数要少，导入需要两行命令即可：~~
-
-```{r}
-library(readphoto)
-df <- read_bat_6800("./data/6800", data_start = 56)
-```
-
-~~其中就两个参数，第一个为 LI-6800 **原始数据**所在的文件夹，即文件夹内**包含且仅包含 LI-6800 的原始数据**，不要放其他文件，不要放 excel 数据。第二个参数即为你原始数据中测量数据的起始行，例如本例中使用数据测量值从 56 行开始。~~
-
-~~数据输出如下所示(仅显示前8列数据)：~~
-
-```{r,echo=FALSE}
-knitr::kable(df[1:15, 1:8], booktabs = TRUE,
-caption = 'LI-6800 批量整合数据')
-```
-
-~~其他注意事项见 LI-6400 数据整合部分~~
-
-~~另外： 今天添加了使用 regex 读取 LI-6800 原始文件的方法，这个只需要路径即可（2020-3-18），简单测试，有名字重复的警告，是 TIME，不影响大局，我没时间改，过几天有时间了再改：~~
-
-**当前版本有问题，可能时依赖的 `stringi` 升级导致，现在没有时间处理。**
-
-```{r, eval=FALSE}
-library(readphoto)
-df2 <- read_regex68("./data/6800")
-```
-
-```{r,eval=FALSE}
-knitr::kable(df2[1:15, 1:8], booktabs = TRUE,
-caption = 'LI-6800 regex 方式批量整合数据')
-```
-
-## 重计算功能 {#recompute_raw}
-
-如果只是将原始数据批量处理，那么在遇到叶片不能充满叶室的情况时会很麻烦，这里我们提供了重新计算功能，重新计算的参数包括光合速率，蒸腾速率，对水的气孔导度以及胞间二氧化碳浓度，当然计算他们所需要的一些中间数值也做了重计算，只不过多数时候我们用不到，我们仅看这四项。
-
 ### LI-6400 数据重计算 {#recompute6400}
 
 参数的重计算函数为 `recomp_6400`, 其参数除了 `read_bat_6400` 所包含的参数外，还有叶面积 S, 以及叶片正反面的气孔比例，默认值分别为 6 和 0.5。
@@ -115,180 +68,88 @@ y1$Photo/x1$Photo
 
 我们看到各个值之差非常小，因为我们使用的是相同的叶面积，理论上这两次读数的差异应为 0， 但在实际计算过程中，有小数点位数的影响，所以某些值不完全为 0，但该差值足够小。我们将所有的数据叶面积减半后，二者比值也约等于 2.
 
-### LI-6800 数据重计算 {#recompute6800}
 
-#### 原始数据的批量计算 {#raw-batch-68}
+## LI-6800 数据的处理 {#6800data}
 
-**此部分内容保留，但不建议继续使用**
-~~参数的重计算函数为 `recomp_6800`, 其参数除了 `read_bat_6800` 所包含的参数外，还有叶面积 S, 以及叶片正反面的气孔比例，默认值分别为 6 和 0.5。~~
+LI-6800 的数据我们可以直接处理 Excel 即可，读取我这里有两种方案，一种是 `R` 读取方案，一种是 `python` 读取方案，之所以这么复杂，是因为 LI-6800 的 Excel 格式较为复杂，不被常用的软件包所支持。我们分开来看两种方式：
 
-```{r, eval=FALSE}
-library(readphoto)
-x3 <- read_bat_6800("./data/6800")
-y3 <- recomp_6800("./data/6800", S = 6, K = 0.5)
+### R 下  Excel 格式读取的重计算 {##6800xlconnect}
 
-x3$A - y3$A
-x3$E - y3$E
-x3$gsw - y3$gsw
-x3$Ci-y3$Ci
+偶然发现了 `XLConnect` 软件包的一个功能（以前知道这个软件包，但忽视了），那就是直接读取 LI-6800 Excel 格式的数据并重计算，我将其写成了函数，放在了我的 readphoto 软件包里，软件包的安装：
 
-# half of original the area
-y3 <- recomp_6800("./data/6800", S = 3, K = 0.5)
-y3$A/x3$A
-# test with random area less than six
-area <- 6 - runif(28, 1, 3)
-y3 <- recomp_6800("./data/6800", S = area, K = 0.5)
-y3$A/x3$A
-```
-
-~~测量结果相比 6400 的数据，某些值差异略大，我仔细核对过公式，并无问题，可能仅仅是小数点后数据的原因，如果童鞋们发现我这里有错误，可以提交 github 或者邮箱发送给我，便于我改正。~~
-
-#### Excel 格式的重计算 {#excel-recompute-68}
-
-偶然发现了 `XLConnect` 软件包的一个功能（以前知道这个软件包，但忽视了），那就是直接读取 LI-6800 Excel 格式的数据并重计算，我将其写成了函数，放在了我的 `readphoto` 软件包里，软件包的安装：
-
-```{r, eval=FALSE}
+```{r,  eval=FALSE}
 remotes::install_github("zhujiedong/readphoto")
 ```
 
+
 当然，最近连我自己安装 github 的软件包都经常出问题，如果大家同样遇到问题，可以按照下面的方式安装：
 
-```{r, eval=FALSE}
+```{r,  eval=FALSE}
 remotes::install_git("https://gitee.com/zhu_jie_dong/readphoto")
 ```
 
+
 其中：
 
-- path 是 Excel 文件的路径；
+* path 是 Excel 文件的路径；
 
-- start_row 是数据开始的行号；
+* start_row 是数据开始的行号；
 
-- S 为修改的叶面积，默认值为 6，如果叶面积无需更改，则使用默认的 NULL。如果使用 aperture 更改了面积，且叶片能够充满叶室，比方说是 2 cm^2^，该值必须输入一个长度和测量值数量完全一致的向量，例如有 3 个测量值，我们输入 S 的长度则为 3，例如，一共有三个测量值，只有第一个叶片没充满叶室，面积为 1.5，其他的为 2，则输入方式为 `S = c(1.5, 2, 2)`。
+* S 为修改的叶面积，默认值为 6，如果叶面积无需更改，则使用默认的 NULL。如果使用 aperture 更改了面积，且叶片能够充满叶室，比方说是 2 $cm^2$，该值必须输入一个长度和测量值数量完全一致的向量，例如有 3 个测量值，我们输入 S 的长度则为 3，例如，一共有三个测量值，只有第一个叶片没充满叶室，面积为 1.5，其他的为 2，则输入方式为 S = c(1.5, 2, 2)。
 
+我们直接使用下面的例子解释，导入的数据是 6 cm2 的默认面积：
 
-我们直接使用下面的例子解释，导入的数据是 6 cm^2^ 的默认面积：
-
-```{r, eval=FALSE}
+```{r}
 library(readphoto)
 
 df6 <- xlconnect_read("./data/aci-xlc.xlsx")
 df6$A
 
-##  [1] 24.7381184 18.1379358 10.8055345  3.0239340 -0.9144044 26.9519572
-##  [7] 27.5088717 40.9101889 50.1393342 55.3865984 58.0662751 59.3556428
-```
 
-将面积改为 3 cm^2^
-
-```{r, eval=FALSE}
 df3 <- xlconnect_read("./data/aci-xlc.xlsx", S = rep(3, 12))
 df6$A/df3$A
 
-##  [1] 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5
-```
 
-模拟 12 个不同的叶面积，均值为 3，方差为 0.1
-
-```{r, eval=FALSE}
 df_random <- xlconnect_read("./data/aci-xlc.xlsx", S = rnorm(12, 3, 0.1))
 df6$A/df_random$A
 
-##  [1] 0.5404604 0.4946930 0.5055978 0.5131122 0.5091636 0.5010179 0.5118623
-##  [8] 0.4928284 0.4838221 0.5126210 0.4926683 0.4925639
 ```
 
-#### 批量处理 LI-6800 的数据 {#batch-6800-xlsx}
+光合速率的倍数的变化在预期之内。
 
-为了避免麻烦，不再建议前面 \@ref(recompute6800)的方式进行处理，其实基本的代码处理也很简单，例如下面演示的一些方法，供参考：
+### 使用 Python 来处理 {#python}
 
-```{r, eval=FALSE}
-library(readphoto)
-file_names <-
-  list.files(path = "./data/extdata",
-             full.names = TRUE,
-             pattern = '*.xlsx')
+本节内容与题目不符，不过大家也不用担心，我提供了一个图形界面来操作，可以将所有文件批量处理为 `csv` 格式。
 
-data_list <- lapply(file_names, xlconnect_read)
+python 方案见链接：[github](https://github.com/zhujiedong/LI6800_excel2csv) 或 [微信](https://mp.weixin.qq.com/s?__biz=MzU4ODI3NjkzMg==&mid=2247485489&idx=2&sn=9aed981d7624c8e289cb9173c269373a&chksm=fdde7d9acaa9f48c3dc0d09324d0461b18b4edd4ff56207de54b5152cbfe4a97fdc482b31b82&token=101697346&lang=zh_CN#rd)
 
-## 整理好数据为正常格式并导出，例如导出 csv 文件
+### 批量处理 csv 文件 {#python-r-batch}
 
-# 根据需要，若文件夹不存在可创建
-#dir.create( "./data/extdata/csvdata")
-short_names <-
-  list.files(path = "./data/extdata", pattern = '*.xlsx')
-short_name <- gsub(".xlsx", "", short_names)
-csv_file <-
-  paste0("./data/extdata/csvdata", "/", short_name, ".csv")
-mapply(x = data_list, file = csv_file, write.csv)
+如果还是比习惯用 `R`，我们来处理上面的 `csv` 文件即可。其实没什么特别的，就是需要批量导入后添加一个分组标签即可。以下为示例：
 
+```{r}
+files_csv <- list.files("./data/csvdata", full.names = TRUE)
+files_csv
 
-
-# 若需要修改叶面积，则可以将叶面积重新另存为只有叶面积数据的文件
-# 面积数据的文件仅包含S列，且文件名与待修改面积的文件名保持一致
-
-
-# 批量读取叶面积的数据
-# 为方便使用，我将面积存为了 csv 格式
-# 根据需要，若文件夹不存在可创建
-#dir.create( "./data/extdata/areacsv")
-file_area <-
-  list.files(path = "./data/extdata/area",
-             full.names = TRUE,
-             pattern = '*.csv')
-area_list <- lapply(file_area, read.csv)
-
-# mapply 使用多个list 读取数据，注意将list命名为参数的名字，
-# 以免出现使用位置的方式匹配参数，出现错误
-data_list_csv <-
-  mapply(
-    path = file_names,
-    S = area_list,
-    xlconnect_read,
-    start_row = 17,
-    SIMPLIFY = F
-  )
-short_names_csv <-
-  list.files(path = "./data/extdata", pattern = '*.xlsx')
-short_name_csv <- gsub(".xlsx", "", short_names_csv)
-csv_file_area <-
-  paste0("./data/extdata/areacsv", "/", short_name_csv, ".csv")
-mapply(x = data_list_csv, file = csv_file_area, write.csv)
-
-
-##如果要合并数据到一个文件内，可以在合并时，使用文件名作为
-# 单独的一列，例如列名都叫做 from_file
-# 例如使用我们刚刚修改叶面积的数据为例，使用刚刚导出的csv文件，节省代码
-
-
-add_col_name <- function(path, file_name){
+add_remark <- function(path){
   df <- read.csv(path)
-  df$from_file <- file_name
-  df
-  }
+  df$remarks <- gsub(".csv", "", basename(path))
+  return(df)
+}
 
-csv_data_path <-
-  list.files(path = "./data/extdata/areacsv",
-             full.names = TRUE,
-             pattern = '*.csv')
+list_csv <- lapply(files_csv, add_remark)
 
-data_combine <-
-  mapply(
-    path = csv_data_path,
-    file_name = short_name_csv,
-    add_col_name,
-    SIMPLIFY = F
-  )
+df_remark <- do.call(rbind, list_csv)
 
-# 或者使用data.table::rbindlist(listOfDataFrames)
-# 或者使用 dplyr::bind_rows(listOfDataFrames)
-
-df_combined <- dplyr::bind_rows(data_combine)
-
-# 检验数据
-head(df_combined$from_file)
-tail(df_combined$from_file)
+n <- ncol(df_remark)
+head(df_remark[,(n-3):n])
+tail(df_remark[,(n-3):n])
 
 ```
+
+到此为止已经整理为所谓的 `tidy data` 了，用 `tidyverse` 也好，用 `base` 语法也好，总之是比较容易处理的数据了，例如上面其实是 `RACiR` 数据了，有两个，那么当然可以使用 `plantecophys::fitacis` 来一条命令搞定所有数据的拟合了。
+
+这里需要注意的是使用 `xlconnect_read` 也可以使用类似的操作，但我觉得不如这种方法省事，故而只列出来这一种，有需要的也可以按照类似方法处理即可。
 
 
 \cleardoublepage

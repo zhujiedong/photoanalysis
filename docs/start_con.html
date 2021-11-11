@@ -170,12 +170,16 @@ div.csl-indent {
 <li class="chapter" data-level="2" data-path="batch_question.html"><a href="batch_question.html"><i class="fa fa-check"></i><b>2</b> 批量处理光合测定数据</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="batch_question.html"><a href="batch_question.html#install_readphoto"><i class="fa fa-check"></i><b>2.1</b> 安装</a></li>
-<li class="chapter" data-level="2.2" data-path="batch_question.html"><a href="batch_question.html#batch64"><i class="fa fa-check"></i><b>2.2</b> 6400 数据整合</a></li>
-<li class="chapter" data-level="2.3" data-path="batch_question.html"><a href="batch_question.html#batch68"><i class="fa fa-check"></i><b>2.3</b> LI-6800 数据整合</a></li>
-<li class="chapter" data-level="2.4" data-path="batch_question.html"><a href="batch_question.html#recompute_raw"><i class="fa fa-check"></i><b>2.4</b> 重计算功能</a>
+<li class="chapter" data-level="2.2" data-path="batch_question.html"><a href="batch_question.html#batch64"><i class="fa fa-check"></i><b>2.2</b> LI-6400 数据处理</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="batch_question.html"><a href="batch_question.html#recompute6400"><i class="fa fa-check"></i><b>2.4.1</b> LI-6400 数据重计算</a></li>
-<li class="chapter" data-level="2.4.2" data-path="batch_question.html"><a href="batch_question.html#recompute6800"><i class="fa fa-check"></i><b>2.4.2</b> LI-6800 数据重计算</a></li>
+<li class="chapter" data-level="2.2.1" data-path="batch_question.html"><a href="batch_question.html#li-6400-数据的整合6400combine"><i class="fa fa-check"></i><b>2.2.1</b> LI-6400 数据的整合{#6400combine}</a></li>
+<li class="chapter" data-level="2.2.2" data-path="batch_question.html"><a href="batch_question.html#recompute6400"><i class="fa fa-check"></i><b>2.2.2</b> LI-6400 数据重计算</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="batch_question.html"><a href="batch_question.html#li-6800-数据的处理-6800data"><i class="fa fa-check"></i><b>2.3</b> LI-6800 数据的处理 {#6800data}</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="batch_question.html"><a href="batch_question.html#r-下-excel-格式读取的重计算-6800xlconnect"><i class="fa fa-check"></i><b>2.3.1</b> R 下 Excel 格式读取的重计算 {##6800xlconnect}</a></li>
+<li class="chapter" data-level="2.3.2" data-path="batch_question.html"><a href="batch_question.html#python"><i class="fa fa-check"></i><b>2.3.2</b> 使用 Python 来处理</a></li>
+<li class="chapter" data-level="2.3.3" data-path="batch_question.html"><a href="batch_question.html#python-r-batch"><i class="fa fa-check"></i><b>2.3.3</b> 批量处理 csv 文件</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="response_fit.html"><a href="response_fit.html"><i class="fa fa-check"></i><b>3</b> CO<sub>2</sub> 响应曲线的拟合</a>
@@ -356,12 +360,12 @@ div.csl-indent {
 </blockquote>
 <p>用通俗但不是特别严谨的说法可解释为：每次执行这种算法时，程序都会从原值（也就是我抄的上面迭代法定义的旧值）推出一个新值。</p>
 <p>之所以先介绍这个迭代，原因很简单，非线性拟合就是通过迭代的方法，需要对每一个变量<strong>最初的估计值进行不断的迭代，得到一个向一个点收缩或汇聚的值，这个估计值必须在实际值的一定范围内，程序通过不断调整这个值来改善拟合结果</strong>。这就解释了上面的问题，初始值是让程序开始运行的前提，不然没法迭代，必须设定。我下面的内容将以 LI-6800 的光响应曲线的测试数据，使用非直角双曲线模型进行拟合来讲解具体的 R 中的一些实现方法，我们首先导入数据，然后再利用这些数据逐个举例不同的确定初始值的方式。</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="start_con.html#cb82-1" aria-hidden="true" tabindex="-1"></a>nls <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/nlstest.csv&quot;</span>)</span>
-<span id="cb82-2"><a href="start_con.html#cb82-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-3"><a href="start_con.html#cb82-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-4"><a href="start_con.html#cb82-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 光响应曲线比较简单，我们将需要的数据直接提取，方便后面操作</span></span>
-<span id="cb82-5"><a href="start_con.html#cb82-5" aria-hidden="true" tabindex="-1"></a>lrc_Q <span class="ot">&lt;-</span> nls<span class="sc">$</span>Qin</span>
-<span id="cb82-6"><a href="start_con.html#cb82-6" aria-hidden="true" tabindex="-1"></a>lrc_A <span class="ot">&lt;-</span> nls<span class="sc">$</span>A</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="start_con.html#cb86-1" aria-hidden="true" tabindex="-1"></a>nls <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/nlstest.csv&quot;</span>)</span>
+<span id="cb86-2"><a href="start_con.html#cb86-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-3"><a href="start_con.html#cb86-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-4"><a href="start_con.html#cb86-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 光响应曲线比较简单，我们将需要的数据直接提取，方便后面操作</span></span>
+<span id="cb86-5"><a href="start_con.html#cb86-5" aria-hidden="true" tabindex="-1"></a>lrc_Q <span class="ot">&lt;-</span> nls<span class="sc">$</span>Qin</span>
+<span id="cb86-6"><a href="start_con.html#cb86-6" aria-hidden="true" tabindex="-1"></a>lrc_A <span class="ot">&lt;-</span> nls<span class="sc">$</span>A</span></code></pre></div>
 <div id="nlslm" class="section level2" number="9.1">
 <h2><span class="header-section-number">9.1</span> nlsLM 解决方案</h2>
 <p>nlsLM 来自于 <span class="citation">Elzhov et al. (<a href="#ref-Elzhov2016minpack" role="doc-biblioref">2016</a>)</span> 的 <code>minpack.lm</code>，利用 C 语言的 MINPACK 库，修改了 Levenberg-Marquardt 算法，在实际操作中，很多时候并不准确的输入初始值，他也能得出比较好的拟合结果。但结果未必完美，出现下面让人烦恼的报错：</p>
@@ -370,15 +374,15 @@ div.csl-indent {
 </blockquote>
 <p>的概率会大大降低，而且尽管结果不如意，我们也可以利用他的结果缩小初始值的范围，继续尝试其他初始值。</p>
 <p>例如下面的例子中，非直角双曲线的 Rd 的初始值我们可以利用暗呼吸的实测值大致估计，同理最大光合速率也是如此，剩下的分别为非直角双曲线曲率，我们暂定为 1，alpha 也暂定为 0.1，使用 <code>nlsLM</code> 进行拟合，结果如下：</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="start_con.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(minpack.lm)</span>
-<span id="cb83-2"><a href="start_con.html#cb83-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb83-3"><a href="start_con.html#cb83-3" aria-hidden="true" tabindex="-1"></a>lrcnls_lm <span class="ot">&lt;-</span> <span class="fu">nlsLM</span>(lrc_A <span class="sc">~</span> (<span class="dv">1</span><span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>theta))<span class="sc">*</span></span>
-<span id="cb83-4"><a href="start_con.html#cb83-4" aria-hidden="true" tabindex="-1"></a>        (alpha<span class="sc">*</span>lrc_Q<span class="sc">+</span>Am<span class="sc">-</span><span class="fu">sqrt</span>((alpha<span class="sc">*</span>lrc_Q<span class="sc">+</span>Am)<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> </span>
-<span id="cb83-5"><a href="start_con.html#cb83-5" aria-hidden="true" tabindex="-1"></a>        <span class="dv">4</span><span class="sc">*</span>alpha<span class="sc">*</span>theta<span class="sc">*</span>Am<span class="sc">*</span>lrc_Q))<span class="sc">-</span> </span>
-<span id="cb83-6"><a href="start_con.html#cb83-6" aria-hidden="true" tabindex="-1"></a>        Rd, <span class="at">start=</span><span class="fu">list</span>(<span class="at">Am=</span>(<span class="fu">max</span>(lrc_A)<span class="sc">-</span><span class="fu">min</span>(lrc_A)),</span>
-<span id="cb83-7"><a href="start_con.html#cb83-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">alpha=</span><span class="fl">0.1</span>,<span class="at">Rd=</span><span class="sc">-</span><span class="fu">min</span>(lrc_A),<span class="at">theta=</span><span class="fl">0.8</span>)) </span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="start_con.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(minpack.lm)</span>
+<span id="cb87-2"><a href="start_con.html#cb87-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-3"><a href="start_con.html#cb87-3" aria-hidden="true" tabindex="-1"></a>lrcnls_lm <span class="ot">&lt;-</span> <span class="fu">nlsLM</span>(lrc_A <span class="sc">~</span> (<span class="dv">1</span><span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>theta))<span class="sc">*</span></span>
+<span id="cb87-4"><a href="start_con.html#cb87-4" aria-hidden="true" tabindex="-1"></a>        (alpha<span class="sc">*</span>lrc_Q<span class="sc">+</span>Am<span class="sc">-</span><span class="fu">sqrt</span>((alpha<span class="sc">*</span>lrc_Q<span class="sc">+</span>Am)<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> </span>
+<span id="cb87-5"><a href="start_con.html#cb87-5" aria-hidden="true" tabindex="-1"></a>        <span class="dv">4</span><span class="sc">*</span>alpha<span class="sc">*</span>theta<span class="sc">*</span>Am<span class="sc">*</span>lrc_Q))<span class="sc">-</span> </span>
+<span id="cb87-6"><a href="start_con.html#cb87-6" aria-hidden="true" tabindex="-1"></a>        Rd, <span class="at">start=</span><span class="fu">list</span>(<span class="at">Am=</span>(<span class="fu">max</span>(lrc_A)<span class="sc">-</span><span class="fu">min</span>(lrc_A)),</span>
+<span id="cb87-7"><a href="start_con.html#cb87-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">alpha=</span><span class="fl">0.1</span>,<span class="at">Rd=</span><span class="sc">-</span><span class="fu">min</span>(lrc_A),<span class="at">theta=</span><span class="fl">0.8</span>)) </span></code></pre></div>
 <p>结果没有报错，看上去没有问题，那我们观察一下具体的拟合结果：</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="start_con.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lrcnls_lm)</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="start_con.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lrcnls_lm)</span></code></pre></div>
 <pre><code>## 
 ## Formula: lrc_A ~ (1/(2 * theta)) * (alpha * lrc_Q + Am - sqrt((alpha * 
 ##     lrc_Q + Am)^2 - 4 * alpha * theta * Am * lrc_Q)) - Rd
@@ -410,21 +414,21 @@ div.csl-indent {
 </ul>
 <div id="plot_exam" class="section level3" number="9.2.1">
 <h3><span class="header-section-number">9.2.1</span> 实现过程</h3>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="start_con.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 我们选择的模型，将其写为一个函数，用于计算净光合速率</span></span>
-<span id="cb86-2"><a href="start_con.html#cb86-2" aria-hidden="true" tabindex="-1"></a>expfct <span class="ot">&lt;-</span> <span class="cf">function</span>(x, Am, alpha, Rd, theta) {</span>
-<span id="cb86-3"><a href="start_con.html#cb86-3" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">1</span><span class="sc">/</span>(<span class="dv">2</span> <span class="sc">*</span> theta)) <span class="sc">*</span> (alpha <span class="sc">*</span> x <span class="sc">+</span> Am <span class="sc">-</span> </span>
-<span id="cb86-4"><a href="start_con.html#cb86-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>((alpha <span class="sc">*</span> x <span class="sc">+</span> Am)<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> <span class="dv">4</span> <span class="sc">*</span> alpha <span class="sc">*</span> theta <span class="sc">*</span> Am <span class="sc">*</span> x)) <span class="sc">-</span> Rd</span>
-<span id="cb86-5"><a href="start_con.html#cb86-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb86-6"><a href="start_con.html#cb86-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-7"><a href="start_con.html#cb86-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 我们的数据</span></span>
-<span id="cb86-8"><a href="start_con.html#cb86-8" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> lrc_Q, <span class="at">y =</span> lrc_A)</span></code></pre></div>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="start_con.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 先做实测数据的散点图</span></span>
-<span id="cb87-2"><a href="start_con.html#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y <span class="sc">~</span> x, <span class="at">data =</span> test)</span>
-<span id="cb87-3"><a href="start_con.html#cb87-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb87-4"><a href="start_con.html#cb87-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 利用上面的函数，假定 alpha 的值为0.8，看计算值与测量值重合程度</span></span>
-<span id="cb87-5"><a href="start_con.html#cb87-5" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">expfct</span>(x, <span class="at">Am =</span> (<span class="fu">max</span>(lrc_A)<span class="sc">-</span><span class="fu">min</span>(lrc_A)),</span>
-<span id="cb87-6"><a href="start_con.html#cb87-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">alpha=</span><span class="fl">0.8</span>, <span class="at">Rd=</span><span class="sc">-</span><span class="fu">min</span>(lrc_A), <span class="at">theta=</span><span class="fl">0.8</span>), <span class="at">add =</span> <span class="cn">TRUE</span></span>
-<span id="cb87-7"><a href="start_con.html#cb87-7" aria-hidden="true" tabindex="-1"></a>             )</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="start_con.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 我们选择的模型，将其写为一个函数，用于计算净光合速率</span></span>
+<span id="cb90-2"><a href="start_con.html#cb90-2" aria-hidden="true" tabindex="-1"></a>expfct <span class="ot">&lt;-</span> <span class="cf">function</span>(x, Am, alpha, Rd, theta) {</span>
+<span id="cb90-3"><a href="start_con.html#cb90-3" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">1</span><span class="sc">/</span>(<span class="dv">2</span> <span class="sc">*</span> theta)) <span class="sc">*</span> (alpha <span class="sc">*</span> x <span class="sc">+</span> Am <span class="sc">-</span> </span>
+<span id="cb90-4"><a href="start_con.html#cb90-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>((alpha <span class="sc">*</span> x <span class="sc">+</span> Am)<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> <span class="dv">4</span> <span class="sc">*</span> alpha <span class="sc">*</span> theta <span class="sc">*</span> Am <span class="sc">*</span> x)) <span class="sc">-</span> Rd</span>
+<span id="cb90-5"><a href="start_con.html#cb90-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb90-6"><a href="start_con.html#cb90-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-7"><a href="start_con.html#cb90-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 我们的数据</span></span>
+<span id="cb90-8"><a href="start_con.html#cb90-8" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> lrc_Q, <span class="at">y =</span> lrc_A)</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="start_con.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 先做实测数据的散点图</span></span>
+<span id="cb91-2"><a href="start_con.html#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y <span class="sc">~</span> x, <span class="at">data =</span> test)</span>
+<span id="cb91-3"><a href="start_con.html#cb91-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-4"><a href="start_con.html#cb91-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 利用上面的函数，假定 alpha 的值为0.8，看计算值与测量值重合程度</span></span>
+<span id="cb91-5"><a href="start_con.html#cb91-5" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">expfct</span>(x, <span class="at">Am =</span> (<span class="fu">max</span>(lrc_A)<span class="sc">-</span><span class="fu">min</span>(lrc_A)),</span>
+<span id="cb91-6"><a href="start_con.html#cb91-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">alpha=</span><span class="fl">0.8</span>, <span class="at">Rd=</span><span class="sc">-</span><span class="fu">min</span>(lrc_A), <span class="at">theta=</span><span class="fl">0.8</span>), <span class="at">add =</span> <span class="cn">TRUE</span></span>
+<span id="cb91-7"><a href="start_con.html#cb91-7" aria-hidden="true" tabindex="-1"></a>             )</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:pomp"></span>
 <img src="bookdown_files/figure-html/pomp-1.png" alt="初步判断 alpha 的初始值" width="672" />
 <p class="caption">
@@ -432,9 +436,9 @@ div.csl-indent {
 </p>
 </div>
 <p>观察上图 <a href="start_con.html#fig:pomp">9.1</a> 的结果可以看到，曲线在 0-600 的范围内，拟合值明显偏大，观察模型的方程式，以及其他起始值的设定方式，我们初步判断 alpha 的值偏大，于是乎我们将其改小观察，观察曲线和测量点的重合仍然不是很好，我们尝试修改 theta 值与 alpha 值（也即曲线高于测量点，则需要减小纵坐标的值，低于测量点，则需要增加该值，该过程省略，我大概设置了五分钟完成），最终得出的结果如下：</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="start_con.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y <span class="sc">~</span> x, <span class="at">data =</span> test)</span>
-<span id="cb88-2"><a href="start_con.html#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">expfct</span>(x, <span class="at">Am =</span> (<span class="fu">max</span>(lrc_A)<span class="sc">-</span><span class="fu">min</span>(lrc_A)),</span>
-<span id="cb88-3"><a href="start_con.html#cb88-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">alpha=</span><span class="fl">0.06</span>, <span class="at">Rd=</span><span class="sc">-</span><span class="fu">min</span>(lrc_A), <span class="at">theta=</span><span class="fl">0.82</span>), <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="start_con.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y <span class="sc">~</span> x, <span class="at">data =</span> test)</span>
+<span id="cb92-2"><a href="start_con.html#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">expfct</span>(x, <span class="at">Am =</span> (<span class="fu">max</span>(lrc_A)<span class="sc">-</span><span class="fu">min</span>(lrc_A)),</span>
+<span id="cb92-3"><a href="start_con.html#cb92-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">alpha=</span><span class="fl">0.06</span>, <span class="at">Rd=</span><span class="sc">-</span><span class="fu">min</span>(lrc_A), <span class="at">theta=</span><span class="fl">0.82</span>), <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:alpp"></span>
 <img src="bookdown_files/figure-html/alpp-1.png" alt="初修正后断 alpha 的初始值" width="672" />
 <p class="caption">
@@ -442,13 +446,13 @@ div.csl-indent {
 </p>
 </div>
 <p>图 <a href="start_con.html#fig:alpp">9.2</a> 尽管看上去效果仍然不满意，但我们可试着进行拟合，看能否得到显著差异的结果：</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="start_con.html#cb89-1" aria-hidden="true" tabindex="-1"></a>lrcnls_manual <span class="ot">&lt;-</span> <span class="fu">nls</span>(lrc_A <span class="sc">~</span> </span>
-<span id="cb89-2"><a href="start_con.html#cb89-2" aria-hidden="true" tabindex="-1"></a>        (<span class="dv">1</span><span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>theta))<span class="sc">*</span></span>
-<span id="cb89-3"><a href="start_con.html#cb89-3" aria-hidden="true" tabindex="-1"></a>        (alpha<span class="sc">*</span>lrc_Q<span class="sc">+</span>Am<span class="sc">-</span><span class="fu">sqrt</span>((alpha<span class="sc">*</span>lrc_Q<span class="sc">+</span>Am)<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> </span>
-<span id="cb89-4"><a href="start_con.html#cb89-4" aria-hidden="true" tabindex="-1"></a>                               <span class="dv">4</span><span class="sc">*</span>alpha<span class="sc">*</span>theta<span class="sc">*</span>Am<span class="sc">*</span>lrc_Q))<span class="sc">-</span> </span>
-<span id="cb89-5"><a href="start_con.html#cb89-5" aria-hidden="true" tabindex="-1"></a>        Rd, <span class="at">start=</span><span class="fu">list</span>(<span class="at">Am=</span>(<span class="fu">max</span>(lrc_A)<span class="sc">-</span><span class="fu">min</span>(lrc_A)),</span>
-<span id="cb89-6"><a href="start_con.html#cb89-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">alpha=</span><span class="fl">0.03</span>,<span class="at">Rd=</span><span class="sc">-</span><span class="fu">min</span>(lrc_A),<span class="at">theta=</span><span class="fl">0.6</span>))</span>
-<span id="cb89-7"><a href="start_con.html#cb89-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lrcnls_manual)</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="start_con.html#cb93-1" aria-hidden="true" tabindex="-1"></a>lrcnls_manual <span class="ot">&lt;-</span> <span class="fu">nls</span>(lrc_A <span class="sc">~</span> </span>
+<span id="cb93-2"><a href="start_con.html#cb93-2" aria-hidden="true" tabindex="-1"></a>        (<span class="dv">1</span><span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>theta))<span class="sc">*</span></span>
+<span id="cb93-3"><a href="start_con.html#cb93-3" aria-hidden="true" tabindex="-1"></a>        (alpha<span class="sc">*</span>lrc_Q<span class="sc">+</span>Am<span class="sc">-</span><span class="fu">sqrt</span>((alpha<span class="sc">*</span>lrc_Q<span class="sc">+</span>Am)<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> </span>
+<span id="cb93-4"><a href="start_con.html#cb93-4" aria-hidden="true" tabindex="-1"></a>                               <span class="dv">4</span><span class="sc">*</span>alpha<span class="sc">*</span>theta<span class="sc">*</span>Am<span class="sc">*</span>lrc_Q))<span class="sc">-</span> </span>
+<span id="cb93-5"><a href="start_con.html#cb93-5" aria-hidden="true" tabindex="-1"></a>        Rd, <span class="at">start=</span><span class="fu">list</span>(<span class="at">Am=</span>(<span class="fu">max</span>(lrc_A)<span class="sc">-</span><span class="fu">min</span>(lrc_A)),</span>
+<span id="cb93-6"><a href="start_con.html#cb93-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">alpha=</span><span class="fl">0.03</span>,<span class="at">Rd=</span><span class="sc">-</span><span class="fu">min</span>(lrc_A),<span class="at">theta=</span><span class="fl">0.6</span>))</span>
+<span id="cb93-7"><a href="start_con.html#cb93-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lrcnls_manual)</span></code></pre></div>
 <pre><code>## 
 ## Formula: lrc_A ~ (1/(2 * theta)) * (alpha * lrc_Q + Am - sqrt((alpha * 
 ##     lrc_Q + Am)^2 - 4 * alpha * theta * Am * lrc_Q)) - Rd
@@ -466,11 +470,11 @@ div.csl-indent {
 ## 
 ## Number of iterations to convergence: 7 
 ## Achieved convergence tolerance: 4.601e-06</code></pre>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="start_con.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 对拟合之后的结果作图，观察使用我们的估计值，</span></span>
-<span id="cb91-2"><a href="start_con.html#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 迭代的最终值与元数据的重合程度</span></span>
-<span id="cb91-3"><a href="start_con.html#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y <span class="sc">~</span> x, <span class="at">data =</span> test, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">14</span>))</span>
-<span id="cb91-4"><a href="start_con.html#cb91-4" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">expfct</span>(x, <span class="at">Am =</span> <span class="fl">12.307586</span>,</span>
-<span id="cb91-5"><a href="start_con.html#cb91-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">alpha=</span><span class="fl">0.045706</span>, <span class="at">Rd=</span> <span class="fl">0.656643</span>, <span class="at">theta=</span><span class="fl">0.707518</span>), <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="start_con.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 对拟合之后的结果作图，观察使用我们的估计值，</span></span>
+<span id="cb95-2"><a href="start_con.html#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 迭代的最终值与元数据的重合程度</span></span>
+<span id="cb95-3"><a href="start_con.html#cb95-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y <span class="sc">~</span> x, <span class="at">data =</span> test, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">14</span>))</span>
+<span id="cb95-4"><a href="start_con.html#cb95-4" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">expfct</span>(x, <span class="at">Am =</span> <span class="fl">12.307586</span>,</span>
+<span id="cb95-5"><a href="start_con.html#cb95-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">alpha=</span><span class="fl">0.045706</span>, <span class="at">Rd=</span> <span class="fl">0.656643</span>, <span class="at">theta=</span><span class="fl">0.707518</span>), <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:alpf"></span>
 <img src="bookdown_files/figure-html/alpf-1.png" alt="检验作图法的初始值判断" width="672" />
 <p class="caption">
@@ -482,37 +486,37 @@ div.csl-indent {
 <div id="show_demo" class="section level3" number="9.2.2">
 <h3><span class="header-section-number">9.2.2</span> 直观展示</h3>
 <p>上面的表述太啰嗦，直接用下面的图形说明一下，其中 alhpa 的取值在此处选择从 0.01 到 0.07，每次增加 0.05，其他值分别为 Am = 12.31, Rd= 0.66, theta=0.71 （此处为展示效果和方便，将这些值直接按照拟合结果设定了，实际差别不大）</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="start_con.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb92-2"><a href="start_con.html#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
-<span id="cb92-3"><a href="start_con.html#cb92-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb92-4"><a href="start_con.html#cb92-4" aria-hidden="true" tabindex="-1"></a>lrc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/nlstest.csv&quot;</span>)</span>
-<span id="cb92-5"><a href="start_con.html#cb92-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb92-6"><a href="start_con.html#cb92-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 光响应曲线比较简单，我们将需要的数据直接提取，方便后面操作</span></span>
-<span id="cb92-7"><a href="start_con.html#cb92-7" aria-hidden="true" tabindex="-1"></a>lrc_Q <span class="ot">&lt;-</span> lrc<span class="sc">$</span>Qin</span>
-<span id="cb92-8"><a href="start_con.html#cb92-8" aria-hidden="true" tabindex="-1"></a>lrc_A <span class="ot">&lt;-</span> lrc<span class="sc">$</span>A</span>
-<span id="cb92-9"><a href="start_con.html#cb92-9" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(lrc_A)</span>
-<span id="cb92-10"><a href="start_con.html#cb92-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb92-11"><a href="start_con.html#cb92-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb92-12"><a href="start_con.html#cb92-12" aria-hidden="true" tabindex="-1"></a>alp <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;a=&quot;</span>, <span class="fu">seq</span>(<span class="fl">0.01</span>, <span class="fl">0.07</span>, <span class="at">by =</span> <span class="fl">0.005</span>))</span>
-<span id="cb92-13"><a href="start_con.html#cb92-13" aria-hidden="true" tabindex="-1"></a>alpn <span class="ot">&lt;-</span> <span class="fu">rep</span>(alp, <span class="at">each =</span> n)</span>
-<span id="cb92-14"><a href="start_con.html#cb92-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb92-15"><a href="start_con.html#cb92-15" aria-hidden="true" tabindex="-1"></a>expfct <span class="ot">&lt;-</span> <span class="cf">function</span>(x, Am, alpha, Rd, theta) {(<span class="dv">1</span><span class="sc">/</span>(<span class="dv">2</span> <span class="sc">*</span> theta)) <span class="sc">*</span> (alpha <span class="sc">*</span> x <span class="sc">+</span> Am <span class="sc">-</span> <span class="fu">sqrt</span>((alpha <span class="sc">*</span> x <span class="sc">+</span> Am)<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> <span class="dv">4</span> <span class="sc">*</span> alpha <span class="sc">*</span> theta <span class="sc">*</span> Am <span class="sc">*</span> x)) <span class="sc">-</span> Rd</span>
-<span id="cb92-16"><a href="start_con.html#cb92-16" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb92-17"><a href="start_con.html#cb92-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb92-18"><a href="start_con.html#cb92-18" aria-hidden="true" tabindex="-1"></a>paras <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">alpha =</span> <span class="fu">rep</span>(<span class="fu">seq</span>(<span class="fl">0.01</span>, <span class="fl">0.07</span>, <span class="at">by =</span> <span class="fl">0.005</span>), <span class="at">each =</span> n), </span>
-<span id="cb92-19"><a href="start_con.html#cb92-19" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> <span class="fu">rep</span>(lrc_Q, n), <span class="at">Am =</span> <span class="fu">rep</span>(<span class="fl">12.31</span>, n), <span class="at">Rd =</span> <span class="fu">rep</span>(<span class="fl">0.66</span>, n), </span>
-<span id="cb92-20"><a href="start_con.html#cb92-20" aria-hidden="true" tabindex="-1"></a>           <span class="at">theta =</span> <span class="fu">rep</span>(<span class="fl">0.71</span>, n))</span>
-<span id="cb92-21"><a href="start_con.html#cb92-21" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="fu">unlist</span>(<span class="fu">pmap</span>(paras, expfct))</span>
-<span id="cb92-22"><a href="start_con.html#cb92-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb92-23"><a href="start_con.html#cb92-23" aria-hidden="true" tabindex="-1"></a>show <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rep</span>(lrc_Q, <span class="dv">14</span>),</span>
-<span id="cb92-24"><a href="start_con.html#cb92-24" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> <span class="fu">c</span>(lrc_A, y), </span>
-<span id="cb92-25"><a href="start_con.html#cb92-25" aria-hidden="true" tabindex="-1"></a>           <span class="at">a =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;measured&quot;</span>, n), alpn),</span>
-<span id="cb92-26"><a href="start_con.html#cb92-26" aria-hidden="true" tabindex="-1"></a>           <span class="at">level =</span> <span class="fu">c</span>(<span class="st">&quot;measured&quot;</span>, alp)</span>
-<span id="cb92-27"><a href="start_con.html#cb92-27" aria-hidden="true" tabindex="-1"></a>             ))</span>
-<span id="cb92-28"><a href="start_con.html#cb92-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb92-29"><a href="start_con.html#cb92-29" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> show, <span class="fu">aes</span>(x, y, <span class="at">group =</span> a, <span class="at">color=</span>a)) <span class="sc">+</span> </span>
-<span id="cb92-30"><a href="start_con.html#cb92-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb92-31"><a href="start_con.html#cb92-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="start_con.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb96-2"><a href="start_con.html#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb96-3"><a href="start_con.html#cb96-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-4"><a href="start_con.html#cb96-4" aria-hidden="true" tabindex="-1"></a>lrc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/nlstest.csv&quot;</span>)</span>
+<span id="cb96-5"><a href="start_con.html#cb96-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-6"><a href="start_con.html#cb96-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 光响应曲线比较简单，我们将需要的数据直接提取，方便后面操作</span></span>
+<span id="cb96-7"><a href="start_con.html#cb96-7" aria-hidden="true" tabindex="-1"></a>lrc_Q <span class="ot">&lt;-</span> lrc<span class="sc">$</span>Qin</span>
+<span id="cb96-8"><a href="start_con.html#cb96-8" aria-hidden="true" tabindex="-1"></a>lrc_A <span class="ot">&lt;-</span> lrc<span class="sc">$</span>A</span>
+<span id="cb96-9"><a href="start_con.html#cb96-9" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(lrc_A)</span>
+<span id="cb96-10"><a href="start_con.html#cb96-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-11"><a href="start_con.html#cb96-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-12"><a href="start_con.html#cb96-12" aria-hidden="true" tabindex="-1"></a>alp <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;a=&quot;</span>, <span class="fu">seq</span>(<span class="fl">0.01</span>, <span class="fl">0.07</span>, <span class="at">by =</span> <span class="fl">0.005</span>))</span>
+<span id="cb96-13"><a href="start_con.html#cb96-13" aria-hidden="true" tabindex="-1"></a>alpn <span class="ot">&lt;-</span> <span class="fu">rep</span>(alp, <span class="at">each =</span> n)</span>
+<span id="cb96-14"><a href="start_con.html#cb96-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-15"><a href="start_con.html#cb96-15" aria-hidden="true" tabindex="-1"></a>expfct <span class="ot">&lt;-</span> <span class="cf">function</span>(x, Am, alpha, Rd, theta) {(<span class="dv">1</span><span class="sc">/</span>(<span class="dv">2</span> <span class="sc">*</span> theta)) <span class="sc">*</span> (alpha <span class="sc">*</span> x <span class="sc">+</span> Am <span class="sc">-</span> <span class="fu">sqrt</span>((alpha <span class="sc">*</span> x <span class="sc">+</span> Am)<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> <span class="dv">4</span> <span class="sc">*</span> alpha <span class="sc">*</span> theta <span class="sc">*</span> Am <span class="sc">*</span> x)) <span class="sc">-</span> Rd</span>
+<span id="cb96-16"><a href="start_con.html#cb96-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb96-17"><a href="start_con.html#cb96-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-18"><a href="start_con.html#cb96-18" aria-hidden="true" tabindex="-1"></a>paras <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">alpha =</span> <span class="fu">rep</span>(<span class="fu">seq</span>(<span class="fl">0.01</span>, <span class="fl">0.07</span>, <span class="at">by =</span> <span class="fl">0.005</span>), <span class="at">each =</span> n), </span>
+<span id="cb96-19"><a href="start_con.html#cb96-19" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> <span class="fu">rep</span>(lrc_Q, n), <span class="at">Am =</span> <span class="fu">rep</span>(<span class="fl">12.31</span>, n), <span class="at">Rd =</span> <span class="fu">rep</span>(<span class="fl">0.66</span>, n), </span>
+<span id="cb96-20"><a href="start_con.html#cb96-20" aria-hidden="true" tabindex="-1"></a>           <span class="at">theta =</span> <span class="fu">rep</span>(<span class="fl">0.71</span>, n))</span>
+<span id="cb96-21"><a href="start_con.html#cb96-21" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="fu">unlist</span>(<span class="fu">pmap</span>(paras, expfct))</span>
+<span id="cb96-22"><a href="start_con.html#cb96-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-23"><a href="start_con.html#cb96-23" aria-hidden="true" tabindex="-1"></a>show <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rep</span>(lrc_Q, <span class="dv">14</span>),</span>
+<span id="cb96-24"><a href="start_con.html#cb96-24" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> <span class="fu">c</span>(lrc_A, y), </span>
+<span id="cb96-25"><a href="start_con.html#cb96-25" aria-hidden="true" tabindex="-1"></a>           <span class="at">a =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;measured&quot;</span>, n), alpn),</span>
+<span id="cb96-26"><a href="start_con.html#cb96-26" aria-hidden="true" tabindex="-1"></a>           <span class="at">level =</span> <span class="fu">c</span>(<span class="st">&quot;measured&quot;</span>, alp)</span>
+<span id="cb96-27"><a href="start_con.html#cb96-27" aria-hidden="true" tabindex="-1"></a>             ))</span>
+<span id="cb96-28"><a href="start_con.html#cb96-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-29"><a href="start_con.html#cb96-29" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> show, <span class="fu">aes</span>(x, y, <span class="at">group =</span> a, <span class="at">color=</span>a)) <span class="sc">+</span> </span>
+<span id="cb96-30"><a href="start_con.html#cb96-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb96-31"><a href="start_con.html#cb96-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>) </span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:malp"></span>
 <img src="bookdown_files/figure-html/malp-1.png" alt="多个 alpha 取值的差异" width="672" />
 <p class="caption">
@@ -525,20 +529,20 @@ div.csl-indent {
 <div id="mult_try" class="section level2" number="9.3">
 <h2><span class="header-section-number">9.3</span> 自动多次尝试法</h2>
 <p>该方法实际为使用 <code>nls2</code> 来实现，具体方法参考 <span class="citation">Bouvier and Huet (<a href="#ref-nls2" role="doc-biblioref">1994</a>)</span> 的文章，可简单概括为使用一系列的起始值梯度（例如下面的代码中， alpha 的取值在 0.01 到 0.08 之间 ），然后软件循序使用不同的起始值，即排列组合所有的起始值序列，最终找到合适的值，具体实现如下：</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="start_con.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nls2)</span>
-<span id="cb93-2"><a href="start_con.html#cb93-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb93-3"><a href="start_con.html#cb93-3" aria-hidden="true" tabindex="-1"></a>grid.test <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="fu">list</span>(</span>
-<span id="cb93-4"><a href="start_con.html#cb93-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Am=</span><span class="fu">c</span>(<span class="dv">12</span>),</span>
-<span id="cb93-5"><a href="start_con.html#cb93-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fu">seq</span>(<span class="fl">0.01</span>, <span class="fl">0.08</span>, <span class="at">by =</span><span class="fl">0.01</span>),</span>
-<span id="cb93-6"><a href="start_con.html#cb93-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Rd =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3</span>),</span>
-<span id="cb93-7"><a href="start_con.html#cb93-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">theta=</span><span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="dv">1</span>, <span class="at">by =</span> <span class="fl">0.1</span>)</span>
-<span id="cb93-8"><a href="start_con.html#cb93-8" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb93-9"><a href="start_con.html#cb93-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb93-10"><a href="start_con.html#cb93-10" aria-hidden="true" tabindex="-1"></a>lrcnls2 <span class="ot">&lt;-</span> <span class="fu">nls2</span>(lrc_A <span class="sc">~</span> </span>
-<span id="cb93-11"><a href="start_con.html#cb93-11" aria-hidden="true" tabindex="-1"></a>        (<span class="dv">1</span><span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>theta))<span class="sc">*</span></span>
-<span id="cb93-12"><a href="start_con.html#cb93-12" aria-hidden="true" tabindex="-1"></a>        (alpha<span class="sc">*</span>lrc_Q<span class="sc">+</span>Am<span class="sc">-</span><span class="fu">sqrt</span>((alpha<span class="sc">*</span>lrc_Q<span class="sc">+</span>Am)<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> </span>
-<span id="cb93-13"><a href="start_con.html#cb93-13" aria-hidden="true" tabindex="-1"></a>                               <span class="dv">4</span><span class="sc">*</span>alpha<span class="sc">*</span>theta<span class="sc">*</span>Am<span class="sc">*</span>lrc_Q))<span class="sc">-</span> </span>
-<span id="cb93-14"><a href="start_con.html#cb93-14" aria-hidden="true" tabindex="-1"></a>        Rd, <span class="at">start =</span> grid.test, <span class="at">algorithm =</span> <span class="st">&quot;brute-force&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="start_con.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nls2)</span>
+<span id="cb97-2"><a href="start_con.html#cb97-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-3"><a href="start_con.html#cb97-3" aria-hidden="true" tabindex="-1"></a>grid.test <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="fu">list</span>(</span>
+<span id="cb97-4"><a href="start_con.html#cb97-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Am=</span><span class="fu">c</span>(<span class="dv">12</span>),</span>
+<span id="cb97-5"><a href="start_con.html#cb97-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fu">seq</span>(<span class="fl">0.01</span>, <span class="fl">0.08</span>, <span class="at">by =</span><span class="fl">0.01</span>),</span>
+<span id="cb97-6"><a href="start_con.html#cb97-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Rd =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3</span>),</span>
+<span id="cb97-7"><a href="start_con.html#cb97-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">theta=</span><span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="dv">1</span>, <span class="at">by =</span> <span class="fl">0.1</span>)</span>
+<span id="cb97-8"><a href="start_con.html#cb97-8" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb97-9"><a href="start_con.html#cb97-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-10"><a href="start_con.html#cb97-10" aria-hidden="true" tabindex="-1"></a>lrcnls2 <span class="ot">&lt;-</span> <span class="fu">nls2</span>(lrc_A <span class="sc">~</span> </span>
+<span id="cb97-11"><a href="start_con.html#cb97-11" aria-hidden="true" tabindex="-1"></a>        (<span class="dv">1</span><span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>theta))<span class="sc">*</span></span>
+<span id="cb97-12"><a href="start_con.html#cb97-12" aria-hidden="true" tabindex="-1"></a>        (alpha<span class="sc">*</span>lrc_Q<span class="sc">+</span>Am<span class="sc">-</span><span class="fu">sqrt</span>((alpha<span class="sc">*</span>lrc_Q<span class="sc">+</span>Am)<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> </span>
+<span id="cb97-13"><a href="start_con.html#cb97-13" aria-hidden="true" tabindex="-1"></a>                               <span class="dv">4</span><span class="sc">*</span>alpha<span class="sc">*</span>theta<span class="sc">*</span>Am<span class="sc">*</span>lrc_Q))<span class="sc">-</span> </span>
+<span id="cb97-14"><a href="start_con.html#cb97-14" aria-hidden="true" tabindex="-1"></a>        Rd, <span class="at">start =</span> grid.test, <span class="at">algorithm =</span> <span class="st">&quot;brute-force&quot;</span>)</span></code></pre></div>
 <pre><code>## Error in numericDeriv(form[[3L]], names(ind), env, central = nDcentral) : 
 ##   Missing value or an infinity produced when evaluating the model
 ## Error in numericDeriv(form[[3L]], names(ind), env, central = nDcentral) : 
@@ -571,7 +575,7 @@ div.csl-indent {
 ##   Missing value or an infinity produced when evaluating the model
 ## Error in numericDeriv(form[[3L]], names(ind), env, central = nDcentral) : 
 ##   Missing value or an infinity produced when evaluating the model</code></pre>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="start_con.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lrcnls2)</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="start_con.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lrcnls2)</span></code></pre></div>
 <pre><code>## 
 ## Formula: lrc_A ~ (1/(2 * theta)) * (alpha * lrc_Q + Am - sqrt((alpha * 
 ##     lrc_Q + Am)^2 - 4 * alpha * theta * Am * lrc_Q)) - Rd
@@ -590,9 +594,9 @@ div.csl-indent {
 ## Number of iterations to convergence: 320 
 ## Achieved convergence tolerance: NA</code></pre>
 <p>通过结果可以看到，虽然和之前采用手动方法判定的结果比较接近，但是还是略有差异，可以看一下他们各自的结果同测量值的重合程度：</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="start_con.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lrc_Q, lrc_A)</span>
-<span id="cb97-2"><a href="start_con.html#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(lrc_Q,  <span class="fu">predict</span>(lrcnls2), <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span>
-<span id="cb97-3"><a href="start_con.html#cb97-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(lrc_Q,  <span class="fu">predict</span>(lrcnls_manual), <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="start_con.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lrc_Q, lrc_A)</span>
+<span id="cb101-2"><a href="start_con.html#cb101-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(lrc_Q,  <span class="fu">predict</span>(lrcnls2), <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb101-3"><a href="start_con.html#cb101-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(lrc_Q,  <span class="fu">predict</span>(lrcnls_manual), <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:mcomp"></span>
 <img src="bookdown_files/figure-html/mcomp-1.png" alt="两种方法结果的对比展示" width="672" />
 <p class="caption">

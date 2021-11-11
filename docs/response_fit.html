@@ -170,12 +170,16 @@ div.csl-indent {
 <li class="chapter" data-level="2" data-path="batch_question.html"><a href="batch_question.html"><i class="fa fa-check"></i><b>2</b> 批量处理光合测定数据</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="batch_question.html"><a href="batch_question.html#install_readphoto"><i class="fa fa-check"></i><b>2.1</b> 安装</a></li>
-<li class="chapter" data-level="2.2" data-path="batch_question.html"><a href="batch_question.html#batch64"><i class="fa fa-check"></i><b>2.2</b> 6400 数据整合</a></li>
-<li class="chapter" data-level="2.3" data-path="batch_question.html"><a href="batch_question.html#batch68"><i class="fa fa-check"></i><b>2.3</b> LI-6800 数据整合</a></li>
-<li class="chapter" data-level="2.4" data-path="batch_question.html"><a href="batch_question.html#recompute_raw"><i class="fa fa-check"></i><b>2.4</b> 重计算功能</a>
+<li class="chapter" data-level="2.2" data-path="batch_question.html"><a href="batch_question.html#batch64"><i class="fa fa-check"></i><b>2.2</b> LI-6400 数据处理</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="batch_question.html"><a href="batch_question.html#recompute6400"><i class="fa fa-check"></i><b>2.4.1</b> LI-6400 数据重计算</a></li>
-<li class="chapter" data-level="2.4.2" data-path="batch_question.html"><a href="batch_question.html#recompute6800"><i class="fa fa-check"></i><b>2.4.2</b> LI-6800 数据重计算</a></li>
+<li class="chapter" data-level="2.2.1" data-path="batch_question.html"><a href="batch_question.html#li-6400-数据的整合6400combine"><i class="fa fa-check"></i><b>2.2.1</b> LI-6400 数据的整合{#6400combine}</a></li>
+<li class="chapter" data-level="2.2.2" data-path="batch_question.html"><a href="batch_question.html#recompute6400"><i class="fa fa-check"></i><b>2.2.2</b> LI-6400 数据重计算</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="batch_question.html"><a href="batch_question.html#li-6800-数据的处理-6800data"><i class="fa fa-check"></i><b>2.3</b> LI-6800 数据的处理 {#6800data}</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="batch_question.html"><a href="batch_question.html#r-下-excel-格式读取的重计算-6800xlconnect"><i class="fa fa-check"></i><b>2.3.1</b> R 下 Excel 格式读取的重计算 {##6800xlconnect}</a></li>
+<li class="chapter" data-level="2.3.2" data-path="batch_question.html"><a href="batch_question.html#python"><i class="fa fa-check"></i><b>2.3.2</b> 使用 Python 来处理</a></li>
+<li class="chapter" data-level="2.3.3" data-path="batch_question.html"><a href="batch_question.html#python-r-batch"><i class="fa fa-check"></i><b>2.3.3</b> 批量处理 csv 文件</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="response_fit.html"><a href="response_fit.html"><i class="fa fa-check"></i><b>3</b> CO<sub>2</sub> 响应曲线的拟合</a>
@@ -483,28 +487,28 @@ C_c = C_i - \frac{A}{gm}
 <div id="fitaci_intro" class="section level3" number="3.4.1">
 <h3><span class="header-section-number">3.4.1</span> fitaci 函数介绍</h3>
 <p><code>fitaci</code> 的用法如下<a href="references.html#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>：</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="response_fit.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fitaci</span>(data, <span class="at">varnames =</span> <span class="fu">list</span>(<span class="at">ALEAF =</span> <span class="st">&quot;Photo&quot;</span>, </span>
-<span id="cb26-2"><a href="response_fit.html#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Tleaf =</span> <span class="st">&quot;Tleaf&quot;</span>, <span class="at">Ci =</span> <span class="st">&quot;Ci&quot;</span>, <span class="at">PPFD =</span> <span class="st">&quot;PARi&quot;</span>, </span>
-<span id="cb26-3"><a href="response_fit.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Rd =</span> <span class="st">&quot;Rd&quot;</span>), <span class="at">Tcorrect =</span> <span class="cn">TRUE</span>, <span class="at">Patm =</span> <span class="dv">100</span>, </span>
-<span id="cb26-4"><a href="response_fit.html#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">citransition =</span> <span class="cn">NULL</span>, <span class="at">quiet =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb26-5"><a href="response_fit.html#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">startValgrid =</span> <span class="cn">TRUE</span>, <span class="at">fitmethod =</span> </span>
-<span id="cb26-6"><a href="response_fit.html#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;default&quot;</span>, <span class="st">&quot;bilinear&quot;</span>, <span class="st">&quot;onepoint&quot;</span>), </span>
-<span id="cb26-7"><a href="response_fit.html#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">algorithm =</span> <span class="st">&quot;default&quot;</span>, <span class="at">fitTPU =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb26-8"><a href="response_fit.html#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">useRd =</span> <span class="cn">FALSE</span>, <span class="at">PPFD =</span> <span class="cn">NULL</span>, <span class="at">Tleaf =</span> <span class="cn">NULL</span>, </span>
-<span id="cb26-9"><a href="response_fit.html#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.24</span>, <span class="at">theta =</span> <span class="fl">0.85</span>, <span class="at">gmeso =</span> <span class="cn">NULL</span>, </span>
-<span id="cb26-10"><a href="response_fit.html#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">EaV =</span> <span class="fl">82620.87</span>, <span class="at">EdVC =</span> <span class="dv">0</span>, <span class="at">delsC =</span> <span class="fl">645.1013</span>,</span>
-<span id="cb26-11"><a href="response_fit.html#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">EaJ =</span> <span class="fl">39676.89</span>, <span class="at">EdVJ =</span> <span class="fl">2e+05</span>, </span>
-<span id="cb26-12"><a href="response_fit.html#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">delsJ =</span> <span class="fl">641.3615</span>, <span class="at">GammaStar =</span> <span class="cn">NULL</span>, </span>
-<span id="cb26-13"><a href="response_fit.html#cb26-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">Km =</span> <span class="cn">NULL</span>, <span class="at">id =</span> <span class="cn">NULL</span>, ...)</span>
-<span id="cb26-14"><a href="response_fit.html#cb26-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-15"><a href="response_fit.html#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="do">## S3 method for class &#39;acifit&#39;</span></span>
-<span id="cb26-16"><a href="response_fit.html#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="at">what =</span> <span class="fu">c</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;model&quot;</span>, <span class="st">&quot;none&quot;</span>),</span>
-<span id="cb26-17"><a href="response_fit.html#cb26-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="cn">NULL</span>, <span class="at">ylim =</span> <span class="cn">NULL</span>, <span class="at">whichA =</span> <span class="fu">c</span>(</span>
-<span id="cb26-18"><a href="response_fit.html#cb26-18" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;Ac&quot;</span>, <span class="st">&quot;Aj&quot;</span>, <span class="st">&quot;Amin&quot;</span>, <span class="st">&quot;Ap&quot;</span>), <span class="at">add =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb26-19"><a href="response_fit.html#cb26-19" aria-hidden="true" tabindex="-1"></a><span class="at">pch =</span> <span class="dv">19</span>, <span class="at">addzeroline =</span> <span class="cn">TRUE</span>, <span class="at">addlegend =</span> </span>
-<span id="cb26-20"><a href="response_fit.html#cb26-20" aria-hidden="true" tabindex="-1"></a>  <span class="sc">!</span>add, <span class="at">legendbty =</span> <span class="st">&quot;o&quot;</span>,<span class="at">transitionpoint =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb26-21"><a href="response_fit.html#cb26-21" aria-hidden="true" tabindex="-1"></a><span class="at">linecols =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>), <span class="at">lwd =</span> <span class="fu">c</span>(<span class="dv">1</span>,</span>
-<span id="cb26-22"><a href="response_fit.html#cb26-22" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>), ...)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="response_fit.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fitaci</span>(data, <span class="at">varnames =</span> <span class="fu">list</span>(<span class="at">ALEAF =</span> <span class="st">&quot;Photo&quot;</span>, </span>
+<span id="cb30-2"><a href="response_fit.html#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Tleaf =</span> <span class="st">&quot;Tleaf&quot;</span>, <span class="at">Ci =</span> <span class="st">&quot;Ci&quot;</span>, <span class="at">PPFD =</span> <span class="st">&quot;PARi&quot;</span>, </span>
+<span id="cb30-3"><a href="response_fit.html#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Rd =</span> <span class="st">&quot;Rd&quot;</span>), <span class="at">Tcorrect =</span> <span class="cn">TRUE</span>, <span class="at">Patm =</span> <span class="dv">100</span>, </span>
+<span id="cb30-4"><a href="response_fit.html#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">citransition =</span> <span class="cn">NULL</span>, <span class="at">quiet =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb30-5"><a href="response_fit.html#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">startValgrid =</span> <span class="cn">TRUE</span>, <span class="at">fitmethod =</span> </span>
+<span id="cb30-6"><a href="response_fit.html#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;default&quot;</span>, <span class="st">&quot;bilinear&quot;</span>, <span class="st">&quot;onepoint&quot;</span>), </span>
+<span id="cb30-7"><a href="response_fit.html#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">algorithm =</span> <span class="st">&quot;default&quot;</span>, <span class="at">fitTPU =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb30-8"><a href="response_fit.html#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">useRd =</span> <span class="cn">FALSE</span>, <span class="at">PPFD =</span> <span class="cn">NULL</span>, <span class="at">Tleaf =</span> <span class="cn">NULL</span>, </span>
+<span id="cb30-9"><a href="response_fit.html#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.24</span>, <span class="at">theta =</span> <span class="fl">0.85</span>, <span class="at">gmeso =</span> <span class="cn">NULL</span>, </span>
+<span id="cb30-10"><a href="response_fit.html#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">EaV =</span> <span class="fl">82620.87</span>, <span class="at">EdVC =</span> <span class="dv">0</span>, <span class="at">delsC =</span> <span class="fl">645.1013</span>,</span>
+<span id="cb30-11"><a href="response_fit.html#cb30-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">EaJ =</span> <span class="fl">39676.89</span>, <span class="at">EdVJ =</span> <span class="fl">2e+05</span>, </span>
+<span id="cb30-12"><a href="response_fit.html#cb30-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">delsJ =</span> <span class="fl">641.3615</span>, <span class="at">GammaStar =</span> <span class="cn">NULL</span>, </span>
+<span id="cb30-13"><a href="response_fit.html#cb30-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">Km =</span> <span class="cn">NULL</span>, <span class="at">id =</span> <span class="cn">NULL</span>, ...)</span>
+<span id="cb30-14"><a href="response_fit.html#cb30-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-15"><a href="response_fit.html#cb30-15" aria-hidden="true" tabindex="-1"></a><span class="do">## S3 method for class &#39;acifit&#39;</span></span>
+<span id="cb30-16"><a href="response_fit.html#cb30-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="at">what =</span> <span class="fu">c</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;model&quot;</span>, <span class="st">&quot;none&quot;</span>),</span>
+<span id="cb30-17"><a href="response_fit.html#cb30-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="cn">NULL</span>, <span class="at">ylim =</span> <span class="cn">NULL</span>, <span class="at">whichA =</span> <span class="fu">c</span>(</span>
+<span id="cb30-18"><a href="response_fit.html#cb30-18" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;Ac&quot;</span>, <span class="st">&quot;Aj&quot;</span>, <span class="st">&quot;Amin&quot;</span>, <span class="st">&quot;Ap&quot;</span>), <span class="at">add =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb30-19"><a href="response_fit.html#cb30-19" aria-hidden="true" tabindex="-1"></a><span class="at">pch =</span> <span class="dv">19</span>, <span class="at">addzeroline =</span> <span class="cn">TRUE</span>, <span class="at">addlegend =</span> </span>
+<span id="cb30-20"><a href="response_fit.html#cb30-20" aria-hidden="true" tabindex="-1"></a>  <span class="sc">!</span>add, <span class="at">legendbty =</span> <span class="st">&quot;o&quot;</span>,<span class="at">transitionpoint =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb30-21"><a href="response_fit.html#cb30-21" aria-hidden="true" tabindex="-1"></a><span class="at">linecols =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>), <span class="at">lwd =</span> <span class="fu">c</span>(<span class="dv">1</span>,</span>
+<span id="cb30-22"><a href="response_fit.html#cb30-22" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>), ...)</span></code></pre></div>
 <p><em>主要参数注释：</em></p>
 <ul>
 <li>data：需要分析的数据，必须为 data.frame<a href="references.html#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>。
@@ -624,21 +628,21 @@ CO<span class="math inline">\(_{2}\)</span> 的增加而增加时发生的，因
 <div id="fitaci-p" class="section level3" number="3.5.2">
 <h3><span class="header-section-number">3.5.2</span> 使用示例</h3>
 <p><code>plantecophys</code> 并非 base 的安装包，首次使用需要从 <code>CRAN</code> 安装，可以使用图形界面安装，也可以直接用命令行安装<a href="references.html#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>，推荐同时安装依赖。</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="response_fit.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;plantecophys&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="response_fit.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 载入 plantecophys </span></span>
-<span id="cb28-2"><a href="response_fit.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;plantecophys&quot;</span>)</span>
-<span id="cb28-3"><a href="response_fit.html#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-4"><a href="response_fit.html#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 利用read.csv读取数据文件，</span></span>
-<span id="cb28-5"><a href="response_fit.html#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 我的路径为当前工作路径的data文件夹内</span></span>
-<span id="cb28-6"><a href="response_fit.html#cb28-6" aria-hidden="true" tabindex="-1"></a>aci <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./data/aci.csv&quot;</span>)</span>
-<span id="cb28-7"><a href="response_fit.html#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-8"><a href="response_fit.html#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 防止可能出现的NA值</span></span>
-<span id="cb28-9"><a href="response_fit.html#cb28-9" aria-hidden="true" tabindex="-1"></a>aci <span class="ot">&lt;-</span> <span class="fu">subset</span>(aci, Obs <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
-<span id="cb28-10"><a href="response_fit.html#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-11"><a href="response_fit.html#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 不修改默认参数对数据进行拟合</span></span>
-<span id="cb28-12"><a href="response_fit.html#cb28-12" aria-hidden="true" tabindex="-1"></a>acifit <span class="ot">&lt;-</span> <span class="fu">fitaci</span>(aci)</span>
-<span id="cb28-13"><a href="response_fit.html#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看拟合结果的参数名称，方便导出数据使用</span></span>
-<span id="cb28-14"><a href="response_fit.html#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(acifit)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="response_fit.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;plantecophys&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="response_fit.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 载入 plantecophys </span></span>
+<span id="cb32-2"><a href="response_fit.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;plantecophys&quot;</span>)</span>
+<span id="cb32-3"><a href="response_fit.html#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="response_fit.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 利用read.csv读取数据文件，</span></span>
+<span id="cb32-5"><a href="response_fit.html#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 我的路径为当前工作路径的data文件夹内</span></span>
+<span id="cb32-6"><a href="response_fit.html#cb32-6" aria-hidden="true" tabindex="-1"></a>aci <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./data/aci.csv&quot;</span>)</span>
+<span id="cb32-7"><a href="response_fit.html#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-8"><a href="response_fit.html#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 防止可能出现的NA值</span></span>
+<span id="cb32-9"><a href="response_fit.html#cb32-9" aria-hidden="true" tabindex="-1"></a>aci <span class="ot">&lt;-</span> <span class="fu">subset</span>(aci, Obs <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb32-10"><a href="response_fit.html#cb32-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-11"><a href="response_fit.html#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 不修改默认参数对数据进行拟合</span></span>
+<span id="cb32-12"><a href="response_fit.html#cb32-12" aria-hidden="true" tabindex="-1"></a>acifit <span class="ot">&lt;-</span> <span class="fu">fitaci</span>(aci)</span>
+<span id="cb32-13"><a href="response_fit.html#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看拟合结果的参数名称，方便导出数据使用</span></span>
+<span id="cb32-14"><a href="response_fit.html#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(acifit)</span></code></pre></div>
 <pre><code>## $names
 ##  [1] &quot;df&quot;             &quot;pars&quot;           &quot;nlsfit&quot;         &quot;Tcorrect&quot;      
 ##  [5] &quot;Photosyn&quot;       &quot;Ci&quot;             &quot;Ci_transition&quot;  &quot;Ci_transition2&quot;
@@ -648,8 +652,8 @@ CO<span class="math inline">\(_{2}\)</span> 的增加而增加时发生的，因
 ## 
 ## $class
 ## [1] &quot;acifit&quot;</code></pre>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="response_fit.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看拟合结果</span></span>
-<span id="cb30-2"><a href="response_fit.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(acifit)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="response_fit.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看拟合结果</span></span>
+<span id="cb34-2"><a href="response_fit.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(acifit)</span></code></pre></div>
 <pre><code>## Result of fitaci.
 ## 
 ## Data and predictions:
@@ -705,8 +709,8 @@ CO<span class="math inline">\(_{2}\)</span> 的增加而增加时发生的，因
 ## Estimated from Tleaf (shown at mean Tleaf):
 ## GammaStar =  58.61138 
 ## Km =  1223.279</code></pre>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="response_fit.html#cb32-1" aria-hidden="true" tabindex="-1"></a>acifit_linear <span class="ot">&lt;-</span> <span class="fu">fitaci</span>(aci,  <span class="at">fitmethod =</span> <span class="st">&quot;bilinear&quot;</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb32-2"><a href="response_fit.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(acifit_linear)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="response_fit.html#cb36-1" aria-hidden="true" tabindex="-1"></a>acifit_linear <span class="ot">&lt;-</span> <span class="fu">fitaci</span>(aci,  <span class="at">fitmethod =</span> <span class="st">&quot;bilinear&quot;</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb36-2"><a href="response_fit.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(acifit_linear)</span></code></pre></div>
 <pre><code>## Result of fitaci.
 ## 
 ## Data and predictions:
@@ -762,36 +766,36 @@ CO<span class="math inline">\(_{2}\)</span> 的增加而增加时发生的，因
 ## Estimated from Tleaf (shown at mean Tleaf):
 ## GammaStar =  58.61138 
 ## Km =  1223.279</code></pre>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="response_fit.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 仅查看拟合参数, 比较两种拟合参数的差异</span></span>
-<span id="cb34-2"><a href="response_fit.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(acifit_linear)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="response_fit.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 仅查看拟合参数, 比较两种拟合参数的差异</span></span>
+<span id="cb38-2"><a href="response_fit.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(acifit_linear)</span></code></pre></div>
 <pre><code>##       Vcmax        Jmax          Rd 
 ##  49.3787547 128.5546403   0.3828608</code></pre>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="response_fit.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(acifit)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="response_fit.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(acifit)</span></code></pre></div>
 <pre><code>##      Vcmax       Jmax         Rd 
 ##  49.261616 126.620537   0.159449</code></pre>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="response_fit.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 设置作图参数，图形的边距及分为1行两列输出图形</span></span>
-<span id="cb38-2"><a href="response_fit.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">4.5</span>, <span class="fl">4.5</span>, <span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb38-3"><a href="response_fit.html#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb38-4"><a href="response_fit.html#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 对两种拟合参数的结果作图，查看模型拟合是否正常</span></span>
-<span id="cb38-5"><a href="response_fit.html#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(acifit, <span class="at">addlegend =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb38-6"><a href="response_fit.html#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="dv">500</span>, <span class="at">y =</span> <span class="dv">10</span>, </span>
-<span id="cb38-7"><a href="response_fit.html#cb38-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(A[c])), </span>
-<span id="cb38-8"><a href="response_fit.html#cb38-8" aria-hidden="true" tabindex="-1"></a>                <span class="fu">expression</span>(<span class="fu">paste</span>(A[j])),</span>
-<span id="cb38-9"><a href="response_fit.html#cb38-9" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;Limiting rate&quot;</span>),</span>
-<span id="cb38-10"><a href="response_fit.html#cb38-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
-<span id="cb38-11"><a href="response_fit.html#cb38-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span><span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;black&quot;</span>) </span>
-<span id="cb38-12"><a href="response_fit.html#cb38-12" aria-hidden="true" tabindex="-1"></a>         )</span>
-<span id="cb38-13"><a href="response_fit.html#cb38-13" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&quot; fitmethod = &#39;default&#39; &quot;</span>)</span>
-<span id="cb38-14"><a href="response_fit.html#cb38-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-15"><a href="response_fit.html#cb38-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(acifit_linear, <span class="at">addlegend =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb38-16"><a href="response_fit.html#cb38-16" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="dv">500</span>, <span class="at">y =</span> <span class="dv">10</span>, </span>
-<span id="cb38-17"><a href="response_fit.html#cb38-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(A[c])), </span>
-<span id="cb38-18"><a href="response_fit.html#cb38-18" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">expression</span>(<span class="fu">paste</span>(A[j])),</span>
-<span id="cb38-19"><a href="response_fit.html#cb38-19" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;Limiting rate&quot;</span>),</span>
-<span id="cb38-20"><a href="response_fit.html#cb38-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
-<span id="cb38-21"><a href="response_fit.html#cb38-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span><span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;black&quot;</span>) </span>
-<span id="cb38-22"><a href="response_fit.html#cb38-22" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb38-23"><a href="response_fit.html#cb38-23" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&quot;fitmethod = &#39;bilinear&#39; &quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="response_fit.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 设置作图参数，图形的边距及分为1行两列输出图形</span></span>
+<span id="cb42-2"><a href="response_fit.html#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">4.5</span>, <span class="fl">4.5</span>, <span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb42-3"><a href="response_fit.html#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb42-4"><a href="response_fit.html#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 对两种拟合参数的结果作图，查看模型拟合是否正常</span></span>
+<span id="cb42-5"><a href="response_fit.html#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(acifit, <span class="at">addlegend =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb42-6"><a href="response_fit.html#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="dv">500</span>, <span class="at">y =</span> <span class="dv">10</span>, </span>
+<span id="cb42-7"><a href="response_fit.html#cb42-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(A[c])), </span>
+<span id="cb42-8"><a href="response_fit.html#cb42-8" aria-hidden="true" tabindex="-1"></a>                <span class="fu">expression</span>(<span class="fu">paste</span>(A[j])),</span>
+<span id="cb42-9"><a href="response_fit.html#cb42-9" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;Limiting rate&quot;</span>),</span>
+<span id="cb42-10"><a href="response_fit.html#cb42-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb42-11"><a href="response_fit.html#cb42-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span><span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;black&quot;</span>) </span>
+<span id="cb42-12"><a href="response_fit.html#cb42-12" aria-hidden="true" tabindex="-1"></a>         )</span>
+<span id="cb42-13"><a href="response_fit.html#cb42-13" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&quot; fitmethod = &#39;default&#39; &quot;</span>)</span>
+<span id="cb42-14"><a href="response_fit.html#cb42-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-15"><a href="response_fit.html#cb42-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(acifit_linear, <span class="at">addlegend =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb42-16"><a href="response_fit.html#cb42-16" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="dv">500</span>, <span class="at">y =</span> <span class="dv">10</span>, </span>
+<span id="cb42-17"><a href="response_fit.html#cb42-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(A[c])), </span>
+<span id="cb42-18"><a href="response_fit.html#cb42-18" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">expression</span>(<span class="fu">paste</span>(A[j])),</span>
+<span id="cb42-19"><a href="response_fit.html#cb42-19" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;Limiting rate&quot;</span>),</span>
+<span id="cb42-20"><a href="response_fit.html#cb42-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb42-21"><a href="response_fit.html#cb42-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span><span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;black&quot;</span>) </span>
+<span id="cb42-22"><a href="response_fit.html#cb42-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb42-23"><a href="response_fit.html#cb42-23" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&quot;fitmethod = &#39;bilinear&#39; &quot;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:fitaci6400"></span>
 <img src="bookdown_files/figure-html/fitaci6400-1.png" alt="光合速率的不同的限制阶段" width="672" />
 <p class="caption">
@@ -799,11 +803,11 @@ CO<span class="math inline">\(_{2}\)</span> 的增加而增加时发生的，因
 </p>
 </div>
 <p>如果需要导出数据做他用，直接根据 <code>attributes</code> 中看到的名称，选择对应的数据导出即可，如果使用 Rstudio 的话，其自动补全的功能在选择数据上更方便。例如导出预测值和系数分别使用如下方式：</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="response_fit.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 将模型拟合结果中df（即计算数据）赋给predictaci，</span></span>
-<span id="cb39-2"><a href="response_fit.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 并用write.csv导出</span></span>
-<span id="cb39-3"><a href="response_fit.html#cb39-3" aria-hidden="true" tabindex="-1"></a>predictaci <span class="ot">&lt;-</span> acifit<span class="sc">$</span>df</span>
-<span id="cb39-4"><a href="response_fit.html#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(acifit<span class="sc">$</span>df, <span class="at">file =</span> <span class="st">&quot;acipredict.csv&quot;</span>)</span>
-<span id="cb39-5"><a href="response_fit.html#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="fu">coef</span>(acifit), <span class="at">file =</span> <span class="st">&quot;coefaci.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="response_fit.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 将模型拟合结果中df（即计算数据）赋给predictaci，</span></span>
+<span id="cb43-2"><a href="response_fit.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 并用write.csv导出</span></span>
+<span id="cb43-3"><a href="response_fit.html#cb43-3" aria-hidden="true" tabindex="-1"></a>predictaci <span class="ot">&lt;-</span> acifit<span class="sc">$</span>df</span>
+<span id="cb43-4"><a href="response_fit.html#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(acifit<span class="sc">$</span>df, <span class="at">file =</span> <span class="st">&quot;acipredict.csv&quot;</span>)</span>
+<span id="cb43-5"><a href="response_fit.html#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="fu">coef</span>(acifit), <span class="at">file =</span> <span class="st">&quot;coefaci.csv&quot;</span>)</span></code></pre></div>
 <blockquote>
 <p>需要注意的是，因为非线性拟合需要一个初始值，因此，使用默认方式（非线性拟合）的时候，会存在可能的拟合失败现象，此时可以使用 <code>fitmethod = "bilinear"</code>，二者结果略有差别。</p>
 </blockquote>
@@ -831,9 +835,9 @@ K_m = K_c (1 + \frac{O_i}{K_o})
 <div id="onpoint_fit" class="section level3" number="3.5.3">
 <h3><span class="header-section-number">3.5.3</span> 使用 ‘onepoint’ 单独计算 V<sub>cmax</sub> 和 J<sub>max</sub></h3>
 <p>目前我手头没有相应数据，仅有使用 LI-6400 测试 auto log 2 时的一个数据，我们用这个来示范该方法的使用：</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="response_fit.html#cb40-1" aria-hidden="true" tabindex="-1"></a>one_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./data/onepoint.csv&quot;</span>)</span>
-<span id="cb40-2"><a href="response_fit.html#cb40-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(one_data), <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb40-3"><a href="response_fit.html#cb40-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">caption =</span> <span class="st">&#39;onepoint 使用的数据&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="response_fit.html#cb44-1" aria-hidden="true" tabindex="-1"></a>one_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./data/onepoint.csv&quot;</span>)</span>
+<span id="cb44-2"><a href="response_fit.html#cb44-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(one_data), <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb44-3"><a href="response_fit.html#cb44-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">caption =</span> <span class="st">&#39;onepoint 使用的数据&#39;</span>)</span></code></pre></div>
 <table style="width:100%;">
 <caption><span id="tab:onepointdata">表 3.2: </span>onepoint 使用的数据</caption>
 <colgroup>
@@ -1339,13 +1343,13 @@ K_m = K_c (1 + \frac{O_i}{K_o})
 </table>
 <p>数据如上所示，为同一个叶片连续记录数据，故所有的光合速率十分接近。</p>
 <p>使用方法：</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="response_fit.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plantecophys)</span>
-<span id="cb41-2"><a href="response_fit.html#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-3"><a href="response_fit.html#cb41-3" aria-hidden="true" tabindex="-1"></a>one_data <span class="ot">&lt;-</span> <span class="fu">subset</span>(one_data, Obs <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
-<span id="cb41-4"><a href="response_fit.html#cb41-4" aria-hidden="true" tabindex="-1"></a>one_data<span class="sc">$</span>Rd <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb41-5"><a href="response_fit.html#cb41-5" aria-hidden="true" tabindex="-1"></a>aci_fit <span class="ot">&lt;-</span> <span class="fu">fitaci</span>(one_data, <span class="at">fitmethod =</span> <span class="st">&quot;onepoint&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="response_fit.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plantecophys)</span>
+<span id="cb45-2"><a href="response_fit.html#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="response_fit.html#cb45-3" aria-hidden="true" tabindex="-1"></a>one_data <span class="ot">&lt;-</span> <span class="fu">subset</span>(one_data, Obs <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb45-4"><a href="response_fit.html#cb45-4" aria-hidden="true" tabindex="-1"></a>one_data<span class="sc">$</span>Rd <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb45-5"><a href="response_fit.html#cb45-5" aria-hidden="true" tabindex="-1"></a>aci_fit <span class="ot">&lt;-</span> <span class="fu">fitaci</span>(one_data, <span class="at">fitmethod =</span> <span class="st">&quot;onepoint&quot;</span>)</span></code></pre></div>
 <table>
-<caption><span id="tab:unnamed-chunk-22">表 3.3: </span>onepoint 法计算的结果</caption>
+<caption><span id="tab:unnamed-chunk-15">表 3.3: </span>onepoint 法计算的结果</caption>
 <thead>
 <tr class="header">
 <th align="right">aci_fit.Photo</th>
@@ -1391,31 +1395,31 @@ K_m = K_c (1 + \frac{O_i}{K_o})
 <div id="multi_curve" class="section level3" number="3.5.4">
 <h3><span class="header-section-number">3.5.4</span> 多条 CO<sub>2</sub> 响应曲线的拟合</h3>
 <p>fitacis 函数实际上是 fitaci 函数的扩展，方便一次拟合多条曲线<a href="references.html#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>。函数的参数如下：</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="response_fit.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fitacis</span>(data, group, <span class="at">fitmethod =</span> <span class="fu">c</span>(<span class="st">&quot;default&quot;</span>, </span>
-<span id="cb42-2"><a href="response_fit.html#cb42-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;bilinear&quot;</span>),<span class="at">progressbar =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb42-3"><a href="response_fit.html#cb42-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">quiet =</span> <span class="cn">FALSE</span>, <span class="at">id =</span> <span class="cn">NULL</span>, ...)</span>
-<span id="cb42-4"><a href="response_fit.html#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-5"><a href="response_fit.html#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="do">## S3 method for class &#39;acifits&#39;</span></span>
-<span id="cb42-6"><a href="response_fit.html#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="at">how =</span> <span class="fu">c</span>(<span class="st">&quot;manyplots&quot;</span>, <span class="st">&quot;oneplot&quot;</span>), </span>
-<span id="cb42-7"><a href="response_fit.html#cb42-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">highlight =</span> <span class="cn">NULL</span>, <span class="at">ylim =</span> <span class="cn">NULL</span>, </span>
-<span id="cb42-8"><a href="response_fit.html#cb42-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="cn">NULL</span>, <span class="at">add =</span> <span class="cn">FALSE</span>, <span class="at">what =</span> <span class="fu">c</span>(<span class="st">&quot;model&quot;</span>,</span>
-<span id="cb42-9"><a href="response_fit.html#cb42-9" aria-hidden="true" tabindex="-1"></a>     <span class="st">&quot;data&quot;</span>, <span class="st">&quot;none&quot;</span>), ...)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="response_fit.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fitacis</span>(data, group, <span class="at">fitmethod =</span> <span class="fu">c</span>(<span class="st">&quot;default&quot;</span>, </span>
+<span id="cb46-2"><a href="response_fit.html#cb46-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;bilinear&quot;</span>),<span class="at">progressbar =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb46-3"><a href="response_fit.html#cb46-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">quiet =</span> <span class="cn">FALSE</span>, <span class="at">id =</span> <span class="cn">NULL</span>, ...)</span>
+<span id="cb46-4"><a href="response_fit.html#cb46-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-5"><a href="response_fit.html#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="do">## S3 method for class &#39;acifits&#39;</span></span>
+<span id="cb46-6"><a href="response_fit.html#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="at">how =</span> <span class="fu">c</span>(<span class="st">&quot;manyplots&quot;</span>, <span class="st">&quot;oneplot&quot;</span>), </span>
+<span id="cb46-7"><a href="response_fit.html#cb46-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">highlight =</span> <span class="cn">NULL</span>, <span class="at">ylim =</span> <span class="cn">NULL</span>, </span>
+<span id="cb46-8"><a href="response_fit.html#cb46-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="cn">NULL</span>, <span class="at">add =</span> <span class="cn">FALSE</span>, <span class="at">what =</span> <span class="fu">c</span>(<span class="st">&quot;model&quot;</span>,</span>
+<span id="cb46-9"><a href="response_fit.html#cb46-9" aria-hidden="true" tabindex="-1"></a>     <span class="st">&quot;data&quot;</span>, <span class="st">&quot;none&quot;</span>), ...)</span></code></pre></div>
 <p><strong>主要参数详解：</strong></p>
 <p>实际上 fitacis 与 fitaci 模型算法完全一致，只不过增加了一个 group 参数，用于区分不同测量的数据，具体请参考举例内容。</p>
 <div id="fitacis_exa" class="section level4" number="3.5.4.1">
 <h4><span class="header-section-number">3.5.4.1</span> fitacis 函数应用举例</h4>
 <p>下文代码根据 plantecophys 中的示例代码修改，进行演示，原代码请参考其帮助文档。</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="response_fit.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plantecophys)</span>
-<span id="cb43-2"><a href="response_fit.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 只提取前10个不同测量的数据，节省时间进行举例</span></span>
-<span id="cb43-3"><a href="response_fit.html#cb43-3" aria-hidden="true" tabindex="-1"></a>manyacidat2 <span class="ot">&lt;-</span> <span class="fu">droplevels</span>(manyacidat[manyacidat<span class="sc">$</span>Curve <span class="sc">%in%</span> </span>
-<span id="cb43-4"><a href="response_fit.html#cb43-4" aria-hidden="true" tabindex="-1"></a>                                       <span class="fu">levels</span>(manyacidat<span class="sc">$</span>Curve)[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>],])</span>
-<span id="cb43-5"><a href="response_fit.html#cb43-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-6"><a href="response_fit.html#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 对多条曲线进行拟合，使用bilinear方法，</span></span>
-<span id="cb43-7"><a href="response_fit.html#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 仅仅因为其比非线性拟合节省时间</span></span>
-<span id="cb43-8"><a href="response_fit.html#cb43-8" aria-hidden="true" tabindex="-1"></a>fits <span class="ot">&lt;-</span> <span class="fu">fitacis</span>(manyacidat2, <span class="at">group =</span> <span class="st">&quot;Curve&quot;</span>, <span class="at">fitmethod=</span><span class="st">&quot;bilinear&quot;</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb43-9"><a href="response_fit.html#cb43-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-10"><a href="response_fit.html#cb43-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 拟合结果为list，我们可以只提取第一个的拟合结果</span></span>
-<span id="cb43-11"><a href="response_fit.html#cb43-11" aria-hidden="true" tabindex="-1"></a>fits[[<span class="dv">1</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="response_fit.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plantecophys)</span>
+<span id="cb47-2"><a href="response_fit.html#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 只提取前10个不同测量的数据，节省时间进行举例</span></span>
+<span id="cb47-3"><a href="response_fit.html#cb47-3" aria-hidden="true" tabindex="-1"></a>manyacidat2 <span class="ot">&lt;-</span> <span class="fu">droplevels</span>(manyacidat[manyacidat<span class="sc">$</span>Curve <span class="sc">%in%</span> </span>
+<span id="cb47-4"><a href="response_fit.html#cb47-4" aria-hidden="true" tabindex="-1"></a>                                       <span class="fu">levels</span>(manyacidat<span class="sc">$</span>Curve)[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>],])</span>
+<span id="cb47-5"><a href="response_fit.html#cb47-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-6"><a href="response_fit.html#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 对多条曲线进行拟合，使用bilinear方法，</span></span>
+<span id="cb47-7"><a href="response_fit.html#cb47-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 仅仅因为其比非线性拟合节省时间</span></span>
+<span id="cb47-8"><a href="response_fit.html#cb47-8" aria-hidden="true" tabindex="-1"></a>fits <span class="ot">&lt;-</span> <span class="fu">fitacis</span>(manyacidat2, <span class="at">group =</span> <span class="st">&quot;Curve&quot;</span>, <span class="at">fitmethod=</span><span class="st">&quot;bilinear&quot;</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-9"><a href="response_fit.html#cb47-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-10"><a href="response_fit.html#cb47-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 拟合结果为list，我们可以只提取第一个的拟合结果</span></span>
+<span id="cb47-11"><a href="response_fit.html#cb47-11" aria-hidden="true" tabindex="-1"></a>fits[[<span class="dv">1</span>]]</span></code></pre></div>
 <pre><code>## Result of fitaci.
 ## 
 ## Data and predictions:
@@ -1475,17 +1479,17 @@ K_m = K_c (1 + \frac{O_i}{K_o})
 ## Estimated from Tleaf (shown at mean Tleaf):
 ## GammaStar =  42.31453 
 ## Km =  698.2084</code></pre>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="response_fit.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 使用sapply提取拟合结果的RMSE(均方根误差)</span></span>
-<span id="cb45-2"><a href="response_fit.html#cb45-2" aria-hidden="true" tabindex="-1"></a>rmses <span class="ot">&lt;-</span> <span class="fu">sapply</span>(fits, <span class="st">&quot;[[&quot;</span>, <span class="st">&quot;RMSE&quot;</span>)</span>
-<span id="cb45-3"><a href="response_fit.html#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rmses, <span class="at">type=</span><span class="st">&#39;h&#39;</span>, <span class="at">ylab=</span><span class="st">&quot;RMSE&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;Curve nr&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="response_fit.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 使用sapply提取拟合结果的RMSE(均方根误差)</span></span>
+<span id="cb49-2"><a href="response_fit.html#cb49-2" aria-hidden="true" tabindex="-1"></a>rmses <span class="ot">&lt;-</span> <span class="fu">sapply</span>(fits, <span class="st">&quot;[[&quot;</span>, <span class="st">&quot;RMSE&quot;</span>)</span>
+<span id="cb49-3"><a href="response_fit.html#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rmses, <span class="at">type=</span><span class="st">&#39;h&#39;</span>, <span class="at">ylab=</span><span class="st">&quot;RMSE&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;Curve nr&quot;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:fitacisr-1"></span>
 <img src="bookdown_files/figure-html/fitacisr-1.png" alt="fitacis作图结果" width="672" />
 <p class="caption">
 图 3.3: fitacis作图结果
 </p>
 </div>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="response_fit.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 对最差的拟合结果进行作图</span></span>
-<span id="cb46-2"><a href="response_fit.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fits[[<span class="fu">which.max</span>(rmses)]])</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="response_fit.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 对最差的拟合结果进行作图</span></span>
+<span id="cb50-2"><a href="response_fit.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fits[[<span class="fu">which.max</span>(rmses)]])</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:fitacisr-2"></span>
 <img src="bookdown_files/figure-html/fitacisr-2.png" alt="fitacis作图结果" width="672" />
 <p class="caption">
@@ -1498,7 +1502,7 @@ K_m = K_c (1 + \frac{O_i}{K_o})
 <div id="transition" class="section level3" number="3.5.5">
 <h3><span class="header-section-number">3.5.5</span> <code>findCiTransition</code> 函数</h3>
 <p>计算 CiTransition 的函数，第一点为 Ac &amp; Aj，第二点为 Aj &amp; Ap，并且仅在计算 TPU 的前提下才会有第二点出现。</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="response_fit.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">findCiTransition</span>(object, ...)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="response_fit.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">findCiTransition</span>(object, ...)</span></code></pre></div>
 <p>参数使用，object 为 fitaci 函数对象，或者整个的 <code>Photosyn</code> 函数。
 … 为使用 <code>Photosyn</code> 时可传递的参数。</p>
 
@@ -1508,12 +1512,12 @@ K_m = K_c (1 + \frac{O_i}{K_o})
 <h2><span class="header-section-number">3.6</span> C4 植物光合</h2>
 <p>之前的部分模型全部为关于 C3 植物的拟合，而 <span class="citation">Caemmerer (<a href="#ref-Caemmerer2000Biochemical" role="doc-biblioref">2000</a>)</span> 的方法，则是针对
 C4 植物的 A-Ci 曲线的实现。</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="response_fit.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AciC4</span>(Ci, <span class="at">PPFD =</span> <span class="dv">1500</span>, <span class="at">Tleaf =</span> <span class="dv">25</span>, <span class="at">VPMAX25 =</span> <span class="dv">120</span>, </span>
-<span id="cb48-2"><a href="response_fit.html#cb48-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">JMAX25 =</span> <span class="dv">400</span>, <span class="at">Vcmax =</span> <span class="dv">60</span>, <span class="at">Vpr =</span> <span class="dv">80</span>, </span>
-<span id="cb48-3"><a href="response_fit.html#cb48-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">alpha =</span> <span class="dv">0</span>, <span class="at">gbs =</span> <span class="fl">0.003</span>, <span class="at">O2 =</span> <span class="dv">210</span>, </span>
-<span id="cb48-4"><a href="response_fit.html#cb48-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="fl">0.4</span>, <span class="at">THETA =</span> <span class="fl">0.7</span>, <span class="at">Q10 =</span> <span class="fl">2.3</span>, </span>
-<span id="cb48-5"><a href="response_fit.html#cb48-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">RD0 =</span> <span class="dv">1</span>, <span class="at">RTEMP =</span> <span class="dv">25</span>, <span class="at">TBELOW =</span> <span class="dv">0</span>, </span>
-<span id="cb48-6"><a href="response_fit.html#cb48-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">DAYRESP =</span> <span class="dv">1</span>, <span class="at">Q10F =</span> <span class="dv">2</span>, <span class="at">FRM =</span> <span class="fl">0.5</span>, ...)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="response_fit.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AciC4</span>(Ci, <span class="at">PPFD =</span> <span class="dv">1500</span>, <span class="at">Tleaf =</span> <span class="dv">25</span>, <span class="at">VPMAX25 =</span> <span class="dv">120</span>, </span>
+<span id="cb52-2"><a href="response_fit.html#cb52-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">JMAX25 =</span> <span class="dv">400</span>, <span class="at">Vcmax =</span> <span class="dv">60</span>, <span class="at">Vpr =</span> <span class="dv">80</span>, </span>
+<span id="cb52-3"><a href="response_fit.html#cb52-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">alpha =</span> <span class="dv">0</span>, <span class="at">gbs =</span> <span class="fl">0.003</span>, <span class="at">O2 =</span> <span class="dv">210</span>, </span>
+<span id="cb52-4"><a href="response_fit.html#cb52-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="fl">0.4</span>, <span class="at">THETA =</span> <span class="fl">0.7</span>, <span class="at">Q10 =</span> <span class="fl">2.3</span>, </span>
+<span id="cb52-5"><a href="response_fit.html#cb52-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">RD0 =</span> <span class="dv">1</span>, <span class="at">RTEMP =</span> <span class="dv">25</span>, <span class="at">TBELOW =</span> <span class="dv">0</span>, </span>
+<span id="cb52-6"><a href="response_fit.html#cb52-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">DAYRESP =</span> <span class="dv">1</span>, <span class="at">Q10F =</span> <span class="dv">2</span>, <span class="at">FRM =</span> <span class="fl">0.5</span>, ...)</span></code></pre></div>
 <p><strong>参数详解</strong></p>
 <ul>
 <li>Ci：胞间二氧化碳浓度 (<span class="math inline">\(\mu mol\cdot m^{-2}\cdot s^{-1}\)</span>)。</li>
@@ -1539,12 +1543,12 @@ C4 植物的 A-Ci 曲线的实现。</p>
 <p>以上参数均来自 <span class="citation">Caemmerer (<a href="#ref-Caemmerer2000Biochemical" role="doc-biblioref">2000</a>)</span>，括号中的参数值均为默认值，具体应用时请按照实际情况修改。</p>
 <div id="c4_sim" class="section level3" number="3.6.1">
 <h3><span class="header-section-number">3.6.1</span> C4 植物光合速率的计算</h3>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="response_fit.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 模拟 C4 植物的 Ci 值，计算光合速率并作图</span></span>
-<span id="cb49-2"><a href="response_fit.html#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plantecophys)</span>
-<span id="cb49-3"><a href="response_fit.html#cb49-3" aria-hidden="true" tabindex="-1"></a>aci <span class="ot">&lt;-</span> <span class="fu">AciC4</span>(<span class="at">Ci=</span><span class="fu">seq</span>(<span class="dv">5</span>,<span class="dv">600</span>, <span class="at">length=</span><span class="dv">101</span>))</span>
-<span id="cb49-4"><a href="response_fit.html#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(aci, <span class="fu">plot</span>(Ci, ALEAF, <span class="at">type=</span><span class="st">&#39;l&#39;</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(ALEAF))))</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-26"></span>
-<img src="bookdown_files/figure-html/unnamed-chunk-26-1.png" alt="C4 植物 A-Ci 作图" width="672" />
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="response_fit.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 模拟 C4 植物的 Ci 值，计算光合速率并作图</span></span>
+<span id="cb53-2"><a href="response_fit.html#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plantecophys)</span>
+<span id="cb53-3"><a href="response_fit.html#cb53-3" aria-hidden="true" tabindex="-1"></a>aci <span class="ot">&lt;-</span> <span class="fu">AciC4</span>(<span class="at">Ci=</span><span class="fu">seq</span>(<span class="dv">5</span>,<span class="dv">600</span>, <span class="at">length=</span><span class="dv">101</span>))</span>
+<span id="cb53-4"><a href="response_fit.html#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(aci, <span class="fu">plot</span>(Ci, ALEAF, <span class="at">type=</span><span class="st">&#39;l&#39;</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(ALEAF))))</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-19"></span>
+<img src="bookdown_files/figure-html/unnamed-chunk-19-1.png" alt="C4 植物 A-Ci 作图" width="672" />
 <p class="caption">
 图 3.5: C4 植物 A-Ci 作图
 </p>
