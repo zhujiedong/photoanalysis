@@ -2,14 +2,7 @@
 
 ## 数据格式 {#data6800}
 
-~~LI-6800 的数据前处理同 LI-6400 相同，如表 \@ref(tab:head6800) 所示的样式。~~
-
-并非此处格式无效，只是有更简洁的数据读取方式，见 \@ref(excel-recompute-68)。
-
-```{r, head6800, echo=FALSE}
-style1 <- read.csv("./data/aci6800.csv")
-knitr::kable(head(style1[, 1:6]),  longtable = TRUE, booktabs = TRUE, caption = '推荐 LI-6800 整理后数据样式')
-```
+此处参考 \@ref(batch_question) 相关内容即可。
 
 ## LI-6800 与 LI-6400 使用时的差别 {#dif}
 
@@ -39,5 +32,13 @@ knitr::kable(head(style1[, 1:6]),  longtable = TRUE, booktabs = TRUE, caption = 
 lrc_Q <- lrc$Qin
 lrc_A <- lrc$A 
 ```
+
+## 其他软件包的光响应曲线 {#other_light_response}
+
+[FitAQ 软件包](https://mp.weixin.qq.com/s?__biz=MzU4ODI3NjkzMg==&mid=2247485406&idx=1&sn=3c9f48168663b27f698d82125a7dbe18&chksm=fdde7275caa9fb63afb9e655e360c9d019c3813384fddae08b820a25800d6c6960afd120a66f&token=101697346&lang=zh_CN#rd)
+
+[photosynthesis 软件包](https://mp.weixin.qq.com/s?__biz=MzU4ODI3NjkzMg==&mid=2247484668&idx=1&sn=58b3cd098b1a07f96f6ba217a9bcc65e&chksm=fdde7157caa9f84133917abfb116dfab41bc0aa5d55eaee17f122c36502bce4b4c0d9a3bff1b&token=101697346&lang=zh_CN#rd)
+
+
 
 \cleardoublepage
